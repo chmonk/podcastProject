@@ -11,9 +11,10 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 @Entity
 @Table(name="activity")
+@Component
 public class ActivityBean {
 	private int activityId;
 	private String activityName;
@@ -25,6 +26,7 @@ public class ActivityBean {
 	private int activityMaxPeople;
 	private int activityMinPeople;
 	private int activityStatus;
+	private String activityImg;
 	
 	@Id
 	@Column(name="ACTIVITYID")
@@ -108,4 +110,11 @@ public class ActivityBean {
 		this.activityStatus = activityStatus;
 	}
 
+	@Column(name="ACTIVITYIMG")
+	public String getActivityImg() {
+		return activityImg;
+	}
+	public void setActivityImg(String activityImg) {
+		this.activityImg = activityImg;
+	}
 }
