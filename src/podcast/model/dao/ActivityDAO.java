@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import podcast.model.idao.IActivityDAO;
 import podcast.model.javabean.ActivityBean;
-import podcast.model.javabean.HistoryBean;
+
 
 
 @Repository("ActivityDAO")
@@ -70,6 +70,7 @@ public class ActivityDAO implements IActivityDAO {
 			oldbean.setActivityMaxPeople(abean.getActivityMaxPeople());
 			oldbean.setActivityMinPeople(abean.getActivityMinPeople());
 			oldbean.setActivityStatus(abean.getActivityStatus());
+			oldbean.setActivityImg(abean.getActivityImg());
 			System.out.println("update done");
 		}
 
