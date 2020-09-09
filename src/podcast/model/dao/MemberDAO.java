@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -74,6 +75,14 @@ public class MemberDAO implements IMemberDAO {
 	public List<MemberBean> selectAll() {
 		Session session = sessionFactory.getCurrentSession();
 		Query<MemberBean> query = session.createQuery("from MemberBean", MemberBean.class);
+		return query.list();
+	}
+	
+	@Override
+	public List<MemberBean> fuzzySelectPodcasterAll() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from MemberBean where role=2";
+		Query<MemberBean> query = session.createQuery(hql, MemberBean.class);
 		return query.list();
 	}
 
