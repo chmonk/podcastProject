@@ -48,7 +48,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	@Override
 	public List<uploadPodcastBean> selectAll() throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		String hbl = "from Category";
+		String hbl = "from uploadPodcastBean";
 
 		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
 
