@@ -46,12 +46,12 @@ const mediaData = [
     },
     {
         author: "米津玄師",
-        authorUrl: "https://www.youtube.com/channel/UCwhJTv7O8EmDwyvqMBLHcHg",
+        authorUrl: "",
         fileName: "lemon",
         fileUrl:
-            "./lemon.mp3",
+            "./test/lemon.mp3",
         thumb:
-            "./lemon.jpg"
+            "./test/lemon.jpg"
     }
 ];
 
