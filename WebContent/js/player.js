@@ -429,8 +429,8 @@ $(document).ready(() => {
 
     // 播放清單開關
     queueBtn.click(() => {
-        queueWrapper.removeClass("hidden");
-        queueBtn.addClass("select");
+        queueWrapper.toggleClass("hidden");
+        queueBtn.toggleClass("select");
     });
 
     queueCloseBtn.click(() => {
