@@ -43,23 +43,13 @@ public class TestShowSubProgram {
     	
 
     	
-    	
-//    	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
-//    	List<uploadPodcastBean> s = sdao.selectByMemeberId(20);
-//    	
-//    
-//    	for(uploadPodcastBean i:s) {
-//    		System.out.println("會員ID: "+i.getMemberId());
-//    		System.out.println("節目ID: "+i.getPodcastId());
-//    		System.out.println("點擊次數: "+i.getClickAmount());
-//    		System.out.println("節目路徑: "+i.getAudioPath());
-//    	}
+
 		
     	
     	//用訂單列表SUBCRIPTION取得會員帳號與訂閱的播客。判斷訂閱時間是否過期
-    	SubProgramListDAO fdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
+    
     	Date date =new Date();
-    	
+    	SubProgramListDAO fdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
     	List<SubscriptionBean> f = fdao.selectSubcriptionByMemberID(1, 20);
     	for(SubscriptionBean i:f) {
     		if(i.getSubdateEnd().compareTo(date)==1) {
@@ -74,9 +64,20 @@ public class TestShowSubProgram {
     	System.out.println("-----------------------------------------------");
     	System.out.println("現在時間: "+date);
     	
-//    	request.getSession().setAttribute("subProgram",f);
+    	
+    	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
+    	List<uploadPodcastBean> s = sdao.selectByMemeberId(20);
+    	
+    	
+    	for(uploadPodcastBean i:s) {
+    		System.out.println("會員ID: "+i.getMemberId());
+    		System.out.println("節目ID: "+i.getPodcastId());
+    		System.out.println("點擊次數: "+i.getClickAmount());
+    		System.out.println("節目路徑: "+i.getAudioPath());
+    	}
+    	request.getSession().setAttribute("subProgram",s);
 	
-    	return null;
-//		return "/view";
+//    	return null;
+		return "/view";
 	}
 }
