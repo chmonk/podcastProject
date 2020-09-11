@@ -27,6 +27,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
+	
 	@Override
 	public uploadPodcastBean insert(uploadPodcastBean ubean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
