@@ -79,6 +79,21 @@ public class MemberDAO implements IMemberDAO {
 	}
 	
 	@Override
+	public MemberBean selectPodcaster(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from MemberBean where memberId=:id";
+		Query<MemberBean> query = session.createQuery(hql, MemberBean.class);
+		query.setParameter("id", id);
+		
+		MemberBean m = query.uniqueResult();
+		if (m != null) {
+			return m;
+		}
+		return null;
+		
+	}
+	
+	@Override
 	public List<MemberBean> fuzzySelectPodcasterAll() {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from MemberBean where role=2";

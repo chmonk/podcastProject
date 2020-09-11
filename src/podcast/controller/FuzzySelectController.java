@@ -1,4 +1,4 @@
-package podcast.model.dao;
+package podcast.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,12 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
+import podcast.model.dao.CategoryDAO;
+import podcast.model.dao.MemberDAO;
+import podcast.model.dao.UploadPodcastDAO;
+import podcast.model.javabean.CategoryBean;
 import podcast.model.javabean.MemberBean;
+import podcast.model.javabean.fuzzyPodcastReturnArchitecture;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
@@ -30,7 +35,6 @@ public class FuzzySelectController {
 	    	//取得註冊物件的context
 	    	ServletContext app = request.getServletContext();
 	    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-	    	
 	    	
 	    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
 	    	List<MemberBean> userAllData = mdao.fuzzySelectPodcasterAll();
@@ -45,13 +49,16 @@ public class FuzzySelectController {
 	    			MemberBean selectData = new MemberBean();
 	    			selectData.setNickname(userAllData.get(e.getIndex()).getNickname());
 	    			selectData.setImage(userAllData.get(e.getIndex()).getImage());
+	    			selectData.setInfo(userAllData.get(e.getIndex()).getInfo());
 	    			selectData.setMemberId(userAllData.get(e.getIndex()).getMemberId());
 	    			fuzzyUserData.add(selectData);
 	    		}
 	    	}
 	    	
 	    	UploadPodcastDAO updao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
+	    	CategoryDAO cdao = (CategoryDAO)context.getBean("CategoryDAO");
 	    	List<uploadPodcastBean> podcastAllData = updao.selectAll();
+	    	ArrayList<fuzzyPodcastReturnArchitecture> fuzzyPodcastData = new ArrayList<fuzzyPodcastReturnArchitecture>();
 	    	List<String> podcastAllDataName = new ArrayList<String>();
 	    	for(uploadPodcastBean i:podcastAllData) {
 	    		podcastAllDataName.add(i.getTitle());	
@@ -59,14 +66,22 @@ public class FuzzySelectController {
 	    	List<ExtractedResult> podcastContainer = FuzzySearch.extractTop(request.getParameter("selectCondition"), podcastAllDataName,100);
 	    	for(ExtractedResult e:podcastContainer) {
 	    		if(e.getScore()>0) { 
-	    			MemberBean selectData = new MemberBean();
-	    			selectData.setNickname(userAllData.get(e.getIndex()).getNickname());
-	    			selectData.setImage(userAllData.get(e.getIndex()).getImage());
-	    			selectData.setMemberId(userAllData.get(e.getIndex()).getMemberId());
-	    			fuzzyUserData.add(selectData);
+	    			fuzzyPodcastReturnArchitecture selectData = new fuzzyPodcastReturnArchitecture();
+	    			selectData.setPodcastId(podcastAllData.get(e.getIndex()).getPodcastId());
+	    			selectData.setTitle(podcastAllData.get(e.getIndex()).getTitle());
+	    			selectData.setPodcastInfo(podcastAllData.get(e.getIndex()).getPodcastInfo());
+	    			selectData.setCategoryName(cdao.select(podcastAllData.get(e.getIndex()).getCategoryId()).getCategoryName());
+	    			selectData.setPodcasterName(mdao.selectPodcaster(podcastAllData.get(e.getIndex()).getMemberId()).getNickname());
+	    			selectData.setOpenPayment(podcastAllData.get(e.getIndex()).getOpenPayment());
+	    			selectData.setUploadTime(podcastAllData.get(e.getIndex()).getUploadTime());
+	    			selectData.setClickAmount(podcastAllData.get(e.getIndex()).getClickAmount());
+	    			selectData.setAudioPath(podcastAllData.get(e.getIndex()).getAudioPath());
+	    			fuzzyPodcastData.add(selectData);
 	    		}
 	    	}
+	    	
 			m.addAttribute("fuzzyUserData", fuzzyUserData);
+			m.addAttribute("fuzzyPodcastData", fuzzyPodcastData);
 			return "/FuzzySelect/showFuzzySelect";
 		}
 
