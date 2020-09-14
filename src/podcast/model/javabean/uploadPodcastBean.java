@@ -15,25 +15,27 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "uploadPodcast")
 @Entity
 public class uploadPodcastBean {
-	private int podcastId;
+	private Integer podcastId;
 	private String title;
-	private int categoryId;
-	private int memberId;
+	private Integer categoryId;
+	private Integer memberId;
 	private String podcastInfo;
-	private int openPayment;
-	private int openComment;
+	private Integer openPayment;
+	private Integer openComment;
 	private Date uploadTime;
-	private int clickAmount;
+	private Integer clickAmount;
 	private String audioPath;
+	private String audioimg;
+	private Integer likesCount;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PODCASTID")
-	public int getPodcastId() {
+	public Integer getPodcastId() {
 		return podcastId;
 	}
 
-	public void setPodcastId(int podcastId) {
+	public void setPodcastId(Integer podcastId) {
 		this.podcastId = podcastId;
 	}
 
@@ -47,20 +49,20 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "CATEGORYID")
-	public int getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
 	@Column(name = "MEMBERID")
-	public int getMemberId() {
+	public Integer getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
 
@@ -74,20 +76,20 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "OPENPAYMENT")
-	public int getOpenPayment() {
+	public Integer getOpenPayment() {
 		return openPayment;
 	}
 
-	public void setOpenPayment(int openPayment) {
+	public void setOpenPayment(Integer openPayment) {
 		this.openPayment = openPayment;
 	}
 
 	@Column(name = "OPENCOMMENT")
-	public int getOpenComment() {
+	public Integer getOpenComment() {
 		return openComment;
 	}
 
-	public void setOpenComment(int openComment) {
+	public void setOpenComment(Integer openComment) {
 		this.openComment = openComment;
 	}
 
@@ -101,11 +103,11 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "CLICKAMOUNT")
-	public int getClickAmount() {
+	public Integer getClickAmount() {
 		return clickAmount;
 	}
 
-	public void setClickAmount(int clickAmount) {
+	public void setClickAmount(Integer clickAmount) {
 		this.clickAmount = clickAmount;
 	}
 
@@ -117,4 +119,24 @@ public class uploadPodcastBean {
 	public void setAudioPath(String audioPath) {
 		this.audioPath = audioPath;
 	}
+
+	@Column(name = "AUDIOIMG")
+	public String getAudioimg() {
+		return audioimg;
+	}
+
+	public void setAudioimg(String audioimg) {
+		this.audioimg = audioimg;
+	}
+
+	@Column(name = "LIKESCOUNT")
+	public Integer getLikesCount() {
+		return likesCount;
+	}
+
+	public void setLikesCount(Integer likesCount) {
+		this.likesCount = likesCount;
+	}
+	
+	
 }
