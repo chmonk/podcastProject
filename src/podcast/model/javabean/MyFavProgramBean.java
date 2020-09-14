@@ -13,56 +13,56 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "myFavProgram")
 public class MyFavProgramBean {
-	private int memberId;
-	private int favId;
-	private int podcastId;
-	private int subPermission;
-	private int podcastOpen;
+	private Integer memberId;
+	private Integer favId;
+	private Integer podcastId;
+	private Integer subPermission;
+	private Integer podcastOpen;
 
 	@Id
 	@Column(name = "FAVID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getFavId() {
+	public Integer getFavId() {
 		return favId;
 	}
 
-	public void setFavId(int favId) {
+	public void setFavId(Integer favId) {
 		this.favId = favId;
 	}
 
 	@Column(name = "MEMBERID")
-	public int getMemberId() {
+	public Integer getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
 
 	@Column(name = "PODCASTID")
-	public int getPodcastId() {
+	public Integer getPodcastId() {
 		return podcastId;
 	}
 
-	public void setPodcastId(int podcastId) {
+	public void setPodcastId(Integer podcastId) {
 		this.podcastId = podcastId;
 	}
 
 	@Column(name = "SUBPERMISSION")
-	public int getSubPermission() {
+	public Integer getSubPermission() {
 		return subPermission;
 	}
 
-	public void setSubPermission(int subPermission) {
+	public void setSubPermission(Integer subPermission) {
 		this.subPermission = subPermission;
 	}
 
 	@Column(name = "PODCASTOPEN")
-	public int getPodcastOpen() {
+	public Integer getPodcastOpen() {
 		return podcastOpen;
 	}
 
-	public void setPodcastOpen(int podcastOpen) {
+	public void setPodcastOpen(Integer podcastOpen) {
 		this.podcastOpen = podcastOpen;
 	}
 

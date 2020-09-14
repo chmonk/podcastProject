@@ -51,7 +51,7 @@ public class SubscriptionDAO implements ISubscriptionDAO {
 	}
 
 	@Override
-	public SubscriptionBean select(int subOrderId) throws Exception {
+	public SubscriptionBean select(Integer subOrderId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 
 		return session.get(SubscriptionBean.class, subOrderId);
@@ -71,7 +71,7 @@ public class SubscriptionDAO implements ISubscriptionDAO {
 	}
 
 	@Override
-	public SubscriptionBean update(int subOrderId, SubscriptionBean sbean) throws Exception {
+	public SubscriptionBean update(Integer subOrderId, SubscriptionBean sbean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 
 		SubscriptionBean oldbean = select(subOrderId);
@@ -94,7 +94,7 @@ public class SubscriptionDAO implements ISubscriptionDAO {
 	}
 
 	@Override
-	public boolean delete(int subOrderId) throws Exception {
+	public boolean delete(Integer subOrderId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 
 		SubscriptionBean sbean = select(subOrderId);
