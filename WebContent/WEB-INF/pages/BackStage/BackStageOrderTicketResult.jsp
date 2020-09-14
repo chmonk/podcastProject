@@ -6,6 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>BackStage OrderTicket Result</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
 <style>
 	td{
 		width: 100px;
@@ -24,12 +35,20 @@
 		border:1px solid;
 		
 	}
+	
+		.center{
+		margin:0px auto;
+		text-align:center;
+		
+	}
 </style>
 </head>
 <body>
-<h3>backStage OrderTicket Result</h3>
+<div style="margin-top: 50px">
+
+<h3 class="center">BackStage OrderTicket Result</h3><br>
 <div>
-<table>
+<table class="center">
 <tr><th>TicketOrderId</th><th>OrderDate</th><th>OrderPrice</th><th>MemberId</th><th>CreditCardNumber</th><th>ActivityId</th></tr>
 <c:forEach items="${oList}" var="order" varStatus="tagStatus">
 	<tr>
@@ -43,11 +62,11 @@
 </c:forEach>
 </table>
 </div>
-<form  action="<c:url value="/BackToSelect.controller"/>">
+<form class="center" action="<c:url value="/BackToSelect.controller"/>">
 	<input type="submit" value="BACK" style="margin-top: 50px">
 </form>
 
 
-
+</div>
 </body>
 </html>

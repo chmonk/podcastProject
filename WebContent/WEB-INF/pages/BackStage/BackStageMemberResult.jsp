@@ -6,6 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>BackStage Member Result</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
 <style>
 	td{
 		width: 100px;
@@ -24,12 +35,20 @@
 		border:1px solid;
 		
 	}
+	
+		.center{
+		margin:0px auto;
+		text-align:center;
+		
+	}
 </style>
 </head>
 <body>
-<h3 style="color: cyan">BackStage Member Result</h3>
+<div style="margin-top: 50px">
+
+<h3 class="center" style="color: cyan">BackStage Member Result</h3><br>
 <div>
-<table>
+<table  class="center">
 <tr><th>MemberId</th><th>Account</th><th>Password</th><th>Name</th><th>NickName</th><th>Birthday</th>
 	<th>RegisterDate</th><th>Info</th><th>Email</th><th>CellPhone</th><th>Address</th><th>Sex</th>
 	<th>Image</th><th>Role</th><th>CreditCardNumber</th><th>BankAccount</th><th>MonthlyPayment</th>
@@ -58,11 +77,11 @@
 </table>
 </div>
 
-<form  action="<c:url value="/BackToSelect.controller"/>">
+<form  class="center" action="<c:url value="/BackToSelect.controller"/>">
 	<input type="submit" value="BACK" style="margin-top: 50px">
 </form>
 
-
+</div>
 
 
 </body>

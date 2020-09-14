@@ -23,11 +23,11 @@ public interface IBackStageDAO {
 	public List<ProgramCommentBean> selectCommentByPodcaster(int podcasterId);
 	public boolean deleteComment(int commentId);
 	public void deleteCommentByMember(int memberId,int podcasterId);
-	public boolean setNewCategory(CategoryBean cBean) throws Exception;
+	public boolean setNewCategory(String categoryName) throws Exception;
 	public boolean updateCategory(int categoryId,CategoryBean cBean) throws Exception;
 	public List<SubscriptionBean> selectSubscriptionByMember(int memberId);
 	public List<SubscriptionBean> selectSubscriptionByPodcaster(int podcasterId);
-	public boolean addNewActivity(ActivityBean aBean) throws Exception;
+//	public boolean addNewActivity(ActivityBean aBean) throws Exception;
 	public ActivityBean selectActivity(int activityId) throws Exception;
 	public List<ActivityBean> selectActivityByPodcaster(int podcasterId);
 	public List<ActivityBean> selectActivitybyDate(Date activityDate);
