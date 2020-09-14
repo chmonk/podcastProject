@@ -34,7 +34,7 @@ public class CategoryDAO implements ICategoryDAO {
 	}
 
 	@Override
-	public CategoryBean select(int categoryId) throws Exception {
+	public CategoryBean select(Integer categoryId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(CategoryBean.class, categoryId);
 	}
@@ -52,7 +52,7 @@ public class CategoryDAO implements ICategoryDAO {
 	}
 
 	@Override
-	public CategoryBean update(int categoryId, CategoryBean cbean) throws Exception {
+	public CategoryBean update(Integer categoryId, CategoryBean cbean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		CategoryBean oldbean = select(categoryId);
 
@@ -68,7 +68,7 @@ public class CategoryDAO implements ICategoryDAO {
 	}
 
 	@Override
-	public boolean delete(int categoryId) throws Exception {
+	public boolean delete(Integer categoryId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		CategoryBean cbean = select(categoryId);
 

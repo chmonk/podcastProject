@@ -20,7 +20,7 @@ public class MemberBean {
 	@Id
 	@Column(name = "MEMBERID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int memberId;
+	private Integer memberId;
 
 	@Column(name = "ACCOUNT")
 	private String account;
@@ -59,7 +59,7 @@ public class MemberBean {
 	private String image;
 
 	@Column(name = "ROLE")
-	private int role;
+	private Integer role;
 
 	@Column(name = "CREDITCARDNUMBER")
 	private String creditCardNumber;
@@ -68,16 +68,16 @@ public class MemberBean {
 	private String bankAccount;
 
 	@Column(name = "MONTHLYPAYMENT")
-	private int monthlyPayment;
+	private Integer monthlyPayment;
 
 	public MemberBean() {
 	}
 
-	public int getMemberId() {
+	public Integer getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
 
@@ -177,11 +177,11 @@ public class MemberBean {
 		this.image = image;
 	}
 
-	public int getRole() {
+	public Integer getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(Integer role) {
 		this.role = role;
 	}
 
@@ -201,11 +201,11 @@ public class MemberBean {
 		this.bankAccount = bankAccount;
 	}
 
-	public int getMonthlyPayment() {
+	public Integer getMonthlyPayment() {
 		return monthlyPayment;
 	}
 
-	public void setMonthlyPayment(int monthlyPayment) {
+	public void setMonthlyPayment(Integer monthlyPayment) {
 		this.monthlyPayment = monthlyPayment;
 	}
 
