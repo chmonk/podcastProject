@@ -1218,7 +1218,7 @@
 				<i class="material-icons" id="prev">skip_previous</i>
 			</div>
 			<div class="player__play player__item">
-				<i class="material-icons" id="play">pause</i>
+				<i class="material-icons" id="play">play_arrow</i>
 			</div>
 			<div class="player__next-work player__item">
 				<i class="material-icons" id="next">skip_next</i>
@@ -1325,7 +1325,6 @@
 	<!-- Custom JS -->
 	<script src="js/custom.js"></script>
 	<!-- 	plaer bar function js -->
-	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script> -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
 </body>
