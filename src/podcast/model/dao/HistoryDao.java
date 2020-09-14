@@ -44,13 +44,13 @@ public class HistoryDao implements IHistoryDao {
 	}
 
 	@Override
-	public HistoryBean select(int historyId) {
+	public HistoryBean select(Integer historyId) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(HistoryBean.class, historyId);
 	}
 
 	@Override
-	public boolean delete(int historyId) {
+	public boolean delete(Integer historyId) {
 		Session session = sessionFactory.getCurrentSession();
 		HistoryBean hBean = session.get(HistoryBean.class, historyId);
 		if (hBean != null) {
@@ -65,7 +65,7 @@ public class HistoryDao implements IHistoryDao {
 	// sql: "select from HistoryBean where memberId=:memberId"
 	// hql: "from (這邊是對應bean的class名稱,不是tablename絕對要注意!!!!!!!!!!!!!!!!)HistoryBean
 	// where memberId=:memberId"
-	public List<HistoryBean> selectByMember(int memberId) {
+	public List<HistoryBean> selectByMember(Integer memberId) {
 		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = "from HistoryBean where memberId=:memberId";
 		Query<HistoryBean> query = session.createQuery(hqlstr, HistoryBean.class);
@@ -75,7 +75,7 @@ public class HistoryDao implements IHistoryDao {
 	}
 
 	@Override
-	public List<HistoryBean> selectByPodcast(int podcastId) {
+	public List<HistoryBean> selectByPodcast(Integer podcastId) {
 		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = " from HistoryBean where podcastId=:podcastId";
 		Query<HistoryBean> query = session.createQuery(hqlstr, HistoryBean.class);
@@ -85,7 +85,7 @@ public class HistoryDao implements IHistoryDao {
 	}
 
 	@Override
-	public List<HistoryBean> selectByPublisher(int publisherId) {
+	public List<HistoryBean> selectByPublisher(Integer publisherId) {
 		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = " from HistoryBean where publisherId=:publisherId";
 		Query<HistoryBean> query = session.createQuery(hqlstr, HistoryBean.class);
