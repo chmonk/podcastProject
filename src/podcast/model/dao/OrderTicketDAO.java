@@ -41,7 +41,7 @@ public class OrderTicketDAO implements IOrderTicketDAO {
 	}
 
 	@Override
-	public OrderTicketBean select(int ticketOrderId) {
+	public OrderTicketBean select(Integer ticketOrderId) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(OrderTicketBean.class, ticketOrderId);
 	}
@@ -54,7 +54,7 @@ public class OrderTicketDAO implements IOrderTicketDAO {
 	}
 
 	@Override
-	public OrderTicketBean update(int ticketOrderId,OrderTicketBean oBean) {
+	public OrderTicketBean update(Integer ticketOrderId,OrderTicketBean oBean) {
 		Session session = sessionFactory.getCurrentSession();
 		OrderTicketBean oldBean = session.get(OrderTicketBean.class, ticketOrderId);
 
@@ -71,7 +71,7 @@ public class OrderTicketDAO implements IOrderTicketDAO {
 	}
 
 	@Override
-	public boolean delete(int ticketOrderId) {
+	public boolean delete(Integer ticketOrderId) {
 		Session session = sessionFactory.getCurrentSession();
 		OrderTicketBean oBean = session.get(OrderTicketBean.class, ticketOrderId);
 

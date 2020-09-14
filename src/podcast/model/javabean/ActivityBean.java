@@ -16,25 +16,25 @@ import org.springframework.stereotype.Component;
 @Table(name="activity")
 @Component
 public class ActivityBean {
-	private int activityId;
+	private Integer activityId;
 	private String activityName;
 	private Date activityDate;
 	private String activityContent;
 	private String activityLocation;
-	private int podcasterId;
-	private int activityPrice;
-	private int activityMaxPeople;
-	private int activityMinPeople;
-	private int activityStatus;
+	private Integer podcasterId;
+	private Integer activityPrice;
+	private Integer activityMaxPeople;
+	private Integer activityMinPeople;
+	private Integer activityStatus;
 	private String activityImg;
 	
 	@Id
 	@Column(name="ACTIVITYID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public int getActivityId() {
+	public Integer getActivityId() {
 		return activityId;
 	}
-	public void setActivityId(int activityId) {
+	public void setActivityId(Integer activityId) {
 		this.activityId = activityId;
 	}
 	
@@ -71,42 +71,42 @@ public class ActivityBean {
 	}
 	
 	@Column(name="PODCASTERID")
-	public int getPodcasterId() {
+	public Integer getPodcasterId() {
 		return podcasterId;
 	}
-	public void setPodcasterId(int podcasterId) {
+	public void setPodcasterId(Integer podcasterId) {
 		this.podcasterId = podcasterId;
 	}
 	
 	@Column(name="ACTIVITYPRICE")
-	public int getActivityPrice() {
+	public Integer getActivityPrice() {
 		return activityPrice;
 	}
-	public void setActivityPrice(int activityPrice) {
+	public void setActivityPrice(Integer activityPrice) {
 		this.activityPrice = activityPrice;
 	}
 	
 	@Column(name="ACTIVITYMAXPEOPLE")
-	public int getActivityMaxPeople() {
+	public Integer getActivityMaxPeople() {
 		return activityMaxPeople;
 	}
-	public void setActivityMaxPeople(int activityMaxPeople) {
+	public void setActivityMaxPeople(Integer activityMaxPeople) {
 		this.activityMaxPeople = activityMaxPeople;
 	}
 	
 	@Column(name="ACTIVITYMINPEOPLE")
-	public int getActivityMinPeople() {
+	public Integer getActivityMinPeople() {
 		return activityMinPeople;
 	}
-	public void setActivityMinPeople(int activityMinPeople) {
+	public void setActivityMinPeople(Integer activityMinPeople) {
 		this.activityMinPeople = activityMinPeople;
 	}
 	
 	@Column(name="ACTIVITYSTATUS")
-	public int getActivityStatus() {
+	public Integer getActivityStatus() {
 		return activityStatus;
 	}
-	public void setActivityStatus(int activityStatus) {
+	public void setActivityStatus(Integer activityStatus) {
 		this.activityStatus = activityStatus;
 	}
 

@@ -15,18 +15,18 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "orderTicket")
 public class OrderTicketBean {
-	private int ticketOrderId;
+	private Integer ticketOrderId;
 	private Date orderDate;
-	private int orderPrice;
-	private int memberId;
+	private Integer orderPrice;
+	private Integer memberId;
 	private String creditCardNumber;
-	private int activityId;
+	private Integer activityId;
 
 	public OrderTicketBean() {
 	}
 
-	public OrderTicketBean(int ticketOrderId, Date orderDate, int orderPrice, int memberId, String creditCardNumber,
-			int activityId) {
+	public OrderTicketBean(Integer ticketOrderId, Date orderDate, Integer orderPrice, Integer memberId, String creditCardNumber,
+			Integer activityId) {
 		this.ticketOrderId = ticketOrderId;
 		this.orderDate = orderDate;
 		this.orderPrice = orderPrice;
@@ -38,11 +38,11 @@ public class OrderTicketBean {
 	@Id
 	@Column(name = "TICKETORDERID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getTicketOrderId() {
+	public Integer getTicketOrderId() {
 		return ticketOrderId;
 	}
 
-	public void setTicketOrderId(int ticketOrderId) {
+	public void setTicketOrderId(Integer ticketOrderId) {
 		this.ticketOrderId = ticketOrderId;
 	}
 
@@ -56,20 +56,20 @@ public class OrderTicketBean {
 	}
 
 	@Column(name = "ORDERPRICE")
-	public int getOrderPrice() {
+	public Integer getOrderPrice() {
 		return orderPrice;
 	}
 
-	public void setOrderPrice(int orderPrice) {
+	public void setOrderPrice(Integer orderPrice) {
 		this.orderPrice = orderPrice;
 	}
 
 	@Column(name = "MEMBERID")
-	public int getMemberId() {
+	public Integer getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
 
@@ -83,11 +83,11 @@ public class OrderTicketBean {
 	}
 
 	@Column(name = "ACTIVITYID")
-	public int getActivityId() {
+	public Integer getActivityId() {
 		return activityId;
 	}
 
-	public void setActivityId(int activityId) {
+	public void setActivityId(Integer activityId) {
 		this.activityId = activityId;
 	}
 
