@@ -9,5 +9,5 @@ public interface ISubProgramListDAO {
 	public List<uploadPodcastBean> selectByMemeberId(int memberID) throws Exception;
 
 
-	List<SubscriptionBean> selectSubcriptionByMemberID(int memberID,int podcasterID) throws Exception;
+	public List<SubscriptionBean> selectSubcriptionByMemberID(int memberID,int podcasterID) throws Exception;
 }
