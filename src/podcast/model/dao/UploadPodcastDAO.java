@@ -41,7 +41,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	}
 
 	@Override
-	public uploadPodcastBean select(int podcastId) throws Exception {
+	public uploadPodcastBean select(Integer podcastId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(uploadPodcastBean.class, podcastId);
 	}
@@ -59,7 +59,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	}
 
 	@Override
-	public uploadPodcastBean update(int podcastId, uploadPodcastBean ubean) throws Exception {
+	public uploadPodcastBean update(Integer podcastId, uploadPodcastBean ubean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		uploadPodcastBean oldbean = select(podcastId);
 
@@ -75,7 +75,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	}
 
 	@Override
-	public boolean delete(int podcastId) throws Exception {
+	public boolean delete(Integer podcastId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		uploadPodcastBean ubean = select(podcastId);
 

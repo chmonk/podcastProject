@@ -38,13 +38,13 @@ public class MyFavProgramDAO implements IMyFavProgramDAO {
 	}
 
 	@Override
-	public MyFavProgramBean select(int favId) {
+	public MyFavProgramBean select(Integer favId) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(MyFavProgramBean.class, favId);
 	}
 
 	@Override
-	public boolean delete(int favId) {
+	public boolean delete(Integer favId) {
 		Session session = sessionFactory.getCurrentSession();
 		MyFavProgramBean fBean = session.get(MyFavProgramBean.class, favId);
 		if (fBean != null) {
@@ -55,7 +55,7 @@ public class MyFavProgramDAO implements IMyFavProgramDAO {
 	}
 
 	@Override
-	public List<MyFavProgramBean> selectByMember(int memberId) {
+	public List<MyFavProgramBean> selectByMember(Integer memberId) {
 		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = "from MyFavProgramBean where memberId=:memberId";
 		Query<MyFavProgramBean> query = session.createQuery(hqlstr, MyFavProgramBean.class);
@@ -65,7 +65,7 @@ public class MyFavProgramDAO implements IMyFavProgramDAO {
 	}
 
 	@Override
-	public List<MyFavProgramBean> selectByPodcast(int podcastId) {
+	public List<MyFavProgramBean> selectByPodcast(Integer podcastId) {
 		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = "from MyFavProgramBean where podcastId=:podcastId";
 		Query<MyFavProgramBean> query = session.createQuery(hqlstr, MyFavProgramBean.class);
