@@ -38,7 +38,7 @@ public class ActivityDAO implements IActivityDAO {
 	}
 
 	@Override
-	public ActivityBean select(int activityId) throws Exception {
+	public ActivityBean select(Integer activityId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(ActivityBean.class, activityId);
 	}
@@ -56,7 +56,7 @@ public class ActivityDAO implements IActivityDAO {
 	}
 
 	@Override
-	public ActivityBean update(int activityId, ActivityBean abean) throws Exception {
+	public ActivityBean update(Integer activityId, ActivityBean abean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		ActivityBean oldbean = select(activityId);
 
@@ -80,7 +80,7 @@ public class ActivityDAO implements IActivityDAO {
 	}
 
 	@Override
-	public boolean delete(int activityId) throws Exception {
+	public boolean delete(Integer activityId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		ActivityBean abean = select(activityId);
 

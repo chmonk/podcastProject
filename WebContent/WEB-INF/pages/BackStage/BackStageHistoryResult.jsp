@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BackStage OrderTicket Result</title>
+<title>BackStage History Result</title>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,22 +42,22 @@
 		
 	}
 </style>
+
 </head>
 <body>
 <div style="margin-top: 50px">
-
-<h3 class="center">BackStage OrderTicket Result</h3><br>
-<div>
-<table class="center">
-<tr><th>TicketOrderId</th><th>OrderDate</th><th>OrderPrice</th><th>MemberId</th><th>CreditCardNumber</th><th>ActivityId</th></tr>
-<c:forEach items="${oList}" var="order" varStatus="tagStatus">
+<h3 class="center">${HistoryResult}</h3><br>
+<div class="center">
+<table>
+<tr><th>HistoryId</th><th>PodcastId</th><th>PodcastName</th><th>PublisherId</th><th>MemberId</th><th>LastListen</th></tr>
+<c:forEach items="${hList}" var="history" varStatus="tagStatus">
 	<tr>
-	<td>${order.ticketOrderId}</td>
-	<td>${order.orderDate}</td>
-	<td>${order.orderPrice}</td>
-	<td>${order.memberId}</td>
-	<td>${order.creditCardNumber}</td>
-	<td>${order.activityId}</td>
+	<td>${history.historyId}</td>
+	<td>${history.podcastId}</td>
+	<td>${history.podcastName}</td>
+	<td>${history.publisherId}</td>
+	<td>${history.memberId}</td>
+	<td>${history.lastListen}</td>
 	</tr>
 </c:forEach>
 </table>
@@ -65,8 +65,6 @@
 <form class="center" action="<c:url value="/BackToSelect.controller"/>">
 	<input type="submit" value="BACK" style="margin-top: 50px">
 </form>
-
-
 </div>
 </body>
 </html>

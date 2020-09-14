@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BackStage OrderTicket Result</title>
+<title>BackStage Activity Result</title>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,37 +36,44 @@
 		
 	}
 	
-		.center{
+	.center {
 		margin:0px auto;
 		text-align:center;
 		
 	}
+	 
+	 
+	 
 </style>
+
 </head>
 <body>
 <div style="margin-top: 50px">
-
-<h3 class="center">BackStage OrderTicket Result</h3><br>
+<h3 class="center">${ActResult}</h3><br>
 <div>
-<table class="center">
-<tr><th>TicketOrderId</th><th>OrderDate</th><th>OrderPrice</th><th>MemberId</th><th>CreditCardNumber</th><th>ActivityId</th></tr>
-<c:forEach items="${oList}" var="order" varStatus="tagStatus">
+<table  class="center" >
+<tr><th>ActivityId</th><th>ActivityName</th><th>ActivityDate</th><th>ActivityContent</th><th>ActivityLocation</th><th>PodcasterId</th><th>ActivityPrice</th><th>ActivityMaxPeople</th><th>ActivityMinPeople</th><th>ActivityStatus</th><th>ActivityImg</th></tr>
+<c:forEach items="${aList}" var="act" varStatus="tagStatus">
 	<tr>
-	<td>${order.ticketOrderId}</td>
-	<td>${order.orderDate}</td>
-	<td>${order.orderPrice}</td>
-	<td>${order.memberId}</td>
-	<td>${order.creditCardNumber}</td>
-	<td>${order.activityId}</td>
+	<td>${act.activityId}</td>
+	<td>${act.activityName}</td>
+	<td>${act.activityDate}</td>
+	<td>${act.activityContent}</td>
+	<td>${act.activityLocation}</td>
+	<td>${act.podcasterId}</td>
+	<td>${act.activityPrice}</td>
+	<td>${act.activityMaxPeople}</td>
+	<td>${act.activityMinPeople}</td>
+	<td>${act.activityStatus}</td>
+	<td>${act.activityImg}</td>
+	
 	</tr>
 </c:forEach>
 </table>
 </div>
-<form class="center" action="<c:url value="/BackToSelect.controller"/>">
+<form  action="<c:url value="/BackToSelect.controller"/>" class="center">
 	<input type="submit" value="BACK" style="margin-top: 50px">
 </form>
-
-
 </div>
 </body>
 </html>

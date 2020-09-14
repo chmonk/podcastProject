@@ -8,13 +8,13 @@ import podcast.model.javabean.ProgramCommentBean;
 public interface IProgramCommentDAO {
 	public ProgramCommentBean insert(ProgramCommentBean pBean);
 
-	public ProgramCommentBean select(int commentId);
+	public ProgramCommentBean select(Integer commentId);
 
 	public List<ProgramCommentBean> selectAll();
 
-	public ProgramCommentBean update(int commentId, String commentMsg, int memberId, int podcasterId, int msgStatus,
+	public ProgramCommentBean update(Integer commentId, String commentMsg, Integer memberId, Integer podcasterId, Integer msgStatus,
 			Date msgDate);
 
-	public boolean delete(int commentId);
+	public boolean delete(Integer commentId);
 
 }

@@ -15,17 +15,17 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "programComment")
 public class ProgramCommentBean {
-	private int commentId;
+	private Integer commentId;
 	private String commentMsg;
-	private int memberId;
-	private int podcasterId;
-	private int msgStatus;
+	private Integer memberId;
+	private Integer podcasterId;
+	private Integer msgStatus;
 	private Date msgDate;
 
 	public ProgramCommentBean() {
 	}
 
-	public ProgramCommentBean(int commentId, String commentMsg, int memberId, int podcasterId, int msgStatus,
+	public ProgramCommentBean(Integer commentId, String commentMsg, Integer memberId, Integer podcasterId, Integer msgStatus,
 			Date msgDate) {
 		this.commentId = commentId;
 		this.commentMsg = commentMsg;
@@ -38,11 +38,11 @@ public class ProgramCommentBean {
 	@Id
 	@Column(name = "COMMENTID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getCommentId() {
+	public Integer getCommentId() {
 		return commentId;
 	}
 
-	public void setCommentId(int commentId) {
+	public void setCommentId(Integer commentId) {
 		this.commentId = commentId;
 	}
 
@@ -56,29 +56,29 @@ public class ProgramCommentBean {
 	}
 
 	@Column(name = "MEMBERID")
-	public int getMemberId() {
+	public Integer getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
 
 	@Column(name = "PODCASTERID")
-	public int getPodcasterId() {
+	public Integer getPodcasterId() {
 		return podcasterId;
 	}
 
-	public void setPodcasterId(int podcasterId) {
+	public void setPodcasterId(Integer podcasterId) {
 		this.podcasterId = podcasterId;
 	}
 
 	@Column(name = "MSGSTATUS")
-	public int getMsgStatus() {
+	public Integer getMsgStatus() {
 		return msgStatus;
 	}
 
-	public void setMsgStatus(int msgStatus) {
+	public void setMsgStatus(Integer msgStatus) {
 		this.msgStatus = msgStatus;
 	}
 
