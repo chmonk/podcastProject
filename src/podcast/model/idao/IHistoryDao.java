@@ -6,9 +6,9 @@ import podcast.model.javabean.HistoryBean;
 
 public interface IHistoryDao {
 	public HistoryBean insert(HistoryBean hBean);
-	public HistoryBean select(int historyId);
-	public boolean delete(int historyId);
-	public List<HistoryBean> selectByMember(int memberId);
-	public List<HistoryBean> selectByPodcast(int podcastId);
-	public List<HistoryBean> selectByPublisher(int publisherId);
+	public HistoryBean select(Integer historyId);
+	public boolean delete(Integer historyId);
+	public List<HistoryBean> selectByMember(Integer memberId);
+	public List<HistoryBean> selectByPodcast(Integer podcastId);
+	public List<HistoryBean> selectByPublisher(Integer publisherId);
 }

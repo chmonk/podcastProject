@@ -17,30 +17,30 @@ import org.springframework.stereotype.Component;
 public class HistoryBean {
 	
 	
-	private int historyId;
-	private int podcastId;
+	private Integer historyId;
+	private Integer podcastId;
 	private String podcastName;
-	private int publisherId;
-	private int memberId;
+	private Integer publisherId;
+	private Integer memberId;
 	private Date lastListen;
 
 	@Id
 	@Column(name="HISTORYID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public int getHistoryId() {
+	public Integer getHistoryId() {
 		return historyId;
 	}
 
-	public void setHistoryId(int historyId) {
+	public void setHistoryId(Integer historyId) {
 		this.historyId = historyId;
 	}
 
 	@Column(name="PODCASTID")
-	public int getPodcastId() {
+	public Integer getPodcastId() {
 		return podcastId;
 	}
 
-	public void setPodcastId(int podcastId) {
+	public void setPodcastId(Integer podcastId) {
 		this.podcastId = podcastId;
 	}
 
@@ -54,20 +54,20 @@ public class HistoryBean {
 	}
 
 	@Column(name="PUBLISHERID")
-	public int getPublisherId() {
+	public Integer getPublisherId() {
 		return publisherId;
 	}
 
-	public void setPublisherId(int publisherId) {
+	public void setPublisherId(Integer publisherId) {
 		this.publisherId = publisherId;
 	}
 
 	@Column(name="MEMBERID")
-	public int getMemberId() {
+	public Integer getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
 

@@ -16,7 +16,7 @@ public class CategoryBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private int categoryId;
+	private Integer categoryId;
 	private String categoryName;
 
 	// 無參數建構子
@@ -24,7 +24,7 @@ public class CategoryBean implements Serializable {
 	}
 
 	// 帶參數建構子
-	public CategoryBean(int categoryId, String categoryName) {
+	public CategoryBean(Integer categoryId, String categoryName) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
@@ -32,11 +32,11 @@ public class CategoryBean implements Serializable {
 
 	@Id
 	@Column(name = "CATEGORYID")
-	public int getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
