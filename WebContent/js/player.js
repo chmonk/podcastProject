@@ -445,6 +445,11 @@ $(document).ready(() => {
 		queueWrapper.addClass("hidden");
 		queueBtn.removeClass("select");
 	});
+		//離開播放選單元素時關閉播放選單
+		queueWrapper.on("mouseleave",()=>{
+			queueWrapper.addClass("hidden");
+		})
+	
 
 	// 音量調整面板
 	//按下音量紐開關音量調節面板
