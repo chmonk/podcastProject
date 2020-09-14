@@ -8,9 +8,9 @@ public interface ICategoryDAO {
 //	CRUD
 	
 	public CategoryBean insert(CategoryBean cbean) throws Exception;
-	public CategoryBean select(int categoryId) throws Exception;
+	public CategoryBean select(Integer categoryId) throws Exception;
 	public List<CategoryBean> selectAll() throws Exception;
-	public CategoryBean update(int categoryId,CategoryBean cbean) throws Exception;
-	public boolean delete(int categoryId) throws Exception;
+	public CategoryBean update(Integer categoryId,CategoryBean cbean) throws Exception;
+	public boolean delete(Integer categoryId) throws Exception;
 	
 }

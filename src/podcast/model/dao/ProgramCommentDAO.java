@@ -41,7 +41,7 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 	}
 
 	@Override
-	public ProgramCommentBean select(int commentId) {
+	public ProgramCommentBean select(Integer commentId) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(ProgramCommentBean.class, commentId);
 	}
@@ -54,7 +54,7 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 	}
 
 	@Override
-	public ProgramCommentBean update(int commentId, String commentMsg, int memberId, int podcasterId, int msgStatus,
+	public ProgramCommentBean update(Integer commentId, String commentMsg, Integer memberId, Integer podcasterId, Integer msgStatus,
 			Date msgDate) {
 		Session session = sessionFactory.getCurrentSession();
 		ProgramCommentBean pBean = session.get(ProgramCommentBean.class, commentId);
@@ -71,7 +71,7 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 	}
 
 	@Override
-	public boolean delete(int commentId) {
+	public boolean delete(Integer commentId) {
 		Session session = sessionFactory.getCurrentSession();
 		ProgramCommentBean pBean = session.get(ProgramCommentBean.class, commentId);
 
