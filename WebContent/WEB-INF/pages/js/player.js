@@ -49,9 +49,9 @@ const mediaData = [
 		authorUrl: "",
 		fileName: "lemon",
 		fileUrl:
-			"./test/lemon.mp3",
+			"./programTestFile/lemon.mp3",
 		thumb:
-			"./test/lemon.jpg"
+			"./programTestFile/lemon.jpg"
 	}
 ];
 

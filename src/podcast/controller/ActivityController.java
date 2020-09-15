@@ -114,6 +114,24 @@ public class ActivityController {
 		//return "../index";
 	}
 	
+	//資料庫的所有活動傳送至首頁
+		@RequestMapping(path = "/b", method = RequestMethod.GET)
+		public String showActivities1(HttpServletRequest request,Model m) throws Exception {
+			
+			ServletContext app = request.getServletContext();
+	    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+	    	
+	    	ActivityDAO aDao = (ActivityDAO)context.getBean("ActivityDAO");
+	    	List<ActivityBean> list = new LinkedList<ActivityBean>();
+	    	
+	    	list = aDao.selectAll();
+
+			m.addAttribute("list", list);
+			//return "../../ActivitiesList";
+			return "page2/index1";
+			//return "../index";
+		}
+	
 	
 	
 
