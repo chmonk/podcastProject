@@ -46,9 +46,10 @@
 <body>
 <div style="margin-top: 50px">
 
-<h3 class="center" style="color: cyan">BackStage Member Result</h3><br>
+<h3 class="center">BackStage Member Result</h3><br>
+<h3 style="color: red" class="center">${memberDeleteMsg}</h3>
 <div>
-<table  class="center">
+<table  class="center" class="center">
 <tr><th>MemberId</th><th>Account</th><th>Password</th><th>Name</th><th>NickName</th><th>Birthday</th>
 	<th>RegisterDate</th><th>Info</th><th>Email</th><th>CellPhone</th><th>Address</th><th>Sex</th>
 	<th>Image</th><th>Role</th><th>CreditCardNumber</th><th>BankAccount</th><th>MonthlyPayment</th>

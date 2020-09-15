@@ -48,7 +48,7 @@
 <div style="margin-top: 50px">
 <h3 class="center">${HistoryResult}</h3><br>
 <div class="center">
-<table>
+<table class="center">
 <tr><th>HistoryId</th><th>PodcastId</th><th>PodcastName</th><th>PublisherId</th><th>MemberId</th><th>LastListen</th></tr>
 <c:forEach items="${hList}" var="history" varStatus="tagStatus">
 	<tr>
