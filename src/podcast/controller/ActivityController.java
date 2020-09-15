@@ -110,7 +110,7 @@ public class ActivityController {
 
 		m.addAttribute("list", list);
 		//return "../../ActivitiesList";
-		return "../../index";
+		return "/index";
 		//return "../index";
 	}
 	
