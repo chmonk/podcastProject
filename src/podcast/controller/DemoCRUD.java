@@ -1,5 +1,6 @@
 package podcast.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -14,10 +15,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+import me.xdrop.fuzzywuzzy.model.ExtractedResult;
 import podcast.model.dao.ActivityDAO;
 import podcast.model.dao.CategoryDAO;
+import podcast.model.dao.MemberDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.CategoryBean;
+import podcast.model.javabean.MemberBean;
 
 
 //for test server 
@@ -33,24 +38,41 @@ public class DemoCRUD {
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
     	
     	
+    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
+    	List<MemberBean> userAllData = mdao.fuzzySelectPodcasterAll();
+    	List<MemberBean> fuzzyUserData = new ArrayList<MemberBean>();
+    	List<String> a = new ArrayList<String>();
+    	for(MemberBean i:userAllData) {
+    		a.add(i.getNickname());	
+    	}
+//    	List<ExtractedResult> container = FuzzySearch.extractSorted(condition, a);
+    	List<ExtractedResult> container = FuzzySearch.extractSorted(request.getParameter("selectCondition"), a);
+    	System.out.println(userAllData);
+    	System.out.println(container);
+    	for(ExtractedResult e:container) {
+    		if(e.getScore()>0) {  
+    			fuzzyUserData.add(userAllData.get(e.getIndex()));
+    		}
+    	}
+    	System.out.println(fuzzyUserData);
     	//ActivityDAO ,以下測資
     	//insert into activity(activityName,activityDate,activityContent,activityLocation,podcasterId,activityPrice,activityMaxPeople,activityMinPeople,activityStatus) values('party',GETDATE(),'go to bookstore','bookstore',15,500,300,15,1)
-    	ActivityDAO adao = (ActivityDAO)context.getBean("ActivityDAO");
-    	List<ActivityBean> a = adao.selectAll();
-    	
-    	for(ActivityBean i:a) {
-    		System.out.println(i.getActivityDate());
-    	}
+//    	ActivityDAO adao = (ActivityDAO)context.getBean("ActivityDAO");
+//    	List<ActivityBean> a = adao.selectAll();
+//    	
+//    	for(ActivityBean i:a) {
+//    		System.out.println(i.getActivityDate());
+//    	}
     	
     	//CategoryDAO,以下測資
     	//insert into category (categoryName) values('happyprogram')
-    	CategoryDAO cdao = (CategoryDAO)context.getBean("CategoryDAO");
-    	List<CategoryBean> c = cdao.selectAll();
-    	
-    	for(CategoryBean i:c) {
-    		System.out.println(i.getCategoryName());
-    	}
-    	
+//    	CategoryDAO cdao = (CategoryDAO)context.getBean("CategoryDAO");
+//    	List<CategoryBean> c = cdao.selectAll();
+//    	
+//    	for(CategoryBean i:c) {
+//    		System.out.println(i.getCategoryName());
+//    	}
+//    	
     	
 		m.addAttribute("msg","You got mail!");
 		return "/success";
