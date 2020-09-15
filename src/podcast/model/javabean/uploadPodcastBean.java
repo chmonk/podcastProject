@@ -25,6 +25,8 @@ public class uploadPodcastBean {
 	private Date uploadTime;
 	private Integer clickAmount;
 	private String audioPath;
+	private String audioimg;
+	private Integer likesCount;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -117,4 +119,24 @@ public class uploadPodcastBean {
 	public void setAudioPath(String audioPath) {
 		this.audioPath = audioPath;
 	}
+
+	@Column(name = "AUDIOIMG")
+	public String getAudioimg() {
+		return audioimg;
+	}
+
+	public void setAudioimg(String audioimg) {
+		this.audioimg = audioimg;
+	}
+
+	@Column(name = "LIKESCOUNT")
+	public Integer getLikesCount() {
+		return likesCount;
+	}
+
+	public void setLikesCount(Integer likesCount) {
+		this.likesCount = likesCount;
+	}
+	
+	
 }

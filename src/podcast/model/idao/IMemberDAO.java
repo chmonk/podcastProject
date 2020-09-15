@@ -16,4 +16,9 @@ public interface IMemberDAO {
 
 	public MemberBean update(String acc,MemberBean member );
 
+	public List<MemberBean> fuzzySelectPodcasterAll();
+
+	public MemberBean selectPodcaster(int id);
+
+
 }
