@@ -24,6 +24,9 @@ p{
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+		
+	
 </head>
 <body onload="fff();showhide();columnTestify()">
 	
@@ -401,7 +404,7 @@ p{
 		
 		</div>
 
-<script src="../js/BackStageSelect.js"></script>	
+<script type="text/javascript" src="<c:url value='/js/BackStageSelect.js'/>"></script>
 
 </body>
 </html>
