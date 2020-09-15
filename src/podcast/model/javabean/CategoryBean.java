@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 @Entity
 @Table(name = "Category")
 public class CategoryBean implements Serializable {
@@ -32,7 +34,11 @@ public class CategoryBean implements Serializable {
 
 	@Id
 	@Column(name = "CATEGORYID")
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	public Integer getCategoryId() {
+
 		return categoryId;
 	}
 
