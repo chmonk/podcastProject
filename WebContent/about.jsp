@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<%-- 
 <!-- Styles -->
 
 <!-- Bootstrap CSS -->
@@ -26,6 +26,30 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/logo/favicon.ico">
+
+
+	<!-- Javascript files -->
+	<!-- jQuery -->
+	<script src="js/jquery.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- WayPoints JS -->
+	<script src="js/waypoints.min.js"></script>
+	<!-- Include js plugin -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- One Page Nav -->
+	<script src="js/jquery.nav.js"></script>
+	<!-- Respond JS for IE8 -->
+	<script src="js/respond.min.js"></script>
+	<!-- HTML5 Support for IE -->
+	<script src="js/html5shiv.js"></script>
+	<!-- Custom JS -->
+	<script src="js/custom.js"></script>
+	<!-- 	plaer bar function js -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
+	
+	--%>
 </head>
 <body>
 
@@ -176,26 +200,6 @@
 	<!-- about end -->
 
 
-	<!-- Javascript files -->
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-	<!-- Bootstrap JS -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- WayPoints JS -->
-	<script src="js/waypoints.min.js"></script>
-	<!-- Include js plugin -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- One Page Nav -->
-	<script src="js/jquery.nav.js"></script>
-	<!-- Respond JS for IE8 -->
-	<script src="js/respond.min.js"></script>
-	<!-- HTML5 Support for IE -->
-	<script src="js/html5shiv.js"></script>
-	<!-- Custom JS -->
-	<script src="js/custom.js"></script>
-	<!-- 	plaer bar function js -->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/player.js"></script>
 </body>
 
 </html>
