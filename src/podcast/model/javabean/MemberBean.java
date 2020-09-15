@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "MEMBER")
+@Table(name = "MEMBERS")
 @Component
 public class MemberBean {
 	@Id

@@ -22,11 +22,14 @@ a {
 	color: #333;
 }
 
-/* 控制播放條位置 */
+/* 控制播放條位置 fa-fa chart 顏色 */ 
 .player {
+	color: #FFFFFF	;
 	height: 48px;
 	width: 100%;
-	background: #f5f5f5;
+	background: #000000	;
+	/*background-image:url("../img/background/sunset.jpg");
+	background-repeat:round;*/
 	border-top: 1px solid #cecece;
 	position: fixed;
 	bottom: 0px;
@@ -52,7 +55,8 @@ a {
 }
 
 .player__item i.select {
-	color: #f50;
+	/*播放清單點擊紐顏色*/
+	color: #FFFFFF;
 }
 
 .player__item:before {
@@ -61,9 +65,10 @@ a {
 	width: 0;
 }
 
+/*時間條文自顏色*/
 .timeline {
 	height: 100%;
-	color: #f50;
+	color: #FFFFFF		;
 }
 
 .timeline__passtime, .timeline__duration {
@@ -108,7 +113,8 @@ a {
 }
 
 .timeline__progress-bar {
-	background: #f50;
+	/*時間軸顏色*/
+	background:#FFFFFF	;
 	width: 0%;
 	/* 控制條 */
 }
@@ -123,7 +129,8 @@ a {
 }
 
 .timeline__progress-handle:hover {
-	background: #f50;
+	/*時間條圓紐顏色*/
+	background: #FFFFFF		;
 	box-shadow: 0 0 2px 2px #eee;
 	cursor: pointer;
 }
@@ -139,7 +146,8 @@ a {
 	bottom: 48px;
 	left: -5px;
 	padding-bottom: 10px;
-	background: #f5f5f5;
+	/*音量調背板顏色*/
+	background: #000000;
 	border: 1px solid #cecece;
 	box-shadow: 0 2px 4px #cecece;
 }
@@ -178,7 +186,8 @@ a {
 }
 
 .volume__progress-bar {
-	background: #f50;
+	/*音量條顏色*/
+	background: #FFFFFF	;
 	transform-origin: 2 0;
 	transform: rotate(-180deg);
 	bottom: 8px;
@@ -196,7 +205,8 @@ a {
 }
 
 .volume__progress-handle:hover {
-	background: #f50;
+	/*音量調節紐顏色*/
+	background: #FFFFFF	;
 	box-shadow: 0 0 2px 2px #eee;
 	cursor: pointer;
 }
@@ -212,10 +222,13 @@ a {
 }
 
 .info__wrapper {
+	/*播放條節目標題顏色*/
+	color:#808080;
 	width: 250px;
 }
 
 .info__author, .info__name {
+	
 	display: block;
 	margin: 2px 0;
 	white-space: nowrap;
@@ -223,13 +236,20 @@ a {
 	text-overflow: ellipsis;
 }
 
+/*播放清單title顏色*/
+.queue__title{
+	color: #808080	;
+}
+
+
+/*播放清單演出者顏色*/
 .info__author {
-	color: #999;
+	color: #808080	;
 }
 
 .queue {
 	position: absolute;
-	background: #f5f5f5;
+	background: #0000ff;
 }
 
 .queue__wrapper {
@@ -272,7 +292,8 @@ a {
 }
 
 .queue__item {
-	background: #f5f5f5;
+	/*播放清單背景顏色*/
+	background: #000000;
 	padding: 0 24px;
 	height: 48px;
 }
