@@ -34,12 +34,11 @@ public class CategoryBean implements Serializable {
 
 	@Id
 	@Column(name = "CATEGORYID")
-<<<<<<< HEAD
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getCategoryId() {
-=======
+
 	public Integer getCategoryId() {
->>>>>>> c2b05bb51eb55e4f231fec1fceb624e2cc6b161c
+
 		return categoryId;
 	}
 

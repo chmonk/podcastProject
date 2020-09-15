@@ -37,19 +37,19 @@ public class BackStageControlerVer1 {
 
 	//BackStage Login=======================================================================================================
 	
-	@PostMapping(path= {"/BackStageLogin.controller"})
-	public String BackStageLogin(
-			@RequestParam(name="userName")String userName,
-			@RequestParam(name="password")String password,
-			Model m) {
-		if(userName.equals("test123")&&password.equals("pass123")) {
-			return "/BackStage/BackStageSelect";
-		}
-		
-		m.addAttribute("LoginErrorMsg","請輸入正確帳號密碼!");
-		return "/BackStage/BackStageLogin";
-	}
-	
+//	@PostMapping(path= {"/BackStageLogin.controller"})
+//	public String BackStageLogin(
+//			@RequestParam(name="userName")String userName,
+//			@RequestParam(name="password")String password,
+//			Model m) {
+//		if(userName.equals("test123")&&password.equals("pass123")) {
+//			return "/BackStage/BackStageSelect";
+//		}
+//		
+//		m.addAttribute("LoginErrorMsg","請輸入正確帳號密碼!");
+//		return "/BackStage/BackStageLogin";
+//	}
+//	
 	
 	// Back 2 Select==========================================================================================
 	@GetMapping(path = { "/BackToSelect.controller" })
@@ -98,9 +98,14 @@ public class BackStageControlerVer1 {
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
+		MemberBean mBean = bDao.selectMember(memberId);
+		java.util.List<MemberBean> mList = new ArrayList<MemberBean>();
+		mList.add(mBean);
+		m.addAttribute("mList", mList);
+		
 		bDao.deleteMember(memberId);
-		m.addAttribute("msg", "Member Deleted!");
-		return "/BackStage/BackStageSelect";
+		m.addAttribute("memberDeleteMsg", "Select Member Deleted!");
+		return "/BackStage/BackStageMemberResult";
 
 	}
 
@@ -362,14 +367,19 @@ public class BackStageControlerVer1 {
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
-		Date date=Date.valueOf(activityDate);
-		
-		java.util.List<ActivityBean> aList=bDao.selectActivitybyDate(date);
-		m.addAttribute("aList",aList);
-		m.addAttribute("ActResult","Activity Select Result");
-		
-		return "/BackStage/BackStageActivityResult";
-		
+		Date date;
+		java.util.List<ActivityBean> aList=new ArrayList<ActivityBean>();
+		try {
+			date=Date.valueOf(activityDate);
+			aList=bDao.selectActivitybyDate(date);
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+			
+			m.addAttribute("aList",aList);
+			m.addAttribute("ActResult","Activity Select Result");
+			
+			return "/BackStage/BackStageActivityResult";
 	}
 	
 	@PostMapping(path = { "/DeleteActivityByID.controller" })
@@ -452,9 +462,16 @@ public class BackStageControlerVer1 {
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
-		Date date=Date.valueOf(lastListen);
+		Date date;
+		java.util.List<HistoryBean> hList=new ArrayList<HistoryBean>();
 		
-		java.util.List<HistoryBean> hList = bDao.selectHistoryByLastListen(date);
+		try {
+			date=Date.valueOf(lastListen);
+			hList = bDao.selectHistoryByLastListen(date);
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+		
 		m.addAttribute("hList",hList);
 		m.addAttribute("HistoryResult","History Select By LastListen Result");
 		
@@ -469,10 +486,15 @@ public class BackStageControlerVer1 {
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
-		Date date=Date.valueOf(deleteDate);
+		Date date;
 		
-		bDao.deleteHistoryByDate(date);
-
+		try {
+			date=Date.valueOf(deleteDate);
+			bDao.deleteHistoryByDate(date);
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+		
 		m.addAttribute("HistoryResult","History Before "+deleteDate+" Has Been Deleted!");
 		
 		return "/BackStage/BackStageHistoryResult";
@@ -489,9 +511,18 @@ public class BackStageControlerVer1 {
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
-		Date startdate=Date.valueOf(startDate);
-		Date enddate=Date.valueOf(endDate);
-		int subIncome=bDao.SubscriptionIncome(startdate, enddate);
+		Date startdate;
+		Date enddate;
+		Integer subIncome=null;
+		
+		try {
+			startdate=Date.valueOf(startDate);
+			enddate=Date.valueOf(endDate);
+			subIncome=bDao.SubscriptionIncome(startdate, enddate);
+		}catch(IllegalArgumentException e) {
+			//do nothing
+		}
+		
 		m.addAttribute("startDate",startDate);
 		m.addAttribute("endDate",endDate);
 		m.addAttribute("income", subIncome);
@@ -510,9 +541,18 @@ public class BackStageControlerVer1 {
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
-		Date startdate=Date.valueOf(startDate);
-		Date enddate=Date.valueOf(endDate);
-		int subIncome=bDao.TicketIncome(startdate, enddate);
+		Date startdate; 
+		Date enddate;
+		Integer subIncome=null;
+		
+		try {
+			startdate=Date.valueOf(startDate);
+			enddate=Date.valueOf(endDate);
+			subIncome=bDao.TicketIncome(startdate, enddate);
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+		
 		m.addAttribute("startDate",startDate);
 		m.addAttribute("endDate",endDate);
 		m.addAttribute("income", subIncome);

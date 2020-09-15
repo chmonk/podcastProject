@@ -50,7 +50,9 @@ public class BackStageDAO implements IBackStageDAO{
 		this.sessionFactory=sessionFactory;
 	}
 
-	public MemberBean selectMember(int memberId) {
+	//Member FUnction==============================================================================
+	
+	public MemberBean selectMember(Integer memberId) {
 		Session session=sessionFactory.getCurrentSession();
 		return session.get(MemberBean.class, memberId);
 	}
@@ -60,11 +62,15 @@ public class BackStageDAO implements IBackStageDAO{
 		String hqlstr="from MemberBean where account=:account";
 		Query<MemberBean> query=session.createQuery(hqlstr,MemberBean.class);
 		query.setParameter("account", account);
-		MemberBean m = query.getSingleResult();
-		return m;
+		List<MemberBean> m = query.getResultList();
+		if(m.isEmpty()) {
+			return null;
+		}
+		
+		return m.get(0);
 	}
 
-	public boolean deleteMember(int memberId) {
+	public boolean deleteMember(Integer memberId) {
 		Session session=sessionFactory.getCurrentSession();
 		MemberBean mBean=session.get(MemberBean.class, memberId);
 		if(mBean!=null) {
@@ -74,13 +80,15 @@ public class BackStageDAO implements IBackStageDAO{
 		return false;
 	}
 
-	public OrderTicketBean selectOrderById(int orderId) {
+	//TicketOrderFunction==========================================================================
+	
+	public OrderTicketBean selectOrderById(Integer orderId) {
 		Session session=sessionFactory.getCurrentSession();
 		OrderTicketBean oBean=session.get(OrderTicketBean.class, orderId);
 		return oBean;
 	}
 
-	public List<OrderTicketBean> selectOrderByMember(int memberId) {
+	public List<OrderTicketBean> selectOrderByMember(Integer memberId) {
 		Session session=sessionFactory.getCurrentSession();
 		String hqlstr="from OrderTicketBean where memberId=:memberId";
 		Query<OrderTicketBean> query=session.createQuery(hqlstr,OrderTicketBean.class);
@@ -88,20 +96,22 @@ public class BackStageDAO implements IBackStageDAO{
 		return query.list();
 	}
 
-	public List<OrderTicketBean> selectOrderByActivity(int activityId) {
+	public List<OrderTicketBean> selectOrderByActivity(Integer activityId) {
 		Session session=sessionFactory.getCurrentSession();
 		String hqlstr="from OrderTicketBean where activityId=:activityId";
 		Query<OrderTicketBean> query=session.createQuery(hqlstr,OrderTicketBean.class);
 		query.setParameter("activityId", activityId);
 		return query.list();
 	}
+	
+	//ProgramCommentFunction======================================================================
 
-	public ProgramCommentBean selectCommentById(int commentId) {
+	public ProgramCommentBean selectCommentById(Integer commentId) {
 		Session session=sessionFactory.getCurrentSession();
 		return session.get(ProgramCommentBean.class, commentId);
 	}
 
-	public List<ProgramCommentBean> selectCommentByMember(int memberId,int podcasterId) {
+	public List<ProgramCommentBean> selectCommentByMember(Integer memberId,Integer podcasterId) {
 		Session session=sessionFactory.getCurrentSession();
 		String hqlstr="from ProgramCommentBean where memberId=:memberId and podcasterId=:podcasterId";
 		Query<ProgramCommentBean> query=session.createQuery(hqlstr,ProgramCommentBean.class);
@@ -110,7 +120,7 @@ public class BackStageDAO implements IBackStageDAO{
 		return query.list();
 	}
 
-	public List<ProgramCommentBean> selectCommentByPodcaster(int podcasterId) {
+	public List<ProgramCommentBean> selectCommentByPodcaster(Integer podcasterId) {
 		Session session=sessionFactory.getCurrentSession();
 		String hqlstr="from ProgramCommentBean where podcasterId=:podcasterId";
 		Query<ProgramCommentBean> query=session.createQuery(hqlstr,ProgramCommentBean.class);
@@ -118,7 +128,7 @@ public class BackStageDAO implements IBackStageDAO{
 		return query.list();
 	}// 提醒要改，現有的Bean還是以每集podcast在寫的
 
-	public boolean deleteComment(int commentId) {
+	public boolean deleteComment(Integer commentId) {
 		Session session=sessionFactory.getCurrentSession();
 		ProgramCommentBean pBean= session.get(ProgramCommentBean.class, commentId);
 		if(pBean!=null) {
@@ -128,7 +138,7 @@ public class BackStageDAO implements IBackStageDAO{
 		return false;
 	}
 
-	public void deleteCommentByMember(int memberId,int podcasterId) {
+	public void deleteCommentByMember(Integer memberId,Integer podcasterId) {
 		Session session=sessionFactory.getCurrentSession();
 		String hqlstr="from ProgramCommentBean where memberId=:memberId and podcasterId=:podcasterId";
 		Query<ProgramCommentBean> query=session.createQuery(hqlstr,ProgramCommentBean.class);
@@ -139,6 +149,8 @@ public class BackStageDAO implements IBackStageDAO{
 			session.delete(pBean);
 		}
 	}
+	
+	//CategoryFunction============================================================
 
 	public boolean setNewCategory(String categoryName) throws Exception {
 //		CategoryDAO cDao=new CategoryDAO();
@@ -156,7 +168,7 @@ public class BackStageDAO implements IBackStageDAO{
 		
 	}
 
-	public boolean updateCategory(int categoryId,CategoryBean cBean) throws Exception {
+	public boolean updateCategory(Integer categoryId,CategoryBean cBean) throws Exception {
 		//CategoryDAO cDao=new CategoryDAO();
 		CategoryBean categorybean=cDao.select(categoryId);
 		if(categorybean!=null) {
@@ -166,7 +178,9 @@ public class BackStageDAO implements IBackStageDAO{
 		return false;
 	}
 
-	public List<SubscriptionBean> selectSubscriptionByMember(int memberId) {
+	//Subscription Function==========================================================================
+	
+	public List<SubscriptionBean> selectSubscriptionByMember(Integer memberId) {
 		Session session=sessionFactory.getCurrentSession();
 		String hqlstr="from SubscriptionBean where memberId=:memberId";
 		Query<SubscriptionBean> query=session.createQuery(hqlstr,SubscriptionBean.class);
@@ -174,7 +188,7 @@ public class BackStageDAO implements IBackStageDAO{
 		return query.list();
 	}	
 
-	public List<SubscriptionBean> selectSubscriptionByPodcaster(int podcasterId) {
+	public List<SubscriptionBean> selectSubscriptionByPodcaster(Integer podcasterId) {
 		Session session=sessionFactory.getCurrentSession();
 		String hqlstr="from SubscriptionBean where podcasterId=:podcasterId";
 		Query<SubscriptionBean> query=session.createQuery(hqlstr,SubscriptionBean.class);
@@ -182,6 +196,8 @@ public class BackStageDAO implements IBackStageDAO{
 		return query.list();
 	}
 
+	//Activity Function================================================================================
+	
 //	public boolean addNewActivity(ActivityBean aBean) throws Exception {
 //		//ActivityDAO aDao=new ActivityDAO();
 //		ActivityBean activityBean = aDao.select(aBean.getActivityId());
@@ -192,12 +208,12 @@ public class BackStageDAO implements IBackStageDAO{
 //		return false;
 //	}
 
-	public ActivityBean selectActivity(int activityId) throws Exception {
+	public ActivityBean selectActivity(Integer activityId) throws Exception {
 		//ActivityDAO aDao=new ActivityDAO();
 		return aDao.select(activityId);
 	}
 
-	public List<ActivityBean> selectActivityByPodcaster(int podcasterId) {
+	public List<ActivityBean> selectActivityByPodcaster(Integer podcasterId) {
 		Session session=sessionFactory.getCurrentSession();
 		String hqlstr="from ActivityBean where podcasterId=:podcasterId";
 		Query<ActivityBean> query=session.createQuery(hqlstr,ActivityBean.class);
@@ -213,46 +229,49 @@ public class BackStageDAO implements IBackStageDAO{
 		return query.list();
 	}
 
-	public boolean deleteActivity(int activityId) throws Exception {
+	public boolean deleteActivity(Integer activityId) throws Exception {
 		//ActivityDAO aDao=new ActivityDAO();
 		return aDao.delete(activityId);
 	}
 
+	//BrowsingHistory Function====================================================================
 	
-	public HistoryBean selectHistoryById(int historyId) {
+	public HistoryBean selectHistoryById(Integer historyId) {
 		return hDao.select(historyId);
 	}
 
-	public List<HistoryBean> selectHistoryByMember(int memberId) {
+	public List<HistoryBean> selectHistoryByMember(Integer memberId) {
 		return hDao.selectByMember(memberId);
 	}
 
-	public List<HistoryBean> selectHistoryByPodcaster(int podcasterId) {
+	public List<HistoryBean> selectHistoryByPodcaster(Integer podcasterId) {
 		return hDao.selectByPublisher(podcasterId);
 	}
 	
-	public List<HistoryBean> selectHistoryByLastListen(Date setPoint){
+	public List<HistoryBean> selectHistoryByLastListen(Date setPoInteger){
 		Session session=sessionFactory.getCurrentSession();
-		String hqlstr="from HistoryBean where lastListen>:setPoint";
+		String hqlstr="from HistoryBean where lastListen>:setPoInteger";
 		Query<HistoryBean> query=session.createQuery(hqlstr,HistoryBean.class);
-		query.setParameter("setPoint", setPoint);
+		query.setParameter("setPoInteger", setPoInteger);
 		return query.list();
 	}
 	
-	public boolean deleteHistoryByDate(Date setPoint){
+	public boolean deleteHistoryByDate(Date setPoInteger){
 		Session session=sessionFactory.getCurrentSession();
-		String hqlstr="from HistoryBean where lastListen <:setPoint";
+		String hqlstr="from HistoryBean where lastListen <:setPoInteger";
 		Query<HistoryBean> query=session.createQuery(hqlstr,HistoryBean.class);
-		query.setParameter("setPoint", setPoint);
+		query.setParameter("setPoInteger", setPoInteger);
 		List<HistoryBean> list=query.list();
 		for(HistoryBean hBean:list) {
 			session.delete(hBean);
 		}
 		return true;
 	}
+	
+	//income Function===================================================================================
 
 	@Override
-	public int SubscriptionIncome(Date startDate,Date endDate) {
+	public Integer SubscriptionIncome(Date startDate,Date endDate) {
 		Session session=sessionFactory.getCurrentSession();
 		String hqlstr="from SubscriptionBean where subdateStart between :startDate and :endDate";
 		Query<SubscriptionBean> query=session.createQuery(hqlstr,SubscriptionBean.class);
@@ -260,7 +279,7 @@ public class BackStageDAO implements IBackStageDAO{
 		query.setParameter("endDate", endDate);
 		List<SubscriptionBean> list=query.list();
 		
-		int income=0;
+		Integer income=0;
 		for(SubscriptionBean sBean:list ) {
 			income+=sBean.getMonthlyPayment();
 		}
@@ -268,7 +287,7 @@ public class BackStageDAO implements IBackStageDAO{
 	}
 
 	@Override
-	public int TicketIncome(Date startDate,Date endDate) {
+	public Integer TicketIncome(Date startDate,Date endDate) {
 		Session session=sessionFactory.getCurrentSession();
 		String hqlstr="from OrderTicketBean where orderDate between :startDate and :endDate";
 		Query<OrderTicketBean> query=session.createQuery(hqlstr,OrderTicketBean.class);
@@ -276,7 +295,7 @@ public class BackStageDAO implements IBackStageDAO{
 		query.setParameter("endDate", endDate);
 		List<OrderTicketBean> list=query.list();
 		
-		int income=0;
+		Integer income=0;
 		for(OrderTicketBean oBean:list ) {
 			income+=oBean.getOrderPrice();
 		}
