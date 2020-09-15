@@ -26,7 +26,7 @@ p{
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body onload="fff();showhide();columnTestify()">
-	<script src="js/BackStageSelect.js"></script>
+	
 
 
 	<div class="container-fluid"
@@ -401,7 +401,7 @@ p{
 		
 		</div>
 
-	
+<script src="../js/BackStageSelect.js"></script>	
 
 </body>
 </html>
