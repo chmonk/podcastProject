@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<%-- 
 <!-- Styles -->
 
 <!-- Bootstrap CSS -->
@@ -26,26 +26,8 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/logo/favicon.ico">
-</head>
-<body>
 
-	<footer>
-		<div class="container">
-			<!-- social media links -->
-			<div class="social">
-				<a class="h-facebook" href="#"><i class="fa fa-facebook"></i></a> <a
-					class="h-google" href="#"><i class="fa fa-google-plus"></i></a> <a
-					class="h-linkedin" href="#"><i class="fa fa-linkedin"></i></a> <a
-					class="h-twitter" href="#"><i class="fa fa-twitter"></i></a>
-			</div>
-			<!-- copy right -->
-			<p class="copy-right">&copy; copyright 2018, All rights are
-				reserved.</p>
-		</div>
-	</footer>
-
-
-	<!-- Javascript files -->
+<!-- Javascript files -->
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
 	<!-- Bootstrap JS -->
@@ -65,6 +47,27 @@
 	<!-- 	plaer bar function js -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
+	--%>
+</head>
+<body>
+
+	<footer>
+		<div class="container">
+			<!-- social media links -->
+			<div class="social">
+				<a class="h-facebook" href="#"><i class="fa fa-facebook"></i></a> <a
+					class="h-google" href="#"><i class="fa fa-google-plus"></i></a> <a
+					class="h-linkedin" href="#"><i class="fa fa-linkedin"></i></a> <a
+					class="h-twitter" href="#"><i class="fa fa-twitter"></i></a>
+			</div>
+			<!-- copy right -->
+			<p class="copy-right">&copy; copyright 2018, All rights are
+				reserved.</p>
+		</div>
+	</footer>
+
+
+	
 </body>
 
 </html>
