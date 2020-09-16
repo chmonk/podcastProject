@@ -86,6 +86,7 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "OPENCOMMENT")
+	@Transient
 	public Integer getOpenComment() {
 		return openComment;
 	}
@@ -105,6 +106,7 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "CLICKAMOUNT")
+	@Transient
 	public Integer getClickAmount() {
 		return clickAmount;
 	}
@@ -132,6 +134,7 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "LIKESCOUNT")
+	@Transient
 	public Integer getLikesCount() {
 		return likesCount;
 	}
