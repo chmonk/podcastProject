@@ -96,8 +96,25 @@ public class ActivityController {
     }
 	
 	
-	//資料庫的所有活動傳送至首頁
-	@RequestMapping(path = "/a", method = RequestMethod.GET)
+//	//資料庫的所有活動傳送至首頁
+//	@RequestMapping(path = "/a", method = RequestMethod.GET)
+//	public String showActivities(HttpServletRequest request,Model m) throws Exception {
+//		
+//		ServletContext app = request.getServletContext();
+//    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+//    	
+//    	ActivityDAO aDao = (ActivityDAO)context.getBean("ActivityDAO");
+//    	List<ActivityBean> list = new LinkedList<ActivityBean>();
+//    	
+//    	list = aDao.selectAll();
+//
+//		m.addAttribute("list", list);
+//		//return "../../ActivitiesList";
+//		return "/index";
+//		//return "../index";
+//	}
+	
+	@RequestMapping(path = "/h", method = RequestMethod.GET)
 	public String showActivities(HttpServletRequest request,Model m) throws Exception {
 		
 		ServletContext app = request.getServletContext();
@@ -110,8 +127,8 @@ public class ActivityController {
 
 		m.addAttribute("list", list);
 		//return "../../ActivitiesList";
+		//return "/header_banner";
 		return "/index";
-		//return "../index";
 	}
 	
 	
