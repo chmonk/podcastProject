@@ -13,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +44,7 @@ public class PodcastController {
     	m.addAttribute("upList",upList);
     	request.setAttribute("upList", upList);
 		
-		return "/PodcastManage/PodcastManage";
+		return "/PodcastManage/PodcastManage2";
 	}
 	
 	//新增頻道
@@ -55,11 +57,52 @@ public class PodcastController {
 
 	//修改頻道
 	@RequestMapping(path = "/modifyPodcast", method = RequestMethod.GET)
-	public String showmodifyForm(Model m) {
+	public String showmodifyForm(Model m,
+				@RequestParam("thisPodcastId")Integer podcastId,
+				HttpServletRequest request) {
 		uploadPodcastBean mpodcast = new uploadPodcastBean();
 		m.addAttribute("uploadPodcastBean", mpodcast);
+		m.addAttribute("modifyPodcastId", podcastId);
 		return "/PodcastManage/ModifyPodcast";
 	}
+	
+	
+	//修改單集節目內容
+		@PostMapping(path= {"/PodcastModifyProcess"})
+		public String podcastModifyProcess(@RequestParam("title")String title,
+								 @RequestParam("podcastInfo")String podcastInfo,
+								 @RequestParam("radioC")Integer openComment,
+								 @RequestParam("radioP")Integer openPayment,
+								 @RequestParam("podcastId")Integer podcastId,
+								 HttpServletRequest request,
+								 Model m) throws Exception {
+			
+			ServletContext app = request.getServletContext();
+	    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+	    	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
+	    	
+	    	System.out.println("modifyPodcastId:"+podcastId);
+	    	
+	    	uploadPodcastBean ubean=new uploadPodcastBean();
+	    	ubean.setTitle(title);
+	    	ubean.setPodcastInfo(podcastInfo);
+	    	ubean.setOpenComment(openComment);
+	    	ubean.setOpenPayment(openPayment);
+	    	upDao.update(podcastId, ubean);
+	    	
+	    	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
+	    	
+	    	Integer memberId=20;
+	    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
+	    	m.addAttribute("upList",upList);
+	    	request.setAttribute("upList", upList);
+			
+			
+			return "/PodcastManage/PodcastManage2";
+		}
+	
+	
+	
 	//接收新增頻道
 	@RequestMapping(path = "/addPodcastProcess", method = RequestMethod.POST)
 //    public String processPodcast(@RequestParam("podcastfile") MultipartFile multipartFile2,
@@ -131,31 +174,7 @@ public class PodcastController {
 		
 	}
 	
-	//修改單集節目內容
-	@PostMapping(path= {"/PodcastModifyProcess"})
-	public String podcastModifyProcess(@RequestParam("title")String title,
-							 @RequestParam("podcastInfo")String podcastInfo,
-							 @RequestParam("radioC")Integer openComment,
-							 @RequestParam("radioP")Integer openPayment,
-							 HttpServletRequest request,
-							 Model m) throws Exception {
-		
-		ServletContext app = request.getServletContext();
-    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-    	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
-    	
-    	uploadPodcastBean ubean=new uploadPodcastBean();
-    	ubean.setTitle(title);
-    	ubean.setPodcastInfo(podcastInfo);
-    	ubean.setOpenComment(openComment);
-    	ubean.setOpenPayment(openPayment);
-    	
-    	
-    	upDao.update(1, ubean);
-		
-		
-		return "/PodcastManage/PodcastManage";
-	}
+	
 	
 	//刪除節目===============================================================
 	
