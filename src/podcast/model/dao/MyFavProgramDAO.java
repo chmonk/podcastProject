@@ -28,13 +28,9 @@ public class MyFavProgramDAO implements IMyFavProgramDAO {
 	@Override
 	public MyFavProgramBean insert(MyFavProgramBean fBean) {
 		Session session = sessionFactory.getCurrentSession();
-		MyFavProgramBean myFavProgramBean = session.get(MyFavProgramBean.class, fBean.getFavId());
-
-		if (myFavProgramBean == null) {
 			session.save(fBean);
 			return fBean;
-		}
-		return null;
+	
 	}
 
 	@Override

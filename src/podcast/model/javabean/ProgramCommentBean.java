@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -74,6 +75,7 @@ public class ProgramCommentBean {
 	}
 
 	@Column(name = "MSGSTATUS")
+	@Transient
 	public Integer getMsgStatus() {
 		return msgStatus;
 	}
@@ -83,6 +85,7 @@ public class ProgramCommentBean {
 	}
 
 	@Column(name = "MSGDATE")
+	@Transient
 	public Date getMsgDate() {
 		return msgDate;
 	}
