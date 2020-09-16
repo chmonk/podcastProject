@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
+<%-- 
 <!-- Styles -->
 
 <!-- Bootstrap CSS -->
@@ -21,30 +21,10 @@
 <!-- player bar css -->
 <link href="css/playerbar.css" rel="stylesheet">
 <!-- player bar icon -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="img/logo/favicon.ico">
-</head>
-<body>
-
-	<footer>
-		<div class="container">
-			<!-- social media links -->
-			<div class="social">
-				<a class="h-facebook" href="#"><i class="fa fa-facebook"></i></a> <a
-					class="h-google" href="#"><i class="fa fa-google-plus"></i></a> <a
-					class="h-linkedin" href="#"><i class="fa fa-linkedin"></i></a> <a
-					class="h-twitter" href="#"><i class="fa fa-twitter"></i></a>
-			</div>
-			<!-- copy right -->
-			<p class="copy-right">&copy; copyright 2018, All rights are
-				reserved.</p>
-		</div>
-	</footer>
-
-
+<link rel="shortcut icon" href="img/logo/favicon.ico">     
 	<!-- Javascript files -->
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
@@ -63,8 +43,42 @@
 	<!-- Custom JS -->
 	<script src="js/custom.js"></script>
 	<!-- 	plaer bar function js -->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/player.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/player.js"></script> 
+	
+	--%>
+</head>
+<body>		
+
+				<!-- call to action -->
+		<div class="cta parallax-one pad">
+			<div class="container">
+				<!-- cta element -->
+				<div class="cta-element ">
+					<div class="row">
+						<div class="col-md-9 col-sm-8">
+							<!-- heading -->
+							<h3>Melodi, A Fully Rock Album Pro</h3>
+							<!-- paragraph -->
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+								sed do eiusmod tempor incididunt ut labore et dolore magna
+								aliqua. Ut enim sectetur adipiscing elit, sed do eiusmod tempoad
+								minim veniam consequat.</p>
+						</div>
+						<div class="col-md-3 col-sm-4">
+							<div class="cta-btn text-center">
+								<!-- purchase now button -->
+								<a href="#" class="btn btn-default btn-lg">Download Now</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ cta end -->
+
+
+
 </body>
 
 </html>
