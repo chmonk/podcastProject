@@ -31,13 +31,10 @@ public class OrderTicketDAO implements IOrderTicketDAO {
 	@Override
 	public OrderTicketBean insert(OrderTicketBean oBean) {
 		Session session = sessionFactory.getCurrentSession();
-		OrderTicketBean orderTicketBean = session.get(OrderTicketBean.class, oBean.getTicketOrderId());
 
-		if (orderTicketBean == null) {
 			session.save(oBean);
 			return oBean;
-		}
-		return null;
+
 	}
 
 	@Override
