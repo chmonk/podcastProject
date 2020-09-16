@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- 
+
 <!-- Styles -->
 
 <!-- Bootstrap CSS -->
@@ -27,28 +28,41 @@
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/logo/favicon.ico">
 <!-- Javascript files -->
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-	<!-- Bootstrap JS -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- WayPoints JS -->
-	<script src="js/waypoints.min.js"></script>
-	<!-- Include js plugin -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- One Page Nav -->
-	<script src="js/jquery.nav.js"></script>
-	<!-- Respond JS for IE8 -->
-	<script src="js/respond.min.js"></script>
-	<!-- HTML5 Support for IE -->
-	<script src="js/html5shiv.js"></script>
-	<!-- Custom JS -->
-	<script src="js/custom.js"></script>
-	<!-- 	plaer bar function js -->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/player.js"></script>
-	--%>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<!-- Bootstrap JS -->
+<script src="js/bootstrap.min.js"></script>
+<!-- WayPoints JS -->
+<script src="js/waypoints.min.js"></script>
+<!-- Include js plugin -->
+<script src="js/owl.carousel.min.js"></script>
+<!-- One Page Nav -->
+<script src="js/jquery.nav.js"></script>
+<!-- Respond JS for IE8 -->
+<script src="js/respond.min.js"></script>
+<!-- HTML5 Support for IE -->
+<script src="js/html5shiv.js"></script>
+<!-- Custom JS -->
+<script src="js/custom.js"></script>
+<!-- 	plaer bar function js -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="js/player.js"></script>
+
 </head>
 <body>
+
+
+	<%-- <c:forEach begin="17" end="18" var="x"> --%>
+	<%--   <button id="${x}">id ${x}</button> --%>
+	<%-- </c:forEach> --%>
+
+	<c:forEach var="ele" items="${player}">
+		<button id="${ele}">id ${ele}</button>
+		2554
+		11111111
+
+	</c:forEach>
+<!-- 	<img id="lemon" src="programimg/17_307_img.jpg"> -->
 
 	<!--用字串呼叫對應符號  -->
 	<!-- < span class="material-icons" >
@@ -146,10 +160,56 @@
 		</div>
 	</div>
 
+	<script>
+
+// var lemon=$("#lemon");
+
+// lemon.click("on",function(){
+
+//     let xhr=new XMLHttpRequest();
+
+//     xhr.open("get","/SpringWebProject/postjson",true);
+
+//     xhr.send();
+
+//     xhr.onreadystatechange=function(){
+//         if(xhr.status==200 && xhr.readyState==4){
+//             alert(xhr.responseText);
+//         }
+//     }
+// })
+
+$("button").click("on",function(e){
+
+	console.log(e.target.id);
+
+	let xhr1 = new XMLHttpRequest();
+
+	xhr1.open("get", "/SpringWebProject/song", true);
+
+	xhr1.send();
+
+	xhr1.onreadystatechange = function() {
+		if (xhr1.status == 200 && xhr1.readyState == 4) {
+
+			console.log(xhr1.readyState);
+			alert(xhr1.responseText);
+			
 
 
+		}
 
+	}
+})
 	
+
+
+
+
+</script>
+
+
+
 </body>
 
 </html>

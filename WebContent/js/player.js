@@ -52,7 +52,7 @@ const mediaData = [
 			"./programTestFile1/lemon.mp3",
 		thumb:
 			"./programTestFile1/lemon.jpg"
-	
+
 	}
 ];
 
@@ -446,11 +446,11 @@ $(document).ready(() => {
 		queueWrapper.addClass("hidden");
 		queueBtn.removeClass("select");
 	});
-		//離開播放選單元素時關閉播放選單
-		queueWrapper.on("mouseleave",()=>{
-			queueWrapper.addClass("hidden");
-		})
-	
+	//離開播放選單元素時關閉播放選單
+	queueWrapper.on("mouseleave", () => {
+		queueWrapper.addClass("hidden");
+	})
+
 
 	// 音量調整面板
 	//按下音量紐開關音量調節面板
@@ -491,4 +491,33 @@ $(document).ready(() => {
 	});
 
 	renderPlaylist(mediaData);
+
+
+	/////////////////////////////////
+	var lemon = $("#lemon");
+
+	lemon.click("on", function() {
+
+		let xhr = new XMLHttpRequest();
+
+		xhr.open("get", "/SpringWebProject/postjson", true);
+
+		xhr.send();
+
+		xhr.onreadystatechange = function() {
+			if (xhr.status == 200 && xhr.readyState == 4) {
+				alert(xhr.responseText);
+				
+				mediaData.push(JSON.parse(xhr.responseText));
+				
+				renderPlaylist(mediaData);
+				
+			}
+		}
+	})
+	
+	
+
+
+
 });

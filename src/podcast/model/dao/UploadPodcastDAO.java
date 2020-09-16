@@ -1,4 +1,5 @@
 package podcast.model.dao;
+
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,14 +12,11 @@ import org.springframework.stereotype.Repository;
 import podcast.model.idao.IUploadPodcastDAO;
 import podcast.model.javabean.uploadPodcastBean;
 
-
-
 @Repository("UploadPodcastDAO")
-public class UploadPodcastDAO implements IUploadPodcastDAO  {
+public class UploadPodcastDAO implements IUploadPodcastDAO {
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
-
 
 	public UploadPodcastDAO() {
 	}
@@ -27,13 +25,12 @@ public class UploadPodcastDAO implements IUploadPodcastDAO  {
 		this.sessionFactory = sessionFactory;
 	}
 
-	
 	@Override
 	public uploadPodcastBean insert(uploadPodcastBean ubean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		
-			session.save(ubean);
-			return ubean;
+
+		session.save(ubean);
+		return ubean;
 
 	}
 
@@ -83,6 +80,16 @@ public class UploadPodcastDAO implements IUploadPodcastDAO  {
 		}
 
 		return false;
+	}
+
+	public List<uploadPodcastBean> queryProgramByMemberID(Integer memberId) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql="from uploadPodcastBean up where up.memberid= :mid";
+		
+		List<uploadPodcastBean> resultlist = 
+				(List<uploadPodcastBean>)session.createQuery(hql).setParameter("mid", memberId).getResultList();
+		return resultlist;
+
 	}
 
 }
