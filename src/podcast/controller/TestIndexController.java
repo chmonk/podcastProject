@@ -8,6 +8,6 @@ public class TestIndexController {
 	
 	@GetMapping(path = { "/ToIndex.controller" })
 	public String toIndex() {
-		return"/index1";
+		return"/index";
 	}
 }

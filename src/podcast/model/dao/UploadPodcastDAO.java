@@ -14,7 +14,7 @@ import podcast.model.javabean.uploadPodcastBean;
 
 
 @Repository("UploadPodcastDAO")
-public class UploadPodcastDAO implements IUploadPodcastDAO {
+public class UploadPodcastDAO implements IUploadPodcastDAO  {
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
@@ -31,13 +31,10 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	@Override
 	public uploadPodcastBean insert(uploadPodcastBean ubean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		uploadPodcastBean historyBean = session.get(uploadPodcastBean.class, ubean.getPodcastId());
-
-		if (historyBean == null) {
+		
 			session.save(ubean);
 			return ubean;
-		}
-		return null;
+
 	}
 
 	@Override
@@ -56,6 +53,19 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 		List<uploadPodcastBean> lists = query.list();
 
 		return lists;
+	}
+	
+	@Override
+	public List<uploadPodcastBean> selectAllFromMember(Integer memberId) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		String hbl = "from uploadPodcastBean where memberId=:memberId";
+
+		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
+		query.setParameter("memberId", memberId);
+
+		List<uploadPodcastBean> upList = query.list();
+
+		return upList;
 	}
 
 	@Override

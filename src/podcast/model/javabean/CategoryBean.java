@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-
+@Component
 @Entity
 @Table(name = "Category")
 public class CategoryBean implements Serializable {
@@ -35,10 +35,8 @@ public class CategoryBean implements Serializable {
 	@Id
 	@Column(name = "CATEGORYID")
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getCategoryId() {
-
 		return categoryId;
 	}
 
