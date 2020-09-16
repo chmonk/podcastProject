@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -121,6 +122,7 @@ public class MemberBean {
 		this.birthday = birthday;
 	}
 
+	@Transient
 	public Date getRegisterDate() {
 		return registerDate;
 	}
