@@ -54,6 +54,19 @@ public class UploadPodcastDAO implements IUploadPodcastDAO  {
 
 		return lists;
 	}
+	
+	@Override
+	public List<uploadPodcastBean> selectAllFromMember(Integer memberId) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		String hbl = "from uploadPodcastBean where memberId=:memberId";
+
+		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
+		query.setParameter("memberId", memberId);
+
+		List<uploadPodcastBean> upList = query.list();
+
+		return upList;
+	}
 
 	@Override
 	public uploadPodcastBean update(Integer podcastId, uploadPodcastBean ubean) throws Exception {

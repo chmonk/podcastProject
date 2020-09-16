@@ -61,7 +61,7 @@ fieldset {
 	<fieldset>
 		<legend>修改單集</legend>
 			
-		<form:form action="......addActivityProcess" method="POST" modelAttribute="uploadPodcastBean" enctype="multipart/form-data">				
+		<form:form action="PodcastModifyProcess" method="POST" modelAttribute="uploadPodcastBean" enctype="multipart/form-data">				
 			<div class="div1">
 				<form:label path="title" for="" class="l1" >單集名稱:</form:label>
 				<form:input path="title"/>
@@ -78,16 +78,16 @@ fieldset {
 
 			<div class="div1">
 			<label for="" class="l1">留言狀態:</label>
-			<input type=radio name="radio" value=0 />關閉
-			<input type=radio name="radio" value=1 />公開 
+			<input type=radio name="radioC" value=0 />關閉
+			<input type=radio name="radioC" value=1 />公開 
 			<span id="idsp1"></span>
 			<div class="notice"></div>
 			</div>
 			
 			<div class="div1">
 			<label for="" class="l1">付費狀態:</label>
-			<input type=radio name="radio" value=0 />免費
-			<input type=radio name="radio" value=1 />訂閱 
+			<input type=radio name="radioP" value=0 />免費
+			<input type=radio name="radioP" value=1 />訂閱 
 			<span id="idsp1"></span>
 			<div class="notice"></div>
 			</div>

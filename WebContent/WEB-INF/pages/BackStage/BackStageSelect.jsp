@@ -72,7 +72,7 @@ p{
 						<h4 style="color: #0067FF">Select Member By Id:</h4>
 						<form id="selectMemberByIdForm" action="<c:url value="/BackStageSelectMember.controller"/>"
 							method="POST">
-							<input id="selectMemberIdText" type="text" name="selectmemberId">
+							<input id="selectMemberIdText" type="number" name="selectmemberId">
 							<input id="memberIdBtn" type="button" value="send"><br>
 							<p id="selectMemberByIdErr" ></p>
 						</form><br>
@@ -89,7 +89,7 @@ p{
 						<h4 style="color: #0067FF">Delete Member:</h4>
 						<form id="deleteMemberForm" action="<c:url value="/BackStageDeleteMember.controller"/>"
 							method="POST">
-							<input id="deleteMemberText" type="text" name="deletememberId"> 
+							<input id="deleteMemberText" type="number" name="deletememberId"> 
 							<input id="deleteMemberBtn" type="button" value="send"> <br>
 							<p id="deleteMemberErr"></p>
 						</form>
@@ -107,7 +107,7 @@ p{
 					<form id="selectOrderIdForm"
 						action="<c:url value="/BackStageSelectOrderById.controller"/>"
 						method="POST">
-						<input id="selectOrderIdText" type="text" name="orderId"> 
+						<input id="selectOrderIdText" type="number" name="orderId"> 
 						<input id="selectOrderIdBtn" type="button" value="send"><br>
 						<p id="selectOrderIdErr"></p>
 					</form><br>
@@ -116,7 +116,7 @@ p{
 					<form id="selectOrderMemberForm"
 						action="<c:url value="/BackStageSelectOrderByMember.controller"/>"
 						method="POST">
-						<input id="selectOrderMemberText" type="text" name="memberId"> 
+						<input id="selectOrderMemberText" type="number" name="memberId"> 
 						<input id="selectOrderMemberBtn" type="button" value="send"><br>
 						<p id="selectOrderMemberErr"></p>
 					</form><br>
@@ -125,7 +125,7 @@ p{
 					<form id="selectOrderActForm"
 						action="<c:url value="/BackStageSelectOrderByActivity.controller"/>"
 						method="POST">
-						<input id="selectOrderActText" type="text" name="activityId"> 
+						<input id="selectOrderActText" type="number" name="activityId"> 
 						<input id="selectOrderActBtn" type="button" value="send"><br>
 						<p id="selectOrderActErr"></p>
 					</form><br>
@@ -145,7 +145,7 @@ p{
 					<form id="selectCommentIdForm"
 						action="<c:url value="/BackStageSelectCommentById.controller"/>"
 						method="POST">
-						<input id="selectCommentIdText" type="text" name="commentId"> 
+						<input id="selectCommentIdText" type="number" name="commentId"> 
 						<input id="selectCommentIdBtn" type="button" value="send"><br>
 						<p id="selectCommentIdErr"></p>
 					</form><br>
@@ -154,9 +154,9 @@ p{
 					<form id="selectCommentMemberForm"
 						action="<c:url value="/BackStageSelectCommentByMember.controller"/>"
 						method="POST">
-						<input id="selectCommentMemberMText" type="text" name="commentmemberId"><br>
+						<input id="selectCommentMemberMText" type="number" name="commentmemberId"><br>
 						memberId <br>
-						<input id="selectCommentMemberPText" type="text" name="commentpodcasterId"><br>
+						<input id="selectCommentMemberPText" type="number" name="commentpodcasterId"><br>
 						podcasterId <br>
 						<input id="selectCommentMemberBtn" type="button" value="send"><p id="selectCommentMemerErr"></p>
 					</form><br>
@@ -165,7 +165,7 @@ p{
 					<form id="selectCommentPodcasterForm"
 						action="<c:url value="/BackStageSelectCommentByPodcaster.controller"/>"
 						method="POST">
-						<input id="selectCommentPodcasterText" type="text" name="commentpodcasterId"> 
+						<input id="selectCommentPodcasterText" type="number" name="commentpodcasterId"> 
 						<input id="selectCommentPodcasterBtn" type="button" value="send"><br>
 						<p id="selectCommentPodcasterErr"></p>
 					</form><br>
@@ -174,7 +174,7 @@ p{
 					<form id="deleteCommentIdForm"
 						action="<c:url value="/BackStageDeleteCommentById.controller"/>"
 						method="POST">
-						<input id="deleteCommentIdText" type="text" name="commentId"> 
+						<input id="deleteCommentIdText" type="number" name="commentId"> 
 						<input id="deleteCommentIdBtn" type="button" value="send"><br>
 						<p id="deleteCommentIdErr"></p>
 					</form><br>
@@ -183,9 +183,9 @@ p{
 					<form id="deleteCommentMemberForm"
 						action="<c:url value="/BackStageDeleteCommentByMember.controller"/>"
 						method="POST">
-						<input id="deleteCommentMemberMText" type="text" name="commentMemberId"> <br>
+						<input id="deleteCommentMemberMText" type="number" name="commentMemberId"> <br>
 						memberId<br>
-						<input id="deleteCommentMemberPText" type="text" name="commentPodcasterId"><br>
+						<input id="deleteCommentMemberPText" type="number" name="commentPodcasterId"><br>
 						podcasterId<br>
 						<input id="deleteCommentMemberBtn" type="button" value="send"><p id="deleteCommentMemberErr"></p>
 					</form><br>
@@ -214,7 +214,7 @@ p{
 					<form id="upgradeCategoryForm"
 						action="<c:url value="/BackStageUpdateCategoryById.controller"/>"
 						method="POST">
-						<input id="upgradeCategoryIdText" type="text" name="categoryId"><br>
+						<input id="upgradeCategoryIdText" type="number" name="categoryId"><br>
 						categoryId<br> 
 						<input id="upgradeCategoryNameText" type="text" name="categoryNewName"><br>
 						categoryNewName<br>
@@ -238,7 +238,7 @@ p{
 					<form id="selectSubMemberForm"
 						action="<c:url value="/SelectSubscriptionByMember.controller"/>"
 						method="POST">
-						<input id="selectSubMemberText" type="text" name="memberId"> 
+						<input id="selectSubMemberText" type="number" name="memberId"> 
 						<input id="selectSubMemberBtn" type="button" value="send"><br>
 						<p id="selectSubMemberErr"></p>
 					</form><br>
@@ -247,7 +247,7 @@ p{
 					<form id="selectSubPodcasterForm"
 						action="<c:url value="/SelectSubscriptionByPodcaster.controller"/>"
 						method="POST">
-						<input id="selectSubPodcasterText" type="text" name="podcasterId"> 
+						<input id="selectSubPodcasterText" type="number" name="podcasterId"> 
 						<input id="selectSubPodcasterBtn" type="button" value="send"><br>
 						<p id="selectSubPodcasterErr"></p>
 					</form><br>
@@ -267,7 +267,7 @@ p{
 					<form id="selectActIdForm"
 						action="<c:url value="/SelectActivityById.controller"/>"
 						method="POST">
-						<input id="selectActIdText" type="text" name="activityId"> 
+						<input id="selectActIdText" type="number" name="activityId"> 
 						<input id="selectActIdBtn" type="button" value="send"><br>
 						<p id="selectActIdErr"></p>
 					</form><br>
@@ -276,7 +276,7 @@ p{
 					<form id="selectActPodcasterForm"
 						action="<c:url value="/SelectActivityByPodcaster.controller"/>"
 						method="POST">
-						<input id="selectActPodcasterText" type="text" name="podcasterId"> 
+						<input id="selectActPodcasterText" type="number" name="podcasterId"> 
 						<input id="selectActPodcasterBtn" type="button" value="send"><br>
 						<p id="selectActPodcasterErr"></p>
 					</form><br>
@@ -294,7 +294,7 @@ p{
 					<form id="deleteActIdForm" 
 						action="<c:url value="/DeleteActivityByID.controller"/>"
 						method="POST">
-						<input id="deleteActIdText"  type="text" name="activityId"> 
+						<input id="deleteActIdText"  type="number" name="activityId"> 
 						<input id="deleteActIdBtn"  type="button" value="send"><br>
 						<p id="deleteActIdErr" ></p>
 					</form><br>
@@ -315,7 +315,7 @@ p{
 					<form id="selectHistoryIdForm"
 						action="<c:url value="/SelectHistoryById.controller"/>"
 						method="POST">
-						<input id="selectHistoryIdText" type="text" name="historyId"> 
+						<input id="selectHistoryIdText" type="number" name="historyId"> 
 						<input id="selectHistoryIdBtn" type="button" value="send"><br>
 						<p id="selectHistoryIdErr"></p>
 					</form><br>
@@ -324,7 +324,7 @@ p{
 					<form id="selectHistoryMemberForm"
 						action="<c:url value="/SelectHistoryByMember.controller"/>"
 						method="POST">
-						<input id="selectHistoryMemberText" type="text" name="memberId"> 
+						<input id="selectHistoryMemberText" type="number" name="memberId"> 
 						<input id="selectHistoryMemberBtn" type="button" value="send"><br>
 						<p id="selectHistoryMemberErr"></p>
 					</form><br>
@@ -333,7 +333,7 @@ p{
 					<form id="selectHistoryPodcasterForm"
 						action="<c:url value="/SelectHistoryByPodcaster.controller"/>"
 						method="POST">
-						<input id="selectHistoryPodcasterText" type="text" name="podcasterId"> 
+						<input id="selectHistoryPodcasterText" type="number" name="podcasterId"> 
 						<input id="selectHistoryPodcasterBtn" type="button" value="send"><br>
 						<p id="selectHistoryPodcasterErr"></p>
 					</form><br>
@@ -425,7 +425,7 @@ p{
 					<form id="topPodcastForm"
 						action="<c:url value="/TopPodcst.controller"/>"
 						method="POST">
-						<input id="topPodcastText" type="text" name="uploadTime"> 
+						<input id="topPodcastText" type="text" name="uploadTime" placeholder="YYYY-mm-dd"> 
 						<input id="topPodcastBtn" type="button" value="send"><br>
 						<p id="topPodcastErr"></p>
 					</form><br>
