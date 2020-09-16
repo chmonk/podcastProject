@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenericGenerator;
@@ -85,6 +86,7 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "OPENCOMMENT")
+	@Transient
 	public Integer getOpenComment() {
 		return openComment;
 	}
@@ -94,6 +96,7 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "UPLOADTIME")
+	@Transient
 	public Date getUploadTime() {
 		return uploadTime;
 	}
@@ -103,6 +106,7 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "CLICKAMOUNT")
+	@Transient
 	public Integer getClickAmount() {
 		return clickAmount;
 	}
@@ -130,6 +134,7 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "LIKESCOUNT")
+	@Transient
 	public Integer getLikesCount() {
 		return likesCount;
 	}
