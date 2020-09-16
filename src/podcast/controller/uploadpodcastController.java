@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.annotation.ApplicationScope;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,43 +36,61 @@ public class uploadpodcastController {
 
 	@Autowired
 	UploadPodcastDAO upDao;
-
+	
 	// 導向上船頁面
 	@GetMapping(path = "/podcastupload")
-	public String turntouploadPC(Model m) throws Exception {
+	public String turntouploadPC(HttpServletRequest request,Model m) throws Exception {
+		
+			
+		// System.out.println(request.getContextPath()); // /SpringWebProject
+		// System.out.println(context.getRealPath("/")); //
+		// C:\eclipse_202003ForSpring\SpringWorkSpace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\webapps\formal
+		// pod project\
+		// System.out.println(request. getServletPath()); // /podcastupload
+		// System.out.println(request. getRequestURI()); //
+		// /SpringWebProject/podcastupload
+		// System.out.println(request. getPathTranslated()); //null
+		// System.out.println(request.getSession().getServletContext().getRealPath("/"));  
+		// C:\eclipse_202003ForSpring\SpringWorkSpace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\webapps\formal pod project\
+		
+
+		//path 取得workspace 在本機的workspace路徑 + 後續奇怪path
+		String path=request.getSession().getServletContext().getRealPath("/");
+		// 專案資料夾名稱
+		String caseFolder = path.split("\\\\")[path.split("\\\\").length-1];
+		//取得到含workspace前的絕對路徑
+		String workspace=request.getSession().getServletContext().getRealPath("/").substring(0,path.indexOf("\\.metadata"));
+		
+		//存檔名稱 
+		String  filename=workspace+"\\"+caseFolder+"\\WebContent\\"+"";
+		
+		String  savepath=workspace+"\\"+caseFolder+"\\WebContent\\"+"" ; 
+		System.out.println(workspace);
+		System.out.println(path.split("\\\\")[path.split("\\\\").length-1]);
+		System.out.println(workspace+"\\"+path.split("\\\\")[path.split("\\\\").length-1]+"\\WebContent\\"+"");
+		
+		File f= new File(workspace+"\\"+path.split("\\\\")[path.split("\\\\").length-1]+"\\WebContent\\"+"aaa");
+		
+		if(!f.exists()) {
+			f.mkdirs();
+		}
+	
 		
 		
-		
-		Session session= sessionFactory.getCurrentSession();
-		
-		uploadPodcastBean ubean= new uploadPodcastBean();
-		
-		//
-//		private Integer podcastId;
-//		private String title;
-//		private Integer categoryId;
-//		private Integer memberId;
-//		private String podcastInfo;
-//		private Integer openPayment;
-//		private Integer openComment;
-//		private Date uploadTime;
-//		private Integer clickAmount;
-//		private String audioPath;
-//		private String audioimg;
-//		private Integer likesCount;
+		uploadPodcastBean ubean=new uploadPodcastBean();
 		
 		
 		ubean.setCategoryId(1);
 		ubean.setMemberId(15);
 		ubean.setOpenComment(1);
 		ubean.setOpenPayment(1);
-		ubean.setPodcastInfo("ttttt");
+		ubean.setPodcastInfo("tttsxdcstt");
 		ubean.setTitle("yhcjsdkc");
 		upDao.insert(ubean);
-		
+	
 
 		// 給入偽身分 id17 阿滴日文
-		m.addAttribute("id", "17");
+//		m.addAttribute("id", "17");
 		return "playerBar/pcupload";
 	}
 
