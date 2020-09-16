@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenericGenerator;
@@ -94,6 +95,7 @@ public class uploadPodcastBean {
 	}
 
 	@Column(name = "UPLOADTIME")
+	@Transient
 	public Date getUploadTime() {
 		return uploadTime;
 	}
