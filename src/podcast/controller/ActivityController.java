@@ -69,7 +69,7 @@ public class ActivityController {
     	System.out.println("fileName:" + fileName);
     	     
     	//設定圖片存檔路徑
-    	String savePath ="C:\\DataSource\\workspace\\0906PodcastProject\\WebContent\\WEB-INF\\resources\\images\\"+fileName+".jpg";
+    	String savePath ="C:\\SpringSource\\springworkspace\\PodcastProject2\\WebContent\\WEB-INF\\resources\\images\\"+fileName+".jpg";
     	//String savePath ="C:\\DataSource\\workspace\\0906PodcastProject\\WebContent\\WEB-INF\\resources\\images\\"+fileName+".jpg";
     	//String savePath = request.getSession().getServletContext().getRealPath("/") 
     	// + "uploadTempDir\\" + fileName;
