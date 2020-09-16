@@ -34,6 +34,7 @@ public class CategoryBean implements Serializable {
 
 	@Id
 	@Column(name = "CATEGORYID")
+
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getCategoryId() {
 		return categoryId;
