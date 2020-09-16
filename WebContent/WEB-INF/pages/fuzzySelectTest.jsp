@@ -8,9 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="<c:url value="FuzzySelect.controller"/>" method="get">
-	<input type="text" name="selectCondition"/>
-	<input type="submit" value="Send">
-</form>
+	<div  style="display:inline-block;">
+		<form action="<c:url value="FuzzySelect.controller"/>" method="get">
+			<input class="form-control-sm" type="text" name="selectCondition"/>
+			<input class="form-control-sm" type="submit" value="Send">
+		</form>
+	</div>
 </body>
 </html>

@@ -1,0 +1,19 @@
+diff a/src/podcast/model/javabean/CategoryBean.java b/src/podcast/model/javabean/CategoryBean.java	(rejected hunks)
+@@ -34,12 +34,16 @@
+ 
+ 	@Id
+ 	@Column(name = "CATEGORYID")
+
+ 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
+	public Integer getCategoryId() {
+
+ 		return categoryId;
+ 	}
+ 
+
+	public void setCategoryId(Integer categoryId) {
+ 		this.categoryId = categoryId;
+ 	}
+ 

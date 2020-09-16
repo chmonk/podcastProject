@@ -30,14 +30,10 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 	@Override
 	public ProgramCommentBean insert(ProgramCommentBean pBean) {
 		Session session = sessionFactory.getCurrentSession();
-		ProgramCommentBean ProgramCommentBean = session.get(ProgramCommentBean.class, pBean.getCommentId());
 
-		if (ProgramCommentBean == null) {
+	
 			session.save(pBean);
 			return pBean;
-		}
-
-		return null;
 	}
 
 	@Override
