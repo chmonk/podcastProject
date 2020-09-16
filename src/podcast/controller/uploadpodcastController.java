@@ -61,15 +61,23 @@ public class uploadpodcastController {
 		//取得到含workspace前的絕對路徑
 		String workspace=request.getSession().getServletContext().getRealPath("/").substring(0,path.indexOf("\\.metadata"));
 		
-		//存檔名稱 
-		String  filename=workspace+"\\"+caseFolder+"\\WebContent\\"+"";
+		//制式資料夾  
+		//節目圖片 program file
+		//節目音檔
+		//會員照片
+		//活動圖片
 		
-		String  savepath=workspace+"\\"+caseFolder+"\\WebContent\\"+"" ; 
+		
+		
+		//檔案制式存檔名稱  待設定
+		String  filename="";
+		
+		String  savepath=workspace+"\\"+caseFolder+"\\WebContent\\"+filename ; 
 		System.out.println(workspace);
 		System.out.println(path.split("\\\\")[path.split("\\\\").length-1]);
 		System.out.println(workspace+"\\"+path.split("\\\\")[path.split("\\\\").length-1]+"\\WebContent\\"+"");
 		
-		File f= new File(workspace+"\\"+path.split("\\\\")[path.split("\\\\").length-1]+"\\WebContent\\"+"aaa");
+		File f= new File(savepath);
 		
 		if(!f.exists()) {
 			f.mkdirs();
@@ -80,23 +88,32 @@ public class uploadpodcastController {
 		uploadPodcastBean ubean=new uploadPodcastBean();
 		
 		
-		ubean.setCategoryId(1);
-		ubean.setMemberId(15);
-		ubean.setOpenComment(1);
-		ubean.setOpenPayment(1);
-		ubean.setPodcastInfo("tttsxdcstt");
-		ubean.setTitle("yhcjsdkc");
-		upDao.insert(ubean);
+//		ubean.setCategoryId(1);
+//		ubean.setMemberId(15);
+//		ubean.setOpenComment(1);
+//		ubean.setOpenPayment(1);
+//		ubean.setPodcastInfo("tttsxdcstt");
+//		ubean.setTitle("yhcjsdkc");
+//		upDao.insert(ubean);
 	
 
 		// 給入偽身分 id17 阿滴日文
-//		m.addAttribute("id", "17");
+		m.addAttribute("id", "17");
+		System.out.println(upDao.select(31).getUploadTime().toString());
 		return "playerBar/pcupload";
+		
+		
 	}
 
+	
+	
+	
+	
+	
+	
 	// 表單上傳資料
 	@PostMapping(path = "/uploadpc")
-	public void uploadinfo(HttpServletRequest req, HttpServletResponse res, Model m,
+	public void uploadinfo(HttpServletRequest request, HttpServletResponse response, Model m,
 			@RequestParam(value = "title") String title,
 			// 種類是數字傳入
 			@RequestParam(value = "class", defaultValue = "1") Integer categoryId,
@@ -104,69 +121,94 @@ public class uploadpodcastController {
 			@RequestParam(value = "openPayment") Integer openPayment,
 			@RequestParam(value = "openComment") Integer openComment,
 			@RequestParam(value = "audio") MultipartFile podcastmp3,
-			@RequestParam(value = "audioImg") MultipartFile audioimg) throws IllegalStateException, IOException {
+			@RequestParam(value = "audioImg") MultipartFile audioimg) throws Exception {
 
 		// 從session取得身分
 		String id = (String) m.getAttribute("id");
+		
+		
+		
+		
+		
 
-		System.out.println(title);
-		// category要抓處理
-		System.out.println(categoryId);
-		System.out.println(podcastInfo);
-		System.out.println(openPayment);
-		System.out.println(openComment);
-
-		// 儲存podcast audio
 		// 取得原檔案名字
 		String filename = podcastmp3.getOriginalFilename();
 		System.out.println(filename);
 
-		System.out.println(req.getSession().getServletContext().getRealPath("/"));
+			// 取得主檔名
+			String maintitile = filename.substring(0, filename.lastIndexOf("."));
+			System.out.println(maintitile);
+	
+			// 處理副檔名
+			String subtitle = filename.substring(filename.lastIndexOf("."));
 
-		// 取得主檔名
-		String maintitile = filename.substring(0, filename.lastIndexOf("."));
-		System.out.println(maintitile);
+				// System.out.println(request.getContextPath()); // /SpringWebProject
+				// System.out.println(context.getRealPath("/")); //
+				// C:\eclipse_202003ForSpring\SpringWorkSpace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\webapps\formal
+				// pod project\
+				// System.out.println(request. getServletPath()); // /podcastupload
+				// System.out.println(request. getRequestURI()); //
+				// /SpringWebProject/podcastupload
+				// System.out.println(request. getPathTranslated()); //null
+				// System.out.println(request.getSession().getServletContext().getRealPath("/"));  
+				// C:\eclipse_202003ForSpring\SpringWorkSpace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\webapps\formal pod project\
+				
 
-		// 處理副檔名
-		String subtitle = filename.substring(filename.lastIndexOf("."));
-
-		// 建立存檔路徑string d:
-		String savepath = "c:programTestFile\\" + id + "\\";
-
-		// 生成存檔路徑
-		File saveFile = new File(savepath);
-
-		// 確認存檔路徑 不存在就新建
-		if (!saveFile.exists()) {
-			saveFile.mkdirs();
-		}
-		System.out.println(savepath);
-
-		// 檔案寫入路徑
-		podcastmp3.transferTo(saveFile);
-
-		// 儲存podcast img
-		// 取得原檔案名字
-		String imgFilename = audioimg.getOriginalFilename();
-		System.out.println(imgFilename);
-
-		// 處理附檔名
-		String imgsubtitle = imgFilename.substring(imgFilename.lastIndexOf("."));
-		// 建立存檔路徑string d:
-		String imgsavepath = "d:\\podimg\\" + title + "01" + imgsubtitle;
-
-		// 生成存檔路徑
-		File imgsaveFile = new File(imgsavepath);
-
-		// 確認存檔路徑 不存在就新建
-		if (!imgsaveFile.exists()) {
-			imgsaveFile.mkdirs();
-		}
-		System.out.println(imgsavepath);
-
-		// 檔案寫入路徑
-		audioimg.transferTo(imgsaveFile);
-
+				//path 取得workspace 在本機的workspace路徑 + 後續奇怪path
+				String path=request.getSession().getServletContext().getRealPath("/");
+				// 專案資料夾名稱
+				String caseFolder = path.split("\\\\")[path.split("\\\\").length-1];
+				//取得到含workspace前的絕對路徑
+				String workspace=request.getSession().getServletContext().getRealPath("/").substring(0,path.indexOf("\\.metadata"));
+				
+				//制式資料夾  
+				//節目圖片 programimg
+				//節目音檔 programmedia
+				//會員照片 memberpic
+				//活動圖片 activitypic
+				
+			    //資料夾名稱 
+				String savefolder= "programimg";
+				
+				//制式檔案名稱
+				//String savefilename=id+"這邊修改成要存的名稱"+subtitle;
+				String savefilename=id+"_program"+subtitle;
+				
+				//檔案制式存檔名稱  待設定
+				
+				String  savepath=workspace+"\\"+caseFolder+"\\WebContent\\"+savefolder+"\\"+savefilename; 
+				//System.out.println(workspace);
+				//System.out.println(path.split("\\\\")[path.split("\\\\").length-1]);
+				//System.out.println(workspace+"\\"+path.split("\\\\")[path.split("\\\\").length-1]+"\\WebContent\\"+"");
+				
+				//準備儲存檔案
+				File f= new File(savepath);
+				
+				
+				//不存在就建立路徑
+				if(!f.exists()) {
+					f.mkdirs();
+				}
+				// 檔案寫入路徑(存檔)
+				audioimg.transferTo(f);
+				
+				
+				
+				uploadPodcastBean ubean= new uploadPodcastBean();		
+				
+				ubean.setCategoryId(categoryId);;
+				ubean.setMemberId(Integer.parseInt(id));
+				ubean.setOpenComment(openComment);
+				ubean.setOpenPayment(openPayment);
+				ubean.setPodcastInfo(podcastInfo);
+				ubean.setTitle(title);
+				ubean.setAudioimg("./"+savefolder+"/"+savefilename);
+				ubean.setAudioPath("./"+savefolder+"/"+savefilename);
+				
+				upDao.insert(ubean);
+				
+				
+				//存入資料庫預設路徑    "./"+savefolder+"/"+savefilename
 	}
 
 }
