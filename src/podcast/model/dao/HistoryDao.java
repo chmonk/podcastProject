@@ -21,10 +21,9 @@ public class HistoryDao implements IHistoryDao {
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
-	
+
 	public HistoryDao() {
 	}
-	
 
 	public HistoryDao(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -33,14 +32,10 @@ public class HistoryDao implements IHistoryDao {
 	@Override
 	public HistoryBean insert(HistoryBean hBean) {
 		Session session = sessionFactory.getCurrentSession();
-		HistoryBean HistoryBean = session.get(HistoryBean.class, hBean.getHistoryId());
 
-		if (HistoryBean == null) {
-			session.save(hBean);
-			return hBean;
-		}
+		session.save(hBean);
+		return hBean;
 
-		return null;
 	}
 
 	@Override
