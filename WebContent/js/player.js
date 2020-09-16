@@ -293,6 +293,18 @@ $(document).ready(() => {
 	const volumeBg = $("#volume_bg");
 	const volumeBar = $("#volume_bar");
 	const volumeHandle = $("#volume_handle");
+	
+	//播放清單取得歌曲
+	//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
+	playBtn.click(function(){
+		xhr=$.ajax({
+			url:"/SpringWebProject/addListController",
+			async:false
+	})
+	console.log(xhr);
+	mediaData.push(xhr.responseText);
+	renderPlaylist(mediaData);//重新取得清單資訊
+	});
 
 	// 歌曲資訊元件
 	const MusicInfo = (info, idx) => {
