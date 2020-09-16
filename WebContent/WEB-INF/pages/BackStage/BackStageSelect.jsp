@@ -47,6 +47,7 @@ p{
 				<option value="activity">Activity</option>
 				<option value="history">History</option>
 				<option value="income">Income</option>
+				<option value="podcast">Podcast</option>
 			</select>
 			<!-- <input type="submit" value="send"> -->
 		</form>
@@ -393,6 +394,47 @@ p{
 					</div>
 					
 				</div>
+				
+				
+				<!-- UploadPodcast Function============================================== -->
+				
+				<div class="areas" id="podcast"
+					style="background-color: #DD77FF; display: none;padding: 20px;">
+					
+					<div style="width:250px;margin:0px auto ">
+					
+					<h4 style="color: #0067FF">Select Podcast By Member:</h4>
+					<form id="selectPodcastMemberForm"
+						action="<c:url value="/SelectPodcastByMember.controller"/>"
+						method="POST">
+						<input id="selectPodcastMemberText" type="number" name="memberId"> 
+						<input id="selectPodcastMemberBtn" type="button" value="send"><br>
+						<p id="selectPodcastMemberErr"></p>
+					</form><br>
+					
+					<h4 style="color: #0067FF">Delete Podcast By Id:</h4>
+					<form id="deletePodcastIdForm"
+						action="<c:url value="/DeletePodcastbyId.controller"/>"
+						method="POST">
+						<input id="deletePodcastIdText" type="number" name="podcastId"> 
+						<input id="deletePodcastIdBtn" type="button" value="send"><br>
+						<p id="deletePodcastIdErr"></p>
+					</form><br>
+					
+					<h4 style="color: #0067FF">Top Podcast:</h4>
+					<form id="topPodcastForm"
+						action="<c:url value="/TopPodcst.controller"/>"
+						method="POST">
+						<input id="topPodcastText" type="text" name="uploadTime"> 
+						<input id="topPodcastBtn" type="button" value="send"><br>
+						<p id="topPodcastErr"></p>
+					</form><br>
+					
+					
+					</div>
+				</div>
+				
+				
 
 			</div>
 
