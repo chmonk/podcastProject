@@ -14,7 +14,7 @@ import podcast.model.javabean.uploadPodcastBean;
 
 
 @Repository("UploadPodcastDAO")
-public class UploadPodcastDAO implements IUploadPodcastDAO {
+public class UploadPodcastDAO implements IUploadPodcastDAO  {
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
@@ -31,13 +31,10 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	@Override
 	public uploadPodcastBean insert(uploadPodcastBean ubean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		uploadPodcastBean historyBean = session.get(uploadPodcastBean.class, ubean.getPodcastId());
-
-		if (historyBean == null) {
+		
 			session.save(ubean);
 			return ubean;
-		}
-		return null;
+
 	}
 
 	@Override
