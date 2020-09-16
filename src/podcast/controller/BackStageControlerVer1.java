@@ -37,19 +37,19 @@ public class BackStageControlerVer1 {
 
 	//BackStage Login=======================================================================================================
 	
-	@PostMapping(path= {"/BackStageLogin.controller"})
-	public String BackStageLogin(
-			@RequestParam(name="userName")String userName,
-			@RequestParam(name="password")String password,
-			Model m) {
-		if(userName.equals("test123")&&password.equals("pass123")) {
-			return "/BackStage/BackStageSelect";
-		}
-		
-		m.addAttribute("LoginErrorMsg","請輸入正確帳號密碼!");
-		return "/BackStage/BackStageLogin";
-	}
-	
+//	@PostMapping(path= {"/BackStageLogin.controller"})
+//	public String BackStageLogin(
+//			@RequestParam(name="userName")String userName,
+//			@RequestParam(name="password")String password,
+//			Model m) {
+//		if(userName.equals("test123")&&password.equals("pass123")) {
+//			return "/BackStage/BackStageSelect";
+//		}
+//		
+//		m.addAttribute("LoginErrorMsg","請輸入正確帳號密碼!");
+//		return "/BackStage/BackStageLogin";
+//	}
+//	
 	
 	// Back 2 Select==========================================================================================
 	@GetMapping(path = { "/BackToSelect.controller" })
