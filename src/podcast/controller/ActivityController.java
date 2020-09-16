@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +27,7 @@ import podcast.model.javabean.ActivityBean;
 
 
 @Controller
+@SessionAttributes({ "LoginOK", "pageNo", "products_DPP", "ShoppingCart"})
 public class ActivityController {
 	
 	//導向管理活動頁面
@@ -45,7 +48,7 @@ public class ActivityController {
 	//接收新增活動表單
 	@RequestMapping(path = "/addActivityProcess", method = RequestMethod.POST)
     public String processAction(@RequestParam("file") MultipartFile multipartFile,
-    		@RequestParam("radio") int activityStatus,
+    		@RequestParam("radio") Integer activityStatus,
     		HttpServletRequest request,@ModelAttribute("ActivityBean") ActivityBean activity,
     		BindingResult result, Model m) throws Exception {
     	
@@ -69,13 +72,15 @@ public class ActivityController {
     	System.out.println("fileName:" + fileName);
     	     
     	//設定圖片存檔路徑
+    	//String savePath =request.getSession().getServletContext().getRealPath("/")+"\\WEB-INF\\resources\\images\\"+fileName+".jpg";;
+    			//"C:\\DataSource\\workspace\\0906PodcastProject\\WebContent\\WEB-INF\\resources\\images\\"+fileName+".jpg";
     	String savePath ="C:\\DataSource\\workspace\\0906PodcastProject\\WebContent\\WEB-INF\\resources\\images\\"+fileName+".jpg";
-    	//String savePath ="C:\\DataSource\\workspace\\0906PodcastProject\\WebContent\\WEB-INF\\resources\\images\\"+fileName+".jpg";
     	//String savePath = request.getSession().getServletContext().getRealPath("/") 
     	// + "uploadTempDir\\" + fileName;
-
+System.out.println(savePath);
     	//存圖片到指定路徑
     	File saveFile = new File(savePath);
+    	if(!saveFile.exists()) {saveFile.mkdirs();};
     	multipartFile.transferTo(saveFile);
     	
     	//設定圖片路徑及活動狀態(以@RequestParam取值的屬性)
@@ -96,42 +101,29 @@ public class ActivityController {
     }
 	
 	
-//	//資料庫的所有活動傳送至首頁
-//	@RequestMapping(path = "/a", method = RequestMethod.GET)
-//	public String showActivities(HttpServletRequest request,Model m) throws Exception {
-//		
-//		ServletContext app = request.getServletContext();
-//    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-//    	
-//    	ActivityDAO aDao = (ActivityDAO)context.getBean("ActivityDAO");
-//    	List<ActivityBean> list = new LinkedList<ActivityBean>();
-//    	
-//    	list = aDao.selectAll();
-//
-//		m.addAttribute("list", list);
-//		//return "../../ActivitiesList";
-//		return "/index";
-//		//return "../index";
-//	}
-	
-	@RequestMapping(path = "/h", method = RequestMethod.GET)
+	//資料庫的所有活動傳送至首頁
+	@RequestMapping(path = "/a", method = RequestMethod.GET)
 	public String showActivities(HttpServletRequest request,Model m) throws Exception {
 		
 		ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
     	
     	ActivityDAO aDao = (ActivityDAO)context.getBean("ActivityDAO");
-    	List<ActivityBean> list = new LinkedList<ActivityBean>();
     	
+    	List<ActivityBean> list = new LinkedList<ActivityBean>();  	
     	list = aDao.selectAll();
-
 		m.addAttribute("list", list);
+		
+		ActivityDAO bDao = (ActivityDAO)context.getBean("ActivityDAO");
+		
+		Map<Integer, ActivityBean> AMap = bDao.getActivityMap();
+		m.addAttribute("products_DPP", AMap);
+		
 		//return "../../ActivitiesList";
-		//return "/header_banner";
-		return "/index";
+		return "../../index2";
+		//return "../index";
 	}
 	
-	
-	
+
 
 }
