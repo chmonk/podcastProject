@@ -75,7 +75,6 @@ public class ProgramCommentBean {
 	}
 
 	@Column(name = "MSGSTATUS")
-	@Transient
 	public Integer getMsgStatus() {
 		return msgStatus;
 	}
@@ -85,7 +84,6 @@ public class ProgramCommentBean {
 	}
 
 	@Column(name = "MSGDATE")
-	@Transient
 	public Date getMsgDate() {
 		return msgDate;
 	}
