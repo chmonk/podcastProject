@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,7 @@
 	<!-- 	plaer bar function js -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>    
-	--%>
+--%>
 </head>
 <body>		
 <!-- header area -->
@@ -60,9 +61,18 @@
 						<strong>E-mail</strong>:&nbsp; <a href="#">music.site@melodi.com</a> -->
 					</div>
 					<!-- secondary menu right link area -->
+					
+					
 					<div class="sm-right">
 						<!-- social link -->
+						
 						<div class="sm-social-link">
+						<div  style="display:inline-block;line-height: 20px;color: #333;">
+							<form action="<c:url value="FuzzySelect.controller"/>" method="get">
+								<input class="form-control-sm" type="text" name="selectCondition"/>
+								<input class="form-control-sm" type="submit" value="Send">
+							</form>
+						</div>
 							<a class="h-facebook" href="#"><i class="fa fa-facebook"></i></a>
 							<a class="h-twitter" href="#"><i class="fa fa-twitter"></i></a> <a
 								class="h-google" href="#"><i class="fa fa-google-plus"></i></a>
