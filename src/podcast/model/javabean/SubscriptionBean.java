@@ -52,7 +52,7 @@ public class SubscriptionBean {
 	}
 
 	@Column(name = "SUBDATESTART")
-
+	
 	public Date getSubdateStart() {
 		return subdateStart;
 	}
@@ -62,7 +62,7 @@ public class SubscriptionBean {
 	}
 
 	@Column(name = "SUBDATEEND")
-
+	
 	public Date getSubdateEnd() {
 		return subdateEnd;
 	}

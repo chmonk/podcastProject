@@ -73,7 +73,6 @@ public class HistoryBean {
 	}
 
 	@Column(name="LASTLISTEN")
-	@Transient
 	public Date getLastListen() {
 		return lastListen;
 	}

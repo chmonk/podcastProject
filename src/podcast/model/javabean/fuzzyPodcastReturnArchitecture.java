@@ -3,14 +3,14 @@ package podcast.model.javabean;
 import java.util.Date;
 
 public class fuzzyPodcastReturnArchitecture {
-	private int podcastId;
+	private Integer podcastId;
 	private String title;
 	private String categoryName;
 	private String podcasterName;
 	private String podcastInfo;
-	private int openPayment;
+	private Integer openPayment;
 	private Date uploadTime;
-	private int clickAmount;
+	private Integer clickAmount;
 	private String audioPath;
 	
 	
@@ -18,8 +18,8 @@ public class fuzzyPodcastReturnArchitecture {
 		
 	}
 	
-	public fuzzyPodcastReturnArchitecture(int podcastId, String title, String categoryName, String podcasterName, String podcastInfo,
-			int openPayment, Date uploadTime, int clickAmount, String audioPath) {
+	public fuzzyPodcastReturnArchitecture(Integer podcastId, String title, String categoryName, String podcasterName, String podcastInfo,
+			Integer openPayment, Date uploadTime, Integer clickAmount, String audioPath) {
 		this.podcastId = podcastId;
 		this.title = title;
 		this.categoryName = categoryName;
@@ -32,10 +32,10 @@ public class fuzzyPodcastReturnArchitecture {
 	}
 	
 	
-	public int getPodcastId() {
+	public Integer getPodcastId() {
 		return podcastId;
 	}
-	public void setPodcastId(int podcastId) {
+	public void setPodcastId(Integer podcastId) {
 		this.podcastId = podcastId;
 	}
 	public String getTitle() {
@@ -63,11 +63,11 @@ public class fuzzyPodcastReturnArchitecture {
 		this.podcastInfo = podcastInfo;
 	}
 
-	public int getOpenPayment() {
+	public Integer getOpenPayment() {
 		return openPayment;
 	}
 
-	public void setOpenPayment(int openPayment) {
+	public void setOpenPayment(Integer openPayment) {
 		this.openPayment = openPayment;
 	}
 
@@ -79,11 +79,11 @@ public class fuzzyPodcastReturnArchitecture {
 		this.uploadTime = uploadTime;
 	}
 
-	public int getClickAmount() {
+	public Integer getClickAmount() {
 		return clickAmount;
 	}
 
-	public void setClickAmount(int clickAmount) {
+	public void setClickAmount(Integer clickAmount) {
 		this.clickAmount = clickAmount;
 	}
 
