@@ -69,14 +69,6 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	public uploadPodcastBean update(Integer podcastId, uploadPodcastBean ubean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		uploadPodcastBean oldbean = session.get(uploadPodcastBean.class, podcastId);
-
-//		if (oldbean != null) {
-//			oldbean.setPodcastId(ubean.getPodcastId());
-//
-//			System.out.println("update done");
-//		}
-//
-//		session.save(oldbean);
 		
 		if(oldbean != null) {
 			oldbean.setOpenComment(ubean.getOpenComment());
@@ -110,6 +102,18 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 				(List<uploadPodcastBean>)session.createQuery(hql).setParameter("mid", memberId).getResultList();
 		return resultlist;
 
+	}
+	
+	
+	//點擊時點級數加一
+	public uploadPodcastBean addClickCount(Integer podcastID) {
+		
+		uploadPodcastBean ubean= sessionFactory.getCurrentSession().get(uploadPodcastBean.class,podcastID);
+		
+		ubean.setClickAmount(ubean.getClickAmount()+1);
+		
+		return ubean;
+		
 	}
 
 }
