@@ -20,6 +20,7 @@ import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.OrderTicketBean;
 import podcast.model.javabean.ProgramCommentBean;
 import podcast.model.javabean.SubscriptionBean;
+import podcast.model.javabean.uploadPodcastBean;
 
 @Repository("BackStageDAO")
 public class BackStageDAO implements IBackStageDAO{
@@ -40,6 +41,8 @@ public class BackStageDAO implements IBackStageDAO{
 	private ActivityDAO aDao;
 	@Autowired
 	private HistoryDao hDao;
+	@Autowired
+	private UploadPodcastDAO uDao;
 	
 
 	public BackStageDAO() {
@@ -301,5 +304,38 @@ public class BackStageDAO implements IBackStageDAO{
 		}
 		System.out.println("income:"+income);
 		return income;
+	}
+	
+	//UploadPodcast Function===================================================================
+	
+	@Override
+	public List<uploadPodcastBean> selectPodcastByMember(Integer memberId){
+		
+		Session session=sessionFactory.getCurrentSession();
+		String hqlstr="from uploadPodcastBean where memberId=:memberId";
+		Query<uploadPodcastBean> query = session.createQuery(hqlstr,uploadPodcastBean.class);
+		query.setParameter("memberId", memberId);
+		List<uploadPodcastBean> list=query.list();
+		
+		return list;
+		
+	}
+	
+	@Override
+	public boolean deletePodcast(Integer podcastId) throws Exception {
+		
+		return uDao.delete(podcastId);	
+	}
+	
+	@Override
+	public List<uploadPodcastBean> topPodcast(Date uploadTime){
+		
+		Session session=sessionFactory.getCurrentSession();
+		String hqlstr="from uploadPodcastBean where uploadTime>:uploadTime ORDER BY clickAmount DESC ";
+		Query<uploadPodcastBean> query = session.createQuery(hqlstr,uploadPodcastBean.class);
+		query.setParameter("uploadTime", uploadTime);
+		List<uploadPodcastBean> list=query.list();
+		
+		return list;
 	}
 } 

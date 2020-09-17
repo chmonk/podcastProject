@@ -24,6 +24,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import antlr.collections.List;
 import podcast.model.dao.BackStageDAO;
 import podcast.model.dao.CategoryDAO;
+import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.CategoryBean;
 import podcast.model.javabean.HistoryBean;
@@ -31,6 +32,7 @@ import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.OrderTicketBean;
 import podcast.model.javabean.ProgramCommentBean;
 import podcast.model.javabean.SubscriptionBean;
+import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
 public class BackStageControlerVer1 {
@@ -559,6 +561,70 @@ public class BackStageControlerVer1 {
 		m.addAttribute("incomeMsg","Ticket Income");
 		
 		return "/BackStage/BackStageIncomeResult";
+	}
+	
+	//Podcast Function=====================================================================
+	
+	@PostMapping(path= {"/SelectPodcastByMember.controller"})
+	public String SelectPocastByMember(HttpServletRequest request,
+										@RequestParam("memberId")Integer memberId,
+										Model m) {
+		
+		ServletContext app = request.getServletContext();
+		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
+		
+		java.util.List<uploadPodcastBean> uList = bDao.selectPodcastByMember(memberId);
+		m.addAttribute("uList",uList);
+		m.addAttribute("PodcastResult","Podcast Select By Member Result");
+		
+		return "/BackStage/BackStagePodcastResult";
+		
+	}
+	
+	@PostMapping(path= {"/DeletePodcastbyId.controller"})
+	public String DeletePodcastById(HttpServletRequest request,
+									@RequestParam("podcastId")Integer podcastId,
+									Model m) throws Exception {
+		ServletContext app = request.getServletContext();
+		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
+		
+		UploadPodcastDAO uDao = new UploadPodcastDAO();
+		uploadPodcastBean uBean = uDao.select(podcastId);
+		java.util.List<uploadPodcastBean> uList = new ArrayList<uploadPodcastBean>();
+		uList.add(uBean);
+		m.addAttribute("uList",uList);
+		m.addAttribute("PodcastResult","Select Podcast Deleted!");
+		
+		bDao.deletePodcast(podcastId);
+		
+		
+		return "/BackStage/BackStagePodcastResult";
+		
+	}
+	
+	@PostMapping(path= {"/TopPodcst.controller"})
+	public String TopPodcast(HttpServletRequest request,
+							 @RequestParam("uploadTime")String uploadTime,
+							 Model m) {
+		
+		ServletContext app = request.getServletContext();
+		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
+		Date date;
+		java.util.List<uploadPodcastBean> uList=new ArrayList<uploadPodcastBean>();
+		try {
+			date=Date.valueOf(uploadTime);
+			uList=bDao.topPodcast(date);
+			
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+		m.addAttribute("uList",uList);
+		m.addAttribute("PodcastResult","Podcast Sorted By clickAmount in Time");
+		
+		return "/BackStage/BackStagePodcastResult";
 	}
 	
 }

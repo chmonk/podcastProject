@@ -375,6 +375,44 @@
 		}
 		
 		
+		//Podcast Function==========================================================================
+		
+		var selectPodcastMemberBtn=document.getElementById("selectPodcastMemberBtn");
+		selectPodcastMemberBtn.onclick=function(){
+			var selectPodcastMemberText=document.getElementById("selectPodcastMemberText").value;
+			
+			if(!selectPodcastMemberText){
+				document.getElementById("selectPodcastMemberErr").innerHTML="請輸入MemberId";
+				return false;
+			}	
+			document.getElementById("selectPodcastMemberForm").submit();
+			return true;
+		}
+		
+		var deletePodcastIdBtn=document.getElementById("deletePodcastIdBtn");
+		deletePodcastIdBtn.onclick=function(){
+			var deletePodcastIdText=document.getElementById("deletePodcastIdText").value;
+			
+			if(!deletePodcastIdText){
+				document.getElementById("deletePodcastIdErr").innerHTML="請輸入PodcastId";
+				return false;
+			}	
+			document.getElementById("deletePodcastIdForm").submit();
+			return true;
+		}
+		
+		var topPodcastBtn=document.getElementById("topPodcastBtn");
+		topPodcastBtn.onclick=function(){
+			var topPodcastText=document.getElementById("topPodcastText").value;
+			
+			if(!topPodcastText){
+				document.getElementById("topPodcastErr").innerHTML="請輸入uploadTime";
+				return false;
+			}	
+			document.getElementById("topPodcastForm").submit();
+			return true;
+		}
+		
 		
 	}
 		
