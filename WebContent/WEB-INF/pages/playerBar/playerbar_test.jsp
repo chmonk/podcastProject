@@ -51,13 +51,50 @@
 </head>
 <body>
 
+	<%
+		String path = request.getContextPath();
+	String basepath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+	%>
 
+	<%=basepath%>
+	</br>
+
+
+
+
+	<%-- <c:forEach begin="17" end="18" var="x"> --%>
+	<%--   <button id="${x}">id ${x}</button> --%>
+	<%-- </c:forEach> --%>
+
+	<c:forEach var="ele" items="${player}">
+		<button class="t" id="${ele}">id ${ele}</button>
+
+	</c:forEach>
+	<a
+		href="http://localhost:8080/SpringWebProject/gettheplayersong?name=17"><img
+		id="lemon" src="programimg/17_307_img.jpg"> </a>
+
+	<div id="show"></div>
+	</br>
+
+	<p>i am userid ${userid}</p>
+
+	<button
+		onclick="window.location.href=' <%=basepath %>goToBrowsingHistory?userid=${userid}'">goHistory</button>
+
+<!-- for the userid plan -->
+<input type="hidden" id="userid" data-value="${userid}" />
+
+
+
+
+	${pageContext.request.contextPath}
+	</br>
+	<%=basepath%>
 
 
 	<!--用字串呼叫對應符號  -->
-	<!-- < span class="material-icons" >
-             drag_indicator
-        </span > -->
+	<!-- < span class="material-icons" > drag_indicator</span > -->
 	<div class="player">
 		<div class="player__wrapper">
 			<div class="player__prev-work player__item">
@@ -149,8 +186,12 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
 
+console.log("html get "+document.getElementById("userid").dataset.value);
+
+</script>
 
 </body>
-
 </html>
+
