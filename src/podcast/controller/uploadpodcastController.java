@@ -142,14 +142,14 @@ public class uploadpodcastController {
 				ubean.setOpenPayment(openPayment);
 				ubean.setPodcastInfo(podcastInfo);
 				ubean.setTitle(title);
-				ubean.setAudioimg(uploadFilepath(podcastmp3,id,spec));
-				ubean.setAudioPath(uploadFilepath(audioimg,id,spec));
+				ubean.setAudioPath(uploadFilepath(podcastmp3,id,spec));
+				ubean.setAudioimg(uploadFilepath(audioimg,id,spec));
 				ubean.setClickAmount(0);
 				ubean.setUploadTime(new Date());
 				ubean.setLikesCount(0);
 				upDao.insert(ubean);
 	
-				//存入資料庫預設路徑    "./"+savefolder+"/"+savefilename
+				//存入資料庫預設路徑    "./"+savefolder+"/"+savefilename  setAudioPath
 	}
 	
 	
