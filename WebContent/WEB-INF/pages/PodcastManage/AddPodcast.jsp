@@ -14,38 +14,31 @@
 * {
 	margin: 0 auto;
 }
-
 fieldset {
 	width: 500px;
 	border: 2px solid;
 	border-radius: 15px;
 	/* 	background-color: beige; */
 }
-
 .div1 {
 	margin: 15px;
 	border-bottom: 1px dashed grey;
 }
-
 .div2 {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 15px;
 }
-
 .div2 input {
 	margin: 1px
 }
-
 .notice {
 	font-size: 10px;
 }
-
 .wrong_contnet {
 	color: red;
 	font-size: small;
 }
-
 .right_contnet {
 	color: green;
 	font-size: small;
@@ -104,12 +97,7 @@ fieldset {
 				<div class="notice"></div>
 			</div>
 
-			<div class="div1">
-				<label for="" class="l1">留言狀態:</label> <input type=radio
-					name="openComment" value=0 />關閉 <input type=radio
-					name="openComment" value=1 />公開 <span id="idsp1"></span>
-				<div class="notice"></div>
-			</div>
+			
 
 			<div class="div1">
 				<label for="" class="l1">付費狀態:</label> <input type=radio

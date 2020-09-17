@@ -1,6 +1,9 @@
 package podcast.controller;
 
 import java.io.File;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,9 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +34,17 @@ import podcast.model.javabean.uploadPodcastBean;
 public class PodcastController {
 	//管理頻道
 	@RequestMapping(path = "/managePodcast", method = RequestMethod.GET)
-	public String showManagePodcast(Model m) {
+	public String showManagePodcast(HttpServletRequest request,Model m) throws Exception {
+		
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+    	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
+    	//Integer memberId=(Integer) request.getAttribute("memberId");
+    	Integer memberId=20;
+    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
+    	m.addAttribute("upList",upList);
+    	request.setAttribute("upList", upList);
+		
 		return "/PodcastManage/PodcastManage";
 	}
 	
@@ -42,54 +58,116 @@ public class PodcastController {
 
 	//修改頻道
 	@RequestMapping(path = "/modifyPodcast", method = RequestMethod.GET)
-	public String showmodifyForm(Model m) {
-		uploadPodcastBean mpodcast = new uploadPodcastBean();
-		m.addAttribute("uploadPodcastBean", mpodcast);
+	public String showmodifyForm(Model m,
+				@RequestParam("thisPodcastId")Integer podcastId,
+				HttpServletRequest request) throws Exception {
+//		uploadPodcastBean mpodcast = new uploadPodcastBean();
+		
+		
+		//透過抓到的PodcastId先透過DAO方法取得該podcast，預先在欄位內填入資訊---
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+    	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
+    	uploadPodcastBean mpodcast = upDao.select(podcastId);
+    	//把取得的bean以及id再送到jsp頁面
+    	//m.addAttribute("mPodcastBean", mpodcast);
+    	m.addAttribute("uploadPodcastBean", mpodcast);
+		m.addAttribute("modifyPodcastId", podcastId);
 		return "/PodcastManage/ModifyPodcast";
 	}
-	//接收新增頻道
-	@RequestMapping(path = "/addPodcastProcess", method = RequestMethod.POST)
-    	public String processPodcast(@RequestParam("podcastpic") MultipartFile multipartFile,@RequestParam("podcastfile") MultipartFile multipartFile2,
-    			@RequestParam("category") Integer categoryId,@RequestParam("openComment") Integer openComment,@RequestParam("openPayment") Integer openPayment,
-    			HttpServletRequest request,@ModelAttribute("uploadPodcastBean") uploadPodcastBean upload,
-    			BindingResult result, Model m) throws Exception {
-    		if(result.hasErrors()) {
-    			return "/PodcastManage/AddPodcast";
-    		}
-    	
-    	m.addAttribute("podcastId", upload.getPodcastId());
-    	m.addAttribute("podcastTitle", upload.getTitle());
-    	
-    	m.addAttribute("podcastInfo", upload.getPodcastInfo());
-    	m.addAttribute("podcastPaymentSetting", upload.getOpenPayment());
-    	m.addAttribute("podcastCommentSetting", upload.getOpenComment());
+	
+	
+	//修改單集節目內容
+		@PostMapping(path= {"/PodcastModifyProcess"})
+		public String podcastModifyProcess(@RequestParam("title")String title,
+								 @RequestParam("podcastInfo")String podcastInfo,
+								 @RequestParam("radioP")Integer openPayment,
+								 @RequestParam("podcastId")Integer podcastId,
+								 HttpServletRequest request,
+								 Model m) throws Exception {
+			
+			ServletContext app = request.getServletContext();
+	    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+	    	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
+	    	
+	    	System.out.println("modifyPodcastId:"+podcastId);
+	    	
+	    	uploadPodcastBean ubean=new uploadPodcastBean();
+	    	ubean.setTitle(title);
+	    	ubean.setPodcastInfo(podcastInfo);
+	    	ubean.setOpenPayment(openPayment);
+	    	upDao.update(podcastId, ubean);
+	    	
+	    	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
+	    	
+	    	Integer memberId=20;
+	    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
+	    	m.addAttribute("upList",upList);
+	    	request.setAttribute("upList", upList);
+			
+			
+			return "/PodcastManage/PodcastManage";
+		}
+	
+	
+	
+		//接收新增頻道
+		@RequestMapping(path = "/addPodcastProcess", method = RequestMethod.POST)
+	    	public String processPodcast(@RequestParam("podcastpic") MultipartFile multipartFile,@RequestParam("podcastfile") MultipartFile multipartFile2,
+	    			@RequestParam("category") Integer categoryId,@RequestParam("openPayment") Integer openPayment,
+	    			HttpServletRequest request,@ModelAttribute("uploadPodcastBean") uploadPodcastBean upload,
+	    			BindingResult result, Model m) throws Exception {
+	    		if(result.hasErrors()) {
+	    			return "/PodcastManage/AddPodcast";
+	    		}
+	    	
+	    	m.addAttribute("podcastId", upload.getPodcastId());
+	    	m.addAttribute("podcastTitle", upload.getTitle());
+	    	m.addAttribute("podcastInfo", upload.getPodcastInfo());
+	    	m.addAttribute("podcastPaymentSetting", upload.getOpenPayment());
+	    	m.addAttribute("podcastCommentSetting", upload.getOpenComment());
 
-    	String filename= upload.getTitle();
-    	String saveaudioPath="C:\\SpringSource\\springworkspace\\PodcastProject2\\WebContent\\audio\\"+filename+".mp3";
-    	String savePicPath = "C:\\SpringSource\\springworkspace\\PodcastProject2\\WebContent\\audio\\" + filename+".jpg";
-//    	String saveaudioPath = request.getSession().getServletContext().getRealPath("/") + "audio\\" + filename+".mp3";
-//    	String savePicPath = request.getSession().getServletContext().getRealPath("/") + "audiopic\\" + filename+".jpg";
-    	File saveAudioFile = new File(saveaudioPath);
-    	multipartFile2.transferTo(saveAudioFile);
-    	File savePicFile = new File(savePicPath);
-    	multipartFile.transferTo(savePicFile);
-    	
-    	
-    	
-    	upload.setAudioimg(savePicPath);
-    	upload.setAudioPath(saveaudioPath);
-    	upload.setOpenComment(openComment);
-    	upload.setOpenPayment(openPayment);
-    	upload.setCategoryId(categoryId);
-    	
-    	ServletContext app = request.getServletContext();
-    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-    	
-    	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
+	    	String filename= upload.getTitle();
+	    	String saveaudioPath="C:\\SpringSource\\springworkspace\\PodcastProject2\\WebContent\\audio\\"+filename+".mp3";
+	    	String savePicPath = "C:\\SpringSource\\springworkspace\\PodcastProject2\\WebContent\\audio\\" + filename+".jpg";
+//	    	String saveaudioPath = request.getSession().getServletContext().getRealPath("/") + "audio\\" + filename+".mp3";
+//	    	String savePicPath = request.getSession().getServletContext().getRealPath("/") + "audiopic\\" + filename+".jpg";
+	    	
+	    	File saveAudioFile = new File(saveaudioPath);
+	    	multipartFile2.transferTo(saveAudioFile);
+	    	File savePicFile = new File(savePicPath);
+	    	multipartFile.transferTo(savePicFile);
+	    	
+	    	Timestamp time= new Timestamp(System.currentTimeMillis());
+	    	
+	    	upload.setAudioimg(savePicPath);
+	    	upload.setAudioPath(saveaudioPath);
+	    	upload.setOpenPayment(openPayment);
+	    	upload.setCategoryId(categoryId);
+	    	upload.setClickAmount(0);
+	    	upload.setLikesCount(0);;
+	    	upload.setUploadTime(time);
+	    	//由於還沒接sessionAttribute，memberId先手動輸入
+	    	upload.setMemberId(20);
+	    	
+	    	
+	    	ServletContext app = request.getServletContext();
+	    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+	    	
+	    	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
 
-    	upDao.insert(upload);
-    	return "/PodcastManage/PodcastManage";
-    }
+	    	upDao.insert(upload);
+	    	
+	    	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
+	    	
+	    	Integer memberId=20;
+	    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
+	    	m.addAttribute("upList",upList);
+	    	request.setAttribute("upList", upList);
+			
+			
+			return "/PodcastManage/PodcastManage";
+	    }
 	
 	@RequestMapping(path = "/allPodcast", method = RequestMethod.GET)
 	public String showActivities(HttpServletRequest request,Model m) throws Exception {
@@ -103,8 +181,33 @@ public class PodcastController {
     	list = upDao.selectAll();
 
 		m.addAttribute("list", list);
-		return "../../index";
+		return "/PodcastManage/PodcastManage";
 		
+	}
+	
+	
+	
+	//刪除節目===============================================================
+	
+	@PostMapping(path= {"/processDeletePodcast"})
+	public String ProcessDeletePodcast( HttpServletRequest request,
+						Model m,
+						@RequestParam("delPodcastId")Integer delPodcastId) throws Exception {
+		
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+    	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
+    	
+    	upDao.delete(delPodcastId);
+    	
+    	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
+    	
+    	Integer memberId=20;
+    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
+    	m.addAttribute("upList",upList);
+    	request.setAttribute("upList", upList);
+		
+		return "/PodcastManage/PodcastManage";
 	}
 
 }
