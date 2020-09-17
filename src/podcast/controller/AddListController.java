@@ -20,11 +20,11 @@ public class AddListController {
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
 		List<uploadPodcastBean> songlist = udao.selectAll();
 
-		m.put("author", songlist.get(1).getPodcastInfo());
-		m.put("authorurl", songlist.get(1).getPodcastInfo());
-		m.put("fileName", songlist.get(1).getPodcastInfo());
-		m.put("fileUrl", songlist.get(1).getPodcastInfo());
-		m.put("thumb", songlist.get(1).getPodcastInfo());
+		m.put("author", songlist.get(7).getMemberId().toString());
+		m.put("authorurl", songlist.get(7).getMemberId().toString());
+		m.put("fileName", songlist.get(7).getTitle());
+		m.put("fileUrl", songlist.get(7).getAudioPath());
+		m.put("thumb", songlist.get(7).getAudioimg());
 
 		return m;
 
