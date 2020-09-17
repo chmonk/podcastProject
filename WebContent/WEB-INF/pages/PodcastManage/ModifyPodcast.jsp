@@ -14,31 +14,38 @@
 * {
 	margin: 0 auto;
 }
+
 fieldset {
 	width: 500px;
 	border: 2px solid;
 	border-radius: 15px;
 	/* 	background-color: beige; */
 }
+
 .div1 {
 	margin: 15px;
 	border-bottom: 1px dashed grey;
 }
+
 .div2 {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 15px;
 }
+
 .div2 input {
 	margin: 1px
 }
+
 .notice {
 	font-size: 10px;
 }
+
 .wrong_contnet {
 	color: red;
 	font-size: small;
 }
+
 .right_contnet {
 	color: green;
 	font-size: small;
@@ -89,25 +96,31 @@ fieldset {
 
 <script>
 window.onload=function(){
+
 	var title="${uploadPodcastBean.title}";
 	document.getElementById("title").value=title;
 	
 	var podcastInfo="${uploadPodcastBean.podcastInfo}";
 	document.getElementById("podcastInfo").value=podcastInfo;
 	
+
 	var openPayment=${uploadPodcastBean.openPayment};
 	document.getElementById("radioP"+openPayment).checked=true;
 }
+
 document.getElementById("clear").onclick = function() {clear()};
 function clear(){
 	document.getElementById("title").value="";
 	document.getElementById("podcastInfo").value="";
+
 	document.getElementById("radioP0").checked=true;
 	document.getElementById("radioP1").checked=false;
 	
 }
+
 document.getElementById("submitBtn").onclick = function() {check()};
 function check(){
+
 	var title=document.getElementById("title").value;
 	var podcastInfo=document.getElementById("podcastInfo").value;
 	
@@ -117,6 +130,7 @@ function check(){
 		document.getElementById("podcastModifyForm").submit();
 	}	
 }
+
 </script>
 
 

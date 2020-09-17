@@ -14,31 +14,38 @@
 * {
 	margin: 0 auto;
 }
+
 fieldset {
 	width: 500px;
 	border: 2px solid;
 	border-radius: 15px;
 	/* 	background-color: beige; */
 }
+
 .div1 {
 	margin: 15px;
 	border-bottom: 1px dashed grey;
 }
+
 .div2 {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 15px;
 }
+
 .div2 input {
 	margin: 1px
 }
+
 .notice {
 	font-size: 10px;
 }
+
 .wrong_contnet {
 	color: red;
 	font-size: small;
 }
+
 .right_contnet {
 	color: green;
 	font-size: small;

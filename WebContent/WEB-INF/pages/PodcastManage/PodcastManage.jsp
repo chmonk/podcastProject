@@ -26,7 +26,9 @@
 </table>
 
 <script type="text/javascript">
+
 function delConfirm(clicked_name){
+
 	var r=confirm("確定要刪除此podcast?")
 	if(r==true){
 		
@@ -37,6 +39,7 @@ function delConfirm(clicked_name){
 		
 	}
 }
+
 </script>
 
 </body>
