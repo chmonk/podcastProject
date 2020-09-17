@@ -7,9 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
 
 public class EcpayController {
+	public static AllInOne all;
 	@RequestMapping(value = "/greenPay.controller")
 
 	public String greenPay(
@@ -96,7 +98,9 @@ public class EcpayController {
 		return "greenTest";
 
 	}
-
+	private static void initial(){
+		all = new AllInOne("");
+	}
 
 
 }

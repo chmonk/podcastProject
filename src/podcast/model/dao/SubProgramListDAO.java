@@ -56,11 +56,17 @@ public class SubProgramListDAO implements ISubProgramListDAO {
 		
 	}
 
-//	@Override
-//	public uploadPodcastBean selectByOpenPayment(int openPayment) throws Exception {
-//		Session session = sessionFactory.getCurrentSession();
-//		return session.get(uploadPodcastBean.class, openPayment);
-//	}
-//	
+
+	@Override
+	public SubscriptionBean insert(SubscriptionBean sbean) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+
+		session.save(sbean);
+
+		return sbean;
+	}
+
+	
+
 	
 }

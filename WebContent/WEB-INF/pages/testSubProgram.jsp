@@ -16,16 +16,18 @@ function openWindows(){
 
 	<form action="/greenPay.controller">
 		<a href="javascript:;" onclick="document.getElementById('d1').style.display='' ">訂閱列表</a><br>
-		<div id="d1" style="display: none">
+		<div id="d1" style="display: none" >
 			<c:forEach items="${subProgram}" var="bymemberid">
 				<c:forEach items="${upLoadProgram}" var="byuploadid">
- 訂閱期間= ${byuploadid.getSubdateStart()} 到 ${byuploadid.getSubdateEnd()}<br />
+
+
 				</c:forEach>
 節目名稱 =${bymemberid.getTitle()}<br />
+
 				<p>
-					付費節目<br />
+					付	費節目<br />
 				</p>
-				<a href="audio/audio.mp3">music</a>
+		     <a href="#/">播放</a>
 				<br />
 			</c:forEach>
 		</div>

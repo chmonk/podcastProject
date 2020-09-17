@@ -10,4 +10,10 @@ public interface ISubProgramListDAO {
 
 
 	public List<SubscriptionBean> selectSubcriptionByMemberID(Integer memberID,Integer podcasterID) throws Exception;
+
+
+	public SubscriptionBean insert(SubscriptionBean sbean) throws Exception;
+
+
+
 }

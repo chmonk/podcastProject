@@ -85,6 +85,10 @@ public class TestShowSubProgram {
     	
     	request.getSession().setAttribute("subProgram",s);
 	
+    	
+    	
+    	
+    	
 //    	return null;
 		return "/testSubProgram";
 	}
