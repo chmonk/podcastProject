@@ -3,6 +3,9 @@ package podcast.model.dao;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
@@ -129,6 +132,23 @@ public class MemberDAO implements IMemberDAO {
 		session.save(m);
 		return null;
 
+	}
+	
+	public MemberBean checkIdPassword(String account, String password) {
+		MemberBean mb = null;		
+		String hql = "from MemberBean where account=:acc and password=:pwsd";		
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			mb = (MemberBean)session.createQuery(hql)
+								.setParameter("acc", account)
+								.setParameter("pwsd", password)
+								.getSingleResult();
+		} catch(NoResultException ex) {
+			;
+		} catch(NonUniqueResultException ex) {
+			throw new RuntimeException("帳號資料有誤");
+		} 	
+		return mb;
 	}
 
 }
