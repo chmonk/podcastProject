@@ -1,9 +1,8 @@
 package podcast.controller;
 
 import java.io.File;
-import java.sql.Date;
+import java.io.IOException;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,33 +13,36 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import podcast.model.dao.UploadPodcastDAO;
+import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.uploadPodcastBean;
 
 
 
 @Controller
+@SessionAttributes({ "LoginOK"})
 public class PodcastController {
 	//管理頻道
 	@RequestMapping(path = "/managePodcast", method = RequestMethod.GET)
 	public String showManagePodcast(HttpServletRequest request,Model m) throws Exception {
 		
+		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+		Integer memberId = memberBean.getMemberId();
+		
 		ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
     	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
     	//Integer memberId=(Integer) request.getAttribute("memberId");
-    	Integer memberId=20;
+//    	Integer memberId=20;
     	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
     	m.addAttribute("upList",upList);
     	request.setAttribute("upList", upList);
@@ -100,7 +102,9 @@ public class PodcastController {
 	    	
 	    	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
 	    	
-	    	Integer memberId=20;
+	    	MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+			Integer memberId = memberBean.getMemberId();
+			
 	    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
 	    	m.addAttribute("upList",upList);
 	    	request.setAttribute("upList", upList);
@@ -121,24 +125,30 @@ public class PodcastController {
 	    			return "/PodcastManage/AddPodcast";
 	    		}
 	    	
-	    	m.addAttribute("podcastId", upload.getPodcastId());
-	    	m.addAttribute("podcastTitle", upload.getTitle());
-	    	m.addAttribute("podcastInfo", upload.getPodcastInfo());
-	    	m.addAttribute("podcastPaymentSetting", upload.getOpenPayment());
-	    	m.addAttribute("podcastCommentSetting", upload.getOpenComment());
+//	    	m.addAttribute("podcastId", upload.getPodcastId());
+//	    	m.addAttribute("podcastTitle", upload.getTitle());
+//	    	m.addAttribute("podcastInfo", upload.getPodcastInfo());
+//	    	m.addAttribute("podcastPaymentSetting", upload.getOpenPayment());
+//	    	m.addAttribute("podcastCommentSetting", upload.getOpenComment());
 
-	    	String filename= upload.getTitle();
-	    	String saveaudioPath="C:\\SpringSource\\springworkspace\\PodcastProject2\\WebContent\\audio\\"+filename+".mp3";
-	    	String savePicPath = "C:\\SpringSource\\springworkspace\\PodcastProject2\\WebContent\\audio\\" + filename+".jpg";
+//	    	String filename= upload.getTitle();
+//	    	String saveaudioPath="C:\\SpringSource\\springworkspace\\PodcastProject2\\WebContent\\audio\\"+filename+".mp3";
+//	    	String savePicPath = "C:\\SpringSource\\springworkspace\\PodcastProject2\\WebContent\\audio\\" + filename+".jpg";
 //	    	String saveaudioPath = request.getSession().getServletContext().getRealPath("/") + "audio\\" + filename+".mp3";
 //	    	String savePicPath = request.getSession().getServletContext().getRealPath("/") + "audiopic\\" + filename+".jpg";
 	    	
-	    	File saveAudioFile = new File(saveaudioPath);
-	    	multipartFile2.transferTo(saveAudioFile);
-	    	File savePicFile = new File(savePicPath);
-	    	multipartFile.transferTo(savePicFile);
+//	    	File saveAudioFile = new File(saveaudioPath);
+//	    	multipartFile2.transferTo(saveAudioFile);
+//	    	File savePicFile = new File(savePicPath);
+//	    	multipartFile.transferTo(savePicFile);
+	    	
+	    	MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+			Integer memberId = memberBean.getMemberId();
 	    	
 	    	Timestamp time= new Timestamp(System.currentTimeMillis());
+	    	
+	    	String savePicPath = processIMGFile(memberId,multipartFile,request);
+	    	String saveaudioPath = processAUDFile(memberId,multipartFile2,request);
 	    	
 	    	upload.setAudioimg(savePicPath);
 	    	upload.setAudioPath(saveaudioPath);
@@ -147,8 +157,7 @@ public class PodcastController {
 	    	upload.setClickAmount(0);
 	    	upload.setLikesCount(0);;
 	    	upload.setUploadTime(time);
-	    	//由於還沒接sessionAttribute，memberId先手動輸入
-	    	upload.setMemberId(20);
+	    	upload.setMemberId(memberId);	    	
 	    	
 	    	
 	    	ServletContext app = request.getServletContext();
@@ -160,7 +169,8 @@ public class PodcastController {
 	    	
 	    	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
 	    	
-	    	Integer memberId=20;
+	    	
+			
 	    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
 	    	m.addAttribute("upList",upList);
 	    	request.setAttribute("upList", upList);
@@ -168,22 +178,110 @@ public class PodcastController {
 			
 			return "/PodcastManage/PodcastManage";
 	    }
-	
-	@RequestMapping(path = "/allPodcast", method = RequestMethod.GET)
-	public String showActivities(HttpServletRequest request,Model m) throws Exception {
 		
-		ServletContext app = request.getServletContext();
-    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-    	
-    	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
-    	List<uploadPodcastBean> list = new LinkedList<uploadPodcastBean>();
-    	
-    	list = upDao.selectAll();
+		
+		
+		public String processIMGFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
+			// 取得原檔案名字
+			String filename = multipartFile.getOriginalFilename();
+			System.out.println(filename);
 
-		m.addAttribute("list", list);
-		return "/PodcastManage/PodcastManage";
+			// 取得主檔名
+			String maintitile = filename.substring(0, filename.lastIndexOf("."));
+			System.out.println(maintitile);
+
+			// 處理副檔名
+			String subtitle = filename.substring(filename.lastIndexOf("."));
+			// path 取得workspace 在本機的workspace路徑 + 後續奇怪path
+			String path = request.getSession().getServletContext().getRealPath("/");
+			// 專案資料夾名稱
+			String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
+			// 取得到含workspace前的絕對路徑
+			String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,
+					path.indexOf("\\.metadata"));
+
+			// 制式資料夾
+			// 節目圖片 programimg
+			// 節目音檔 programmedia
+			// 會員照片 memberpic
+			// 活動圖片 activitypic
+
+			// 資料夾名稱
+			String savefolder = "programimg";
+
+			// 制式檔案名稱
+			String savefilename = id + maintitile + subtitle;
+
+			// 檔案制式存檔名稱 待設定
+
+			String savepath = workspace + "\\" + caseFolder + "\\WebContent\\" + savefolder + "\\" + savefilename;
+
+			// 準備儲存檔案
+			File f = new File(savepath);
+
+			// 不存在就建立路徑
+			if (!f.exists()) {
+				f.mkdirs();
+			}
+			// 檔案寫入路徑(存檔)
+			multipartFile.transferTo(f);
+
+			// 存入資料庫預設路徑 
+			return "./"+savefolder+"/"+savefilename;
 		
-	}
+		}
+		
+		public String processAUDFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
+			// 取得原檔案名字
+			String filename = multipartFile.getOriginalFilename();
+			System.out.println(filename);
+
+			// 取得主檔名
+			String maintitile = filename.substring(0, filename.lastIndexOf("."));
+			System.out.println(maintitile);
+
+			// 處理副檔名
+			String subtitle = filename.substring(filename.lastIndexOf("."));
+			// path 取得workspace 在本機的workspace路徑 + 後續奇怪path
+			String path = request.getSession().getServletContext().getRealPath("/");
+			// 專案資料夾名稱
+			String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
+			// 取得到含workspace前的絕對路徑
+			String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,
+					path.indexOf("\\.metadata"));
+
+			// 制式資料夾
+			// 節目圖片 programimg
+			// 節目音檔 programmedia
+			// 會員照片 memberpic
+			// 活動圖片 activitypic
+
+			// 資料夾名稱
+			String savefolder = "programmedia";
+
+			// 制式檔案名稱
+			String savefilename = id + maintitile + subtitle;
+
+			// 檔案制式存檔名稱 待設定
+
+			String savepath = workspace + "\\" + caseFolder + "\\WebContent\\" + savefolder + "\\" + savefilename;
+
+			// 準備儲存檔案
+			File f = new File(savepath);
+
+			// 不存在就建立路徑
+			if (!f.exists()) {
+				f.mkdirs();
+			}
+			// 檔案寫入路徑(存檔)
+			multipartFile.transferTo(f);
+
+			// 存入資料庫預設路徑 
+			return "./"+savefolder+"/"+savefilename;
+		
+		}
+		
+
 	
 	
 	
@@ -201,8 +299,9 @@ public class PodcastController {
     	upDao.delete(delPodcastId);
     	
     	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
-    	
-    	Integer memberId=20;
+    	MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+		Integer memberId = memberBean.getMemberId();
+//    	Integer memberId=20;
     	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
     	m.addAttribute("upList",upList);
     	request.setAttribute("upList", upList);
