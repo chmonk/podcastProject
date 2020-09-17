@@ -438,7 +438,8 @@ $(document).ready(() => {
 
 	// 播放清單開關
 	queueBtn.click(() => {
-		queueWrapper.toggleClass("hidden");
+		queueWrapper.removeClass("hidden");
+		//queueWrapper.toggleClass("hidden");
 		queueBtn.toggleClass("select");
 	});
 
@@ -447,9 +448,9 @@ $(document).ready(() => {
 		queueBtn.removeClass("select");
 	});
 	//離開播放選單元素時關閉播放選單
-	queueWrapper.on("mouseleave", () => {
-		queueWrapper.addClass("hidden");
-	})
+		queueWrapper.on("mouseleave", () => {
+			queueWrapper.addClass("hidden");
+		})
 
 
 	// 音量調整面板
@@ -507,17 +508,97 @@ $(document).ready(() => {
 		xhr.onreadystatechange = function() {
 			if (xhr.status == 200 && xhr.readyState == 4) {
 				alert(xhr.responseText);
-				
+
 				mediaData.push(JSON.parse(xhr.responseText));
-				
+
 				renderPlaylist(mediaData);
-				
+
 			}
 		}
 	})
-	
-	
+
+	//生成對應memberid所含圖片列表(未來替換成播放條列表)
+	$("button")
+		.click("on", function(e) {
+
+			//測試取得按鈕上memberid
+			//console.log(e.target.id);
+
+			//發送要求由 memberid取得 所含有的列表
+			let xhr1 = new XMLHttpRequest();
+
+			xhr1.open("get",
+				"/SpringWebProject/gettheplayersong?name="
+				+ e.target.id, true);
+
+			//傳輸語句測試
+			//console.log("/SpringWebProject/gettheplayersong?name="+ e.target.id);
+			//SpringWebProject/gettheplayersong?name=17
+
+			xhr1.send();
+
+			//收到資料後新建成帶有program id的圖片
+			xhr1.onreadystatechange = function() {
+				if (xhr1.status == 200 && xhr1.readyState == 4) {
+
+					console.log(xhr1.readyState);
+					alert(xhr1.responseText);
+
+					//<img id="lemon" src="programimg/17_307_img.jpg">
+
+					let gettheplayerresult = JSON
+						.parse(xhr1.responseText);
+
+					document.getElementById("show").innerHTML = "";
+
+					for (let i = 0; i < gettheplayerresult.length; i++) {
+
+						//<img id="lemon" src="programimg/17_307_img.jpg">
+
+						let content = "<img id='" + gettheplayerresult[i]["podcastId"] + "' src='" + gettheplayerresult[i]["audioimg"] + "'>";
+
+
+						//資料家道div show的最後元素
+						document.getElementById("show")
+							.insertAdjacentHTML(
+								'beforeend', content);
+					}
+
+				}
+
+			}
+		})
 
 
 
-});
+	//點選#show下的圖片觸發新增到播放列表
+	$("#show").on("click", "img", function() {
+
+		//取得this的id  this.id 
+		//console.log(this.id);
+
+		var thisid = this.id;
+
+		// this 就是element
+
+		let xhr = new XMLHttpRequest();
+		console.log(this);
+		xhr.open("get", "/SpringWebProject/postjson?id=" + thisid, true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.status == 200 && xhr.readyState == 4) {
+				alert(xhr.responseText);
+				mediaData.push(JSON.parse(xhr.responseText));
+				renderPlaylist(mediaData);
+			}
+		}
+
+	})
+
+
+
+
+
+
+
+});	
