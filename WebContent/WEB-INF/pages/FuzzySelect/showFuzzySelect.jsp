@@ -259,6 +259,17 @@ html {
 .padcard{
 	margin: auto;
 }
+.podcastImg{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+
+}
  
  
 
@@ -314,7 +325,7 @@ $(document).ready(function(){
 	    <!-- media container -->
 	    <div class="card-media-object-container">
 	      <div class="card-media-object">
-	      	<img src="${data.getAudioImg()}">
+	      	<img class="podcastImg" src="${data.getAudioImg()}">
 	      </div>
 	      <span class="card-media-object-tag subtle">${data.getPodcasterName()}</span>
 	     
@@ -340,7 +351,7 @@ $(document).ready(function(){
 	      </div>
 	      <div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 	        <span class="card-media-body-supporting-bottom-text subtle">${data.getCategoryName()}</span>
-	        <a href="#/" class="card-media-body-supporting-bottom-text card-media-link u-float-right">加到播放列表</a>
+	        <a id="${data.getPodcastId()}" class="card-media-body-supporting-bottom-text card-media-link u-float-right">加到播放列表</a>
 	      </div>
 	    </div>
 	  </div>
