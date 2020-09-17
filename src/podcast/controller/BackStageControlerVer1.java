@@ -56,7 +56,7 @@ public class BackStageControlerVer1 {
 	// Back 2 Select==========================================================================================
 	@GetMapping(path = { "/BackToSelect.controller" })
 	public String BackToSelect() {
-		return "/BackStage/BackStageSelect";
+		return "/BackStage/BackStageSelectStyle";
 
 	}
 
