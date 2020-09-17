@@ -81,7 +81,6 @@ public class PodcastController {
 		@PostMapping(path= {"/PodcastModifyProcess"})
 		public String podcastModifyProcess(@RequestParam("title")String title,
 								 @RequestParam("podcastInfo")String podcastInfo,
-								 @RequestParam("radioC")Integer openComment,
 								 @RequestParam("radioP")Integer openPayment,
 								 @RequestParam("podcastId")Integer podcastId,
 								 HttpServletRequest request,
@@ -96,7 +95,6 @@ public class PodcastController {
 	    	uploadPodcastBean ubean=new uploadPodcastBean();
 	    	ubean.setTitle(title);
 	    	ubean.setPodcastInfo(podcastInfo);
-	    	ubean.setOpenComment(openComment);
 	    	ubean.setOpenPayment(openPayment);
 	    	upDao.update(podcastId, ubean);
 	    	

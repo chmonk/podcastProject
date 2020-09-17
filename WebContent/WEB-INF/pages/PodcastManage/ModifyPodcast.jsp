@@ -77,13 +77,6 @@ fieldset {
 				<div class="notice"></div>
 			</div>
 
-			<div class="div1">
-			<label for="" class="l1">留言狀態:</label>
-			<input id="radioC0" type=radio name="radioC" value=0 />關閉
-			<input id="radioC1" type=radio name="radioC" value=1 />公開 
-			<span id="idsp1"></span>
-			<div class="notice"></div>
-			</div>
 			
 			<div class="div1">
 			<label for="" class="l1">付費狀態:</label>
@@ -110,8 +103,6 @@ window.onload=function(){
 	var podcastInfo="${uploadPodcastBean.podcastInfo}";
 	document.getElementById("podcastInfo").value=podcastInfo;
 	
-	var openComment=${uploadPodcastBean.openComment};
-	document.getElementById("radioC"+openComment).checked=true;
 
 	var openPayment=${uploadPodcastBean.openPayment};
 	document.getElementById("radioP"+openPayment).checked=true;
@@ -122,8 +113,6 @@ function clear(){
 	document.getElementById("title").value="";
 	document.getElementById("podcastInfo").value="";
 
-	document.getElementById("radioC0").checked=false;
-	document.getElementById("radioC1").checked=true;
 	document.getElementById("radioP0").checked=true;
 	document.getElementById("radioP1").checked=false;
 	
