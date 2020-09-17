@@ -34,6 +34,7 @@ public class SubProgramListDAO implements ISubProgramListDAO {
 
 
 	@Override
+	
 	public List<uploadPodcastBean> selectByMemeberId(int memberID) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = "from uploadPodcastBean where memberId=:memberId and openpayment=1";
@@ -44,7 +45,7 @@ public class SubProgramListDAO implements ISubProgramListDAO {
 	
 	//在訂閱清單尋找會員ID與播客ID
 	@Override
-	public List<SubscriptionBean> selectSubcriptionByMemberID(int memberID,int podcasterID) throws Exception {
+	public List<SubscriptionBean> selectSubcriptionByMemberID(Integer memberID,Integer podcasterID) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = "from SubscriptionBean where memberId=:memberId and podcasterID=:podcasterID";
 		Query<SubscriptionBean> query = session.createQuery(hqlstr, SubscriptionBean.class);

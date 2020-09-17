@@ -47,26 +47,33 @@ public class TestShowSubProgram {
 		
     	
     	//用訂單列表SUBCRIPTION取得會員帳號與訂閱的播客。判斷訂閱時間是否過期
-    
+    	int procasterNumber = 0;
     	Date date =new Date();
     	SubProgramListDAO fdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
+    	
     	List<SubscriptionBean> f = fdao.selectSubcriptionByMemberID(1, 20);
-    	for(SubscriptionBean i:f) {
-    		if(i.getSubdateEnd().compareTo(date)==1) {
-    			System.out.println("訂閱期間內");
-    		}else if(i.getSubdateEnd().compareTo(date)==-1) {
+ 
+    	for(SubscriptionBean g:f) {
+    	
+    		if(g.getSubdateEnd().compareTo(date)==1) {
+    			System.out.println("會員"+g.getMemberId()+"在"+g.getPodcasterId()+"的訂閱期間內");
+    			procasterNumber =g.getPodcasterId();
+    			System.out.println(procasterNumber);
+    		}else if(g.getSubdateEnd().compareTo(date)==-1) {
     			System.out.println("已過期");
     		}
-    		System.out.println("會員ID: "+i.getMemberId());
-    		System.out.println("節目ID: "+i.getPodcasterId());
-    		System.out.println("日期比較: "+i.getSubdateEnd().compareTo(date));
+    		System.out.println("會員ID: "+g.getMemberId());
+    		System.out.println("節目ID: "+g.getPodcasterId());
+    		System.out.println("日期比較: "+g.getSubdateEnd().compareTo(date));
     	}
     	System.out.println("-----------------------------------------------");
     	System.out.println("現在時間: "+date);
+    	request.getSession().setAttribute("upLoadProgram",f);
+
     	
-    	
+    	//並於上傳列表中找出該節目
     	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
-    	List<uploadPodcastBean> s = sdao.selectByMemeberId(20);
+    	List<uploadPodcastBean> s = sdao.selectByMemeberId(procasterNumber);
     	
     	
     	for(uploadPodcastBean i:s) {
@@ -75,9 +82,10 @@ public class TestShowSubProgram {
     		System.out.println("點擊次數: "+i.getClickAmount());
     		System.out.println("節目路徑: "+i.getAudioPath());
     	}
+    	
     	request.getSession().setAttribute("subProgram",s);
 	
 //    	return null;
-		return "/view";
+		return "/testSubProgram";
 	}
 }
