@@ -3,14 +3,19 @@ package podcast.model.dao;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transaction;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import podcast.model.idao.IOrderTicketDAO;
+
 import podcast.model.javabean.OrderTicketBean;
 
 @Repository("OrderTicketDAO")
@@ -20,8 +25,10 @@ public class OrderTicketDAO implements IOrderTicketDAO {
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
+
 	
 	public OrderTicketDAO() {
+		
 	}
 
 	public OrderTicketDAO( SessionFactory sessionFactory) {
@@ -31,14 +38,12 @@ public class OrderTicketDAO implements IOrderTicketDAO {
 	@Override
 	public OrderTicketBean insert(OrderTicketBean oBean) {
 		Session session = sessionFactory.getCurrentSession();
-
 			session.save(oBean);
-			return oBean;
-
+		return oBean;
 	}
 
 	@Override
-	public OrderTicketBean select(Integer ticketOrderId) {
+	public OrderTicketBean select(int ticketOrderId) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(OrderTicketBean.class, ticketOrderId);
 	}
@@ -51,24 +56,23 @@ public class OrderTicketDAO implements IOrderTicketDAO {
 	}
 
 	@Override
-	public OrderTicketBean update(Integer ticketOrderId,OrderTicketBean oBean) {
+	public OrderTicketBean update(int ticketOrderId,OrderTicketBean oBean) {
 		Session session = sessionFactory.getCurrentSession();
 		OrderTicketBean oldBean = session.get(OrderTicketBean.class, ticketOrderId);
 
 		
 		if (oldBean != null) {
-			oldBean.setOrderDate(oBean.getOrderDate());
-			oldBean.setOrderPrice(oBean.getOrderPrice());
+			oldBean.setTotalAmount(oBean.getTotalAmount());
 			oldBean.setMemberId(oBean.getMemberId());
-			oldBean.setCreditCardNumber(oBean.getCreditCardNumber());
 			oldBean.setActivityId(oBean.getActivityId());
+			//!!!!新增其他屬性
 		}
 
 		return oBean;
 	}
 
 	@Override
-	public boolean delete(Integer ticketOrderId) {
+	public boolean delete(int ticketOrderId) {
 		Session session = sessionFactory.getCurrentSession();
 		OrderTicketBean oBean = session.get(OrderTicketBean.class, ticketOrderId);
 
