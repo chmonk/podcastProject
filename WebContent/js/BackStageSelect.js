@@ -59,8 +59,18 @@
 				document.getElementById("deleteMemberErr").innerHTML="請輸入MemberId";
 				return false;
 			}	
-			document.getElementById("deleteMemberForm").submit();
-			return true;
+			
+			var r=confirm("確定要刪除此Member?")
+			if(r==true){
+		
+				document.getElementById("deleteMemberForm").submit();
+				return true;
+			}else{
+		
+			}
+			
+			
+			
 		}
 		
 		//TicketOrder Function=================================
@@ -150,9 +160,18 @@
 			if(!deleteCommentIdText){
 				document.getElementById("deleteCommentIdErr").innerHTML="請輸入CommentId";
 				return false;
-			}	
-			document.getElementById("deleteCommentIdForm").submit();
-			return true;
+			}
+			
+			var r=confirm("確定要刪除此Comment?")
+			if(r==true){
+		
+				document.getElementById("deleteCommentIdForm").submit();
+				return true;
+			}else{
+		
+			}
+				
+			
 		}
 		
 		var deleteCommentMemberBtn=document.getElementById("deleteCommentMemberBtn");
@@ -167,8 +186,15 @@
 				document.getElementById("deleteCommentMemberErr").innerHTML="請輸入MemberId & PodcasterId";
 				return false;
 			}
-			document.getElementById("deleteCommentMemberForm").submit();
-			return true;
+			
+			var r=confirm("確定要刪除Comment?")
+			if(r==true){
+		
+				document.getElementById("deleteCommentIdForm").submit();
+				return true;
+			}else{
+		
+			}
 		}
 		
 		//Category Function===========================================
@@ -273,9 +299,16 @@
 			if(!deleteActIdText){
 				document.getElementById("deleteActIdErr").innerHTML="請輸入ActivityId";
 				return false;
+			}
+			
+			var r=confirm("確定要刪除此Activity?")
+			if(r==true){
+				document.getElementById("deleteActIdForm").submit();
+				return true;
+			}else{
+		
 			}	
-			document.getElementById("deleteActIdForm").submit();
-			return true;
+			
 		}
 		
 		//BrowsingHistory Function========================================
@@ -336,8 +369,15 @@
 				document.getElementById("deleteHistoryDateErr").innerHTML="請輸入Date";
 				return false;
 			}	
-			document.getElementById("deleteHistoryDateForm").submit();
-			return true;
+			
+			var r=confirm("確定要刪除History?")
+			if(r==true){
+				document.getElementById("deleteHistoryDateForm").submit();
+				return true;
+			}else{
+		
+			}	
+			
 		}
 		
 		//Income Calculate Function========================================
@@ -396,9 +436,16 @@
 			if(!deletePodcastIdText){
 				document.getElementById("deletePodcastIdErr").innerHTML="請輸入PodcastId";
 				return false;
-			}	
-			document.getElementById("deletePodcastIdForm").submit();
-			return true;
+			}
+			
+			var r=confirm("確定要刪除Podcast?")
+			if(r==true){
+				document.getElementById("deletePodcastIdForm").submit();
+				return true;
+			}else{
+		
+			}		
+			
 		}
 		
 		var topPodcastBtn=document.getElementById("topPodcastBtn");

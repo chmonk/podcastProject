@@ -590,6 +590,8 @@ public class BackStageControlerVer1 {
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
 		
+		System.out.println("podcastId:"+podcastId);
+		
 		UploadPodcastDAO uDao = new UploadPodcastDAO();
 		uploadPodcastBean uBean = uDao.select(podcastId);
 		java.util.List<uploadPodcastBean> uList = new ArrayList<uploadPodcastBean>();
