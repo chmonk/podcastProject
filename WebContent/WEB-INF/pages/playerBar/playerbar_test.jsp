@@ -51,13 +51,23 @@
 </head>
 <body>
 
+	<%
+		String path = request.getContextPath();
+	String basepath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+	%>
+
+	<%=basepath%>
+	</br>
+
+
+
 
 	<%-- <c:forEach begin="17" end="18" var="x"> --%>
 	<%--   <button id="${x}">id ${x}</button> --%>
 	<%-- </c:forEach> --%>
 
 	<c:forEach var="ele" items="${player}">
-		<button id="${ele}">id ${ele}</button>
+		<button class="t" id="${ele}">id ${ele}</button>
 
 	</c:forEach>
 	<a
@@ -65,12 +75,26 @@
 		id="lemon" src="programimg/17_307_img.jpg"> </a>
 
 	<div id="show"></div>
+	</br>
+
+	<p>i am userid ${userid}</p>
+
+	<button
+		onclick="window.location.href=' <%=basepath %>goToBrowsingHistory?userid=${userid}'">goHistory</button>
+
+<!-- for the userid plan -->
+<input type="hidden" id="userid" data-value="${userid}" />
+
+
+
+
+	${pageContext.request.contextPath}
+	</br>
+	<%=basepath%>
 
 
 	<!--用字串呼叫對應符號  -->
-	<!-- < span class="material-icons" >
-             drag_indicator
-        </span > -->
+	<!-- < span class="material-icons" > drag_indicator</span > -->
 	<div class="player">
 		<div class="player__wrapper">
 			<div class="player__prev-work player__item">
@@ -162,104 +186,12 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
 
-	<script>
-		// var lemon=$("#lemon");
+console.log("html get "+document.getElementById("userid").dataset.value);
 
-		// lemon.click("on",function(){
-
-		//     let xhr=new XMLHttpRequest();
-
-		//     xhr.open("get","/SpringWebProject/postjson",true);
-
-		//     xhr.send();
-
-		//     xhr.onreadystatechange=function(){
-		//         if(xhr.status==200 && xhr.readyState==4){
-		//             alert(xhr.responseText);
-		//         }
-		//     }
-		// })
-
-// 		$("button")
-// 				.click(
-// 						"on",
-// 						function(e) {
-
-// 							console.log(e.target.id);
-
-// 							let xhr1 = new XMLHttpRequest();
-
-// 							xhr1.open("get",
-// 									"/SpringWebProject/gettheplayersong?name="
-// 											+ e.target.id, true);
-
-// 							console
-// 									.log("/SpringWebProject/gettheplayersong?name="
-// 											+ e.target.id);
-// 							//SpringWebProject/gettheplayersong?name=17
-// 							xhr1.send();
-
-// 							xhr1.onreadystatechange = function() {
-// 								if (xhr1.status == 200 && xhr1.readyState == 4) {
-
-// 									console.log(xhr1.readyState);
-// 									alert(xhr1.responseText);
-
-// 									//<img id="lemon" src="programimg/17_307_img.jpg">
-
-// 									let gettheplayerresult = JSON
-// 											.parse(xhr1.responseText);
-
-// 									document.getElementById("show").innerHTML = "";
-
-// 									for (let i = 0; i < gettheplayerresult.length; i++) {
-
-// 										//<img id="lemon" src="programimg/17_307_img.jpg">
-
-// 										let content = "<img id='" + gettheplayerresult[i]["podcastId"] + "' src='" + gettheplayerresult[i]["audioimg"] + "'>";
-
-// 										document.getElementById("show")
-// 												.insertAdjacentHTML(
-// 														'beforeend', content);
-// 									}
-
-// 								}
-
-// 							}
-// 						})
-
-// 		$("#show").on("click", "img", function() {
-
-// 			//取得this的id  this.id 
-// 			console.log(this.id);
-
-// 			var thisid=this.id;
-
-// 			// this 就是element
-// 			console.log(document.getElementById("46"));
-
-// 			\$(this).on("click", function() {
-// 				let xhr = new XMLHttpRequest();
-// 				console.log(this);
-// 				xhr.open("get", "/SpringWebProject/postjson?id="+thisid, true);
-// 				xhr.send();
-// 				xhr.onreadystatechange = function() {
-// 					if (xhr.status == 200 && xhr.readyState == 4) {
-// 						alert(xhr.responseText);
-// 						mediaData.push(JSON.parse(xhr.responseText));
-// 						renderPlaylist(mediaData);
-// 					}
-// 				}
-// 			})
-
-
-
-// 		})
-	</script>
-
-
+</script>
 
 </body>
-
 </html>
+
