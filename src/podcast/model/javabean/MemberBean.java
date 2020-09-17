@@ -122,7 +122,6 @@ public class MemberBean {
 		this.birthday = birthday;
 	}
 
-	@Transient
 	public Date getRegisterDate() {
 		return registerDate;
 	}
