@@ -44,7 +44,7 @@ public class PodcastController {
     	m.addAttribute("upList",upList);
     	request.setAttribute("upList", upList);
 		
-		return "/PodcastManage/PodcastManage2";
+		return "/PodcastManage/PodcastManage";
 	}
 	
 	//新增頻道
@@ -59,9 +59,18 @@ public class PodcastController {
 	@RequestMapping(path = "/modifyPodcast", method = RequestMethod.GET)
 	public String showmodifyForm(Model m,
 				@RequestParam("thisPodcastId")Integer podcastId,
-				HttpServletRequest request) {
-		uploadPodcastBean mpodcast = new uploadPodcastBean();
-		m.addAttribute("uploadPodcastBean", mpodcast);
+				HttpServletRequest request) throws Exception {
+//		uploadPodcastBean mpodcast = new uploadPodcastBean();
+		
+		
+		//透過抓到的PodcastId先透過DAO方法取得該podcast，預先在欄位內填入資訊---
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+    	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
+    	uploadPodcastBean mpodcast = upDao.select(podcastId);
+    	//把取得的bean以及id再送到jsp頁面
+    	//m.addAttribute("mPodcastBean", mpodcast);
+    	m.addAttribute("uploadPodcastBean", mpodcast);
 		m.addAttribute("modifyPodcastId", podcastId);
 		return "/PodcastManage/ModifyPodcast";
 	}
@@ -98,7 +107,7 @@ public class PodcastController {
 	    	request.setAttribute("upList", upList);
 			
 			
-			return "/PodcastManage/PodcastManage2";
+			return "/PodcastManage/PodcastManage";
 		}
 	
 	
@@ -180,13 +189,21 @@ public class PodcastController {
 	
 	@PostMapping(path= {"/processDeletePodcast"})
 	public String ProcessDeletePodcast( HttpServletRequest request,
-						Model m) throws Exception {
+						Model m,
+						@RequestParam("delPodcastId")Integer delPodcastId) throws Exception {
 		
 		ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
     	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
-    	Integer podcastId=1;
-    	upDao.delete(podcastId);
+    	
+    	upDao.delete(delPodcastId);
+    	
+    	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
+    	
+    	Integer memberId=20;
+    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
+    	m.addAttribute("upList",upList);
+    	request.setAttribute("upList", upList);
 		
 		return "/PodcastManage/PodcastManage";
 	}
