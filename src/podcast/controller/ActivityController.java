@@ -82,17 +82,23 @@ public class ActivityController {
 		
 		activity.setActivityImg(ActivityImg);
 		activity.setActivityStatus(activityStatus);
+		
 
 		// 取得資料庫連線
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+		
+		// 連線到活動資料表
+		ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
 
-<<<<<<< HEAD
-		m.addAttribute("list", list);
-		//return "../../ActivitiesList";
-		return "/header_banner";
-		//return "/index";
+		// 輸入表單資料至活動資料表
+		aDao.insert(activity);
+
+		return "Activity/manageActivities";
+
+		
 	}
+	
 	@RequestMapping(path = "/p", method = RequestMethod.GET)
 	public String showActivitiess(HttpServletRequest request,Model m) throws Exception {
 		
@@ -107,16 +113,7 @@ public class ActivityController {
 		m.addAttribute("list", list);
 		//return "../../ActivitiesList";
 		//return "/header_banner";
-		return "/index";
-=======
-		// 連線到活動資料表
-		ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
-
-		// 輸入表單資料至活動資料表
-		aDao.insert(activity);
-
-		return "Activity/manageActivities";
->>>>>>> 003e67674cad20d2b3abea83e5faf602d049f516
+		return "/index";	
 	}
 
 	public String processFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {

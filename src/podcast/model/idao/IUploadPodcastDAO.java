@@ -11,10 +11,6 @@ public interface IUploadPodcastDAO {
 	public List<uploadPodcastBean> selectAllFromMember(Integer memberId) throws Exception;
 	public uploadPodcastBean update(Integer podcastId,uploadPodcastBean ubean) throws Exception;
 	public boolean delete(Integer podcastId) throws Exception;
-<<<<<<< HEAD
 	public List<String> fuzzySelectPodcastAllName();
-	}
-=======
-	
+
 }
->>>>>>> 003e67674cad20d2b3abea83e5faf602d049f516

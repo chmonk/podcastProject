@@ -56,7 +56,6 @@ public class UploadPodcastDAO implements IUploadPodcastDAO  {
 		return lists;
 	}
 	
-<<<<<<< HEAD
 	@Override
 	public List<String> fuzzySelectPodcastAllName(){
 		Session session = sessionFactory.getCurrentSession();
@@ -71,8 +70,6 @@ public class UploadPodcastDAO implements IUploadPodcastDAO  {
 		
 	}
 
-=======
->>>>>>> 003e67674cad20d2b3abea83e5faf602d049f516
 	@Override
 	public List<uploadPodcastBean> selectAllFromMember(Integer memberId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
