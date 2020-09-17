@@ -62,6 +62,7 @@ fieldset {
 		<legend>修改單集</legend>
 			
 		<form:form action="PodcastModifyProcess" method="POST" modelAttribute="uploadPodcastBean" enctype="multipart/form-data">				
+				<input type="hidden" name="podcastId" value=${modifyPodcastId}>
 			<div class="div1">
 				<form:label path="title" for="" class="l1" >單集名稱:</form:label>
 				<form:input path="title"/>

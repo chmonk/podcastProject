@@ -71,15 +71,22 @@ public class UploadPodcastDAO implements IUploadPodcastDAO  {
 	@Override
 	public uploadPodcastBean update(Integer podcastId, uploadPodcastBean ubean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		uploadPodcastBean oldbean = select(podcastId);
+		uploadPodcastBean oldbean = session.get(uploadPodcastBean.class, podcastId);
 
-		if (oldbean != null) {
-			oldbean.setPodcastId(ubean.getPodcastId());
-
-			System.out.println("update done");
+//		if (oldbean != null) {
+//			oldbean.setPodcastId(ubean.getPodcastId());
+//
+//			System.out.println("update done");
+//		}
+//
+//		session.save(oldbean);
+		
+		if(oldbean != null) {
+			oldbean.setOpenComment(ubean.getOpenComment());
+			oldbean.setOpenPayment(ubean.getOpenPayment());
+			oldbean.setTitle(ubean.getTitle());
+			oldbean.setPodcastInfo(ubean.getPodcastInfo());
 		}
-
-		session.save(oldbean);
 
 		return oldbean;
 	}
