@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.*"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"  %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- 
+ 
 <!-- Styles -->
 
 <!-- Bootstrap CSS -->
@@ -48,13 +51,16 @@
 	<!-- 	plaer bar function js -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
-	--%>
+	
 </head>
 <body>
 
 <!-- modal for booking ticket form -->
-	<div class="modal fade" id="bookTicket" tabindex="-1" role="dialog"
-		aria-labelledby="BookTicket">
+<!-- modal for booking ticket form -->
+<c:forEach var="list" items="${list}" varStatus="loop">
+						
+	<div class="modal fade" id="bookTicket${loop.index}" tabindex="-1" role="dialog"
+		aria-labelledby="BookTicket" class="">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -62,118 +68,135 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						&nbsp; <small><span class="label label-success">Available</span>
-							&nbsp; <span class="label label-danger">Not Available</span></small>
+					<h4 class="modal-title" id="myModalLabel" style="color:#F23030"> ${list.activityName}
+						&nbsp; <small><span class="label label-success">售票中</span>
+						
+<!-- 							&nbsp; <span class="label label-danger">已結束</span></small> -->
 					</h4>
 				</div>
 
 
-				<!-- 				form for events ticket booking -->
-				<form>
+				<!-- form for events ticket booking -->
+				<form action="addTickets" method="POST">
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="exampleInputEmail1">Email</label> <input type="email"
-								class="form-control" id="exampleInputEmail1"
-								placeholder="example@mail.com">
+						<h4>日期：<br/></h4>
+							${list.activityDate}<br/>
+							<h4>地點：<br/></h4>${list.activityLocation}<br/>
+							<h4>票價：<br/></h4>${list.activityPrice}<br/>
+							<h4>簡介：<br/></h4>${list.activityContent}<br/>
+							
+							
 						</div>
 						<div class="form-group">
-							<label for="exampleInputContact">Contact</label> <input
-								type="text" class="form-control" id="exampleInputContact"
-								placeholder="+91 55 5555 5555">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputSeats">Number of Tickets</label> <select
-								class="form-control" id="exampleInputSeats">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+							<label for="exampleInputSeats"><h4>票券張數：</h4></label> <select
+								name="qty" class="form-control" id="exampleInputSeats">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
 							</select>
+							<Input type='hidden' name='activityId' value='${list.activityId}'>
+							<Input type='hidden' name='activityName' value='${list.activityName}'>
+							<Input type='hidden' name='activityPrice' value='${list.activityPrice}'>
+							<Input type='hidden' name='activityDate' value='${list.activityDate}'>
+							<Input type='hidden' name='activityLocation' value='${list.activityLocation}'>
 						</div>
 						<div class="checkbox">
-							<label> <input type="checkbox"> I accept the
-								Terms of Service
+							<label> <input type="checkbox"> 我已同意SoundPod播音平台服務規範
 							</label>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						link to payment gatway here
-						<button type="button" class="btn btn-primary">Book Now</button>
+						<!-- link to payment gatway here -->
+						<button type="submit" class="btn btn-primary" id="booknow">加入購物車</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+</c:forEach>
 
 
-	<!-- 	--------------訂票表單格式結束----------------- -->
+		<!-- events -->
+		<div class="events parallax-three pad" id="events">
+			<div class="container">
+				<!-- default heading -->
+				<div class="default-heading-shadow">
+					<!-- heading -->
+					<h2>派對活動</h2>
+				</div>
+				<!-- events element -->
+				<div class="events-element">
+					<div class="row">
 
 
 
-	<!-- events -->
-	<div class="events parallax-three pad" id="events">
-		<div class="container">
-			<!-- default heading -->
-			<div class="default-heading-shadow">
-				<!-- heading -->
-				<h2>派對活動</h2>
-			</div>
-			<!-- events element -->
-			<div class="events-element">
-				<div class="row">
 
-					<%-- 					<c:forEach var="list" items="${list}"> --%>
-					<div class="col-md-6 col-sm-6">
-						<!-- event item -->
-						<div class="events-item ">
-							<!-- image container -->
-							<div class="figure">
-								<!-- event date -->
-								<div class="event-date">
-									24 <span class="emonth">Jan</span>
-									<div class="clearfix"></div>
-									<!-- time -->
-									<span class="etime">06:30 pm</span>
-								</div>
-								<!-- event location -->
-								<span class="event-location"><i class="fa fa-map-marker"></i>
-									New York</span>
-								<!-- image -->
-								<img class="img-responsive" src="img/event/1.jpg" alt="" />
-								<!-- image hover -->
-								<div class="img-hover">
-									<!-- hover icon -->
-									<a href="#"><i class="fa fa-play-circle"></i></a>
+						<c:forEach var="list" items="${list}" varStatus="loop">
+						
+							<div class="col-md-6 col-sm-6">
+								<!-- event item -->
+								<div class="events-item ">
+									<!-- image container -->
+									<div class="figure">
+										<!-- event date -->
+										<div class="event-date">
+<!-- 										2020-10-23 -->
+											${fn:substring(list.activityDate, 5, 7)} /  <span class="emonth">${fn:substring(list.activityDate, 8, 10)}</span>
+											<div class="clearfix"></div>
+											<!-- time -->
+											<span class="etime">06:30 pm</span>
+										</div>
+										<!-- event location -->
+										<span class="event-location"><i
+											class="fa fa-map-marker"></i>${fn:substring(list.activityLocation, 0, 12)}</span>
+										<!-- image -->
+										<img class="img-responsive" src="img/event/1.jpg" alt="" />
+										<!-- image hover -->
+<!-- 										<div class="img-hover"> -->
+<!-- 											hover icon -->
+<!-- 											<a href="#"><i class="fa fa-play-circle"></i></a> -->
+<!-- 										</div> -->
+									</div>
+									<!-- event information -->
+									<div class="event-info">
+										<!-- event title -->
+										<h3 id="getActivity${loop.index }">${list.activityName}</h3>
+										<!-- horizontal line -->
+										<hr />
+										<!-- paragraph -->
+										<p>
+										${fn:substring(list.activityContent, 0, 30)}...
+											 <a style="color:#F23030" href="#">more</a>
+										</p>
+										<!-- buy ticket button link -->
+										<button href="#bookTicket${loop.index}" class="btn btn-lg btn-theme"
+											data-toggle="modal" id="${loop.index}" name="abc">購票</button>
+									</div>
 								</div>
 							</div>
-							<!-- event information -->
-							<div class="event-info">
-								<!-- event title -->
-								<%-- 									<h3>${list.getActivityName()}</h3> --%>
-								<!-- horizontal line -->
-								<hr />
-								<!-- paragraph -->
-								<p>
-									<%-- 										${list.getActivityContent()} --%>
-									<a href="#">more</a>
-								</p>
-								<!-- buy ticket button link -->
-								<button href="#bookTicket" class="btn btn-lg btn-theme"
-									data-toggle="modal">Book Ticket</button>
-							</div>
-						</div>
+	
+
+
+
+	</c:forEach>
+
+
 					</div>
-					<%-- 						</c:forEach> --%>
-
-
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- events end -->
+		<!-- events end -->
+
+		<!-- events end -->
 	
 	
 

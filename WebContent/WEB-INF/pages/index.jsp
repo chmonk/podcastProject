@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Podcast</title>
+<title>SoundPod</title>
 <!-- Description, Keywords and Author -->
 <meta name="description" content="Your description">
 <meta name="keywords" content="Your,Keywords">

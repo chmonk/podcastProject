@@ -158,7 +158,7 @@
 							<li><a href="#portfolio">人氣播客</a></li>
 							<li><a href="#events">派對活動</a></li>
 							<li><a href="#team">瀏覽搜尋</a></li>
-							<li><a href="#contact">註冊/登入</a></li>
+							<li><a href="<c:url value='/login' />">註冊/登入</a></li>
 						</ul>
 					</div>
 					<!-- /.navbar-collapse -->

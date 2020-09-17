@@ -56,6 +56,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO  {
 		return lists;
 	}
 	
+<<<<<<< HEAD
 	@Override
 	public List<String> fuzzySelectPodcastAllName(){
 		Session session = sessionFactory.getCurrentSession();
@@ -70,18 +71,40 @@ public class UploadPodcastDAO implements IUploadPodcastDAO  {
 		
 	}
 
+=======
+>>>>>>> 003e67674cad20d2b3abea83e5faf602d049f516
+	@Override
+	public List<uploadPodcastBean> selectAllFromMember(Integer memberId) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		String hbl = "from uploadPodcastBean where memberId=:memberId";
+
+		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
+		query.setParameter("memberId", memberId);
+
+		List<uploadPodcastBean> upList = query.list();
+
+		return upList;
+	}
+
 	@Override
 	public uploadPodcastBean update(Integer podcastId, uploadPodcastBean ubean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		uploadPodcastBean oldbean = select(podcastId);
+		uploadPodcastBean oldbean = session.get(uploadPodcastBean.class, podcastId);
 
-		if (oldbean != null) {
-			oldbean.setPodcastId(ubean.getPodcastId());
-
-			System.out.println("update done");
+//		if (oldbean != null) {
+//			oldbean.setPodcastId(ubean.getPodcastId());
+//
+//			System.out.println("update done");
+//		}
+//
+//		session.save(oldbean);
+		
+		if(oldbean != null) {
+			oldbean.setOpenComment(ubean.getOpenComment());
+			oldbean.setOpenPayment(ubean.getOpenPayment());
+			oldbean.setTitle(ubean.getTitle());
+			oldbean.setPodcastInfo(ubean.getPodcastInfo());
 		}
-
-		session.save(oldbean);
 
 		return oldbean;
 	}
