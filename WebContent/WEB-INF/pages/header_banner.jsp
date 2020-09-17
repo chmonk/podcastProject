@@ -108,8 +108,9 @@
 							<li><a href="#latestalbum">官方節目</a></li>
 							<li><a href="#featuredalbum">矚目新選</a></li>
 							<li><a href="#joinus">熱播排行</a></li>
-							<li><a href="#portfolio">人氣播客</a></li>
+<!-- 							<li><a href="#portfolio">人氣播客</a></li> -->
 							<li><a href="#events">派對活動</a></li>
+														<li><a href="<c:url value='/ShoppingCart' />">購物車</a></li>
 							<li><a href="#team">瀏覽搜尋</a></li>
 							<li><a href="<c:url value='/login' />">註冊/登入</a></li>
 						</ul>

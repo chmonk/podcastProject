@@ -80,8 +80,8 @@
 				<form action="addTickets" method="POST">
 					<div class="modal-body">
 						<div class="form-group">
-						<h4>日期：<br/></h4>
-							${list.activityDate}<br/>
+						<h4>時間：<br/></h4>
+							${list.activityDate} ${list.activityTime}<br/>
 							<h4>地點：<br/></h4>${list.activityLocation}<br/>
 							<h4>票價：<br/></h4>${list.activityPrice}<br/>
 							<h4>簡介：<br/></h4>${list.activityContent}<br/>
@@ -153,13 +153,15 @@
 											${fn:substring(list.activityDate, 5, 7)} /  <span class="emonth">${fn:substring(list.activityDate, 8, 10)}</span>
 											<div class="clearfix"></div>
 											<!-- time -->
-											<span class="etime">06:30 pm</span>
+<%-- 											<span class="etime">${fn:substring(list.activityTime, 0, 5)}</span> --%>
+											<span class="etime">${list.activityTime}</span>
 										</div>
 										<!-- event location -->
 										<span class="event-location"><i
 											class="fa fa-map-marker"></i>${fn:substring(list.activityLocation, 0, 12)}</span>
 										<!-- image -->
-										<img class="img-responsive" src="img/event/1.jpg" alt="" />
+										<img class="img-responsive" src="${list.activityImg}" alt="" />
+<!-- 										<img class="img-responsive" src="img/event/1.jpg" alt="" /> -->
 										<!-- image hover -->
 <!-- 										<div class="img-hover"> -->
 <!-- 											hover icon -->

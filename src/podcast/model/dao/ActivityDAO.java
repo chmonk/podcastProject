@@ -1,6 +1,8 @@
 package podcast.model.dao;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -71,6 +73,7 @@ public class ActivityDAO implements IActivityDAO {
 			oldbean.setActivityMinPeople(abean.getActivityMinPeople());
 			oldbean.setActivityStatus(abean.getActivityStatus());
 			oldbean.setActivityImg(abean.getActivityImg());
+			oldbean.setActivityTime(abean.getActivityTime());
 			System.out.println("update done");
 		}
 
@@ -91,6 +94,25 @@ public class ActivityDAO implements IActivityDAO {
 		}
 
 		return false;
+	}
+	
+	@Override
+	public Map<Integer, ActivityBean> getActivityMap() {
+		Map<Integer, ActivityBean> map = new LinkedHashMap<>();
+		String hql = "FROM ActivityBean";
+        Session session = sessionFactory.getCurrentSession();
+        @SuppressWarnings("unchecked")
+		List<ActivityBean> list = null;
+		try {
+			list = selectAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for(ActivityBean bean: list) {
+			map.put(bean.getActivityId(), bean);
+			System.out.println("key="+bean.getActivityId()+" bean"+bean);
+		}
+		return map;
 	}
 
 }
