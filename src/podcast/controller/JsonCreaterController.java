@@ -156,6 +156,11 @@ public class JsonCreaterController {
 				hbean.setPublisherId(publisherId);
 				
 				hdao.insert(hbean);
+				
+				
+		 //新增點擊數
+				ubean.setClickAmount(ubean.getClickAmount()+1);
+				updao.update(podcastid, ubean);
 
 				System.out.println("stage3");
 		return songinfo;

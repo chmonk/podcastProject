@@ -84,7 +84,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 
 	public List<uploadPodcastBean> queryProgramByMemberID(Integer memberId) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql="from uploadPodcastBean up where up.memberid= :mid";
+		String hql="from uploadPodcastBean up where up.memberId= :mid";
 		
 		List<uploadPodcastBean> resultlist = 
 				(List<uploadPodcastBean>)session.createQuery(hql).setParameter("mid", memberId).getResultList();
