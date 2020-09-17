@@ -58,8 +58,6 @@
 
 	<c:forEach var="ele" items="${player}">
 		<button id="${ele}">id ${ele}</button>
-		2554
-		11111111
 
 	</c:forEach>
 <!-- 	<img id="lemon" src="programimg/17_307_img.jpg"> -->
@@ -185,7 +183,7 @@ $("button").click("on",function(e){
 
 	let xhr1 = new XMLHttpRequest();
 
-	xhr1.open("get", "/SpringWebProject/song", true);
+	xhr1.open("get", "/SpringWebProject/gettheplayersong?name="+e.target.id, true);
 
 	xhr1.send();
 

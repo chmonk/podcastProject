@@ -2,24 +2,25 @@ package podcast.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 
 import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.CategoryBean;
 import podcast.model.javabean.HouseBean;
-
+import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
 public class JsonCreaterController {
@@ -63,15 +64,17 @@ public class JsonCreaterController {
 		return json;
 	}
 
-	@RequestMapping(value = "/testbar1",method = RequestMethod.GET)
+	@RequestMapping(value = "/testbar1", method = RequestMethod.GET)
 	public String leadToBarOnlyJSP(Model m) {
 
 		ArrayList<Integer> a = new ArrayList<Integer>();
 
-		System.out.println("26sdcd");
+		System.out.println("11111111111");
 		a.add(17);
 		a.add(18);
 		a.add(19);
+		a.add(20);
+		a.add(21);
 
 		m.addAttribute("player", a);
 
@@ -79,25 +82,17 @@ public class JsonCreaterController {
 	}
 
 	@GetMapping(value = "/gettheplayersong")
-	public @ResponseBody String sssString(Model m) {
+	public ResponseEntity<List<uploadPodcastBean>> sssString(Model m, @RequestParam("name") Integer mid) {
 
-		// System.out.println(mid);
-		System.out.println("ahere");
+		System.out.println(mid + "1");
+		System.out.println("aheredscsds");
 
-//    	List<uploadPodcastBean> mlist = updao.queryProgramByMemberID(mid);
-//    	
-//    	ResponseEntity<List<uploadPodcastBean>> result = new ResponseEntity<List<uploadPodcastBean>>(mlist,HttpStatus.OK);
+		List<uploadPodcastBean> mlist = updao.queryProgramByMemberID(mid);
 
-		return null;
+		ResponseEntity<List<uploadPodcastBean>> result = new ResponseEntity<List<uploadPodcastBean>>(mlist,
+				HttpStatus.OK);
+
+		return result;
 	}
-	
-	//@GetMapping(value = "/gettheplayersong")
-	public @ResponseBody String gettheplayersong(Model m) {
 
-		Map<String, String> json = new HashMap<String, String>();
-
-		System.out.println("ahere");
-
-		return "aaaa";
-	}
 }
