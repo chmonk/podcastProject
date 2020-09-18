@@ -20,5 +20,7 @@ public interface IMemberDAO {
 
 	public MemberBean selectPodcaster(int id);
 
+	public List<String> fuzzySelectPodcasterAllName();
+
 
 }
