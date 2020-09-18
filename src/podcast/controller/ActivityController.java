@@ -118,8 +118,8 @@ public class ActivityController {
 	public String showActivities(HttpServletRequest request,Model m) throws Exception {
 		
 		ServletContext app = request.getServletContext();
-    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-    	
+		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+		
     	ActivityDAO aDao = (ActivityDAO)context.getBean("ActivityDAO");
     	List<ActivityBean> list = new LinkedList<ActivityBean>();
     	
@@ -128,7 +128,7 @@ public class ActivityController {
 		m.addAttribute("list", list);
 		//return "../../ActivitiesList";
 		//return "/header_banner";
-		return "/index";
+		return "/index";	
 	}
 	
 	//資料庫的所有活動傳送至首頁

@@ -5,9 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- 
+
 <!-- Styles -->
 
+<!-- jquery-ui CSS -->
+<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<%--
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
@@ -26,7 +30,7 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/logo/favicon.ico">  
-
+	--%>
 <!-- Javascript files -->
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
@@ -45,9 +49,52 @@
 	<!-- Custom JS -->
 	<script src="js/custom.js"></script>
 	<!-- 	plaer bar function js -->
+
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/player.js"></script>    
---%>
+ 	<!-- <script type="text/javascript" src="js/player.js"></script> -->
+	
+
+	 <script type="text/javascript">
+	 $.widget( "custom.catcomplete", $.ui.autocomplete, {
+		    _renderMenu: function( ul, items ) {
+		      var that = this,
+		        currentCategory = "";
+		      $.each( items, function( index, item ) {
+		        if ( item.category != currentCategory ) {
+		          ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+		          currentCategory = item.category;
+		        }
+		        that._renderItemData( ul, item );
+		      });
+		    }
+		  });
+	$(document).ready(function($){
+		xhr=$.ajax({
+			url:"/SpringWebProject/getFuzzySelectAllDataName.controller",
+			async:false
+			})
+		var availableTags = xhr.responseJSON
+		console.log(availableTags);
+		$( "#tags" ).catcomplete({
+		      source: availableTags
+		    });
+	});
+
+	</script>
+	<style type="text/css">
+	.ui-menu{
+	z-index: 999999;
+	}
+	.ui-autocomplete-category {
+    font-weight: bold;
+    padding: .2em .4em;
+    margin: .8em 0 .2em;
+    line-height: 1.5;
+  }
+	</style>
+	
+	
+
 </head>
 <body>		
 <!-- header area -->
@@ -67,9 +114,9 @@
 						<!-- social link -->
 						
 						<div class="sm-social-link">
-						<div  style="display:inline-block;line-height: 20px;color: #333;">
+						<div  style="display:inline-block;line-height: 20px;color: #333; z-index:-100;">
 							<form action="<c:url value="FuzzySelect.controller"/>" method="get">
-								<input class="form-control-sm" type="text" name="selectCondition"/>
+								<input id="tags" class="form-control-sm" type="text" name="selectCondition"/>
 								<input class="form-control-sm" type="submit" value="Send">
 							</form>
 						</div>

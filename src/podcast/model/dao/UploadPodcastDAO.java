@@ -53,6 +53,20 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	}
 	
 	@Override
+	public List<String> fuzzySelectPodcastAllName(){
+		Session session = sessionFactory.getCurrentSession();
+		String hbl = "from uploadPodcastBean";
+		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
+		
+		List<String> podcastAllDataName = new ArrayList<String>();
+    	for(uploadPodcastBean i:query.list()) {
+    		podcastAllDataName.add(i.getTitle());	
+    	}
+		return podcastAllDataName;
+		
+	}
+
+	@Override
 	public List<uploadPodcastBean> selectAllFromMember(Integer memberId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		String hbl = "from uploadPodcastBean where memberId=:memberId";
