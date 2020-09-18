@@ -13,6 +13,17 @@
 				$(this).parent().find('label').removeClass('active');
 			}
 		});
+		
+		
+		$("input.dinput").on('focusin',function() {
+			$(this).parent().find('label').addClass('doubleact');
+		});
+
+		$('input.dinput').on('focusout', function() {
+			if (!this.value) {
+				$(this).parent().find('label').removeClass('doubleact');
+			}
+		});
  
  //======================================
  
@@ -394,40 +405,6 @@
 			
 		}
 		
-		//Income Calculate Function========================================
-		
-		var subIncomeBtn=document.getElementById("subIncomeBtn");
-		subIncomeBtn.onclick=function(){
-			var subIncomeSDText=document.getElementById("subIncomeSDText").value;
-			var subIncomeEDText=document.getElementById("subIncomeEDText").value;
-			
-			if(!subIncomeSDText){
-				document.getElementById("subIncomeErr").innerHTML="請輸入StartDate & EndDate";
-				return false;
-			}else if(!subIncomeEDText){
-				document.getElementById("subIncomeErr").innerHTML="請輸入StartDate & EndDate";
-				return false;
-			}
-			document.getElementById("subIncomeForm").submit();
-			return true;
-		}
-		
-		var ticketIncomeBtn=document.getElementById("ticketIncomeBtn");
-		ticketIncomeBtn.onclick=function(){
-			var ticketIncomeSDText=document.getElementById("ticketIncomeSDText").value;
-			var ticketIncomeEDText=document.getElementById("ticketIncomeEDText").value;
-			
-			if(!ticketIncomeSDText){
-				document.getElementById("ticketIncomeErr").innerHTML="請輸入StartDate & EndDate";
-				return false;
-			}else if(!ticketIncomeEDText){
-				document.getElementById("ticketIncomeErr").innerHTML="請輸入StartDate & EndDate";
-				return false;
-			}
-			document.getElementById("ticketIncomeForm").submit();
-			return true;
-		}
-		
 		
 		//Podcast Function==========================================================================
 		
@@ -473,6 +450,44 @@
 			document.getElementById("topPodcastForm").submit();
 			return true;
 		}
+		
+		
+		
+		//Income Calculate Function========================================
+		
+		var subIncomeBtn=document.getElementById("subIncomeBtn");
+		subIncomeBtn.onclick=function(){
+			var subIncomeSDText=document.getElementById("subIncomeSDText").value;
+			var subIncomeEDText=document.getElementById("subIncomeEDText").value;
+			
+			if(!subIncomeSDText){
+				document.getElementById("subIncomeErr").innerHTML="請輸入StartDate & EndDate";
+				return false;
+			}else if(!subIncomeEDText){
+				document.getElementById("subIncomeErr").innerHTML="請輸入StartDate & EndDate";
+				return false;
+			}
+			document.getElementById("subIncomeForm").submit();
+			return true;
+		}
+		
+		var ticketIncomeBtn=document.getElementById("ticketIncomeBtn");
+		ticketIncomeBtn.onclick=function(){
+			var ticketIncomeSDText=document.getElementById("ticketIncomeSDText").value;
+			var ticketIncomeEDText=document.getElementById("ticketIncomeEDText").value;
+			
+			if(!ticketIncomeSDText){
+				document.getElementById("ticketIncomeErr").innerHTML="請輸入StartDate & EndDate";
+				return false;
+			}else if(!ticketIncomeEDText){
+				document.getElementById("ticketIncomeErr").innerHTML="請輸入StartDate & EndDate";
+				return false;
+			}
+			document.getElementById("ticketIncomeForm").submit();
+			return true;
+		}
+		
+		
 		
 		
 	}

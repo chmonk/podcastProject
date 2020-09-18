@@ -9,6 +9,23 @@
 
 
 <style>
+.hr0{
+	height:3px;
+	border: none;
+    border-top:3px dashed;
+}
+
+::placeholder {
+	color: #EAE8E8;
+	opacity: 1;
+}
+
+span {
+	color: red;
+	font-size: 20px;
+	margin-top: 10px;
+}
+
 p {
 	color: red;
 	font-size: 20px
@@ -17,11 +34,11 @@ p {
 #body {
 	font-family: "Lato", sans-serif;
 	color: white;
-	background-color: teal;
+	background-color: #949494;
 }
 
 h1 {
-	font-size: 60px;
+	font-size: 80px;
 	margin: 0px;
 	padding: 0px;
 }
@@ -48,7 +65,7 @@ label {
 	font-size: 30px;
 	margin: 10px;
 	padding: 0 10px;
-	background-color: teal;
+	background-color: #949494;
 	-webkit-transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
 	transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
 }
@@ -58,12 +75,28 @@ label {
 	font-size: 20px;
 }
 
+.double {
+	position: absolute;
+	top: 0;
+	font-size: 26px;
+	margin: 13px;
+	padding: 0 10px;
+	background-color: #949494;
+	-webkit-transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
+	transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
+}
+
+.doubleact {
+	top: -25px;
+	font-size: 20px;
+}
+
 input[type="text"] {
 	width: 100%;
 	padding: 20px;
 	border: 1px solid white;
 	font-size: 20px;
-	background-color: teal;
+	background-color: #949494;
 	color: white;
 }
 
@@ -76,7 +109,7 @@ input[type="number"] {
 	padding: 20px;
 	border: 1px solid white;
 	font-size: 20px;
-	background-color: teal;
+	background-color: #949494;
 	color: white;
 }
 
@@ -113,7 +146,7 @@ input[type="button"] {
 <body id="body" onload="showhide();columnTestify()">
 
 	<div class="wrap">
-		<h1>BackStage Function Select</h1>
+		<h1>BackStage Function</h1>
 		<div>
 			<form id="select">
 				<select id="options" name="options" onchange="showhide()">
@@ -124,50 +157,59 @@ input[type="button"] {
 					<option value="subscription">Subscription</option>
 					<option value="activity">Activity</option>
 					<option value="history">History</option>
-					<option value="income">Income</option>
 					<option value="podcast">Podcast</option>
+					<option value="income">Income</option>
+
 				</select>
 			</form>
 		</div>
 
+	<!-- Member============================================================================== -->
 
 		<div class="areas" id="members" style="display: none;">
 
 			<div>
-				<form id="selectMemberByIdForm"
+				<form id="selectMemberByIdForm" autocomplete="off"
 					action="<c:url value="/BackStageSelectMember.controller"/>"
 					method="POST">
-					<label for="fname">Select Member By Id</label> <input
-						id="selectMemberIdText" type="number" name="selectmemberId">
+					<label for="selectMemberIdText">Find Member</label> <input
+						id="selectMemberIdText" type="number" name="selectmemberId" placeholder="memberId">
+					<span>
 					<input id="memberIdBtn" type="button" value="send"
-						class="btn btn-warning">
-					<p id="selectMemberByIdErr"></p>
+						class="btn btn-warning"><span id="selectMemberByIdErr"></span>
+					</span>
+					
 				</form>
 
 			</div>
-
+			<hr class="hr0">
 			<div>
-				<form id="selectMemberByAccountForm"
+				<form id="selectMemberByAccountForm" autocomplete="off"
 					action="<c:url value="/BackStageSelectMemberByAccount.controller"/>"
 					method="POST">
-					<label for="fname">Select Member By Account</label> <input
-						id="selectMemberAccountText" type="text" name="account"> <input
-						id="selectMemberAccountBtn" type="button" value="send"
-						class="btn btn-warning">
-					<p id="selectMemberAccountErr"></p>
+					<label for="selectMemberAccountText">Member By
+						Account</label> <input id="selectMemberAccountText" type="text"
+						name="account" placeholder="account"> 
+					<span>
+					<input id="selectMemberAccountBtn"
+						type="button" value="send" class="btn btn-warning">
+					<span id="selectMemberAccountErr"></span>
+					</span>
 
 				</form>
 			</div>
-
+			<hr class="hr0">
 			<div>
-				<form id="deleteMemberForm"
+				<form id="deleteMemberForm" autocomplete="off"
 					action="<c:url value="/BackStageDeleteMember.controller"/>"
 					method="POST">
-					<label for="fname">Delete Member By Id</label> <input
-						id="deleteMemberText" type="number" name="deletememberId">
+					<label for="deleteMemberText">Delete Member</label> <input
+						id="deleteMemberText" type="number" name="deletememberId" placeholder="memberId">
+					<span>
 					<input id="deleteMemberBtn" type="button" value="send"
 						class="btn btn-warning">
-					<p id="deleteMemberErr"></p>
+					<span id="deleteMemberErr"></span>
+					</span>
 				</form>
 			</div>
 
@@ -178,39 +220,49 @@ input[type="button"] {
 		<div class="areas" id="ticketorder" style="display: none">
 
 			<div>
-				<form id="selectOrderIdForm"
+				<form id="selectOrderIdForm" autocomplete="off"
 					action="<c:url value="/BackStageSelectOrderById.controller"/>"
 					method="POST">
-					<label for="fname">Select Order By Id</label> <input
-						id="selectOrderIdText" type="number" name="orderId"> <input
+					<label for="selectOrderIdText">Find Order</label> 
+					<input
+						id="selectOrderIdText" type="number" name="orderId" placeholder="ticketOrderId"> 
+					<span>
+					<input
 						id="selectOrderIdBtn" type="button" value="send"
-						class="btn btn-warning">
-					<p id="selectOrderIdErr"></p>
+						class="btn btn-warning"><span id="selectOrderIdErr"></span>
+					</span>
 				</form>
 			</div>
 
-
+			<hr class="hr0">
 			<div>
-				<form id="selectOrderMemberForm"
+				<form id="selectOrderMemberForm" autocomplete="off"
 					action="<c:url value="/BackStageSelectOrderByMember.controller"/>"
 					method="POST">
-					<label for="fname">Select Order By Member</label> <input
-						id="selectOrderMemberText" type="number" name="memberId">
+					<label for="selectOrderMemberText">Find Order By Member</label> 
+					<input
+						id="selectOrderMemberText" type="number" name="memberId" placeholder="memberId">
+					<span>
 					<input id="selectOrderMemberBtn" type="button" value="send"
 						class="btn btn-warning">
-					<p id="selectOrderMemberErr"></p>
+					<span id="selectOrderMemberErr"></span>
+					</span>
 				</form>
 			</div>
-
+			<hr class="hr0">
 			<div>
-				<form id="selectOrderActForm"
+				<form id="selectOrderActForm" autocomplete="off"
 					action="<c:url value="/BackStageSelectOrderByActivity.controller"/>"
 					method="POST">
-					<label for="fname">Select Order By Activity</label> <input
-						id="selectOrderActText" type="number" name="activityId"> <input
+					<label for="selectOrderActText">Find Order By Activity</label> 
+					<input
+						id="selectOrderActText" type="number" name="activityId" placeholder="activityId"> 
+					<span>
+					<input
 						id="selectOrderActBtn" type="button" value="send"
 						class="btn btn-warning">
-					<p id="selectOrderActErr"></p>
+					<span id="selectOrderActErr"></span>
+					</span>
 				</form>
 			</div>
 		</div>
@@ -220,18 +272,432 @@ input[type="button"] {
 		<div class="areas" id="programcomment" style="display: none;">
 			<div>
 
-				<form id="selectCommentIdForm"
+				<form id="selectCommentIdForm" autocomplete="off"
 					action="<c:url value="/BackStageSelectCommentById.controller"/>"
 					method="POST">
-					<label for="fname">Select Comment By ID</label> <input
-						id="selectCommentIdText" type="number" name="commentId"> <input
+					<label for="selectCommentIdText">Find Comment</label> 
+					<input
+						id="selectCommentIdText" type="number" name="commentId" placeholder="commentId"> 
+					<span>
+					<input
 						id="selectCommentIdBtn" type="button" value="send"
-						class="btn btn-warning" >
-						<p id="selectCommentIdErr"></p>
-					</form>
+						class="btn btn-warning">
+					<span id="selectCommentIdErr"></span>
+					</span>
+				</form>
 			</div>
-			
+			<hr class="hr0">
+			<div>
+
+				<form id="selectCommentMemberForm" autocomplete="off"
+					action="<c:url value="/BackStageSelectCommentByMember.controller"/>"
+					method="POST">
+					<div>
+						<label class="double" for="selectCommentMemberMText">
+							Comment By Member</label> 
+						<input class="dinput"
+							id="selectCommentMemberMText" type="number"
+							name="commentmemberId" placeholder="memberId">
+					</div>
+					<div>
+						<label class="double" for="selectCommentMemberPText">
+							Under Which Podcaster</label> 
+							<input class="dinput"
+							id="selectCommentMemberPText" type="number"
+							name="commentpodcasterId" placeholder="podcasterId">
+						
+						<span>
+						<input id="selectCommentMemberBtn" type="button" value="send"
+							class="btn btn-warning">
+						<span id="selectCommentMemerErr"></span>
+						</span>
+					</div>
+
+				</form>
+
+			</div>
+			<hr class="hr0">
+			<div>
+
+				<form id="selectCommentPodcasterForm" autocomplete="off"
+					action="<c:url value="/BackStageSelectCommentByPodcaster.controller"/>"
+					method="POST">
+					<label for="selectCommentPodcasterText">Comment by Podcaster</label>
+					<input id="selectCommentPodcasterText" type="number"
+						name="commentpodcasterId" placeholder="podcasterId"> 
+					<span>
+					<input
+						id="selectCommentPodcasterBtn" type="button" value="send"
+						class="btn btn-warning">
+					<span id="selectCommentPodcasterErr"></span>
+					</span>
+				</form>
+
+			</div>
+			<hr class="hr0">
+			<div>
+
+
+				<form id="deleteCommentIdForm" autocomplete="off"
+					action="<c:url value="/BackStageDeleteCommentById.controller"/>"
+					method="POST">
+					<label for="deleteCommentIdText">Delete Comment</label> 
+					<input
+						id="deleteCommentIdText" type="number" name="commentId" placeholder="commentId"> 
+					<span>
+					<input
+						id="deleteCommentIdBtn" type="button" value="send"
+						class="btn btn-warning">
+					<span id="deleteCommentIdErr"></span>
+					</span>
+				</form>
+
+			</div>
+			<hr class="hr0">
+			<div>
+
+				<form id="deleteCommentMemberForm" autocomplete="off"
+					action="<c:url value="/BackStageDeleteCommentByMember.controller"/>"
+					method="POST">
+
+					<div>
+						<label class="double" for="deleteCommentMemberMText">Delete
+							Comment By Member</label> 
+							<input 
+							class="dinput" id="deleteCommentMemberMText" type="number"
+							name="commentMemberId"  placeholder="memberId"> 
+					</div>
+
+					<div>
+						<label class="double" for="deleteCommentMemberPText">Under
+							Which Podcaster</label> 
+						<input class="dinput"
+							id="deleteCommentMemberPText" type="number"
+							name="commentPodcasterId"  placeholder="podcasterId">
+						<span>
+						<input id="deleteCommentMemberBtn" type="button" value="send"
+							class="btn btn-warning">
+						<span id="deleteCommentMemberErr"></span>
+						</span>
+					</div>
+
+				</form>
+
+			</div>
+
 		</div>
+
+		<!-- Category========================================================================-->
+		<div class="areas" id="category" style="display: none;">
+
+			<div>
+				<form id="setNewCategoryForm" autocomplete="off"
+					action="<c:url value="/BackStageSetNewCategory.controller"/>"
+					method="POST">
+					<label for="setNewCategoryText">Set New Category</label> 
+					<input id="setNewCategoryText" 
+					type="text" name="categoryName" placeholder="categoryName"> 
+					<span>
+					<input
+						id="setNewCategoryBtn" type="button" value="send"
+						class="btn btn-warning">
+					<span id="setNewCategoryErr"></span>
+					</span>
+				</form>
+			</div>
+			<hr class="hr0">
+			<div>
+				<form id="upgradeCategoryForm" autocomplete="off"
+					action="<c:url value="/BackStageUpdateCategoryById.controller"/>"
+					method="POST">
+					<div>
+						<label for="upgradeCategoryIdText">Update Category</label> 
+						<input
+							id="upgradeCategoryIdText" type="number" name="categoryId" placeholder="categoryId">
+					</div>
+
+					<div>
+						<label for="upgradeCategoryNameText">To New Name</label> 
+						<input
+							id="upgradeCategoryNameText" type="text" name="categoryNewName" placeholder="categoryName">
+						<span>
+						<input id="upgradeCategoryBtn"
+							type="button" value="send" class="btn btn-warning">
+						<span id="upgradeCategoryErr"></span>
+						</span>
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+
+		<!-- Subscription========================================================================-->
+
+		<div class="areas" id="subscription" style="display: none;">
+
+			<div>
+				<form id="selectSubMemberForm" autocomplete="off"
+					action="<c:url value="/SelectSubscriptionByMember.controller"/>"
+					method="POST">
+					<label for="selectSubMemberText">Subscription By Member</label> <input
+						id="selectSubMemberText" type="number" name="memberId"
+						placeholder="MemberId"> <span> <input
+						id="selectSubMemberBtn" type="button" value="send"
+						class="btn btn-warning"><span id="selectSubMemberErr"></span>
+					</span>
+
+				</form>
+			</div>
+			<hr class="hr0">
+
+			<div>
+				<form id="selectSubPodcasterForm" autocomplete="off"
+					action="<c:url value="/SelectSubscriptionByPodcaster.controller"/>"
+					method="POST">
+					<label for="selectSubPodcasterText">Subscription By Podcaster</label>
+					<input id="selectSubPodcasterText" type="number" name="podcasterId"
+						placeholder="PodcasterId"> <span> <input
+						id="selectSubPodcasterBtn" type="button" value="send"
+						class="btn btn-warning"><span id="selectSubPodcasterErr"></span>
+					</span>
+
+				</form>
+			</div>
+
+		</div>
+
+
+		<!-- Activity========================================================================-->
+		<div class="areas" id="activity" style="display: none;">
+
+			<div>
+				<form id="selectActIdForm" autocomplete="off"
+					action="<c:url value="/SelectActivityById.controller"/>"
+					method="POST">
+					<label for="selectActIdText">Find Activity</label> <input
+						id="selectActIdText" type="number" name="activityId"
+						placeholder="ActivityId"> <span> <input
+						id="selectActIdBtn" type="button" value="send"
+						class="btn btn-warning"> <span id="selectActIdErr"></span>
+					</span>
+
+				</form>
+			</div>
+			<hr class="hr0">
+			<div>
+				<form id="selectActPodcasterForm" autocomplete="off"
+					action="<c:url value="/SelectActivityByPodcaster.controller"/>"
+					method="POST">
+					<label for="selectActPodcasterText">Activity By Podcaster</label> <input
+						id="selectActPodcasterText" type="number" name="podcasterId"
+						placeholder="PodcasterId"> <span> <input
+						id="selectActPodcasterBtn" type="button" value="send"
+						class="btn btn-warning"> <span id="selectActPodcasterErr"></span>
+					</span>
+				</form>
+			</div>
+			<hr class="hr0">
+			<div>
+				<form id="selectActDateForm" autocomplete="off"
+					action="<c:url value="/SelectActivityByDate.controller"/>"
+					method="POST">
+					<label for="selectActDateText">Activity By Date</label> <input
+						id="selectActDateText" type="text" name="activityDate"
+						placeholder="YYYY-mm-dd"> <span> <input
+						id="selectActDateBtn" type="button" value="send"
+						class="btn btn-warning"> <span id="selectActDateErr"></span>
+					</span>
+				</form>
+			</div>
+			<hr class="hr0">
+			<div>
+				<form id="deleteActIdForm" autocomplete="off"
+					action="<c:url value="/DeleteActivityByID.controller"/>"
+					method="POST">
+					<label for="deleteActIdText">Delete Activity</label> <input
+						id="deleteActIdText" type="number" name="activityId"
+						placeholder="ActivityId"> <span> <input
+						id="deleteActIdBtn" type="button" value="send"
+						class="btn btn-warning"> <span id="deleteActIdErr"></span>
+					</span>
+				</form>
+			</div>
+
+		</div>
+
+		<!-- History========================================================================-->
+
+		<div class="areas" id="history" style="display: none;">
+
+			<div>
+				<form id="selectHistoryIdForm" autocomplete="off"
+					action="<c:url value="/SelectHistoryById.controller"/>"
+					method="POST">
+					<label for="selectHistoryIdText">Find History</label> <input
+						id="selectHistoryIdText" type="number" name="historyId"
+						placeholder="historyId">
+					<sapn> <input id="selectHistoryIdBtn" type="button"
+						value="send" class="btn btn-warning"> <span
+						id="selectHistoryIdErr"></span> </sapn>
+				</form>
+			</div>
+			<hr class="hr0">
+			<div>
+				<form id="selectHistoryMemberForm" autocomplete="off"
+					action="<c:url value="/SelectHistoryByMember.controller"/>"
+					method="POST">
+					<label for="selectHistoryMemberText">History By Member</label> <input
+						id="selectHistoryMemberText" type="number" name="memberId"
+						placeholder="memberId"> <span> <input
+						id="selectHistoryMemberBtn" type="button" value="send"
+						class="btn btn-warning"> <span id="selectHistoryMemberErr"></span>
+					</span>
+				</form>
+			</div>
+			<hr class="hr0">
+			<div>
+				<form id="selectHistoryPodcasterForm" autocomplete="off"
+					action="<c:url value="/SelectHistoryByPodcaster.controller"/>"
+					method="POST">
+					<label for="selectHistoryPodcasterText">History By
+						Podcaster</label> <input id="selectHistoryPodcasterText" type="number"
+						name="podcasterId" placeholder="podcasterId">
+					<sapn> <input id="selectHistoryPodcasterBtn" type="button"
+						value="send" class="btn btn-warning"> <span
+						id="selectHistoryPodcasterErr"></span> </sapn>
+				</form>
+
+			</div>
+			<hr class="hr0">
+			<div>
+				<form id="selectHistoryLastForm" autocomplete="off"
+					action="<c:url value="/SelectHistoryByLastListen.controller"/>"
+					method="POST">
+					<label for="selectHistoryLastText">History By Last Listen</label> <input
+						id="selectHistoryLastText" type="text" name="historyLastListen"
+						placeholder="YYYY-mm-dd"> <span> <input
+						id="selectHistoryLastBtn" type="button" value="send"
+						class="btn btn-warning"> <span id="selectHistoryLastErr"></span>
+					</span>
+				</form>
+
+			</div>
+			<hr class="hr0">
+			<div>
+				<form id="deleteHistoryDateForm" autocomplete="off"
+					action="<c:url value="/DeleteHistoryByDate.controller"/>"
+					method="POST">
+					<label for="deleteHistoryDateText">Delete History By Date</label> <input
+						id="deleteHistoryDateText" type="text" name="historyDeleteDate"
+						placeholder="YYYY-mm-dd"> <span> <input
+						id="deleteHistoryDateBtn" type="button" value="send"
+						class="btn btn-warning"> <span id="deleteHistoryDateErr"></span>
+					</span>
+				</form>
+
+			</div>
+
+
+		</div>
+
+		<!-- Podcast========================================================================-->
+
+
+		<div class="areas" id="podcast" style="display: none;">
+
+			<div>
+				<form id="selectPodcastMemberForm" autocomplete="off"
+					action="<c:url value="/SelectPodcastByMember.controller"/>"
+					method="POST">
+					<label for="selectPodcastMemberText">Podcast By Member</label> <input
+						id="selectPodcastMemberText" type="number" name="memberId"
+						placeholder="memberId"> <span> <input
+						id="selectPodcastMemberBtn" type="button" value="send"
+						class="btn btn-warning"> <span id="selectPodcastMemberErr"></span>
+					</span>
+				</form>
+
+			</div>
+			<hr class="hr0">
+			<div>
+				<form id="deletePodcastIdForm" autocomplete="off"
+					action="<c:url value="/DeletePodcastbyId.controller"/>"
+					method="POST">
+					<label for="deletePodcastIdText">Delete Podcast</label> <input
+						id="deletePodcastIdText" type="number" name="podcastId"
+						placeholder="podcastId"> <span> <input
+						id="deletePodcastIdBtn" type="button" value="send"
+						class="btn btn-warning"> <span id="deletePodcastIdErr"></span>
+					</span>
+				</form>
+
+			</div>
+
+			<hr class="hr0">
+
+			<div>
+				<form id="topPodcastForm" autocomplete="off"
+					action="<c:url value="/TopPodcst.controller"/>" method="POST">
+					<label for="topPodcastText">Popular Podcast</label> <input
+						id="topPodcastText" type="text" name="uploadTime"
+						placeholder="YYYY-mm-dd"> <span> <input
+						id="topPodcastBtn" type="button" value="send"
+						class="btn btn-warning"> <span id="topPodcastErr"></span>
+					</span>
+				</form>
+
+			</div>
+
+		</div>
+
+		<!-- Income Calculate========================================================================-->
+
+		<div class="areas" id="income" style="display: none;">
+
+			<div>
+				<form id="subIncomeForm" autocomplete="off"
+					action="<c:url value="/SubscriptionIncome.controller"/>"
+					method="POST">
+					<div>
+						<label for="subIncomeSDText">Sub Income StartDate</label> <input
+							id="subIncomeSDText" type="text" name="startDate"
+							placeholder="YYYY-mm-dd">
+					</div>
+					<div>
+						<label for="subIncomeEDText">Sub Income EndDate</label> <input
+							id="subIncomeEDText" type="text" name="endDate"
+							placeholder="YYYY-mm-dd"> <span> <input
+							id="subIncomeBtn" type="button" value="send"
+							class="btn btn-warning"> <span id="subIncomeErr"></span>
+						</span>
+					</div>
+				</form>
+			</div>
+			<hr class="hr0">
+			<div>
+				<form id="ticketIncomeForm" autocomplete="off"
+					action="<c:url value="/TicketIncome.controller"/>" method="POST">
+					<div>
+						<label for="ticketIncomeSDText">Ticket Income StartDate</label> <input
+							id="ticketIncomeSDText" type="text" name="startDate"
+							placeholder="YYYY-mm-dd">
+					</div>
+					<div>
+						<label for="ticketIncomeEDText">Ticket Income EndDate</label> <input
+							id="ticketIncomeEDText" type="text" name="endDate"
+							placeholder="YYYY-mm-dd"> <span> <input
+							id="ticketIncomeBtn" type="button" value="send"
+							class="btn btn-warning"> <span id="ticketIncomeErr"></span>
+						</span>
+					</div>
+				</form>
+				<br>
+			</div>
+
+		</div>
+
+
 
 	</div>
 
