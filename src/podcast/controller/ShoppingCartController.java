@@ -31,17 +31,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import podcast.model.dao.ActivityDAO;
 import podcast.model.dao.OrderTicketDAO;
 import podcast.model.dao.ShoppingCart;
-import podcast.model.idao.OrderService;
+//import podcast.model.idao.OrderService;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.MemberBean;
-import podcast.model.javabean.OrderBean;
+//import podcast.model.javabean.OrderBean;
 import podcast.model.javabean.OrderItemBean;
 import podcast.model.javabean.OrderTicketBean;
 
 
 
 @Controller
-@SessionAttributes({ "LoginOK", "pageNo", "products_DPP", "ShoppingCart"})
+@SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart"})
 public class ShoppingCartController {
 
 	private final static String SHOW_CART_CONTENT = "Activity/ShowCartContent";
@@ -49,8 +49,8 @@ public class ShoppingCartController {
 	@Autowired
 	ServletContext context;
 	
-	@Autowired
-	OrderService orderService;
+//	@Autowired
+//	OrderService orderService;
 
 	@GetMapping("ShoppingCart")
     public String shoppingCartPage() throws Exception {
@@ -200,10 +200,11 @@ public class ShoppingCartController {
 
 		OrderTicketDAO ot = (OrderTicketDAO)context.getBean("OrderTicketDAO");
 		ot.insert(ob2);
-		status.setComplete();
+		//status.setComplete();
 		webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
 		System.out.println("Order Process OK");
-		return "Orders/OrderList";
+		return "redirect:/orderList";
+		//return "Orders/OrderList";
 		//double totalAmount = Math.round(sc.getSubtotal() * 1.05);  	// 計算訂單總金額 
 		//Date today = new Date();   									// 新增訂單的時間
 		// 新建訂單物件。OrderBean:封裝一筆訂單資料的容器，包含訂單主檔與訂單明細檔的資料。目前只存放訂單主檔的資料。

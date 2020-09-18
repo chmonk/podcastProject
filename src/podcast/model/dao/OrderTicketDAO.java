@@ -13,6 +13,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import podcast.model.idao.IOrderTicketDAO;
 
@@ -83,4 +84,27 @@ public class OrderTicketDAO implements IOrderTicketDAO {
 
 		return false;
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OrderTicketBean> getMemberOrders(Integer memberId) {
+		List<OrderTicketBean> list = null;
+		Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM OrderTicketBean ob WHERE ob.memberId = :mid";
+        list = session.createQuery(hql)
+        			  .setParameter("mid", memberId)
+        			  .getResultList();
+        return list;
+	}
+	
+	
+	public OrderTicketBean getOrder(Integer ticketOrderId) {
+		OrderTicketBean ob = null;
+		Session session = sessionFactory.getCurrentSession();
+    ob = session.get(OrderTicketBean.class, ticketOrderId);
+    return ob;
+}
+	
+	
 }

@@ -33,8 +33,8 @@
 		<c:forEach var="anOrderBean" varStatus="stat" items="${memberOrders}">
 			<TR id='borderA' height='30'>
 			<TD id='borderA' width="86" align="center">
-			    <a  href='<c:url value='orderDetail?memberId=${LoginOK.memberId}&orderNo=${anOrderBean.orderNo}' />'>
-				    ${anOrderBean.orderNo}
+			    <a  href='<c:url value='orderDetail?memberId=${LoginOK.memberId}&ticketOrderId=${anOrderBean.ticketOrderId}' />'>
+				    ${anOrderBean.ticketOrderId}
 			    </a>
 			</TD>
 			<TD id='borderA' width="100" align="center">${anOrderBean.orderDate}</TD>

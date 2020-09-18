@@ -36,7 +36,7 @@
 							<b>訂購日期：</b>${OrderBean.orderDate}
 						</td>
 						<td align="center" width="280px">
-							<b>訂單編號：</b>${OrderBean.orderNo}
+							<b>訂單編號：</b>${OrderBean.ticketOrderId}
 						</td>
 					</tr>
 				</table>
@@ -62,9 +62,9 @@
 				</c:otherwise>
 			</c:choose>
 			<tr id='borderA' bgColor="${aColor}" height='30'>
-				<td id='borderA' align="center">${aBean.bookId}</td>
+				<td id='borderA' align="center">${aBean.ticketOrderId}</td>
 				<td id='borderA' align="left">${aBean.description}</td>
-				<td id='borderA' align="right">${aBean.unitPrice}&nbsp;</td>
+				<td id='borderA' align="right">${aBean.totalAmount}&nbsp;</td>
 				<td id='borderA' align="right">${aBean.quantity}&nbsp;</td>
 				<td id='borderA' align="right">${aBean.unitPrice*aBean.quantity}&nbsp;</td>
 				<td id='borderA' align="center">${aBean.discount}&nbsp;</td>

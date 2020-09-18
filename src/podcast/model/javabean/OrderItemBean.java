@@ -38,8 +38,8 @@ public class OrderItemBean {
 
 	
 	@ManyToOne
-	@JoinColumn(name = "orderNo")
-	OrderBean orderBean;
+	@JoinColumn(name = "ticketOrderId")
+	OrderTicketBean orderTicketBean;
 	
 
 	public OrderItemBean(Integer activityId,String activityName,
@@ -111,12 +111,6 @@ public class OrderItemBean {
 		this.activityName = activityName;
 	}
 
-	public OrderBean getOrderBean() {
-		return orderBean;
-	}
-	public void setOrderBean(OrderBean orderBean) {
-		this.orderBean = orderBean;
-	}
 	public Integer getActivityId() {
 		return activityId;
 	}
@@ -159,6 +153,14 @@ public class OrderItemBean {
 
 	public void setAmount(Integer amount) {
 		this.amount = amount;
+	}
+
+	public OrderTicketBean getOrderTicketBean() {
+		return orderTicketBean;
+	}
+
+	public void setOrderTicketBean(OrderTicketBean orderTicketBean) {
+		this.orderTicketBean = orderTicketBean;
 	}
 	
 	
