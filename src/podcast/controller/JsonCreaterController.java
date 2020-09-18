@@ -88,7 +88,7 @@ public class JsonCreaterController {
 		a.add(21);
 
 		m.addAttribute("player", a);
-		m.addAttribute("userid", 1);
+		m.addAttribute("userid", 2);
 		
 
 		return "playerBar/playerbar_test";
