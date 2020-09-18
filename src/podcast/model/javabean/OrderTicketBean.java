@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +32,9 @@ public class OrderTicketBean {
 	private String invoiceTitle;
 
 
+
+	Set<OrderItemBean> items = new LinkedHashSet<>();
+	
 	public OrderTicketBean() {
 	}
 	
@@ -139,6 +143,16 @@ public class OrderTicketBean {
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
+	}
+
+	@OneToMany(mappedBy="orderTicketBean", cascade=CascadeType.ALL)
+	public Set<OrderItemBean> getItems() {
+		return items;
+	}
+
+
+	public void setItems(Set<OrderItemBean> items) {
+		this.items = items;
 	}
 
 

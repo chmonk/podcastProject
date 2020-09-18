@@ -18,7 +18,7 @@
 }
 </style>
 </head>
-<body style="background:;">
+<body style="background: ;">
 <%-- 	<jsp:include page="/fragment/topMVC.jsp" /> --%>
 	<p />
 	<TABLE style="margin-left: auto; margin-right: auto; background:; border: 1px solid;">
@@ -43,8 +43,8 @@
 			</td>
 		</tr>
 		<tr id='borderA' height='36'>
-			<th id='borderA' width="100px" align="center">書籍編號</th>
-			<th id='borderA' width="400px" align="center">書籍資訊</th>
+			<th id='borderA' width="100px" align="center">票券編號</th>
+			<th id='borderA' width="400px" align="center">票券名稱</th>
 			<th id='borderA' width="70px" align="center">單價</th>
 			<th id='borderA' width="50px" align="center">數量</th>
 			<th id='borderA' width="100px" align="center">總價</th>
@@ -55,21 +55,21 @@
 		<c:forEach var="aBean" varStatus="stat" items="${OrderBean.items}">
 			<c:choose>
 				<c:when test="${ stat.count % 2 == 0 }">
-					<c:set var="aColor" value="grey" />
+					<c:set var="aColor" value="#E6FFA0" />
 				</c:when>
 				<c:otherwise>
-					<c:set var="aColor" value="lightpink" />
+					<c:set var="aColor" value="#EBFFEB" />
 				</c:otherwise>
 			</c:choose>
 			<tr id='borderA' bgColor="${aColor}" height='30'>
-				<td id='borderA' align="center">${aBean.ticketOrderId}</td>
-				<td id='borderA' align="left">${aBean.description}</td>
-				<td id='borderA' align="right">${aBean.totalAmount}&nbsp;</td>
+				<td id='borderA' align="center">${aBean.activityId}</td>
+				<td id='borderA' align="left">${aBean.activityName}</td>
+				<td id='borderA' align="right">${aBean.amount}&nbsp;</td>
 				<td id='borderA' align="right">${aBean.quantity}&nbsp;</td>
-				<td id='borderA' align="right">${aBean.unitPrice*aBean.quantity}&nbsp;</td>
+				<td id='borderA' align="right">${aBean.amount*aBean.quantity}&nbsp;</td>
 				<td id='borderA' align="center">${aBean.discount}&nbsp;</td>
 				<td id='borderA' align="right"><fmt:formatNumber
-						value="${aBean.unitPrice*aBean.discount*aBean.quantity}"
+						value="${aBean.amount*aBean.quantity}"
 						pattern="#,###,###" />元</td>
 				<c:set var="subtotal"
 					value="${ subtotal + aBean.unitPrice * aBean.discount * aBean.quantity }" />

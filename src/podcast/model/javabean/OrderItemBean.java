@@ -2,6 +2,8 @@ package podcast.model.javabean;
 
 import java.sql.Date;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +14,7 @@ import javax.persistence.Table;
 
 //本類別封裝單筆訂單資料
 @Entity
-@Table(name="OrderItems")
+@Table(name="orderItems")
 public class OrderItemBean {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -36,9 +38,10 @@ public class OrderItemBean {
 	
 	String activityLocation;
 
-	
+
+
 	@ManyToOne
-	@JoinColumn(name = "ticketOrderId")
+	@JoinColumn(name = "orderNo")
 	OrderTicketBean orderTicketBean;
 	
 
