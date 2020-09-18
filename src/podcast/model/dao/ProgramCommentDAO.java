@@ -48,6 +48,19 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 		Query<ProgramCommentBean> query = session.createQuery("from ProgramCommentBean", ProgramCommentBean.class);
 		return query.list();
 	}
+	
+	@Override
+	public List<ProgramCommentBean> selectAllPodcasterId(Integer podcasterId) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		String hbl = "from ProgramCommentBean where podcasterId=:podcasterId";
+
+		Query<ProgramCommentBean> query = session.createQuery(hbl, ProgramCommentBean.class);
+		query.setParameter("podcasterId", podcasterId);
+
+		List<ProgramCommentBean> commList = query.list();
+
+		return commList;
+	}
 
 	@Override
 	public ProgramCommentBean update(Integer commentId, String commentMsg, Integer memberId, Integer podcasterId, Integer msgStatus,
