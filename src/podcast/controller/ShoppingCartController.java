@@ -104,11 +104,9 @@ public class ShoppingCartController {
 		
 		OrderItemBean oib = new  OrderItemBean(activityId,activityName,
 				activityPrice,quantity,activityDate,activityLocation);
-		System.out.println("你點選到的票券資訊:"+activityId+activityName+activityPrice+quantity+activityDate+activityLocation);
+		System.out.println("你點選到的票券資訊:"+activityId+activityName+activityPrice+quantity+activityDate+activityLocation);	
 		
-		
-		
-		// 將OrderItem物件內加入ShoppingCart的物件內
+		// 將OrderItem物件加入ShoppingCart
 		cart.addToCart(activityId, oib);
 		
 		return "redirect:/a#events";
@@ -119,7 +117,7 @@ public class ShoppingCartController {
 	@PostMapping("UpdateItem.do")
 	protected String UpdateItem(
 			@RequestParam("cmd")   String cmd,  
-			@RequestParam(value = "bookId", required = false) Integer  bookId, 
+			@RequestParam(value = "activityId", required = false) Integer  activityId, 
 			@RequestParam(value = "newQty", required = false) Integer  newQty, 
 			Model model, 
 			RedirectAttributes ra, 
@@ -132,17 +130,16 @@ public class ShoppingCartController {
 	
 		}
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
-//		memberBean = null;     // 此敘述測試用
 		if (memberBean == null) {
 			status.setComplete();
 			return "redirect:/login";
 
 		}
 		if (cmd.equalsIgnoreCase("DEL")) {
-	        sc.deleteBook(bookId); // 刪除購物車內的某項商品
+	        sc.delete(activityId); // 刪除購物車內的某項商品
 		    return SHOW_CART_CONTENT;
 		} else if (cmd.equalsIgnoreCase("MOD")) {
-			sc.modifyQty(bookId, newQty);   // 修改某項商品的數項
+			sc.modifyQty(activityId, newQty);   // 修改某項商品的數項
 		    return SHOW_CART_CONTENT;
 		} else {
 			return SHOW_CART_CONTENT;
@@ -161,7 +158,7 @@ public class ShoppingCartController {
 		return "Orders/OrderConfirm";
 	}
 
-	//按下確認鍵
+	//按下再次確認鍵
 	@PostMapping("ProcessOrder")
 	protected String ShowOrders(
 			Model model,
@@ -215,4 +212,24 @@ public class ShoppingCartController {
 		System.out.println("Order Process OK");
 		return "redirect:/orderList";
 	}	
+	
+	//按下取消購物
+	@GetMapping("abort")
+	protected String abort(HttpSession session, Model model, WebRequest webRequest, SessionStatus status)  {
+		webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
+		//沒有移除???
+		//status.setComplete();    // 移除所有被@SessionAttributes({"ShoppingCart"})標示的物件
+		return  "redirect:/a";
+	}
+	
+	//按下取消訂單
+	@GetMapping("cancelOrder")
+	protected String cancelOrder(Model model, 
+			WebRequest webRequest, SessionStatus status
+			) {
+		status.setComplete();
+//		webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
+		return  "redirect:/a";
+	}
+	
 }

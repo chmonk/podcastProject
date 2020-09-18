@@ -101,14 +101,14 @@ function reconfirmOrder() {
                                                     
         <TR height='16'>
           <TD style="text-align:left  ;font-size: 11pt;">${entry.value.activityName}</TD>
-          <TD style="text-align:center;font-size: 11pt;">${anEntry.value.activityLocation}
+          <TD style="text-align:center;font-size: 11pt;">${entry.value.activityLocation}
 <%--           	${fn:substring(entry.value.author, 0, 3)} --%>
           </TD>
-          <TD style="text-align:center;font-size: 11pt;">${anEntry.value.activityDate}
+          <TD style="text-align:center;font-size: 11pt;">${entry.value.activityDate}
 <%--           	${fn:substring(entry.value.companyName, 0, 2)} --%>
           </TD>
           <TD style="text-align:right ;font-size: 11pt;">
-                    	<fmt:formatNumber value="${anEntry.value.amount}" pattern="#,###" />元
+                    	<fmt:formatNumber value="${entry.value.amount}" pattern="#,###" />元
 <%--           	<fmt:formatNumber value="${entry.value.unitPrice * entry.value.discount }" pattern="#,###" />元 --%>
           </TD>
           <TD style="text-align:right ;font-size: 11pt;"> 
