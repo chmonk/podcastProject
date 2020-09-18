@@ -67,14 +67,14 @@ fieldset {
 			modelAttribute="uploadPodcastBean" enctype="multipart/form-data" >
 			<div class="div1">
 				<form:label path="title" for="" class="l1">單集名稱:</form:label>
-				<form:input path="title" id="name"/>
+				<form:input path="title" id="name" name="podname" /><span id="empty"></span>
 				<div class="notice"></div>
 			</div>
 
 
 			<div class="div1">
 				<form:label path="podcastInfo" for="" class="l1">單集簡介:</form:label>
-				<form:textarea path="podcastInfo" onclick="return false" name="info"/>
+				<form:textarea path="podcastInfo"  id="info" name="podinfo"/>
 				<span id="idsp2"></span>
 				<div class="notice"></div>
 			</div>
@@ -121,27 +121,32 @@ fieldset {
 			</div>
 
 			<div class="div2">
-				<input type="submit" value="送出" id="send" onclick=function(){columnTestify()}> 
-				<input type="reset" value="清除">
+				<input type="button" value="送出" id="send" onclick=function(){checknull()}/> 
+				<input type="reset" value="清除"/>
 				<p id="err" ></p>
 			</div>
 		</form:form>
 
 	</fieldset>
-
+<!-- onclick=function(){columnTestify} -->
 <script>
-
-	
-	function columnTestify(){
-		var name=document.getElementById("name").value;
-		
-		if(!name || !info || !audio|| !pic){
-			document.getElementById("err").innerHTML="請卻輸入所有內容";
-			return false;
-		}	
-		document.getElementById("totalform").submit();
-		return true;
-	}
+var send=document.getElementById("send");
+send.onclick=function checknull() {
+    var name = document.getElementById("name");
+    var info = document.getElementById("info");
+    var audio = document.getElementById("audio");
+    var pic = document.getElementById("pic");
+    var err=document.getElementById("err");
+  if(name.value =="" || info.value=="" || audio.value=="" || pic.value=="") {
+	  err.innerHTML="請填入所有內容";
+	  return false;
+  }
+  else{
+	err.innerHTML="";
+	document.getElementById("totalform").submit();
+	return true;
+}
+}
 
  </script> 
 
