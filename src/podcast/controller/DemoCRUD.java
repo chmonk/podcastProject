@@ -20,9 +20,11 @@ import me.xdrop.fuzzywuzzy.model.ExtractedResult;
 import podcast.model.dao.ActivityDAO;
 import podcast.model.dao.CategoryDAO;
 import podcast.model.dao.MemberDAO;
+import podcast.model.dao.SubscriptionDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.CategoryBean;
 import podcast.model.javabean.MemberBean;
+import podcast.model.javabean.SubscriptionBean;
 
 
 //for test server 
@@ -36,25 +38,35 @@ public class DemoCRUD {
     	//取得註冊物件的context
     	ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+    	SubscriptionDAO sdao = (SubscriptionDAO)context.getBean("SubscriptionDAO");
+    	SubscriptionBean hhh = new SubscriptionBean();
+    	
+    	hhh.setSubdateStart(null);
+    	hhh.setSubdateEnd(null);
+    	hhh.setMonthlyPayment(100);
+    	hhh.setMemberId(1);
+    	hhh.setPodcasterId(20);
     	
     	
-    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
-    	List<MemberBean> userAllData = mdao.fuzzySelectPodcasterAll();
-    	List<MemberBean> fuzzyUserData = new ArrayList<MemberBean>();
-    	List<String> a = new ArrayList<String>();
-    	for(MemberBean i:userAllData) {
-    		a.add(i.getNickname());	
-    	}
+    	sdao.insert(hhh);
+    	
+//    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
+//    	List<MemberBean> userAllData = mdao.fuzzySelectPodcasterAll();
+//    	List<MemberBean> fuzzyUserData = new ArrayList<MemberBean>();
+//    	List<String> a = new ArrayList<String>();
+//    	for(MemberBean i:userAllData) {
+//    		a.add(i.getNickname());	
+//    	}
 //    	List<ExtractedResult> container = FuzzySearch.extractSorted(condition, a);
-    	List<ExtractedResult> container = FuzzySearch.extractSorted(request.getParameter("selectCondition"), a);
-    	System.out.println(userAllData);
-    	System.out.println(container);
-    	for(ExtractedResult e:container) {
-    		if(e.getScore()>0) {  
-    			fuzzyUserData.add(userAllData.get(e.getIndex()));
-    		}
-    	}
-    	System.out.println(fuzzyUserData);
+//    	List<ExtractedResult> container = FuzzySearch.extractSorted(request.getParameter("selectCondition"), a);
+//    	System.out.println(userAllData);
+//    	System.out.println(container);
+//    	for(ExtractedResult e:container) {
+//    		if(e.getScore()>0) {  
+//    			fuzzyUserData.add(userAllData.get(e.getIndex()));
+//    		}
+//    	}
+//    	System.out.println(fuzzyUserData);
     	//ActivityDAO ,以下測資
     	//insert into activity(activityName,activityDate,activityContent,activityLocation,podcasterId,activityPrice,activityMaxPeople,activityMinPeople,activityStatus) values('party',GETDATE(),'go to bookstore','bookstore',15,500,300,15,1)
 //    	ActivityDAO adao = (ActivityDAO)context.getBean("ActivityDAO");

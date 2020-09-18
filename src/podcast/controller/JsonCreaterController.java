@@ -116,13 +116,13 @@ public class JsonCreaterController {
 	@GetMapping(value = "/postjson/{userid}/")
 	public @ResponseBody Map<String, String> getsinglesong(Model m,
 			HttpServletRequest request, 
-			@RequestParam("id") Integer podcastid,
+			@RequestParam("id") Integer podcastId,
 			@PathVariable("userid") Integer userid)
 			throws Exception {
 
 		
 		System.out.println("stage1");
-		uploadPodcastBean ubean = updao.select(podcastid);
+		uploadPodcastBean ubean = updao.select(podcastId);
 
 		Map<String, String> songinfo = new HashMap<String, String>();
 
@@ -151,12 +151,14 @@ public class JsonCreaterController {
 				
 				hbean.setLastListen(new Date());
 				hbean.setMemberId(userid);
-				hbean.setPodcastId(podcastid);
+				hbean.setPodcastId(podcastId);
 				hbean.setPodcastName(ubean.getTitle());
 				hbean.setPublisherId(publisherId);
 				
 				hdao.insert(hbean);
-
+				
+		 //新增點擊數
+				updao.addClickCount(podcastId);
 				System.out.println("stage3");
 		return songinfo;
 	}

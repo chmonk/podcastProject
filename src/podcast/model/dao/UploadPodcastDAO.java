@@ -51,19 +51,31 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 
 		return lists;
 	}
+	
+	@Override
+	public List<uploadPodcastBean> selectAllFromMember(Integer memberId) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		String hbl = "from uploadPodcastBean where memberId=:memberId";
+
+		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
+		query.setParameter("memberId", memberId);
+
+		List<uploadPodcastBean> upList = query.list();
+
+		return upList;
+	}
 
 	@Override
 	public uploadPodcastBean update(Integer podcastId, uploadPodcastBean ubean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		uploadPodcastBean oldbean = select(podcastId);
-
-		if (oldbean != null) {
-			oldbean.setPodcastId(ubean.getPodcastId());
-
-			System.out.println("update done");
+		uploadPodcastBean oldbean = session.get(uploadPodcastBean.class, podcastId);
+		
+		if(oldbean != null) {
+			oldbean.setOpenComment(ubean.getOpenComment());
+			oldbean.setOpenPayment(ubean.getOpenPayment());
+			oldbean.setTitle(ubean.getTitle());
+			oldbean.setPodcastInfo(ubean.getPodcastInfo());
 		}
-
-		session.save(oldbean);
 
 		return oldbean;
 	}
@@ -84,12 +96,24 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 
 	public List<uploadPodcastBean> queryProgramByMemberID(Integer memberId) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql="from uploadPodcastBean up where up.memberid= :mid";
+		String hql="from uploadPodcastBean up where up.memberId= :mid";
 		
 		List<uploadPodcastBean> resultlist = 
 				(List<uploadPodcastBean>)session.createQuery(hql).setParameter("mid", memberId).getResultList();
 		return resultlist;
 
+	}
+	
+	
+	//點擊時點級數加一
+	public uploadPodcastBean addClickCount(Integer podcastID) {
+		
+		uploadPodcastBean ubean= sessionFactory.getCurrentSession().get(uploadPodcastBean.class,podcastID);
+		
+		ubean.setClickAmount(ubean.getClickAmount()+1);
+		
+		return ubean;
+		
 	}
 
 }
