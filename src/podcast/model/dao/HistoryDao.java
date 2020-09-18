@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -87,6 +88,54 @@ public class HistoryDao implements IHistoryDao {
 		query.setParameter("publisherId", publisherId);
 
 		return query.list();
+	}
+
+	// test native sql : 用瀏覽紀錄id找紀錄
+	public List<HistoryBean> selectHistoryByBrowingId(Integer browsingId) {
+
+		Session session = sessionFactory.getCurrentSession();
+
+		String nativesqlstr = "select * from browsingHistory where historyId=?";
+
+		NativeQuery<HistoryBean> query = session.createNativeQuery(nativesqlstr, HistoryBean.class);
+		
+		query.setParameter(1, browsingId);
+
+		List<HistoryBean> list = query.getResultList();
+
+		for (HistoryBean h : list) {
+			System.out.println(h.getPodcastName());
+		}
+
+		return list;
+	}
+
+	// test native sql : 找出使用者看過節目的最新一筆瀏覽紀錄
+	public List<HistoryBean> selectHistoryByMemberId(Integer memberId) {
+
+		Session session = sessionFactory.getCurrentSession();
+
+		
+		String nativesqlstr =
+				//從虛擬資料表r 依序取原本bean要的值
+				"select r.historyId,r.podcastId,r.podcastName,r.publisherId,r.memberId,r.lastListen from   "
+				//虛擬表格生成方式   所有項目 * 加上排序項目sn(相同節目編號進行分組)用時間反序排列(大到小)
+				+ "(select * , ROW_NUMBER() over (partition by podcastId order by lastlisten desc) as sn "
+				+ "from browsingHistory where memberId= ? ) as r"
+				//取得第一組分組(最新時間排列)
+				+ " where r.sn=1 order by lastListen desc ";
+
+		NativeQuery<HistoryBean> query = session.createNativeQuery(nativesqlstr, HistoryBean.class);
+		
+		query.setParameter(1, memberId);
+
+		List<HistoryBean> list = query.getResultList();
+
+		for (HistoryBean h : list) {
+			System.out.println(h.getPodcastName());
+		}
+
+		return list;
 	}
 
 }
