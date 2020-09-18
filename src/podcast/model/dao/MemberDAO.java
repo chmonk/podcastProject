@@ -1,7 +1,11 @@
 package podcast.model.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -100,6 +104,17 @@ public class MemberDAO implements IMemberDAO {
 		Query<MemberBean> query = session.createQuery(hql, MemberBean.class);
 		return query.list();
 	}
+	@Override
+	public List<String> fuzzySelectPodcasterAllName() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from MemberBean where role=2";
+		Query<MemberBean> query = session.createQuery(hql, MemberBean.class);
+		List<String> userAllDataName = new ArrayList<String>();
+    	for(MemberBean i:query.list()) {
+    		userAllDataName.add(i.getNickname());	
+    	}
+		return userAllDataName;
+	}
 
 	@Override
 	public MemberBean update(String acc, MemberBean mbean) {
@@ -129,6 +144,23 @@ public class MemberDAO implements IMemberDAO {
 		session.save(m);
 		return null;
 
+	}
+	
+	public MemberBean checkIdPassword(String account, String password) {
+		MemberBean mb = null;		
+		String hql = "from MemberBean where account=:acc and password=:pwsd";		
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			mb = (MemberBean)session.createQuery(hql)
+								.setParameter("acc", account)
+								.setParameter("pwsd", password)
+								.getSingleResult();
+		} catch(NoResultException ex) {
+			;
+		} catch(NonUniqueResultException ex) {
+			throw new RuntimeException("帳號資料有誤");
+		} 	
+		return mb;
 	}
 
 }

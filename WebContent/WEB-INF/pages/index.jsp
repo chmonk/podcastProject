@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Podcast</title>
+<title>SoundPod</title>
 <!-- Description, Keywords and Author -->
 <meta name="description" content="Your description">
 <meta name="keywords" content="Your,Keywords">
@@ -17,6 +17,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Styles -->
+
+<!-- jquery-ui CSS -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
@@ -36,6 +39,8 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/logo/favicon.ico">
+
+
 </head>
 
 <body>
