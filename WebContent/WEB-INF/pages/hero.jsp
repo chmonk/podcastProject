@@ -85,7 +85,7 @@
 								<p>Lorem Ipsum has been the industry's standard dummy text
 									ever since 1500.</p>
 								<!-- button -->
-								<a href="#" class="btn btn-lg btn-theme" id="playNowBtn"><i
+								<a href="#" class="btn btn-lg btn-theme" id="playNowBtn" ><i
 									class="fa fa-play"></i>&nbsp; Play Now</a>
 							</div>
 						</div>
@@ -93,7 +93,7 @@
 							<!-- play list -->
 							<div class="playlist-content">
 								<ul class="list-unstyled">
-									<li class="playlist-number">
+									<li id="1" class="playlist-number">
 										<!-- song information -->
 										<div class="song-info">
 											<!-- song title -->
@@ -109,7 +109,7 @@
 										</div>
 										<div class="clearfix"></div>
 									</li>
-									<li class="playlist-number">
+									<li id="2" class="playlist-number">
 										<!-- song information -->
 										<div class="song-info">
 											<!-- song title -->
@@ -125,7 +125,7 @@
 										</div>
 										<div class="clearfix"></div>
 									</li>
-									<li class="playlist-number">
+									<li id="3" class="playlist-number">
 										<!-- song information -->
 										<div class="song-info">
 											<!-- song title -->
@@ -141,7 +141,7 @@
 										</div>
 										<div class="clearfix"></div>
 									</li>
-									<li class="playlist-number">
+									<li id="4" class="playlist-number">
 										<!-- song information -->
 										<div class="song-info">
 											<!-- song title -->
@@ -157,7 +157,7 @@
 										</div>
 										<div class="clearfix"></div>
 									</li>
-									<li class="playlist-number">
+									<li id="5" class="playlist-number">
 										<!-- song information -->
 										<div class="song-info">
 											<!-- song title -->
