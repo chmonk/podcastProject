@@ -1,6 +1,7 @@
 package podcast.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -25,19 +26,23 @@ public class RegisterController {
 	// 導向新增會員頁面
 	@RequestMapping(path = "/register", method = RequestMethod.GET)
 	public String showForm(Model m) {
-		MemberBean activity = new MemberBean();
-		m.addAttribute("MemberBean", activity);
+		MemberBean mBean = new MemberBean();
+		m.addAttribute("MemberBean", mBean);
 		return "Member/registerForm";
 	}
 
 	// 接收新增會員表單
 	@RequestMapping(path = "/addMemberProcess", method = RequestMethod.POST)
-	public String processAction(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request,
+	public String processAction(
+			@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request,
 			@ModelAttribute("MemberBean") MemberBean members, BindingResult result, Model m) throws Exception {
 		// 檢查所有欄位,有空白則導回表單
 		if (result.hasErrors()) {
 			return "Member/registerForm";
-		}
+		}	
+	
+		String image = processFile2(multipartFile,request);		
+		members.setImage(image);		
 
 		// model傳送資料
 		m.addAttribute("account", members.getAccount());
@@ -57,19 +62,6 @@ public class RegisterController {
 		m.addAttribute("bankAccount", members.getBankAccount());
 		m.addAttribute("monthlyPayment", members.getMonthlyPayment());
 
-		// 設定圖片檔名為活動日期
-		Date registerDate = members.getRegisterDate();
-		System.out.println("memberId:" + registerDate);
-		String fileName = registerDate.toString();
-		System.out.println("fileName:" + fileName);
-
-		// 設定圖片存檔路徑
-		String savePath = "C:\\temp\\" + fileName + ".jpg";
-
-		// 存圖片到指定路徑
-		File saveFile = new File(savePath);
-		multipartFile.transferTo(saveFile);
-
 		// 取得資料庫連線
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
@@ -80,6 +72,56 @@ public class RegisterController {
 		// 輸入表單資料至會員資料表
 		mDao.insert(members);
 		return "Member/registerFormResult";
+	}
+	
+	public String processFile2(MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
+		// 取得原檔案名字
+		String filename = multipartFile.getOriginalFilename();
+		System.out.println(filename);
+
+		// 取得主檔名
+		String maintitile = filename.substring(0, filename.lastIndexOf("."));
+		System.out.println(maintitile);
+
+		// 處理副檔名
+		String subtitle = filename.substring(filename.lastIndexOf("."));
+		// path 取得workspace 在本機的workspace路徑 + 後續奇怪path
+		String path = request.getSession().getServletContext().getRealPath("/");
+		// 專案資料夾名稱
+		String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
+		// 取得到含workspace前的絕對路徑
+		String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,
+				path.indexOf("\\.metadata"));
+
+		// 制式資料夾
+		// 節目圖片 programimg
+		// 節目音檔 programmedia
+		// 會員照片 memberpic
+		// 活動圖片 activitypic
+
+		// 資料夾名稱
+		String savefolder = "memberpic";
+
+		// 制式檔案名稱
+		String savefilename = maintitile + subtitle;
+
+		// 檔案制式存檔名稱 待設定
+
+		String savepath = workspace + "\\" + caseFolder + "\\WebContent\\" + savefolder + "\\" + savefilename;
+
+		// 準備儲存檔案
+		File f = new File(savepath);
+
+		// 不存在就建立路徑
+		if (!f.exists()) {
+			f.mkdirs();
+		}
+		// 檔案寫入路徑(存檔)
+		multipartFile.transferTo(f);
+
+		// 存入資料庫預設路徑 
+		return "./"+savefolder+"/"+savefilename;
+	
 	}
 
 }

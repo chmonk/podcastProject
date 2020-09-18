@@ -12,6 +12,8 @@ public class fuzzyPodcastReturnArchitecture {
 	private Date uploadTime;
 	private Integer clickAmount;
 	private String audioPath;
+	private String audioImg;
+	private Integer likesCount;
 	
 	
 	public fuzzyPodcastReturnArchitecture() {
@@ -19,7 +21,7 @@ public class fuzzyPodcastReturnArchitecture {
 	}
 	
 	public fuzzyPodcastReturnArchitecture(Integer podcastId, String title, String categoryName, String podcasterName, String podcastInfo,
-			Integer openPayment, Date uploadTime, Integer clickAmount, String audioPath) {
+			Integer openPayment, Date uploadTime, Integer clickAmount, String audioPath,String audioImg,Integer likesCount) {
 		this.podcastId = podcastId;
 		this.title = title;
 		this.categoryName = categoryName;
@@ -29,6 +31,8 @@ public class fuzzyPodcastReturnArchitecture {
 		this.uploadTime = uploadTime;
 		this.clickAmount = clickAmount;
 		this.audioPath = audioPath;
+		this.audioImg = audioImg;
+		this.setLikesCount(likesCount);
 	}
 	
 	
@@ -93,6 +97,22 @@ public class fuzzyPodcastReturnArchitecture {
 
 	public void setAudioPath(String audioPath) {
 		this.audioPath = audioPath;
+	}
+
+	public String getAudioImg() {
+		return audioImg;
+	}
+
+	public void setAudioImg(String audioImg) {
+		this.audioImg = audioImg;
+	}
+
+	public Integer getLikesCount() {
+		return likesCount;
+	}
+
+	public void setLikesCount(Integer likesCount) {
+		this.likesCount = likesCount;
 	}
 
 
