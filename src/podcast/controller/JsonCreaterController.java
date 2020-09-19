@@ -133,6 +133,7 @@ public class JsonCreaterController {
 		String publishername = mdao.selectPodcaster(publisherId).getNickname();
 
 		//單首節目map資訊
+		songinfo.put("podcastId",ubean.getPodcastId().toString());
 		songinfo.put("author", publishername);
 		songinfo.put("authorUrl", "value");
 		songinfo.put("fileName", ubean.getTitle());
