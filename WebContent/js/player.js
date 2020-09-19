@@ -296,7 +296,28 @@ $(document).ready(() => {
 	const volumeHandle = $("#volume_handle");
 	const audiotext = $(".playlist-number");;
 	
+	
+	
+	//載入頁面時 取得使用者看過的瀏覽列表置換成mediatext
+	
+	getNewMediaData();
+	
+	
+	const getNewMediaData=function (userId){
+		
+		let xhr5 = new XMLHttpRequest();
+		
+		xhr5.open("post","/SpringWebProject/getPlaylist",true);
+		
+		xhr5.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		
+		xhr5.send("userId="+userId);
 
+	};
+	
+	
+	
+	
 	// 歌曲資訊元件
 	const MusicInfo = (info, idx) => {
 		return `
@@ -359,20 +380,23 @@ $(document).ready(() => {
 		
 		xhr=$.ajax({
 			url:"/SpringWebProject/addListController",
+			//上線應修正成async
 			async:false,
 			// data:{pid:$("#playNowBtn").val()}
-			data:pid,
+			data:{id:pid},
 			dataType:"json"
 	})
 	// console.log(xhr);
 	mediaData.push(xhr.responseJSON);//不能用responseText會無法顯示
 	renderPlaylist(mediaData);//重新取得清單資訊
 	});
+	
 	// 監聽事件顯示 UI
 	myAudio.on("playstatuschange", () =>
 		//改變播放圖案
 		playBtn.html(myAudio.getIsPlaying() ? "pause" : "play_arrow")
 	);
+	
 	myAudio.on("playmodechange", () => {
 		switch (myAudio.playMode) {
 			case "step": {
@@ -468,7 +492,7 @@ $(document).ready(() => {
 		queueBtn.removeClass("select");
 	});
 	//離開播放選單元素時關閉播放選單
-		queueWrapper.on("mouseleave", () => {
+	queueWrapper.on("mouseleave", () => {
 			queueWrapper.addClass("hidden");
 		})
 
@@ -515,27 +539,27 @@ $(document).ready(() => {
 
 
 	/////////////////////////////////
-	var lemon = $("#lemon");
-
-	lemon.click("on", function() {
-
-		let xhr = new XMLHttpRequest();
-
-		xhr.open("get", "/SpringWebProject/postjson", true);
-
-		xhr.send();
-
-		xhr.onreadystatechange = function() {
-			if (xhr.status == 200 && xhr.readyState == 4) {
-				alert(xhr.responseText);
-
-				mediaData.push(JSON.parse(xhr.responseText));
-
-				renderPlaylist(mediaData);
-
-			}
-		}
-	})
+//	var lemon = $("#lemon");
+//
+//	lemon.click("on", function() {
+//
+//		let xhr = new XMLHttpRequest();
+//
+//		xhr.open("get", "/SpringWebProject/postjson", true);
+//
+//		xhr.send();
+//
+//		xhr.onreadystatechange = function() {
+//			if (xhr.status == 200 && xhr.readyState == 4) {
+//				alert(xhr.responseText);
+//
+//				mediaData.push(JSON.parse(xhr.responseText));
+//
+//				renderPlaylist(mediaData);
+//
+//			}
+//		}
+//	})
 
 	//生成對應memberid所含圖片列表(未來替換成播放條列表)
 	$("button.t")
@@ -556,7 +580,6 @@ $(document).ready(() => {
 			//SpringWebProject/gettheplayersong?name=17
 
 			
-
 			//收到資料後新建成帶有program id的圖片
 			xhr1.onreadystatechange = function() {
 				if (xhr1.status == 200 && xhr1.readyState == 4) {
