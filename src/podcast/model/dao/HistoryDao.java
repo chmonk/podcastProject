@@ -70,18 +70,16 @@ public class HistoryDao implements IHistoryDao {
 		//檢查是否刪除
 		String nativesqlstr1="select * from browsingHistory where podcastId=?";
 		
-		NativeQuery query = session.createNativeQuery(nativesqlstr1).setParameter(1, podcastId);
+		NativeQuery<HistoryBean> query = session.createNativeQuery(nativesqlstr1,HistoryBean.class).setParameter(1, podcastId);
 		
-		List result = query.getResultList();
+		List<HistoryBean> result = query.getResultList();
+		
 		
 		if(result.isEmpty()) {
 			return true;
 		}else{
 			return false;
 		}
-	
-
-
 	}
 
 	@Override
