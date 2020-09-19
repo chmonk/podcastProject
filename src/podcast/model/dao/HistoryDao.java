@@ -56,6 +56,33 @@ public class HistoryDao implements IHistoryDao {
 			return false;
 		}
 	}
+	
+	
+	
+	public boolean deteleByPodcastId(Integer podcastId) {
+
+		Session session = sessionFactory.getCurrentSession();
+		
+		String nativesqlstr="delete from browsingHistory where podcastId=?";
+		
+		session.createNativeQuery(nativesqlstr).setParameter(1, podcastId).executeUpdate();
+		
+		//檢查是否刪除
+		String nativesqlstr1="select * from browsingHistory where podcastId=?";
+		
+		NativeQuery query = session.createNativeQuery(nativesqlstr1).setParameter(1, podcastId);
+		
+		List result = query.getResultList();
+		
+		if(result.isEmpty()) {
+			return true;
+		}else{
+			return false;
+		}
+	
+
+
+	}
 
 	@Override
 	// sql: "select from HistoryBean where memberId=:memberId"
