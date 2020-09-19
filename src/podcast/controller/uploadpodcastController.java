@@ -3,6 +3,7 @@ package podcast.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import podcast.model.dao.HistoryDao;
 import podcast.model.dao.LikeRecordDAO;
 import podcast.model.dao.UploadPodcastDAO;
+import podcast.model.javabean.HistoryOrderProgramBean;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
@@ -41,6 +43,9 @@ public class uploadpodcastController {
 
 	@Autowired
 	UploadPodcastDAO upDao;
+	
+	@Autowired
+	HistoryDao hdao;
 	
 	@Autowired
 	HttpServletRequest request;
@@ -264,5 +269,17 @@ public class uploadpodcastController {
 	     }
 	
 	
+	     @GetMapping("/testsql")
+	     public void testsql() {
+	        System.out.println("run native");
+	        
+	     
+	    	 List<HistoryOrderProgramBean> hopbeanList = hdao.selectHistoryByMemberId2(1);
+	    	 
+	    	 
+	    	 for(HistoryOrderProgramBean hpbean:hopbeanList) {
+	    		 System.out.println(hpbean.getPodcastId()+" "+hpbean.getUploadTime());
+	    	 }
+	     }
 
 }
