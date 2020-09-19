@@ -294,6 +294,8 @@ $(document).ready(() => {
 	const volumeBg = $("#volume_bg");
 	const volumeBar = $("#volume_bar");
 	const volumeHandle = $("#volume_handle");
+	const audiotext = $(".playlist-number");;
+	
 
 	// 歌曲資訊元件
 	const MusicInfo = (info, idx) => {
@@ -348,6 +350,24 @@ $(document).ready(() => {
 	const timelineBarTotalLength = 250;
 	const volumeBarTotalLength = 100;
 
+	//播放清單取得歌曲
+	//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
+	audiotext.click(function(){
+		var pid={};
+		pid.id=this.id;
+		// console.log(this.id);
+		
+		xhr=$.ajax({
+			url:"/SpringWebProject/addListController",
+			async:false,
+			// data:{pid:$("#playNowBtn").val()}
+			data:pid,
+			dataType:"json"
+	})
+	// console.log(xhr);
+	mediaData.push(xhr.responseJSON);//不能用responseText會無法顯示
+	renderPlaylist(mediaData);//重新取得清單資訊
+	});
 	// 監聽事件顯示 UI
 	myAudio.on("playstatuschange", () =>
 		//改變播放圖案
