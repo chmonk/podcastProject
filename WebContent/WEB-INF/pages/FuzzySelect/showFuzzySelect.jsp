@@ -259,6 +259,17 @@ html {
 .padcard{
 	margin: auto;
 }
+.podcastImg{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+
+}
  
  
 
@@ -266,22 +277,22 @@ html {
 <script type="text/javascript">
 $(document).ready(function(){
 
-$('.owl-carousel').owlCarousel({
-    loop:false,
-    //autoWidth:true, 
-    margin:10,
-    responsive:{
-        350:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:5
-        }
-    }
-})
+	$('.owl-carousel').owlCarousel({
+	    loop:false,
+	    //autoWidth:true, 
+	    margin:10,
+	    responsive:{
+	        350:{
+	            items:1
+	        },
+	        600:{
+	            items:3
+	        },
+	        1000:{
+	            items:5
+	        }
+	    }
+	})
 });
 </script>
 </head>
@@ -307,23 +318,15 @@ $('.owl-carousel').owlCarousel({
 		</div>
 	</div>
 
-	<%-- <c:forEach var="data" items="${fuzzyUserData}">
-		<figure class="snip1344"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample1.jpg" alt="profile-sample1" class="background"/><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample1.jpg" alt="profile-sample1" class="profile"/>
-		  <figcaption>
-		    <h3>${data.getNickname()}<span>Engineer</span></h3>
-		    <div class="icons"><a href="#"><i class="ion-social-reddit-outline"></i></a><a href="#"> <i class="ion-social-twitter-outline"></i></a><a href="#"> <i class="ion-social-vimeo-outline"></i></a></div>
-		  </figcaption>
-		</figure>
-	</c:forEach> --%>
-
-
 <div>
 <c:forEach var="data" items="${fuzzyPodcastData}">
 	<div class="container">
 	  <div class="card-media">
 	    <!-- media container -->
 	    <div class="card-media-object-container">
-	      <div class="card-media-object" style="background-image: url(https://s9.postimg.cc/y0sfm95gv/prince_f.jpg);"></div>
+	      <div class="card-media-object">
+	      	<img class="podcastImg" src="${data.getAudioImg()}">
+	      </div>
 	      <span class="card-media-object-tag subtle">${data.getPodcasterName()}</span>
 	     
 	    </div>
@@ -348,22 +351,12 @@ $('.owl-carousel').owlCarousel({
 	      </div>
 	      <div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 	        <span class="card-media-body-supporting-bottom-text subtle">${data.getCategoryName()}</span>
-	        <a href="#/" class="card-media-body-supporting-bottom-text card-media-link u-float-right">加到播放列表</a>
+	        <a id="${data.getPodcastId()}" class="card-media-body-supporting-bottom-text card-media-link u-float-right">加到播放列表</a>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 	</c:forEach>
-	<p>${data.getPodcastId()}
-		<p>${data.getTitle()}
-		<p>${data.getCategoryName()}
-		<p>${data.getPodcasterName()}
-		<p>${data.getPodcastInfo()}
-		<p>${data.getOpenPayment()}
-		<p>${data.getUploadTime()}
-		<p>${data.getClickAmount()}
-		<p>${data.getAudioPath()}
-	
 
 </div>
 
