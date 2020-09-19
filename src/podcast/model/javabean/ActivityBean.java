@@ -19,6 +19,7 @@ public class ActivityBean {
 	private Integer activityId;
 	private String activityName;
 	private Date activityDate;
+	private String activityTime;
 	private String activityContent;
 	private String activityLocation;
 	private Integer podcasterId;
@@ -117,4 +118,14 @@ public class ActivityBean {
 	public void setActivityImg(String activityImg) {
 		this.activityImg = activityImg;
 	}
+	
+	@Column(name="ACTIVITYTIME")
+	public String getActivityTime() {
+		return activityTime;
+	}
+	public void setActivityTime(String activityTime) {
+		this.activityTime = activityTime;
+	}
+	
+	
 }

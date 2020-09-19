@@ -39,7 +39,7 @@ public class ActivityController {
 		// 先確認有無登入(取得LoginOK即有)
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
 		 if (memberBean == null) {
-				m.addAttribute("errorMsg", "請登入播客會員");
+			 redirectAttrs.addAttribute("errorMsg", "請登入播客會員");
 				return "redirect:/login";
 		}	
 		Integer role = memberBean.getRole();
@@ -179,8 +179,9 @@ public class ActivityController {
 		list = aDao.selectAll();
 		m.addAttribute("list", list);
 
-//		Map<Integer, ActivityBean> aMap = aDao.getActivityMap();
-//		m.addAttribute("products_DPP", aMap);
+		//購物車商品
+		Map<Integer, ActivityBean> aMap = aDao.getActivityMap();
+		m.addAttribute("products_DPP", aMap);
 
 		return "index";
 

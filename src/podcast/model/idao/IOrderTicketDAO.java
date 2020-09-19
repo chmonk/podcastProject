@@ -15,5 +15,7 @@ public interface IOrderTicketDAO {
 	public OrderTicketBean update(Integer ticketOrderId, OrderTicketBean oBean);
 
 	public boolean delete(Integer ticketOrderId);
+	
+	public List<OrderTicketBean> getMemberOrders(Integer memberId);
 
 }
