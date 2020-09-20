@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -11,27 +12,47 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import podcast.model.dao.ActivityDAO;
 import podcast.model.javabean.ActivityBean;
-
-
+import podcast.model.javabean.MemberBean;
 
 @Controller
+@SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart" })
 public class ActivityController {
-	
-	//導向管理活動頁面
-	@RequestMapping(path = "/manageActivities", method = RequestMethod.GET)
-	public String showManageActivities(Model m) {
-		return "Activity/manageActivities";
+
+	// 管理活動頁面
+	@GetMapping("/manageActivities")
+	public String showManageActivities(Model m, RedirectAttributes redirectAttrs) {
+
+		// 先確認有無登入(取得LoginOK即有)
+		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+		 if (memberBean == null) {
+			 redirectAttrs.addAttribute("errorMsg", "請登入播客會員");
+				return "redirect:/login";
+		}	
+		Integer role = memberBean.getRole();
+
+		if (role == 2 || role == 0) { //0=管理員 1=一般會員 2=播客
+			m.addAttribute("LoginOK", memberBean);
+			return "Activity/manageActivities";
+		} else {
+			m.addAttribute("errorMsg", "一般會員無此權限");
+			redirectAttrs.addFlashAttribute("errorMsg", "一般會員無此權限");
+			return "redirect:/login";
+		}
 	}
+
 	
 	//導向新增活動頁面
 	@RequestMapping(path = "/addActivityForm", method = RequestMethod.GET)
@@ -114,22 +135,7 @@ public class ActivityController {
 //		//return "../index";
 //	}
 	
-	@RequestMapping(path = "/h", method = RequestMethod.GET)
-	public String showActivities(HttpServletRequest request,Model m) throws Exception {
-		
-		ServletContext app = request.getServletContext();
-		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-		
-    	ActivityDAO aDao = (ActivityDAO)context.getBean("ActivityDAO");
-    	List<ActivityBean> list = new LinkedList<ActivityBean>();
-    	
-    	list = aDao.selectAll();
 
-		m.addAttribute("list", list);
-		//return "../../ActivitiesList";
-		//return "/header_banner";
-		return "/index";	
-	}
 	
 	//資料庫的所有活動傳送至首頁
 		@RequestMapping(path = "/b", method = RequestMethod.GET)
@@ -149,7 +155,29 @@ public class ActivityController {
 			//return "../index";
 		}
 	
-	
-	
+
+	}
+
+	// 資料庫的所有活動傳送至首頁
+	@RequestMapping(path = "/a", method = RequestMethod.GET)
+	public String showActivities(HttpServletRequest request, Model m) throws Exception {
+
+		ServletContext app = request.getServletContext();
+		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+
+		ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
+
+		List<ActivityBean> list = new LinkedList<ActivityBean>();
+		list = aDao.selectAll();
+		m.addAttribute("list", list);
+
+		//購物車商品
+		Map<Integer, ActivityBean> aMap = aDao.getActivityMap();
+		m.addAttribute("products_DPP", aMap);
+
+		return "index";
+
+	}
+
 
 }
