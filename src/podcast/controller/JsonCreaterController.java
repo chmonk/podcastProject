@@ -174,7 +174,7 @@ public class JsonCreaterController {
 				
 		 //如果myfav未有紀錄就新增
 				
-				if(!myfdao.selectByMemberidAndPodcastID(userid, podcastId)) {
+				if(!myfdao.checkByMemberidAndPodcastID(userid, podcastId)) {
 					MyFavProgramBean myfbean = new MyFavProgramBean();
 					myfbean.setMemberId(userid);
 					myfbean.setPodcastId(podcastId);
