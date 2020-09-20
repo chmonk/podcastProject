@@ -27,7 +27,7 @@
 <!-- Basic stylesheet -->
 <link rel="stylesheet" href="css/owl.carousel.css">
 <!-- Font awesome CSS -->
-<link href="WEB-INF/pages/css/font-awesome.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-color.css" rel="stylesheet">
