@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -187,6 +188,23 @@ public class ActivityController {
 
 		return "index";
 
+	}
+	
+	
+	@PostMapping("DeleteActivity")
+	public String deleteActivity(HttpServletRequest request,
+			@RequestParam("cmd")   String cmd,
+			@RequestParam(value = "activityId", required = false) Integer  activityId) throws Exception {
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
+    	ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
+    	
+    	if (cmd.equalsIgnoreCase("DEL")) {
+    	boolean b = aDao.delete(activityId);
+    	return "Activity/manageActivities";}
+    	else {
+    		return "Activity/manageActivities";	
+    	}
 	}
 
 }
