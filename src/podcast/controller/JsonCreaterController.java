@@ -27,10 +27,13 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import podcast.model.dao.HistoryDao;
 import podcast.model.dao.MemberDAO;
+import podcast.model.dao.MyFavProgramDAO;
+import podcast.model.dao.SubscriptionDAO;
 import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.CategoryBean;
 import podcast.model.javabean.HistoryBean;
 import podcast.model.javabean.HouseBean;
+import podcast.model.javabean.MyFavProgramBean;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
@@ -42,6 +45,12 @@ public class JsonCreaterController {
 
 	@Autowired
 	MemberDAO mdao;
+	
+	@Autowired
+	MyFavProgramDAO myfdao;
+	
+	@Autowired
+	SubscriptionDAO sdao;
 
 	//test json用
 	@RequestMapping(path = "/houseBeanJson", method = RequestMethod.GET)
@@ -94,7 +103,7 @@ public class JsonCreaterController {
 		return "playerBar/playerbar_test";
 	}
 
-	//ajax request 送來member id , 傳回member id 所上船節目list  同時增加瀏覽紀錄
+	//ajax request 送來member id , 傳回member id 所上船節目list  同時增加瀏覽紀錄  
 	@GetMapping(value = "/gettheplayersong")
 	public ResponseEntity<List<uploadPodcastBean>> sssString(Model m,
 			HttpServletRequest request,
@@ -161,6 +170,29 @@ public class JsonCreaterController {
 		 //新增點擊數
 				updao.addClickCount(podcastId);
 				System.out.println("stage3");
+				
+				
+		 //如果myfav未有紀錄就新增
+				
+				if(!myfdao.selectByMemberidAndPodcastID(userid, podcastId)) {
+					MyFavProgramBean myfbean = new MyFavProgramBean();
+					myfbean.setMemberId(userid);
+					myfbean.setPodcastId(podcastId);
+					
+					//如果節目需要收費就確認有無註冊
+					if(updao.select(podcastId).getOpenPayment()==1) {
+						myfbean.setSubPermission(sdao.checkSubsription(userid, publisherId));//有訂閱就給過
+					}else {
+						myfbean.setSubPermission(1);//免費就直接核可權限
+					}
+					
+					myfbean.setPodcastOpen(updao.select(podcastId).getOpenPayment());
+					myfbean.setInPlaylist(1);  //預設加入播放清單
+				}
+				
+				
+				
+				
 		return songinfo;
 	}
 
