@@ -34,24 +34,41 @@ public class ActivityController {
 
 	// 管理活動頁面
 	@GetMapping("/manageActivities")
-	public String showManageActivities(Model m, RedirectAttributes redirectAttrs) {
+	public String showManageActivities(HttpServletRequest request,Model m, RedirectAttributes redirectAttrs) throws Exception {
 
 		// 先確認有無登入(取得LoginOK即有)
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
+    	ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
+    	List<ActivityBean> list = new LinkedList<ActivityBean>();
+    	
 		 if (memberBean == null) {
 			 redirectAttrs.addAttribute("errorMsg", "請登入播客會員");
 				return "redirect:/login";
 		}	
 		Integer role = memberBean.getRole();
 
-		if (role == 2 || role == 0) { //0=管理員 1=一般會員 2=播客
+		if (role == 2) { //0=管理員 1=一般會員 2=播客
 			m.addAttribute("LoginOK", memberBean);
+	 
+	    	list = aDao.selectByPodcasterId(memberBean.getMemberId());				
+	    	m.addAttribute("ActivityList",list);
 			return "Activity/manageActivities";
-		} else {
-			m.addAttribute("errorMsg", "一般會員無此權限");
+		
+		} else if(role == 0) {
+			m.addAttribute("LoginOK", memberBean);			
+			list =aDao.selectAll();
+			m.addAttribute("ActivityList",list);
+			return "Activity/manageActivities";
+		}
+		else {
 			redirectAttrs.addFlashAttribute("errorMsg", "一般會員無此權限");
 			return "redirect:/login";
 		}
+		
+		
+		
 
 
 	}
@@ -80,6 +97,7 @@ public class ActivityController {
 		
 		String ActivityImg = processFile(Id,multipartFile,request);
 		
+		activity.setPodcasterId(Id);
 		activity.setActivityImg(ActivityImg);
 		activity.setActivityStatus(activityStatus);
 		

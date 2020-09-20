@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import podcast.model.idao.IActivityDAO;
 import podcast.model.javabean.ActivityBean;
+import podcast.model.javabean.MemberBean;
 
 
 
@@ -43,6 +44,16 @@ public class ActivityDAO implements IActivityDAO {
 	public ActivityBean select(Integer activityId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(ActivityBean.class, activityId);
+	}
+	
+	@Override
+	public List<ActivityBean>  selectByPodcasterId(Integer podcasterId) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ActivityBean where podcasterId=:id";
+		Query<ActivityBean> query = session.createQuery(hql, ActivityBean.class);
+		query.setParameter("id", podcasterId);
+		return query.list();
+
 	}
 
 	@Override
