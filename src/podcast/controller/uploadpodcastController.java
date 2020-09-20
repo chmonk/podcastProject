@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import podcast.model.dao.HistoryDao;
 import podcast.model.dao.LikeRecordDAO;
+import podcast.model.dao.MyFavProgramDAO;
 import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.HistoryOrderProgramBean;
 import podcast.model.javabean.uploadPodcastBean;
@@ -241,7 +242,7 @@ public class uploadpodcastController {
 	}
 	
 	
-		//當刪除節目時   刪除對應節目瀏覽紀錄  點讚紀錄
+		//當刪除節目時   刪除對應節目瀏覽紀錄  點讚紀錄  我的最愛紀錄
 	     @GetMapping(value = "/deleteProgram/{podcastId}")
 	     public void deleteProgramRelatedDate(HttpServletRequest request,
 	    		 Model m,
@@ -262,10 +263,13 @@ public class uploadpodcastController {
 	    	 	
 	    	 	LikeRecordDAO ldao=(LikeRecordDAO)context.getBean("LikeRecordDAO");
 	    	 	
-	    	 	ldao.deteleByPodcastId(podcastId);	    	 	
+	    	 	ldao.deteleByPodcastId(podcastId);
+	    	 	
+	    	 	MyFavProgramDAO myfavDao = (MyFavProgramDAO)context.getBean("MyFavProgramDAO");
 	    	 
+	    	 	myfavDao.deteleByPodcastId(podcastId);
 	    	 	//test 
-	    	 	System.out.println("delete podcast and related browsing history, likerecord");
+	    	 	System.out.println("delete podcastid "+ podcastId +" and related browsing history, likerecord, myfavrecord");
 	     }
 	
 	
