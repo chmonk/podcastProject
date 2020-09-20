@@ -56,7 +56,7 @@ public class BackStageControlerVer1 {
 	// Back 2 Select==========================================================================================
 	@GetMapping(path = { "/BackToSelect.controller" })
 	public String BackToSelect() {
-		return "/BackStage/BackStageSelect";
+		return "/BackStage/BackStageSelectStyle";
 
 	}
 
@@ -589,6 +589,8 @@ public class BackStageControlerVer1 {
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
+		
+		System.out.println("podcastId:"+podcastId);
 		
 		UploadPodcastDAO uDao = new UploadPodcastDAO();
 		uploadPodcastBean uBean = uDao.select(podcastId);

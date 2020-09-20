@@ -18,16 +18,27 @@
 
 
 	<tr><td>${podcast.memberId}</td><td>${podcast.podcastId}</td><td>${podcast.title}</td><td>${podcast.uploadTime}</td>
-	<td><input type="button" name="modify" value="修改" onclick="location='http://localhost:8080/SpringWebProject/modifyPodcast?id=${podcast.podcastId}"></td>
-	<td><input type="button" name="delete" value="刪除" onclick="location='http://localhost:8080/SpringWebProject/processDeletePodcast'"></td></tr>
-	
+	<td><form action="<c:url value="/modifyPodcast"/>"><input type="hidden" name="thisPodcastId" value=${podcast.podcastId}> <input type="submit" name="modify" value="修改" ></form></td>
+	<td><form id="${podcast.podcastId}" action="<c:url value="/processDeletePodcast"/>"  method="POST"><input type="hidden" name="delPodcastId" value=${podcast.podcastId}> <input type="button" value="刪除" onclick="delConfirm(this.name)" name="${podcast.podcastId}"></form></td>
 	
 
 </c:forEach>
 </table>
 
+<script type="text/javascript">
 
-<script>
+function delConfirm(clicked_name){
+
+	var r=confirm("確定要刪除此podcast?")
+	if(r==true){
+		
+		console.log(clicked_name);
+		document.getElementById(clicked_name).submit();
+		
+	}else{
+		
+	}
+}
 
 </script>
 

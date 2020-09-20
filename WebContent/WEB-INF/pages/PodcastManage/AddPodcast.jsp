@@ -104,12 +104,7 @@ fieldset {
 				<div class="notice"></div>
 			</div>
 
-			<div class="div1">
-				<label for="" class="l1">留言狀態:</label> <input type=radio
-					name="openComment" value=0 />關閉 <input type=radio
-					name="openComment" value=1 />公開 <span id="idsp1"></span>
-				<div class="notice"></div>
-			</div>
+			
 
 			<div class="div1">
 				<label for="" class="l1">付費狀態:</label> <input type=radio

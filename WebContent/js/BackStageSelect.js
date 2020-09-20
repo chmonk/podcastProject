@@ -2,6 +2,31 @@
  * 
  */
  
+ 
+ //model=====================================
+ 	$('input').on('focusin', function() {
+			$(this).parent().find('label').addClass('active');
+		});
+
+		$('input').on('focusout', function() {
+			if (!this.value) {
+				$(this).parent().find('label').removeClass('active');
+			}
+		});
+		
+		
+		$("input.dinput").on('focusin',function() {
+			$(this).parent().find('label').addClass('doubleact');
+		});
+
+		$('input.dinput').on('focusout', function() {
+			if (!this.value) {
+				$(this).parent().find('label').removeClass('doubleact');
+			}
+		});
+ 
+ //======================================
+ 
  function fff() {
 			let oValue = document.getElementById('options');
 			console.log(oValue.value);
@@ -59,8 +84,18 @@
 				document.getElementById("deleteMemberErr").innerHTML="請輸入MemberId";
 				return false;
 			}	
-			document.getElementById("deleteMemberForm").submit();
-			return true;
+			
+			var r=confirm("確定要刪除此Member?")
+			if(r==true){
+		
+				document.getElementById("deleteMemberForm").submit();
+				return true;
+			}else{
+		
+			}
+			
+			
+			
 		}
 		
 		//TicketOrder Function=================================
@@ -150,9 +185,18 @@
 			if(!deleteCommentIdText){
 				document.getElementById("deleteCommentIdErr").innerHTML="請輸入CommentId";
 				return false;
-			}	
-			document.getElementById("deleteCommentIdForm").submit();
-			return true;
+			}
+			
+			var r=confirm("確定要刪除此Comment?")
+			if(r==true){
+		
+				document.getElementById("deleteCommentIdForm").submit();
+				return true;
+			}else{
+		
+			}
+				
+			
 		}
 		
 		var deleteCommentMemberBtn=document.getElementById("deleteCommentMemberBtn");
@@ -167,8 +211,15 @@
 				document.getElementById("deleteCommentMemberErr").innerHTML="請輸入MemberId & PodcasterId";
 				return false;
 			}
-			document.getElementById("deleteCommentMemberForm").submit();
-			return true;
+			
+			var r=confirm("確定要刪除Comment?")
+			if(r==true){
+		
+				document.getElementById("deleteCommentIdForm").submit();
+				return true;
+			}else{
+		
+			}
 		}
 		
 		//Category Function===========================================
@@ -273,9 +324,16 @@
 			if(!deleteActIdText){
 				document.getElementById("deleteActIdErr").innerHTML="請輸入ActivityId";
 				return false;
+			}
+			
+			var r=confirm("確定要刪除此Activity?")
+			if(r==true){
+				document.getElementById("deleteActIdForm").submit();
+				return true;
+			}else{
+		
 			}	
-			document.getElementById("deleteActIdForm").submit();
-			return true;
+			
 		}
 		
 		//BrowsingHistory Function========================================
@@ -336,9 +394,64 @@
 				document.getElementById("deleteHistoryDateErr").innerHTML="請輸入Date";
 				return false;
 			}	
-			document.getElementById("deleteHistoryDateForm").submit();
+			
+			var r=confirm("確定要刪除History?")
+			if(r==true){
+				document.getElementById("deleteHistoryDateForm").submit();
+				return true;
+			}else{
+		
+			}	
+			
+		}
+		
+		
+		//Podcast Function==========================================================================
+		
+		var selectPodcastMemberBtn=document.getElementById("selectPodcastMemberBtn");
+		selectPodcastMemberBtn.onclick=function(){
+			var selectPodcastMemberText=document.getElementById("selectPodcastMemberText").value;
+			
+			if(!selectPodcastMemberText){
+				document.getElementById("selectPodcastMemberErr").innerHTML="請輸入MemberId";
+				return false;
+			}	
+			document.getElementById("selectPodcastMemberForm").submit();
 			return true;
 		}
+		
+		var deletePodcastIdBtn=document.getElementById("deletePodcastIdBtn");
+		deletePodcastIdBtn.onclick=function(){
+			var deletePodcastIdText=document.getElementById("deletePodcastIdText").value;
+			
+			if(!deletePodcastIdText){
+				document.getElementById("deletePodcastIdErr").innerHTML="請輸入PodcastId";
+				return false;
+			}
+			
+			var r=confirm("確定要刪除Podcast?")
+			if(r==true){
+				document.getElementById("deletePodcastIdForm").submit();
+				return true;
+			}else{
+		
+			}		
+			
+		}
+		
+		var topPodcastBtn=document.getElementById("topPodcastBtn");
+		topPodcastBtn.onclick=function(){
+			var topPodcastText=document.getElementById("topPodcastText").value;
+			
+			if(!topPodcastText){
+				document.getElementById("topPodcastErr").innerHTML="請輸入uploadTime";
+				return false;
+			}	
+			document.getElementById("topPodcastForm").submit();
+			return true;
+		}
+		
+		
 		
 		//Income Calculate Function========================================
 		
@@ -375,43 +488,6 @@
 		}
 		
 		
-		//Podcast Function==========================================================================
-		
-		var selectPodcastMemberBtn=document.getElementById("selectPodcastMemberBtn");
-		selectPodcastMemberBtn.onclick=function(){
-			var selectPodcastMemberText=document.getElementById("selectPodcastMemberText").value;
-			
-			if(!selectPodcastMemberText){
-				document.getElementById("selectPodcastMemberErr").innerHTML="請輸入MemberId";
-				return false;
-			}	
-			document.getElementById("selectPodcastMemberForm").submit();
-			return true;
-		}
-		
-		var deletePodcastIdBtn=document.getElementById("deletePodcastIdBtn");
-		deletePodcastIdBtn.onclick=function(){
-			var deletePodcastIdText=document.getElementById("deletePodcastIdText").value;
-			
-			if(!deletePodcastIdText){
-				document.getElementById("deletePodcastIdErr").innerHTML="請輸入PodcastId";
-				return false;
-			}	
-			document.getElementById("deletePodcastIdForm").submit();
-			return true;
-		}
-		
-		var topPodcastBtn=document.getElementById("topPodcastBtn");
-		topPodcastBtn.onclick=function(){
-			var topPodcastText=document.getElementById("topPodcastText").value;
-			
-			if(!topPodcastText){
-				document.getElementById("topPodcastErr").innerHTML="請輸入uploadTime";
-				return false;
-			}	
-			document.getElementById("topPodcastForm").submit();
-			return true;
-		}
 		
 		
 	}
