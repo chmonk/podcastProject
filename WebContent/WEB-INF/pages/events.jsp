@@ -107,6 +107,7 @@
 							<Input type='hidden' name='activityPrice' value='${list.activityPrice}'>
 							<Input type='hidden' name='activityDate' value='${list.activityDate}'>
 							<Input type='hidden' name='activityLocation' value='${list.activityLocation}'>
+							<Input type='hidden' name='activityMaxPeople' value='${list.activityMaxPeople}'>
 						</div>
 						<div class="checkbox">
 							<label> <input type="checkbox"> 我已同意SoundPod播音平台服務規範

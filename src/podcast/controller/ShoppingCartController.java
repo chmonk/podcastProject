@@ -29,6 +29,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import podcast.model.dao.ActivityDAO;
+import podcast.model.dao.OrderItemDao;
 import podcast.model.dao.OrderTicketDAO;
 import podcast.model.dao.ShoppingCart;
 //import podcast.model.idao.OrderService;
@@ -65,6 +66,7 @@ public class ShoppingCartController {
     		@RequestParam("activityId") Integer activityId,
     		@RequestParam("activityLocation") String activityLocation,
     		@RequestParam("activityDate") Date activityDate,
+    		@RequestParam("activityMaxPeople") Integer activityMaxPeople,
     		Model m,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		m.addAttribute("quantity", quantity);
@@ -103,7 +105,7 @@ public class ShoppingCartController {
 		System.out.println("bean : "+bean.getActivityName());
 		
 		OrderItemBean oib = new  OrderItemBean(activityId,activityName,
-				activityPrice,quantity,activityDate,activityLocation);
+				activityPrice,quantity,activityDate,activityLocation,activityMaxPeople);
 		System.out.println("你點選到的票券資訊:"+activityId+activityName+activityPrice+quantity+activityDate+activityLocation);	
 		
 		// 將OrderItem物件加入ShoppingCart
@@ -194,16 +196,26 @@ public class ShoppingCartController {
 		Map<Integer, OrderItemBean> content = sc.getContent();
 		Set<OrderItemBean> items = new LinkedHashSet<>();
 		Set<Integer> set = content.keySet();
+		
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
+    	OrderItemDao otd = (OrderItemDao)context.getBean("OrderItemDao");
+		
+		
 		for(Integer i : set) {
 			OrderItemBean oib = content.get(i);
+			Integer stock = otd.updateProductStock(oib);
+			System.out.println("庫存= "+stock);
+			if(stock>0) {
+			oib.setAmount(stock);
 			oib.setOrderTicketBean(ob2);
 			items.add(oib);
+			}else continue;
 		}
 		ob2.setItems(items);
 		
 		//======
-		ServletContext app = request.getServletContext();
-    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
+		
 		OrderTicketDAO ot = (OrderTicketDAO)context.getBean("OrderTicketDAO");
 		ot.insert(ob2);
 		
