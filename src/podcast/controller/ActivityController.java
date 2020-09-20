@@ -156,7 +156,7 @@ public class ActivityController {
 		}
 	
 
-	}
+	
 
 	// 資料庫的所有活動傳送至首頁
 	@RequestMapping(path = "/a", method = RequestMethod.GET)
