@@ -39,7 +39,7 @@ public class ActivityController {
 		// 先確認有無登入(取得LoginOK即有)
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
 		 if (memberBean == null) {
-				m.addAttribute("errorMsg", "請登入播客會員");
+			 redirectAttrs.addAttribute("errorMsg", "請登入播客會員");
 				return "redirect:/login";
 		}	
 		Integer role = memberBean.getRole();
@@ -82,11 +82,12 @@ public class ActivityController {
 		
 		activity.setActivityImg(ActivityImg);
 		activity.setActivityStatus(activityStatus);
+		
 
 		// 取得資料庫連線
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-
+		
 		// 連線到活動資料表
 		ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
 
@@ -94,6 +95,25 @@ public class ActivityController {
 		aDao.insert(activity);
 
 		return "Activity/manageActivities";
+
+		
+	}
+	
+	@RequestMapping(path = "/p", method = RequestMethod.GET)
+	public String showActivitiess(HttpServletRequest request,Model m) throws Exception {
+		
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+    	
+    	ActivityDAO aDao = (ActivityDAO)context.getBean("ActivityDAO");
+    	List<ActivityBean> list = new LinkedList<ActivityBean>();
+    	
+    	list = aDao.selectAll();
+
+		m.addAttribute("list", list);
+		//return "../../ActivitiesList";
+		//return "/header_banner";
+		return "/index";	
 	}
 
 	public String processFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
@@ -159,8 +179,9 @@ public class ActivityController {
 		list = aDao.selectAll();
 		m.addAttribute("list", list);
 
-//		Map<Integer, ActivityBean> aMap = aDao.getActivityMap();
-//		m.addAttribute("products_DPP", aMap);
+		//購物車商品
+		Map<Integer, ActivityBean> aMap = aDao.getActivityMap();
+		m.addAttribute("products_DPP", aMap);
 
 		return "index";
 

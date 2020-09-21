@@ -1,5 +1,6 @@
 package podcast.model.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -102,6 +103,17 @@ public class MemberDAO implements IMemberDAO {
 		String hql = "from MemberBean where role=2";
 		Query<MemberBean> query = session.createQuery(hql, MemberBean.class);
 		return query.list();
+	}
+	@Override
+	public List<String> fuzzySelectPodcasterAllName() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from MemberBean where role=2";
+		Query<MemberBean> query = session.createQuery(hql, MemberBean.class);
+		List<String> userAllDataName = new ArrayList<String>();
+    	for(MemberBean i:query.list()) {
+    		userAllDataName.add(i.getNickname());	
+    	}
+		return userAllDataName;
 	}
 
 	@Override
