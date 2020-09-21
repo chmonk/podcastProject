@@ -47,7 +47,7 @@ public class SubProgramListDAO implements ISubProgramListDAO {
 	@Override
 	public List<SubscriptionBean> selectSubcriptionByMemberID(Integer memberID,Integer podcasterID) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		String hqlstr = "from SubscriptionBean where memberId=:memberId and podcasterID=:podcasterID";
+		String hqlstr = "from SubscriptionBean where memberId=:memberId and podcasterID=:podcasterID ";
 		Query<SubscriptionBean> query = session.createQuery(hqlstr, SubscriptionBean.class);
 		query.setParameter("podcasterID", podcasterID);
 		query.setParameter("memberId", memberID);
@@ -60,7 +60,7 @@ public class SubProgramListDAO implements ISubProgramListDAO {
 	@Override
 	public SubscriptionBean insert(SubscriptionBean sbean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-
+	
 		session.save(sbean);
 
 		return sbean;
