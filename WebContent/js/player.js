@@ -410,6 +410,7 @@ $(document).ready(() => {
 	//播放清單取得歌曲
 	//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
 	audiotext.click(function() {
+		console.log(this);
 		var pid = {};
 		pid.id = this.id;
 		// console.log(this.id);
@@ -417,17 +418,27 @@ $(document).ready(() => {
 		xhr = $.ajax({
 			url: "/SpringWebProject/addListController",
 			//上線應修正成async
-			async: false,
+			async: true,
 			// data:{pid:$("#playNowBtn").val()}
-			data:pid,
-			dataType:"json"
-	})
-	// console.log(xhr);
-	mediaData.push(xhr.responseJSON);//不能用responseText會無法顯示
-	var result = [...new Set(mediaData.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
-	mediaData=result;
+			data: pid,
+			dataType: "json",
+			success: function(data) {
+				// console.log(xhr);
+				console.log(data);
+				mediaData.push(data);//不能用responseText會無法顯示
+				var result = [...new Set(mediaData.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
+				mediaData = result;
 
-	renderPlaylist();//重新取得清單資訊
+				renderPlaylist();//重新取得清單資訊
+
+
+			}
+
+		})
+
+
+
+
 
 	});
 
