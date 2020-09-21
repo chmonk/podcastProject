@@ -54,7 +54,7 @@ public class AddListController {
 		uploadPodcastBean songlist = udao.select(id);
 		
 		Map<String, String> m =new HashMap<>();
-		m.put("author", songlist.getMemberId().toString());
+		m.put("author", mdao.selectPodcaster(songlist.getMemberId()).getNickname());
 		m.put("authorurl",mdao.selectPodcaster(songlist.getMemberId()).getPodcastorWebPage());
 		m.put("fileName", songlist.getTitle());
 		m.put("fileUrl", songlist.getAudioPath());
@@ -109,7 +109,7 @@ public class AddListController {
 		uploadPodcastBean songlist = udao.select(id);
 		
 		Map<String, String> m =new HashMap<>();
-		m.put("author", songlist.getMemberId().toString());
+		m.put("author", mdao.selectPodcaster(songlist.getMemberId()).getNickname());
 		m.put("authorurl",mdao.selectPodcaster(songlist.getMemberId()).getPodcastorWebPage());
 		m.put("fileName", songlist.getTitle());
 		m.put("fileUrl", songlist.getAudioPath());
