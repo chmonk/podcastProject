@@ -16,18 +16,18 @@ import podcast.model.javabean.LikeRecordBean;
 
 @Repository("LikeRecordDAO")
 public class LikeRecordDAO implements ILikeRecordDAO {
-	
+
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
-	
+
 	public LikeRecordDAO() {
 	}
 
 	public LikeRecordDAO(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	@Override
 	public LikeRecordBean insert(LikeRecordBean lbean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
@@ -40,6 +40,7 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(LikeRecordBean.class, likeRecordId);
 	}
+
 	@Override
 	public List<LikeRecordBean> selectAll() throws Exception {
 		Session session = sessionFactory.getCurrentSession();
@@ -83,71 +84,80 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 		return false;
 	}
 
-	//節目刪除時使用
+	// 節目刪除時使用
 	public boolean detelePodcastId(Integer podcastId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		
-		String nativesqlstr="delete from likeRecord where podcastId= ? ";
-		
+
+		String nativesqlstr = "delete from likeRecord where podcastId= ? ";
+
 		session.createNativeQuery(nativesqlstr).setParameter(1, podcastId).executeUpdate();
-		
-		//檢查是否刪除
-		String nativesqlstr1="select * from likeRecord  where  podcastId= ? ";
-		
-		NativeQuery<LikeRecordBean> query = session.createNativeQuery(nativesqlstr1,LikeRecordBean.class).setParameter(1, podcastId);
-		
+
+		// 檢查是否刪除
+		String nativesqlstr1 = "select * from likeRecord  where  podcastId= ? ";
+
+		NativeQuery<LikeRecordBean> query = session.createNativeQuery(nativesqlstr1, LikeRecordBean.class)
+				.setParameter(1, podcastId);
+
 		List<LikeRecordBean> result = query.getResultList();
-		
-		if(result.isEmpty()) {
-			//刪除乾淨
+
+		if (result.isEmpty()) {
+			// 刪除乾淨
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	//個人取消愛心時刪除
-	public boolean deteleByMemberidAndPodcastId(Integer memberId,Integer podcastId) {
+
+	// 個人取消愛心時刪除
+	public boolean deteleByMemberidAndPodcastId(Integer memberId, Integer podcastId) {
 
 		Session session = sessionFactory.getCurrentSession();
-		
-		String nativesqlstr="delete from likeRecord where  memberId= ? and podcastId= ? ";
-		
+
+		String nativesqlstr = "delete from likeRecord where  memberId= ? and podcastId= ? ";
+
 		session.createNativeQuery(nativesqlstr).setParameter(1, memberId).setParameter(2, podcastId).executeUpdate();
-		
-		//檢查是否刪除
-		String nativesqlstr1="select * from likeRecord  where  memberId= ? and podcastId= ? ";
-		
-		NativeQuery<LikeRecordBean> query = session.createNativeQuery(nativesqlstr1,LikeRecordBean.class).setParameter(1, memberId).setParameter(2, podcastId);
-		
+
+		// 檢查是否刪除
+		String nativesqlstr1 = "select * from likeRecord  where  memberId= ? and podcastId= ? ";
+
+		NativeQuery<LikeRecordBean> query = session.createNativeQuery(nativesqlstr1, LikeRecordBean.class)
+				.setParameter(1, memberId).setParameter(2, podcastId);
+
 		List<LikeRecordBean> result = query.getResultList();
-		
-		if(result.isEmpty()) {
-			//刪除乾淨
+
+		if (result.isEmpty()) {
+			// 刪除乾淨
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	//確認節目 使用者是否有 like紀錄
+
+	// 確認節目 使用者是否有 like紀錄
 	public LikeRecordBean checkByMemberidAndPodcastID(Integer memberId, Integer podcastId) {
 
 		Session session = sessionFactory.getCurrentSession();
 
 		String sqlstr = "select * from likeRecord where memberId=? and podcastId=?";
 
-		NativeQuery<LikeRecordBean> query = session.createNativeQuery(sqlstr,LikeRecordBean.class).setParameter(1, memberId).setParameter(2, podcastId);
+		NativeQuery<LikeRecordBean> query = session.createNativeQuery(sqlstr, LikeRecordBean.class)
+				.setParameter(1, memberId).setParameter(2, podcastId);
 
-		LikeRecordBean rs = query.getSingleResult();
+		// 如果為空 表示未按過節目
+		try {
 
-		// 如果為空 表示未按過節目  
-		if (rs==null) {
+			List<LikeRecordBean> rs = query.getResultList();
+			if (rs.isEmpty()) {
+				return null;
+			} else {
+				return rs.get(0);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
-		} else {
-			return rs;
 		}
+
 	}
 
 }
