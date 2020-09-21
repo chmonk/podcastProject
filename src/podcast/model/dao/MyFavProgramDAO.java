@@ -72,18 +72,19 @@ public class MyFavProgramDAO implements IMyFavProgramDAO {
 		return query.list();
 	}
 	
-	public boolean deteleByPodcastId(Integer podcastId) {
+	
+	public boolean deteleByMemberIdAndPubLisherId(Integer memberId,Integer publisherId) {
 
 		Session session = sessionFactory.getCurrentSession();
 		
-		String nativesqlstr="delete from myFavProgram where podcastId=?";
+		String nativesqlstr="delete from myFavProgram where  memberId= ? and podcastId= ?  ";
 		
-		session.createNativeQuery(nativesqlstr).setParameter(1, podcastId).executeUpdate();
+		session.createNativeQuery(nativesqlstr).setParameter(1, memberId).setParameter(1, publisherId).executeUpdate();
 		
 		//檢查是否刪除
-		String nativesqlstr1="select * from myFavProgram where podcastId=?";
+		String nativesqlstr1="select * from myFavProgram where memberId= ? and podcastId= ? ";
 		
-		NativeQuery<MyFavProgramBean> query = session.createNativeQuery(nativesqlstr1,MyFavProgramBean.class).setParameter(1, podcastId);
+		NativeQuery<MyFavProgramBean> query = session.createNativeQuery(nativesqlstr1,MyFavProgramBean.class).setParameter(1, memberId).setParameter(1, publisherId);
 		
 		List<MyFavProgramBean> result = query.getResultList();
 		
@@ -95,23 +96,23 @@ public class MyFavProgramDAO implements IMyFavProgramDAO {
 		}
 	}
 	
-	//確認有加入播放清單
-	public boolean checkByMemberidAndPodcastID(Integer memberId, Integer podcastId) {
+	//確認播客 使用者是否有訂閱紀錄
+		public boolean checkByMemberidAndPublisherID(Integer memberId, Integer publisherId) {
 
-		Session session = sessionFactory.getCurrentSession();
+			Session session = sessionFactory.getCurrentSession();
 
-		String sqlstr = "select * from myFavProgram where memberId=? and podcastId=?";
+			String sqlstr = "select * from myFavProgram where memberId=? and podcastId=?";
 
-		NativeQuery query = session.createNativeQuery(sqlstr).setParameter(1, memberId).setParameter(2, podcastId);
+			NativeQuery query = session.createNativeQuery(sqlstr).setParameter(1, memberId).setParameter(2, publisherId);
 
-		List rs = query.getResultList();
+			List rs = query.getResultList();
 
-		// 如果為空 表示沒訂閱
-		if (rs.isEmpty()) {
-			return false;
-		} else {
-			return true;
+			// 如果為空 表示未追蹤過節目  
+			if (rs.isEmpty()) {
+				return false;
+			} else {
+				return true;
+			}
 		}
-	}
-
+	
 }

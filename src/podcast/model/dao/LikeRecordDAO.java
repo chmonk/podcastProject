@@ -83,17 +83,17 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 		return false;
 	}
 
-	
-	public boolean deteleByPodcastId(Integer podcastId) {
+	//節目刪除時使用
+	public boolean detelePodcastId(Integer podcastId) {
 
 		Session session = sessionFactory.getCurrentSession();
 		
-		String nativesqlstr="delete from likeRecord where podcastId=?";
+		String nativesqlstr="delete from likeRecord where podcastId= ? ";
 		
 		session.createNativeQuery(nativesqlstr).setParameter(1, podcastId).executeUpdate();
 		
 		//檢查是否刪除
-		String nativesqlstr1="select * from likeRecord where podcastId=?";
+		String nativesqlstr1="select * from likeRecord  where  podcastId= ? ";
 		
 		NativeQuery<LikeRecordBean> query = session.createNativeQuery(nativesqlstr1,LikeRecordBean.class).setParameter(1, podcastId);
 		
@@ -104,6 +104,49 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 			return true;
 		}else{
 			return false;
+		}
+	}
+	
+	//個人取消愛心時刪除
+	public boolean deteleByMemberidAndPodcastId(Integer memberId,Integer podcastId) {
+
+		Session session = sessionFactory.getCurrentSession();
+		
+		String nativesqlstr="delete from likeRecord where  memberId= ? and podcastId= ? ";
+		
+		session.createNativeQuery(nativesqlstr).setParameter(1, memberId).setParameter(2, podcastId).executeUpdate();
+		
+		//檢查是否刪除
+		String nativesqlstr1="select * from likeRecord  where  memberId= ? and podcastId= ? ";
+		
+		NativeQuery<LikeRecordBean> query = session.createNativeQuery(nativesqlstr1,LikeRecordBean.class).setParameter(1, memberId).setParameter(2, podcastId);
+		
+		List<LikeRecordBean> result = query.getResultList();
+		
+		if(result.isEmpty()) {
+			//刪除乾淨
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	//確認節目 使用者是否有 like紀錄
+	public boolean checkByMemberidAndPodcastID(Integer memberId, Integer podcastId) {
+
+		Session session = sessionFactory.getCurrentSession();
+
+		String sqlstr = "select * from likeRecord where memberId=? and podcastId=?";
+
+		NativeQuery query = session.createNativeQuery(sqlstr).setParameter(1, memberId).setParameter(2, podcastId);
+
+		List rs = query.getResultList();
+
+		// 如果為空 表示未按過節目  
+		if (rs.isEmpty()) {
+			return false;
+		} else {
+			return true;
 		}
 	}
 
