@@ -83,7 +83,31 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 		return false;
 	}
 
+	//節目刪除時使用
+	public boolean detelePodcastId(Integer podcastId) {
+
+		Session session = sessionFactory.getCurrentSession();
+		
+		String nativesqlstr="delete from likeRecord where podcastId= ? ";
+		
+		session.createNativeQuery(nativesqlstr).setParameter(1, podcastId).executeUpdate();
+		
+		//檢查是否刪除
+		String nativesqlstr1="select * from likeRecord  where  podcastId= ? ";
+		
+		NativeQuery<LikeRecordBean> query = session.createNativeQuery(nativesqlstr1,LikeRecordBean.class).setParameter(1, podcastId);
+		
+		List<LikeRecordBean> result = query.getResultList();
+		
+		if(result.isEmpty()) {
+			//刪除乾淨
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
+	//個人取消愛心時刪除
 	public boolean deteleByMemberidAndPodcastId(Integer memberId,Integer podcastId) {
 
 		Session session = sessionFactory.getCurrentSession();
