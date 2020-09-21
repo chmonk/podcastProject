@@ -42,7 +42,7 @@ public class AddListController {
 	//點擊節目時  1.節目加入播放列表  2.增加瀏覽紀錄 3.節目點擊增加 4.增加like record like 0 addlist 1
 	@GetMapping(value="/addListController", produces= {"application/json"})
 	//id from ajax provide podcastId
-	public @ResponseBody Map<String, String> AddListController(Map<String, String> m ,Integer id,Model model) throws Exception {
+	public @ResponseBody Map<String, String> AddList(Integer id,Model model) throws Exception {
 
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
 		System.out.println(id);
@@ -52,6 +52,8 @@ public class AddListController {
 
 		//1.pack single program for ajax
 		uploadPodcastBean songlist = udao.select(id);
+		
+		Map<String, String> m =new HashMap<>();
 		m.put("author", songlist.getMemberId().toString());
 		m.put("authorurl",mdao.selectPodcaster(songlist.getMemberId()).getPodcastorWebPage());
 		m.put("fileName", songlist.getTitle());
@@ -95,7 +97,7 @@ public class AddListController {
 	//點擊節目愛心時  1.節目加入播放列表  2.增加瀏覽紀錄 3.節目點擊增加 4.增加like record like 1 addlist 1
 	@GetMapping(value="/addListByLikeController", produces= {"application/json"})
 	//id from ajax provide podcastId
-	public @ResponseBody Map<String, String> AddListByLikeController(Map<String, String> m ,Integer id,Model model) throws Exception {
+	public @ResponseBody Map<String, String> AddListByLike(Integer id,Model model) throws Exception {
 
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
 		System.out.println(id);
@@ -105,6 +107,8 @@ public class AddListController {
 
 		//1.pack single program for ajax
 		uploadPodcastBean songlist = udao.select(id);
+		
+		Map<String, String> m =new HashMap<>();
 		m.put("author", songlist.getMemberId().toString());
 		m.put("authorurl",mdao.selectPodcaster(songlist.getMemberId()).getPodcastorWebPage());
 		m.put("fileName", songlist.getTitle());
