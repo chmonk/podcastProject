@@ -52,10 +52,10 @@ public class ShowSubProgram {
     	Date date =new Date();
     	SubProgramListDAO fdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
     	
-    	List<SubscriptionBean> f = fdao.selectSubcriptionByMemberID(1, 18);
+    	List<SubscriptionBean> f = fdao.selectSubcriptionByMemberID(1,17);
     	if(f.isEmpty()) {
     		SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
-        	List<uploadPodcastBean> needSub = sdao.selectByMemeberId(18);
+        	List<uploadPodcastBean> needSub = sdao.selectByMemeberId(17);
         	m.addAttribute("needSub", needSub);
         	System.out.println("need="+needSub);
     		
