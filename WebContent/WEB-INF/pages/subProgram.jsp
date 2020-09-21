@@ -281,6 +281,7 @@ html {
 </style>
 
 <style type="text/css">
+
 .podcastImg {
 	position: absolute;
 	top: 50%;
@@ -322,7 +323,7 @@ window.onload=function(){
 		<a href="javascript:;"
 			onclick="document.getElementById('d1').style.display='' ">訂閱列表</a><br>
 
-		<div id="d1" style="display: none">
+		<div id="d1" style="display: none" >
 			<div>
 				<c:forEach var="bymemberid" items="${subProgram}">
 					<div class="container">
@@ -407,6 +408,6 @@ window.onload=function(){
 		<script type="text/javascript" src="js/player.js"></script>
 
 
-		<%-- 	<jsp:include page="./playerbar.jsp" flush="true " /> --%>
+			<jsp:include page="./playerbar.jsp" flush="true " />
 </body>
 </html>
