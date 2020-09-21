@@ -26,11 +26,11 @@
 			<table>
 				<tr>
 					<td>留言內容：</td>
-					<td><textarea name="content" rows="5" cols="40"
+					<td><textarea id="content"  rows="5" cols="40"
 							placeholder="請輸入不超過50個字" maxlength="50"></textarea></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value=" 提交 "></td>
+					<td><input id="submitBtn" type="button" value=" 提交 " ></td>
 				</tr>
 			</table>
 		</form>
@@ -38,18 +38,63 @@
 	<br />
 	<div class="d2">
 		<form>
-			<table width="400">
+			<table id="ctable" width="400">
 				<c:forEach items="${commList}" var="comment" varStatus="tagStatus">
 					<tr>
 						<td width="240">${comment.commentMsg}</td>
 						<td width="80">${comment.memberId}</td>
 						<td width="80">${comment.msgDate}</td>
 					</tr>
-				<td><input type="button" name="delete" value="刪除" onclick="location='http://localhost:8080/SpringWebProject/processDeleteComment'"></td></tr>
+<!-- 				<td><input type="button" name="delete" value="刪除" onclick="location='http://localhost:8080/SpringWebProject/processDeleteComment'"></td></tr> -->
+<%-- 				<td><form id="${comment.commentId}" action="<c:url value="/processDeleteComment"/>"  method="POST"> --%>
+<!-- 				<input type="hidden" name="delCommId" value=${comment.commentId}>  -->
+<%-- 				<input type="button" value="刪除" onclick="delConfirm(this.name)" name="${comment.commentId}"></form></td> --%>
 				</c:forEach>
+					
 			</table>
 			<hr>
 		</form>
 	</div>
+	
+<script type="text/javascript">
+
+function delConfirm(clicked_name){
+
+	var r=confirm("確定要刪除此留言?")
+	if(r==true){
+		
+		console.log(clicked_name);
+		document.getElementById(clicked_name).submit();
+		
+	}else{
+		
+	}
+}
+
+document.getElementById("submitBtn").onclick=function(){
+	var xhr=new XMLHttpRequest();
+	xhr.open("POST","<c:url value='/podcastPage.do'/>",true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	var	content=document.getElementById("content").value;
+	console.log(content);
+	xhr.send("content="+content);
+	console.log(content);
+
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState===4 && xhr.status===200){
+			var cbean=JSON.parse(xhr.responseText);
+			console.log(cbean.commentMsg);
+			var ctable=document.getElementById("ctable");
+
+			//下面兩行有問題尚未解決
+			var newMsg="<tr><td width='240'>"+cbean.commentMsg+"</td><td width='80'>"+cbean.memberId+"</td><td width='80'>"+cbean.msgDate+"</td></tr>";
+			ctable.append(newMsg);
+		}
+	}
+	
+}
+
+
+</script>
 </body>
 </html>

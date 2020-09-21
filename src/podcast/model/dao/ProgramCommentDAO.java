@@ -12,8 +12,9 @@ import org.springframework.stereotype.Repository;
 
 import podcast.model.idao.IProgramCommentDAO;
 import podcast.model.javabean.ProgramCommentBean;
+import podcast.model.javabean.uploadPodcastBean;
 
-@Repository("pragramCommentDAO")
+@Repository("ProgramCommentDAO")
 public class ProgramCommentDAO implements IProgramCommentDAO {
 
 	@Autowired
@@ -82,7 +83,7 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 	@Override
 	public boolean delete(Integer commentId) {
 		Session session = sessionFactory.getCurrentSession();
-		ProgramCommentBean pBean = session.get(ProgramCommentBean.class, commentId);
+		ProgramCommentBean pBean = select(commentId);
 
 		if (pBean != null) {
 			session.delete(pBean);
@@ -91,5 +92,7 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 
 		return false;
 	}
+	
+	
 
 }
