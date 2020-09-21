@@ -44,7 +44,7 @@
 		</TR>
 		</c:forEach>
 		<tr height='36' id='borderA'>
-			<td id='borderA' align="center" colspan="4"><a href="<c:url value='/a' />">回首頁</a></td>
+			<td id='borderA' align="center" colspan="4"><a href="<c:url value='removeShoppingCart' />">回首頁</a></td>
 		</tr>
 	</TABLE>
 	</center>

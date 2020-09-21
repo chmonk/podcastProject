@@ -30,7 +30,7 @@ import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.MemberBean;
 
 @Controller
-@SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart" })
+@SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart","ActivityList" })
 public class ActivityController {
 
 	// 管理活動頁面
@@ -58,7 +58,7 @@ public class ActivityController {
 			return "Activity/manageActivities";
 		
 		} else if(role == 0) {
-			m.addAttribute("LoginOK", memberBean);			
+			//m.addAttribute("LoginOK", memberBean);			
 			list =aDao.selectAll();
 			m.addAttribute("ActivityList",list);
 			return "Activity/manageActivities";
@@ -113,9 +113,10 @@ public class ActivityController {
 		// 輸入表單資料至活動資料表
 		aDao.insert(activity);
 
-		return "Activity/manageActivities";
+		//return "Activity/manageActivities";
+		return "redirect:/manageActivities";
 
-		
+		//return "redirect:/Activity/manageActivities";
 	}
 	
 

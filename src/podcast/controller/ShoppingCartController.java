@@ -127,13 +127,11 @@ public class ShoppingCartController {
 			) {
 		ShoppingCart sc = (ShoppingCart) model.getAttribute("ShoppingCart");
 		if (sc == null) {
-			status.setComplete();
 			return "redirect:/login";
 	
 		}
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
-			status.setComplete();
 			return "redirect:/login";
 
 		}
@@ -154,7 +152,6 @@ public class ShoppingCartController {
 	protected String checkout(Model model, SessionStatus status) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
-			status.setComplete();
 			return "redirect:/login";
 		}
 		return "Orders/OrderConfirm";
@@ -214,34 +211,20 @@ public class ShoppingCartController {
 		}
 		ob2.setItems(items);
 		
+        //for購物車的鍵值, 一一取出放在購物車的OrderItemBean, 每一個物件都去查看庫存, 合法便設定此物件的庫存量, 
+        //以及設定此物件的訂單屬性OrderTicketBean(多個物件可以共用一個訂單)
+        //將此物件加入set集合, 再將此物件設定為OrderTicketBean訂單的items屬性
+		
 		//======
 		
 		OrderTicketDAO ot = (OrderTicketDAO)context.getBean("OrderTicketDAO");
 		ot.insert(ob2);
 		
 		//status.setComplete();		
-		webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
+		//webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
 		System.out.println("Order Process OK");
 		return "redirect:/orderList";
 	}	
 	
-	//按下取消購物
-	@GetMapping("abort")
-	protected String abort(HttpSession session, Model model, WebRequest webRequest, SessionStatus status)  {
-		webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
-		//沒有移除???
-		//status.setComplete();    // 移除所有被@SessionAttributes({"ShoppingCart"})標示的物件
-		return  "redirect:/a";
-	}
-	
-	//按下取消訂單
-	@GetMapping("cancelOrder")
-	protected String cancelOrder(Model model, 
-			WebRequest webRequest, SessionStatus status
-			) {
-		status.setComplete();
-//		webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
-		return  "redirect:/a";
-	}
 	
 }

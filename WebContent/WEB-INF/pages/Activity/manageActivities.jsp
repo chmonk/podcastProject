@@ -29,14 +29,14 @@ function confirmDelete(n) {
 		<tr>
 			<th>${LoginOK.name}的活動列表</th>
 			<th>日期</th>
-			<th>參加人數</th>
+			<th>庫存</th>
 			<th>刪除</th>
 		</tr>
 		<c:forEach var="alist" varStatus="loop" items="${ActivityList}">
 			<tr>
 				<td>${alist.activityName}</td>
 				<td>${alist.activityDate}</td>
-				<td>${alist.activityMaxPeople}</td>
+				<td>${alist.activityMaxPeople}張</td>
 				<td><Input type="button" name="delete" value="刪除"
 					onclick="confirmDelete(${alist.activityId})"></td>
 			</tr>

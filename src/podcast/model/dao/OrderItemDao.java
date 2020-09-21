@@ -38,7 +38,8 @@ public class OrderItemDao implements IOrderItemDao {
 		Integer stock = 0;
 		Session session = factory.getCurrentSession();
 		String hql0 = "SELECT activityMaxPeople FROM ActivityBean WHERE activityId = :activityId";
-		String hql1 = "UPDATE OrderItemBean SET amount = amount - :orderAmount WHERE activityId = :activityId";
+		String hql1 = "UPDATE ActivityBean SET activityMaxPeople = activityMaxPeople - :orderAmount WHERE activityId = :activityId";
+		//String hql1 = "UPDATE OrderItemBean SET amount = amount - :orderAmount WHERE activityId = :activityId";
 		stock = (Integer) session.createQuery(hql0)
 								 .setParameter("activityId", oib.getActivityId())
 								 .getSingleResult();
@@ -51,11 +52,11 @@ public class OrderItemDao implements IOrderItemDao {
 					"庫存數量不足: activityId: " + oib.getActivityId() + ", 在庫量: " 
 				    + stock + ", 訂購量: " + oib.getQuantity());
 		}
-//		n = session.createQuery(hql1)
-//				   .setParameter("activityId", oib.getActivityId())
-//				   .setParameter("orderAmount", oib.getQuantity())
-//				   .executeUpdate();
-//		return n;
+		n = (Integer)session.createQuery(hql1)
+				   .setParameter("activityId", oib.getActivityId())
+				   .setParameter("orderAmount", oib.getQuantity())
+				   .executeUpdate();
+		//return n;
 		return stockLeft;
 	}
 	

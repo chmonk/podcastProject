@@ -68,10 +68,10 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel" style="color:#F23030"> ${list.activityName}
-						&nbsp; <small><span class="label label-success">售票中</span>
+					<h4 class="modal-title" id="myModalLabel"> ${list.activityName}
+<%-- 						&nbsp; <small><span class="label label-success" style="color:#F23030">票券剩餘:${list.activityMaxPeople}張</span></small> --%>
 						
-<!-- 							&nbsp; <span class="label label-danger">已結束</span></small> -->
+							&nbsp; <small><span class="label label-danger">票券剩餘:${list.activityMaxPeople}張</span></small>
 					</h4>
 				</div>
 
