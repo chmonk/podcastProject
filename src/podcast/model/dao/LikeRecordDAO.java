@@ -132,21 +132,21 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 	}
 	
 	//確認節目 使用者是否有 like紀錄
-	public boolean checkByMemberidAndPodcastID(Integer memberId, Integer podcastId) {
+	public LikeRecordBean checkByMemberidAndPodcastID(Integer memberId, Integer podcastId) {
 
 		Session session = sessionFactory.getCurrentSession();
 
 		String sqlstr = "select * from likeRecord where memberId=? and podcastId=?";
 
-		NativeQuery query = session.createNativeQuery(sqlstr).setParameter(1, memberId).setParameter(2, podcastId);
+		NativeQuery<LikeRecordBean> query = session.createNativeQuery(sqlstr,LikeRecordBean.class).setParameter(1, memberId).setParameter(2, podcastId);
 
-		List rs = query.getResultList();
+		LikeRecordBean rs = query.getSingleResult();
 
 		// 如果為空 表示未按過節目  
-		if (rs.isEmpty()) {
-			return false;
+		if (rs==null) {
+			return null;
 		} else {
-			return true;
+			return rs;
 		}
 	}
 
