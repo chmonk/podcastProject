@@ -139,14 +139,13 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 
 		Session session = sessionFactory.getCurrentSession();
 
-		String sqlstr = "select * from likeRecord where memberId=? and podcastId=?";
+		String sqlstr = " from LikeRecordBean where memberId=?1 and podcastId=?2";
 
-		NativeQuery<LikeRecordBean> query = session.createNativeQuery(sqlstr, LikeRecordBean.class)
+	Query<LikeRecordBean> query = session.createQuery(sqlstr, LikeRecordBean.class)
 				.setParameter(1, memberId).setParameter(2, podcastId);
 
 		// 如果為空 表示未按過節目
 		try {
-
 			List<LikeRecordBean> rs = query.getResultList();
 			if (rs.isEmpty()) {
 				return null;
