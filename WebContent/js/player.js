@@ -1,4 +1,4 @@
-const mediaData = [
+var mediaData = [
 	{
 		author: "Freedom1111 Trail Studio",
 		authorUrl: "https://www.youtube.com/channel/UCx6kpgiQkDkN1UnK5GaATGw",
@@ -349,6 +349,7 @@ $(document).ready(() => {
 	const timelineBarTotalLength = 250;
 	const volumeBarTotalLength = 100;
 
+	
 	//播放清單取得歌曲
 	//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
 	audiotext.click(function(){
@@ -365,7 +366,10 @@ $(document).ready(() => {
 	})
 	// console.log(xhr);
 	mediaData.push(xhr.responseJSON);//不能用responseText會無法顯示
-	renderPlaylist(mediaData);//重新取得清單資訊
+	var result = [...new Set(mediaData.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
+	mediaData=result;
+	
+	renderPlaylist();//重新取得清單資訊
 	});
 	// 監聽事件顯示 UI
 	myAudio.on("playstatuschange", () =>
@@ -508,6 +512,6 @@ $(document).ready(() => {
 			myAudio.setVolume(vol);
 		}
 	});
-
+	console.log(mediaData);
 	renderPlaylist(mediaData);
 });
