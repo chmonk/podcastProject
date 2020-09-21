@@ -237,8 +237,7 @@ public class uploadpodcastController {
 							// 檔案寫入路徑(存檔)
 							uploadfile.transferTo(f);
 							
-							return "./"+savefolder+"/"+savefilename;
-						
+							return "./"+savefolder+"/"+savefilename;				
 	}
 	
 	
@@ -263,16 +262,27 @@ public class uploadpodcastController {
 	    	 	
 	    	 	LikeRecordDAO ldao=(LikeRecordDAO)context.getBean("LikeRecordDAO");
 	    	 	
-	    	 	ldao.deteleByPodcastId(podcastId);
+	    	 	ldao.detelePodcastId(podcastId);
 	    	 	
-	    	 	MyFavProgramDAO myfavDao = (MyFavProgramDAO)context.getBean("MyFavProgramDAO");
-	    	 
-	    	 	myfavDao.deteleByPodcastId(podcastId);
+//	    	 	MyFavProgramDAO myfavDao = (MyFavProgramDAO)context.getBean("MyFavProgramDAO");
+//	    	 
+//	    	 	myfavDao.deteleByPodcastId(podcastId);
 	    	 	//test 
-	    	 	System.out.println("delete podcastid "+ podcastId +" and related browsing history, likerecord, myfavrecord");
+	    	 	System.out.println("delete podcastid "+ podcastId +" and related browsing history, likerecord");
 	     }
 	
-	
+	     
+	     //吃表單內容   修改節目bean  回到原設定頁面
+	     
+	     public String updateProgram(Integer podcastId) throws Exception {
+	    	 
+	    	 uploadPodcastBean ubean = upDao.select(podcastId);
+	    	 
+	    	 
+	    	 
+	    	 return "";
+	     }
+	     
 	     @GetMapping("/testsql")
 	     public void testsql() {
 	        System.out.println("run native");
