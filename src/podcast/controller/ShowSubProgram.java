@@ -33,7 +33,7 @@ import podcast.model.javabean.uploadPodcastBean;
 @Controller
 @SessionAttributes(names={"subProgram","needSub","upLoadProgram"})
 @RequestMapping(path = { "/showPaymentProgram.controller" })
-public class TestShowSubProgram {
+public class ShowSubProgram {
     @RequestMapping(method = RequestMethod.GET)
 	public String processActin(HttpServletRequest request,HttpServletResponse response,Model m) throws Exception {
     	
@@ -107,7 +107,7 @@ public class TestShowSubProgram {
     	
     	
 //    	return null;
-		return "/testSubProgram";
+		return "/subProgram";
 	}
     
     
