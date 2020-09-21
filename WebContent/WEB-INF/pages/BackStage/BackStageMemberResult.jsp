@@ -24,21 +24,29 @@
 	background-color: #949494;
 }
 
+th{
+	background-color: #3A3A3A;
+}
+
 td {
 	width: 100px;
 	text-align: center;
-	border: 1px solid;
+	border: 1px solid #3A3A3A;
+	word-wrap: break-word;
+    max-width: 1px;
+	
 }
 
 table {
-	border: 3px solid;
+	border: 3px solid #3A3A3A;
 	border-collapse: collapse;
+	
 }
 
 th {
 	width: 100px;
 	text-align: center;
-	border: 1px solid;
+	border: 1px solid #3A3A3A;
 }
 
 .center {
@@ -54,39 +62,48 @@ th {
 		<br>
 		<h3 style="color: red" class="center">${memberDeleteMsg}</h3>
 		<div>
-			<table class="center" class="center">
-				<tr>
-					<th>MemberId</th>
-					<th>Account</th>
-					<th>Password</th>
-					<th>Name</th>
-					<th>NickName</th>
-					<th>Birthday</th>
-					<th>RegisterDate</th>
-					<th>Info</th>
-					<th>Email</th>
-					<th>CellPhone</th>
-					<th>Address</th>
-					<th>Sex</th>
-					<th>Image</th>
-					<th>Role</th>
-					<th>CreditCardNumber</th>
-					<th>BankAccount</th>
-					<th>MonthlyPayment</th>
-				</tr>
+			
 				<c:forEach items="${mList}" var="member" varStatus="tagStatus">
+				<table class="center" class="center">
 					<tr>
-						<td>${member.memberId}</td>
+						<th>MemberId</th>
+						<th>Account</th>
+						<th>Password</th>
+						<th>Name</th>
+						<th>NickName</th>
+						<th>Birthday</th>
+						<th>RegisterDate</th>
+					</tr>
+					<tr>
+						<td rowspan="5">${member.memberId}</td>
 						<td>${member.account}</td>
 						<td>${member.password}</td>
 						<td>${member.name}</td>
 						<td>${member.nickname}</td>
 						<td>${member.birthday}</td>
 						<td>${member.registerDate}</td>
-						<td>${member.info}</td>
+					</tr>
+					<tr>
+						<th colspan="2">Info</th>
+						<th>Email</th>
+						<th>CellPhone</th>
+						<th colspan="2">Address</th>
+					</tr>
+					<tr>
+						<td colspan="2">${member.info}</td>
 						<td>${member.email}</td>
 						<td>${member.cellphone}</td>
-						<td>${member.address}</td>
+						<td colspan="2">${member.address}</td>
+					</tr>
+					<tr>
+						<th>Sex</th>
+						<th>Image</th>
+						<th>Role</th>
+						<th>CreditCardNumber</th>
+						<th>BankAccount</th>
+						<th>MonthlyPayment</th>
+					</tr>
+					<tr>
 						<td>${member.sex}</td>
 						<td>${member.image}</td>
 						<td>${member.role}</td>
@@ -94,8 +111,9 @@ th {
 						<td>${member.bankAccount}</td>
 						<td>${member.monthlyPayment}</td>
 					</tr>
+					</table>
 				</c:forEach>
-			</table>
+			
 		</div>
 
 		<form class="center"

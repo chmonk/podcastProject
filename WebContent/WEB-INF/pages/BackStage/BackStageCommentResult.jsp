@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-   <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,56 +18,86 @@
 
 
 <style>
-	td{
-		width: 100px;
-		text-align: center;
-		border:1px solid;
-	}
+#body {
+	font-family: "Lato", sans-serif;
+	color: white;
+	background-color: #949494;
+}
+
+th {
+	background-color: #3A3A3A;
+}
+
+td {
+	width: 100px;
+	text-align: center;
+	border: 1px solid #3A3A3A;
+	word-wrap: break-word;
+    max-width: 1px;
 	
-	table{
-		border:3px solid;
-		border-collapse: collapse;
-	}
-	
-	th{
-		width:100px;
-		text-align: center;
-		border:1px solid;
-		
-	}
-	
-		.center{
-		margin:0px auto;
-		text-align:center;
-		
-	}
-	
+}
+
+table {
+	border: 3px solid #3A3A3A;
+	border-collapse: collapse;
+}
+
+th {
+	width: 100px;
+	text-align: center;
+	border: 1px solid #3A3A3A;
+}
+
+.center {
+	margin: 0px auto;
+	text-align: center;
+}
 </style>
 </head>
-<body>
-<div style="margin-top: 50px">
-<h3 class="center">BackStage ProgramComment Result</h3><br>
-<div>
-<h3 class="center" style="color: red">${deleteCommentMsg}  ${deletedCommentId} </h3>
-<h3 class="center"  style="color: red">${deleteCommentByMemberMsg}</h3>
-<table class="center" >
-<tr><th>CommentId</th><th>CommentMsg</th><th>MemberId</th><th>PodcasterId</th><th>MsgStatus</th><th>MsgDate</th></tr>
-<c:forEach items="${pList}" var="comment" varStatus="tagStatus">
-	<tr>
-	<td>${comment.commentId}</td>
-	<td>${comment.commentMsg}</td>
-	<td>${comment.memberId}</td>
-	<td>${comment.podcasterId}</td>
-	<td>${comment.msgStatus}</td>
-	<td>${comment.msgDate}</td>
-	</tr>
-</c:forEach>
-</table>
-</div >
-<form class="center" action="<c:url value="/BackToSelect.controller"/>">
-	<input type="submit" value="BACK" style="margin-top: 50px">
-</form>
-</div>
+<body id="body">
+	<div style="margin-top: 50px">
+		<h3 class="center">BackStage ProgramComment Result</h3>
+		<br>
+		<div>
+			<h3 class="center" style="color: red">${deleteCommentMsg}
+				${deletedCommentId}</h3>
+			<h3 class="center" style="color: red">${deleteCommentByMemberMsg}</h3>
+
+
+
+			<c:forEach items="${pList}" var="comment" varStatus="tagStatus">
+				<table class="center">
+					<tr>
+						<th>CommentId</th>
+						<th colspan="2">CommentMsg</th>
+						<th>MsgStatus</th>
+					</tr>
+					<tr>
+						<td rowspan="3">${comment.commentId}</td>
+						<td colspan="2">${comment.commentMsg}</td>
+						<td>${comment.msgStatus}</td>
+					</tr>
+					<tr>
+						<th>PodcasterId</th>
+						<th>MemberId</th>
+						<th>MsgDate</th>
+					</tr>
+					<tr>
+						<td>${comment.podcasterId}</td>
+						<td>${comment.memberId}</td>
+						<td>${comment.msgDate}</td>
+					</tr>
+				</table>
+				<br>
+			</c:forEach>
+
+		</div>
+		<form class="center"
+			action="<c:url value="/BackToSelect.controller"/>">
+			<input type="submit" value="BACK" style="margin-top: 50px;margin-bottom: 50px"
+				class="btn btn-warning">
+		</form>
+	</div>
 
 </body>
 </html>
