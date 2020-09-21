@@ -92,6 +92,7 @@ hr{
 }
 
 .navbar.comeup {margin-top: 0;background: rgba(0,0,0,0.9);}
+.barlist.comeup {margin-top: 0;background: rgba(0,0,0,0.9);}
 .navbar-default .navbar-nav>li>a {
 	padding: 25px 20px;
 	font-size: 15px;

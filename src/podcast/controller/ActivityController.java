@@ -112,8 +112,8 @@ public class ActivityController {
 
 		m.addAttribute("list", list);
 		//return "../../ActivitiesList";
-		//return "/header_banner";
-		return "/index";	
+		return "/header_banner";
+		//return "/index";	
 	}
 
 	public String processFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {

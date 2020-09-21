@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.carousel.min.css"></link>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.theme.default.min.css"></link>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/owl.carousel.min.js"></script>
@@ -16,14 +16,7 @@
 
 <style type="text/css">
  
-/* body {
-	 perspective: 1000px;
-	 background: #f2f4f7;
-} */
-/*  h1 {
-	 color: white;
-} */
-.container {
+./* container {
 	 padding-top: 20px;
 }
  ul {
@@ -34,7 +27,7 @@
 	 margin: 0;
 	 float: left;
 	 padding: 50px 0;
-}
+} */
  .card {
 	 margin-left: 0.25em;
 	 margin-right: 0.25em;
@@ -297,6 +290,10 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+	<div class="head">
+		<jsp:include page="../header_banner.jsp" flush="true " />
+		
+	</div>
 	<div class="carousel-container col-sm-10 padcard">
 		<div class="row">
 	    	<div class="col-sm-12">

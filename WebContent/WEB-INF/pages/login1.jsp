@@ -5,17 +5,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
-<link rel="stylesheet" href="css/loginStyle.css">
 <title>登入</title>
-
+<style type="text/css">
+#main {
+	position:relative;
+	top: 50px;
+    width:100%;
+    text-align:center;
+}
+#content {
+  width: 500px ;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+</style>
 <script type="text/javascript">
 //由<body>的onLoad事件處理函數觸發此函數
 function setFocusToUserId(){   
 	 document.forms[0].userId.focus();   // 將游標放在userId欄位內
 }
-
-
 </script>
 </head>
 <body onLoad="setFocusToUserId()" style="background:;">
@@ -28,62 +36,7 @@ function setFocusToUserId(){
 <!-- 引入共同的頁首 -->
 <%-- <jsp:include page="/fragment/topMVC.jsp" /> --%>
 
-  <form action="<c:url value='login.do' />" method="POST" name="loginForm" class="login-form">
-    <h1>登入</h1>
-    <div class="textb">
-      <input type="text" name="userId" required value="${requestScope.user}${param.userId}">
-      <div class="placeholder">Username</div>
-    </div>
-
-    <div class="textb">
-      <input type="password" required name="password" value="${requestScope.password}${param.password}">
-      <div class="placeholder">Password</div>
-      <div class="show-password fas fa-eye-slash"></div>
-    </div>
-
-    <div class="checkbox">
-      <input type="checkbox" name="rememberMe" 
-               <c:if test='${requestScope.rememberMe==true}'>
-                  
-                  checked='checked'
-               </c:if> 
-             value="true">
-      <div class="fas fa-check"></div>
-      Stay signed in
-    </div>
-
-    <button type="submit" class="btn fas fa-arrow-right" disabled></button>
-    <a href="#">Can't Sign in?</a>
-    <a href="#">Create Account</a>
-  </form>
-<script type="text/javascript">
-var fields = document.querySelectorAll(".textb input");
-var btn = document.querySelector(".btn");
-function check(){
-  if(fields[0].value != "" && fields[1].value != "")
-    btn.disabled = false;
-  else
-    btn.disabled = true;  
-}
-
-fields[0].addEventListener("keyup",check);
-fields[1].addEventListener("keyup",check);
-
-document.querySelector(".show-password").addEventListener("click",function(){
-  if(this.classList[2] == "fa-eye-slash"){
-    this.classList.remove("fa-eye-slash");
-    this.classList.add("fa-eye");
-    fields[1].type = "text";
-  }else{
-    this.classList.remove("fa-eye");
-    this.classList.add("fa-eye-slash");
-    fields[1].type = "password";
-  }
-});
-</script>
-
-
-<%-- <Form action="<c:url value='login.do' />" method="POST" name="loginForm">
+<Form action="<c:url value='login.do' />" method="POST" name="loginForm">
   <div id='content'>
     <Table  style="border-width:2; background:; width: 500px;
                         border-style:inset; border-color:;">
@@ -94,6 +47,7 @@ document.querySelector(".show-password").addEventListener("click",function(){
          <TR>
              <TD colspan='2' align="CENTER" style="font-size:0.6cm;font-weight: 300;"> 
                 <Font color="#006600" face="">
+<%--                     ${AppName} --%>
                 </Font>
              </TD>
          </TR>
@@ -150,6 +104,6 @@ document.querySelector(".show-password").addEventListener("click",function(){
          </TR>
     </Table>
   </div>
-</Form> --%>
+</Form>
 </body>
 </html>
