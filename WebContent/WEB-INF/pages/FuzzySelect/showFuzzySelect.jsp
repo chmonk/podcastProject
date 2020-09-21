@@ -13,6 +13,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.theme.default.min.css"></link>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/owl.carousel.min.js"></script>
 
+<!-- player bar css -->
+<link href="css/playerbar.css" rel="stylesheet">
+<!-- player bar icon -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 
 <style type="text/css">
  
@@ -351,7 +356,7 @@ $(document).ready(function(){
 	      </div>
 	      <div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 	        <span class="card-media-body-supporting-bottom-text subtle">${data.getCategoryName()}</span>
-	        <a id="${data.getPodcastId()}" class="card-media-body-supporting-bottom-text card-media-link u-float-right">加到播放列表</a>
+	        <a id="${data.getPodcastId()}" class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 	      </div>
 	    </div>
 	  </div>
@@ -359,7 +364,32 @@ $(document).ready(function(){
 	</c:forEach>
 
 </div>
-
+	<!--playerbar -->
+	
+	<!-- jQuery -->
+	<script src="js/jquery.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- WayPoints JS -->
+	<script src="js/waypoints.min.js"></script>
+	<!-- Include js plugin -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- One Page Nav -->
+	<script src="js/jquery.nav.js"></script>
+	<!-- Respond JS for IE8 -->
+	<script src="js/respond.min.js"></script>
+	<!-- HTML5 Support for IE -->
+	<script src="js/html5shiv.js"></script>
+	<!-- Custom JS -->
+	<script src="js/custom.js"></script>
+	<!-- 	plaer bar function js -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
+	
+	
+	<jsp:include page="../playerbar.jsp" flush="true " />
+	
+	<!--playerbar end -->
 	
 
 </body>

@@ -3,6 +3,7 @@ package podcast.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,15 +17,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.annotation.ApplicationScope;
 import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import podcast.model.dao.HistoryDao;
+import podcast.model.dao.LikeRecordDAO;
+import podcast.model.dao.MyFavProgramDAO;
 import podcast.model.dao.UploadPodcastDAO;
+import podcast.model.javabean.HistoryOrderProgramBean;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
@@ -36,6 +44,9 @@ public class uploadpodcastController {
 
 	@Autowired
 	UploadPodcastDAO upDao;
+	
+	@Autowired
+	HistoryDao hdao;
 	
 	@Autowired
 	HttpServletRequest request;
@@ -89,18 +100,9 @@ public class uploadpodcastController {
 		
 		
 		uploadPodcastBean ubean=new uploadPodcastBean();
-		
-		
-//		ubean.setCategoryId(1);
-//		ubean.setMemberId(15);
-//		ubean.setOpenComment(1);
-//		ubean.setOpenPayment(1);
-//		ubean.setPodcastInfo("tttsxdcstt");
-//		ubean.setTitle("yhcjsdkc");
-//		upDao.insert(ubean);
-	
+			
 
-		// 給入偽身分 id17 阿滴日文
+		// 給入偽身分 id17 阿滴日文  //接上
 		m.addAttribute("id", "18");
 		//System.out.println(upDao.select(31).getUploadTime().toString());
 		return "playerBar/pcupload";
@@ -240,5 +242,48 @@ public class uploadpodcastController {
 	}
 	
 	
+		//當刪除節目時   刪除對應節目瀏覽紀錄  點讚紀錄  我的最愛紀錄
+	     @GetMapping(value = "/deleteProgram/{podcastId}")
+	     public void deleteProgramRelatedDate(HttpServletRequest request,
+	    		 Model m,
+	    		 @PathVariable Integer podcastId
+	    		 ) throws Exception {
+	    	 
+	    	 	ServletContext app = request.getServletContext();
+	    	 	
+	    	 	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+	    	 	
+	    	 	UploadPodcastDAO updao= (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
+	    	 	
+	    	 	updao.delete(podcastId);
+	    	 	
+	    	 	HistoryDao hdao= (HistoryDao)context.getBean("HistoryDao");
+	    	 	
+	    	 	hdao.deteleByPodcastId(podcastId);
+	    	 	
+	    	 	LikeRecordDAO ldao=(LikeRecordDAO)context.getBean("LikeRecordDAO");
+	    	 	
+	    	 	ldao.deteleByPodcastId(podcastId);
+	    	 	
+	    	 	MyFavProgramDAO myfavDao = (MyFavProgramDAO)context.getBean("MyFavProgramDAO");
+	    	 
+	    	 	myfavDao.deteleByPodcastId(podcastId);
+	    	 	//test 
+	    	 	System.out.println("delete podcastid "+ podcastId +" and related browsing history, likerecord, myfavrecord");
+	     }
+	
+	
+	     @GetMapping("/testsql")
+	     public void testsql() {
+	        System.out.println("run native");
+	        
+	     
+	    	 List<HistoryOrderProgramBean> hopbeanList = hdao.selectHistoryByMemberId2(1);
+	    	 
+	    	 
+	    	 for(HistoryOrderProgramBean hpbean:hopbeanList) {
+	    		 System.out.println(hpbean.getPodcastId()+" "+hpbean.getUploadTime());
+	    	 }
+	     }
 
 }

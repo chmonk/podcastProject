@@ -294,6 +294,68 @@ $(document).ready(() => {
 	const volumeBg = $("#volume_bg");
 	const volumeBar = $("#volume_bar");
 	const volumeHandle = $("#volume_handle");
+	const audiotext = $(".playlist-number");;
+
+
+
+	//載入頁面時 取得使用者看過的瀏覽列表置換成mediatext
+	const getNewMediaData = function (userId) {
+
+		
+
+		//請求瀏覽紀錄塞入播放清單
+		let xhr5 = new XMLHttpRequest();
+
+		xhr5.open("post", "/SpringWebProject/getPlaylist", true);
+
+		xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+		xhr5.send("userId=" + userId);
+
+
+
+
+		xhr5.onreadystatechange = function() {
+
+			if (xhr5.readyState == 4) {
+
+				if (xhr5.status == 200) {
+
+					var type = xhr5.getResponseHeader("Content-Type");
+
+					if (type.indexOf("application/json") === 0) {
+						
+						//clean old mediaData
+
+						//黑魔法清空array
+						mediaData.length = 0;
+						
+						
+						med = JSON.parse(xhr5.responseText);
+
+						//將object 轉為 js array 才能取用 array方法
+						Object.keys(med).map(function(_) { return med[_]; });
+						//console.log(med);
+
+						//依序塞入歌曲  舊到新push   反敘為unshift
+						med.forEach(function(song, index) {
+							mediaData.unshift(song);
+						})
+
+						renderPlaylist(mediaData);
+					}
+
+				} else {
+					console.log("status isn;t 200");
+				}
+			} else {
+				console.log("readystate=" + xhr5.readyState);
+			}
+	};
+	};
+
+	//getNewMediaData(1);
+
 
 	// 歌曲資訊元件
 	const MusicInfo = (info, idx) => {
@@ -325,7 +387,7 @@ $(document).ready(() => {
 			const idx = parseInt($(this).attr("id").replace("queue-item-", ""));
 			//設定準備播放歌曲
 			myAudio.setCurrentMusic(idx);
-			//自動播放
+			//自動播放	
 			myAudio.setPlayStatus(true);
 		});
 	};
@@ -344,15 +406,36 @@ $(document).ready(() => {
 		$("#duration").html(formatTime(duration));
 	};
 
-	const myAudio = new AudioPlayer(mediaData);
+	var myAudio = new AudioPlayer(mediaData);
 	const timelineBarTotalLength = 250;
 	const volumeBarTotalLength = 100;
+
+	//播放清單取得歌曲
+	//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
+	audiotext.click(function() {
+		var pid = {};
+		pid.id = this.id;
+		// console.log(this.id);
+
+		xhr = $.ajax({
+			url: "/SpringWebProject/addListController",
+			//上線應修正成async
+			async: false,
+			// data:{pid:$("#playNowBtn").val()}
+			data: { id: pid },
+			dataType: "json"
+		})
+		// console.log(xhr);
+		mediaData.push(xhr.responseJSON);//不能用responseText會無法顯示
+		renderPlaylist(mediaData);//重新取得清單資訊
+	});
 
 	// 監聽事件顯示 UI
 	myAudio.on("playstatuschange", () =>
 		//改變播放圖案
 		playBtn.html(myAudio.getIsPlaying() ? "pause" : "play_arrow")
 	);
+
 	myAudio.on("playmodechange", () => {
 		switch (myAudio.playMode) {
 			case "step": {
@@ -448,9 +531,9 @@ $(document).ready(() => {
 		queueBtn.removeClass("select");
 	});
 	//離開播放選單元素時關閉播放選單
-		queueWrapper.on("mouseleave", () => {
-			queueWrapper.addClass("hidden");
-		})
+	queueWrapper.on("mouseleave", () => {
+		queueWrapper.addClass("hidden");
+	})
 
 
 	// 音量調整面板
@@ -491,31 +574,32 @@ $(document).ready(() => {
 		}
 	});
 
-	renderPlaylist(mediaData);
+	//取得使用者id  渲染成對應的播放清單
+	getNewMediaData(1);
 
 
 	/////////////////////////////////
-	var lemon = $("#lemon");
-
-	lemon.click("on", function() {
-
-		let xhr = new XMLHttpRequest();
-
-		xhr.open("get", "/SpringWebProject/postjson", true);
-
-		xhr.send();
-
-		xhr.onreadystatechange = function() {
-			if (xhr.status == 200 && xhr.readyState == 4) {
-				alert(xhr.responseText);
-
-				mediaData.push(JSON.parse(xhr.responseText));
-
-				renderPlaylist(mediaData);
-
-			}
-		}
-	})
+	//	var lemon = $("#lemon");
+	//
+	//	lemon.click("on", function() {
+	//
+	//		let xhr = new XMLHttpRequest();
+	//
+	//		xhr.open("get", "/SpringWebProject/postjson", true);
+	//
+	//		xhr.send();
+	//
+	//		xhr.onreadystatechange = function() {
+	//			if (xhr.status == 200 && xhr.readyState == 4) {
+	//				alert(xhr.responseText);
+	//
+	//				mediaData.push(JSON.parse(xhr.responseText));
+	//
+	//				renderPlaylist(mediaData);
+	//
+	//			}
+	//		}
+	//	})
 
 	//生成對應memberid所含圖片列表(未來替換成播放條列表)
 	$("button.t")
@@ -532,10 +616,9 @@ $(document).ready(() => {
 				+ e.target.id, true);
 
 			//傳輸語句測試
-			console.log("/SpringWebProject/gettheplayersong?name="+ e.target.id);
+			console.log("/SpringWebProject/gettheplayersong?name=" + e.target.id);
 			//SpringWebProject/gettheplayersong?name=17
 
-			
 
 			//收到資料後新建成帶有program id的圖片
 			xhr1.onreadystatechange = function() {
@@ -566,7 +649,7 @@ $(document).ready(() => {
 
 				}
 			}
-				xhr1.send();
+			xhr1.send();
 		})
 
 
@@ -577,23 +660,48 @@ $(document).ready(() => {
 		//取得this的id  this.id , this 指向對應element
 		//console.log(this.id);
 		var thisid = this.id;
-		
-		
+
+
 		//取得使樂者id
-		var userid= document.getElementById("userid").dataset.value;
+		var userid = document.getElementById("userid").dataset.value;
 
 		//測試字串
-		console.log("/SpringWebProject/postjson/"+userid+"/?id=" + thisid);
+		console.log("/SpringWebProject/postjson/" + userid + "/?id=" + thisid);
 
 		let xhr = new XMLHttpRequest();
 		console.log(this);
-		xhr.open("get", "/SpringWebProject/postjson/"+userid+"/?id=" + thisid, true);
+		xhr.open("get", "/SpringWebProject/postjson/" + userid +"/?id=" + thisid, true );
 		xhr.send();
 		xhr.onreadystatechange = function() {
 			if (xhr.status == 200 && xhr.readyState == 4) {
 				alert(xhr.responseText);
-				mediaData.push(JSON.parse(xhr.responseText));
-				renderPlaylist(mediaData);
+
+
+				var new_song = JSON.parse(xhr.responseText);
+
+				var duplicate = false;
+				var duplicate_index;
+
+				for (let i = 0; i < mediaData.length; i++) {
+					if (mediaData[i].podcastId == new_song.podcastId) {
+						duplicate = true;
+						duplicate_index = i;
+						break;
+					}
+				}
+				if (duplicate) {
+					mediaData.splice(duplicate_index, 1);
+					mediaData.unshift(new_song);
+					renderPlaylist(mediaData);
+				} else {
+					mediaData.unshift(new_song);
+					renderPlaylist(mediaData);
+				}
+				
+				//設定準備播放歌曲
+			myAudio.setCurrentMusic(0);
+			//自動播放	
+			myAudio.setPlayStatus(true);
 			}
 		}
 
