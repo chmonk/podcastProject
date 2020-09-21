@@ -23,7 +23,7 @@ import podcast.model.javabean.ProgramCommentBean;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
-//@SessionAttributes({ "LoginOK"})
+@SessionAttributes({ "LoginOK"})
 public class CommentController {
 
 	//按下頻道圖案=送出action,連到此方法
@@ -52,9 +52,9 @@ public class CommentController {
 		 HttpServletRequest request, Model m) throws Exception {
 		
 		//連接帳號
-//		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
-//		Integer memberId = memberBean.getMemberId();
-		System.out.println("content:"+commentMsg);
+		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+		Integer memberId = memberBean.getMemberId();
+//		System.out.println("content:"+commentMsg);
 
 	
 		ProgramCommentBean pBean =new ProgramCommentBean();
@@ -62,6 +62,7 @@ public class CommentController {
     	Timestamp time= new Timestamp(System.currentTimeMillis());
 
 		
+    	pBean.setMemberId(memberId);
 		pBean.setCommentMsg(commentMsg);
 		pBean.setMsgDate(time);
 		
@@ -71,8 +72,8 @@ public class CommentController {
 		commDao.insert(pBean);
 
 		
-		Integer podcasterId=5;//暫定
-		List<ProgramCommentBean> commList=commDao.selectAllPodcasterId(podcasterId);
+//		Integer podcasterId=5;//暫定
+		List<ProgramCommentBean> commList=commDao.selectAllPodcasterId(memberId);
 		m.addAttribute("commList",commList);
 		request.setAttribute("commList", commList);
 		
