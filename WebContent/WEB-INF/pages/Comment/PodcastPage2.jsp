@@ -7,94 +7,75 @@
 <meta charset="UTF-8">
 <title>頻道頁面</title>
 </head>
-<style>
-.d2 {
-	width: 500px;
-	height: 500px;
-	overflow-y: scroll;
-	overflow-x: none;
-}
-</style>
+
 <body>
+$().ready(function() {
+				//获取留言信息
+				getComment();
+			});
 
-	<Input type="button" name="modify" value="我的最愛"
-		onclick="location='http://localhost:8080/SpringWebProject/...'">
-	<br />
-	<br />
-	<div>
-		<form action="podcastPage.do" method="post" name="comment">
-			<table>
-				<tr>
-					<td>留言內容：</td>
-					<td><textarea id="content"  rows="5" cols="40"
-							placeholder="請輸入不超過50個字" maxlength="50"></textarea></td>
-				</tr>
-				<tr>
-					<td><input id="submitBtn" type="button" value=" 提交 " ></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-	<br />
-	<div class="d2">
-		<form>
-			<table id="ctable" width="400">
-				<c:forEach items="${commList}" var="comment" varStatus="tagStatus">
-					<tr>
-						<td width="240">${comment.commentMsg}</td>
-						<td width="80">${comment.memberId}</td>
-						<td width="80">${comment.msgDate}</td>
-					</tr>
-<!-- 				<td><input type="button" name="delete" value="刪除" onclick="location='http://localhost:8080/SpringWebProject/processDeleteComment'"></td></tr> -->
-<%-- 				<td><form id="${comment.commentId}" action="<c:url value="/processDeleteComment"/>"  method="POST"> --%>
-<!-- 				<input type="hidden" name="delCommId" value=${comment.commentId}>  -->
-<%-- 				<input type="button" value="刪除" onclick="delConfirm(this.name)" name="${comment.commentId}"></form></td> --%>
-				</c:forEach>
+
+<script>
+
+function  getComment(){
+		$.ajax({
+			url : "../../CommentServlet?method=getComment&page_now=1&com_type=3",
+				dataType : "JSON",
+				success : function(data) {
+				//	var json = jQuery.parseJSON(data); 
+				//$("#myText").text(json);
+				$.each(data,function(i,va){//这是可以的
+					//alert(va["count_all"]);i为data的索引，va为该索引的对象。
+					//对象变量名[“属性名”] 得到该对象下该属性名的属性值
+					var list = va["list"];
 					
-			</table>
-			<hr>
-		</form>
-	</div>
-	
-<script type="text/javascript">
-
-function delConfirm(clicked_name){
-
-	var r=confirm("確定要刪除此留言?")
-	if(r==true){
-		
-		console.log(clicked_name);
-		document.getElementById(clicked_name).submit();
-		
-	}else{
-		
+					//写一个存放所有评论的com_id的数组，用于后面和con_pid进行比较，如果相同，则说明，该评论有回复，就加上回复的内容
+					$.each(list,function(p,va){//	1.这里是先把没有回复内容的留言拿到
+						var com_id = va.com_pid;
+						if(com_id == ""){//没有回复
+							appendToDiv(va);//直接生成评论
+						}
+					});
+					$.each(list,function(p,va){
+							var com_id = va.com_pid;
+							if(com_id != ""){//2.在根据有pid（就是回复留言的留言），然后根据pid来把这个内容追加到对应的留言内容里
+							var html = jsonToHtml(va);
+							$("#"+com_id).children(".panel-body").append(html);
+							}
+					});	
+				});	
+			},
+			error : function() {
+				alert("ajax错误");
+			}
+	});
 	}
+
+function jsonToHtml(va){
+	var html = "";
+	html = '<div class="panel panel-danger" id = "'+va.com_id+'">'+
+			//评论title和时间
+			'<div class="panel-heading">' +
+			'<h3 class="panel-title">' +
+			'<div id="show_name">' + 
+			'<span class="glyphicon glyphicon-user" aria-hidden="true"></span>' +
+			'昵称：' + va.com_name +
+			'<div style="float: right;" id ="show_time">Tiime:'+va.com_date+'</div>' +
+			'</div>' +
+			'</h3>' +
+			'</div>' +
+			//评论内容
+			'<div class="panel-body" id="show_content"><div id="show_other"></div>　　　'+va.com_content+'</div>' +
+			//评论未
+			'<div class="panel-footer" align="left">' +
+			'<div align="right">' +
+			'<span class="glyphicon glyphicon-send" aria-hidden="true"></span>' +
+			'<small><button type="button" class="btn btn-sm" id="replay'+va.com_id+'" οnclick="replay('+va.com_id+');">回复</button></small>' +
+			'</div>'+
+			'</div>'
+			'</div>';
+	return html;
 }
-
-document.getElementById("submitBtn").onclick=function(){
-	var xhr=new XMLHttpRequest();
-	xhr.open("POST","<c:url value='/podcastPage.do'/>",true);
-	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	var	content=document.getElementById("content").value;
-	console.log(content);
-	xhr.send("content="+content);
-	console.log(content);
-
-	xhr.onreadystatechange=function(){
-		if(xhr.readyState===4 && xhr.status===200){
-			var cbean=JSON.parse(xhr.responseText);
-			console.log(cbean.commentMsg);
-			var ctable=document.getElementById("ctable");
-
-			//下面兩行有問題尚未解決
-			var newMsg="<tr><td width='240'>"+cbean.commentMsg+"</td><td width='80'>"+cbean.memberId+"</td><td width='80'>"+cbean.msgDate+"</td></tr>";
-			ctable.append(newMsg);
-		}
-	}
-	
-}
-
-
 </script>
 </body>
 </html>
