@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +14,7 @@ import podcast.model.idao.ILikeRecordDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.LikeRecordBean;
 
-@Repository
+@Repository("LikeRecordDAO")
 public class LikeRecordDAO implements ILikeRecordDAO {
 	
 	@Autowired
@@ -82,5 +83,28 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 		return false;
 	}
 
+	
+	public boolean deteleByPodcastId(Integer podcastId) {
+
+		Session session = sessionFactory.getCurrentSession();
+		
+		String nativesqlstr="delete from likeRecord where podcastId=?";
+		
+		session.createNativeQuery(nativesqlstr).setParameter(1, podcastId).executeUpdate();
+		
+		//檢查是否刪除
+		String nativesqlstr1="select * from likeRecord where podcastId=?";
+		
+		NativeQuery<LikeRecordBean> query = session.createNativeQuery(nativesqlstr1,LikeRecordBean.class).setParameter(1, podcastId);
+		
+		List<LikeRecordBean> result = query.getResultList();
+		
+		if(result.isEmpty()) {
+			//刪除乾淨
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 }
