@@ -426,7 +426,7 @@ window.onload=function(){
 									class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 									<span class="card-media-body-supporting-bottom-text subtle">${data.getCategoryName()}</span>
 									<a id="${unalreadySub.getPodcastId()}"
-										class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">需訂閱才能收聽</a>
+										class="card-media-body-supporting-bottom-text card-media-link u-float-right ">需訂閱才能收聽</a>
 								</div>
 							</div>
 						</div>

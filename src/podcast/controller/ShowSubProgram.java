@@ -25,6 +25,7 @@ import podcast.model.dao.SubProgramListDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.CategoryBean;
 import podcast.model.javabean.HistoryBean;
+import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.SubscriptionBean;
 import podcast.model.javabean.uploadPodcastBean;
 
@@ -50,21 +51,24 @@ public class ShowSubProgram {
     	int procasterNumber = 0;
 
     	Date date =new Date();
+    	MemberBean loginMember =(MemberBean)request.getSession().getAttribute("LoginOK");
     	SubProgramListDAO fdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
     	
-    	List<SubscriptionBean> f = fdao.selectSubcriptionByMemberID(1,18);
-    	if(f.isEmpty()) {
-    		SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
-        	List<uploadPodcastBean> needSub = sdao.selectByMemeberId(18);
+    	
+    	System.out.println("----------測試是否抓到登入的會員ID-------------------------");
+    	System.out.println(loginMember.getMemberId());
+    	System.out.println("----------測試是否抓到登入的會員ID---------------------------");
+
+
+    	List<SubscriptionBean> f = fdao.selectSubcriptionByMemberID(loginMember.getMemberId(),17);//確認訂單有無訂閱關係
+    	if(f.isEmpty()) {  //無訂閱關係
+    		SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO"); 
+        	List<uploadPodcastBean> needSub = sdao.selectByMemeberId(17);
         	m.addAttribute("needSub", needSub);
         	System.out.println("need="+needSub);
     		
     	}
-    	
-    	System.out.println("--------------------------------");
-    	
-    	System.out.println(f);
-    	System.out.println("--------------------------------");
+
     	for(SubscriptionBean g:f) {
     	
     		if(g.getSubdateEnd().compareTo(date)==1) {
@@ -79,8 +83,7 @@ public class ShowSubProgram {
     		System.out.println("節目ID: "+g.getPodcasterId());
     		System.out.println("日期比較: "+g.getSubdateEnd().compareTo(date));
     	}
-    	System.out.println("-----------------------------------------------");
-    	System.out.println("現在時間: "+date);
+
     	m.addAttribute("upLoadProgram",f);
 
     	

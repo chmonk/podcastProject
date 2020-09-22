@@ -16,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import podcast.model.dao.SubProgramListDAO;
+import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.SubscriptionBean;
 import podcast.model.javabean.uploadPodcastBean;
 
@@ -47,10 +48,15 @@ public class AfterSubProgram {
 	    	Calendar date2 = Calendar.getInstance(); //Calendar方法 用於計算DATE的加減
 	    	date2.add(Calendar.MONTH, +1);
 	    	Date date3 = date2.getTime(); //需轉換回DATE屬性 以符合setSubdateEnd的屬性    	
-	    	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");	    	
+	    	
+	    	
+	    	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
+	    	MemberBean loginMember =(MemberBean)request.getSession().getAttribute("LoginOK");
+	    	
+	    	
 	    	if(a.isEmpty()) {
 	    	SubscriptionBean q = new SubscriptionBean();
-	    	q.setMemberId(1); //訂閱者ID
+	    	q.setMemberId(loginMember.getMemberId()); //訂閱者ID
 	    	q.setMonthlyPayment(300);
 	    	q.setSubdateStart(date);
 	    	q.setSubdateEnd(date3);
@@ -79,10 +85,9 @@ public class AfterSubProgram {
 //	    	}
 	    	
 	    	
-	    	
-//	    	SubProgramListDAO sdao2 = (SubProgramListDAO)context.getBean("SubProgramListDAO");
-//	    	List<uploadPodcastBean> s = sdao2.selectByMemeberId(18);
-//	    	m.addAttribute("subProgram", s);
+	    	SubProgramListDAO sdao2 = (SubProgramListDAO)context.getBean("SubProgramListDAO");
+	    	List<uploadPodcastBean> s = sdao2.selectByMemeberId(18);
+	    	m.addAttribute("subProgram", s);
 	    
 	    
 	    	
