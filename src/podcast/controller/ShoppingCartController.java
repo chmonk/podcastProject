@@ -3,6 +3,7 @@ package podcast.controller;
 
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -29,6 +30,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import podcast.model.dao.ActivityDAO;
+import podcast.model.dao.OrderItemDao;
 import podcast.model.dao.OrderTicketDAO;
 import podcast.model.dao.ShoppingCart;
 //import podcast.model.idao.OrderService;
@@ -65,6 +67,7 @@ public class ShoppingCartController {
     		@RequestParam("activityId") Integer activityId,
     		@RequestParam("activityLocation") String activityLocation,
     		@RequestParam("activityDate") Date activityDate,
+    		@RequestParam("activityMaxPeople") Integer activityMaxPeople,
     		Model m,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		m.addAttribute("quantity", quantity);
@@ -103,13 +106,13 @@ public class ShoppingCartController {
 		System.out.println("bean : "+bean.getActivityName());
 		
 		OrderItemBean oib = new  OrderItemBean(activityId,activityName,
-				activityPrice,quantity,activityDate,activityLocation);
+				activityPrice,quantity,activityDate,activityLocation,activityMaxPeople);
 		System.out.println("你點選到的票券資訊:"+activityId+activityName+activityPrice+quantity+activityDate+activityLocation);	
 		
 		// 將OrderItem物件加入ShoppingCart
 		cart.addToCart(activityId, oib);
 		
-		return "redirect:/a#events";
+		return "redirect:/#events";
 		
 	}
 	
@@ -125,13 +128,11 @@ public class ShoppingCartController {
 			) {
 		ShoppingCart sc = (ShoppingCart) model.getAttribute("ShoppingCart");
 		if (sc == null) {
-			status.setComplete();
 			return "redirect:/login";
 	
 		}
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
-			status.setComplete();
 			return "redirect:/login";
 
 		}
@@ -152,7 +153,6 @@ public class ShoppingCartController {
 	protected String checkout(Model model, SessionStatus status) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
-			status.setComplete();
 			return "redirect:/login";
 		}
 		return "Orders/OrderConfirm";
@@ -187,49 +187,52 @@ public class ShoppingCartController {
 		System.out.println("測試零");
 		Integer memberId = memberBean.getMemberId();  
 		double totalAmount = sc.getSubtotal(); // 取出會員代號
-		OrderTicketBean ob2 = new OrderTicketBean(memberId, totalAmount, ShippingAddress, BNO, InvoiceTitle);
+		Timestamp time= new Timestamp(System.currentTimeMillis());
+		Integer activityId = 10000;  //訂單不該有這一個欄位,應該是OIB才有
+		Integer orderPrice = 10000;  //此欄位已有totalAmount
+		OrderTicketBean ob2 = new OrderTicketBean(memberId, totalAmount, ShippingAddress, BNO,
+				InvoiceTitle,time,activityId,orderPrice);
 		
 		//======
 		
 		Map<Integer, OrderItemBean> content = sc.getContent();
 		Set<OrderItemBean> items = new LinkedHashSet<>();
 		Set<Integer> set = content.keySet();
+		
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
+    	OrderItemDao otd = (OrderItemDao)context.getBean("OrderItemDao");
+		
+		
 		for(Integer i : set) {
 			OrderItemBean oib = content.get(i);
+			Integer stock = otd.updateProductStock(oib);
+			System.out.println("庫存= "+stock);
+			if(stock>0) {
+			oib.setDiscount(1.0);  //
+			oib.setDescription("無用資料欄");
+			
+			oib.setAmount(stock);
 			oib.setOrderTicketBean(ob2);
 			items.add(oib);
+			}else continue;
 		}
 		ob2.setItems(items);
 		
+        //for購物車的鍵值, 一一取出放在購物車的OrderItemBean, 每一個物件都去查看庫存, 合法便設定此物件的庫存量, 
+        //以及設定此物件的訂單屬性OrderTicketBean(多個物件可以共用一個訂單)
+        //將此物件加入set集合, 再將此物件設定為OrderTicketBean訂單的items屬性
+		
 		//======
-		ServletContext app = request.getServletContext();
-    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
+		
 		OrderTicketDAO ot = (OrderTicketDAO)context.getBean("OrderTicketDAO");
 		ot.insert(ob2);
 		
 		//status.setComplete();		
-		webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
+		//webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
 		System.out.println("Order Process OK");
 		return "redirect:/orderList";
 	}	
 	
-	//按下取消購物
-	@GetMapping("abort")
-	protected String abort(HttpSession session, Model model, WebRequest webRequest, SessionStatus status)  {
-		webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
-		//沒有移除???
-		//status.setComplete();    // 移除所有被@SessionAttributes({"ShoppingCart"})標示的物件
-		return  "redirect:/a";
-	}
-	
-	//按下取消訂單
-	@GetMapping("cancelOrder")
-	protected String cancelOrder(Model model, 
-			WebRequest webRequest, SessionStatus status
-			) {
-		status.setComplete();
-//		webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
-		return  "redirect:/a";
-	}
 	
 }

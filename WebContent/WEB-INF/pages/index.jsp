@@ -21,7 +21,7 @@
 <!-- jquery-ui CSS -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <!-- Bootstrap CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
 <link href="css/animate.min.css" rel="stylesheet">
 <!-- Basic stylesheet -->
@@ -71,7 +71,9 @@
 
 		<!-- 熱播排行 -->
 		<jsp:include page="workWithUs.jsp" flush="true " />
-		<!-- 熱播排行 -->
+			<%-- <jsp:param value="" name=""/> --%>
+<%-- 		</jsp:include>
+ --%>		<!-- 熱播排行 -->
 
 		<!-- sign up for news letter -->
 		<jsp:include page="newsLetter.jsp" flush="true " />
