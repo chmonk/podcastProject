@@ -120,11 +120,11 @@ function Abort() {
           <td >${anEntry.value.activityName}</td>
           <td style="text-align:center;">${anEntry.value.activityLocation}</td>
           <td style="text-align:center;">${anEntry.value.activityDate}</td>
-          <td style="text-align:right;"><fmt:formatNumber value="${anEntry.value.amount}" pattern="#,###" />元</td>
+          <td style="text-align:right;"><fmt:formatNumber value="${anEntry.value.unitPrice}" pattern="#,###" />元</td>
           <td style="text-align:right;">
                 <Input id="newQty${vs.index}" style="width:28px;text-align:right" name="newQty" type="text" value="<fmt:formatNumber value="${anEntry.value.quantity}" />" name="qty" onkeypress="return isNumberKey(event)"  />
           </td>
-          <td style="text-align:right;"><fmt:formatNumber value="${anEntry.value.amount * anEntry.value.quantity}" pattern="#,###,###" />元</td>
+          <td style="text-align:right;"><fmt:formatNumber value="${anEntry.value.unitPrice * anEntry.value.quantity}" pattern="#,###,###" />元</td>
           <td ><Input type="button" name="update" value="修改" onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index})">
                <Input type="button" name="delete" value="刪除" onclick="confirmDelete(${anEntry.key})"></td>
         </tr>
@@ -154,7 +154,7 @@ function Abort() {
      <table border='1'>
         <tr >
           <td width="265" align='center'>
-              <a href="<c:url value='/a#events' />">繼續購物</a>
+              <a href="<c:url value='/#events' />">繼續購物</a>
           </td>
           <td width="265" align='center'>
               <a href="<c:url value='checkout' />" onClick="return Checkout(${subtotal});">再次確認</a>

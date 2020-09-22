@@ -13,7 +13,6 @@
 <meta name="description" content="Your description">
 <meta name="keywords" content="Your,Keywords">
 <meta name="author" content="HimanshuGupta">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Styles -->
@@ -27,7 +26,7 @@
 <!-- Basic stylesheet -->
 <link rel="stylesheet" href="css/owl.carousel.css">
 <!-- Font awesome CSS -->
-<link href="WEB-INF/pages/css/font-awesome.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-color.css" rel="stylesheet">
@@ -50,10 +49,9 @@
 	<div class="wrapper" id="home">
 
 
-		<!-- header banner area -->
+		<!-- header_banner area -->
 		<jsp:include page="header_banner.jsp" flush="true " />
-		<!--/ header banner end -->
-
+		<!--/ header_banner end -->
 		<!-- block for animate navigation menu -->
 		<div class="nav-animate"></div>
 

@@ -1,4 +1,4 @@
-package podcast.model.dao;
+package podcast.model.idao;
 
 import java.sql.Connection;
 

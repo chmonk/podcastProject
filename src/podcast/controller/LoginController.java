@@ -36,7 +36,6 @@ public class LoginController {
     public String loginForm() throws Exception {
 		return "login";
 	}
-	
 	@PostMapping("/login")   // = login.jsp的login.do路徑
 	public String checkAccount(
 			@ModelAttribute("loginBean") LoginBean bean,
@@ -72,7 +71,8 @@ public class LoginController {
 				packMemberBean.setMemberId(mbean.getMemberId());
 				packMemberBean.setRole(mbean.getRole());
 				packMemberBean.setAddress(mbean.getAddress());
-				
+				packMemberBean.setName(mbean.getName());
+				packMemberBean.setNickname(mbean.getNickname());				
 				model.addAttribute("LoginOK", packMemberBean);
 			} else {
 				// 登入失敗, 放相關的錯誤訊息到 errorMsgMap 之內
@@ -89,7 +89,6 @@ public class LoginController {
 		return "redirect:/";
 		
 	}
-	
 	
 	private void processCookies(LoginBean bean, HttpServletRequest request, HttpServletResponse response) {
 		Cookie cookieUser = null;
