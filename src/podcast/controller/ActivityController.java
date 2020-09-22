@@ -103,6 +103,9 @@ public class ActivityController {
 		
 		String ActivityImg = processFile(Id,multipartFile,request);
 		
+		
+		Integer stock = activity.getActivityMaxPeople();
+		activity.setStock(stock);
 		activity.setPodcasterId(Id);
 		activity.setActivityImg(ActivityImg);
 		activity.setActivityStatus(activityStatus);

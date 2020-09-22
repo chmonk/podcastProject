@@ -40,13 +40,15 @@ public class OrderTicketBean {
 	
 	
 	public OrderTicketBean(Integer memberId,Double totalAmount,String shippingAddress,
-			String bno,String invoiceTitle,Date orderDate) {
+			String bno,String invoiceTitle,Date orderDate,Integer activityId,Integer orderPrice) {
 		this.memberId = memberId;
 		this.totalAmount = totalAmount;
 		this.shippingAddress = shippingAddress;
 		this.bno = bno;
 		this.invoiceTitle = invoiceTitle;
 		this.orderDate = orderDate;
+		this.activityId = activityId;
+		this.orderPrice = orderPrice;
 	}
 
 

@@ -31,8 +31,8 @@
 
 
 	<div style="text-align: center">
-		<a href="<c:url value='orderList' />">回上一頁</a>&nbsp;&nbsp;
-		<a href="<c:url value='removeShoppingCart' />">回首頁</a>
+		<a href="<c:url value='/manageActivities' />">回上一頁</a>&nbsp;&nbsp;
+		<a href="<c:url value='/' />">回首頁</a>
 	</div>
 </body>
 

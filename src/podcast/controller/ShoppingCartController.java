@@ -188,7 +188,10 @@ public class ShoppingCartController {
 		Integer memberId = memberBean.getMemberId();  
 		double totalAmount = sc.getSubtotal(); // 取出會員代號
 		Timestamp time= new Timestamp(System.currentTimeMillis());
-		OrderTicketBean ob2 = new OrderTicketBean(memberId, totalAmount, ShippingAddress, BNO, InvoiceTitle,time);
+		Integer activityId = 10000;  //訂單不該有這一個欄位,應該是OIB才有
+		Integer orderPrice = 10000;  //此欄位已有totalAmount
+		OrderTicketBean ob2 = new OrderTicketBean(memberId, totalAmount, ShippingAddress, BNO,
+				InvoiceTitle,time,activityId,orderPrice);
 		
 		//======
 		
@@ -206,6 +209,9 @@ public class ShoppingCartController {
 			Integer stock = otd.updateProductStock(oib);
 			System.out.println("庫存= "+stock);
 			if(stock>0) {
+			oib.setDiscount(1.0);  //
+			oib.setDescription("無用資料欄");
+			
 			oib.setAmount(stock);
 			oib.setOrderTicketBean(ob2);
 			items.add(oib);
