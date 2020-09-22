@@ -16,7 +16,7 @@ public class LogoutController {
 		status.setComplete();
 		session.invalidate();
 		
-		return "redirect:/a";
+		return "redirect:/";
 		
 	}
 
