@@ -43,6 +43,10 @@
 							
 		</TR>
 		</c:forEach>
+		<tr height='36' id='borderA' ><td align="center" colspan="4">
+		<a href="https://p.ecpay.com.tw/C93401C"><img src="https://payment.ecpay.com.tw/Content/themes/WebStyle20170517/images/ecgo.png" alt=""/></a>
+		</td></tr>
+		
 		<tr height='36' id='borderA'>
 			<td id='borderA' align="center" colspan="4"><a href="<c:url value='removeShoppingCart' />">回首頁</a></td>
 		</tr>

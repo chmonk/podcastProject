@@ -33,8 +33,10 @@ function confirmDelete(n) {
 			<th>刪除</th>
 		</tr>
 		<c:forEach var="alist" varStatus="loop" items="${ActivityList}">
-			<tr>
-				<td>${alist.activityName}</td>
+			<tr><td>
+			<a  href='<c:url value='ActivityDetail?memberId=${LoginOK.memberId}&activityId=${alist.activityId}' />'>
+						${alist.activityName}
+			    </a></td>
 				<td>${alist.activityDate}</td>
 				<td>${alist.activityMaxPeople}張</td>
 				<td><Input type="button" name="delete" value="刪除"
@@ -45,7 +47,7 @@ function confirmDelete(n) {
 
 		<tr height='36' id='borderA'>
 			<td id='borderA' align="center" colspan="4"><a
-				href="<c:url value='/a' />">回首頁</a></td>
+				href="<c:url value='/' />">回首頁</a></td>
 		</tr>
 	</table>
 	<form>

@@ -26,8 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import podcast.model.dao.ActivityDAO;
+import podcast.model.dao.OrderTicketDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.MemberBean;
+import podcast.model.javabean.OrderTicketBean;
 
 @Controller
 @SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart","ActivityList" })
@@ -92,6 +94,9 @@ public class ActivityController {
 		if (result.hasErrors()) {
 			return "Activity/addActivity";
 		}
+		
+		System.out.println("DATE="+activity.getActivityDate());
+		
 
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
 		Integer Id = memberBean.getMemberId();
@@ -171,7 +176,7 @@ public class ActivityController {
 	}
 
 	// 資料庫的所有活動傳送至首頁
-	@RequestMapping(path = "/a", method = RequestMethod.GET)
+	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String showActivities(HttpServletRequest request, Model m) throws Exception {
 
 		ServletContext app = request.getServletContext();
@@ -206,6 +211,24 @@ public class ActivityController {
     	else {
     		return "Activity/manageActivities";	
     	}
+	}
+	
+	@GetMapping("ActivityDetail")
+	protected String ActivitrDetail(HttpServletRequest request,Model model, 
+			@RequestParam("activityId") Integer activityId 
+			) throws Exception {
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		if (memberBean == null) {
+			return "redirect:/login";
+			
+		}
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
+    	ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
+		ActivityBean aBean = aDao.select(activityId);
+		model.addAttribute("aBean", aBean);
+		return "Activity/showSingleActivity";
+		
 	}
 
 }

@@ -154,7 +154,7 @@ function Abort() {
      <table border='1'>
         <tr >
           <td width="265" align='center'>
-              <a href="<c:url value='/a#events' />">繼續購物</a>
+              <a href="<c:url value='/#events' />">繼續購物</a>
           </td>
           <td width="265" align='center'>
               <a href="<c:url value='checkout' />" onClick="return Checkout(${subtotal});">再次確認</a>

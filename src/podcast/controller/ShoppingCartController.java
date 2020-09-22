@@ -3,6 +3,7 @@ package podcast.controller;
 
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -111,7 +112,7 @@ public class ShoppingCartController {
 		// 將OrderItem物件加入ShoppingCart
 		cart.addToCart(activityId, oib);
 		
-		return "redirect:/a#events";
+		return "redirect:/#events";
 		
 	}
 	
@@ -186,7 +187,8 @@ public class ShoppingCartController {
 		System.out.println("測試零");
 		Integer memberId = memberBean.getMemberId();  
 		double totalAmount = sc.getSubtotal(); // 取出會員代號
-		OrderTicketBean ob2 = new OrderTicketBean(memberId, totalAmount, ShippingAddress, BNO, InvoiceTitle);
+		Timestamp time= new Timestamp(System.currentTimeMillis());
+		OrderTicketBean ob2 = new OrderTicketBean(memberId, totalAmount, ShippingAddress, BNO, InvoiceTitle,time);
 		
 		//======
 		

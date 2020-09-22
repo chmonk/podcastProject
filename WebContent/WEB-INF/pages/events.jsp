@@ -80,6 +80,8 @@
 				<form action="addTickets" method="POST">
 					<div class="modal-body">
 						<div class="form-group">
+						<div align="center" width="300px" height="200px"><img width="100%" height="100%" src="${list.activityImg}"></div>
+						
 						<h4>時間：<br/></h4>
 							${list.activityDate} ${list.activityTime}<br/>
 							<h4>地點：<br/></h4>${list.activityLocation}<br/>
