@@ -184,7 +184,7 @@ public class HistoryDao implements IHistoryDao {
 				//"--用節目id分組 依照觀看時間反序排(新的數字小)
 				"ROW_NUMBER() over (partition by podcastId order by lastlisten desc) as sn " + 
 				//取得節目id 名稱 上傳者暱稱 觀看時間 上傳時間  使用者id 節目典籍次數 節目案讚數  所以join 所需的三table 命名為new
-				"from (select h.podcastId,h.podcastName,h.publisherId,h.lastListen,h.memberId ,m.nickname,u.uploadTime, u.likesCount,u.clickAmount,u.audioImg, u.audioPath "+ 
+				"from (select h.podcastId,h.podcastName,h.publisherId,h.lastListen,h.memberId ,m.nickname,u.uploadTime, u.likesCount,u.clickAmount,u.audioImg, u.audioPath,u.podcastInfo "+ 
 				"from browsingHistory as h "+
 				"left join uploadPodcast as u on  h.podcastId = u.podcastId " + 
 				"left join  members as m on m.memberId= u.memberId) " + 
@@ -230,6 +230,8 @@ public class HistoryDao implements IHistoryDao {
 			hpbean.setClickAmount(Integer.parseInt(resultSet.get(i)[8].toString()));
 			hpbean.setAudioImg(resultSet.get(i)[9].toString());
 			hpbean.setAudioPath(resultSet.get(i)[10].toString());
+			hpbean.setPodcastInfo(resultSet.get(i)[11].toString());
+			hpbean.setCategoryName(resultSet.get(i)[12].toString());
 			
 			orderList.add(hpbean);
 		}
