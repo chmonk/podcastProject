@@ -70,6 +70,9 @@ public class MemberBean {
 
 	@Column(name = "MONTHLYPAYMENT")
 	private Integer monthlyPayment;
+	
+	@Column(name = "PODCASTORWEBPAGE")
+	private String podcastorWebPage;
 
 	public MemberBean() {
 	}
@@ -210,6 +213,14 @@ public class MemberBean {
 		this.monthlyPayment = monthlyPayment;
 	}
 
+	public String getPodcastorWebPage() {
+		return podcastorWebPage;
+	}
+
+	public void setPodcastorWebPage(String podcastorWebPage) {
+		this.podcastorWebPage = podcastorWebPage;
+	}
+
 //	public List<friendsList> getFriendsList() {
 //		return friendsList;
 //	}
@@ -218,4 +229,6 @@ public class MemberBean {
 //		this.friendsList = friendsList;
 //	}
 
+	
+	
 }

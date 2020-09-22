@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import podcast.model.idao.IMyFavProgramDAO;
+import podcast.model.javabean.LikeRecordBean;
 import podcast.model.javabean.MyFavProgramBean;
 
 @Repository("MyFavProgramDAO")
@@ -69,5 +71,48 @@ public class MyFavProgramDAO implements IMyFavProgramDAO {
 
 		return query.list();
 	}
+	
+	
+	public boolean deteleByMemberIdAndPubLisherId(Integer memberId,Integer publisherId) {
 
+		Session session = sessionFactory.getCurrentSession();
+		
+		String nativesqlstr="delete from myFavProgram where  memberId= ? and podcastId= ?  ";
+		
+		session.createNativeQuery(nativesqlstr).setParameter(1, memberId).setParameter(1, publisherId).executeUpdate();
+		
+		//檢查是否刪除
+		String nativesqlstr1="select * from myFavProgram where memberId= ? and podcastId= ? ";
+		
+		NativeQuery<MyFavProgramBean> query = session.createNativeQuery(nativesqlstr1,MyFavProgramBean.class).setParameter(1, memberId).setParameter(1, publisherId);
+		
+		List<MyFavProgramBean> result = query.getResultList();
+		
+		if(result.isEmpty()) {
+			//刪除乾淨
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	//確認播客 使用者是否有訂閱紀錄
+		public boolean checkByMemberidAndPublisherID(Integer memberId, Integer publisherId) {
+
+			Session session = sessionFactory.getCurrentSession();
+
+			String sqlstr = "select * from myFavProgram where memberId=? and podcastId=?";
+
+			NativeQuery query = session.createNativeQuery(sqlstr).setParameter(1, memberId).setParameter(2, publisherId);
+
+			List rs = query.getResultList();
+
+			// 如果為空 表示未追蹤過節目  
+			if (rs.isEmpty()) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	
 }

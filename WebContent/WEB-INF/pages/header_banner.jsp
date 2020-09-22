@@ -30,7 +30,7 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/logo/favicon.ico">  
-	--%>
+		--%>
 <!-- Javascript files -->
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
@@ -52,9 +52,9 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  	<!-- <script type="text/javascript" src="js/player.js"></script> -->
-	
 
-	 <script type="text/javascript">
+
+	 <script type="text/javascript">	 
 	 $.widget( "custom.catcomplete", $.ui.autocomplete, {
 		    _renderMenu: function( ul, items ) {
 		      var that = this,
@@ -78,6 +78,7 @@
 		$( "#tags" ).catcomplete({
 		      source: availableTags
 		    });
+
 	});
 
 	</script>
@@ -91,7 +92,55 @@
     margin: .8em 0 .2em;
     line-height: 1.5;
   }
-	</style>
+ 
+
+nav ul {
+	padding: 0;
+  	margin: 0;
+	list-style: none;
+	position: relative;
+	}
+	
+
+
+nav a {
+	display:block;
+	padding:0 10px;	 
+	color:#FFF;
+	font-size:15px;
+	line-height: 40px;
+	text-decoration:none;
+}
+nav a:hover { 
+	background-color: rgba(0,0,0,0.2);
+	
+}
+
+
+
+/* Hide Dropdowns by Default */
+nav ul ul {
+	display: none;
+	position: absolute; 
+	top: 70px; /* the height of the main nav */
+}
+	
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+	display:inherit;
+}
+	
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+	width:170px;
+	float:none;
+	display:list-item;
+	position: relative;
+}
+
+	
+
+</style>
 	
 	
 
@@ -146,21 +195,79 @@
 							class="img-responsive" src="img/logo/logo.png" alt="" />
 						</a>
 					</div>
-
+	
 					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse"
-						id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right">
 
-							<li><a href="#latestalbum">官方節目</a></li>
-							<li><a href="#featuredalbum">矚目新選</a></li>
-							<li><a href="#joinus">熱播排行</a></li>
-							<li><a href="#portfolio">人氣播客</a></li>
-							<li><a href="#events">派對活動</a></li>
-							<li><a href="#team">瀏覽搜尋</a></li>
-							<li><a href="<c:url value='/login' />">註冊/登入</a></li>
-						</ul>
-					</div>
+					<c:choose>
+						<c:when test="${LoginOK.role==1}">
+							<div class="collapse navbar-collapse"
+								id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav navbar-right">
+		
+									<li><a href="#latestalbum">官方節目</a></li>
+									<li><a href="#featuredalbum">矚目新選</a></li>
+									<li><a href="#joinus">熱播排行</a></li>
+									<li><a href="#portfolio">人氣播客</a></li>
+									<li><a href="#events">派對活動</a></li>
+									<li><a href="#team">瀏覽搜尋</a></li>
+									<li><li><a href="#">${LoginOK.name}</a>
+				         				<!-- First Tier Drop Down -->
+							            <ul class="barlist">
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
+							                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>							
+							            </ul>        
+							           </li>
+								</ul>
+							</div>
+						</c:when>
+						<c:when test="${LoginOK.role==2}">					
+							<div class="collapse navbar-collapse"
+								id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav navbar-right">
+		
+									<li><a href="#latestalbum">官方節目</a></li>
+									<li><a href="#featuredalbum">矚目新選</a></li>
+									<li><a href="#joinus">熱播排行</a></li>
+									<li><a href="#portfolio">人氣播客</a></li>
+									<li><a href="#events">派對活動</a></li>
+									<li><a href="#team">瀏覽搜尋</a></li>
+									<li><li><a href="#">${LoginOK.name}</a>
+				         				<!-- First Tier Drop Down -->
+							            <ul class="barlist">
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳音檔</a></li>
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳活動</a></li>
+							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;頻道管理</a></li>
+							                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>
+							        
+							            </ul>        
+							           </li>
+								</ul>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="collapse navbar-collapse"
+								id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav navbar-right ">
+		
+									<li><a href="#latestalbum">官方節目</a></li>
+									<li><a href="#featuredalbum">矚目新選</a></li>
+									<li><a href="#joinus">熱播排行</a></li>
+									<li><a href="#portfolio">人氣播客</a></li>
+									<li><a href="#events">派對活動</a></li>
+									<li><a href="#team">瀏覽搜尋</a></li>
+									<li><a href="<c:url value='/login' />">註冊/登入</a></li>
+								</ul>
+							</div>					    
+					    </c:otherwise>
+					</c:choose>
+
 					<!-- /.navbar-collapse -->
 				</div>
 				<!-- /.container-fluid -->
