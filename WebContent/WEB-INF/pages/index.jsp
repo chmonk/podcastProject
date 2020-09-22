@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.*"%>
 
+
 <!DOCTYPE html>
 <html>
 
@@ -43,7 +44,7 @@
 
 </head>
 
-<body>
+<body >
 
 
 	<!-- wrapper -->
@@ -78,8 +79,10 @@
 		<!-- news letter end -->
 
 		<!-- 人氣播客 portfolio -->
-		<jsp:include page="popularPodcasts.jsp" flush="true " />
-		<!-- portfolio end -->
+		<jsp:include page="popularPodcastsTry.jsp" flush="true " />
+		 <!--portfolio end -->
+		
+		 
 
 		<!-- events -->
 		<jsp:include page="events.jsp" flush="true " />
