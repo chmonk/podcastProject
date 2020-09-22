@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import podcast.model.idao.IActivityDAO;
 import podcast.model.javabean.ActivityBean;
+import podcast.model.javabean.MemberBean;
 
 
 
@@ -44,6 +45,16 @@ public class ActivityDAO implements IActivityDAO {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(ActivityBean.class, activityId);
 	}
+	
+
+	public List<ActivityBean>  selectByPodcasterId(Integer podcasterId) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ActivityBean where podcasterId=:id";
+		Query<ActivityBean> query = session.createQuery(hql, ActivityBean.class);
+		query.setParameter("id", podcasterId);
+		return query.list();
+
+	}
 
 	@Override
 	public List<ActivityBean> selectAll() throws Exception {
@@ -70,7 +81,7 @@ public class ActivityDAO implements IActivityDAO {
 			oldbean.setPodcasterId(abean.getPodcasterId());
 			oldbean.setActivityPrice(abean.getActivityPrice());
 			oldbean.setActivityMaxPeople(abean.getActivityMaxPeople());
-			oldbean.setActivityMinPeople(abean.getActivityMinPeople());
+			oldbean.setStock(abean.getStock());
 			oldbean.setActivityStatus(abean.getActivityStatus());
 			oldbean.setActivityImg(abean.getActivityImg());
 			oldbean.setActivityTime(abean.getActivityTime());

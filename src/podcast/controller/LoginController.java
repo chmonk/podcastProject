@@ -51,7 +51,7 @@ public class LoginController {
 
 		
 		System.out.println("account & password= "+account+" "+password);
-		MemberBean memberbean = null;
+		MemberBean mbean = null;
 		
 		
     	ServletContext app = request.getServletContext();
@@ -62,10 +62,18 @@ public class LoginController {
 		
 
 		try {
-			memberbean = mdao.checkIdPassword(account,password);
-			if (memberbean != null) {
-				// 登入成功, 將mb物件放入Session範圍內，識別字串為"LoginOK"
-				model.addAttribute("LoginOK", memberbean);
+			mbean = mdao.checkIdPassword(account,password);
+			if (mbean != null) {
+				// 登入成功, 將mb物件放入Session範圍內，重新組裝   識別字串為"LoginOK"
+				
+				MemberBean packMemberBean = new MemberBean();
+				
+				packMemberBean.setAccount(mbean.getAccount());
+				packMemberBean.setMemberId(mbean.getMemberId());
+				packMemberBean.setRole(mbean.getRole());
+				packMemberBean.setAddress(mbean.getAddress());
+				
+				model.addAttribute("LoginOK", packMemberBean);
 			} else {
 				// 登入失敗, 放相關的錯誤訊息到 errorMsgMap 之內
 				result.rejectValue("invalidCredentials", "", "該帳號不存在或密碼錯誤");
@@ -78,7 +86,7 @@ public class LoginController {
 		}
 		processCookies(bean, request, response);
 
-		return "redirect:/a";
+		return "redirect:/";
 		
 	}
 	
