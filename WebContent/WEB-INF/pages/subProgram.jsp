@@ -325,13 +325,13 @@ window.onload=function(){
 
 		<div id="d1" style="display: none" >
 			<div>
-				<c:forEach var="bymemberid" items="${subProgram}">
+				<c:forEach var="alreadySub" items="${subProgram}">
 					<div class="container">
 						<div class="card-media">
 							<!-- media container -->
 							<div class="card-media-object-container">
 								<div class="card-media-object">
-									<img class="podcastImg" src="${bymemberid.getAudioimg()}">
+									<img class="podcastImg" src="${alreadySub.getAudioimg()}">
 								</div>
 <%-- 								<span class="card-media-object-tag subtle">${bymemberid.getPodcastInfo()}</span> --%>
 
@@ -339,7 +339,7 @@ window.onload=function(){
 							<!-- body container -->
 							<div class="card-media-body">
 								<div class="card-media-body-top">
-									<span class="subtle">${bymemberid.getTitle()}</span>
+									<span class="subtle">${alreadySub.getTitle()}</span>
 									<div class="card-media-body-top-icons u-float-right">
 										<svg fill="#888888" height="16" viewBox="0 0 24 24" width="16"
 											xmlns="http://www.w3.org/2000/svg">
@@ -354,11 +354,11 @@ window.onload=function(){
 	          </svg>
 									</div>
 								</div>
-								<span class="card-media-body-heading">${bymemberid.getPodcastInfo()}</span>
+								<span class="card-media-body-heading">${alreadySub.getPodcastInfo()}</span>
 								<div class="card-media-body-supporting-bottom">
-									<span class="card-media-body-supporting-bottom-text subtle">${bymemberid.getUploadTime()}</span>
+									<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getUploadTime()}</span>
 									<span
-										class="card-media-body-supporting-bottom-text subtle u-float-right">點擊率${bymemberid.getClickAmount()}</span>
+										class="card-media-body-supporting-bottom-text subtle u-float-right">點擊率${alreadySub.getClickAmount()}</span>
 								</div>
 								<div
 									class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
@@ -375,11 +375,66 @@ window.onload=function(){
 
 
 		</div>
+	<div id="d2" style="display: none" >
+			<div>
+				<c:forEach var="unalreadySub" items="${needSub}">
+					<div class="container">
+						<div class="card-media">
+							<!-- media container -->
+							<div class="card-media-object-container">
+								<div class="card-media-object">
+									<img class="podcastImg" src="${unalreadySub.getAudioimg()}">
+								</div>
+<%-- 								<span class="card-media-object-tag subtle">${bymemberid.getPodcastInfo()}</span> --%>
+
+							</div>
+							<!-- body container -->
+							<div class="card-media-body">
+								<div class="card-media-body-top">
+									<span class="subtle">${unalreadySub.getTitle()}</span>
+									<div class="card-media-body-top-icons u-float-right">
+										<svg fill="#888888" height="16" viewBox="0 0 24 24" width="16"
+											xmlns="http://www.w3.org/2000/svg">
+	            <path d="M0 0h24v24H0z" fill="none" />
+	            <path
+												d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+	          </svg>
+										<svg fill="#888888" height="16" viewBox="0 -28 512 512"
+											width="16" xmlns="http://www.w3.org/2000/svg">
+	          	<path
+												d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0" />
+	          </svg>
+									</div>
+								</div>
+								<span class="card-media-body-heading">${unalreadySub.getPodcastInfo()}</span>
+								<div class="card-media-body-supporting-bottom">
+									<span class="card-media-body-supporting-bottom-text subtle">${unalreadySub.getUploadTime()}</span>
+									<span
+										class="card-media-body-supporting-bottom-text subtle u-float-right">點擊率${unalreadySub.getClickAmount()}</span>
+								</div>
+								<div
+									class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
+									<span class="card-media-body-supporting-bottom-text subtle">${data.getCategoryName()}</span>
+									<a id="${unalreadySub.getPodcastId()}"
+										class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+
+			</div>
+
+
+		</div>
 <input id='check_sub'type="submit" value="訂閱">
+
+
+
 <!-- 	<button id="hide" type="button" -->
 <!-- 		onclick="document.getElementById('d1').style.display='none'">取消訂閱</button> -->
 	
-	<hr />
+	<hr/>
 
 </form>
 

@@ -77,9 +77,12 @@ public class AfterSubProgram {
 //	    	
 //	    	sdao.insert(f);	
 //	    	}
-	    	SubProgramListDAO sdao2 = (SubProgramListDAO)context.getBean("SubProgramListDAO");
-	    	List<uploadPodcastBean> s = sdao2.selectByMemeberId(18);
-	    	m.addAttribute("subProgram", s);
+	    	
+	    	
+	    	
+//	    	SubProgramListDAO sdao2 = (SubProgramListDAO)context.getBean("SubProgramListDAO");
+//	    	List<uploadPodcastBean> s = sdao2.selectByMemeberId(18);
+//	    	m.addAttribute("subProgram", s);
 	    
 	    
 	    	
