@@ -18,7 +18,7 @@ public class MyFavProgramBean {
 	private Integer podcastId;
 	private Integer subPermission;
 	private Integer podcastOpen;
-	private Integer inPlaylist;
+	
 
 	@Id
 	@Column(name = "FAVID")
@@ -67,14 +67,7 @@ public class MyFavProgramBean {
 		this.podcastOpen = podcastOpen;
 	}
 
-	@Column(name = "INPLAYLIST")
-	public Integer getInPlaylist() {
-		return inPlaylist;
-	}
 
-	public void setInPlaylist(Integer inPlaylist) {
-		this.inPlaylist = inPlaylist;
-	}
 	
 	
 }

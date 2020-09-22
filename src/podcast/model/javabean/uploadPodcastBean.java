@@ -12,9 +12,11 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.stereotype.Component;
 
 @Table(name = "uploadPodcast")
 @Entity
+@Component
 public class uploadPodcastBean {
 	private Integer podcastId;
 	private String title;
