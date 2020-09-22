@@ -62,7 +62,6 @@ public class OrderTicketBean {
 	}
 
 	@Column(name = "ORDERDATE")
-	@Transient
 	public Date getOrderDate() {
 		return orderDate;
 	}

@@ -81,7 +81,7 @@ public class ActivityDAO implements IActivityDAO {
 			oldbean.setPodcasterId(abean.getPodcasterId());
 			oldbean.setActivityPrice(abean.getActivityPrice());
 			oldbean.setActivityMaxPeople(abean.getActivityMaxPeople());
-			oldbean.setActivityMinPeople(abean.getActivityMinPeople());
+			oldbean.setStock(abean.getStock());
 			oldbean.setActivityStatus(abean.getActivityStatus());
 			oldbean.setActivityImg(abean.getActivityImg());
 			oldbean.setActivityTime(abean.getActivityTime());
