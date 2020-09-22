@@ -5,6 +5,8 @@
 $('.nav-animate').waypoint(function(direction) {
 	$('.secondary-menu').toggleClass('hide', direction === "down");
 	$('.navbar').toggleClass('comeup', direction === "down");
+	$('.barlist').toggleClass('comeup', direction === "down");
+	
 }, {
 	offset: '10%'
 });

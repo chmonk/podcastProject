@@ -99,6 +99,8 @@ public class ActivityController {
 		
 	}
 	
+
+	//測試用
 	@RequestMapping(path = "/p", method = RequestMethod.GET)
 	public String showActivitiess(HttpServletRequest request,Model m) throws Exception {
 		
@@ -112,9 +114,10 @@ public class ActivityController {
 
 		m.addAttribute("list", list);
 		//return "../../ActivitiesList";
-		//return "/header_banner";
-		return "/index";	
+		return "/header_banner";
+		//return "/index";	
 	}
+
 
 	public String processFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
 		// 取得原檔案名字
