@@ -10,6 +10,9 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style type="text/css">
 
@@ -296,7 +299,7 @@ html {
 <script type="text/javascript">
 window.onload=function(){
 	if ("${subProgram}"=="[]"){
-		document.getElementById('need_to_sub').innerHTML="請訂閱";
+		document.getElementById('need_to_sub').innerHTML="未訂閱此頻道，請訂閱";
 		document.getElementById('hide_alreadysub_btn').style.display='none';
 		
 		
@@ -306,6 +309,8 @@ window.onload=function(){
 		document.getElementById('d2').style.display='none';
 		}
 }
+
+
 </script>
 
 
@@ -316,15 +321,12 @@ window.onload=function(){
 
 
 		<span id='need_to_sub'></span>
-			<button id="hide_alreadysub_btn" type="button" style="display:'';"
-				onclick="document.getElementById('d1').style.display=''">已訂閱</button>
+			<button id="hide_alreadysub_btn" type="button" class="btn btn-info" style="display:'';">已訂閱</button>
 	
 
 	<form action="/SpringWebProject/AfterSubProgram.controller">
-		<a href="javascript:;"
-			onclick="document.getElementById('d1').style.display='' ">訂閱列表</a><br>
-			
-	<input id='check_sub'type="submit" value="訂閱">
+		<a href="javascript:;" onclick="document.getElementById('d1').style.display='' ">訂閱列表</a>			
+	<input id='check_sub'type="submit" value="訂閱"  class="btn btn-danger">
 
 
 		<div id="d1" style="display: none" >

@@ -96,11 +96,42 @@ try{
 <head>
 <meta charset="UTF-8">
 <title>NCCC Response</title>
+<style type="text/css">
 
+table { 
+  border-collapse: separate;
+  background:#fff;
+  border-radius:5px;
+  margin:50px auto;
+ box-shadow(0px 0px 5px rgba(0,0,0,0.3));
+}
+body {
+  background:	#E8FFF5;
+}
+ tr td {
+   font-align:auto;
+  font-family: '微軟正黑體';
+  font-weight:400;
+  color:#5f6062;
+  font-size:13px;
+  padding:20px 20px 20px 20px;
+  border-bottom:1px solid #e0e0e0;
+}
+ tr:nth-child(2n) {
+  background:#f0f3f5;
+}
+
+thead {
+    border-radius:5px;
+    background:#1AFD9C;
+}
+
+</style>
 </head>
 <body onload="shownum()">
 
-<table>
+<table border="1">
+  <thead><tr><th>交易結果</th><tr></thead>
 <tr><td>特店代號：<%=MerchantID %></td></tr>
 <tr><td>端末機代碼：<%=TerminalID %></td></tr>
 <tr><td>訂單編號：<%=OrderID %></td></tr>
