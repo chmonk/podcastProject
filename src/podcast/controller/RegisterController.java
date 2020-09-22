@@ -39,8 +39,8 @@ public class RegisterController {
 		// 檢查所有欄位,有空白則導回表單
 		if (result.hasErrors()) {
 			return "Member/registerForm";
-		}	
-	
+		}		
+		
 		String image = processFile2(multipartFile,request);		
 		members.setImage(image);		
 

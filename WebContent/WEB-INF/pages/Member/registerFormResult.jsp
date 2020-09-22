@@ -23,6 +23,6 @@
 信用卡號：${creditCardNumber}<br/>
 銀行帳號：${bankAccount}<br/>
 頻道月費：${monthlyPayment}<br/>
-
+<Input type="button" name="update" value="修改" onclick="location='http://localhost:8080/SpringWebProject/update'">
 </body>
 </html>

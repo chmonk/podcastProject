@@ -1,10 +1,9 @@
 package podcast.model.dao;
 
-<<<<<<< HEAD
-=======
+
 import java.util.ArrayList;
-import java.util.Date;
->>>>>>> origin/master
+import java.sql.Date;
+
 import java.util.List;
 
 import javax.persistence.NoResultException;

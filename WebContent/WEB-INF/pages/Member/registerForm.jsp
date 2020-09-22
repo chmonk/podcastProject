@@ -1,25 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-function plachoose(){
-	if($('#planniu').is(':checked')){
-			$("#plant").show();
-		}else{
-			$("#plant").hide();
-			}   
-}
-
-</script>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/styles.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>register</title>
+<script type="text/javascript">
+	function removeElement() {
+		document.getElementById("p1").style.display = "none";
+		document.getElementById("p2").style.display = "none";
+		
+	}
+	function showElement() {
+		document.getElementById("p1").style.display = "block";
+		document.getElementById("p2").style.display = "block";
+	}
+	function window_onload() {
+		var text1 = window.document.getElementById('text1');
+		var now = new Date();
+		var today = now.getFullYear().toString() + '-'
+				+ (now.getMonth() + 1).toString() + '-'
+				+ now.getDate().toString();
+		text1.value = today;
+	}
+</script>
 </head>
 <style>
 * {
@@ -69,10 +76,9 @@ fieldset {
 	float: left;
 	text-align: right;
 }
-
 </style>
 
-<body>
+<body onload="return window_onload()">
 	<fieldset>
 		<legend>新增會員</legend>
 		<form:form action="addMemberProcess" method="POST"
@@ -104,14 +110,14 @@ fieldset {
 
 			<div class="div1">
 				<form:label path="birthday" for="" class="l1">生日：</form:label>
-				<form:input path="birthday" type="date" size="40" placeholder="2000-1-1" />
+				<form:input path="birthday" type="date" size="40" />
 				<span id="idsp2"></span>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
 				<form:label path="registerDate" for="" class="l1">註冊日期：</form:label>
-				<form:input path="registerDate" type="date" size="40" placeholder="2020-10-07" />
+				<form:input path="registerDate" type="text" size="40" id="text1"  value="οnfοcus=this.blur()" onfocus="this.blur()" />
 				<span id="idsp2"></span>
 				<div class="notice"></div>
 			</div>
@@ -137,16 +143,16 @@ fieldset {
 
 			<div class="div1">
 				<form:label path="address" for="" class="l1">住址：</form:label>
-				<form:input path="address" type="text" size="40" placeholder="台北市大同區大同路五段1111號30F" />
+				<form:input path="address" type="text" size="40"
+					placeholder="台北市大同區大同路五段1111號30F" />
 				<span id="idsp1"></span>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
-				<label for="" class="l1">性別：</label> 
-				<input type=radio name="sex" value=男 />男 
-				<input type=radio name="sex" value=女 />女 
-				<span id="idsp1"></span>
+				<label for="" class="l1">性別：</label> <input type=radio name="sex"
+					value=男 />男 <input type=radio name="sex" value=女 />女 <span
+					id="idsp1"></span>
 				<div class="notice"></div>
 			</div>
 
@@ -157,34 +163,40 @@ fieldset {
 			</div>
 
 			<div class="div1">
-				<label for="" class="l1">角色：</label> 
-				<input type=radio name="role" value=1 />一般會員 
-				<input type=radio name="role" value=2 id="planniu" onclick="plachoose"/>播客
-				<span id="idsp1"></span>
+				<label for="" class="l1">角色：</label> <input type=radio name="role"
+					value=1 onclick="removeElement()" />一般會員 <input type=radio
+					name="role" value=2 onclick="showElement()" />播客 <span id="idsp1"></span>
 				<div class="notice"></div>
 			</div>
 
-			<div class="div1" >
+			<div class="div1">
 				<form:label path="creditCardNumber" for="" class="l1">信用卡號：</form:label>
-				<form:input path="creditCardNumber" type="text" maxlength="4" size="4" />-
-				<form:input path="creditCardNumber" type="text" maxlength="4" size="4" />-
-				<form:input path="creditCardNumber" type="text" maxlength="4" size="4" />-
-				<form:input path="creditCardNumber" type="text" maxlength="4" size="4" />
+				<form:input path="creditCardNumber" type="text" maxlength="4"
+					size="4" />
+				-
+				<form:input path="creditCardNumber" type="text" maxlength="4"
+					size="4" />
+				-
+				<form:input path="creditCardNumber" type="text" maxlength="4"
+					size="4" />
+				-
+				<form:input path="creditCardNumber" type="text" maxlength="4"
+					size="4" />
 				<span id="idsp2"></span>
 				<div class="notice"></div>
 			</div>
 
-			<div class="div1" style="display: none" id="plant">
+			<div class="div1" id="p1" style="display: none;">
 				<form:label path="bankAccount" for="" class="l1">銀行帳號：</form:label>
-				<form:input path="bankAccount" size="40"/>
+				<form:input path="bankAccount" size="40" />
 				<span id="idsp1"></span>
 				<div class="notice"></div>
 			</div>
 
-			<div class="div1" style="display: none">
-				<label for="" class="l1">頻道月費：</label> <input type="checkbox"
-					name="monthlyPayment" value=0>免費 <input type="checkbox"
-					name="monthlyPayment" value=100>100元 <input type="checkbox"
+			<div class="div1" id="p2" style="display: none;">
+				<label for="" class="l1">頻道月費：</label> <input type="radio"
+					name="monthlyPayment" value=0 checked="checked">免費 <input type="radio"
+					name="monthlyPayment" value=100>100元 <input type="radio"
 					name="monthlyPayment" value=300>300元 <span id="idsp1"></span>
 				<div class="notice"></div>
 			</div>
