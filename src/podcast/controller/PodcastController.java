@@ -117,9 +117,13 @@ public class PodcastController {
 	
 		//接收新增頻道
 		@RequestMapping(path = "/addPodcastProcess", method = RequestMethod.POST)
-	    	public String processPodcast(@RequestParam("podcastpic") MultipartFile multipartFile,@RequestParam("podcastfile") MultipartFile multipartFile2,
-	    			@RequestParam("category") Integer categoryId,@RequestParam("openPayment") Integer openPayment,
-	    			HttpServletRequest request,@ModelAttribute("uploadPodcastBean") uploadPodcastBean upload,
+	    	public String processPodcast(
+	    			@RequestParam("podcastpic") MultipartFile multipartFile,
+	    			@RequestParam("podcastfile") MultipartFile multipartFile2,
+	    			@RequestParam("category") Integer categoryId,
+	    			@RequestParam("openPayment") Integer openPayment,
+	    			HttpServletRequest request,
+	    			@ModelAttribute("uploadPodcastBean") uploadPodcastBean upload,
 	    			BindingResult result, Model m) throws Exception {
 	    		if(result.hasErrors()) {
 	    			return "/PodcastManage/AddPodcast";
@@ -155,7 +159,8 @@ public class PodcastController {
 	    	upload.setOpenPayment(openPayment);
 	    	upload.setCategoryId(categoryId);
 	    	upload.setClickAmount(0);
-	    	upload.setLikesCount(0);;
+	    	upload.setLikesCount(0);
+	    	upload.setOpenComment(1);
 	    	upload.setUploadTime(time);
 	    	upload.setMemberId(memberId);	    	
 	    	

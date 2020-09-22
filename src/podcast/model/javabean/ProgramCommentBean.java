@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Component
 @Entity
@@ -84,10 +86,12 @@ public class ProgramCommentBean {
 	}
 
 	@Column(name = "MSGDATE")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public Date getMsgDate() {
 		return msgDate;
 	}
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public void setMsgDate(Date msgDate) {
 		this.msgDate = msgDate;
 	}

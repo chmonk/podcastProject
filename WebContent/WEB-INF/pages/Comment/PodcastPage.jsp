@@ -2,8 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ page import="java.util.*"%>
+
 <!DOCTYPE html>
 <html>
+
+
+
+
 <head>
 <meta charset="UTF-8">
 <title>頻道頁面</title>
@@ -37,30 +42,174 @@
 
 </head>
 <style>
+ @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700); 
+
+/* html{    background:url(http://thekitemap.com/images/feedback-img.jpg) no-repeat; */
+/*   background-size: cover; */
+/*   height:100%; */
+/* } */
+
+/* #feedback-page{ */
+/* 	text-align:center; */
+/* } */
+
+/* #form-main{ */
+/* 	width:100%; */
+/* 	float:left; */
+/* 	padding-top:0px; */
+/* } */
+
+#form-div {
+	background-color:rgba(72,72,72,0.4);
+	padding-left:35px;
+	padding-right:35px;
+	padding-top:35px;
+	padding-bottom:35px;
+	width: 250px;
+  margin-top:35px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
+
+.feedback-input {
+	color:#3c3c3c;
+ 	font-family: Helvetica, Arial, sans-serif; 
+   font-weight:500; 
+	font-size: 16px;
+	border-radius: 0;
+	background-color: #fbfbfb;
+	padding: 5px 5px 5px 5px;
+	margin-bottom: 10px;
+	width:100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+  border: 3px solid rgba(0,0,0,0);
+}
+
+.feedback-input:focus{
+	background: #fff;
+	box-shadow: 0;
+	border: 3px solid #3498db;
+	color: #3498db;
+	outline: none;
+  padding: 5px 5px 5px 5px;
+}
+
+.focused{
+	color:#30aed6;
+	border:#30aed6 solid 3px;
+}
+
+/* Icons ---------------------------------- */
+
+ #content{ 
+ 	background-image: url(http://rexkirby.com/kirbyandson/images/comment.svg); 
+ 	background-size: 30px 30px; 
+ 	background-position: 11px 8px; 
+ 	background-repeat: no-repeat; 
+ } 
+
+textarea {
+    width: 100%;
+    height: 150px;
+    line-height: 150%;
+    resize:vertical;
+}
+
+input:hover, textarea:hover,
+input:focus, textarea:focus {
+	background-color:white;
+}
+
+#submitBtn{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	float:left;
+	width: 100%;
+	border: #fbfbfb solid 4px;
+	cursor:pointer;
+	background-color: #3498db;
+	color:white;
+	font-size:15px;
+	padding-top:10px;
+	padding-bottom:10px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
+
+#submitBtn:hover{
+	background-color: white;
+	color: #0493bd;
+}
+	
+.submit:hover {
+	color: #3498db;
+}
+	
+ .ease { 
+ 	width: 0px; 
+ 	height: 74px; 
+ 	background-color: #fbfbfb; 
+ 	-webkit-transition: .3s ease; 
+ 	-moz-transition: .3s ease; 
+ 	-o-transition: .3s ease; 
+ 	-ms-transition: .3s ease; 
+ 	transition: .3s ease; 
+ } 
+
+ .submit:hover .ease{ 
+   width:100%; 
+   background-color:white; 
+ } 
+
+/* @media only screen and (max-width: 580px) { */
+/* 	#form-div{ */
+/* 		left: 3%; */
+/* 		margin-right: 3%; */
+/* 		width: 88%; */
+/* 		margin-left: 0; */
+/* 		padding-left: 3%; */
+/* 		padding-right: 3%; */
+/* 	} */
+/* } */
 .d2 {
 	width: 500px;
 	height: 500px;
 	overflow-y: scroll;
 	overflow-x: none;
 }
-/* .d3{ */
+#onetable{
+/* background-color: red; */
+border: solid 3px black;
+padding: 10px 10px 10px 10px; 
+}
+.d3{
+border-bottom: dashed 2px #D0D0D0;
+}
 
-/* } */
+
+
 </style>
-<body>
 
-	<div>
-		<form action="podcastPage.do" method="post" name="comment">
-			<table>
-				<tr>
-					<td>留言內容：</td>
-					<td><textarea id="content" rows="5" cols="40"
-							placeholder="請輸入不超過50個字" maxlength="50"></textarea></td>
+
+
+<body>
+	<div id="form-div">
+		<form action="podcastPage.do" method="post" name="comment" class="form" id="form1">
+			<table >
+				<tr class="text">
+					<td><textarea name="text" class="validate[required,length[6,300]] feedback-input" id="content" cols="40" placeholder="留言內容：&#13;&#10;請輸入不超過50個字" maxlength="50"></textarea></td>
+<!-- 					<textarea id="content" rows="5" cols="40" -->
+<!-- 							placeholder="請輸入不超過50個字" maxlength="50"></textarea></td> -->
 				</tr>
 				<tr>
-					<td>
+					<td class="submit">
 					<input type="hidden" id="PId" value=${thisPodcasterId}>   
-					<input id="submitBtn" type="button" value=" 提交 ">
+					<input id="submitBtn" type="button" value=" 提交 " >
 					</td>
 				</tr>
 			</table>
@@ -68,25 +217,26 @@
 	</div>
 	<br />
 	<div class="d2">
-		<form>
-			<table id="ctable" width="400">
-				<c:forEach items="${commList}" var="comment" varStatus="tagStatus">
-					<tr>
-						<td width="240">${comment.commentMsg}</td>
-						<td width="80">${comment.memberId}</td>
-						<td width="80">${comment.msgDate}</td>
-					</tr>
+		<form >
+			
+			<table  width="400">
+				<tbody id="ctable">
+					<c:forEach items="${commList}" var="comment" varStatus="tagStatus">
+						<tr class="d3">
+							<td width="260">${comment.commentMsg}</td>
+							<td width="40" align="center" style="color:gray">${comment.memberId}</td>
+							<td width="100" align="center" style="color:gray">${comment.msgDate}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			
+		</form>
+	</div>
 					<!-- 				<td><input type="button" name="delete" value="刪除" onclick="location='http://localhost:8080/SpringWebProject/processDeleteComment'"></td></tr> -->
 					<%-- 				<td><form id="${comment.commentId}" action="<c:url value="/processDeleteComment"/>"  method="POST"> --%>
 					<!-- 				<input type="hidden" name="delCommId" value=${comment.commentId}>  -->
 					<%-- 				<input type="button" value="刪除" onclick="delConfirm(this.name)" name="${comment.commentId}"></form></td> --%>
-				</c:forEach>
-
-			</table>
-			<hr>
-		</form>
-	</div>
-
 <div class="col-md-6 col-sm-6">
 <!-- play list -->
 <c:forEach items="${upList}" var="podcast" varStatus="status">
@@ -108,12 +258,7 @@
 		</div>
 	</c:forEach>
 	</div>
-<!--/ hero end -->
-
-
-
-
-	<script type="text/javascript">
+<script type="text/javascript">
 		function delConfirm(clicked_name) {
 
 			var r = confirm("確定要刪除此留言?")
@@ -126,6 +271,8 @@
 
 			}
 		}
+
+		var flag= false;
 
 		document.getElementById("submitBtn").onclick = function() {
 			var xhr = new XMLHttpRequest();
@@ -146,17 +293,21 @@
 					console.log(cbean.commentMsg);
 					var ctable = document.getElementById("ctable");
 
-					//下面兩行有問題尚未解決
-					var newMsg = "<tr><td width='240'>" + cbean.commentMsg
-							+ "</td><td width='80'>" + cbean.memberId
-							+ "</td><td width='80'>" + cbean.msgDate
-							+ "</td></tr>";
-				ctable.innerHTML+=newMsg;
-				}
-			}
+					
 
+					//下面兩行有問題尚未解決
+					var newMsg = "<tr class='d3'><td width='240'>" + cbean.commentMsg
+							+ "</td><td width='80' align='center' style='color:gray'>" + cbean.memberId
+							+ "</td><td width='80' align='center' style='color:gray'>" + cbean.msgDate
+							+ "</td></tr>";
+					
+				ctable.innerHTML+=newMsg;
+
+				flag=true;
+				}
+			}		
 		}
-	</script>
+</script>
 	
 
 	<!-- Javascript files -->

@@ -1,10 +1,11 @@
 package podcast.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -59,7 +60,8 @@ public class CommentController {
 		return "Comment/PodcastPage";
 		}
 	
-		
+	@Column	
+	@Temporal(TemporalType.TIMESTAMP)
 	@PostMapping("/podcastPage.do")
 	public @ResponseBody ProgramCommentBean processComment(@RequestParam("content") String commentMsg,
 			@RequestParam(name="PId")Integer podcasterId,
@@ -76,7 +78,6 @@ public class CommentController {
 		Integer memberId = memberBean.getMemberId();
 //		System.out.println("content:"+commentMsg);
 
-	
 		ProgramCommentBean pBean =new ProgramCommentBean();
 
     	//Timestamp time= new Timestamp(System.currentTimeMillis());
@@ -85,6 +86,7 @@ public class CommentController {
 		
 		
 		
+		pBean.setMsgStatus(1);
     	pBean.setMemberId(memberId);
 		pBean.setCommentMsg(commentMsg);
 		pBean.setMsgDate(time);
