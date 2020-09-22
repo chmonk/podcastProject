@@ -68,10 +68,16 @@ fieldset {
 			<div class="notice"></div>
 			</div>
 
-
 			<div class="div1">
-				<form:label path="activityDate" for="" class="l1">時間:</form:label>
-			    <form:input path="activityDate" placeholder="2020-10-07"/>
+				<form:label path="activityDate" for="" class="l1">日期:</form:label>
+			    <form:input path="activityDate" placeholder="2020-10-07" ></form:input>
+				<span id="idsp2"></span>
+				<div class="notice"></div>
+			</div>
+			
+			<div class="div1">
+				<form:label path="activityTime" for="" class="l1">時間:</form:label>
+			    <form:input path="activityTime" placeholder="06:30 pm"/>
 				<span id="idsp2"></span>
 				<div class="notice"></div>
 			</div>

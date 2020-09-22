@@ -1,5 +1,5 @@
 package podcast.controller;
-
+    
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,33 +26,52 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import podcast.model.dao.ActivityDAO;
+import podcast.model.dao.OrderTicketDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.MemberBean;
+import podcast.model.javabean.OrderTicketBean;
 
 @Controller
-@SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart" })
+@SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart","ActivityList" })
 public class ActivityController {
 
 	// 管理活動頁面
 	@GetMapping("/manageActivities")
-	public String showManageActivities(Model m, RedirectAttributes redirectAttrs) {
+	public String showManageActivities(HttpServletRequest request,Model m, RedirectAttributes redirectAttrs) throws Exception {
 
 		// 先確認有無登入(取得LoginOK即有)
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
+    	ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
+    	List<ActivityBean> list = new LinkedList<ActivityBean>();
+    	
 		 if (memberBean == null) {
-				m.addAttribute("errorMsg", "請登入播客會員");
+			 redirectAttrs.addAttribute("errorMsg", "請登入播客會員");
 				return "redirect:/login";
 		}	
 		Integer role = memberBean.getRole();
 
-		if (role == 2 || role == 0) { //0=管理員 1=一般會員 2=播客
+		if (role == 2) { //0=管理員 1=一般會員 2=播客
 			m.addAttribute("LoginOK", memberBean);
+	 
+	    	list = aDao.selectByPodcasterId(memberBean.getMemberId());				
+	    	m.addAttribute("ActivityList",list);
 			return "Activity/manageActivities";
-		} else {
-			m.addAttribute("errorMsg", "一般會員無此權限");
+		
+		} else if(role == 0) {
+			//m.addAttribute("LoginOK", memberBean);			
+			list =aDao.selectAll();
+			m.addAttribute("ActivityList",list);
+			return "Activity/manageActivities";
+		}
+		else {
 			redirectAttrs.addFlashAttribute("errorMsg", "一般會員無此權限");
 			return "redirect:/login";
 		}
+		
+		
+		
 
 
 	}
@@ -74,12 +94,19 @@ public class ActivityController {
 		if (result.hasErrors()) {
 			return "Activity/addActivity";
 		}
+		
+		System.out.println("DATE="+activity.getActivityDate());
+		
 
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
 		Integer Id = memberBean.getMemberId();
 		
 		String ActivityImg = processFile(Id,multipartFile,request);
 		
+		
+		Integer stock = activity.getActivityMaxPeople();
+		activity.setStock(stock);
+		activity.setPodcasterId(Id);
 		activity.setActivityImg(ActivityImg);
 		activity.setActivityStatus(activityStatus);
 		
@@ -94,11 +121,14 @@ public class ActivityController {
 		// 輸入表單資料至活動資料表
 		aDao.insert(activity);
 
-		return "Activity/manageActivities";
+		//return "Activity/manageActivities";
+		return "redirect:/manageActivities";
 
-		
+		//return "redirect:/Activity/manageActivities";
 	}
 	
+
+	//測試用
 	@RequestMapping(path = "/p", method = RequestMethod.GET)
 	public String showActivitiess(HttpServletRequest request,Model m) throws Exception {
 		
@@ -116,6 +146,7 @@ public class ActivityController {
 		//return "/index";	
 		return "/PodcastManage/showPodcaster";
 	}
+
 
 	public String processFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
 		// 取得原檔案名字
@@ -168,7 +199,7 @@ public class ActivityController {
 	}
 
 	// 資料庫的所有活動傳送至首頁
-	@RequestMapping(path = "/a", method = RequestMethod.GET)
+	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String showActivities(HttpServletRequest request, Model m) throws Exception {
 
 		ServletContext app = request.getServletContext();
@@ -180,11 +211,47 @@ public class ActivityController {
 		list = aDao.selectAll();
 		m.addAttribute("list", list);
 
-//		Map<Integer, ActivityBean> aMap = aDao.getActivityMap();
-//		m.addAttribute("products_DPP", aMap);
+		//購物車商品
+		Map<Integer, ActivityBean> aMap = aDao.getActivityMap();
+		m.addAttribute("products_DPP", aMap);
 
 		return "index";
 
+	}
+	
+	
+	@PostMapping("DeleteActivity")
+	public String deleteActivity(HttpServletRequest request,
+			@RequestParam("cmd")   String cmd,
+			@RequestParam(value = "activityId", required = false) Integer  activityId) throws Exception {
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
+    	ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
+    	
+    	if (cmd.equalsIgnoreCase("DEL")) {
+    	boolean b = aDao.delete(activityId);
+    	return "Activity/manageActivities";}
+    	else {
+    		return "Activity/manageActivities";	
+    	}
+	}
+	
+	@GetMapping("ActivityDetail")
+	protected String ActivitrDetail(HttpServletRequest request,Model model, 
+			@RequestParam("activityId") Integer activityId 
+			) throws Exception {
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		if (memberBean == null) {
+			return "redirect:/login";
+			
+		}
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
+    	ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
+		ActivityBean aBean = aDao.select(activityId);
+		model.addAttribute("aBean", aBean);
+		return "Activity/showSingleActivity";
+		
 	}
 
 }

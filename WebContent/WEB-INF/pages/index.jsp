@@ -20,7 +20,7 @@
 <!-- jquery-ui CSS -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <!-- Bootstrap CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
 <link href="css/animate.min.css" rel="stylesheet">
 <!-- Basic stylesheet -->

@@ -1,4 +1,4 @@
-const mediaData = [
+var mediaData = [
 	{
 		author: "Freedom1111 Trail Studio",
 		authorUrl: "https://www.youtube.com/channel/UCx6kpgiQkDkN1UnK5GaATGw",
@@ -49,9 +49,10 @@ const mediaData = [
 		authorUrl: "",
 		fileName: "lemon",
 		fileUrl:
-			"./test/lemon.mp3",
+			"./programTestFile1/lemon.mp3",
 		thumb:
-			"./test/lemon.jpg"
+			"./programTestFile1/lemon.jpg"
+
 	}
 ];
 
@@ -293,6 +294,64 @@ $(document).ready(() => {
 	const volumeBg = $("#volume_bg");
 	const volumeBar = $("#volume_bar");
 	const volumeHandle = $("#volume_handle");
+	const audiotext = $(".playlist-number");;
+
+
+
+	//載入頁面時 取得使用者看過的瀏覽列表置換成mediatext
+	const getNewMediaData = function(userId) {
+
+
+
+		//請求瀏覽紀錄塞入播放清單
+		let xhr5 = new XMLHttpRequest();
+
+		xhr5.open("post", "/SpringWebProject/getPlaylist", true);
+
+		xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+		xhr5.send("userId=" + userId);
+		xhr5.onreadystatechange = function() {
+
+			if (xhr5.readyState == 4) {
+
+				if (xhr5.status == 200) {
+
+					var type = xhr5.getResponseHeader("Content-Type");
+
+					if (type.indexOf("application/json") === 0) {
+
+						//clean old mediaData
+
+						//黑魔法清空array
+						mediaData.length = 0;
+
+
+						med = JSON.parse(xhr5.responseText);
+
+						//將object 轉為 js array 才能取用 array方法
+						Object.keys(med).map(function(_) { return med[_]; });
+						//console.log(med);
+
+						//依序塞入歌曲  舊到新push   反敘為unshift
+						med.forEach(function(song, index) {
+							mediaData.unshift(song);
+						})
+
+						renderPlaylist(mediaData);
+					}
+
+				} else {
+					console.log("status isn't 200");
+				}
+			} else {
+				console.log("readystate=" + xhr5.readyState);
+			}
+		};
+	};
+
+	//getNewMediaData(1);
+
 
 	// 歌曲資訊元件
 	const MusicInfo = (info, idx) => {
@@ -324,7 +383,7 @@ $(document).ready(() => {
 			const idx = parseInt($(this).attr("id").replace("queue-item-", ""));
 			//設定準備播放歌曲
 			myAudio.setCurrentMusic(idx);
-			//自動播放
+			//自動播放	
 			myAudio.setPlayStatus(true);
 		});
 	};
@@ -343,15 +402,52 @@ $(document).ready(() => {
 		$("#duration").html(formatTime(duration));
 	};
 
-	const myAudio = new AudioPlayer(mediaData);
+	var myAudio = new AudioPlayer(mediaData);
 	const timelineBarTotalLength = 250;
 	const volumeBarTotalLength = 100;
+
+
+	//播放清單取得歌曲
+	//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
+	audiotext.click(function() {
+		console.log(this);
+		var pid = {};
+		pid.id = this.id;
+		// console.log(this.id);
+
+		xhr = $.ajax({
+			url: "/SpringWebProject/addListController",
+			//上線應修正成async
+			async: true,
+			// data:{pid:$("#playNowBtn").val()}
+			data: pid,
+			dataType: "json",
+			success: function(data) {
+				// console.log(xhr);
+				console.log(data);
+				mediaData.push(data);//不能用responseText會無法顯示
+				var result = [...new Set(mediaData.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
+				mediaData = result;
+
+				renderPlaylist();//重新取得清單資訊
+
+
+			}
+
+		})
+
+
+
+
+
+	});
 
 	// 監聽事件顯示 UI
 	myAudio.on("playstatuschange", () =>
 		//改變播放圖案
 		playBtn.html(myAudio.getIsPlaying() ? "pause" : "play_arrow")
 	);
+
 	myAudio.on("playmodechange", () => {
 		switch (myAudio.playMode) {
 			case "step": {
@@ -437,7 +533,8 @@ $(document).ready(() => {
 
 	// 播放清單開關
 	queueBtn.click(() => {
-		queueWrapper.toggleClass("hidden");
+		queueWrapper.removeClass("hidden");
+		//queueWrapper.toggleClass("hidden");
 		queueBtn.toggleClass("select");
 	});
 
@@ -445,11 +542,11 @@ $(document).ready(() => {
 		queueWrapper.addClass("hidden");
 		queueBtn.removeClass("select");
 	});
-		//離開播放選單元素時關閉播放選單
-		queueWrapper.on("mouseleave",()=>{
-			queueWrapper.addClass("hidden");
-		})
-	
+	//離開播放選單元素時關閉播放選單
+	queueWrapper.on("mouseleave", () => {
+		queueWrapper.addClass("hidden");
+	})
+
 
 	// 音量調整面板
 	//按下音量紐開關音量調節面板
@@ -489,5 +586,141 @@ $(document).ready(() => {
 		}
 	});
 
+
+	//取得使用者id  渲染成對應的播放清單
+	//getNewMediaData(1);
+
+
+	/////////////////////////////////
+	//	var lemon = $("#lemon");
+	//
+	//	lemon.click("on", function() {
+	//
+	//		let xhr = new XMLHttpRequest();
+	//
+	//		xhr.open("get", "/SpringWebProject/postjson", true);
+	//
+	//		xhr.send();
+	//
+	//		xhr.onreadystatechange = function() {
+	//			if (xhr.status == 200 && xhr.readyState == 4) {
+	//				alert(xhr.responseText);
+	//
+	//				mediaData.push(JSON.parse(xhr.responseText));
+	//
+	//				renderPlaylist(mediaData);
+	//
+	//			}
+	//		}
+	//	})
+
+	//生成對應memberid所含圖片列表(未來替換成播放條列表)
+	$("button.t")
+		.on("click", function(e) {
+
+			//測試取得按鈕上memberid
+			//console.log(e.target.id);
+
+			//發送要求由 memberid取得 所含有的列表
+			let xhr1 = new XMLHttpRequest();
+
+			xhr1.open("get",
+				"/SpringWebProject/gettheplayersong?name="
+				+ e.target.id, true);
+
+			//傳輸語句測試
+			console.log("/SpringWebProject/gettheplayersong?name=" + e.target.id);
+			//SpringWebProject/gettheplayersong?name=17
+
+
+			//收到資料後新建成帶有program id的圖片
+			xhr1.onreadystatechange = function() {
+				if (xhr1.status == 200 && xhr1.readyState == 4) {
+
+					console.log(xhr1.readyState);
+					alert(xhr1.responseText);
+
+					//<img id="lemon" src="programimg/17_307_img.jpg">
+
+					let gettheplayerresult = JSON
+						.parse(xhr1.responseText);
+
+					document.getElementById("show").innerHTML = "";
+
+					for (let i = 0; i < gettheplayerresult.length; i++) {
+
+						//<img id="lemon" src="programimg/17_307_img.jpg">
+
+						let content = "<img id='" + gettheplayerresult[i]["podcastId"] + "' src='" + gettheplayerresult[i]["audioimg"] + "'>";
+
+
+						//資料家道div show的最後元素
+						document.getElementById("show")
+							.insertAdjacentHTML(
+								'beforeend', content);
+					}
+
+				}
+			}
+			xhr1.send();
+		})
+
+
+
+	//點選#show下的圖片觸發新增到播放列表 同時發送使用者id(利用html input tag) 節目id(綁在節目圖示)
+	$("#show").on("click", "img", function() {
+
+		//取得this的id  this.id , this 指向對應element
+		//console.log(this.id);
+		var thisid = this.id;
+
+
+		//取得使樂者id
+		var userid = document.getElementById("userid").dataset.value;
+
+		//測試字串
+		console.log("/SpringWebProject/postjson/" + userid + "/?id=" + thisid);
+
+		let xhr = new XMLHttpRequest();
+		console.log(this);
+		xhr.open("get", "/SpringWebProject/postjson/" + userid + "/?id=" + thisid, true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.status == 200 && xhr.readyState == 4) {
+				alert(xhr.responseText);
+
+
+				var new_song = JSON.parse(xhr.responseText);
+
+				var duplicate = false;
+				var duplicate_index;
+
+				for (let i = 0; i < mediaData.length; i++) {
+					if (mediaData[i].podcastId == new_song.podcastId) {
+						duplicate = true;
+						duplicate_index = i;
+						break;
+					}
+				}
+				if (duplicate) {
+					mediaData.splice(duplicate_index, 1);
+					mediaData.unshift(new_song);
+					renderPlaylist(mediaData);
+				} else {
+					mediaData.unshift(new_song);
+					renderPlaylist(mediaData);
+				}
+
+				//設定準備播放歌曲
+				myAudio.setCurrentMusic(0);
+				//自動播放	
+				myAudio.setPlayStatus(true);
+			}
+		}
+
+	})
+
+
+	console.log(mediaData);
 	renderPlaylist(mediaData);
 });

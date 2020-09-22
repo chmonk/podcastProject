@@ -11,7 +11,7 @@
 <!-- jquery-ui CSS -->
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-
+<%--
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
@@ -30,7 +30,7 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/logo/favicon.ico">  
-	
+		--%>
 <!-- Javascript files -->
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
@@ -52,7 +52,7 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  	<!-- <script type="text/javascript" src="js/player.js"></script> -->
-	
+
 
 	 <script type="text/javascript">	 
 	 $.widget( "custom.catcomplete", $.ui.autocomplete, {
@@ -197,6 +197,7 @@ nav ul ul li {
 					</div>
 	
 					<!-- Collect the nav links, forms, and other content for toggling -->
+
 					<c:choose>
 						<c:when test="${LoginOK.role==1}">
 							<div class="collapse navbar-collapse"
@@ -266,6 +267,7 @@ nav ul ul li {
 							</div>					    
 					    </c:otherwise>
 					</c:choose>
+
 					<!-- /.navbar-collapse -->
 				</div>
 				<!-- /.container-fluid -->

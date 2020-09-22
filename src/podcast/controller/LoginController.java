@@ -78,7 +78,7 @@ public class LoginController {
 		}
 		processCookies(bean, request, response);
 
-		return "redirect:/a";
+		return "redirect:/";
 		
 	}
 	
