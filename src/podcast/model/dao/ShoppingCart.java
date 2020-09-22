@@ -58,7 +58,7 @@ public class ShoppingCart {
 		Set<Integer> set = cart.keySet();
 		for(int n : set){
 			OrderItemBean oib = cart.get(n);
-			double price    = oib.getAmount();
+			double price    = oib.getUnitPrice();
 			//double discount = oib.getDiscount();
 			int qty      = oib.getQuantity();
 			//subTotal +=  price * discount * qty;
