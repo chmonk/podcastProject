@@ -298,7 +298,7 @@ public class BackStageDAO implements IBackStageDAO {
 	}
 
 	@Override
-	public Integer TicketIncome(Date startDate, Date endDate) {
+	public Double TicketIncome(Date startDate, Date endDate) {
 		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = "from OrderTicketBean where orderDate between :startDate and :endDate";
 		Query<OrderTicketBean> query = session.createQuery(hqlstr, OrderTicketBean.class);
@@ -306,11 +306,12 @@ public class BackStageDAO implements IBackStageDAO {
 		query.setParameter("endDate", endDate);
 		List<OrderTicketBean> list = query.list();
 
-		Integer income = 0;
+		int in = 0;
 		for (OrderTicketBean oBean : list) {
-			income += oBean.getOrderPrice();
+			in +=oBean.getTotalAmount();
 		}
-		System.out.println("income:" + income);
+		System.out.println("income:" + in);
+		Double income=null;
 		return income;
 	}
 

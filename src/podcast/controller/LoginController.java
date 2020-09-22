@@ -82,7 +82,7 @@ public class LoginController {
 		if(memberbean.getRole()==0) {
 			return "/BackStage/BackStageSelectStyle";
 		}
-		return "redirect:/a";
+		return "redirect:/";
 		
 	}
 	

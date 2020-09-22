@@ -39,7 +39,7 @@ public interface IBackStageDAO {
 	public List<HistoryBean> selectHistoryByLastListen(Date setPoInteger);
 	public boolean deleteHistoryByDate(Date setPoInteger);
 	public Integer SubscriptionIncome(Date startDate,Date endDate);
-	public Integer TicketIncome(Date startDate,Date endDate);
+	public Double TicketIncome(Date startDate,Date endDate);
 	
 	//uploadPodcast methods=============================================
 	public List<uploadPodcastBean> selectPodcastByMember(Integer memberId);
