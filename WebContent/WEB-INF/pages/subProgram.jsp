@@ -297,12 +297,13 @@ html {
 window.onload=function(){
 	if ("${subProgram}"=="[]"){
 		document.getElementById('need_to_sub').innerHTML="請訂閱";
-		document.getElementById('hide').style.display='none';
+		document.getElementById('hide_alreadysub_btn').style.display='none';
 		
 		
 	}else{
 		document.getElementById('d1').style.display='';
 		document.getElementById('check_sub').style.display='none';
+		document.getElementById('d2').style.display='none';
 		}
 }
 </script>
@@ -315,13 +316,16 @@ window.onload=function(){
 
 
 		<span id='need_to_sub'></span>
-			<button id="hide" type="button" style="display:'';"
+			<button id="hide_alreadysub_btn" type="button" style="display:'';"
 				onclick="document.getElementById('d1').style.display=''">已訂閱</button>
 	
 
 	<form action="/SpringWebProject/AfterSubProgram.controller">
 		<a href="javascript:;"
 			onclick="document.getElementById('d1').style.display='' ">訂閱列表</a><br>
+			
+	<input id='check_sub'type="submit" value="訂閱">
+
 
 		<div id="d1" style="display: none" >
 			<div>
@@ -363,7 +367,7 @@ window.onload=function(){
 								<div
 									class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 									<span class="card-media-body-supporting-bottom-text subtle">${data.getCategoryName()}</span>
-									<a id="${data.getPodcastId()}"
+									<a id="${alreadySub.getPodcastId()}"
 										class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 								</div>
 							</div>
@@ -375,7 +379,11 @@ window.onload=function(){
 
 
 		</div>
-	<div id="d2" style="display: none" >
+	
+	
+
+	
+	<div id="d2" style="display:''" >
 			<div>
 				<c:forEach var="unalreadySub" items="${needSub}">
 					<div class="container">
@@ -416,7 +424,7 @@ window.onload=function(){
 									class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 									<span class="card-media-body-supporting-bottom-text subtle">${data.getCategoryName()}</span>
 									<a id="${unalreadySub.getPodcastId()}"
-										class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
+										class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">需訂閱才能收聽</a>
 								</div>
 							</div>
 						</div>
@@ -427,7 +435,7 @@ window.onload=function(){
 
 
 		</div>
-<input id='check_sub'type="submit" value="訂閱">
+
 
 
 
