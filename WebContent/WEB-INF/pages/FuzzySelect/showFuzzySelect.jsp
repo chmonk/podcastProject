@@ -320,6 +320,13 @@ html {
 </script>
 </head>
 <body>
+		<div class="head">
+		<jsp:include page="../header_banner.jsp" flush="true " />
+	</div>
+	<div class="showPodcasterBody">
+		<div class="title-select">
+			<h1>搜尋結果</h1>
+		</div>
 	<div class="carousel-container col-sm-10 padcard">
 		<div class="row">
 			<div class="col-sm-12">
@@ -398,6 +405,7 @@ html {
 		</c:forEach>
 
 	</div>
+		</div>
 	<!--playerbar -->
 
 	<!-- jQuery -->
