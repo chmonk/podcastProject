@@ -25,7 +25,7 @@ public class ActivityBean {
 	private Integer podcasterId;
 	private Integer activityPrice;
 	private Integer activityMaxPeople;
-	private Integer activityMinPeople;
+	private Integer stock;
 	private Integer activityStatus;
 	private String activityImg;
 	
@@ -95,12 +95,12 @@ public class ActivityBean {
 		this.activityMaxPeople = activityMaxPeople;
 	}
 	
-	@Column(name="ACTIVITYMINPEOPLE")
-	public Integer getActivityMinPeople() {
-		return activityMinPeople;
+	@Column(name="STOCK")
+	public Integer getStock() {
+		return stock;
 	}
-	public void setActivityMinPeople(Integer activityMinPeople) {
-		this.activityMinPeople = activityMinPeople;
+	public void setStock(Integer stock) {
+		this.stock = stock;
 	}
 	
 	@Column(name="ACTIVITYSTATUS")

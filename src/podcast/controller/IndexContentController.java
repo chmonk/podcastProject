@@ -46,20 +46,22 @@ public class IndexContentController {
 		
 		LocalDate date=LocalDate.now().minusDays(30);
 		Date date2=Date.valueOf(date);
-		java.util.List<uploadPodcastBean> uList=bDao.topPodcast(date2);
 		
+		//舊方法
+		java.util.List<uploadPodcastBean> uList=bDao.topPodcast(date2);		
 		List<Integer> idList=new ArrayList<Integer>();
-		for(int i=0;i<10;i++) {
+		for(int i=0;i<uList.size();i++) {
 			idList.add(uList.get(i).getMemberId());
 		}
 		
 		List<MemberBean> mList = new ArrayList<MemberBean>();
-		for(int j=0;j<idList.size();j++) {
-				mList.add(mDao.selectPodcaster(idList.get(j)));
-		}
 		
-		//m.addAttribute("mbean",mList);
-		 
+		for(int j=0;j<10;j++) {
+			mList.add(mDao.selectPodcaster(idList.get(j)));
+		}
+
+		//List<MemberBean> mList = bDao.topTenMember(date2);
+		
 		return mList;
 	}
 }

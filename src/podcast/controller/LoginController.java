@@ -51,7 +51,7 @@ public class LoginController {
 
 		
 		System.out.println("account & password= "+account+" "+password);
-		MemberBean memberbean = null;
+		MemberBean memberbean = new MemberBean();
 		
 		
     	ServletContext app = request.getServletContext();
@@ -77,7 +77,11 @@ public class LoginController {
 			return loginForm;
 		}
 		processCookies(bean, request, response);
-
+		
+		//0922新增管理員身分導致後台頁面敘述
+		if(memberbean.getRole()==0) {
+			return "/BackStage/BackStageSelectStyle";
+		}
 		return "redirect:/a";
 		
 	}

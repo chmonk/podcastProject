@@ -45,5 +45,6 @@ public interface IBackStageDAO {
 	public List<uploadPodcastBean> selectPodcastByMember(Integer memberId);
 	public boolean deletePodcast(Integer podcastId) throws Exception;
 	public List<uploadPodcastBean> topPodcast(Date uploadTime);
+	public List<MemberBean> topTenMember(Date uploadTime);
 	
 }

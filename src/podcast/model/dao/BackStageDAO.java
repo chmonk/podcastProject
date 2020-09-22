@@ -2,7 +2,11 @@ package podcast.model.dao;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -342,6 +346,56 @@ public class BackStageDAO implements IBackStageDAO {
 		List<uploadPodcastBean> list = query.list();
 
 		return list;
+	}
+	
+	@Override
+	public List<MemberBean> topTenMember(Date uploadTime){
+		Session session = sessionFactory.getCurrentSession();
+		String hqlstr="from uploadPodcastBean where uploadTime>:uploadTime ORDER BY clickAmount DESC ";
+		Query<uploadPodcastBean> query = session.createQuery(hqlstr, uploadPodcastBean.class);
+		query.setParameter("uploadTime", uploadTime);
+		List<uploadPodcastBean> podlist = query.list();
+		
+		System.out.println("podlist:"+podlist);
+		
+		//開始計算點擊次數總和排名
+		List<Integer> allMember=new ArrayList<Integer>();
+		Map<Integer,Integer> memCount=new HashMap<Integer,Integer>();
+		int i=0;
+		while(i<podlist.size()){
+			if(allMember.contains(podlist.get(i).getMemberId())==false) {
+				allMember.add(podlist.get(i).getMemberId());
+				memCount.put(podlist.get(i).getMemberId(), 1);
+			}else {
+				Integer pre=memCount.get(podlist.get(i).getMemberId());
+				memCount.replace(podlist.get(i).getMemberId(),pre+1);
+			}
+		}
+		
+		System.out.println("Map memCount:"+memCount);
+		//Map轉換為list
+		List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(memCount.entrySet()); 
+		for (int x = 0; x < list.size(); x++) {
+            System.out.println(list.get(x).getKey() + ": " + list.get(x).getValue());
+        } 
+		
+		//sort
+		 Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+	           @Override
+	           public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+	               return o2.getValue().compareTo(o1.getValue());
+	           }
+	       });
+		 
+		 List<MemberBean> popList=new ArrayList<MemberBean>();
+		 for(int k=0;k<8;k++) {
+			MemberBean mbean = mDao.selectPodcaster(list.get(k).getKey());
+			popList.add(mbean);
+		 }
+		 
+		 System.out.println("popList:"+popList);
+		
+		return popList;
 	}
 
 }

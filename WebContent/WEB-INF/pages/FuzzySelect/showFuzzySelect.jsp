@@ -314,7 +314,7 @@ $(document).ready(function(){
 			                <h4 class="card-title">${data.getNickname()}</h4>
 			                <p class="card-text">${data.getInfo()}</p>
 			                
-			                <form action="<c:url value="/podastPage"/>">
+			                <form action="<c:url value="/podcastPage"/>">
 			                <input type="hidden" name="fuzzyPodcasterId" value=${data.getMemberId()} />
 			                <input type="submit" class="btn btn-primary" value="Button"/>
 			                </form>
