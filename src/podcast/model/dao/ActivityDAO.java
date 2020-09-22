@@ -46,7 +46,7 @@ public class ActivityDAO implements IActivityDAO {
 		return session.get(ActivityBean.class, activityId);
 	}
 	
-	@Override
+
 	public List<ActivityBean>  selectByPodcasterId(Integer podcasterId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from ActivityBean where podcasterId=:id";
