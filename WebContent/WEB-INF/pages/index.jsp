@@ -71,7 +71,9 @@
 
 		<!-- 熱播排行 -->
 		<jsp:include page="workWithUs.jsp" flush="true " />
-		<!-- 熱播排行 -->
+			<%-- <jsp:param value="" name=""/> --%>
+<%-- 		</jsp:include>
+ --%>		<!-- 熱播排行 -->
 
 		<!-- sign up for news letter -->
 		<jsp:include page="newsLetter.jsp" flush="true " />

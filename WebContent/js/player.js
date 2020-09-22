@@ -299,9 +299,9 @@ $(document).ready(() => {
 
 
 	//載入頁面時 取得使用者看過的瀏覽列表置換成mediatext
-	const getNewMediaData = function (userId) {
+	const getNewMediaData = function(userId) {
 
-		
+
 
 		//請求瀏覽紀錄塞入播放清單
 		let xhr5 = new XMLHttpRequest();
@@ -311,10 +311,6 @@ $(document).ready(() => {
 		xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 		xhr5.send("userId=" + userId);
-
-
-
-
 		xhr5.onreadystatechange = function() {
 
 			if (xhr5.readyState == 4) {
@@ -324,13 +320,13 @@ $(document).ready(() => {
 					var type = xhr5.getResponseHeader("Content-Type");
 
 					if (type.indexOf("application/json") === 0) {
-						
+
 						//clean old mediaData
 
 						//黑魔法清空array
 						mediaData.length = 0;
-						
-						
+
+
 						med = JSON.parse(xhr5.responseText);
 
 						//將object 轉為 js array 才能取用 array方法
@@ -346,12 +342,12 @@ $(document).ready(() => {
 					}
 
 				} else {
-					console.log("status isn;t 200");
+					console.log("status isn't 200");
 				}
 			} else {
 				console.log("readystate=" + xhr5.readyState);
 			}
-	};
+		};
 	};
 
 	//getNewMediaData(1);
@@ -410,9 +406,11 @@ $(document).ready(() => {
 	const timelineBarTotalLength = 250;
 	const volumeBarTotalLength = 100;
 
+
 	//播放清單取得歌曲
 	//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
 	audiotext.click(function() {
+		console.log(this);
 		var pid = {};
 		pid.id = this.id;
 		// console.log(this.id);
@@ -420,14 +418,28 @@ $(document).ready(() => {
 		xhr = $.ajax({
 			url: "/SpringWebProject/addListController",
 			//上線應修正成async
-			async: false,
+			async: true,
 			// data:{pid:$("#playNowBtn").val()}
-			data: { id: pid },
-			dataType: "json"
+			data: pid,
+			dataType: "json",
+			success: function(data) {
+				// console.log(xhr);
+				console.log(data);
+				mediaData.push(data);//不能用responseText會無法顯示
+				var result = [...new Set(mediaData.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
+				mediaData = result;
+
+				renderPlaylist();//重新取得清單資訊
+
+
+			}
+
 		})
-		// console.log(xhr);
-		mediaData.push(xhr.responseJSON);//不能用responseText會無法顯示
-		renderPlaylist(mediaData);//重新取得清單資訊
+
+
+
+
+
 	});
 
 	// 監聽事件顯示 UI
@@ -574,8 +586,9 @@ $(document).ready(() => {
 		}
 	});
 
+
 	//取得使用者id  渲染成對應的播放清單
-	getNewMediaData(1);
+	//getNewMediaData(1);
 
 
 	/////////////////////////////////
@@ -670,7 +683,7 @@ $(document).ready(() => {
 
 		let xhr = new XMLHttpRequest();
 		console.log(this);
-		xhr.open("get", "/SpringWebProject/postjson/" + userid +"/?id=" + thisid, true );
+		xhr.open("get", "/SpringWebProject/postjson/" + userid + "/?id=" + thisid, true);
 		xhr.send();
 		xhr.onreadystatechange = function() {
 			if (xhr.status == 200 && xhr.readyState == 4) {
@@ -697,20 +710,17 @@ $(document).ready(() => {
 					mediaData.unshift(new_song);
 					renderPlaylist(mediaData);
 				}
-				
+
 				//設定準備播放歌曲
-			myAudio.setCurrentMusic(0);
-			//自動播放	
-			myAudio.setPlayStatus(true);
+				myAudio.setCurrentMusic(0);
+				//自動播放	
+				myAudio.setPlayStatus(true);
 			}
 		}
 
 	})
 
 
-
-
-
-
-
-});	
+	console.log(mediaData);
+	renderPlaylist(mediaData);
+});

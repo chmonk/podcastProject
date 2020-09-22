@@ -125,6 +125,25 @@ public class ActivityController {
 	}
 	
 
+	//測試用
+	@RequestMapping(path = "/p", method = RequestMethod.GET)
+	public String showActivitiess(HttpServletRequest request,Model m) throws Exception {
+		
+		ServletContext app = request.getServletContext();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+    	
+    	ActivityDAO aDao = (ActivityDAO)context.getBean("ActivityDAO");
+    	List<ActivityBean> list = new LinkedList<ActivityBean>();
+    	
+    	list = aDao.selectAll();
+
+		m.addAttribute("list", list);
+		//return "../../ActivitiesList";
+		return "/header_banner";
+		//return "/index";	
+	}
+
+
 	public String processFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
 		// 取得原檔案名字
 		String filename = multipartFile.getOriginalFilename();
