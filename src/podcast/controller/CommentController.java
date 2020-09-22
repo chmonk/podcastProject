@@ -1,6 +1,8 @@
 package podcast.controller;
 
-import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -50,32 +52,46 @@ public class CommentController {
 		List<uploadPodcastBean> upList=upDao.selectAllFromMember(podcasterId);
     	m.addAttribute("upList",upList);
     	request.setAttribute("upList", upList);
-		
-		
+    	
+    	//把PodcasterId送到頻道頁面
+    	//request.setAttribute("thisPodcasterId", podcasterId);
+		m.addAttribute("thisPodcasterId",podcasterId);
 		return "Comment/PodcastPage";
 		}
 	
 		
 	@PostMapping("/podcastPage.do")
 	public @ResponseBody ProgramCommentBean processComment(@RequestParam("content") String commentMsg,
+			@RequestParam(name="PId")Integer podcasterId,
 		 HttpServletRequest request, Model m) throws Exception {
+		
+		System.out.println(commentMsg);
 		
 		//連接帳號
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+		
+		System.out.println(memberBean);
+
+		
 		Integer memberId = memberBean.getMemberId();
 //		System.out.println("content:"+commentMsg);
 
 	
 		ProgramCommentBean pBean =new ProgramCommentBean();
 
-    	Timestamp time= new Timestamp(System.currentTimeMillis());
-
+    	//Timestamp time= new Timestamp(System.currentTimeMillis());
+		Date time = new Date();
+//		time=java.sql.Date(utime.getTime());
+		
+		
 		
     	pBean.setMemberId(memberId);
 		pBean.setCommentMsg(commentMsg);
 		pBean.setMsgDate(time);
+		pBean.setPodcasterId(podcasterId);
 		
 		System.out.println(pBean.getCommentMsg());
+		System.out.println("塞進的PID"+podcasterId);
 		
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);

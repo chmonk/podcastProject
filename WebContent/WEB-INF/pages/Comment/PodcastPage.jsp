@@ -49,10 +49,6 @@
 </style>
 <body>
 
-	<Input type="button" name="modify" value="我的最愛"
-		onclick="location='http://localhost:8080/SpringWebProject/...'">
-	<br />
-	<br />
 	<div>
 		<form action="podcastPage.do" method="post" name="comment">
 			<table>
@@ -62,7 +58,10 @@
 							placeholder="請輸入不超過50個字" maxlength="50"></textarea></td>
 				</tr>
 				<tr>
-					<td><input id="submitBtn" type="button" value=" 提交 "></td>
+					<td>
+					<input type="hidden" id="PId" value=${thisPodcasterId}>   
+					<input id="submitBtn" type="button" value=" 提交 ">
+					</td>
 				</tr>
 			</table>
 		</form>
@@ -134,12 +133,15 @@
 			xhr.setRequestHeader("Content-type",
 					"application/x-www-form-urlencoded");
 			var content = document.getElementById("content").value;
+			var PId=document.getElementById("PId").value;
 			console.log(content);
-			xhr.send("content=" + content);
+			xhr.send("content=" + content+"&PId="+PId);
 			console.log(content);
 
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === 4 && xhr.status === 200) {
+					console.log("get data");
+					console.log(xhr.responseText);
 					var cbean = JSON.parse(xhr.responseText);
 					console.log(cbean.commentMsg);
 					var ctable = document.getElementById("ctable");
@@ -149,7 +151,7 @@
 							+ "</td><td width='80'>" + cbean.memberId
 							+ "</td><td width='80'>" + cbean.msgDate
 							+ "</td></tr>";
-				ctable.insertAdjacentElement("beforeend",newMsg);
+				ctable.innerHTML+=newMsg;
 				}
 			}
 
