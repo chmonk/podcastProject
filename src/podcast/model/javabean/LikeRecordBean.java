@@ -36,7 +36,7 @@ public class LikeRecordBean {
 
 
 	@Id
-	@Column(name="LIKERECORD")
+	@Column(name="LIKERECORDID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getLikeRecordId() {
 		return likeRecordId;

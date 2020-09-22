@@ -17,6 +17,8 @@ public class HistoryOrderProgramBean {
 	Integer clickAmount;
 	String audioImg;
 	String audioPath;
+	String podcastInfo;
+	String categoryName;
 
 	public HistoryOrderProgramBean() {
 	}
@@ -25,7 +27,7 @@ public class HistoryOrderProgramBean {
 
 	public HistoryOrderProgramBean(Integer podcastId, String podcastName, Integer publisherId, String lastListen,
 			Integer memberId, String nickname, String uploadTime, Integer likesCount, Integer clickAmount,
-			String audioImg, String audioPath) {
+			String audioImg, String audioPath, String podcastInfo, String categoryName) {
 		super();
 		this.podcastId = podcastId;
 		this.podcastName = podcastName;
@@ -38,6 +40,8 @@ public class HistoryOrderProgramBean {
 		this.clickAmount = clickAmount;
 		this.audioImg = audioImg;
 		this.audioPath = audioPath;
+		this.podcastInfo = podcastInfo;
+		this.categoryName = categoryName;
 	}
 
 
@@ -136,6 +140,26 @@ public class HistoryOrderProgramBean {
 
 	public void setAudioPath(String audioPath) {
 		this.audioPath = audioPath;
+	}
+
+	public String getPodcastInfo() {
+		return podcastInfo;
+	}
+
+	public void setPodcastInfo(String podcastInfo) {
+		this.podcastInfo = podcastInfo;
+	}
+
+
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 	
 	
