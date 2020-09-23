@@ -104,7 +104,7 @@ window.onload=function(){
 	document.getElementById("podcastInfo").value=podcastInfo;
 	
 
-	var openPayment=${uploadPodcastBean.openPayment};
+	var openPayment=${uploadPodcastBean.openPayment}
 	document.getElementById("radioP"+openPayment).checked=true;
 }
 

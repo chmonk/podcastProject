@@ -1,6 +1,4 @@
-/**
- * 
- */
+
  
  
  //model=====================================
@@ -487,21 +485,54 @@
 			return true;
 		}
 		
+}
+		
 //logOut=============================================================================
+	
+	document.getElementById("showAllMemberBtn").onclick=function showAllMembers(){
+		let ajaxtable=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("GET", "showAllMember", true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type = xhr.getResponseHeader("Content-Type");
+				let allMembers = JSON.parse(xhr.responseText);
 
-		
-		document.getElementById("logoutBtn").onclick=function(){
-			var r=confirm("確定要登出?")
-			if(r==true){
-				document.getElementById("logoutForm").submit();
-				return true;
-			}else{
-		
-			}		
-			
+				let content=
+				"<table class='ta' >"
+				+"<tr>"
+				+"<th>MemberId</th>"
+				+"<th>Account</th>"
+				+"<th>Name</th>"	
+				+"<th>NickName</th>"
+				+"<th>Email</th>"	
+				+"<th>CellPhone</th>"	
+				+"<th>Sex</th>"	
+				+"<th>Role</th>"	
+				+"</tr>";
+				
+				for(var i=0;i<allMembers.length;i++){
+				content+=
+				"<tr>"
+				+"<td>"+allMembers[i].memberId+"</td>"
+				+"<td>"+allMembers[i].account+"</td>"
+				+"<td>"+allMembers[i].name+"</td>"
+				+"<td>"+allMembers[i].nickname+"</td>"
+				+"<td>"+allMembers[i].email+"</td>"
+				+"<td>"+allMembers[i].cellphone+"</td>"
+				+"<td>"+allMembers[i].sex+"</td>"
+				+"<td>"+allMembers[i].role+"</td>";	
+			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+				
+				content+="</table>";
+				ajaxtable.innerHTML=content;
 		}
-		
-		
-		
 	}
+}
+
+
+
 		
