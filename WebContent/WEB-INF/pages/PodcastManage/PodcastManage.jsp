@@ -19,7 +19,9 @@
 
 	<tr><td>${podcast.memberId}</td><td>${podcast.podcastId}</td><td>${podcast.title}</td><td>${podcast.uploadTime}</td>
 	<td><form action="<c:url value="/modifyPodcast"/>"><input type="hidden" name="thisPodcastId" value=${podcast.podcastId}> <input type="submit" name="modify" value="修改" ></form></td>
-	<td><form id="${podcast.podcastId}" action="<c:url value="/processDeletePodcast"/>"  method="POST"><input type="hidden" name="delPodcastId" value=${podcast.podcastId}> <input type="button" value="刪除" onclick="delConfirm(this.name)" name="${podcast.podcastId}"></form></td>
+	<td><form id="${podcast.podcastId}" action="<c:url value="/processDeletePodcast"/>"  method="POST">
+	<input type="hidden" name="delPodcastId" value=${podcast.podcastId}> 
+	<input type="button" value="刪除" onclick="delConfirm(this.name)" name="${podcast.podcastId}"></form></td>
 	
 
 </c:forEach>

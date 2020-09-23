@@ -49,7 +49,6 @@ p{
 				<option value="income">Income</option>
 				<option value="podcast">Podcast</option>
 			</select>
-			<!-- <input type="submit" value="send"> -->
 		</form>
 
 
