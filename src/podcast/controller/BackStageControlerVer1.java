@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import antlr.collections.List;
 import podcast.model.dao.BackStageDAO;
 import podcast.model.dao.CategoryDAO;
+import podcast.model.dao.MemberDAO;
 import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.CategoryBean;
@@ -36,8 +38,9 @@ import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
 public class BackStageControlerVer1 {
-
-
+	
+	@Autowired
+	private MemberDAO mDao;
 	
 	// Back 2 Select==========================================================================================
 	@GetMapping(path = { "/BackToSelect.controller" })
@@ -49,6 +52,16 @@ public class BackStageControlerVer1 {
 	// Member
 	// Function==========================================================================================
 
+	@PostMapping(path= {"/showAllMember"})
+	public String showAllMember(Model m) {
+		java.util.List<MemberBean> allMemberList=mDao.selectAll();
+		m.addAttribute("allMemberList",allMemberList);
+		
+		
+		return "/BackStage/AllMember";
+	}
+	
+	
 	@PostMapping(path = { "/BackStageSelectMember.controller" })
 	public String selectMember(HttpServletRequest request, @RequestParam(name = "selectmemberId") int memberId,
 			Model m) {

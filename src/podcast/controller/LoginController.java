@@ -51,6 +51,7 @@ public class LoginController {
 
 		
 		System.out.println("account & password= "+account+" "+password);
+		MemberBean mbean=null;
 		MemberBean memberbean = new MemberBean();
 		
 		
@@ -63,6 +64,8 @@ public class LoginController {
 
 		try {
 				mbean = mdao.checkIdPassword(account,password);
+			
+				
 			if (mbean != null) {
 				// 登入成功, 將mb物件放入Session範圍內，重新組裝   識別字串為"LoginOK"
 				
@@ -89,10 +92,11 @@ public class LoginController {
 		}
 		processCookies(bean, request, response);
 		
-		//管理員身分導至後台頁面
-		if(memberbean.getRole()==0) {
+		//管理員身分導至後台頁面	
+		if(mbean.getRole()==0) {
 			return "/BackStage/BackStageSelectStyle";
 		}
+		
 		return "redirect:/";
 		
 	}
