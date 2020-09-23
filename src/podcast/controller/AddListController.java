@@ -70,7 +70,7 @@ public class AddListController {
 		HistoryBean hbean = new HistoryBean();
 
 		hbean.setLastListen(new Date());
-		hbean.setMemberId(userId);
+		hbean.setMemberId(userid);
 		hbean.setPodcastId(id);
 		hbean.setPodcastName(songlist.getTitle());
 		hbean.setPublisherId(songlist.getMemberId());
@@ -83,10 +83,10 @@ public class AddListController {
 
 		//4. 如果likelist未有紀錄就新增 單純新增like record
 
-		LikeRecordBean likeresult = ldao.checkByMemberidAndPodcastID(userId, podcastId);
+		LikeRecordBean likeresult = ldao.checkByMemberidAndPodcastID(userid, podcastId);
 		if (likeresult==null) {
 			LikeRecordBean lbean = new LikeRecordBean();
-			lbean.setMemberId(userId);
+			lbean.setMemberId(userid);
 			lbean.setPodcastId(podcastId);
 			lbean.setLikeStatus(0);
 			lbean.setShowInListOrNot(1); // 預計顯示在清單中
