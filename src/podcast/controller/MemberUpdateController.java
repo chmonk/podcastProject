@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,12 +22,13 @@ import podcast.model.dao.MemberDAO;
 import podcast.model.javabean.MemberBean;
 
 @Controller
+@SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart" })
 public class MemberUpdateController {
-
+	
 	// 導向修改會員頁面
 	@RequestMapping(path = "/update", method = RequestMethod.GET)
 	public String showForm(Model m) {
-		MemberBean mBean = new MemberBean();
+		MemberBean mBean = (MemberBean) m.getAttribute("LoginOK");
 		m.addAttribute("MemberBean", mBean);
 		return "Member/updateMember";
 	}
@@ -68,9 +70,12 @@ public class MemberUpdateController {
 
 		// 連線到會員資料表
 		MemberDAO mDao = (MemberDAO) context.getBean("MemberDAO");
+		
+		MemberBean mBean = (MemberBean) m.getAttribute("LoginOK");
+		String acc=mBean.getAccount();
 
 		// 更新表單資料至會員資料表
-		mDao.update("acc",members);
+		mDao.update(acc,members);
 		return "Member/registerFormResult";
 	}
 	

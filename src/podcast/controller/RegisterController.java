@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +22,7 @@ import podcast.model.dao.MemberDAO;
 import podcast.model.javabean.MemberBean;
 
 @Controller
+@SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart" })
 public class RegisterController {
 
 	// 導向新增會員頁面

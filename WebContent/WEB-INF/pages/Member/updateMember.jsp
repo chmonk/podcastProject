@@ -8,7 +8,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>register</title>
-
+<script type="text/javascript">
+	function removeElement() {
+		document.getElementById("p1").style.display = "none";
+		document.getElementById("p2").style.display = "none";
+		
+	}
+	function showElement() {
+		document.getElementById("p1").style.display = "block";
+		document.getElementById("p2").style.display = "block";
+	}
+	function window_onload() {
+		var text1 = window.document.getElementById('text1');
+		var now = new Date();
+		var today = now.getFullYear().toString() + '-'
+				+ (now.getMonth() + 1).toString() + '-'
+				+ now.getDate().toString();
+		text1.value = today;
+	}
+</script>
 </head>
 <style>
 * {
@@ -68,65 +86,64 @@ fieldset {
 
 			<div class="div1">
 				<form:label path="account" for="" class="l1">帳號：</form:label>
-				<form:input path="account" type="text" size="40" />${account}
+				<form:input path="account" type="text" size="40"  value="${LoginOK.account}"/>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
 				<form:label path="password" for="" class="l1">密碼：</form:label>
-				<form:input path="password" type="password" size="40" />${password}
+				<form:input path="password" type="password" size="40" value="${LoginOK.password}"/>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
 				<form:label path="name" for="" class="l1">姓名：</form:label>
-				<form:input path="name" type="text" size="40" />${name}
+				<form:input path="name" type="text" size="40" value="${LoginOK.name}"/>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
 				<form:label path="nickname" for="" class="l1">暱稱：</form:label>
-				<form:input path="nickname" type="text" size="40" />${nickname}
+				<form:input path="nickname" type="text" size="40" value="${LoginOK.nickname}"/>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
 				<form:label path="birthday" for="" class="l1">生日：</form:label>
-				<form:input path="birthday" type="date" size="40" />${birthday}
+				<form:input path="birthday" type="date" size="40" value="${LoginOK.birthday}"/>
 				<span id="idsp2"></span>
 				<div class="notice"></div>
 			</div>
 
-			<div class="div1">
-				<form:label path="registerDate" for="" class="l1">註冊日期：</form:label>
-				<form:input path="registerDate" type="text" size="40" id="text1"  value="οnfοcus=this.blur()" onfocus="this.blur()" />${registerDate}
+			<div class="div1" style="display: none;">
+				<form:label path="registerDate" for="" class="l1" >註冊日期：</form:label>
+				<form:input path="registerDate" type="text" size="40" id="text1"  value="${LoginOK.registerDate}"/>
 				<span id="idsp2"></span>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
 				<form:label path="info" for="" class="l1">自我介紹：</form:label>
-				<form:textarea path="info" type="text" size="40" cols="40" rows="5" />${info}
+				<form:textarea path="info" type="text" size="40" cols="40" rows="5" value="${LoginOK.info}"/>
 				<span id="idsp2"></span>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
 				<form:label path="email" for="" class="l1">電子信箱：</form:label>
-				<form:input path="email" type="email" size="40" />${email}
+				<form:input path="email" type="email" size="40" value="${LoginOK.email}"/>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
 				<form:label path="cellphone" for="" class="l1">手機號碼：</form:label>
-				<form:input path="cellphone" type="tel" maxlength="10" size="40" />${cellphone}
+				<form:input path="cellphone" type="tel" maxlength="10" size="40" value="${LoginOK.cellphone}"/>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
 				<form:label path="address" for="" class="l1">住址：</form:label>
-				<form:input path="address" type="text" size="40"
-					placeholder="台北市大同區大同路五段1111號30F" />${address}
+				<form:input path="address" type="text" size="40" value="${LoginOK.address}"/>
 				<span id="idsp1"></span>
 				<div class="notice"></div>
 			</div>
@@ -153,24 +170,15 @@ fieldset {
 
 			<div class="div1">
 				<form:label path="creditCardNumber" for="" class="l1">信用卡號：</form:label>
-				<form:input path="creditCardNumber" type="text" maxlength="4"
-					size="4" />
-				-
-				<form:input path="creditCardNumber" type="text" maxlength="4"
-					size="4" />
-				-
-				<form:input path="creditCardNumber" type="text" maxlength="4"
-					size="4" />
-				-
-				<form:input path="creditCardNumber" type="text" maxlength="4"
-					size="4" />
+				<form:input path="creditCardNumber" type="text" maxlength="20"
+					size="40" />				
 				<span id="idsp2"></span>
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1" id="p1" style="display: none;">
 				<form:label path="bankAccount" for="" class="l1">銀行帳號：</form:label>
-				<form:input path="bankAccount" size="40" />
+				<form:input path="bankAccount" size="40" value="${LoginOK.bankAccount}"/>
 				<span id="idsp1"></span>
 				<div class="notice"></div>
 			</div>
@@ -184,8 +192,7 @@ fieldset {
 			</div>
 
 			<div class="div2">
-				<input type="submit" value="送出"> <input type="reset"
-					value="清除">
+				<input type="submit" value="確認修改">
 			</div>
 		</form:form>
 	</fieldset>
