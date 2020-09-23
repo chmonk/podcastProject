@@ -8,12 +8,6 @@
 	<packaging>war</packaging>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-jsp-api</artifactId>
-			<version>9.0.16</version>
-		</dependency>
-
 		<!-- https://github.com/xdrop/fuzzywuzzy 模糊搜尋套件 -->
 		<dependency>
 			<groupId>me.xdrop</groupId>
@@ -181,6 +175,12 @@
 </dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jsp-api -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jsp-api</artifactId>
+			<version>9.0.16</version>
+		</dependency>
 
 
 

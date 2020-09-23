@@ -34,28 +34,21 @@ public class CommentController {
 	@RequestMapping(path = "/podcastPage", method = RequestMethod.GET)
 	public String showPodcastPage(HttpServletRequest request,Model m, @RequestParam(name="fuzzyPodcasterId")Integer podcasterId) throws Exception {
 		
-		//連接帳號
-//		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
-//		Integer memberId = memberBean.getMemberId();
-
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		ProgramCommentDAO commDao = (ProgramCommentDAO) context.getBean("ProgramCommentDAO");
 		UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
 		
-//		Integer podcasterId=5;//暫定
 		List<ProgramCommentBean> commList=commDao.selectAllPodcasterId(podcasterId);
 		m.addAttribute("commList",commList);
 		request.setAttribute("commList", commList);
 		
-//		Integer memberId=20;//暫定
 		//顯示所有單集
 		List<uploadPodcastBean> upList=upDao.selectAllFromMember(podcasterId);
     	m.addAttribute("upList",upList);
     	request.setAttribute("upList", upList);
     	
     	//把PodcasterId送到頻道頁面
-    	//request.setAttribute("thisPodcasterId", podcasterId);
 		m.addAttribute("thisPodcasterId",podcasterId);
 		return "Comment/PodcastPage";
 		}
@@ -74,17 +67,11 @@ public class CommentController {
 		
 		System.out.println(memberBean);
 
-		
 		Integer memberId = memberBean.getMemberId();
-//		System.out.println("content:"+commentMsg);
 
 		ProgramCommentBean pBean =new ProgramCommentBean();
 
-    	//Timestamp time= new Timestamp(System.currentTimeMillis());
 		Date time = new Date();
-//		time=java.sql.Date(utime.getTime());
-		
-		
 		
 		pBean.setMsgStatus(1);
     	pBean.setMemberId(memberId);
@@ -100,14 +87,11 @@ public class CommentController {
 		ProgramCommentDAO commDao = (ProgramCommentDAO) context.getBean("ProgramCommentDAO");
 		commDao.insert(pBean);
 
-		
-//		Integer podcasterId=5;//暫定
+
 		List<ProgramCommentBean> commList=commDao.selectAllPodcasterId(memberId);
 		m.addAttribute("commList",commList);
 		request.setAttribute("commList", commList);
 		
-		
-		//return "Comment/PodcastPage";
 		return pBean;
 	}
 	

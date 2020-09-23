@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import podcast.model.idao.IProgramCommentDAO;
 import podcast.model.javabean.ProgramCommentBean;
-import podcast.model.javabean.uploadPodcastBean;
 
 @Repository("ProgramCommentDAO")
 public class ProgramCommentDAO implements IProgramCommentDAO {
@@ -49,19 +48,6 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 		Query<ProgramCommentBean> query = session.createQuery("from ProgramCommentBean", ProgramCommentBean.class);
 		return query.list();
 	}
-	
-	@Override
-	public List<ProgramCommentBean> selectAllPodcasterId(Integer podcasterId) throws Exception {
-		Session session = sessionFactory.getCurrentSession();
-		String hbl = "from ProgramCommentBean where podcasterId=:podcasterId";
-
-		Query<ProgramCommentBean> query = session.createQuery(hbl, ProgramCommentBean.class);
-		query.setParameter("podcasterId", podcasterId);
-
-		List<ProgramCommentBean> commList = query.list();
-
-		return commList;
-	}
 
 	@Override
 	public ProgramCommentBean update(Integer commentId, String commentMsg, Integer memberId, Integer podcasterId, Integer msgStatus,
@@ -83,7 +69,7 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 	@Override
 	public boolean delete(Integer commentId) {
 		Session session = sessionFactory.getCurrentSession();
-		ProgramCommentBean pBean = select(commentId);
+		ProgramCommentBean pBean = session.get(ProgramCommentBean.class, commentId);
 
 		if (pBean != null) {
 			session.delete(pBean);
@@ -93,6 +79,17 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 		return false;
 	}
 	
-	
+	@Override
+	 public List<ProgramCommentBean> selectAllPodcasterId(Integer podcasterId) throws Exception {
+	  Session session = sessionFactory.getCurrentSession();
+	  String hbl = "from ProgramCommentBean where podcasterId=:podcasterId";
+
+	  Query<ProgramCommentBean> query = session.createQuery(hbl, ProgramCommentBean.class);
+	  query.setParameter("podcasterId", podcasterId);
+
+	  List<ProgramCommentBean> commList = query.list();
+
+	  return commList;
+	 }
 
 }
