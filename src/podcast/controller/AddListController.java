@@ -52,7 +52,8 @@ public class AddListController {
 		Integer publisherId=udao.select(id).getMemberId();
 //		Integer userId=(Integer)model.getAttribute("userid");
 		MemberBean mbean = (MemberBean)model.getAttribute("LoginOK");
-		Integer userid=mbean.getMemberId();
+		//Integer userid=mbean.getMemberId();
+		Integer userid=1;
 		Integer podcastId=id;
 
 		//1.pack single program for ajax

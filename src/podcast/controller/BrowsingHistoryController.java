@@ -38,12 +38,12 @@ public class BrowsingHistoryController {
 
 	// 導向瀏覽紀錄頁面 ?userid=
 	@GetMapping(value = "/goToBrowsingHistory")
-	public String leadToBrowsingHistory(Model m, HttpServletRequest request, 
-			@RequestParam("userid") Integer userid)
+	public String leadToBrowsingHistory(Model m, HttpServletRequest request)
+//			, @RequestParam("userid") Integer userid)
 			throws Exception {
 
 		// get the list of browsing list
-		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId2(userid);
+		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId2(1);
 
 		m.addAttribute("history", rs);
 
