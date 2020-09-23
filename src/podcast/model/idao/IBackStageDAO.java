@@ -8,6 +8,7 @@ import podcast.model.javabean.CategoryBean;
 import podcast.model.javabean.HistoryBean;
 import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.OrderTicketBean;
+import podcast.model.javabean.PopularPodcasterBean;
 import podcast.model.javabean.ProgramCommentBean;
 import podcast.model.javabean.SubscriptionBean;
 import podcast.model.javabean.uploadPodcastBean;
@@ -39,11 +40,12 @@ public interface IBackStageDAO {
 	public List<HistoryBean> selectHistoryByLastListen(Date setPoInteger);
 	public boolean deleteHistoryByDate(Date setPoInteger);
 	public Integer SubscriptionIncome(Date startDate,Date endDate);
-	public Integer TicketIncome(Date startDate,Date endDate);
+	public Double TicketIncome(Date startDate,Date endDate);
 	
 	//uploadPodcast methods=============================================
 	public List<uploadPodcastBean> selectPodcastByMember(Integer memberId);
 	public boolean deletePodcast(Integer podcastId) throws Exception;
 	public List<uploadPodcastBean> topPodcast(Date uploadTime);
+	public List<PopularPodcasterBean> topTenMember(Date uploadTime);
 	
 }

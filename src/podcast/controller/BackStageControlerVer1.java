@@ -37,26 +37,12 @@ import podcast.model.javabean.uploadPodcastBean;
 @Controller
 public class BackStageControlerVer1 {
 
-	//BackStage Login=======================================================================================================
-	
-//	@PostMapping(path= {"/BackStageLogin.controller"})
-//	public String BackStageLogin(
-//			@RequestParam(name="userName")String userName,
-//			@RequestParam(name="password")String password,
-//			Model m) {
-//		if(userName.equals("test123")&&password.equals("pass123")) {
-//			return "/BackStage/BackStageSelect";
-//		}
-//		
-//		m.addAttribute("LoginErrorMsg","請輸入正確帳號密碼!");
-//		return "/BackStage/BackStageLogin";
-//	}
-//	
+
 	
 	// Back 2 Select==========================================================================================
 	@GetMapping(path = { "/BackToSelect.controller" })
 	public String BackToSelect() {
-		return "/BackStage/BackStageSelect";
+		return "/BackStage/BackStageSelectStyle";
 
 	}
 
@@ -545,7 +531,7 @@ public class BackStageControlerVer1 {
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
 		Date startdate; 
 		Date enddate;
-		Integer subIncome=null;
+		Double subIncome=0.0;
 		
 		try {
 			startdate=Date.valueOf(startDate);
@@ -589,6 +575,8 @@ public class BackStageControlerVer1 {
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
+		
+		System.out.println("podcastId:"+podcastId);
 		
 		UploadPodcastDAO uDao = new UploadPodcastDAO();
 		uploadPodcastBean uBean = uDao.select(podcastId);
