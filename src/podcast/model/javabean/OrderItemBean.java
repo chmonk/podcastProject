@@ -22,11 +22,11 @@ public class OrderItemBean {
 	
 	Integer activityId;
 	
-	Integer amount;
+	Integer amount; //庫存量
 	
 	String description;
 	
-	Double unitPrice;
+	Integer unitPrice; //單價
 	
 	Integer quantity;
 	
@@ -46,8 +46,9 @@ public class OrderItemBean {
 	
 
 	public OrderItemBean(Integer activityId,String activityName,
-			Integer amount,Integer quantity,Date activityDate,String activityLocation) {
+			Integer unitPrice,Integer quantity,Date activityDate,String activityLocation,Integer amount) {
 		this.activityId = activityId;
+		this.unitPrice = unitPrice;
 		this.amount = amount;
 		this.quantity = quantity;
 		this.activityName = activityName;
@@ -92,11 +93,11 @@ public class OrderItemBean {
 		this.quantity = quantity;
 	}
 
-	public Double getUnitPrice() {
+	public Integer getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(Double unitPrice) {
+	public void setUnitPrice(Integer unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 

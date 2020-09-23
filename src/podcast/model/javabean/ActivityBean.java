@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 
 @Entity
-@Table(name="ACTIVITY")
+@Table(name="activity")
 @Component
 public class ActivityBean {
 	private Integer activityId;
@@ -28,7 +28,6 @@ public class ActivityBean {
 	private Integer stock;
 	private Integer activityStatus;
 	private String activityImg;
-	
 	
 	@Id
 	@Column(name="ACTIVITYID")
@@ -96,6 +95,13 @@ public class ActivityBean {
 		this.activityMaxPeople = activityMaxPeople;
 	}
 	
+	@Column(name="STOCK")
+	public Integer getStock() {
+		return stock;
+	}
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
 	
 	@Column(name="ACTIVITYSTATUS")
 	public Integer getActivityStatus() {
@@ -105,13 +111,6 @@ public class ActivityBean {
 		this.activityStatus = activityStatus;
 	}
 
-	@Column(name="STOCK")
-	public Integer getStock() {
-		return stock;
-	}
-	public void setStock(Integer stock) {
-		this.stock = stock;
-	}
 	@Column(name="ACTIVITYIMG")
 	public String getActivityImg() {
 		return activityImg;

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import podcast.model.idao.IProgramCommentDAO;
 import podcast.model.javabean.ProgramCommentBean;
 
-@Repository("pragramCommentDAO")
+@Repository("ProgramCommentDAO")
 public class ProgramCommentDAO implements IProgramCommentDAO {
 
 	@Autowired
@@ -78,5 +78,18 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 
 		return false;
 	}
+	
+	@Override
+	 public List<ProgramCommentBean> selectAllPodcasterId(Integer podcasterId) throws Exception {
+	  Session session = sessionFactory.getCurrentSession();
+	  String hbl = "from ProgramCommentBean where podcasterId=:podcasterId";
+
+	  Query<ProgramCommentBean> query = session.createQuery(hbl, ProgramCommentBean.class);
+	  query.setParameter("podcasterId", podcasterId);
+
+	  List<ProgramCommentBean> commList = query.list();
+
+	  return commList;
+	 }
 
 }

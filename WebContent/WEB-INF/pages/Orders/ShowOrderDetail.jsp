@@ -47,9 +47,9 @@
 			<th id='borderA' width="400px" align="center">票券名稱</th>
 			<th id='borderA' width="70px" align="center">單價</th>
 			<th id='borderA' width="50px" align="center">數量</th>
-			<th id='borderA' width="100px" align="center">總價</th>
+<!-- 			<th id='borderA' width="100px" align="center">總價</th> -->
 			<th id='borderA' width="80px" align="center">折扣</th>
-			<th id='borderA' width="100px" align="center">售價</th>
+			<th id='borderA' width="100px" align="center">金額</th>
 		</tr>
 		<c:set var="subtotal" value="0" />
 		<c:forEach var="aBean" varStatus="stat" items="${OrderBean.items}">
@@ -64,22 +64,22 @@
 			<tr id='borderA' bgColor="${aColor}" height='30'>
 				<td id='borderA' align="center">${aBean.activityId}</td>
 				<td id='borderA' align="left">${aBean.activityName}</td>
-				<td id='borderA' align="right">${aBean.amount}&nbsp;</td>
+				<td id='borderA' align="right">${aBean.unitPrice}&nbsp;</td>
 				<td id='borderA' align="right">${aBean.quantity}&nbsp;</td>
-				<td id='borderA' align="right">${aBean.amount*aBean.quantity}&nbsp;</td>
+<%-- 				<td id='borderA' align="right">${aBean.unitPrice*aBean.quantity}&nbsp;</td> --%>
 				<td id='borderA' align="center">${aBean.discount}&nbsp;</td>
 				<td id='borderA' align="right"><fmt:formatNumber
-						value="${aBean.amount*aBean.quantity}"
+						value="${aBean.unitPrice*aBean.quantity}"
 						pattern="#,###,###" />元</td>
 				<c:set var="subtotal"
 					value="${ subtotal + aBean.unitPrice * aBean.discount * aBean.quantity }" />
 			</tr>
 		</c:forEach>
 		<tr height='30'>
-			<TD id='borderA' align="center" rowspan="3" colspan="5">&nbsp;</TD>
-			<TD id='borderA' width="60px" align="center"><b>合 計</b></TD>
-			<TD id='borderA' width="100px" align="right">
-			   <fmt:formatNumber value="${subtotal}" pattern="#,###,###" />元</TD>
+			<TD id='borderA' align="center" rowspan="3" colspan="4">&nbsp;</TD>
+			<TD id='borderA' width="60px" align="center" colspan="2"><b>合 計</b></TD>
+<!-- 			<TD id='borderA' width="100px" align="right"> -->
+<%-- 			   <fmt:formatNumber value="${subtotal}" pattern="#,###,###" />元</TD> --%>
 		</tr>
 		<tr height='30'>
 			<TD id='borderA' width="60px" align="center"><b>營業稅</b></TD>
@@ -97,7 +97,7 @@
 
 	<div style="text-align: center">
 		<a href="<c:url value='orderList' />">回上一頁</a>&nbsp;&nbsp;
-		<a href="<c:url value='/a' />">回首頁</a>
+		<a href="<c:url value='removeShoppingCart' />">回首頁</a>
 	</div>
 </body>
 </html>

@@ -108,7 +108,7 @@ function reconfirmOrder() {
 <%--           	${fn:substring(entry.value.companyName, 0, 2)} --%>
           </TD>
           <TD style="text-align:right ;font-size: 11pt;">
-                    	<fmt:formatNumber value="${entry.value.amount}" pattern="#,###" />元
+                    	<fmt:formatNumber value="${entry.value.unitPrice}" pattern="#,###" />元
 <%--           	<fmt:formatNumber value="${entry.value.unitPrice * entry.value.discount }" pattern="#,###" />元 --%>
           </TD>
           <TD style="text-align:right ;font-size: 11pt;"> 
@@ -116,7 +116,7 @@ function reconfirmOrder() {
           </TD>
           <TD style="text-align:right ;font-size: 11pt;">
 <%--           	<fmt:formatNumber value="${entry.value.unitPrice * entry.value.discount * entry.value.quantity}" pattern="#,###,###" />元 --%>
-          	<fmt:formatNumber value="${entry.value.amount * entry.value.quantity}" pattern="#,###,###" />元
+          	<fmt:formatNumber value="${entry.value.unitPrice * entry.value.quantity}" pattern="#,###,###" />元
           </TD>
         </TR>
      </c:forEach>
