@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.*"%>
 
+
 <!DOCTYPE html>
 <html>
 
@@ -18,9 +19,10 @@
 <!-- Styles -->
 
 <!-- jquery-ui CSS -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <!-- Bootstrap CSS -->
-<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
 <link href="css/animate.min.css" rel="stylesheet">
 <!-- Basic stylesheet -->
@@ -69,17 +71,20 @@
 
 		<!-- 熱播排行 -->
 		<jsp:include page="workWithUs.jsp" flush="true " />
-			<%-- <jsp:param value="" name=""/> --%>
-<%-- 		</jsp:include>
- --%>		<!-- 熱播排行 -->
+		<%-- <jsp:param value="" name=""/> --%>
+		<%-- 		</jsp:include>
+ --%>
+		<!-- 熱播排行 -->
 
 		<!-- sign up for news letter -->
 		<jsp:include page="newsLetter.jsp" flush="true " />
 		<!-- news letter end -->
 
 		<!-- 人氣播客 portfolio -->
-		<jsp:include page="popularPodcasts.jsp" flush="true " />
-		<!-- portfolio end -->
+		<jsp:include page="popularPodcastsTry2.jsp" flush="true " />
+		<!--portfolio end -->
+
+
 
 		<!-- events -->
 		<jsp:include page="events.jsp" flush="true " />
@@ -112,6 +117,109 @@
 
 
 	<!-- Javascript files -->
+	
+	<!-- 熱門播客JS -->
+
+	<script>
+		window.onload = function() {
+			console.log("PopFunction Start!");
+
+			let pop1 = document.getElementById("pop1");
+			let pop2 = document.getElementById("pop2");
+			let pop3 = document.getElementById("pop3");
+			let pop4 = document.getElementById("pop4");
+			let pop5 = document.getElementById("pop5");
+			let pop6 = document.getElementById("pop6");
+			let pop7 = document.getElementById("pop7");
+			let pop8 = document.getElementById("pop8");
+
+			let img1 = document.getElementById("img1");
+			let img2 = document.getElementById("img2");
+			let img3 = document.getElementById("img3");
+			let img4 = document.getElementById("img4");
+			let img5 = document.getElementById("img5");
+			let img6 = document.getElementById("img6");
+			let img7 = document.getElementById("img7");
+			let img8 = document.getElementById("img8");
+
+			let title1 = document.getElementById("title1");
+			let title2 = document.getElementById("title2");
+			let title3 = document.getElementById("title3");
+			let title4 = document.getElementById("title4");
+			let title5 = document.getElementById("title5");
+			let title6 = document.getElementById("title6");
+			let title7 = document.getElementById("title7");
+			let title8 = document.getElementById("title8");
+
+			let info1 = document.getElementById("info1");
+			let info2 = document.getElementById("info2");
+			let info3 = document.getElementById("info3");
+			let info4 = document.getElementById("info4");
+			let info5 = document.getElementById("info5");
+			let info6 = document.getElementById("info6");
+			let info7 = document.getElementById("info7");
+			let info8 = document.getElementById("info8");
+
+			var content = document.getElementById("portfolioOwl");
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "PopularPodcaster", true);
+			xhr.setRequestHeader("Content-type",
+					"application/x-www-form-urlencoded");
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					console.log("readyState & status GOOD!");
+					var type = xhr.getResponseHeader("Content-Type");
+					var podcasters = JSON.parse(xhr.responseText);
+					console.log("podcasters:" + podcasters);
+
+					pop1.value = podcasters[0].memberId;
+					pop2.value = podcasters[1].memberId;
+					pop3.value = podcasters[2].memberId;
+					pop4.value = podcasters[3].memberId;
+	<%--
+					pop5.value = podcasters[4].memberId;
+					pop6.value = podcasters[5].memberId;
+					pop7.value = podcasters[6].memberId;
+					pop8.value = podcasters[7].memberId;
+					--%>
+		
+	<%--
+			img1.src=podcasters[0].image;
+			img2.src=podcasters[1].image;
+			img3.src=podcasters[2].image;
+			img4.src=podcasters[3].image;
+			img5.src=podcasters[4].image;
+			img6.src=podcasters[5].image;
+			img7.src=podcasters[6].image;
+			img8.src=podcasters[7].image;
+			--%>
+		title1.innerHTML = podcasters[0].nickname;
+					title2.innerHTML = podcasters[1].nickname;
+					title3.innerHTML = podcasters[2].nickname;
+					title4.innerHTML = podcasters[3].nickname;
+	<%--
+					title5.innerHTML = podcasters[4].nickname;
+					title6.innerHTML = podcasters[5].nickname;
+					title7.innerHTML = podcasters[6].nickname;
+					title8.innerHTML = podcasters[7].nickname;
+					--%>
+		info1.innerHTML = podcasters[0].info;
+					info2.innerHTML = podcasters[1].info;
+					info3.innerHTML = podcasters[2].info;
+					info4.innerHTML = podcasters[3].info;
+	<%--
+					info5.innerHTML = podcasters[4].info;
+					info6.innerHTML = podcasters[5].info;
+					info7.innerHTML = podcasters[6].info;
+					info8.innerHTML = podcasters[7].info;
+					--%>
+		}
+			}
+		}
+	</script>
+
+
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
 	<!-- Bootstrap JS -->
