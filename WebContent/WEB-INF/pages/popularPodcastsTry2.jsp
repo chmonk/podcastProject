@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 
 <!-- Styles -->
-
+<%-- 
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
@@ -48,7 +48,7 @@
 <!-- 	plaer bar function js -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/player.js"></script>
-
+--%>
 </head>
 <body>
 	<!-- portfolio -->
@@ -71,7 +71,7 @@
 				<!-- on mouse hover details -->
 				<div class="p-hover">
 					<!-- heading /title -->
-					<h3 id="title1">Album Title</h3>
+					<h3 id="title1">熱門播客1</h3>
 					<hr>
 					<!-- project details -->
 					<p id="info1">Some details about album.</p>
@@ -271,6 +271,7 @@
 	<!-- portfolio end -->
 	<script>
 		window.onload = function() {
+			console.log("PopFunction Start!");
 
 			let pop1 = document.getElementById("pop1");
 			let pop2 = document.getElementById("pop2");
@@ -317,6 +318,7 @@
 			xhr.send();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === 4 && xhr.status === 200) {
+					console.log("readyState & status GOOD!");
 					var type = xhr.getResponseHeader("Content-Type");
 					var podcasters = JSON.parse(xhr.responseText);
 
@@ -326,10 +328,12 @@
 					pop2.value = podcasters[1].memberId;
 					pop3.value = podcasters[2].memberId;
 					pop4.value = podcasters[3].memberId;
+					<%--
 					pop5.value = podcasters[4].memberId;
 					pop6.value = podcasters[5].memberId;
 					pop7.value = podcasters[6].memberId;
 					pop8.value = podcasters[7].memberId;
+					--%>
 	<%--
 			img1.src=podcasters[0].image;
 			img2.src=podcasters[1].image;
@@ -345,20 +349,23 @@
 					title2.innerHTML = podcasters[1].nickname;
 					title3.innerHTML = podcasters[2].nickname;
 					title4.innerHTML = podcasters[3].nickname;
+					<%--
 					title5.innerHTML = podcasters[4].nickname;
 					title6.innerHTML = podcasters[5].nickname;
 					title7.innerHTML = podcasters[6].nickname;
 					title8.innerHTML = podcasters[7].nickname;
+					--%>
 
 					info1.innerHTML = podcasters[0].info;
 					info2.innerHTML = podcasters[1].info;
 					info3.innerHTML = podcasters[2].info;
 					info4.innerHTML = podcasters[3].info;
+					<%--
 					info5.innerHTML = podcasters[4].info;
 					info6.innerHTML = podcasters[5].info;
 					info7.innerHTML = podcasters[6].info;
 					info8.innerHTML = podcasters[7].info;
-
+					--%>
 				}
 			}
 		}

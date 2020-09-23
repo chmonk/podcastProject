@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +22,7 @@ import podcast.model.javabean.CategoryBean;
 import podcast.model.javabean.HistoryBean;
 import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.OrderTicketBean;
+import podcast.model.javabean.PopularPodcasterBean;
 import podcast.model.javabean.ProgramCommentBean;
 import podcast.model.javabean.SubscriptionBean;
 import podcast.model.javabean.uploadPodcastBean;
@@ -306,12 +308,11 @@ public class BackStageDAO implements IBackStageDAO {
 		query.setParameter("endDate", endDate);
 		List<OrderTicketBean> list = query.list();
 
-		int in = 0;
+		Double income = 0.0;
 		for (OrderTicketBean oBean : list) {
-			in +=oBean.getTotalAmount();
+			income +=oBean.getTotalAmount();
 		}
-		System.out.println("income:" + in);
-		Double income=null;
+		System.out.println("income:" + income);
 		return income;
 	}
 
@@ -350,53 +351,79 @@ public class BackStageDAO implements IBackStageDAO {
 	}
 	
 	@Override
-	public List<MemberBean> topTenMember(Date uploadTime){
+	public List<PopularPodcasterBean> topTenMember(Date uploadTime){
 		Session session = sessionFactory.getCurrentSession();
-		String hqlstr="from uploadPodcastBean where uploadTime>:uploadTime ORDER BY clickAmount DESC ";
-		Query<uploadPodcastBean> query = session.createQuery(hqlstr, uploadPodcastBean.class);
-		query.setParameter("uploadTime", uploadTime);
-		List<uploadPodcastBean> podlist = query.list();
-		
-		System.out.println("podlist:"+podlist);
-		
-		//開始計算點擊次數總和排名
-		List<Integer> allMember=new ArrayList<Integer>();
-		Map<Integer,Integer> memCount=new HashMap<Integer,Integer>();
-		int i=0;
-		while(i<podlist.size()){
-			if(allMember.contains(podlist.get(i).getMemberId())==false) {
-				allMember.add(podlist.get(i).getMemberId());
-				memCount.put(podlist.get(i).getMemberId(), 1);
-			}else {
-				Integer pre=memCount.get(podlist.get(i).getMemberId());
-				memCount.replace(podlist.get(i).getMemberId(),pre+1);
-			}
+		String nativesqlstr =
+				"select new.memberId,total,nickname,info,image from\r\n" + 
+				"(select u.memberId ,sum(clickAmount) as total  from uploadPodcast as u group by memberid ) \r\n" + 
+				"as new\r\n" + 
+				"left join members as m on m.memberId=new.memberId\r\n" + 
+				"order by total desc";
+		NativeQuery query = session.createNativeQuery(nativesqlstr);
+		List<Object[]> list=query.list();
+		List<PopularPodcasterBean> popList=new ArrayList<PopularPodcasterBean>();
+		for(int i=0;i<list.size();i++) {
+			PopularPodcasterBean popbean=new PopularPodcasterBean();
+			popbean.setMemberId((Integer) list.get(i)[0]);
+			popbean.setTotal((Integer)list.get(1)[1]);
+			popbean.setNickname((String)list.get(i)[2]);
+			popbean.setInfo((String)list.get(i)[3]);
+			popbean.setImage((String)list.get(i)[4]);
+			
+			popList.add(popbean);
 		}
-		
-		System.out.println("Map memCount:"+memCount);
-		//Map轉換為list
-		List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(memCount.entrySet()); 
-		for (int x = 0; x < list.size(); x++) {
-            System.out.println(list.get(x).getKey() + ": " + list.get(x).getValue());
-        } 
-		
-		//sort
-		 Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-	           @Override
-	           public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
-	               return o2.getValue().compareTo(o1.getValue());
-	           }
-	       });
-		 
-		 List<MemberBean> popList=new ArrayList<MemberBean>();
-		 for(int k=0;k<8;k++) {
-			MemberBean mbean = mDao.selectPodcaster(list.get(k).getKey());
-			popList.add(mbean);
-		 }
-		 
-		 System.out.println("popList:"+popList);
-		
 		return popList;
 	}
+	
+//	@Override
+//	public List<MemberBean> topTenMember(Date uploadTime){
+//		Session session = sessionFactory.getCurrentSession();
+//		String hqlstr="from uploadPodcastBean where uploadTime>:uploadTime ORDER BY clickAmount DESC ";
+//		Query<uploadPodcastBean> query = session.createQuery(hqlstr, uploadPodcastBean.class);
+//		query.setParameter("uploadTime", uploadTime);
+//		List<uploadPodcastBean> podlist = query.list();
+//		
+//		System.out.println("podlist:"+podlist);
+//		
+//		//開始計算點擊次數總和排名
+//		List<Integer> allMember=new ArrayList<Integer>();
+//		Map<Integer,Integer> memCount=new HashMap<Integer,Integer>();
+//		int i=0;
+//		while(i<podlist.size()){
+//			if(allMember.contains(podlist.get(i).getMemberId())==false) {
+//				allMember.add(podlist.get(i).getMemberId());
+//				memCount.put(podlist.get(i).getMemberId(), 1);
+//			}else {
+//				Integer pre=memCount.get(podlist.get(i).getMemberId());
+//				memCount.replace(podlist.get(i).getMemberId(),pre+1);
+//			}
+//		}
+//		
+//		System.out.println("Map memCount:"+memCount);
+//		//Map轉換為list
+//		List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(memCount.entrySet()); 
+//		for (int x = 0; x < list.size(); x++) {
+//            System.out.println(list.get(x).getKey() + ": " + list.get(x).getValue());
+//        } 
+//		
+//		//sort
+//		 Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+//	           @Override
+//	           public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+//	               return o2.getValue().compareTo(o1.getValue());
+//	           }
+//	       });
+//		 
+//		 List<MemberBean> popList=new ArrayList<MemberBean>();
+//		 for(int k=0;k<8;k++) {
+//			MemberBean mbean = mDao.selectPodcaster(list.get(k).getKey());
+//			popList.add(mbean);
+//		 }
+//		 
+//		 System.out.println("popList:"+popList);
+//		
+//		return popList;
+//	}
+
 
 }

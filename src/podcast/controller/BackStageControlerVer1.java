@@ -545,7 +545,7 @@ public class BackStageControlerVer1 {
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
 		Date startdate; 
 		Date enddate;
-		Integer subIncome=null;
+		Double subIncome=0.0;
 		
 		try {
 			startdate=Date.valueOf(startDate);

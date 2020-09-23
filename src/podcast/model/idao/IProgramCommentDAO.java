@@ -19,6 +19,5 @@ public interface IProgramCommentDAO {
 	
 	public List<ProgramCommentBean> selectAllPodcasterId(Integer podcasterId) throws Exception;
 
-	public List<ProgramCommentBean> selectAllPodcasterId(Integer podcasterId) throws Exception;
 
 }
