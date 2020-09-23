@@ -16,275 +16,92 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.theme.default.min.css"></link>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/owl.carousel.min.js"></script>
-
 <!-- player bar css -->
 <link href="css/playerbar.css" rel="stylesheet">
 <!-- player bar icon -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
-<style type="text/css">
-. /* container {
-	 padding-top: 20px;
-}
- ul {
-	 padding: 0;
-	 list-style: none;
-}
- li {
-	 margin: 0;
-	 float: left;
-	 padding: 50px 0;
-} */
-/* .title-select{
-	margin-top: 100px;
-} */
-.showPodcasterBody {
-	padding-bottom: 60px;
-}
+<!-- music bar css -->
+<link href="css/musicbar.css" rel="stylesheet">
 
+
+<style type="text/css">
+.showPodcasterBody {
+	margin-bottom: 60px;
+}
 .card {
-	margin-left: 0.25em;
-	margin-right: 0.25em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
 }
 
 .card img {
 	display: block;
 	max-width: 100%;
-	height: auto;
+	height: 200px;
+	padding: 10px;
 }
-
-html {
-	background-color: #fefefe;
-	box-sizing: border-box;
-	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	font-weight: 500;
-}
-
-*, *:before, *:after {
-	box-sizing: inherit;
-}
-
-.container .PodcastData {
-	margin: 20px auto 0;
-	width: 700px;
-}
-
-.u-float-right {
-	float: right;
-}
-
-.u-flex-center {
-	display: -webkit-flex;
-	display: flex;
-	-webkit-justify-content: center;
-	justify-content: center;
-	-webkit-align-items: center;
-	align-items: center;
-}
-
-.subtle {
-	color: #888;
-	font-size: 12px;
-}
-
-.card-media {
-	border-radius: 2px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
-	height: 125px;
-	margin-bottom: 25px;
-	transition: all 300ms ease-out;
-	width: 100%;
-}
-
-.card-media:hover {
-	box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
-}
-
-.card-media-object-container {
-	background: none;
-	float: left;
-	height: 100%;
-	width: 35%;
-	position: relative;
-}
-
-.card-media-object {
-	background-position: center center;
-	background-size: cover;
-	height: 100%;
-}
-
-.card-media-object:after {
-	content: " ";
-	display: block;
-	height: 100%;
-	left: 0;
-	opacity: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
-	transition: all 300ms ease-out;
-	z-index: 10;
-}
-
-.card-media:hover .card-media-object:after {
-	background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%,
-		rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.4) 100%);
-	background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%,
-		rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.4) 100%);
-	background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%,
-		rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.4) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000',
-		endColorstr='#a6000000', GradientType=0);
-	opacity: 1;
-}
-
-.card-media-object-tag {
-	background-color: #fff;
-	border-radius: 2px;
-	padding: 2px 7px;
-	position: absolute;
-	right: 10px;
-	top: 10px;
-}
-
-.card-media-object-social-list {
-	bottom: 4px;
-	left: 10px;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	z-index: 20;
-}
-
-.card-media-object-social-list li {
-	border-radius: 50%;
-	display: inline-block;
-	height: 30px;
-	margin-right: 6px;
-	opacity: 0;
-	overflow: hidden;
-	transform: translateY(5px);
-	transition: all 300ms ease-out;
-	width: 30px;
-}
-
-.card-media:hover .card-media-object-social-list li {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-.card-media-object-social-list li:nth-child(1) {
-	transition-delay: 0;
-}
-
-.card-media-object-social-list li:nth-child(2) {
-	transition-delay: 75ms;
-}
-
-.card-media-object-social-list li:nth-child(3) {
-	transition-delay: 150ms;
-}
-
-.card-media-object-social-list-item-additional {
-	border: 1px solid #fff;
-	color: #fff;
-	font-size: 12px;
-	padding-top: 7px;
+.card-block{
 	text-align: center;
 }
 
-.card-media-body {
-	background-color: #fff;
-	float: left;
-	height: 100%;
-	padding: 12px 15px;
-	position: relative;
-	width: 65%;
+.padcastlist {
+	margin: 60px;
 }
-
-.card-media-body-top {
-	display: block;
-}
-
-.card-media-body-top-icons {
-	margin-top: -2px;
-	opacity: 0;
-	transition: all 300ms ease-out;
-	transform: translateY(-5px);
-}
-
-.card-media:hover .card-media-body-top-icons {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-.card-media-body-top-icons>svg {
-	cursor: pointer;
-	margin-left: 10px;
-	transition: all 300ms ease-out;
-}
-
-.card-media-body-top-icons>svg:hover {
-	fill: #444;
-}
-
-.card-media-body-heading {
-	display: block;
-	margin-top: 10px;
-}
-
-.card-media-body-supporting-bottom {
-	position: absolute;
-	bottom: 10px;
-	left: 0;
-	opacity: 1;
-	padding: 0 15px;
-	transition: all 300ms ease-out;
-	width: 100%;
-}
-
-.card-media:hover .card-media-body-supporting-bottom {
-	opacity: 0;
-	transform: translateY(-8px);
-}
-
-.card-media-body-supporting-bottom-text {
-	display: inline-block;
-}
-
-.card-media-body-supporting-bottom-reveal {
-	opacity: 0;
-	transform: translateY(8px);
-	transition: all 300ms ease-out;
-}
-
-.card-media:hover .card-media-body-supporting-bottom-reveal {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-.card-media-link {
-	color: #41C1F2;
-	text-decoration: none;
-}
-
-.padcard {
+.padcard{
 	margin: auto;
+	
+}
+.padcard ul {
+	padding: 0;
+	list-style: none;
 }
 
-.podcastImg {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: auto;
-	height: auto;
-	max-width: 100%;
-	max-height: 100%;
+.padcard li {
+	margin: 0;
+	float: left;
+	padding: 50px 0;
+}
+
+.title-select {
+	margin-top: 50px;
+	margin-left: 50px; 
+}
+.first {
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+.first:hover {
+   box-shadow: 0 0 40px 40px #2f97ed inset;
+ }
+ .btn1 {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #2f97ed;
+  border-radius: 0.6em;
+  color: #2f97ed;
+  cursor: pointer;
+  /* display: flex; */
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; 
+}
+
+.btn1:hover{
+    color: #fff;
+    outline: 0;
+}
+.btn1:focus{
+	color: #fff;
+    outline: 0;
 }
 </style>
 <script type="text/javascript">
@@ -317,20 +134,22 @@ html {
 		<div class="title-select">
 			<h1>搜尋結果</h1>
 		</div>
-		<div class="carousel-container col-sm-10 padcard">
+		<div class="container padcard">
 			<div class="row">
 				<div class="col-sm-12">
 					<ul class="owl-carousel owl-theme">
 						<c:forEach var="data" items="${fuzzyUserData}">
 							<li class="item">
 								<div class="card">
-									<img class="card-img-top img-fluid"
-										src="https://source.unsplash.com/318x180/?starwars"
-										alt="Card image cap">
+									<img class="card-img-top img-fluid cardImg"
+										src="${data.getImage()}">
 									<div class="card-block">
 										<h4 class="card-title">${data.getNickname()}</h4>
 										<p class="card-text">${data.getInfo()}</p>
-										<a href="#" class="btn btn-primary">Button</a>
+										<form action="<c:url value="/podcastPage"/>">
+						                   <input type="hidden" name="fuzzyPodcasterId" value=${data.getMemberId()} />
+						                   <input type="submit" class="btn1 first" value="Button"/>
+						                 </form>
 									</div>
 								</div>
 							</li>
@@ -339,7 +158,7 @@ html {
 				</div>
 			</div>
 		</div>
-		<div>
+		<div class="padcastlist">
 			<c:forEach var="data" items="${fuzzyPodcastData}">
 				<div class="container PodcastData">
 					<div class="card-media">
@@ -356,16 +175,17 @@ html {
 							<div class="card-media-body-top">
 								<span class="subtle">${data.getTitle()}</span>
 								<div class="card-media-body-top-icons u-float-right">
-									<svg fill="#888888" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+									<svg fill="#888888" height="16" viewBox="0 0 24 24" width="16"
+										xmlns="http://www.w3.org/2000/svg">
 	            						<path d="M0 0h24v24H0z" fill="none" />
-	            						<path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+	            						<path
+											d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
 	         						</svg>
 									<svg fill="#888888" height="16" viewBox="0 -28 512 512"
 										width="16" xmlns="http://www.w3.org/2000/svg">
 	          	<path
 											d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0" />
 	          </svg>
-
 								</div>
 							</div>
 							<span class="card-media-body-heading">${data.getPodcastInfo()}</span>
@@ -386,11 +206,7 @@ html {
 				</div>
 			</c:forEach>
 		</div>
-
-
 	</div>
-	<!--playerbar -->
-
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
 	<!-- Bootstrap JS -->
@@ -411,6 +227,7 @@ html {
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
 
+	<!--playerbar -->
 
 	<jsp:include page="../playerbar.jsp" flush="true " />
 
