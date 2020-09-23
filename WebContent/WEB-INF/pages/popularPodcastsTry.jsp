@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
 <!-- Styles -->
-
+<%-- 
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
@@ -47,11 +48,13 @@
 	<!-- 	plaer bar function js -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
+--%>
+
 
 </head>
-<body>
+<body >
 	<!-- portfolio -->
-	<div class="portfolio pad" id="portfolio">
+	<div class="portfolio pad" id="portfolio" >
 		<div>
 			<!-- default heading -->
 			<div class="default-heading">
@@ -60,41 +63,10 @@
 			</div>
 		</div>
 		<!-- portfolio -->
-		<div class="portfolio-content" id="portfolioOwl">
-			<div class="item">
-				<!-- item image -->
-				<img class="img-responsive" src="img/portfolio/1.jpg" alt="">
-				<!-- transparent background -->
-				<div class="p-transparent"></div>
-				<!-- on mouse hover details -->
-				<div class="p-hover">
-					<!-- heading /title -->
-					<h3>Album Title</h3>
-					<hr>
-					<!-- project details -->
-					<p>Some details about album.</p>
-					<!-- icon -->
-					<a href="#"><i class="fa fa-share"></i></a>
-				</div>
-			</div>
-			<div class="item">
-				<!-- item image -->
-				<img class="img-responsive" src="img/portfolio/2.jpg" alt="">
-				<!-- transparent background -->
-				<div class="p-transparent"></div>
-				<!-- on mouse hover details -->
-				<div class="p-hover">
-					<!-- heading /title -->
-					<h3>Album Title</h3>
-					<hr>
-					<!-- project details -->
-					<p>Some details about album.</p>
-					<!-- icon -->
-					<a href="#"><i class="fa fa-share"></i></a>
-				</div>
-			</div>
-
-
+		
+		<div class="portfolio-content" id="portfolioOwl" style="opacity:1;">
+			
+			
 		</div>
 		<div class="text-center">
 			<a href="#" class="btn btn-lg btn-theme">View more</a>
@@ -102,6 +74,44 @@
 		<!-- portfolio end -->
 	</div>
 	<!-- portfolio end -->
+	
+	
+<script src="js/custom.js"></script>
+
+	
+<script>
+	window.onload=function(){
+		var content=document.getElementById("portfolioOwl");
+		var xhr=new XMLHttpRequest();
+		xhr.open("GET","PopularPodcaster",true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr.send();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState===4 && xhr.status===200){
+				var type=xhr.getResponseHeader("Content-Type");
+				var podcasters=JSON.parse(xhr.responseText);
+
+				console.log("podcasters:"+podcasters);
+				var inside="";
+				for(var i=0;i<5;i++){ 
+					inside+=
+					"<div class='item'>"
+					+"<img class='img-responsive' src='img/portfolio/1.jpg' alt=''>"
+					+"<div class='p-transparent'></div>"
+					+"<div class='p-hover'>"
+					+"<h3>"+podcasters[i].nickname+"</h3>"
+					+"<hr>"
+					+"<p>"+podcasters[i].info+"</p>"
+					+"<a href='#'><i class='fa fa-share'></i></a>"
+					+"</div>"
+					+"</div>"
+					
+				}		
+				content.innerHTML=inside;
+			}
+		}
+	}
+</script>
 
 </body>
 
