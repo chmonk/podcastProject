@@ -36,6 +36,7 @@ public class LoginController {
     public String loginForm() throws Exception {
 		return "login";
 	}
+	
 	@PostMapping("/login")   // = login.jsp的login.do路徑
 	public String checkAccount(
 			@ModelAttribute("loginBean") LoginBean bean,
@@ -51,6 +52,7 @@ public class LoginController {
 		
 		System.out.println("account & password= "+account+" "+password);
 		MemberBean mbean = null;
+		MemberBean memberbean = new MemberBean();
 		
 		
     	ServletContext app = request.getServletContext();
@@ -61,7 +63,7 @@ public class LoginController {
 		
 
 		try {
-			mbean = mdao.checkIdPassword(account,password);
+				mbean = mdao.checkIdPassword(account,password);
 			if (mbean != null) {
 				// 登入成功, 將mb物件放入Session範圍內，重新組裝   識別字串為"LoginOK"
 				
@@ -73,6 +75,7 @@ public class LoginController {
 				packMemberBean.setAddress(mbean.getAddress());
 				packMemberBean.setName(mbean.getName());
 				packMemberBean.setNickname(mbean.getNickname());
+
 				
 				model.addAttribute("LoginOK", packMemberBean);
 			} else {
@@ -86,10 +89,15 @@ public class LoginController {
 			return loginForm;
 		}
 		processCookies(bean, request, response);
-
+		
+		//管理員身分導至後台頁面
+		if(memberbean.getRole()==0) {
+			return "/BackStage/BackStageSelectStyle";
+		}
 		return "redirect:/";
 		
 	}
+	
 	
 	private void processCookies(LoginBean bean, HttpServletRequest request, HttpServletResponse response) {
 		Cookie cookieUser = null;

@@ -1,21 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>搜尋頁面</title>
-<script
-	src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+<title>Insert title here</title>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.carousel.min.css"></link>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.theme.default.min.css"></link>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/owl.carousel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.carousel.min.css"></link>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.theme.default.min.css"></link>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/owl.carousel.min.js"></script>
+
 <!-- player bar css -->
 <link href="css/playerbar.css" rel="stylesheet">
 <!-- player bar icon -->
@@ -103,32 +100,36 @@
 	color: #fff;
     outline: 0;
 }
+ 
+ 
+
 </style>
 <script type="text/javascript">
-	$(document).ready(function() {
+$(document).ready(function(){
 
-		$('.owl-carousel').owlCarousel({
-			loop : false,
-			//autoWidth:true, 
-			margin : 10,
-			responsive : {
-				350 : {
-					items : 1
-				},
-				600 : {
-					items : 3
-				},
-				1000 : {
-					items : 5
-				}
-			}
-		})
-	});
+	$('.owl-carousel').owlCarousel({
+	    loop:false,
+	    //autoWidth:true, 
+	    margin:10,
+	    responsive:{
+	        350:{
+	            items:1
+	        },
+	        600:{
+	            items:3
+	        },
+	        1000:{
+	            items:5
+	        }
+	    }
+	})
+});
 </script>
 </head>
 <body>
 	<div class="head">
 		<jsp:include page="../header_banner.jsp" flush="true " />
+		
 	</div>
 	<div class="showPodcasterBody">
 		<div class="title-select">
@@ -228,10 +229,10 @@
 	<script type="text/javascript" src="js/player.js"></script>
 
 	<!--playerbar -->
-
 	<jsp:include page="../playerbar.jsp" flush="true " />
-
+	
 	<!--playerbar end -->
+	
 
 </body>
 </html>
