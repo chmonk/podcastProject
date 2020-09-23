@@ -78,7 +78,7 @@ public class LoginController {
 		}
 		processCookies(bean, request, response);
 		
-		//0922新增管理員身分導致後台頁面敘述
+		//管理員身分導至後台頁面
 		if(memberbean.getRole()==0) {
 			return "/BackStage/BackStageSelectStyle";
 		}

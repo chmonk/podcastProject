@@ -146,8 +146,9 @@ input[type="button"] {
 <body id="body" onload="showhide();columnTestify()">
 
 	<div class="wrap">
-		<h1>BackStage Function</h1>
+	
 		<div>
+			<h1>後臺管理功能選擇 </h1>
 			<form id="select">
 				<select id="options" name="options" onchange="showhide()">
 					<option value="members">Members</option>
@@ -159,7 +160,7 @@ input[type="button"] {
 					<option value="history">History</option>
 					<option value="podcast">Podcast</option>
 					<option value="income">Income</option>
-
+					<option value="logout">===LogOut===</option>
 				</select>
 			</form>
 		</div>
@@ -697,9 +698,28 @@ input[type="button"] {
 
 		</div>
 
+<!-- LogOut========================================================================-->
 
+		<div class="areas" id="logout" style="display: none;">
+			<form id="logoutForm" action="<c:url value="logout"/>" method="GET">
+			<input id="logoutBtn" type="button" value="登出" class="btn btn-warning">
+			</form>
+		</div>
 
 	</div>
+	
+	<script>
+	document.getElementById("logoutBtn").onclick=function(){
+		var r=confirm("確定要登出?")
+		if(r==true){
+			document.getElementById("logoutForm").submit();
+			return true;
+		}else{
+	
+		}		
+		
+	}
+	</script>
 
 	<script type="text/javascript"
 		src="<c:url value='/js/BackStageSelect.js'/>"></script>

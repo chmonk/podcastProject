@@ -487,6 +487,19 @@
 			return true;
 		}
 		
+//logOut=============================================================================
+
+		
+		document.getElementById("logoutBtn").onclick=function(){
+			var r=confirm("確定要登出?")
+			if(r==true){
+				document.getElementById("logoutForm").submit();
+				return true;
+			}else{
+		
+			}		
+			
+		}
 		
 		
 		
