@@ -16,5 +16,7 @@ public interface IProgramCommentDAO {
 			Date msgDate);
 
 	public boolean delete(Integer commentId);
+	
+	public List<ProgramCommentBean> selectAllPodcasterId(Integer podcasterId) throws Exception;
 
 }

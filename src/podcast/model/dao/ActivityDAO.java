@@ -1,5 +1,4 @@
 package podcast.model.dao;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,5 +124,4 @@ public class ActivityDAO implements IActivityDAO {
 		}
 		return map;
 	}
-
 }
