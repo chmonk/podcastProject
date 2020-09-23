@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import podcast.model.dao.ActivityDAO;
 import podcast.model.dao.OrderTicketDAO;
 import podcast.model.javabean.ActivityBean;
+import podcast.model.javabean.LoginBean;
 import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.OrderTicketBean;
 
@@ -87,29 +88,17 @@ public class ActivityController {
 	// 處理活動表單
 	@RequestMapping(path = "/addActivityProcess", method = RequestMethod.POST)
 	public String processAction(@RequestParam("file") MultipartFile multipartFile,
-			@RequestParam("radio") Integer activityStatus, HttpServletRequest request,
-			@ModelAttribute("ActivityBean") ActivityBean activity, BindingResult result, Model m) throws Exception {
-
-		// 檢查所有欄位,有空白則導回表單
-		if (result.hasErrors()) {
-			return "Activity/addActivity";
-		}
-		
-		System.out.println("DATE="+activity.getActivityDate());
-		
+			 HttpServletRequest request,
+			@ModelAttribute("ActivityBean") ActivityBean activity, Model m) throws Exception {
 
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
 		Integer Id = memberBean.getMemberId();
 		
-		String ActivityImg = processFile(Id,multipartFile,request);
-		
-		
+		String ActivityImg = processFile(Id,multipartFile,request);		
 		Integer stock = activity.getActivityMaxPeople();
 		activity.setStock(stock);
 		activity.setPodcasterId(Id);
 		activity.setActivityImg(ActivityImg);
-		activity.setActivityStatus(activityStatus);
-		
 
 		// 取得資料庫連線
 		ServletContext app = request.getServletContext();
@@ -121,30 +110,10 @@ public class ActivityController {
 		// 輸入表單資料至活動資料表
 		aDao.insert(activity);
 
-		//return "Activity/manageActivities";
 		return "redirect:/manageActivities";
 
-		//return "redirect:/Activity/manageActivities";
 	}
 	
-
-	//測試用
-	@RequestMapping(path = "/p", method = RequestMethod.GET)
-	public String showActivitiess(HttpServletRequest request,Model m) throws Exception {
-		
-		ServletContext app = request.getServletContext();
-    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-    	
-    	ActivityDAO aDao = (ActivityDAO)context.getBean("ActivityDAO");
-    	List<ActivityBean> list = new LinkedList<ActivityBean>();
-    	
-    	list = aDao.selectAll();
-
-		m.addAttribute("list", list);
-		//return "../../ActivitiesList";
-		return "/header_banner";
-		//return "/index";	
-	}
 
 
 	public String processFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
@@ -252,5 +221,51 @@ public class ActivityController {
 		return "Activity/showSingleActivity";
 		
 	}
+	
+	@GetMapping("formTest")
+	public String showForm2(Model m) {
+		ActivityBean activity = new ActivityBean();
+		m.addAttribute("ActivityBean", activity);
+		return "Activity/fom2";
+	}
+	
+	@PostMapping("/addActivityProcess2")
+	public String processAction2(
+			@ModelAttribute("ActivityBean") ActivityBean activity,
+			@RequestParam("file") MultipartFile multipartFile,Model m) throws Exception {
+		
+		System.out.println("Entering processAction2");
+		
+		String AcName = activity.getActivityName();
+		Date activityDate = activity.getActivityDate();
+		String activityTime = activity.getActivityTime();
+		String activityLocation = activity.getActivityLocation();
+		String activityContent = activity.getActivityContent();
+	//	Integer podcasterId =  activity.getPodcasterId();
+		Integer activityPrice = activity.getActivityPrice();
+		Integer activityMaxPeople =activity.getActivityMaxPeople();
+	//	Integer stock =activity.getStock();
+	    Integer activityStatus=activity.getActivityStatus();
+	//	String activityImg=activity.getActivityImg();
+		
+		
+		System.out.println("抓到modelAttr="
+		+AcName
+		+activityDate
+		+activityTime
+		+activityLocation
+		+activityContent
+		+activityPrice
+		+activityMaxPeople
+		+activityStatus
+		+multipartFile);
+		
+		
+		
+		return "redirect:/manageActivities";
+		
+		
+	}
+	
 
 }
