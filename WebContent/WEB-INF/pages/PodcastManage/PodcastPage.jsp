@@ -178,8 +178,7 @@ position:relative;
 	border-bottom: dashed 2px #D0D0D0;
 }
 
-//
-阿凱樣式
+/* 阿凱樣式 */
 html {
 	background-color: #fefefe;
 	box-sizing: border-box;
