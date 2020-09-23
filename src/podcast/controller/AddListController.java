@@ -50,10 +50,12 @@ public class AddListController {
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
 		System.out.println(id);
 		Integer publisherId=udao.select(id).getMemberId();
+
 //		Integer userId=(Integer)model.getAttribute("userid");
 		MemberBean mbean = (MemberBean)model.getAttribute("LoginOK");
 		//Integer userid=mbean.getMemberId();
 		Integer userid=1;
+
 		Integer podcastId=id;
 
 		//1.pack single program for ajax

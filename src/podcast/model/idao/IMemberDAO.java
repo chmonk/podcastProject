@@ -1,20 +1,20 @@
 package podcast.model.idao;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import podcast.model.javabean.MemberBean;
 
 public interface IMemberDAO {
-	public MemberBean insert(MemberBean member) throws Exception;
+	public MemberBean insert(MemberBean mBean) throws Exception;
 
-	public boolean checkLogin(MemberBean member);
+	public boolean checkLogin(MemberBean mBean);
 
 	public MemberBean select(String acc, String pwd);
 
 	public List<MemberBean> selectAll();
 
-	public MemberBean update(String acc,MemberBean member );
+	public MemberBean update(String acc,MemberBean mBean );
 
 	public List<MemberBean> fuzzySelectPodcasterAll();
 

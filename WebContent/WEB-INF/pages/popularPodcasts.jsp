@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- 
+
 <!-- Styles -->
 
 <!-- Bootstrap CSS -->
@@ -47,7 +47,7 @@
 	<!-- 	plaer bar function js -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
-	--%>
+
 </head>
 <body>
 	<!-- portfolio -->

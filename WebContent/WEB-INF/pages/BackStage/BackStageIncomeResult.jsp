@@ -18,33 +18,41 @@
 
 
 <style>
-	td{
-		width: 100px;
-		text-align: center;
-		border:1px solid;
-	}
+	#body {
+	font-family: "Lato", sans-serif;
+	color: white;
+	background-color: #949494;
+}
+
+td {
+	width: 100px;
+	text-align: center;
+	border: 1px solid #3A3A3A;
+	word-wrap: break-word;
+    max-width: 1px;
 	
-	table{
-		border:3px solid;
-		border-collapse: collapse;
-	}
-	
-	th{
-		width:100px;
-		text-align: center;
-		border:1px solid;
-		
-	}
-	
-		.center{
-		margin:0px auto;
-		text-align:center;
-		
-	}
+}
+
+table {
+	border: 3px solid #3A3A3A;
+	border-collapse: collapse;
+}
+
+th {
+	width: 100px;
+	text-align: center;
+	border: 1px solid #3A3A3A;
+	background-color: #3A3A3A;
+}
+
+.center {
+	margin: 0px auto;
+	text-align: center;
+}
 </style>
 
 </head>
-<body>
+<body id="body">
 <div style="margin-top: 50px">
 
 <h3 class="center">${incomeMsg}</h3><br>
@@ -61,7 +69,7 @@
 </table>
 </div>
 <form class="center" action="<c:url value="/BackToSelect.controller"/>">
-	<input type="submit" value="BACK" style="margin-top: 50px">
+	<input type="submit" value="BACK" style="margin-top: 50px" class="btn btn-warning">
 </form>
 
 </div>
