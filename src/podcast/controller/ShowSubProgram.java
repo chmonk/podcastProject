@@ -106,10 +106,6 @@ public class ShowSubProgram {
     	m.addAttribute("subProgram", s);
 	
     	
-    	
-    	
-    	
-//    	return null;
 		return "/subProgram";
 	}
     

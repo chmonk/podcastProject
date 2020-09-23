@@ -15,5 +15,8 @@ public interface ISubProgramListDAO {
 	public SubscriptionBean insert(SubscriptionBean sbean) throws Exception;
 
 
+	List<SubscriptionBean> selectBySubMemeberId(int memberID) throws Exception;
+
+
 
 }

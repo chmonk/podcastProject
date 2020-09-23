@@ -55,8 +55,19 @@ public class SubProgramListDAO implements ISubProgramListDAO {
 		
 		
 	}
-
-
+	
+	
+	//會員尋找購買紀錄
+	@Override
+	public List<SubscriptionBean> selectBySubMemeberId(int memberID) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		String hqlstr = "from SubscriptionBean where memberId=:memberId";
+		Query<SubscriptionBean> query = session.createQuery(hqlstr, SubscriptionBean.class);
+		query.setParameter("memberId", memberID);
+		return query.list();
+	}
+	
+	
 	@Override
 	public SubscriptionBean insert(SubscriptionBean sbean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();

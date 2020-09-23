@@ -36,10 +36,10 @@ public class AfterSubProgram {
 	    	 List<uploadPodcastBean> needSub = (List<uploadPodcastBean>)request.getSession().getAttribute("needSub");
 
 
-	    	System.out.println(31);
+	    	System.out.println("-------確認抓到的播客ID---------");
 	    	System.out.println((List<uploadPodcastBean>)request.getSession().getAttribute("subProgram"));
 	    	System.out.println(needSub.get(0).getMemberId());
-	    	System.out.println(33);
+	    	System.out.println("-------確認抓到的播客ID---------");
 	    	
 	    
 
@@ -86,11 +86,16 @@ public class AfterSubProgram {
 	    	
 	    	
 	    	SubProgramListDAO sdao2 = (SubProgramListDAO)context.getBean("SubProgramListDAO");
-	    	List<uploadPodcastBean> s = sdao2.selectByMemeberId(18);
-	    	m.addAttribute("subProgram", s);
-	    
-	    
+//	    	List<uploadPodcastBean> s = sdao2.selectByMemeberId(18);
+//	    	m.addAttribute("subProgram", s);
 	    	
+	    	List<SubscriptionBean> subRecord=sdao2.selectBySubMemeberId(loginMember.getMemberId());
+	    	System.out.println("---------訂閱--------------");
+	    	System.out.println(subRecord.get(0).getMemberId());
+	    	System.out.println(subRecord.get(0).getSubdateEnd());
+	    	System.out.println(subRecord.get(0).getSubdateStart());
+	    	System.out.println("---------訂閱--------------");
+	    	m.addAttribute("subRecord", subRecord);
 	return "/NcccPaymentPage";
 }
 }

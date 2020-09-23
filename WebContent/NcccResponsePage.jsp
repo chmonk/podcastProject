@@ -67,28 +67,28 @@ String ResponseMsg = request.getParameter("ResponseMsg");
 
 // jdbc/BookDataSQLver
 
-java.sql.Connection conn = null;
-PreparedStatement ps = null;
-ResultSet rs = null;
-try{
-	String sqlstr = "Select * from PRODUCTS ";
-	conn = _getDBConnetion("BookDataSQLver2");
-	ps=conn.prepareStatement(sqlstr);
-	rs = ps.executeQuery();
-	if (rs.next()) {
-		out.print("rs getString " + rs.getString(2));
-	}
-}catch(Exception e){
-	e.printStackTrace();
-}finally{
-	_closeRS(rs);
-	_closeStmt(ps);
-	if(conn!=null){
-		try{
-			conn.close();
-		}catch(SQLException sex){}finally{conn=null;}
-	}
-}
+// java.sql.Connection conn = null;
+// PreparedStatement ps = null;
+// ResultSet rs = null;
+// try{
+// 	String sqlstr = "Select * from subscription ";
+// 	conn = _getDBConnetion("Podcast");
+// 	ps=conn.prepareStatement(sqlstr);
+// 	rs = ps.executeQuery();
+// 	if (rs.next()) {
+// 		out.print("rs getString " + rs.getString(2));
+// 	}
+// }catch(Exception e){
+// 	e.printStackTrace();
+// }finally{
+// 	_closeRS(rs);
+// 	_closeStmt(ps);
+// 	if(conn!=null){
+// 		try{
+// 			conn.close();
+// 		}catch(SQLException sex){}finally{conn=null;}
+// 	}
+// }
 
 %>
 <!DOCTYPE html>
