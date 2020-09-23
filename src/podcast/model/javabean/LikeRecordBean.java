@@ -17,20 +17,26 @@ public class LikeRecordBean {
 	private Integer memberId;
 	private Integer podcastId;
 	private Integer likeStatus;
+	private Integer showInListOrNot;
 	
 	public LikeRecordBean() {
 		
 	}
-	
-	public LikeRecordBean(Integer likeRecordId,Integer memberId,Integer podcastId,Integer likeStatus) {
-		this.likeRecordId=likeRecordId;
-		this.memberId=memberId;
-		this.podcastId=podcastId;
-		this.likeStatus=likeStatus;
+
+	public LikeRecordBean(Integer likeRecordId, Integer memberId, Integer podcastId, Integer likeStatus,
+			Integer showInListOrNot) {
+		super();
+		this.likeRecordId = likeRecordId;
+		this.memberId = memberId;
+		this.podcastId = podcastId;
+		this.likeStatus = likeStatus;
+		this.showInListOrNot = showInListOrNot;
 	}
-	
+
+
+
 	@Id
-	@Column(name="LIKERECORD")
+	@Column(name="LIKERECORDID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getLikeRecordId() {
 		return likeRecordId;
@@ -62,6 +68,16 @@ public class LikeRecordBean {
 	public void setLikeStatus(Integer likeStatus) {
 		this.likeStatus = likeStatus;
 	}
+
+	@Column(name = "SHOWINLISTORNOT")
+	public Integer getShowInListOrNot() {
+		return showInListOrNot;
+	}
+
+	public void setShowInListOrNot(Integer showInListOrNot) {
+		this.showInListOrNot = showInListOrNot;
+	}
+	
 	
 
 }

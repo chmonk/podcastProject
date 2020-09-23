@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import antlr.collections.List;
 import podcast.model.dao.BackStageDAO;
 import podcast.model.dao.CategoryDAO;
+import podcast.model.dao.MemberDAO;
 import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.CategoryBean;
@@ -36,22 +38,9 @@ import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
 public class BackStageControlerVer1 {
-
-	//BackStage Login=======================================================================================================
 	
-//	@PostMapping(path= {"/BackStageLogin.controller"})
-//	public String BackStageLogin(
-//			@RequestParam(name="userName")String userName,
-//			@RequestParam(name="password")String password,
-//			Model m) {
-//		if(userName.equals("test123")&&password.equals("pass123")) {
-//			return "/BackStage/BackStageSelect";
-//		}
-//		
-//		m.addAttribute("LoginErrorMsg","請輸入正確帳號密碼!");
-//		return "/BackStage/BackStageLogin";
-//	}
-//	
+	@Autowired
+	private MemberDAO mDao;
 	
 	// Back 2 Select==========================================================================================
 	@GetMapping(path = { "/BackToSelect.controller" })
@@ -63,6 +52,16 @@ public class BackStageControlerVer1 {
 	// Member
 	// Function==========================================================================================
 
+	@PostMapping(path= {"/showAllMember"})
+	public String showAllMember(Model m) {
+		java.util.List<MemberBean> allMemberList=mDao.selectAll();
+		m.addAttribute("allMemberList",allMemberList);
+		
+		
+		return "/BackStage/AllMember";
+	}
+	
+	
 	@PostMapping(path = { "/BackStageSelectMember.controller" })
 	public String selectMember(HttpServletRequest request, @RequestParam(name = "selectmemberId") int memberId,
 			Model m) {
@@ -545,7 +544,7 @@ public class BackStageControlerVer1 {
 		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
 		Date startdate; 
 		Date enddate;
-		Integer subIncome=null;
+		Double subIncome=0.0;
 		
 		try {
 			startdate=Date.valueOf(startDate);

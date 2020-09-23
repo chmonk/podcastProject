@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import podcast.model.dao.BackStageDAO;
 import podcast.model.dao.MemberDAO;
 import podcast.model.javabean.MemberBean;
+import podcast.model.javabean.PopularPodcasterBean;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
@@ -42,24 +43,26 @@ public class IndexContentController {
 	private MemberDAO mDao;
 	
 	@GetMapping(path= {"/PopularPodcaster"})
-	public @ResponseBody List<MemberBean> popularPodcaster(Model m, HttpServletRequest request) {
+	public @ResponseBody List<PopularPodcasterBean> popularPodcaster(Model m, HttpServletRequest request) {
 		
 		LocalDate date=LocalDate.now().minusDays(30);
 		Date date2=Date.valueOf(date);
-		java.util.List<uploadPodcastBean> uList=bDao.topPodcast(date2);
 		
-		List<Integer> idList=new ArrayList<Integer>();
-		for(int i=0;i<10;i++) {
-			idList.add(uList.get(i).getMemberId());
-		}
+//		//舊方法
+//		java.util.List<uploadPodcastBean> uList=bDao.topPodcast(date2);		
+//		List<Integer> idList=new ArrayList<Integer>();
+//		for(int i=0;i<uList.size();i++) {
+//			idList.add(uList.get(i).getMemberId());
+//		}
+//		
+//		List<MemberBean> mList = new ArrayList<MemberBean>();
+//		
+//		for(int j=0;j<10;j++) {
+//			mList.add(mDao.selectPodcaster(idList.get(j)));
+//		}
+
+		List<PopularPodcasterBean> popList=bDao.topTenMember(date2);
 		
-		List<MemberBean> mList = new ArrayList<MemberBean>();
-		for(int j=0;j<idList.size();j++) {
-				mList.add(mDao.selectPodcaster(idList.get(j)));
-		}
-		
-		//m.addAttribute("mbean",mList);
-		 
-		return mList;
+		return popList;
 	}
 }

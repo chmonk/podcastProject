@@ -3,14 +3,18 @@ package podcast.model.dao;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import podcast.model.idao.ISubscriptionDAO;
+import podcast.model.javabean.MyFavProgramBean;
 import podcast.model.javabean.SubscriptionBean;
 
 @Repository("SubscriptionDAO")
@@ -21,7 +25,7 @@ public class SubscriptionDAO implements ISubscriptionDAO {
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
-	
+
 	public SubscriptionDAO() {
 	}
 
@@ -38,8 +42,6 @@ public class SubscriptionDAO implements ISubscriptionDAO {
 //	this.podcasterId = podcasterId;
 //	this.creditCardNumber = creditCardNumber;
 //	this.receipt = receipt;
-	
-	
 
 	@Override
 	public SubscriptionBean insert(SubscriptionBean sbean) throws Exception {
@@ -107,5 +109,26 @@ public class SubscriptionDAO implements ISubscriptionDAO {
 
 		return false;
 	}
+
+	//確認有無訂閱
+	public Integer checkSubsription(Integer memberId, Integer publisherId) {
+
+		Session session = sessionFactory.getCurrentSession();
+
+		String sqlstr = "select * from subscription where memberId=? and podcasterId=?";
+
+		NativeQuery query = session.createNativeQuery(sqlstr).setParameter(1, memberId).setParameter(2, publisherId);
+
+		List rs = query.getResultList();
+
+		// 如果為空 表示沒訂閱
+		if (rs.isEmpty()) {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+	
+
 
 }

@@ -9,6 +9,7 @@
 
 
 <style>
+
 .hr0{
 	height:3px;
 	border: none;
@@ -146,8 +147,9 @@ input[type="button"] {
 <body id="body" onload="showhide();columnTestify()">
 
 	<div class="wrap">
-		<h1>BackStage Function</h1>
+	
 		<div>
+			<h1>後臺管理功能選擇 </h1>
 			<form id="select">
 				<select id="options" name="options" onchange="showhide()">
 					<option value="members">Members</option>
@@ -159,7 +161,7 @@ input[type="button"] {
 					<option value="history">History</option>
 					<option value="podcast">Podcast</option>
 					<option value="income">Income</option>
-
+					<option value="logout">===LogOut===</option>
 				</select>
 			</form>
 		</div>
@@ -167,12 +169,16 @@ input[type="button"] {
 	<!-- Member============================================================================== -->
 
 		<div class="areas" id="members" style="display: none;">
-
+			<div >
+			<form action="<c:url value="/showAllMember"/>" method="POST" target="_blank">
+				<input id="showAllMemberBtn" type="submit" class="btn btn-danger btn-lg" value="Member總覽">
+			</form>
+			</div>	
 			<div>
 				<form id="selectMemberByIdForm" autocomplete="off"
 					action="<c:url value="/BackStageSelectMember.controller"/>"
 					method="POST">
-					<label for="selectMemberIdText">Find Member</label> <input
+					<label for="selectMemberIdText">Member 詳情</label> <input
 						id="selectMemberIdText" type="number" name="selectmemberId" placeholder="memberId">
 					<span>
 					<input id="memberIdBtn" type="button" value="send"
@@ -187,9 +193,9 @@ input[type="button"] {
 				<form id="selectMemberByAccountForm" autocomplete="off"
 					action="<c:url value="/BackStageSelectMemberByAccount.controller"/>"
 					method="POST">
-					<label for="selectMemberAccountText">Member By
-						Account</label> <input id="selectMemberAccountText" type="text"
-						name="account" placeholder="account"> 
+					<label for="selectMemberAccountText">Nickname 搜尋</label> 
+						<input id="selectMemberAccountText" type="text"
+						name="account" placeholder="nickname"> 
 					<span>
 					<input id="selectMemberAccountBtn"
 						type="button" value="send" class="btn btn-warning">
@@ -203,7 +209,7 @@ input[type="button"] {
 				<form id="deleteMemberForm" autocomplete="off"
 					action="<c:url value="/BackStageDeleteMember.controller"/>"
 					method="POST">
-					<label for="deleteMemberText">Delete Member</label> <input
+					<label for="deleteMemberText">刪除 Member</label> <input
 						id="deleteMemberText" type="number" name="deletememberId" placeholder="memberId">
 					<span>
 					<input id="deleteMemberBtn" type="button" value="send"
@@ -697,9 +703,28 @@ input[type="button"] {
 
 		</div>
 
+<!-- LogOut========================================================================-->
 
+		<div class="areas" id="logout" style="display: none;">
+			<form id="logoutForm" action="<c:url value="logout"/>" method="GET">
+			<input id="logoutBtn" type="button" value="登出" class="btn btn-warning">
+			</form>
+		</div>
 
 	</div>
+	
+	<script>
+	document.getElementById("logoutBtn").onclick=function(){
+		var r=confirm("確定要登出?")
+		if(r==true){
+			document.getElementById("logoutForm").submit();
+			return true;
+		}else{
+	
+		}		
+		
+	}
+	</script>
 
 	<script type="text/javascript"
 		src="<c:url value='/js/BackStageSelect.js'/>"></script>

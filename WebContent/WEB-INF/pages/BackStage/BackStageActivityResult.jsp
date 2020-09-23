@@ -64,7 +64,7 @@ th {
 						<th>ActivityId</th>
 						<th>ActivityName</th>
 						<th>ActivityDate</th>
-						<th colspan="3">ActivityContent</th>
+						<th colspan="4">ActivityContent</th>
 						<th>ActivityLocation</th>
 						
 					</tr>
@@ -72,23 +72,25 @@ th {
 						<td rowspan="3">${act.activityId}</td>
 						<td>${act.activityName}</td>
 						<td>${act.activityDate}</td>
-						<td colspan="3">${act.activityContent}</td>
+						<td colspan="4">${act.activityContent}</td>
 						<td>${act.activityLocation}</td>
 						
 					</tr>
 					<tr>
+						<th>ActivityTime</th>
 						<th>PodcasterId</th>
 						<th>ActivityPrice</th>
 						<th>ActivityMaxPeople</th>
-						<th>ActivityMinPeople</th>
+						<th>Stock</th>
 						<th>ActivityStatus</th>
 						<th>ActivityImg</th>
 					</tr>
 					<tr>
+						<td>${act.activityTime}</td>
 						<td>${act.podcasterId}</td>
 						<td>${act.activityPrice}</td>
 						<td>${act.activityMaxPeople}</td>
-						<td>${act.activityMinPeople}</td>
+						<td>${act.stock}</td>
 						<td>${act.activityStatus}</td>
 						<td>${act.activityImg}</td>
 

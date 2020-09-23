@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 
 <!-- Styles -->
-
+<%-- 
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
@@ -48,11 +48,13 @@
 	<!-- 	plaer bar function js -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
+--%>
+
 
 </head>
 <body >
 	<!-- portfolio -->
-	<div class="portfolio pad" id="portfolio">
+	<div class="portfolio pad" id="portfolio" >
 		<div>
 			<!-- default heading -->
 			<div class="default-heading">
@@ -62,8 +64,8 @@
 		</div>
 		<!-- portfolio -->
 		
-		<div class="portfolio-content" id="portfolioOwl">
-
+		<div class="portfolio-content" id="portfolioOwl" style="opacity:1;">
+			
 			
 		</div>
 		<div class="text-center">
@@ -72,6 +74,10 @@
 		<!-- portfolio end -->
 	</div>
 	<!-- portfolio end -->
+	
+	
+<script src="js/custom.js"></script>
+
 	
 <script>
 	window.onload=function(){
@@ -85,10 +91,12 @@
 				var type=xhr.getResponseHeader("Content-Type");
 				var podcasters=JSON.parse(xhr.responseText);
 
-				console.log("podcasters:"+podcasters[3].nickname);
-				var inside="<div class='item'>";
-				for(var i=0;i<podcasters.length;i++){ 
-					inside+="<img class='img-responsive' src='img/portfolio/1.jpg' alt=''>"
+				console.log("podcasters:"+podcasters);
+				var inside="";
+				for(var i=0;i<5;i++){ 
+					inside+=
+					"<div class='item'>"
+					+"<img class='img-responsive' src='img/portfolio/1.jpg' alt=''>"
 					+"<div class='p-transparent'></div>"
 					+"<div class='p-hover'>"
 					+"<h3>"+podcasters[i].nickname+"</h3>"
@@ -96,9 +104,9 @@
 					+"<p>"+podcasters[i].info+"</p>"
 					+"<a href='#'><i class='fa fa-share'></i></a>"
 					+"</div>"
-					+"</div>";
-				}
-						
+					+"</div>"
+					
+				}		
 				content.innerHTML=inside;
 			}
 		}

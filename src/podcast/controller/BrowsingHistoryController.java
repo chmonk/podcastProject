@@ -43,38 +43,10 @@ public class BrowsingHistoryController {
 			throws Exception {
 
 		// get the list of browsing list
-		ServletContext app = request.getServletContext();
+		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId2(userid);
 
-		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+		m.addAttribute("history", rs);
 
-		HistoryDao hdao = (HistoryDao) context.getBean("HistoryDao");
-
-		List<HistoryBean> list = hdao.selectHistoryByMemberId(userid);
-
-		// get program info and pack into list
-
-		UploadPodcastDAO updao = (UploadPodcastDAO) context.getBean("UploadPodcastDAO");
-
-		MemberDAO mDao = (MemberDAO) context.getBean("MemberDAO");
-
-		ArrayList<uploadPodcastBean> programinfo = new ArrayList<uploadPodcastBean>();
-
-		ArrayList<String> AuthorList = new ArrayList<String>();
-
-		for (HistoryBean prog : list) {
-
-			uploadPodcastBean singleProgramInfo = updao.select(prog.getPodcastId());
-
-			programinfo.add(singleProgramInfo);
-
-			String author = mDao.selectPodcaster(prog.getPublisherId()).getNickname();
-
-			AuthorList.add(author);
-		}
-
-		m.addAttribute("history", list);
-		m.addAttribute("program", programinfo);
-		m.addAttribute("author", AuthorList);
 
 		return "browsingHistory";
 	}
