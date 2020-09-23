@@ -48,6 +48,7 @@ public class AddListController {
 		System.out.println(id);
 		Integer publisherId=udao.select(id).getMemberId();
 		Integer userId=(Integer)model.getAttribute("userid");
+
 		Integer podcastId=id;
 
 		//1.pack single program for ajax
