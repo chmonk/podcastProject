@@ -218,6 +218,7 @@ public class ActivityController {
     	ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
 		ActivityBean aBean = aDao.select(activityId);
 		model.addAttribute("aBean", aBean);
+		
 		return "Activity/showSingleActivity";
 		
 	}
@@ -229,10 +230,10 @@ public class ActivityController {
 		return "Activity/fom2";
 	}
 	
-	@PostMapping("/addActivityProcess2")
+	@PostMapping("/updateAc")
 	public String processAction2(
 			@ModelAttribute("ActivityBean") ActivityBean activity,
-			@RequestParam("file") MultipartFile multipartFile,Model m) throws Exception {
+			@RequestParam("file") MultipartFile multipartFile,Model m,HttpServletRequest request) throws Exception {
 		
 		System.out.println("Entering processAction2");
 		
@@ -259,11 +260,35 @@ public class ActivityController {
 		+activityMaxPeople
 		+activityStatus
 		+multipartFile);
+
 		
+		Integer aId = activity.getActivityId();	
+		Integer stock = activity.getActivityMaxPeople();
+		activity.setStock(stock);
 		
+		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+		Integer Id = memberBean.getMemberId();		
+		activity.setPodcasterId(Id);
 		
+		String ActivityImg = "";
+		if(multipartFile != null) {
+			ActivityImg = processFile(Id,multipartFile,request);
+		}else {
+			ActivityImg = activity.getActivityImg();
+		}		
+		activity.setActivityImg(ActivityImg);
+
+		
+		ServletContext app = request.getServletContext();
+		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+		
+	
+		ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
+
+		aDao.update(aId,activity);
+				
 		return "redirect:/manageActivities";
-		
+	
 		
 	}
 	

@@ -51,6 +51,10 @@
 			<td id='borderA' align="center" colspan="4"><a href="<c:url value='removeShoppingCart' />">回首頁</a></td>
 		</tr>
 	</TABLE>
+	
+	
+	
+	
 	</center>
 </body>
 </html>
