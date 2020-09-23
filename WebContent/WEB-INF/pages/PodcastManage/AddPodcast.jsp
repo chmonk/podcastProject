@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,18 +63,18 @@ fieldset {
 	<fieldset>
 		<legend>新增單集</legend>
 
-		<form:form action="addPodcastProcess" method="POST"
-			modelAttribute="uploadPodcastBean" enctype="multipart/form-data">
+		<form:form id="totalform" action="addPodcastProcess" method="POST"
+			modelAttribute="uploadPodcastBean" enctype="multipart/form-data" >
 			<div class="div1">
 				<form:label path="title" for="" class="l1">單集名稱:</form:label>
-				<form:input path="title" />
+				<form:input path="title" id="name" name="podname" /><span id="empty"></span>
 				<div class="notice"></div>
 			</div>
 
 
 			<div class="div1">
 				<form:label path="podcastInfo" for="" class="l1">單集簡介:</form:label>
-				<form:textarea path="podcastInfo" />
+				<form:textarea path="podcastInfo"  id="info" name="podinfo"/>
 				<span id="idsp2"></span>
 				<div class="notice"></div>
 			</div>
@@ -97,44 +98,59 @@ fieldset {
 					<option value=14>科技趨勢</option>
 					<option value=15>音樂藝術</option>
 					<option value=16>教育學習</option>
-					
 				</select>
-				<!-- <input type=select name="category" /> -->
 				<span id="idsp1"></span>
 				<div class="notice"></div>
 			</div>
-
-			
-
 			<div class="div1">
 				<label for="" class="l1">付費狀態:</label> <input type=radio
-					name="openPayment" value=0 />免費 <input type=radio
+					name="openPayment" value=0 checked/>免費 <input type=radio
 					name="openPayment" value=1 />訂閱 <span id="idsp1"></span>
 				<div class="notice"></div>
 			</div>
-
-
-
 			<div class="div1">
 				<label for="" class="l1">上傳單集:</label> <input type="file"
-					name="podcastfile" size="40">
+					name="podcastfile" size="40" id="audio">
 				<div class="notice"></div>
 			</div>
 
 			<div class="div1">
 				<label for="" class="l1">單集封面:</label> <input type="file"
-					name="podcastpic" size="40">
+					name="podcastpic" size="40" id="pic">
 				<div class="notice"></div>
 			</div>
 
 			<div class="div2">
-				<input type="submit" value="送出"> 
-				<input type="reset" value="清除">
+				<input type="button" value="送出" id="send" onclick=function(){checknull()}/> 
+				<input type="reset" value="清除"/>
+				<p id="err" ></p>
 			</div>
 		</form:form>
 
 	</fieldset>
+<!-- onclick=function(){columnTestify} -->
+<script>
+var send=document.getElementById("send");
+send.onclick=function checknull() {
+    var name = document.getElementById("name");
+    var info = document.getElementById("info");
+    var audio = document.getElementById("audio");
+    var pic = document.getElementById("pic");
+    var err=document.getElementById("err");
+  if(name.value =="" || info.value=="" || audio.value=="" || pic.value=="") {
+	  err.innerHTML="請填入所有內容";
+	  return false;
+  }
+  else{
+	err.innerHTML="";
+	document.getElementById("totalform").submit();
+	return true;
+}
+}
+
+ </script> 
 
 </body>
+
 
 </html>
