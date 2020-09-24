@@ -125,7 +125,7 @@ public class BackStageAjaxController {
 		return allPodcastList;
 	}
 	
-//Member Function=================================================================
+//Member AJAX Function=================================================================
 	
 	@PostMapping(path = { "/BackStageSelectMember" })
 	public @ResponseBody java.util.List<MemberBean> selectMember(HttpServletRequest request, @RequestParam(value="input") Integer memberId,
@@ -165,5 +165,19 @@ public class BackStageAjaxController {
 
 	}
 
+//TicketOrder AJAX Function============================================
+	
+	@PostMapping(path = { "/BackStageSelectOrderById" })
+	public @ResponseBody java.util.List<OrderTicketBean> selectOrderById(HttpServletRequest request, @RequestParam(value = "input") Integer orderId, Model m) {
+		
+		OrderTicketBean oBean = bDao.selectOrderById(orderId);
+		java.util.List<OrderTicketBean> oList = new ArrayList<OrderTicketBean>();
+		oList.add(oBean);
+		m.addAttribute("oList", oList);
+
+		return oList;
+	}
+
+	
 	
 }
