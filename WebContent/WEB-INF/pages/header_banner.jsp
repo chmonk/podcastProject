@@ -213,7 +213,7 @@ nav ul ul li {
 									<li><li><a href="#">${LoginOK.name}</a>
 				         				<!-- First Tier Drop Down -->
 							            <ul class="barlist">
-							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
+							                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
@@ -237,7 +237,7 @@ nav ul ul li {
 									<li><li><a href="#">${LoginOK.name}</a>
 				         				<!-- First Tier Drop Down -->
 							            <ul class="barlist">
-							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
+							                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
