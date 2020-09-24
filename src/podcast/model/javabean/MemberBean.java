@@ -1,6 +1,6 @@
 package podcast.model.javabean;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "MEMBERS")
+@Table(name = "members")
 @Component
 public class MemberBean {
 	@Id
