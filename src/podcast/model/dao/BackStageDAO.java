@@ -66,11 +66,11 @@ public class BackStageDAO implements IBackStageDAO {
 		return session.get(MemberBean.class, memberId);
 	}
 
-	public MemberBean selectMemberByAccount(String account) {
+	public MemberBean selectMemberByAccount(String nickname) {
 		Session session = sessionFactory.getCurrentSession();
-		String hqlstr = "from MemberBean where account=:account";
+		String hqlstr = "from MemberBean where nickname=:nickname";
 		Query<MemberBean> query = session.createQuery(hqlstr, MemberBean.class);
-		query.setParameter("account", account);
+		query.setParameter("nickname", nickname);
 		List<MemberBean> m = query.getResultList();
 		if (m.isEmpty()) {
 			return null;
