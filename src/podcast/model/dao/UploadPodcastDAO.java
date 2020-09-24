@@ -133,21 +133,39 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 		return ubean;
 	}
 
+	// 點擊愛心時like數加一
+	public uploadPodcastBean addLikeCount(Integer podcastID) {
+
+		uploadPodcastBean ubean = sessionFactory.getCurrentSession().get(uploadPodcastBean.class, podcastID);
+
+		ubean.setLikesCount(ubean.getLikesCount() + 1);
+
+		return ubean;
+	}
+
+	// 點擊愛心時like數減一
+	public uploadPodcastBean decrLikeCount(Integer podcastID) {
+
+		uploadPodcastBean ubean = sessionFactory.getCurrentSession().get(uploadPodcastBean.class, podcastID);
+
+		ubean.setLikesCount(ubean.getLikesCount() - 1);
+
+		return ubean;
+	}
+
 	// 依據傳入的list(PodcastId 們取資料)
 	public ArrayList<uploadPodcastBean> selectListOfPodcast(List<HistoryBean> browsingHisList) {
 
-		
-		//準備純數字的歷史podcastid序列
-		List<Integer> browsingList=new ArrayList<>();
-		
-		for(HistoryBean hbean:browsingHisList) {
+		// 準備純數字的歷史podcastid序列
+		List<Integer> browsingList = new ArrayList<>();
+
+		for (HistoryBean hbean : browsingHisList) {
 			browsingList.add(hbean.getPodcastId());
 		}
-		
-		
+
 		Session session = sessionFactory.getCurrentSession();
 
-		//寫sql語法準備查詢
+		// 寫sql語法準備查詢
 		String nativeSql = "select * from uploadPodcast where ";
 
 		for (Integer podcastId : browsingList) {
@@ -171,7 +189,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 		ArrayList<uploadPodcastBean> orderList = new ArrayList<>();
 
 		for (Integer i = browsingList.size() - 1; i >= 0; i--) {
-			 orderList.add(m.get(browsingList.get(i)));
+			orderList.add(m.get(browsingList.get(i)));
 		}
 
 		return orderList;
