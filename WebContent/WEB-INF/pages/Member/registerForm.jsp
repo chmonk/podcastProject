@@ -69,36 +69,39 @@
           
 </script>
 <style type="text/css">
-body {
-	background-image: url(< c : url value = '/img/banner/b1.jpg'/ >);
-	background-size: cover;
-	background-position: center;
-	background-attachment: fixed;
-}
+    body {
+      background-image: url(<c:url value='/img/banner/b1.jpg' />);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
 
-#ui {
-	border-radius: 10px;
-	background-color: #333;
-	padding: 50px;
-	opacity: 0.8;
-	box-shadow: 2px 2px 2px 2px #000;
-	animation-delay: 2s;
-	animation-duration: 2s;
-}
+    #ui {
+      border-radius: 10px;
+      background-color: #333;
+      padding: 50px;
+      opacity: 0.8;
+      box-shadow: 2px 2px 2px 2px #000;
+      animation-delay: 2s;
+      animation-duration: 2s;
 
-#ui label {
-	color: #fff;
-	font-weight: 800;
-}
+    }
 
-#contact_showcase {
-	margin-top: 70px;
-}
+    #ui label {
+      color: #fff;
+      font-weight: 800;
 
-.button {
-	font-weight: 800;
-}
-</style>
+    }
+
+    #contact_showcase {
+      margin-top: 70px;
+    }
+
+    .button {
+      font-weight: 800;
+
+    }
+  </style>
 </head>
 
 <body>
