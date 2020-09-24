@@ -12,6 +12,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Component
 @Entity
 @Table(name="browsingHistory")
@@ -72,11 +74,13 @@ public class HistoryBean {
 		this.memberId = memberId;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	@Column(name="LASTLISTEN")
 	public Date getLastListen() {
 		return lastListen;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public void setLastListen(Date lastListen) {
 		this.lastListen = lastListen;
 	}

@@ -11,6 +11,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 @Table(name="activity")
@@ -47,10 +49,12 @@ public class ActivityBean {
 		this.activityName = activityName;
 	}
 	
+	@JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
 	@Column(name="ACTIVITYDATE")
 	public Date getActivityDate() {
 		return activityDate;
 	}
+	@JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
 	public void setActivityDate(Date activityDate) {
 		this.activityDate = activityDate;
 	}
