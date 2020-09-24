@@ -51,19 +51,37 @@ public class RegisterController {
 		String name=request.getParameter("name");
 		String nickname=request.getParameter("nickname");
 		String birthday=request.getParameter("birthday");
+		String registerDate=request.getParameter("registerDate");
 		String info=request.getParameter("info");
+		String email=request.getParameter("email");
 		String cellphone=request.getParameter("cellphone");
 		String address=request.getParameter("address");
+		String sex=request.getParameter("sex");
+		String file=request.getParameter("file");
+		String role=request.getParameter("role");
+		String creditCardNumber=request.getParameter("creditCardNumber");
+		String bankAccount=request.getParameter("bankAccount");
 		String image = processFile2(multipartFile,request);		
-		members.setImage(image);	
+		members.setImage(image);
+		
+		System.out.println("accunt:"+account);
 		
 		//資料格式判斷
 		Map<String, String> errors = new HashMap<String, String>();
 		request.setAttribute("err", errors);
 			//帳號
-		if(account=="1111") {
+		if(account.equals("曹圈圈")) {
 			errors.put("account", "account is required");
 			};
+			
+			//email
+		String EMAIL_REGEX = "^[\w-_\.+]*[\w-_\.]\@([\w]+\.)+[\w]+[\w]$";
+		if() {
+			
+		};
+		if(!errors.isEmpty()) {
+				return "Member/registerForm";
+				};
 
 		// model傳送資料
 //		m.addAttribute("account", members.getAccount());
