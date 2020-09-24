@@ -33,6 +33,7 @@ a {
 	border-top: 1px solid #cecece;
 	position: fixed;
 	bottom: 0px;
+	z-index: 999;
 }
 
 .player__wrapper {

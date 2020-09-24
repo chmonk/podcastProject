@@ -424,12 +424,41 @@ $(document).ready(() => {
 			dataType: "json",
 			success: function(data) {
 				// console.log(xhr);
-				console.log(data);
-				mediaData.push(data);//不能用responseText會無法顯示
-				var result = [...new Set(mediaData.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
-				mediaData = result;
+//				console.log(data);
+//				mediaData.push(data);//不能用responseText會無法顯示
+//				var result = [...new Set(mediaData.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
+//				mediaData = result;
+//
+//				renderPlaylist();//重新取得清單資訊
 
-				renderPlaylist();//重新取得清單資訊
+                var new_song = data;
+
+				var duplicate = false;
+				var duplicate_index;
+
+				for (let i = 0; i < mediaData.length; i++) {
+					if (mediaData[i].podcastId == new_song.podcastId) {
+						duplicate = true;
+						duplicate_index = i;
+						break;
+					}
+				}
+				if (duplicate) {
+					mediaData.splice(duplicate_index, 1);
+					mediaData.push(new_song);
+					renderPlaylist(mediaData);
+				} else {
+					mediaData.push(new_song);
+					renderPlaylist(mediaData);
+				}
+
+				//設定準備播放歌曲
+				myAudio.setCurrentMusic(mediaData.length-1);
+				//自動播放	
+				myAudio.setPlayStatus(true);
+
+
+
 
 
 			}

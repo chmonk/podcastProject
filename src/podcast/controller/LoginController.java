@@ -51,8 +51,14 @@ public class LoginController {
 
 		
 		System.out.println("account & password= "+account+" "+password);
+<<<<<<< HEAD
 		MemberBean mbean=null;
 		MemberBean memberbean = new MemberBean();
+=======
+
+		MemberBean mbean = new MemberBean();
+
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 		
 		
     	ServletContext app = request.getServletContext();
@@ -63,22 +69,35 @@ public class LoginController {
 		
 
 		try {
+<<<<<<< HEAD
 				mbean = mdao.checkIdPassword(account,password);
 			
 				
+=======
+
+				   mbean = mdao.checkIdPassword(account,password);
+
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 			if (mbean != null) {
+
 				// 登入成功, 將mb物件放入Session範圍內，重新組裝   識別字串為"LoginOK"
+				
+				request.getSession().setMaxInactiveInterval(1800);
 				
 				MemberBean packMemberBean = new MemberBean();
 				
+
 				packMemberBean.setAccount(mbean.getAccount());
 				packMemberBean.setMemberId(mbean.getMemberId());
 				packMemberBean.setRole(mbean.getRole());
 				packMemberBean.setAddress(mbean.getAddress());
 				packMemberBean.setName(mbean.getName());
+
 				packMemberBean.setNickname(mbean.getNickname());
 
+
 				
+
 				model.addAttribute("LoginOK", packMemberBean);
 			} else {
 				// 登入失敗, 放相關的錯誤訊息到 errorMsgMap 之內
@@ -92,7 +111,11 @@ public class LoginController {
 		}
 		processCookies(bean, request, response);
 		
+<<<<<<< HEAD
 		//管理員身分導至後台頁面	
+=======
+		//管理員身分導至後台頁面
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 		if(mbean.getRole()==0) {
 			return "/BackStage/BackStageSelectStyle";
 		}
