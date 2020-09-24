@@ -109,7 +109,7 @@
 			<div class="col-lg-3"></div>
 			<div class="col-lg-6">
 				<h1 class="text-center animated slideInDown"
-					style="color: #fff; font-weight: bold;">修改會員</h1>
+					style="color: #fff; font-weight: bold;">修改會員資料</h1>
 				<div id="ui" class="text-center">
 					<form class="form-group" action="updateMemberProcess" method="POST"
 						enctype='multipart/form-data'>
