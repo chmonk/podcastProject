@@ -151,12 +151,19 @@ public class AddListController {
 			lbean.setPodcastId(podcastId);
 			lbean.setLikeStatus(1);
 			lbean.setShowInListOrNot(1); // 預計顯示在清單中
+			udao.addLikeCount(id);
 
 			ldao.insert(lbean);
+			
 		}else if(likeresult.getLikeStatus()==0){
+			//增加愛心
+			udao.addLikeCount(id);
 			likeresult.setLikeStatus(1);
 			likeresult.setShowInListOrNot(1); //重點變為可加入list
+			
 		}else {
+			//取消愛心
+			udao.decrLikeCount(id);
 			likeresult.setLikeStatus(0);
 			likeresult.setShowInListOrNot(1); //重點變為可加入list
 		}
