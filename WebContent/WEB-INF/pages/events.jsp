@@ -50,6 +50,7 @@
 <script src="js/custom.js"></script>
 <!-- 	plaer bar function js -->
 
+
 <!-- map -->
 <!-- 	plaer bar function js -->
 <style type="text/css">
@@ -59,47 +60,85 @@
 </style>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKsAoRrnd4jZL_pQJhvBgphbttPkTl8LM&callback=initMap&libraries=&v=weekly"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeVgKGb9DYep9MX7uwKiRZd2NYaerrhSw"
 	defer></script>
-
-	<script type="text/javascript">
-	var map;
-	function initMap() {
-	  map = new google.maps.Map(document.getElementById('map'), {
-	    center: {lat: -34.397, lng: 150.644},
-	    zoom: 8
-	  });
+	<script src="js/map.js"></script>
+	
+	<style>
+	#map {
+		height: 98%;
 	}
 
+	html, body {
+		height: 98%;
+		margin: 0;
+		padding: 0;
+	}
+	</style>
+	<script>
+		var geocoder;
+		var map;
+		function initialize() {
+			geocoder = new google.maps.Geocoder();
+			
+			var latlng = new google.maps.LatLng(-34.397, 150.644);
+			var mapOptions = {
+				zoom : 11,
+				center : latlng
+			}
+			map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		}
 
-	
-	  var geocoder;
- 	  var map;
-	  function initialize() {
-	    geocoder = new google.maps.Geocoder();
-	    var latlng = new google.maps.LatLng(-34.397, 150.644);
-	    var mapOptions = {
-	      zoom: 8,
-	      center: latlng
-	    }
-	    map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	  }
+		function codeAddress() {
+			var address = document.getElementById('address').value;
+			geocoder.geocode({
+				'address' : address
+			}, function(results, status) {
+				if (status == 'OK') {
+					map.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker({
+						map : map,
+						position : results[0].geometry.location
+					});
+				} else {
+					alert('Geocode was not successful for the following reason: ' + status);
+				}
+			});
+		}
+// 	var map;
+// 	function initMap() {
+// 	  map = new google.maps.Map(document.getElementById('map'), {
+// 	    center: {lat: -34.397, lng: 150.644},
+// 	    zoom: 8
+// 	  });
+// 	}
 
-	  function codeAddress() {
-	    var address = document.getElementById('address').value;;
-	    geocoder.geocode( { 'address': address}, function(results, status) {
-	      if (status == 'OK') {
-	        map.setCenter(results[0].geometry.location);
-	        var marker = new google.maps.Marker({
-	            map: map,
-	            position: results[0].geometry.location
-	        });
-	      } else {
-	        alert('Geocode was not successful for the following reason: ' + status);
-	      }
-	    });
-	  }
+// 	  var geocoder;
+//  	  var map;
+// 	  function initialize() {
+// 	    geocoder = new google.maps.Geocoder();
+// 	    var latlng = new google.maps.LatLng(-34.397, 150.644);
+// 	    var mapOptions = {
+// 	      zoom: 8,
+// 	      center: latlng
+// 	    }
+// 	    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+// 	  }
+
+// 	  function codeAddress() {
+// 	    var address = document.getElementById('address').value;;
+// 	    geocoder.geocode( { 'address': address}, function(results, status) {
+// 	      if (status == 'OK') {
+// 	        map.setCenter(results[0].geometry.location);
+// 	        var marker = new google.maps.Marker({
+// 	            map: map,
+// 	            position: results[0].geometry.location
+// 	        });
+// 	      } else {
+// 	        alert('Geocode was not successful for the following reason: ' + status);
+// 	      }
+// 	    });
+// 	  }
 	</script>
 
 
@@ -272,7 +311,39 @@
 	<!-- events end -->
 
 	<!-- events end -->
+<script>
+var geocoder;
+var map;
 
+function initialize() {
+    geocoder = new google.maps.Geocoder();
+
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var mapOptions = {
+        zoom: 11,
+        center: latlng
+    }
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+}
+
+function codeAddress() {
+    var address = document.getElementById('address').value;
+    geocoder.geocode({
+        'address': address
+    }, function (results, status) {
+        if (status == 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
+</script>
 
 </body>
 </html>
