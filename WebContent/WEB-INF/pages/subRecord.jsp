@@ -4,28 +4,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>訂閱頻道紀錄</title>
 <style type="text/css">
 
 div{
 margin:25px auto;
-width:250px
-
-
+width:200px
 }
 
 h1{
-
-width:300px;
+color:#FFFFFF;
+width:1000px;
 margin:25px auto;
+text-align: center;
 }
 body{
-background:
-
-
-}
+ background-image:url(<c:url value='/img/banner/b4.jpg' />)}
 table {
+	
+  text-align:center;
   width:1000px;
   height:200px;
   font-family: 'Arial';
@@ -39,37 +40,40 @@ table {
      0px 30px 20px rgba(0,0,0,0.05);
      }
   tr:hover {
-      color:#4F4F4F;
-      background: #f4f4f4;
+  	
+      color:#000000;
+      background: #FF9797;
       }
-   
+   th{
+   text-align: center;
+   }
   
   th, td {
-    color: #999;
+  font-size:20px;
+/*   text-align:center; */
+  height:100px;
+    color: #FFFFFF;
     border: 1px solid 	#ADADAD;
-    padding: 12px 35px;
+    padding: auto;
     border-collapse: collapse;
   }
   th {
+  	
  	 font-family:微軟正黑體;
     background:	#7B7B7B;
     color: 		#FFFFFF;
     text-transform: uppercase;
-    font-size: 20px;
+    font-size: 24px;
     &.last {
       border-right: none;
     }
   }
 }</style>
 
-<script type="text/javascript">
-
-</script>
-
 </head>
 <body>
 
-<h1>${LoginOK.name}的頻道訂閱紀錄</h1>
+<h1 >${LoginOK.name}的頻道訂閱紀錄</h1>
 	<table border="1">
 <thead>
 <tr>
@@ -88,6 +92,9 @@ table {
 
 </table>
 <div>
-<a href="<c:url value="/"/>">回首頁</a></div>
+<button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/" />'">回首頁</button>
+<button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/orderList" />'">票券訂購紀錄</button>
+</div>
+
 </body>
 </html>

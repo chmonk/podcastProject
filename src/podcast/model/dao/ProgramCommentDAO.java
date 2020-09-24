@@ -1,6 +1,7 @@
 package podcast.model.dao;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -88,8 +89,14 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 	  query.setParameter("podcasterId", podcasterId);
 
 	  List<ProgramCommentBean> commList = query.list();
+	  List<ProgramCommentBean> reverseOrderCommList = new LinkedList<ProgramCommentBean>();
 
-	  return commList;
+	  for(int i=commList.size()-1;i>=0;i--) {
+		  reverseOrderCommList.add(commList.get(i));	  
+		  
+	  }
+
+	  return reverseOrderCommList;
 	 }
 
 }

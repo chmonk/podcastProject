@@ -27,10 +27,9 @@ import podcast.model.javabean.fuzzyPodcastReturnArchitecture;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
+@SessionAttributes({"LoginOK","thisPodcasterId","subscriptionPermission"})
 @RequestMapping(path = { "/AfterSubProgram.controller" })
-@SessionAttributes(names={"subProgram","needSub","upLoadProgram"})
 public class AfterSubProgram {
-	  private SubscriptionBean sbean;
 
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -39,78 +38,43 @@ public class AfterSubProgram {
 	    	//取得註冊物件的context
 	    	ServletContext app = request.getServletContext();
 	    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-	    	
-	    	 List<uploadPodcastBean> a = (List<uploadPodcastBean>)request.getSession().getAttribute("subProgram");
-	    	 List<uploadPodcastBean> needSub = (List<uploadPodcastBean>)request.getSession().getAttribute("needSub");
-
-
+//	    	
+//	    	 List<uploadPodcastBean> a = (List<uploadPodcastBean>)request.getSession().getAttribute("subProgram");
+//	    	 List<uploadPodcastBean> needSub = (List<uploadPodcastBean>)request.getSession().getAttribute("needSub");
+//	    	int subscriptionPermission = (int) request.getSession().getAttribute("subscriptionPermission");
+//	    	 
 	    	System.out.println("-------確認抓到的播客ID---------");
-	    	System.out.println((List<uploadPodcastBean>)request.getSession().getAttribute("subProgram"));
-	    	System.out.println(needSub.get(0).getMemberId());
+	    	//System.out.println((List<uploadPodcastBean>)request.getSession().getAttribute("subProgram"));
+	    	System.out.println(m.getAttribute("thisPodcasterId"));
 	    	System.out.println("-------確認抓到的播客ID---------");
-	    	
-	    
-
 	    	
 	    	Date date = new Date();
 	    	Calendar date2 = Calendar.getInstance(); //Calendar方法 用於計算DATE的加減
 	    	date2.add(Calendar.MONTH, +1);
 	    	Date date3 = date2.getTime(); //需轉換回DATE屬性 以符合setSubdateEnd的屬性    	
+	    	   	
+	    	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
+	    	MemberBean loginMember =(MemberBean)m.getAttribute("LoginOK");
+	    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
 	    	
+
 	    	
-	    	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO"); 
-	    	MemberBean loginMember =(MemberBean)request.getSession().getAttribute("LoginOK"); //抓取登入會員ID
-	    	MemberDAO podcaster = (MemberDAO)context.getBean("MemberDAO"); //實體播客資料DAO
-	    	MemberBean podcasterChannel = podcaster.selectPodcaster(needSub.get(0).getMemberId()); //獲取播客會員資料
-	    	
-	    	if(a.isEmpty()) {
-	    	SubscriptionBean q = new SubscriptionBean();
-	    	q.setMemberId(loginMember.getMemberId()); //訂閱者ID
-//	    	q.setMonthlyPayment(podcasterChannel.getMonthlyPayment());
-	    	q.setMonthlyPayment(300);
-	    	q.setSubdateStart(date);
-	    	q.setSubdateEnd(date3);
-	    	q.setPodcasterId(needSub.get(0).getMemberId()); //播客ID
-	    	q.setReceipt(podcasterChannel.getInfo());
-	    	q.setCreditCardNumber("4938-1701-3000-0003");
-	    	
-	    	sdao.insert(q);
-	    		    		
+	    	if((int) m.getAttribute("subscriptionPermission")==0) {
+		    	SubscriptionBean q = new SubscriptionBean();
+		    	q.setMemberId(loginMember.getMemberId()); //訂閱者ID
+		    	q.setMonthlyPayment(300);
+		    	q.setSubdateStart(date);
+		    	q.setSubdateEnd(date3);
+		    	q.setPodcasterId((Integer)m.getAttribute("thisPodcasterId")); //播客ID
+		    	q.setReceipt(mdao.selectPodcaster((Integer)m.getAttribute("thisPodcasterId")).getNickname());
+		    	q.setCreditCardNumber("4938-1701-3000-0003");    	
+		    	sdao.insert(q);		    		
 	    	}
+
 	    	
-	    	
-	    	
-//	    	
-//	    	else {
-//	    	SubscriptionBean f = new SubscriptionBean();
-//	    	f.setMemberId(a.get(0).getMemberId()); //訂閱者ID
-//	    	f.setMonthlyPayment(300);
-//	    	f.setSubdateStart(date);
-//	    	f.setSubdateEnd(date3);
-//	    	f.setPodcasterId(17); //播客ID
-//	    	f.setReceipt("小黃測試");
-//	    	f.setCreditCardNumber("1111-2222-3333-4444");
-//	    	
-//	    	sdao.insert(f);	
-//	    	}
-	    
-	    	
-	    	SubProgramListDAO sdao2 = (SubProgramListDAO)context.getBean("SubProgramListDAO");	    	
-	    	List<SubscriptionBean> subRecordList=sdao2.selectBySubMemeberId(loginMember.getMemberId());	    	
-	    	subRecordList.get(0).getPodcasterId();//訂閱的播客
-	    
-	    	
-	    
-	    	
-	    	//訂閱的頻道、訂閱的起訖日、費用。
-	    	System.out.println("---------訂閱--------------");
-	    	System.out.println(subRecordList.get(0).getMemberId());
-	    	System.out.println(subRecordList.get(0).getSubdateEnd());
-	    	System.out.println(subRecordList.get(0).getSubdateStart());
-	    	System.out.println(subRecordList.get(0).getMonthlyPayment());	    	
-	    	System.out.println(subRecordList.get(0).getReceipt());	  
-	    	System.out.println("---------訂閱--------------");
-	    	m.addAttribute("subRecordList", subRecordList);
+
+	    	List<SubscriptionBean> subRecord=sdao.selectBySubMemeberId(loginMember.getMemberId());
+	    	m.addAttribute("subRecord", subRecord);
 	    	
 	return "/NcccPaymentPage";
 }
