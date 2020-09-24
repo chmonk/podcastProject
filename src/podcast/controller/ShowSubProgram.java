@@ -40,13 +40,7 @@ public class ShowSubProgram {
     	
     	//取得註冊物件的context
     	ServletContext app = request.getServletContext();
-    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-    	
-
-    	
-
-		
-    	
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);  	
     	//用訂單列表SUBCRIPTION取得會員帳號與訂閱的播客。判斷訂閱時間是否過期
     	int procasterNumber = 0;
 

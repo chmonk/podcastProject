@@ -63,11 +63,18 @@
 	color: #3c3c3c;
 	font-family: Helvetica, Arial, sans-serif;
 	font-weight: 500;
+=======
+.feedback-input { 
+	color : #3c3c3c;
+	font-family: Helvetica, Arial, sans-serif;
+ 	font-weight: 500; 
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 	font-size: 16px;
 	border-radius: 0;
 	background-color: #fbfbfb;
 	padding: 5px 5px 5px 5px;
 	margin-bottom: 10px;
+<<<<<<< HEAD
 	width: 100%; -webkit-box-sizing : border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
@@ -75,6 +82,15 @@
 	border: 3px solid rgba(0, 0, 0, 0);
 	color: #3c3c3c;
 	-webkit-box-sizing: border-box;
+=======
+ 	width:100%; 
+ 	-webkit-box-sizing: border-box; 
+ 	-moz-box-sizing: border-box; 
+ 	-ms-box-sizing: border-box; 
+ 	box-sizing: border-box; 
+	border: 3px solid rgba(0, 0, 0, 0);
+	color: #3c3c3c;
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 }
 
 .feedback-input:focus {
@@ -93,6 +109,7 @@
 
 /* Icons ---------------------------------- */
 #content {
+<<<<<<< HEAD
 	position: relative;
 	background-image:
 		url(http://rexkirby.com/kirbyandson/images/comment.svg);
@@ -100,6 +117,15 @@
 	background-position: 11px 8px;
 	background-repeat: no-repeat;
 	height: 100%;
+=======
+    position: relative;
+ 	background-image:
+		url(http://rexkirby.com/kirbyandson/images/comment.svg); 
+ 	background-size: 30px 30px; 
+ 	background-position: 11px 8px; 
+ 	background-repeat: no-repeat; 
+	height:100%;
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 }
 
 textarea {
@@ -113,14 +139,22 @@ input:hover, textarea:hover, input:focus, textarea:focus {
 }
 
 #submitBtn {
+<<<<<<< HEAD
 	position: relative;
+=======
+position:relative;
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 	border: #fbfbfb solid 1px;
 	cursor: pointer;
 	background-color: #3498db;
 	color: white;
 	font-size: 12px;
+<<<<<<< HEAD
 	margin-top: -5px;
+=======
+	margin-top:-5px;
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 	padding-top: 10px;
 	padding-bottom: 10px;
 	-webkit-transition: all 0.3s;
@@ -153,6 +187,7 @@ input:hover, textarea:hover, input:focus, textarea:focus {
 	width: 100%;
 	background-color: white;
 }
+<<<<<<< HEAD
 
 .d2 {
 	position: relative;
@@ -162,6 +197,17 @@ input:hover, textarea:hover, input:focus, textarea:focus {
 
 .f2 {
 	position: relative;
+=======
+
+ .d2 { 
+ position: relative; 
+ margin-top:12%; 
+ margin-left:3%; 
+
+ } 
+.f2{
+ position: relative; 
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 	overflow-y: scroll;
 	overflow-x: none;
 	position: relative;
@@ -194,19 +240,31 @@ html {
 
 .container {
 	float: right;
+<<<<<<< HEAD
 	margin-right: 10px;
+=======
+margin-right: 10px ; 
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 	width: 600px;
 }
 
 .container2 {
 	float: right;
 	margin-top: 10px;
+<<<<<<< HEAD
 	padding-right: 10px;
 	width: 650px;
 	height: 35vw;
 	overflow-y: scroll;
 	width: 650px;
 	overflow-x: none;
+=======
+	padding-right: 10px; width : 650px;
+	height: 35vw;
+	overflow-y: scroll;
+	width: 650px;
+	/* 	overflow-x: none; */
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 }
 
 .u-float-right {
@@ -279,6 +337,7 @@ html {
 	opacity: 1;
 }
 
+<<<<<<< HEAD
 .card-media-object-social-list {
   bottom: 4px;
   left: 10px;
@@ -324,6 +383,8 @@ html {
   text-align: center;
 }
 
+=======
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 .card-media-body {
 	background-color: #fff;
 	float: right;
@@ -439,6 +500,7 @@ html {
 									<svg fill="#888888" height="16" viewBox="0 0 24 24" width="16"
 										xmlns="http://www.w3.org/2000/svg">
 	            <path d="M0 0h24v24H0z" fill="none" />
+<<<<<<< HEAD
 	            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
 	          </svg>
 			 <svg fill="#888888" height="16" viewBox="0 -28 512 512" width="16" xmlns="http://www.w3.org/2000/svg">
@@ -446,6 +508,18 @@ html {
 	          </svg>
 			 </div>
 			 </div>
+=======
+	            <path
+											d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+	          </svg>
+									<svg fill="#888888" height="16" viewBox="0 -28 512 512"
+										width="16" xmlns="http://www.w3.org/2000/svg">
+	          	<path
+											d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0" />
+	          </svg>
+								</div>
+							</div>
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 							<span class="card-media-body-heading">${podcast.podcastInfo}</span>
 							<div class="card-media-body-supporting-bottom">
 								<span class="card-media-body-supporting-bottom-text subtle">${podcast.uploadTime}</span>
@@ -479,19 +553,31 @@ html {
 							class="validate[required,length[6,300]] feedback-input"
 							id="content" cols="60" placeholder="留言內容：&#13;&#10;請輸入不超過50個字"
 							maxlength="50"></textarea></td>
+<<<<<<< HEAD
 
 				</tr>
 				<tr>
 					<td class="submit"><input type="hidden" id="PId"
 						value=${thisPodcasterId}> <input id="submitBtn"
 						type="button" value=" 提交 "></td>
+=======
+	
+				</tr>
+				<tr>
+					<td class="submit"><input type="hidden" id="PId" value=${thisPodcasterId}> 
+						<input id="submitBtn" type="button" value=" 提交 "></td>
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 				</tr>
 			</table>
 		</form>
 	</div>
 	<br />
 	<div class="d2">
+<<<<<<< HEAD
 		<h3>所有留言</h3>
+=======
+	<h3>所有留言</h3>
+>>>>>>> c78e5cab68e7c988680c4c1c91f57d420f8e55eb
 		<form class="f2">
 
 			<table width="400">

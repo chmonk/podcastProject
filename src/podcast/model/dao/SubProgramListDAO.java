@@ -64,6 +64,7 @@ public class SubProgramListDAO implements ISubProgramListDAO {
 		String hqlstr = "from SubscriptionBean where memberId=:memberId";
 		Query<SubscriptionBean> query = session.createQuery(hqlstr, SubscriptionBean.class);
 		query.setParameter("memberId", memberID);
+		
 		return query.list();
 	}
 	
@@ -76,7 +77,7 @@ public class SubProgramListDAO implements ISubProgramListDAO {
 
 		return sbean;
 	}
-
+	
 	
 
 	
