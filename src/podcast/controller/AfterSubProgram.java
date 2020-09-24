@@ -58,15 +58,16 @@ public class AfterSubProgram {
 	    	Date date3 = date2.getTime(); //需轉換回DATE屬性 以符合setSubdateEnd的屬性    	
 	    	
 	    	
-	    	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
-	    	MemberBean loginMember =(MemberBean)request.getSession().getAttribute("LoginOK");
-	    	MemberDAO podcaster = (MemberDAO)context.getBean("MemberDAO");
+	    	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO"); 
+	    	MemberBean loginMember =(MemberBean)request.getSession().getAttribute("LoginOK"); //抓取登入會員ID
+	    	MemberDAO podcaster = (MemberDAO)context.getBean("MemberDAO"); //實體播客資料DAO
 	    	MemberBean podcasterChannel = podcaster.selectPodcaster(needSub.get(0).getMemberId()); //獲取播客會員資料
 	    	
 	    	if(a.isEmpty()) {
 	    	SubscriptionBean q = new SubscriptionBean();
 	    	q.setMemberId(loginMember.getMemberId()); //訂閱者ID
-	    	q.setMonthlyPayment(podcasterChannel.getMonthlyPayment());
+//	    	q.setMonthlyPayment(podcasterChannel.getMonthlyPayment());
+	    	q.setMonthlyPayment(300);
 	    	q.setSubdateStart(date);
 	    	q.setSubdateEnd(date3);
 	    	q.setPodcasterId(needSub.get(0).getMemberId()); //播客ID
