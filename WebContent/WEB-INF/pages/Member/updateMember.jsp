@@ -209,18 +209,18 @@
 						</div>
 						<br>
 
-						<div  class="resources" style=" display: none;">
+						<div>
 							<label>銀行帳號：</label> <input type="text" name="bankAccount"
 								class="form-control"  value="${MemberBean.bankAccount}">
 						</div>
 						<br>
 
-						<div  class="resources" style=" display: none;">
+						<div>
 							<label>頻道月費：</label> <select class="form-control" name="monthlyPayment" >
 								<option value="-1">---請選擇---</option>
-								<c:forEach items="${MemberBean.account}" var="d" varStatus="i">
-								<option value="${MemberBean.monthlyPayment}" selected>${MemberBean.monthlyPayment}</option>
-								</c:forEach>
+								<option value=0 selected>免費</option>
+								<option value=100>100元</option>
+								<option value=300>300元</option>
 							</select>
 						</div>
 						<br>
