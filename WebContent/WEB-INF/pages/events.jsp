@@ -179,7 +179,7 @@
 									name='activityMaxPeople' value='${list.activityMaxPeople}'>
 							</div>
 							<div class="checkbox">
-								<label> <input type="checkbox">
+								<label> <input type="checkbox" required>
 									我已同意SoundPod播音平台服務規範
 								</label>
 							</div>
@@ -232,7 +232,7 @@
 									<!-- event location -->
 									<span class="event-location"><i class="fa fa-map-marker"></i>${fn:substring(list.activityLocation, 0, 12)}</span>
 									<!-- image -->
-									<img class="img-responsive" src="${list.activityImg}" alt="" />
+									<img class="img-responsive" src="<c:url value='${list.activityImg}' />" alt="" />
 									<!-- 										<img class="img-responsive" src="img/event/1.jpg" alt="" /> -->
 									<!-- image hover -->
 									<!-- 										<div class="img-hover"> -->
