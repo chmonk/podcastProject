@@ -22,10 +22,13 @@ import podcast.model.dao.SubscriptionDAO;
 import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.HistoryBean;
 import podcast.model.javabean.LikeRecordBean;
+import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
 public class AddListController {
+	
+	
 	@Autowired
 	private UploadPodcastDAO udao;// 需要宣告實例化並用autowire注入
 
@@ -47,7 +50,12 @@ public class AddListController {
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
 		System.out.println(id);
 		Integer publisherId=udao.select(id).getMemberId();
-		Integer userId=(Integer)model.getAttribute("userid");
+
+//		Integer userId=(Integer)model.getAttribute("userid");
+		MemberBean mbean = (MemberBean)model.getAttribute("LoginOK");
+
+		Integer userid=mbean.getMemberId();
+
 
 		Integer podcastId=id;
 
@@ -60,12 +68,13 @@ public class AddListController {
 		m.put("fileName", songlist.getTitle());
 		m.put("fileUrl", songlist.getAudioPath());
 		m.put("thumb", songlist.getAudioimg());
+		m.put("podcastId",songlist.getPodcastId().toString());
 
 		//2. 新增瀏覽紀錄
 		HistoryBean hbean = new HistoryBean();
 
 		hbean.setLastListen(new Date());
-		hbean.setMemberId(userId);
+		hbean.setMemberId(userid);
 		hbean.setPodcastId(id);
 		hbean.setPodcastName(songlist.getTitle());
 		hbean.setPublisherId(songlist.getMemberId());
@@ -78,10 +87,10 @@ public class AddListController {
 
 		//4. 如果likelist未有紀錄就新增 單純新增like record
 
-		LikeRecordBean likeresult = ldao.checkByMemberidAndPodcastID(userId, podcastId);
+		LikeRecordBean likeresult = ldao.checkByMemberidAndPodcastID(userid, podcastId);
 		if (likeresult==null) {
 			LikeRecordBean lbean = new LikeRecordBean();
-			lbean.setMemberId(userId);
+			lbean.setMemberId(userid);
 			lbean.setPodcastId(podcastId);
 			lbean.setLikeStatus(0);
 			lbean.setShowInListOrNot(1); // 預計顯示在清單中

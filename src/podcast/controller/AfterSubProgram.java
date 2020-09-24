@@ -1,5 +1,6 @@
 package podcast.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +9,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +23,14 @@ import podcast.model.dao.MemberDAO;
 import podcast.model.dao.SubProgramListDAO;
 import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.SubscriptionBean;
+import podcast.model.javabean.fuzzyPodcastReturnArchitecture;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
 @SessionAttributes({"LoginOK","thisPodcasterId","subscriptionPermission"})
 @RequestMapping(path = { "/AfterSubProgram.controller" })
 public class AfterSubProgram {
+
 
 	@RequestMapping(method = RequestMethod.GET)
 		public String processActin(HttpServletRequest request,HttpServletResponse response,Model m) throws Exception {
@@ -52,6 +57,7 @@ public class AfterSubProgram {
 	    	MemberBean loginMember =(MemberBean)m.getAttribute("LoginOK");
 	    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
 	    	
+
 	    	
 	    	if((int) m.getAttribute("subscriptionPermission")==0) {
 		    	SubscriptionBean q = new SubscriptionBean();
@@ -66,13 +72,10 @@ public class AfterSubProgram {
 	    	}
 
 	    	
+
 	    	List<SubscriptionBean> subRecord=sdao.selectBySubMemeberId(loginMember.getMemberId());
-	    	System.out.println("---------訂閱--------------");
-	    	System.out.println(subRecord.get(0).getMemberId());
-	    	System.out.println(subRecord.get(0).getSubdateEnd());
-	    	System.out.println(subRecord.get(0).getSubdateStart());
-	    	System.out.println("---------訂閱--------------");
 	    	m.addAttribute("subRecord", subRecord);
+	    	
 	return "/NcccPaymentPage";
 }
 }

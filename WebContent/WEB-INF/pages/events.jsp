@@ -49,24 +49,62 @@
 <!-- Custom JS -->
 <script src="js/custom.js"></script>
 <!-- 	plaer bar function js -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="js/player.js"></script>
+
+<!-- map -->
+<!-- 	plaer bar function js -->
+<style type="text/css">
+#map {
+	height: 100%;
+}
+</style>
+
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKsAoRrnd4jZL_pQJhvBgphbttPkTl8LM&callback=initMap&libraries=&v=weekly"
 	defer></script>
 
-<style type="text/css">
-#map {
-	height: 50%;
-}
-</style>
+	<script type="text/javascript">
+	var map;
+	function initMap() {
+	  map = new google.maps.Map(document.getElementById('map'), {
+	    center: {lat: -34.397, lng: 150.644},
+	    zoom: 8
+	  });
+	}
 
 
+	
+	  var geocoder;
+ 	  var map;
+	  function initialize() {
+	    geocoder = new google.maps.Geocoder();
+	    var latlng = new google.maps.LatLng(-34.397, 150.644);
+	    var mapOptions = {
+	      zoom: 8,
+	      center: latlng
+	    }
+	    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	  }
+
+	  function codeAddress() {
+	    var address = document.getElementById('address').value;;
+	    geocoder.geocode( { 'address': address}, function(results, status) {
+	      if (status == 'OK') {
+	        map.setCenter(results[0].geometry.location);
+	        var marker = new google.maps.Marker({
+	            map: map,
+	            position: results[0].geometry.location
+	        });
+	      } else {
+	        alert('Geocode was not successful for the following reason: ' + status);
+	      }
+	    });
+	  }
+	</script>
 
 
 </head>
-<body onload="initialize()">
+<body  onload="initialize()">
 
 	<!-- modal for booking ticket form -->
 	<!-- modal for booking ticket form -->
@@ -95,7 +133,7 @@
 						<div class="modal-body">
 							<div class="form-group">
 								<div align="center" width="300px" height="200px">
-									<img width="100%" height="100%" src="${list.activityImg}">
+									<img width="100%" height="100%" src="<c:url value='${list.activityImg}' />">
 								</div>
 
 								<h4>
@@ -105,7 +143,8 @@
 								<h4>
 									地點：<br />
 								</h4>
-								<p id="address">${list.activityLocation}</p>
+								<input type=hidden id="address" value="${list.activityLocation}"/>
+								${list.activityLocation}
 								<br />
 								<h4>
 									票價：<br />
@@ -140,7 +179,7 @@
 									name='activityMaxPeople' value='${list.activityMaxPeople}'>
 							</div>
 							<div class="checkbox">
-								<label> <input type="checkbox">
+								<label> <input type="checkbox" required>
 									我已同意SoundPod播音平台服務規範
 								</label>
 							</div>
@@ -193,7 +232,7 @@
 									<!-- event location -->
 									<span class="event-location"><i class="fa fa-map-marker"></i>${fn:substring(list.activityLocation, 0, 12)}</span>
 									<!-- image -->
-									<img class="img-responsive" src="${list.activityImg}" alt="" />
+									<img class="img-responsive" src="<c:url value='${list.activityImg}' />" alt="" />
 									<!-- 										<img class="img-responsive" src="img/event/1.jpg" alt="" /> -->
 									<!-- image hover -->
 									<!-- 										<div class="img-hover"> -->
@@ -233,34 +272,7 @@
 	<!-- events end -->
 
 	<!-- events end -->
-	<script type="text/javascript">
-	  var geocoder;
-	  var map;
-	  function initialize() {
-	    geocoder = new google.maps.Geocoder();
-	    var latlng = new google.maps.LatLng(-34.397, 150.644);
-	    var mapOptions = {
-	      zoom: 8,
-	      center: latlng
-	    }
-	    map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	  }
 
-	  function codeAddress() {
-	    var address = document.getElementById('address').innerText;;
-	    geocoder.geocode( { 'address': address}, function(results, status) {
-	      if (status == 'OK') {
-	        map.setCenter(results[0].geometry.location);
-	        var marker = new google.maps.Marker({
-	            map: map,
-	            position: results[0].geometry.location
-	        });
-	      } else {
-	        alert('Geocode was not successful for the following reason: ' + status);
-	      }
-	    });
-	  }
-	</script>
 
 </body>
 </html>

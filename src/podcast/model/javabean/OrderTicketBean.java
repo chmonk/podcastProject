@@ -17,6 +17,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Component
 @Entity
 @Table(name = "orderTicket")
@@ -63,6 +65,7 @@ public class OrderTicketBean {
 		this.ticketOrderId = ticketOrderId;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	@Column(name = "ORDERDATE")
 	public Date getOrderDate() {
 		return orderDate;
@@ -141,7 +144,7 @@ public class OrderTicketBean {
 		this.orderPrice = orderPrice;
 	}
 
-
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}

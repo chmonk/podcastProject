@@ -1,7 +1,9 @@
 package podcast.model.dao;
 
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
+
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -9,7 +11,6 @@ import javax.persistence.NonUniqueResultException;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,7 +21,9 @@ import podcast.model.javabean.MemberBean;
 
 @Repository("MemberDAO")
 public class MemberDAO implements IMemberDAO {
-
+	
+	// @Autowired 自動找尋適合的註冊實體
+	// @Qualifier("sessionFactory") 強制找尋註冊為sessionFactory 塞到sessionFactory變數中
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
@@ -35,10 +38,10 @@ public class MemberDAO implements IMemberDAO {
 	}
 
 	@Override
-	public MemberBean insert(MemberBean member) throws Exception {
+	public MemberBean insert(MemberBean mbean) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(member);
-		return member;
+		session.save(mbean);
+		return mbean;
 	}
 
 	@Override
@@ -79,7 +82,8 @@ public class MemberDAO implements IMemberDAO {
 	public List<MemberBean> selectAll() {
 		Session session = sessionFactory.getCurrentSession();
 		Query<MemberBean> query = session.createQuery("from MemberBean", MemberBean.class);
-		return query.list();
+		List<MemberBean> lists = query.list();
+		return lists;
 	}
 	
 	@Override

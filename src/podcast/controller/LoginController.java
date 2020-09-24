@@ -52,14 +52,13 @@ public class LoginController {
 		
 		System.out.println("account & password= "+account+" "+password);
 		MemberBean mbean = null;
-		MemberBean memberbean = new MemberBean();
-		
-		
+		MemberBean memberbean = new MemberBean();		
     	ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
     	
 
     	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
+    
 		
 
 		try {
