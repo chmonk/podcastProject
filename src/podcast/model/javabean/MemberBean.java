@@ -1,8 +1,8 @@
 package podcast.model.javabean;
 
+import java.io.Serializable;
 import java.sql.Date;
-import java.util.LinkedList;
-import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,14 +10,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "members")
 @Component
-public class MemberBean {
+public class MemberBean implements Serializable  {
+	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "MEMBERID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
