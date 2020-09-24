@@ -802,9 +802,9 @@ input[type="button"] {
 
 	<div class="col-sm-6" style="background-color: #DCDCDC;height:600px">
 	<!-- AJAX動態生成查詢結果 -->
-		<h2 style="text-align:center;margin-top: 15px;color:black">查詢結果:</h2>
+		<h2 id="resultTag" style="text-align:center;margin-top: 15px;color:black">查詢結果:</h2>
 		<div id="ajaxTable" style="margin:0px auto;margin-top: 10px;">
-			
+			<img src="./img/magnifier3.png" alt="" style="margin-left:50px;margin-top:10px;">
 		</div>
 	
 	
