@@ -104,6 +104,7 @@
 						<div>
 							<label>帳號：</label> <input type="text" name="account"
 								class="form-control" placeholder="設定系統帳號" required>
+								<div>${err.account}</div>
 						</div>
 						<br>
 

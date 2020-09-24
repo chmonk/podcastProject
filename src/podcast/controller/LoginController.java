@@ -61,7 +61,7 @@ public class LoginController {
     	
 
     	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
-    	MemberBean mbean=null;
+    
 		
 
 		try {

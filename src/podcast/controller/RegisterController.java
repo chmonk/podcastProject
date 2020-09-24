@@ -3,6 +3,9 @@ package podcast.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,9 +45,25 @@ public class RegisterController {
 		if (result.hasErrors()) {
 			return "Member/registerForm";
 		}		
-		
+		//取得前端欄位資料
+		String account=request.getParameter("account");
+		String password=request.getParameter("password");
+		String name=request.getParameter("name");
+		String nickname=request.getParameter("nickname");
+		String birthday=request.getParameter("birthday");
+		String info=request.getParameter("info");
+		String cellphone=request.getParameter("cellphone");
+		String address=request.getParameter("address");
 		String image = processFile2(multipartFile,request);		
-		members.setImage(image);		
+		members.setImage(image);	
+		
+		//資料格式判斷
+		Map<String, String> errors = new HashMap<String, String>();
+		request.setAttribute("err", errors);
+			//帳號
+		if(account=="1111") {
+			errors.put("account", "account is required");
+			};
 
 		// model傳送資料
 		m.addAttribute("account", members.getAccount());
