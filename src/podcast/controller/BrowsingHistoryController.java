@@ -40,14 +40,16 @@ public class BrowsingHistoryController {
 
 	// 導向瀏覽紀錄頁面 ?userid=
 	@GetMapping(value = "/goToBrowsingHistory")
-	public String leadToBrowsingHistory(Model m, HttpServletRequest request
-			 )
+
+	public String leadToBrowsingHistory(Model m, HttpServletRequest request)
+
 			throws Exception {
 
-		MemberBean mbean = (MemberBean)m.getAttribute("LoginOK");
-		Integer userid = mbean.getMemberId();
 		// get the list of browsing list
-		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId2(userid);
+		MemberBean mbean= (MemberBean)m.getAttribute("LoginOK");
+		Integer userId= mbean.getMemberId();
+		
+		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId3(userId);
 
 		m.addAttribute("history", rs);
 
