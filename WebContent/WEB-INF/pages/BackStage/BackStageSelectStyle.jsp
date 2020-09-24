@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +43,7 @@ th {
 	text-align: center;
 }
 
-<%--以下為表單欄位的CSS，以上為結果表格CSS --%>
+
 
 .hr0{
 	height:3px;
@@ -231,48 +231,42 @@ input[type="button"] {
 			</div>	
 			
 			<div>
-				<form id="selectMemberByIdForm" autocomplete="off"
-					action="<c:url value="/BackStageSelectMember.controller"/>"
-					method="POST">
-					<label for="selectMemberIdText">Member 詳情</label> <input
+				
+					<label for="selectMemberIdText">Member 詳情</label> <input autocomplete="off"
 						id="selectMemberIdText" type="number" name="selectmemberId" placeholder="memberId">
 					<span>
 					<input id="memberIdBtn" type="button" value="send"
 						class="btn btn-warning"><span id="selectMemberByIdErr"></span>
 					</span>
 					
-				</form>
+				
 
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="selectMemberByAccountForm" autocomplete="off"
-					action="<c:url value="/BackStageSelectMemberByAccount.controller"/>"
-					method="POST">
+				
 					<label for="selectMemberAccountText">Nickname 搜尋</label> 
-						<input id="selectMemberAccountText" type="text"
+						<input id="selectMemberAccountText" type="text" autocomplete="off"
 						name="account" placeholder="nickname"> 
 					<span>
-					<input id="selectMemberAccountBtn"
+					<input id="selectMemberAccountBtn" 
 						type="button" value="send" class="btn btn-warning">
 					<span id="selectMemberAccountErr"></span>
 					</span>
 
-				</form>
+				
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="deleteMemberForm" autocomplete="off"
-					action="<c:url value="/BackStageDeleteMember.controller"/>"
-					method="POST">
-					<label for="deleteMemberText">刪除 Member</label> <input
+				
+					<label for="deleteMemberText">刪除 Member</label> <input autocomplete="off"
 						id="deleteMemberText" type="number" name="deletememberId" placeholder="memberId">
 					<span>
 					<input id="deleteMemberBtn" type="button" value="send"
 						class="btn btn-warning">
 					<span id="deleteMemberErr"></span>
 					</span>
-				</form>
+				
 			</div>
 
 		</div>
@@ -337,6 +331,11 @@ input[type="button"] {
 		<!-- ProgramComment========================================================================-->
 
 		<div class="areas" id="programcomment" style="display: none;">
+		
+			<div >
+				<input id="showAllCommentBtn" type="button" class="btn btn-danger btn-lg" 
+				value="Comment總覽" onclick="showAllComment()">
+			</div>	
 			<div>
 
 				<form id="selectCommentIdForm" autocomplete="off"
@@ -457,6 +456,11 @@ input[type="button"] {
 		<!-- Category========================================================================-->
 		<div class="areas" id="category" style="display: none;">
 
+			<div >
+				<input id="showAllCategoryBtn" type="button" class="btn btn-danger btn-lg" 
+				value="Category總覽" onclick="showAllCategory()">
+			</div>
+
 			<div>
 				<form id="setNewCategoryForm" autocomplete="off"
 					action="<c:url value="/BackStageSetNewCategory.controller"/>"
@@ -502,6 +506,11 @@ input[type="button"] {
 		<!-- Subscription========================================================================-->
 
 		<div class="areas" id="subscription" style="display: none;">
+		
+			<div >
+				<input id="showAllSubBtn" type="button" class="btn btn-danger btn-lg" 
+				value="Sub總覽" onclick="showAllSub()">
+			</div>
 
 			<div>
 				<form id="selectSubMemberForm" autocomplete="off"
@@ -537,6 +546,11 @@ input[type="button"] {
 
 		<!-- Activity========================================================================-->
 		<div class="areas" id="activity" style="display: none;">
+
+			<div >
+				<input id="showAllActivityBtn" type="button" class="btn btn-danger btn-lg" 
+				value="Activity總覽" onclick="showAllActivity()">
+			</div>
 
 			<div>
 				<form id="selectActIdForm" autocomplete="off"
@@ -596,6 +610,11 @@ input[type="button"] {
 		<!-- History========================================================================-->
 
 		<div class="areas" id="history" style="display: none;">
+		
+			<div >
+				<input id="showAllHistoryBtn" type="button" class="btn btn-danger btn-lg" 
+				value="History總覽" onclick="showAllHistory()">
+			</div>
 
 			<div>
 				<form id="selectHistoryIdForm" autocomplete="off"
@@ -672,6 +691,11 @@ input[type="button"] {
 
 
 		<div class="areas" id="podcast" style="display: none;">
+		
+			<div >
+				<input id="showAllPodcastBtn" type="button" class="btn btn-danger btn-lg" 
+				value="Podcast總覽" onclick="showAllPodcast()">
+			</div>
 
 			<div>
 				<form id="selectPodcastMemberForm" autocomplete="off"
@@ -778,7 +802,8 @@ input[type="button"] {
 
 	<div class="col-sm-6" style="background-color: #DCDCDC;height:600px">
 	<!-- AJAX動態生成查詢結果 -->
-		<div id="ajaxTable">
+		<h2 style="text-align:center;margin-top: 15px;color:black">查詢結果:</h2>
+		<div id="ajaxTable" style="margin:0px auto;margin-top: 10px;">
 			
 		</div>
 	
@@ -789,7 +814,7 @@ input[type="button"] {
 	
 <!-- SCRIPT!!!======================================================= -->	
 	<script>
-	<%--登出功能JS --%>
+	//登出功能JS 
 	document.getElementById("logoutBtn").onclick=function(){
 		var r=confirm("確定要登出?")
 		if(r==true){
@@ -801,50 +826,87 @@ input[type="button"] {
 		
 	}
 
-	<%--動態生成表格JS --%>
-	document.getElementById("showAllOrderBtn").onclick=function showAllOrder(){
+	//動態生成表格JS 
+	//分區功能:Member===================
+	function processMember(conn,input){
 		let ajaxtable=document.getElementById("ajaxTable");
 		let xhr = new XMLHttpRequest();
-		xhr.open("GET", "showAllTicketOrder", true);
+		xhr.open("POST", conn, true);
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		xhr.send();
+		console.log("conn:"+conn);
+		console.log("input:"+input);
+		xhr.send("input="+input);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				console.log("readyState & status GOOD!");
 				let type2 = xhr.getResponseHeader("Content-Type");
-				let allOrder = JSON.parse(xhr.responseText);
+				let selectMember = JSON.parse(xhr.responseText);
+				if(selectMember[0]==null){
+					console.log("NO RESULT!");
+					ajaxtable.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>"
+				}
 
-				let content=
-				"<table class='ta' >"
-				+"<tr>"
-				+"<th>TicketOrderId</th>"
-				+"<th>OrderDate</th>"
-				+"<th>MemberId</th>"	
-				+"<th>ActivityId</th>"
-				+"<th>ShippingAddress</th>"	
-				+"<th>BNO</th>"	
-				+"<th>InVoiceTitle</th>"	
-				+"<th>TotalAmount</th>"	
-				+"</tr>";
+				let content="";
 				
-				for(var i=0;i<allOrder.length;i++){
+				for(var i=0;i<selectMember.length;i++){
 				content+=
-				"<tr>"
-				+"<td>"+allOrder[i].ticketOrderId+"</td>"
-				+"<td>"+allOrder[i].orderDate+"</td>"
-				+"<td>"+allOrder[i].memberId+"</td>"
-				+"<td>"+allOrder[i].activityId+"</td>"
-				+"<td>"+allOrder[i].shippingAddress+"</td>"
-				+"<td>"+allOrder[i].bno+"</td>"
-				+"<td>"+allOrder[i].invoiceTitle+"</td>"
-				+"<td>"+allOrder[i].totalAmount+"</td>";	
+				"<table  class='ta'>"
+				+"<tr>"	
+				+"<th>MemberId</th>"	
+				+"<th>Account</th>"
+				+"<th>Password</th>"
+				+"<th>Name</th>"
+				+"<th>NickName</th>"
+				+"<th>Birthday</th>"
+				+"<th>RegisterDate</th>"
+				+"</tr>"
+				+"</tr>"
+				+"<tr>"
+				+"<td rowspan='5'>"+selectMember[i].memberId+"</td>"
+				+"<td>"+selectMember[i].account+"</td>"
+				+"<td>"+selectMember[i].password+"</td>"
+				+"<td>"+selectMember[i].name+"</td>"
+				+"<td>"+selectMember[i].nickname+"</td>"
+				+"<td>"+selectMember[i].birthday+"</td>"
+				+"<td>"+selectMember[i].registerDate+"</td>"
+				+"</tr>"
+				+"<tr>"
+				+"<th colspan='2'>Info</th>"
+				+"<th>Email</th>"
+				+"<th>CellPhone</th>"
+				+"<th colspan='2'>Address</th>"
+				+"</tr>"			
+				+"<tr>"
+				+"<td colspan='2'>"+selectMember[i].info+"</td>"
+				+"<td>"+selectMember[i].email+"</td>"
+				+"<td>"+selectMember[i].cellphone+"</td>"
+				+"<td colspan='2'>"+selectMember[i].address+"</td>"
+				+"</tr>"			
+				+"<tr>"
+				+"<th>Sex</th>"
+				+"<th>Image</th>"
+				+"<th>Role</th>"
+				+"<th>CreditCardNumber</th>"
+				+"<th>BankAccount</th>"
+				+"<th>MonthlyPayment</th>"
+				+"</tr>"			
+				+"<tr>"
+				+"<td>"+selectMember[i].sex+"</td>"
+				+"<td>"+selectMember[i].image+"</td>"
+				+"<td>"+selectMember[i].role+"</td>"
+				+"<td>"+selectMember[i].creditCardNumber+"</td>"
+				+"<td>"+selectMember[i].bankAccount+"</td>"
+				+"<td>"+selectMember[i].monthlyPayment+"</td>"
+				+"</tr>"		
+				+"</table>"				
 			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 				
-				content+="</table>";
+				
 				ajaxtable.innerHTML=content;
 		}
 	}
-}
+	}
+
 	
 	
 </script>

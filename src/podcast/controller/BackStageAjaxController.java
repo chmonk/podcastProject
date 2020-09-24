@@ -25,10 +25,14 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import antlr.collections.List;
+import podcast.model.dao.ActivityDAO;
 import podcast.model.dao.BackStageDAO;
 import podcast.model.dao.CategoryDAO;
+import podcast.model.dao.HistoryDao;
 import podcast.model.dao.MemberDAO;
 import podcast.model.dao.OrderTicketDAO;
+import podcast.model.dao.ProgramCommentDAO;
+import podcast.model.dao.SubscriptionDAO;
 import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.CategoryBean;
@@ -46,6 +50,22 @@ public class BackStageAjaxController {
 	private MemberDAO mDao;
 	@Autowired
 	private OrderTicketDAO oDao;
+	@Autowired
+	private ProgramCommentDAO pDao;
+	@Autowired
+	private CategoryDAO cDao;
+	@Autowired
+	private SubscriptionDAO sDao;
+	@Autowired
+	private ActivityDAO aDao;
+	@Autowired
+	private HistoryDao hDao;
+	@Autowired
+	private UploadPodcastDAO uDao;
+	@Autowired
+	private BackStageDAO bDao;
+	
+//所有的showALLFunction=======================================
 	
 	@GetMapping(path= {"showAllMember"})
 	public @ResponseBody java.util.List<MemberBean> showAllMember(Model m) {
@@ -62,5 +82,88 @@ public class BackStageAjaxController {
 		
 		return allOrderList;
 	}
+	
+	@GetMapping(path= {"showAllComment"})
+	public @ResponseBody java.util.List<ProgramCommentBean> showAllComment() {
+		java.util.List<ProgramCommentBean> allCommentList=pDao.selectAll();
+		
+		return allCommentList;
+	}
+	
+	@GetMapping(path= {"showAllCategory"})
+	public @ResponseBody java.util.List<CategoryBean> showAllCategory() throws Exception {
+		java.util.List<CategoryBean> allCategoryList=cDao.selectAll();
+		
+		return allCategoryList;
+	}
+	
+	@GetMapping(path= {"showAllSub"})
+	public @ResponseBody java.util.List<SubscriptionBean> showAllSub() throws Exception {
+		java.util.List<SubscriptionBean> allSubList=sDao.selectAll();
+		
+		return allSubList;
+	}
+	
+	@GetMapping(path= {"showAllActivity"})
+	public @ResponseBody java.util.List<ActivityBean> showAllActivity() throws Exception {
+		java.util.List<ActivityBean> allActivityList=aDao.selectAll();
+		
+		return allActivityList;
+	}
+	
+	@GetMapping(path= {"showAllHistory"})
+	public @ResponseBody java.util.List<HistoryBean> showAllHistory() throws Exception {
+		java.util.List<HistoryBean> allHistoryList=hDao.selectAll();
+		
+		return allHistoryList;
+	}
+	
+	@GetMapping(path= {"showAllPodcast"})
+	public @ResponseBody java.util.List<uploadPodcastBean> showAllPodcast() throws Exception {
+		java.util.List<uploadPodcastBean> allPodcastList=uDao.selectAll();
+		
+		return allPodcastList;
+	}
+	
+//Member Function=================================================================
+	
+	@PostMapping(path = { "/BackStageSelectMember" })
+	public @ResponseBody java.util.List<MemberBean> selectMember(HttpServletRequest request, @RequestParam(value="input") Integer memberId,
+			Model m) {
+		
+		MemberBean mBean = bDao.selectMember(memberId);
+		java.util.List<MemberBean> mList = new ArrayList<MemberBean>();
+		mList.add(mBean);
+		m.addAttribute("mList", mList);
+
+		return mList;
+	}
+	
+	@PostMapping(path = { "/BackStageSelectMemberByAccount" })
+	public @ResponseBody java.util.List<MemberBean> selectMemberByAccount(HttpServletRequest request, @RequestParam(value = "input") String account,
+			Model m) {
+		MemberBean mBean = bDao.selectMemberByAccount(account);
+		java.util.List<MemberBean> mList = new ArrayList<MemberBean>();
+		mList.add(mBean);
+		m.addAttribute("mList", mList);
+
+		return mList;
+	}
+
+	@PostMapping(path = { "/BackStageDeleteMember" })
+	public @ResponseBody java.util.List<MemberBean> DeleteMember(HttpServletRequest request, @RequestParam(value = "input") Integer memberId,
+			Model m) {
+		
+		MemberBean mBean = bDao.selectMember(memberId);
+		java.util.List<MemberBean> mList = new ArrayList<MemberBean>();
+		mList.add(mBean);
+		m.addAttribute("mList", mList);
+		
+		bDao.deleteMember(memberId);
+		m.addAttribute("memberDeleteMsg", "Select Member Deleted!");
+		return mList;
+
+	}
+
 	
 }

@@ -103,6 +103,14 @@ public class HistoryDao implements IHistoryDao {
 
 		return query.list();
 	}
+	
+	@Override
+	public List<HistoryBean> selectAll(){
+		Session session=sessionFactory.getCurrentSession();
+		String hqlstr="from HistoryBean";
+		Query<HistoryBean> query=session.createQuery(hqlstr,HistoryBean.class);
+		return query.list();
+	}
 
 	@Override
 	public List<HistoryBean> selectByPodcast(Integer podcastId) {
