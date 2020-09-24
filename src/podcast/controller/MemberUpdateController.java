@@ -6,6 +6,7 @@ import java.sql.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,47 +23,52 @@ import podcast.model.dao.MemberDAO;
 import podcast.model.javabean.MemberBean;
 
 @Controller
-@SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart" })
+@SessionAttributes({ "LoginOK" })
 public class MemberUpdateController {
 	
+	
+	@Autowired
+	MemberDAO mdao;
+
 	// 導向修改會員頁面
 	@RequestMapping(path = "/update", method = RequestMethod.GET)
 	public String showForm(Model m) {
 		MemberBean mBean = (MemberBean) m.getAttribute("LoginOK");
-		m.addAttribute("MemberBean", mBean);
+		Integer memberid = mBean.getMemberId();		
+		MemberBean memberData = mdao.selectPodcaster(memberid);
+		m.addAttribute("MemberBean", memberData);
 		return "Member/updateMember";
 	}
 
 	// 接收修改會員表單
 	@RequestMapping(path = "/updateMemberProcess", method = RequestMethod.POST)
-	public String processAction(
-			@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request,
+	public String processAction(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request,
 			@ModelAttribute("MemberBean") MemberBean members, BindingResult result, Model m) throws Exception {
 		// 檢查所有欄位,有空白則導回表單
 		if (result.hasErrors()) {
 			return "Member/updateMember";
-		}		
-		
-		String image = processFile2(multipartFile,request);		
-		members.setImage(image);		
+		}
+
+		String image = processFile2(multipartFile, request);
+		members.setImage(image);
 
 		// model傳送資料
-		m.addAttribute("account", members.getAccount());
-		m.addAttribute("password", members.getPassword());
-		m.addAttribute("name", members.getName());
-		m.addAttribute("nickname", members.getNickname());
-		m.addAttribute("birthday", members.getBirthday());
-		m.addAttribute("registerDate", members.getRegisterDate());
-		m.addAttribute("info", members.getInfo());
-		m.addAttribute("email", members.getEmail());
-		m.addAttribute("cellphone", members.getCellphone());
-		m.addAttribute("address", members.getAddress());
-		m.addAttribute("sex", members.getSex());
-		m.addAttribute("image", members.getImage());
-		m.addAttribute("role", members.getRole());
-		m.addAttribute("creditCardNumber", members.getCreditCardNumber());
-		m.addAttribute("bankAccount", members.getBankAccount());
-		m.addAttribute("monthlyPayment", members.getMonthlyPayment());
+//		m.addAttribute("account", members.getAccount());
+//		m.addAttribute("password", members.getPassword());
+//		m.addAttribute("name", members.getName());
+//		m.addAttribute("nickname", members.getNickname());
+//		m.addAttribute("birthday", members.getBirthday());
+//		m.addAttribute("registerDate", members.getRegisterDate());
+//		m.addAttribute("info", members.getInfo());
+//		m.addAttribute("email", members.getEmail());
+//		m.addAttribute("cellphone", members.getCellphone());
+//		m.addAttribute("address", members.getAddress());
+//		m.addAttribute("sex", members.getSex());
+//		m.addAttribute("image", members.getImage());
+//		m.addAttribute("role", members.getRole());
+//		m.addAttribute("creditCardNumber", members.getCreditCardNumber());
+//		m.addAttribute("bankAccount", members.getBankAccount());
+//		m.addAttribute("monthlyPayment", members.getMonthlyPayment());
 
 		// 取得資料庫連線
 		ServletContext app = request.getServletContext();
@@ -70,16 +76,16 @@ public class MemberUpdateController {
 
 		// 連線到會員資料表
 		MemberDAO mDao = (MemberDAO) context.getBean("MemberDAO");
-		
+
 		MemberBean mBean = (MemberBean) m.getAttribute("LoginOK");
-		String acc=mBean.getAccount();
+		String acc = mBean.getAccount();
 
 		// 更新表單資料至會員資料表
-		mDao.update(acc,members);
+		mDao.update(acc, members);
 		return "Member/registerFormResult";
 	}
-	
-	public String processFile2(MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
+
+	public String processFile2(MultipartFile multipartFile, HttpServletRequest request) throws Exception, IOException {
 		// 取得原檔案名字
 		String filename = multipartFile.getOriginalFilename();
 		System.out.println(filename);
@@ -124,9 +130,9 @@ public class MemberUpdateController {
 		// 檔案寫入路徑(存檔)
 		multipartFile.transferTo(f);
 
-		// 存入資料庫預設路徑 
-		return "./"+savefolder+"/"+savefilename;
-	
+		// 存入資料庫預設路徑
+		return "./" + savefolder + "/" + savefilename;
+
 	}
 
 }

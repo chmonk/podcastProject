@@ -22,7 +22,7 @@ import podcast.model.dao.MemberDAO;
 import podcast.model.javabean.MemberBean;
 
 @Controller
-@SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart" })
+@SessionAttributes({ "LoginOK" })
 public class RegisterController {
 
 	// 導向新增會員頁面
@@ -47,22 +47,22 @@ public class RegisterController {
 		members.setImage(image);		
 
 		// model傳送資料
-		m.addAttribute("account", members.getAccount());
-		m.addAttribute("password", members.getPassword());
-		m.addAttribute("name", members.getName());
-		m.addAttribute("nickname", members.getNickname());
-		m.addAttribute("birthday", members.getBirthday());
-		m.addAttribute("registerDate", members.getRegisterDate());
-		m.addAttribute("info", members.getInfo());
-		m.addAttribute("email", members.getEmail());
-		m.addAttribute("cellphone", members.getCellphone());
-		m.addAttribute("address", members.getAddress());
-		m.addAttribute("sex", members.getSex());
-		m.addAttribute("image", members.getImage());
-		m.addAttribute("role", members.getRole());
-		m.addAttribute("creditCardNumber", members.getCreditCardNumber());
-		m.addAttribute("bankAccount", members.getBankAccount());
-		m.addAttribute("monthlyPayment", members.getMonthlyPayment());
+//		m.addAttribute("account", members.getAccount());
+//		m.addAttribute("password", members.getPassword());
+//		m.addAttribute("name", members.getName());
+//		m.addAttribute("nickname", members.getNickname());
+//		m.addAttribute("birthday", members.getBirthday());
+//		m.addAttribute("registerDate", members.getRegisterDate());
+//		m.addAttribute("info", members.getInfo());
+//		m.addAttribute("email", members.getEmail());
+//		m.addAttribute("cellphone", members.getCellphone());
+//		m.addAttribute("address", members.getAddress());
+//		m.addAttribute("sex", members.getSex());
+//		m.addAttribute("image", members.getImage());
+//		m.addAttribute("role", members.getRole());
+//		m.addAttribute("creditCardNumber", members.getCreditCardNumber());
+//		m.addAttribute("bankAccount", members.getBankAccount());
+//		m.addAttribute("monthlyPayment", members.getMonthlyPayment());
 
 		// 取得資料庫連線
 		ServletContext app = request.getServletContext();
