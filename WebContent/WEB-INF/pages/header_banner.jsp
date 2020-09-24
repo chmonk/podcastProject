@@ -215,7 +215,7 @@ nav ul ul li {
 							            <ul class="barlist">
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
-							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
+							                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
 							                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>							
 							            </ul>        
@@ -239,7 +239,7 @@ nav ul ul li {
 							            <ul class="barlist">
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
-							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
+							                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳音檔</a></li>
 							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳活動</a></li>
