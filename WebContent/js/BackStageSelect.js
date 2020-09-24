@@ -1,6 +1,4 @@
-/**
- * 
- */
+
  
  
  //model=====================================
@@ -55,12 +53,23 @@
 		var selectMemberId=document.getElementById("memberIdBtn");
 		selectMemberId.onclick=function(){
 			var selectMemberByIdText=document.getElementById("selectMemberIdText").value;
-			console.log(selectMemberByIdText);
+			
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectMemberAccountText").value="";
+			document.getElementById("deleteMemberText").value="";
+			//清空其他ERR訊息
+			document.getElementById("selectMemberAccountErr").innerHTML="";
+			document.getElementById("deleteMemberErr").innerHTML="";
+
 			if(!selectMemberByIdText){
 				document.getElementById("selectMemberByIdErr").innerHTML="請輸入MemberId";
 				return false;
-			}	
-			document.getElementById("selectMemberByIdForm").submit();
+				}
+			
+			document.getElementById("selectMemberByIdErr").innerHTML="";
+			let input=document.getElementById("selectMemberIdText").value;
+			processMember("BackStageSelectMember",input);
 			return true;
 		}
 		
@@ -68,18 +77,36 @@
 		selectMemberAccount.onclick=function(){
 			var selectMemberAccountText=document.getElementById("selectMemberAccountText").value;
 			
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectMemberIdText").value="";
+			document.getElementById("deleteMemberText").value="";
+			//清空其他ERR訊息
+			document.getElementById("selectMemberByIdErr").innerHTML="";
+			document.getElementById("deleteMemberErr").innerHTML="";
+
 			if(!selectMemberAccountText){
 				document.getElementById("selectMemberAccountErr").innerHTML="請輸入MemberAccount";
 				return false;
-			}	
-			document.getElementById("selectMemberByAccountForm").submit();
+			}
+			
+			document.getElementById("selectMemberAccountErr").innerHTML="";	
+			let input=document.getElementById("selectMemberAccountText").value;
+			processMember("BackStageSelectMemberByAccount",input);
 			return true;
 		}
 		
 		var deleteMemberBtn=document.getElementById("deleteMemberBtn");
 		deleteMemberBtn.onclick=function(){
 			var deleteMemberText=document.getElementById("deleteMemberText").value;
-			
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectMemberIdText").value="";
+			document.getElementById("selectMemberAccountText").value="";
+			//清空其他ERR訊息
+			document.getElementById("selectMemberByIdErr").innerHTML="";
+			document.getElementById("selectMemberAccountErr").innerHTML="";
+
 			if(!deleteMemberText){
 				document.getElementById("deleteMemberErr").innerHTML="請輸入MemberId";
 				return false;
@@ -87,8 +114,10 @@
 			
 			var r=confirm("確定要刪除此Member?")
 			if(r==true){
-		
-				document.getElementById("deleteMemberForm").submit();
+
+				document.getElementById("deleteMemberErr").innerHTML="";
+				let input=document.getElementById("deleteMemberText").value;
+				processMember("BackStageDeleteMember",input);
 				return true;
 			}else{
 		
@@ -487,21 +516,410 @@
 			return true;
 		}
 		
+}
+		
 //logOut=============================================================================
+	
+	document.getElementById("showAllMemberBtn").onclick=function showAllMembers(){
+		let ajaxtable=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("GET", "showAllMember", true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type = xhr.getResponseHeader("Content-Type");
+				let allMembers = JSON.parse(xhr.responseText);
 
-		
-		document.getElementById("logoutBtn").onclick=function(){
-			var r=confirm("確定要登出?")
-			if(r==true){
-				document.getElementById("logoutForm").submit();
-				return true;
-			}else{
-		
-			}		
-			
+				let content=
+				"<table class='ta' >"
+				+"<tr>"
+				+"<th>MemberId</th>"
+				+"<th>Account</th>"
+				+"<th>Name</th>"	
+				+"<th>NickName</th>"
+				+"<th>Email</th>"	
+				+"<th>CellPhone</th>"	
+				+"<th>Sex</th>"	
+				+"<th>Role</th>"	
+				+"</tr>";
+				
+				for(var i=0;i<allMembers.length;i++){
+				content+=
+				"<tr>"
+				+"<td>"+allMembers[i].memberId+"</td>"
+				+"<td>"+allMembers[i].account+"</td>"
+				+"<td>"+allMembers[i].name+"</td>"
+				+"<td>"+allMembers[i].nickname+"</td>"
+				+"<td>"+allMembers[i].email+"</td>"
+				+"<td>"+allMembers[i].cellphone+"</td>"
+				+"<td>"+allMembers[i].sex+"</td>"
+				+"<td>"+allMembers[i].role+"</td>"
+				+"</tr>";	
+			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+				
+				content+="</table>";
+				ajaxtable.innerHTML=content;
 		}
-		
-		
-		
 	}
+}
+
+//All Ticket Order
+	document.getElementById("showAllOrderBtn").onclick=function showAllOrder(){
+		let ajaxtable=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("GET", "showAllTicketOrder", true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type2 = xhr.getResponseHeader("Content-Type");
+				let allOrder = JSON.parse(xhr.responseText);
+
+				let content=
+				"<table class='ta' >"
+				+"<tr>"
+				+"<th>TicketOrderId</th>"
+				+"<th>OrderDate</th>"
+				+"<th>MemberId</th>"	
+				+"<th>ActivityId</th>"
+				+"<th>ShippingAddress</th>"	
+				+"<th>BNO</th>"	
+				+"<th>InVoiceTitle</th>"	
+				+"<th>TotalAmount</th>"	
+				+"</tr>";
+				
+				for(var i=0;i<allOrder.length;i++){
+				content+=
+				"<tr>"
+				+"<td>"+allOrder[i].ticketOrderId+"</td>"
+				+"<td>"+allOrder[i].orderDate+"</td>"
+				+"<td>"+allOrder[i].memberId+"</td>"
+				+"<td>"+allOrder[i].activityId+"</td>"
+				+"<td>"+allOrder[i].shippingAddress+"</td>"
+				+"<td>"+allOrder[i].bno+"</td>"
+				+"<td>"+allOrder[i].invoiceTitle+"</td>"
+				+"<td>"+allOrder[i].totalAmount+"</td>"
+				+"</tr>";	
+			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+				
+				content+="</table>";
+				ajaxtable.innerHTML=content;
+		}
+	}
+}
+
+//All ProgramComment
+document.getElementById("showAllCommentBtn").onclick=function showAllComment(){
+	let ajaxtable=document.getElementById("ajaxTable");
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "showAllComment", true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			console.log("readyState & status GOOD!");
+			let type2 = xhr.getResponseHeader("Content-Type");
+			let allComment = JSON.parse(xhr.responseText);
+
+			let content=
+			"<table class='ta' >"
+			+"<tr>"
+			+"<th>CommentId</th>"
+			+"<th>CommentMsg</th>"
+			+"<th>MemberId</th>"	
+			+"<th>PodcasterId</th>"
+			+"<th>MsgStatus</th>"	
+			+"<th>MsgDate</th>"		
+			+"</tr>";
+			
+			for(var i=0;i<allComment.length;i++){
+			content+=
+			"<tr>"
+			+"<td>"+allComment[i].commentId+"</td>"
+			+"<td>"+allComment[i].commentMsg+"</td>"
+			+"<td>"+allComment[i].memberId+"</td>"
+			+"<td>"+allComment[i].podcasterId+"</td>"
+			+"<td>"+allComment[i].msgStatus+"</td>"
+			+"<td>"+allComment[i].msgDate+"</td>"
+			+"</tr>";
+		}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+			
+			content+="</table>";
+			ajaxtable.innerHTML=content;
+	}
+}
+}
+
+
+//All Category
+document.getElementById("showAllCategoryBtn").onclick=function showAllCategory(){
+	let ajaxtable=document.getElementById("ajaxTable");
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "showAllCategory", true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			console.log("readyState & status GOOD!");
+			let type2 = xhr.getResponseHeader("Content-Type");
+			let allCategory = JSON.parse(xhr.responseText);
+
+			let content=
+			"<table class='ta' >"
+			+"<tr>"
+			+"<th>CategoryId</th>"
+			+"<th>CategoryName</th>"	
+			+"</tr>";
+			
+			for(var i=0;i<allCategory.length;i++){
+			content+=
+			"<tr>"
+			+"<td>"+allCategory[i].categoryId+"</td>"
+			+"<td>"+allCategory[i].categoryName+"</td>"	
+			+"</tr>";
+		}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+			
+			content+="</table>";
+			ajaxtable.innerHTML=content;
+	}
+}
+}
+
+
+//All Subscription
+document.getElementById("showAllSubBtn").onclick=function showAllSub(){
+	let ajaxtable=document.getElementById("ajaxTable");
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "showAllSub", true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			console.log("readyState & status GOOD!");
+			let type2 = xhr.getResponseHeader("Content-Type");
+			let allSub = JSON.parse(xhr.responseText);
+
+			let content=
+			"<table class='ta' >"
+			+"<tr>"
+			+"<th>SubOrderId</th>"
+			+"<th>SubDateStart</th>"
+			+"<th>SubDateEnd</th>"
+			+"<th>MonthlyPayment</th>"
+			+"<th>MemberId</th>"
+			+"<th>PodcasterId</th>"
+			+"<th>CardNumber</th>"
+			+"<th>Reciept</th>"	
+			+"</tr>";
+			
+			for(var i=0;i<allSub.length;i++){
+			content+=
+			"<tr>"
+			+"<td>"+allSub[i].subOrderId+"</td>"
+			+"<td>"+allSub[i].subdateStart+"</td>"
+			+"<td>"+allSub[i].subdateEnd+"</td>"
+			+"<td>"+allSub[i].monthlyPayment+"</td>"
+			+"<td>"+allSub[i].memberId+"</td>"
+			+"<td>"+allSub[i].podcasterId+"</td>"
+			+"<td>"+allSub[i].creditCardNumber+"</td>"
+			+"<td>"+allSub[i].receipt+"</td>"	
+			+"</tr>";
+		}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+			
+			content+="</table>";
+			ajaxtable.innerHTML=content;
+	}
+}
+}
+
+
+//All Activity
+document.getElementById("showAllActivityBtn").onclick=function showAllActivity(){
+	let ajaxtable=document.getElementById("ajaxTable");
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "showAllActivity", true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			console.log("readyState & status GOOD!");
+			let type2 = xhr.getResponseHeader("Content-Type");
+			let allActivity = JSON.parse(xhr.responseText);
+
+			let content=
+			"<table class='ta' >"
+			+"<tr>"
+			+"<th>ActivityId</th>"
+			+"<th>ActivityName</th>"
+			+"<th>ActivityDate</th>"
+			+"<th>ActivityTime</th>"
+			+"<th>ActivityLocation</th>"
+			+"<th>PodcasterId</th>"
+			+"<th>ActivityPrice</th>"
+			+"</tr>";
+			
+			for(var i=0;i<allActivity.length;i++){
+			content+=
+			"<tr>"
+			+"<td>"+allActivity[i].activityId+"</td>"
+			+"<td>"+allActivity[i].activityName+"</td>"
+			+"<td>"+allActivity[i].activityDate+"</td>"
+			+"<td>"+allActivity[i].activityTime+"</td>"
+			+"<td>"+allActivity[i].activityLocation+"</td>"
+			+"<td>"+allActivity[i].podcasterId+"</td>"
+			+"<td>"+allActivity[i].activityPrice+"</td>"
+			+"</tr>";	
+		}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+			
+			content+="</table>";
+			ajaxtable.innerHTML=content;
+	}
+}
+}
+
+
+//All Subscription
+document.getElementById("showAllSubBtn").onclick=function showAllSub(){
+	let ajaxtable=document.getElementById("ajaxTable");
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "showAllSub", true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			console.log("readyState & status GOOD!");
+			let type2 = xhr.getResponseHeader("Content-Type");
+			let allSub = JSON.parse(xhr.responseText);
+
+			let content=
+			"<table class='ta' >"
+			+"<tr>"
+			+"<th>SubOrderId</th>"
+			+"<th>SubDateStart</th>"
+			+"<th>SubDateEnd</th>"
+			+"<th>MonthlyPayment</th>"
+			+"<th>MemberId</th>"
+			+"<th>PodcasterId</th>"
+			+"<th>CardNumber</th>"
+			+"<th>Reciept</th>"	
+			+"</tr>";
+			
+			for(var i=0;i<allSub.length;i++){
+			content+=
+			"<tr>"
+			+"<td>"+allSub[i].subOrderId+"</td>"
+			+"<td>"+allSub[i].subdateStart+"</td>"
+			+"<td>"+allSub[i].subdateEnd+"</td>"
+			+"<td>"+allSub[i].monthlyPayment+"</td>"
+			+"<td>"+allSub[i].memberId+"</td>"
+			+"<td>"+allSub[i].podcasterId+"</td>"
+			+"<td>"+allSub[i].creditCardNumber+"</td>"
+			+"<td>"+allSub[i].receipt+"</td>"	
+			+"</tr>";
+		}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+			
+			content+="</table>";
+			ajaxtable.innerHTML=content;
+	}
+}
+}
+
+
+//All History
+document.getElementById("showAllHistoryBtn").onclick=function showAllHistory(){
+	let ajaxtable=document.getElementById("ajaxTable");
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "showAllHistory", true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			console.log("readyState & status GOOD!");
+			let type2 = xhr.getResponseHeader("Content-Type");
+			let allHistory = JSON.parse(xhr.responseText);
+
+			let content=
+			"<table class='ta' >"
+			+"<tr>"
+			+"<th>HistoryId</th>"
+			+"<th>PodcastId</th>"
+			+"<th>PodcastName</th>"
+			+"<th>PublisherId</th>"
+			+"<th>MemberId</th>"
+			+"<th>LastListen</th>"
+			+"</tr>";
+			
+			for(var i=0;i<allHistory.length;i++){
+			content+=
+			"<tr>"
+			+"<td>"+allHistory[i].historyId+"</td>"
+			+"<td>"+allHistory[i].podcastId+"</td>"
+			+"<td>"+allHistory[i].podcastName+"</td>"
+			+"<td>"+allHistory[i].publisherId+"</td>"
+			+"<td>"+allHistory[i].memberId+"</td>"
+			+"<td>"+allHistory[i].lastListen+"</td>"
+			+"</tr>";	
+		}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+			
+			content+="</table>";
+			ajaxtable.innerHTML=content;
+	}
+}
+}
+
+
+//All Podcast
+document.getElementById("showAllPodcastBtn").onclick=function showAllPodcast(){
+	let ajaxtable=document.getElementById("ajaxTable");
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "showAllPodcast", true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			console.log("readyState & status GOOD!");
+			let type2 = xhr.getResponseHeader("Content-Type");
+			let allPodcast = JSON.parse(xhr.responseText);
+
+			let content=
+			"<table class='ta' >"
+			+"<tr>"
+			+"<th>PodcastId</th>"
+			+"<th>Title</th>"
+			+"<th>CategoryId</th>"
+			+"<th>MemberId</th>"
+			+"<th>OpenPayment</th>"
+			+"<th>UploadTime</th>"
+			+"<th>ClickAmount</th>"
+			+"<th>LikesCount</th>"
+			+"</tr>";
+			
+			for(var i=0;i<allPodcast.length;i++){
+			content+=
+			"<tr>"
+			+"<td>"+allPodcast[i].podcastId+"</td>"
+			+"<td>"+allPodcast[i].title+"</td>"
+			+"<td>"+allPodcast[i].categoryId+"</td>"
+			+"<td>"+allPodcast[i].memberId+"</td>"
+			+"<td>"+allPodcast[i].openPayment+"</td>"
+			+"<td>"+allPodcast[i].uploadTime+"</td>"
+			+"<td>"+allPodcast[i].clickAmount+"</td>"
+			+"<td>"+allPodcast[i].likesCount+"</td>"
+			+"</tr>";	
+		}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+			
+			content+="</table>";
+			ajaxtable.innerHTML=content;
+	}
+}
+}
+
+
+
+
+
+
 		

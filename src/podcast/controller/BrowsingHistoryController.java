@@ -61,9 +61,11 @@ public class BrowsingHistoryController {
 
 	//ajax要瀏覽紀錄整理  塞到播放列表
 	@PostMapping(value = "/getPlaylist")
-	public @ResponseBody List<Map<String, String>> getUserPlaylist(HttpServletRequest request, Model m,
-			@RequestParam(value = "userId") Integer userId) {
+	public @ResponseBody List<Map<String, String>> getUserPlaylist(HttpServletRequest request, Model m) {
 		// test get userid
+		
+		MemberBean mbean = (MemberBean)m.getAttribute("LoginOK");
+		Integer userId = mbean.getMemberId();
 		System.out.println(userId);
 
 		// 從舊到新 與前端順序相同
