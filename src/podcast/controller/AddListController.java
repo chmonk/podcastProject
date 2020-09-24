@@ -113,7 +113,9 @@ public class AddListController {
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
 		System.out.println(id);
 		Integer publisherId=udao.select(id).getMemberId();
-		Integer userId=(Integer)model.getAttribute("userid");
+//		Integer userId=(Integer)model.getAttribute("userid");
+		MemberBean mbean = (MemberBean)model.getAttribute("LoginOK");
+		Integer userid=mbean.getMemberId();
 		Integer podcastId=id;
 
 		//1.pack single program for ajax
@@ -130,7 +132,7 @@ public class AddListController {
 		HistoryBean hbean = new HistoryBean();
 
 		hbean.setLastListen(new Date());
-		hbean.setMemberId(userId);
+		hbean.setMemberId(userid);
 		hbean.setPodcastId(id);
 		hbean.setPodcastName(songlist.getTitle());
 		hbean.setPublisherId(songlist.getMemberId());
@@ -142,17 +144,20 @@ public class AddListController {
 		System.out.println("stage3");
 
 		//4. 如果likelist未有紀錄就新增 單純新增like record
-
-		LikeRecordBean likeresult = ldao.checkByMemberidAndPodcastID(userId, podcastId);
+		LikeRecordBean likeresult = ldao.checkByMemberidAndPodcastID(userid, podcastId);
 		if (likeresult==null) {
 			LikeRecordBean lbean = new LikeRecordBean();
-			lbean.setMemberId(userId);
+			lbean.setMemberId(userid);
 			lbean.setPodcastId(podcastId);
 			lbean.setLikeStatus(1);
 			lbean.setShowInListOrNot(1); // 預計顯示在清單中
 
 			ldao.insert(lbean);
+		}else if(likeresult.getLikeStatus()==0){
+			likeresult.setLikeStatus(1);
+			likeresult.setShowInListOrNot(1); //重點變為可加入list
 		}else {
+			likeresult.setLikeStatus(0);
 			likeresult.setShowInListOrNot(1); //重點變為可加入list
 		}
 		

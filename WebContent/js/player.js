@@ -430,7 +430,7 @@ $(document).ready(() => {
 //				mediaData = result;
 //
 //				renderPlaylist();//重新取得清單資訊
-
+				console.log(data);
                 var new_song = data;
 
 				var duplicate = false;
@@ -470,6 +470,74 @@ $(document).ready(() => {
 
 
 	});
+	
+	///點愛心取得歌曲
+		$("svg").on("click", function (e) {
+
+		$(e.currentTarget.parentNode).toggleClass("like");
+		
+		console.log(e.target);
+		
+		console.log($(e.currentTarget.parentNode.parentNode.parentNode));
+		console.log($(e.currentTarget.parentNode.parentNode.parentNode).find("a"));
+		console.log($(e.currentTarget.parentNode.parentNode.parentNode).find("a").attr("id"));
+		
+		var id=$(e.currentTarget.parentNode.parentNode.parentNode).find("a").attr("id");
+		
+		console.log(id);
+		var pid={};
+		
+		pid.id=id;
+		
+	//播放清單取得歌曲
+	//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
+
+		xhr = $.ajax({
+			url: "/SpringWebProject/addListByLikeController",
+			//上線應修正成async
+			async: true,
+			data: pid,
+			dataType: "json",
+			success: function(data) {
+				console.log(data);
+                var new_song = data;
+
+				var duplicate = false;
+				var duplicate_index;
+
+				for (let i = 0; i < mediaData.length; i++) {
+					if (mediaData[i].podcastId == new_song.podcastId) {
+						duplicate = true;
+						duplicate_index = i;
+						break;
+					}
+				}
+				if (duplicate) {
+					mediaData.splice(duplicate_index, 1);
+					mediaData.push(new_song);
+					renderPlaylist(mediaData);
+				} else {
+					mediaData.push(new_song);
+					renderPlaylist(mediaData);
+				}
+
+				//設定準備播放歌曲
+				myAudio.setCurrentMusic(mediaData.length-1);
+				//自動播放	
+				myAudio.setPlayStatus(true);
+
+	
+
+			}
+
+		})
+
+
+
+
+});
+	
+	
 
 	// 監聽事件顯示 UI
 	myAudio.on("playstatuschange", () =>
