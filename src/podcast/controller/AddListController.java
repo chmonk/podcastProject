@@ -53,8 +53,9 @@ public class AddListController {
 
 //		Integer userId=(Integer)model.getAttribute("userid");
 		MemberBean mbean = (MemberBean)model.getAttribute("LoginOK");
-		//Integer userid=mbean.getMemberId();
-		Integer userid=1;
+
+		Integer userid=mbean.getMemberId();
+
 
 		Integer podcastId=id;
 

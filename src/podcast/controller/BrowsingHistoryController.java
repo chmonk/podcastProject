@@ -40,7 +40,9 @@ public class BrowsingHistoryController {
 
 	// 導向瀏覽紀錄頁面 ?userid=
 	@GetMapping(value = "/goToBrowsingHistory")
+
 	public String leadToBrowsingHistory(Model m, HttpServletRequest request)
+
 			throws Exception {
 
 		// get the list of browsing list

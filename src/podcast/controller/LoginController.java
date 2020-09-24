@@ -51,7 +51,9 @@ public class LoginController {
 
 		
 		System.out.println("account & password= "+account+" "+password);
+
 		MemberBean mbean = new MemberBean();
+
 		
 		
     	ServletContext app = request.getServletContext();
@@ -62,9 +64,13 @@ public class LoginController {
 		
 
 		try {
+
 				   mbean = mdao.checkIdPassword(account,password);
+
 			if (mbean != null) {
 				// 登入成功, 將mb物件放入Session範圍內，重新組裝   識別字串為"LoginOK"
+				
+				request.getSession().setMaxInactiveInterval(1800);
 				
 				MemberBean packMemberBean = new MemberBean();
 				
