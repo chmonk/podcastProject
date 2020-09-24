@@ -90,7 +90,7 @@ public class LoginController {
 		processCookies(bean, request, response);
 		
 		//管理員身分導至後台頁面
-		if(memberbean.getRole()==0) {
+		if(mbean.getRole()==0) {
 			return "/BackStage/BackStageSelectStyle";
 		}
 		return "redirect:/";
