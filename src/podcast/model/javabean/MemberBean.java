@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "members")
 @Component
@@ -119,19 +121,23 @@ public class MemberBean implements Serializable  {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-
+	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public Date getBirthday() {
 		return birthday;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public Date getRegisterDate() {
 		return registerDate;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
