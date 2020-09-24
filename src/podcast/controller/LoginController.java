@@ -68,12 +68,14 @@ public class LoginController {
 				   mbean = mdao.checkIdPassword(account,password);
 
 			if (mbean != null) {
+
 				// 登入成功, 將mb物件放入Session範圍內，重新組裝   識別字串為"LoginOK"
 				
 				request.getSession().setMaxInactiveInterval(1800);
 				
 				MemberBean packMemberBean = new MemberBean();
 				
+
 				packMemberBean.setAccount(mbean.getAccount());
 				packMemberBean.setMemberId(mbean.getMemberId());
 				packMemberBean.setRole(mbean.getRole());
@@ -81,6 +83,7 @@ public class LoginController {
 				packMemberBean.setName(mbean.getName());
 
 				packMemberBean.setNickname(mbean.getNickname());
+
 
 				
 
