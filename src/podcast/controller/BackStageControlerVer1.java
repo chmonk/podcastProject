@@ -52,14 +52,14 @@ public class BackStageControlerVer1 {
 	// Member
 	// Function==========================================================================================
 
-	@PostMapping(path= {"/showAllMember"})
-	public String showAllMember(Model m) {
-		java.util.List<MemberBean> allMemberList=mDao.selectAll();
-		m.addAttribute("allMemberList",allMemberList);
-		
-		
-		return "/BackStage/AllMember";
-	}
+//	@PostMapping(path= {"/showAllMember"})
+//	public String showAllMember(Model m) {
+//		java.util.List<MemberBean> allMemberList=mDao.selectAll();
+//		m.addAttribute("allMemberList",allMemberList);
+//		
+//		
+//		return "/BackStage/AllMember";
+//	}
 	
 	
 	@PostMapping(path = { "/BackStageSelectMember.controller" })
