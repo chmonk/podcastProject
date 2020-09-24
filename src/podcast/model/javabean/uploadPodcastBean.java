@@ -14,6 +14,8 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Table(name = "uploadPodcast")
 @Entity
 @Component
@@ -96,11 +98,13 @@ public class uploadPodcastBean {
 		this.openComment = openComment;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	@Column(name = "UPLOADTIME")
 	public Date getUploadTime() {
 		return uploadTime;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public void setUploadTime(Date uploadTime) {
 		this.uploadTime = uploadTime;
 	}

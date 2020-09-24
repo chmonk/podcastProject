@@ -52,7 +52,7 @@ public class OrderTicketDAO implements IOrderTicketDAO {
 	@Override
 	public List<OrderTicketBean> selectAll() {
 		Session session = sessionFactory.getCurrentSession();
-		Query<OrderTicketBean> query = session.createQuery("from OrderTicketBean", OrderTicketBean.class);
+		Query<OrderTicketBean> query = session.createQuery("from OrderTicketBean where ticketOrderId<40", OrderTicketBean.class);
 		return query.list();
 	}
 

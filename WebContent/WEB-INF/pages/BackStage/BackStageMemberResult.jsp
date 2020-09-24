@@ -24,9 +24,6 @@
 	background-color: #949494;
 }
 
-th{
-	background-color: #3A3A3A;
-}
 
 td {
 	width: 100px;
@@ -47,6 +44,7 @@ th {
 	width: 100px;
 	text-align: center;
 	border: 1px solid #3A3A3A;
+	background-color: #3A3A3A;
 }
 
 .center {
