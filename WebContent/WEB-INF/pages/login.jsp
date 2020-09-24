@@ -28,7 +28,7 @@ function setFocusToUserId(){
 <!-- 引入共同的頁首 -->
 <%-- <jsp:include page="/fragment/topMVC.jsp" /> --%>
 
-  <form action="<c:url value='login.do' />" method="POST" name="loginForm" class="login-form">
+  <form action="<c:url value='login' />" method="POST" name="loginForm" class="login-form">
     <h1>登入</h1>
     <div class="textb">
       <input type="text" name="userId" required value="${requestScope.user}${param.userId}">
