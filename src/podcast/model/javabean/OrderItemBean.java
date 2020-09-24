@@ -14,39 +14,36 @@ import javax.persistence.Table;
 
 //本類別封裝單筆訂單資料
 @Entity
-@Table(name="orderItems")
+@Table(name = "orderItems")
 public class OrderItemBean {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer seqno;
-	
+
 	Integer activityId;
-	
-	Integer amount; //庫存量
-	
+
+	Integer amount; // 庫存量
+
 	String description;
-	
-	Integer unitPrice; //單價
-	
+
+	Integer unitPrice; // 單價
+
 	Integer quantity;
-	
-	Double discount;	
-	
+
+	Double discount;
+
 	Date activityDate;
-	
+
 	String activityName;
-	
+
 	String activityLocation;
-
-
 
 	@ManyToOne
 	@JoinColumn(name = "orderNo")
 	OrderTicketBean orderTicketBean;
-	
 
-	public OrderItemBean(Integer activityId,String activityName,
-			Integer unitPrice,Integer quantity,Date activityDate,String activityLocation,Integer amount) {
+	public OrderItemBean(Integer activityId, String activityName, Integer unitPrice, Integer quantity,
+			Date activityDate, String activityLocation, Integer amount) {
 		this.activityId = activityId;
 		this.unitPrice = unitPrice;
 		this.amount = amount;
@@ -55,10 +52,11 @@ public class OrderItemBean {
 		this.activityDate = activityDate;
 		this.activityLocation = activityLocation;
 	}
-	
+
 	public OrderItemBean() {
-		
+
 	}
+
 	public Integer getSeqno() {
 		return seqno;
 	}
@@ -67,15 +65,13 @@ public class OrderItemBean {
 		this.seqno = seqno;
 	}
 
-
-
-	public Integer getactivityId() {
-		return activityId;
-	}
-
-	public void setactivityId(Integer activityId) {
-		this.activityId = activityId;
-	}
+//	public Integer getactivityId() {
+//		return activityId;
+//	}
+//
+//	public void setactivityId(Integer activityId) {
+//		this.activityId = activityId;
+//	}
 
 	public String getDescription() {
 		return description;
@@ -108,12 +104,14 @@ public class OrderItemBean {
 	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
-	public String getactivityName() {
-		return activityName;
-	}
-	public void setactivityName(String activityName) {
-		this.activityName = activityName;
-	}
+
+//	public String getactivityName() {
+//		return activityName;
+//	}
+//
+//	public void setactivityName(String activityName) {
+//		this.activityName = activityName;
+//	}
 
 	public Integer getActivityId() {
 		return activityId;
@@ -155,9 +153,9 @@ public class OrderItemBean {
 		this.activityLocation = activityLocation;
 	}
 
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
+//	public void setAmount(Integer amount) {
+//		this.amount = amount;
+//	}
 
 	public OrderTicketBean getOrderTicketBean() {
 		return orderTicketBean;
@@ -166,6 +164,5 @@ public class OrderItemBean {
 	public void setOrderTicketBean(OrderTicketBean orderTicketBean) {
 		this.orderTicketBean = orderTicketBean;
 	}
-	
-	
+
 }

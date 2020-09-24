@@ -49,12 +49,12 @@ function setFocusToUserId(){
                </c:if> 
              value="true">
       <div class="fas fa-check"></div>
-      Stay signed in
+     保持登入狀態
     </div>
 
     <button type="submit" class="btn fas fa-arrow-right" disabled></button>
-    <a href="#">Can't Sign in?</a>
-    <a href="#">Create Account</a>
+    <a href="#">無法登入?</a>
+    <a href="<c:url value='/register' />">註冊新的帳號</a>
   </form>
 <script type="text/javascript">
 var fields = document.querySelectorAll(".textb input");

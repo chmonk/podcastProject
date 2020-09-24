@@ -59,6 +59,7 @@ public class LoginController {
     	
 
     	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
+    
 		
 
 		try {
