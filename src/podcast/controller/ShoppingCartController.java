@@ -46,7 +46,7 @@ import podcast.model.javabean.OrderTicketBean;
 @SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart"})
 public class ShoppingCartController {
 
-	private final static String SHOW_CART_CONTENT = "Activity/ShowCartContent";
+	private final static String SHOW_CART_CONTENT = "Activity/ShowCartContent2";
 	
 	@Autowired
 	ServletContext context;
@@ -56,7 +56,7 @@ public class ShoppingCartController {
 
 	@GetMapping("ShoppingCart")
     public String shoppingCartPage() throws Exception {
-		return "Activity/ShowCartContent";
+		return "Activity/ShowCartContent2";
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -155,7 +155,7 @@ public class ShoppingCartController {
 		if (memberBean == null) {
 			return "redirect:/login";
 		}
-		return "Orders/OrderConfirm";
+		return "Orders/OrderConfirm2";
 	}
 
 	//按下再次確認鍵

@@ -8,20 +8,21 @@
 </head>
 <body>
 <h2>會員資料</h2>
-帳號：${account}<br/>
-姓名：${name}<br/>
-暱稱：${nickname}<br/>
-生日：${birthday}<br/>
-自我介紹：${info}<br/>
-電子信箱：${email}<br/>
-手機號碼：${cellphone}<br/>
-住址：${address}<br/>
-性別：${sex}<br/>
-照片：<img src="${image}" width="100px" height="100px"><br/>
-角色：${role}<br/>
-信用卡號：${creditCardNumber}<br/>
-銀行帳號：${bankAccount}<br/>
-頻道月費：${monthlyPayment}<br/>
-<Input type="button" name="update" value="修改" onclick="location='http://localhost:8080/SpringWebProject/update'">
+帳號：${MemberBean.account}<br/>
+註冊日期：${MemberBean.registerDate}<br/>
+姓名：${MemberBean.name}<br/>
+暱稱：${MemberBean.nickname}<br/>
+生日：${MemberBean.birthday}<br/>
+自我介紹：${MemberBean.info}<br/>
+電子信箱：${MemberBean.email}<br/>
+手機號碼：${MemberBean.cellphone}<br/>
+住址：${MemberBean.address}<br/>
+性別：${MemberBean.sex}<br/>
+照片：<br/><img src="${MemberBean.image}" style="max-width: 300px; max-height: 300px;"><br/>
+角色：${MemberBean.role}<br/>
+信用卡號：${MemberBean.creditCardNumber}<br/>
+銀行帳號：${MemberBean.bankAccount}<br/>
+頻道月費：${MemberBean.monthlyPayment}<br/>
+<Input type="button" name="" value="首頁" onclick="location='http://localhost:8080/SpringWebProject/'">
 </body>
 </html>

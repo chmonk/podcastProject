@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
 <script type="text/javascript">
-	
+
 	function window_onload() {
 		var text1 = window.document.getElementById('registerDate');
 		var now = new Date();
@@ -166,8 +166,8 @@
 						<br>
 
 						<div>
-							<label>性別：</label> <select class="form-control" name="sex">
-								<option>請選擇</option>
+							<label>性別：</label> <select class="form-control" name="sex" required>
+								<option value="">---請選擇---</option>
 								<option value="男">男</option>
 								<option value="女">女</option>
 							</select>
@@ -181,10 +181,10 @@
 						<br>
 
 						<div>
-							<label>角色：</label> <select class="form-control" name="role">
-								<option>請選擇</option>
-								<option value=1>一般會員</option>
-								<option value=2>播客</option>
+							<label>角色：</label> <select class="form-control" name="role" id="role" required>
+								<option value="">---請選擇---</option>
+								<option value="1">一般會員</option>
+								<option value="2">播客</option>
 							</select>
 						</div>
 						<br>
@@ -195,17 +195,17 @@
 						</div>
 						<br>
 
-						<div>
+						<div  class="resources" style=" display: none;">
 							<label>銀行帳號：</label> <input type="text" name="bankAccount"
 								class="form-control" id="reason" placeholder="xxx-xxxxxxxxxxxx">
 						</div>
 						<br>
 
-						<div >
+						<div  class="resources" style=" display: none;">
 							<label>頻道月費：</label> <select class="form-control"
 								name="monthlyPayment" id="reason1">
-								<option>請選擇</option>
-								<option value=0>免費</option>
+								<option value="">---請選擇---</option>
+								<option value=0 selected>免費</option>
 								<option value=100>100元</option>
 								<option value=300>300元</option>
 							</select>
