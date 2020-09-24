@@ -26,6 +26,7 @@ import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
+@SessionAttributes("LoginOK")
 public class AddListController {
 	
 	
