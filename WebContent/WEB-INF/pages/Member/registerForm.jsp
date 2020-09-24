@@ -1,14 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>register</title>
+<title>新增會員資料</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/bootstrap.min.css' />">
 <script type="text/javascript">
+
+	function readURL(input){
+	  if(input.files && input.files[0]){
+	    var imageTagID = input.getAttribute("targetID");
+	    var reader = new FileReader();
+	    reader.onload = function (e) {
+	       var img = document.getElementById(imageTagID);
+	       img.setAttribute("src", e.target.result)
+	    }
+	    reader.readAsDataURL(input.files[0]);
+	  }
+	}
 
 	function window_onload() {
 		var text1 = window.document.getElementById('registerDate');
@@ -55,40 +68,37 @@
      	}
           
 </script>
- <style type="text/css">
-    body {
-      background-image: url(<c:url value='/img/banner/b1.jpg' />);
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
+<style type="text/css">
+body {
+	background-image: url(< c : url value = '/img/banner/b1.jpg'/ >);
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+}
 
-    #ui {
-      border-radius: 10px;
-      background-color: #333;
-      padding: 50px;
-      opacity: 0.8;
-      box-shadow: 2px 2px 2px 2px #000;
-      animation-delay: 2s;
-      animation-duration: 2s;
+#ui {
+	border-radius: 10px;
+	background-color: #333;
+	padding: 50px;
+	opacity: 0.8;
+	box-shadow: 2px 2px 2px 2px #000;
+	animation-delay: 2s;
+	animation-duration: 2s;
+}
 
-    }
+#ui label {
+	color: #fff;
+	font-weight: 800;
+}
 
-    #ui label {
-      color: #fff;
-      font-weight: 800;
+#contact_showcase {
+	margin-top: 70px;
+}
 
-    }
-
-    #contact_showcase {
-      margin-top: 70px;
-    }
-
-    .button {
-      font-weight: 800;
-
-    }
-  </style>
+.button {
+	font-weight: 800;
+}
+</style>
 </head>
 
 <body>
@@ -97,7 +107,7 @@
 			<div class="col-lg-3"></div>
 			<div class="col-lg-6">
 				<h1 class="text-center animated slideInDown"
-					style="color: #fff; font-weight: bold;">新增會員</h1>
+					style="color: #fff; font-weight: bold;">新增會員資料</h1>
 				<div id="ui" class="text-center">
 					<form class="form-group" action="addMemberProcess" method="POST"
 						enctype='multipart/form-data'>
@@ -166,7 +176,8 @@
 						<br>
 
 						<div>
-							<label>性別：</label> <select class="form-control" name="sex" required>
+							<label>性別：</label> <select class="form-control" name="sex"
+								required>
 								<option value="">---請選擇---</option>
 								<option value="男">男</option>
 								<option value="女">女</option>
@@ -176,12 +187,17 @@
 
 						<div>
 							<label>照片：</label> <input type="file" name="file"
-								class="form-control" required>
+								class="form-control" onchange="readURL(this)"
+								targetID="preview_progressbarTW_img"
+								accept="image/gif, image/jpeg, image/png" required /><br /> <img
+								id="preview_progressbarTW_img" src="<c:url value='/img/unnamed.jpg' />"
+								style="max-width: 300px; max-height: 300px;" />
 						</div>
 						<br>
 
 						<div>
-							<label>角色：</label> <select class="form-control" name="role" id="role" required>
+							<label>角色：</label> <select class="form-control" name="role"
+								id="role" required>
 								<option value="">---請選擇---</option>
 								<option value="1">一般會員</option>
 								<option value="2">播客</option>
@@ -195,13 +211,13 @@
 						</div>
 						<br>
 
-						<div  class="resources" style=" display: none;">
+						<div class="resources" style="display: none;">
 							<label>銀行帳號：</label> <input type="text" name="bankAccount"
 								class="form-control" id="reason" placeholder="xxx-xxxxxxxxxxxx">
 						</div>
 						<br>
 
-						<div  class="resources" style=" display: none;">
+						<div class="resources" style="display: none;">
 							<label>頻道月費：</label> <select class="form-control"
 								name="monthlyPayment" id="reason1">
 								<option value="">---請選擇---</option>
