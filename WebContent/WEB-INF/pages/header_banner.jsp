@@ -191,8 +191,9 @@ nav ul ul li {
 								class="icon-bar"></span>
 						</button>
 						<!-- logo area -->
-						<a class="navbar-brand" href="<c:url value='/' />"> <!-- logo image --> <img
-							class="img-responsive" src="img/logo/SoundPod2.png" alt="" />
+
+						<a class="navbar-brand" href="<c:url value='/' />"> <!-- logo image --> 
+						<img class="img-responsive" src="img/logo/SoundPod2.png" alt="" />
 						</a>
 					</div>
 	
@@ -285,7 +286,7 @@ nav ul ul li {
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<img src="img/banner/b1.jpg" alt="...">
+						<!-- <img src="img/banner/b1.jpg" alt="..."> -->
 						<div class="container">
 							<!-- banner caption -->
 							<div class="carousel-caption slide-one">
@@ -301,7 +302,7 @@ nav ul ul li {
 						</div>
 					</div>
 					<div class="item">
-						<img src="img/banner/b2.jpg" alt="...">
+						<!-- <img src="img/banner/b2.jpg" alt="..."> -->
 						<div class="container">
 							<!-- banner caption -->
 							<div class="carousel-caption slide-two">

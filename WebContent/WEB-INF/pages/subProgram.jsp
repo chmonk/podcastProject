@@ -10,9 +10,12 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
-<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style type="text/css">
 
@@ -284,7 +287,6 @@ html {
 </style>
 
 <style type="text/css">
-
 .podcastImg {
 	position: absolute;
 	top: 50%;
@@ -297,20 +299,17 @@ html {
 }
 </style>
 <script type="text/javascript">
-window.onload=function(){
-	if ("${subProgram}"=="[]"){
-		document.getElementById('need_to_sub').innerHTML="未訂閱此頻道，請訂閱";
-		document.getElementById('hide_alreadysub_btn').style.display='none';
-		
-		
-	}else{
-		document.getElementById('d1').style.display='';
-		document.getElementById('check_sub').style.display='none';
-		document.getElementById('d2').style.display='none';
+	window.onload = function() {
+		if ("${subProgram}" == "[]") {
+			document.getElementById('need_to_sub').innerHTML = "未訂閱此頻道，請訂閱";
+			document.getElementById('hide_alreadysub_btn').style.display = 'none';
+
+		} else {
+			document.getElementById('d1').style.display = '';
+			document.getElementById('check_sub').style.display = 'none';
+			document.getElementById('d2').style.display = 'none';
 		}
-}
-
-
+	}
 </script>
 
 
@@ -318,18 +317,13 @@ window.onload=function(){
 <title>Insert title here</title>
 </head>
 <body>
-
-
-		<span id='need_to_sub'></span>
-			<button id="hide_alreadysub_btn" type="button" class="btn btn-info" style="display:'';">已訂閱</button>
-	
+	<span id='need_to_sub'></span>
+	<button id="hide_alreadysub_btn" type="button" class="btn btn-info"
+		style="display: '';">已訂閱</button>
 
 	<form action="/SpringWebProject/AfterSubProgram.controller">
-		<a href="javascript:;" onclick="document.getElementById('d1').style.display='' ">訂閱列表</a>			
-	<input id='check_sub'type="submit" value="訂閱"  class="btn btn-danger">
-
-
-		<div id="d1" style="display: none" >
+		<input id='check_sub' type="submit" value="訂閱" class="btn btn-danger">
+		<div id="d1" style="display: none">
 			<div>
 				<c:forEach var="alreadySub" items="${subProgram}">
 					<div class="container">
@@ -339,8 +333,6 @@ window.onload=function(){
 								<div class="card-media-object">
 									<img class="podcastImg" src="${alreadySub.getAudioimg()}">
 								</div>
-<%-- 								<span class="card-media-object-tag subtle">${bymemberid.getPodcastInfo()}</span> --%>
-
 							</div>
 							<!-- body container -->
 							<div class="card-media-body">
@@ -378,14 +370,8 @@ window.onload=function(){
 				</c:forEach>
 
 			</div>
-
-
 		</div>
-	
-	
-
-	
-	<div id="d2" style="display:''" >
+		<div id="d2" style="display: ''">
 			<div>
 				<c:forEach var="unalreadySub" items="${needSub}">
 					<div class="container">
@@ -395,7 +381,7 @@ window.onload=function(){
 								<div class="card-media-object">
 									<img class="podcastImg" src="${unalreadySub.getAudioimg()}">
 								</div>
-<%-- 								<span class="card-media-object-tag subtle">${bymemberid.getPodcastInfo()}</span> --%>
+								<%-- 								<span class="card-media-object-tag subtle">${bymemberid.getPodcastInfo()}</span> --%>
 
 							</div>
 							<!-- body container -->
@@ -432,47 +418,36 @@ window.onload=function(){
 						</div>
 					</div>
 				</c:forEach>
-
 			</div>
-
-
 		</div>
+		<hr />
+	</form>
 
 
 
+	<!--playerbar -->
 
-<!-- 	<button id="hide" type="button" -->
-<!-- 		onclick="document.getElementById('d1').style.display='none'">取消訂閱</button> -->
-	
-	<hr/>
-
-</form>
-
-
-
-		<!--playerbar -->
-
-		<!-- jQuery -->
-		<script src="js/jquery.js"></script>
-		<!-- Bootstrap JS -->
-		<script src="js/bootstrap.min.js"></script>
-		<!-- WayPoints JS -->
-		<script src="js/waypoints.min.js"></script>
-		<!-- Include js plugin -->
-		<script src="js/owl.carousel.min.js"></script>
-		<!-- One Page Nav -->
-		<script src="js/jquery.nav.js"></script>
-		<!-- Respond JS for IE8 -->
-		<script src="js/respond.min.js"></script>
-		<!-- HTML5 Support for IE -->
-		<script src="js/html5shiv.js"></script>
-		<!-- Custom JS -->
-		<script src="js/custom.js"></script>
-		<!-- 	plaer bar function js -->
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<script type="text/javascript" src="js/player.js"></script>
+	<!-- jQuery -->
+	<script src="js/jquery.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- WayPoints JS -->
+	<script src="js/waypoints.min.js"></script>
+	<!-- Include js plugin -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- One Page Nav -->
+	<script src="js/jquery.nav.js"></script>
+	<!-- Respond JS for IE8 -->
+	<script src="js/respond.min.js"></script>
+	<!-- HTML5 Support for IE -->
+	<script src="js/html5shiv.js"></script>
+	<!-- Custom JS -->
+	<script src="js/custom.js"></script>
+	<!-- 	plaer bar function js -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
 
 
-			<jsp:include page="./playerbar.jsp" flush="true " />
+	<jsp:include page="./playerbar.jsp" flush="true " />
 </body>
 </html>

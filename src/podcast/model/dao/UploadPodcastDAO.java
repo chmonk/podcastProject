@@ -74,7 +74,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	@Override
 	public List<uploadPodcastBean> selectAllFromMember(Integer memberId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
-		String hbl = "from uploadPodcastBean where memberId=:memberId";
+		String hbl = "from uploadPodcastBean where memberId=:memberId and openpayment=0";
 
 		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
 		query.setParameter("memberId", memberId);
