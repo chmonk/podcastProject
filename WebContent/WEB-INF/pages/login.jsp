@@ -28,7 +28,7 @@ function setFocusToUserId(){
 <!-- 引入共同的頁首 -->
 <%-- <jsp:include page="/fragment/topMVC.jsp" /> --%>
 
-  <form action="<c:url value='login.do' />" method="POST" name="loginForm" class="login-form">
+  <form action="<c:url value='login' />" method="POST" name="loginForm" class="login-form">
     <h1>登入</h1>
     <div class="textb">
       <input type="text" name="userId" required value="${requestScope.user}${param.userId}">
@@ -49,12 +49,12 @@ function setFocusToUserId(){
                </c:if> 
              value="true">
       <div class="fas fa-check"></div>
-      Stay signed in
+     保持登入狀態
     </div>
 
     <button type="submit" class="btn fas fa-arrow-right" disabled></button>
-    <a href="#">Can't Sign in?</a>
-    <a href="#">Create Account</a>
+    <a href="#">無法登入?</a>
+    <a href="<c:url value='/register' />">註冊新的帳號</a>
   </form>
 <script type="text/javascript">
 var fields = document.querySelectorAll(".textb input");

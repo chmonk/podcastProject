@@ -51,26 +51,21 @@ public class LoginController {
 
 		
 		System.out.println("account & password= "+account+" "+password);
+		MemberBean mbean = null;
+		MemberBean memberbean = new MemberBean();		
 
-		MemberBean mbean = new MemberBean();
-
-		
-		
     	ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
     	
 
     	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
+    
 		
 
 		try {
-
-				   mbean = mdao.checkIdPassword(account,password);
-
+				mbean = mdao.checkIdPassword(account,password);
 			if (mbean != null) {
 				// 登入成功, 將mb物件放入Session範圍內，重新組裝   識別字串為"LoginOK"
-				
-				request.getSession().setMaxInactiveInterval(1800);
 				
 				MemberBean packMemberBean = new MemberBean();
 				
@@ -79,11 +74,9 @@ public class LoginController {
 				packMemberBean.setRole(mbean.getRole());
 				packMemberBean.setAddress(mbean.getAddress());
 				packMemberBean.setName(mbean.getName());
-
 				packMemberBean.setNickname(mbean.getNickname());
 
 				
-
 				model.addAttribute("LoginOK", packMemberBean);
 			} else {
 				// 登入失敗, 放相關的錯誤訊息到 errorMsgMap 之內

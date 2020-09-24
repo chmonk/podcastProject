@@ -141,7 +141,7 @@ thead {
 </table>
 
 <!-- 自動跳轉回訂單成立頁面 -->
-<meta http-equiv="refresh" content ="3;url=/SpringWebProject/showPaymentProgram.controller">
+<meta http-equiv="refresh" content ="3;url=/SpringWebProject/podcastPage?fuzzyPodcasterId=${thisPodcasterId}">
 
 </body>
 </html>
