@@ -63,6 +63,7 @@
 		<div id="ui" class="text-center">
 		
           <form id="podcastModifyForm" class="form-group" action="PodcastModifyProcess" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="podcastId" value=${modifyPodcastId}>
 		   <label path="title">單集名稱: </label>
             <input path="title" id="title" type="text" name="title" class="form-control" required>
             <br>
@@ -70,14 +71,14 @@
 			<div class="row">
              <div class="col-lg-6 col-md-6">
             <label>付費狀態: </label>
-            <select class="form-control" >
-              <option value=0 name="radioP" id="radioP0">免費</option>
-              <option value=1 id="radioP1" name="radioP">訂閱</option>
+            <select class="form-control" name="radioP">
+              <option value=0 id="radioP0" >免費</option>
+              <option value=1 id="radioP1" >訂閱</option>
             </select>
               </div>
              <div class="col-lg-6 col-md-6">
             <label>頻道類別: </label>
-            <select class="form-control">
+            <select class="form-control" name="category">
               <option value=1 id="cat1" >喜劇娛樂</option>
 					<option value=2 id="cat2">生活文化</option>
 					<option value=3 id="cat3">男女話題</option>
@@ -103,8 +104,7 @@
               required> </textarea>
             <br>
             <div class="button">
-              <input id="submitBtn" type="button" value="確認修改" class="btn btn-danger btn-block btn-lg"
-                style="box-shadow: 2px 2px 2px gray; ">
+              <input id="submitBtn" type="button" value="確認修改" class="btn btn-danger btn-block btn-lg" style="box-shadow: 2px 2px 2px gray; ">
               
             </div>
           </form>
