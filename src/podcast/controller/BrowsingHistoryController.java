@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -28,6 +29,7 @@ import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
+@SessionAttributes("LoginOK")
 public class BrowsingHistoryController {
 
 	@Autowired
@@ -38,12 +40,16 @@ public class BrowsingHistoryController {
 
 	// 導向瀏覽紀錄頁面 ?userid=
 	@GetMapping(value = "/goToBrowsingHistory")
-	public String leadToBrowsingHistory(Model m, HttpServletRequest request, 
-			@RequestParam("userid") Integer userid)
+
+	public String leadToBrowsingHistory(Model m, HttpServletRequest request)
+
 			throws Exception {
 
 		// get the list of browsing list
-		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId2(userid);
+		MemberBean mbean= (MemberBean)m.getAttribute("LoginOK");
+		Integer userId= mbean.getMemberId();
+		
+		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId3(userId);
 
 		m.addAttribute("history", rs);
 
