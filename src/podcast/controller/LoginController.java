@@ -62,18 +62,18 @@ public class LoginController {
 		
 
 		try {
-				mbean = mdao.checkIdPassword(account,password);
-			if (mbean != null) {
+				memberbean = mdao.checkIdPassword(account,password);
+			if (memberbean != null) {
 				// 登入成功, 將mb物件放入Session範圍內，重新組裝   識別字串為"LoginOK"
 				
 				MemberBean packMemberBean = new MemberBean();
 				
-				packMemberBean.setAccount(mbean.getAccount());
-				packMemberBean.setMemberId(mbean.getMemberId());
-				packMemberBean.setRole(mbean.getRole());
-				packMemberBean.setAddress(mbean.getAddress());
-				packMemberBean.setName(mbean.getName());
-				packMemberBean.setNickname(mbean.getNickname());
+				packMemberBean.setAccount(memberbean.getAccount());
+				packMemberBean.setMemberId(memberbean.getMemberId());
+				packMemberBean.setRole(memberbean.getRole());
+				packMemberBean.setAddress(memberbean.getAddress());
+				packMemberBean.setName(memberbean.getName());
+				packMemberBean.setNickname(memberbean.getNickname());
 
 				
 				model.addAttribute("LoginOK", packMemberBean);
