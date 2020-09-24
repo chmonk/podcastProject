@@ -52,7 +52,9 @@ public class LoginController {
 		
 		System.out.println("account & password= "+account+" "+password);
 
+
 		MemberBean mbean = new MemberBean();
+
 
 		
 		
