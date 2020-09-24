@@ -35,6 +35,7 @@ th {
 	border: 3px solid #3A3A3A;
 	border-collapse: collapse;
 	background-color:white;
+	margin:0px auto;
 	
 }
 
@@ -281,42 +282,31 @@ input[type="button"] {
 			</div>
 
 			<div>
-				<form id="selectOrderIdForm" autocomplete="off"
-					action="<c:url value="/BackStageSelectOrderById.controller"/>"
-					method="POST">
 					<label for="selectOrderIdText">單筆查詢</label> 
-					<input
+					<input autocomplete="off"
 						id="selectOrderIdText" type="number" name="orderId" placeholder="ticketOrderId"> 
 					<span>
 					<input
 						id="selectOrderIdBtn" type="button" value="send"
 						class="btn btn-warning"><span id="selectOrderIdErr"></span>
 					</span>
-				</form>
 			</div>
 
 			<hr class="hr0">
 			<div>
-				<form id="selectOrderMemberForm" autocomplete="off"
-					action="<c:url value="/BackStageSelectOrderByMember.controller"/>"
-					method="POST">
 					<label for="selectOrderMemberText">會員訂單</label> 
-					<input
+					<input autocomplete="off"
 						id="selectOrderMemberText" type="number" name="memberId" placeholder="memberId">
 					<span>
 					<input id="selectOrderMemberBtn" type="button" value="send"
 						class="btn btn-warning">
 					<span id="selectOrderMemberErr"></span>
 					</span>
-				</form>
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="selectOrderActForm" autocomplete="off"
-					action="<c:url value="/BackStageSelectOrderByActivity.controller"/>"
-					method="POST">
 					<label for="selectOrderActText">活動訂單</label> 
-					<input
+					<input autocomplete="off"
 						id="selectOrderActText" type="number" name="activityId" placeholder="activityId"> 
 					<span>
 					<input
@@ -324,7 +314,6 @@ input[type="button"] {
 						class="btn btn-warning">
 					<span id="selectOrderActErr"></span>
 					</span>
-				</form>
 			</div>
 		</div>
 
@@ -337,12 +326,8 @@ input[type="button"] {
 				value="Comment總覽" onclick="showAllComment()">
 			</div>	
 			<div>
-
-				<form id="selectCommentIdForm" autocomplete="off"
-					action="<c:url value="/BackStageSelectCommentById.controller"/>"
-					method="POST">
 					<label for="selectCommentIdText">留言查詢</label> 
-					<input
+					<input autocomplete="off"
 						id="selectCommentIdText" type="number" name="commentId" placeholder="commentId"> 
 					<span>
 					<input
@@ -350,46 +335,34 @@ input[type="button"] {
 						class="btn btn-warning">
 					<span id="selectCommentIdErr"></span>
 					</span>
-				</form>
 			</div>
 			<hr class="hr0">
 			<div>
-
-				<form id="selectCommentMemberForm" autocomplete="off"
-					action="<c:url value="/BackStageSelectCommentByMember.controller"/>"
-					method="POST">
 					<div>
 						<label  for="selectCommentMemberMText">
 							留言會員</label> 
-						<input 
+						<input  autocomplete="off"
 							id="selectCommentMemberMText" type="number"
 							name="commentmemberId" placeholder="memberId">
 					</div>
 					<div>
 						<label  for="selectCommentMemberPText">
 							哪位播客</label> 
-							<input 
+							<input autocomplete="off"
 							id="selectCommentMemberPText" type="number"
 							name="commentpodcasterId" placeholder="podcasterId">
 						
 						<span>
 						<input id="selectCommentMemberBtn" type="button" value="send"
 							class="btn btn-warning">
-						<span id="selectCommentMemerErr"></span>
+						<span id="selectCommentMemberErr"></span>
 						</span>
 					</div>
-
-				</form>
-
 			</div>
 			<hr class="hr0">
 			<div>
-
-				<form id="selectCommentPodcasterForm" autocomplete="off"
-					action="<c:url value="/BackStageSelectCommentByPodcaster.controller"/>"
-					method="POST">
 					<label for="selectCommentPodcasterText">播客所有留言</label>
-					<input id="selectCommentPodcasterText" type="number"
+					<input id="selectCommentPodcasterText" type="number" autocomplete="off"
 						name="commentpodcasterId" placeholder="podcasterId"> 
 					<span>
 					<input
@@ -397,18 +370,11 @@ input[type="button"] {
 						class="btn btn-warning">
 					<span id="selectCommentPodcasterErr"></span>
 					</span>
-				</form>
-
 			</div>
 			<hr class="hr0">
 			<div>
-
-
-				<form id="deleteCommentIdForm" autocomplete="off"
-					action="<c:url value="/BackStageDeleteCommentById.controller"/>"
-					method="POST">
 					<label for="deleteCommentIdText">刪除留言</label> 
-					<input
+					<input autocomplete="off"
 						id="deleteCommentIdText" type="number" name="commentId" placeholder="commentId"> 
 					<span>
 					<input
@@ -416,20 +382,13 @@ input[type="button"] {
 						class="btn btn-warning">
 					<span id="deleteCommentIdErr"></span>
 					</span>
-				</form>
-
 			</div>
 			<hr class="hr0">
 			<div>
-
-				<form id="deleteCommentMemberForm" autocomplete="off"
-					action="<c:url value="/BackStageDeleteCommentByMember.controller"/>"
-					method="POST">
-
 					<div>
 						<label  for="deleteCommentMemberMText">
 							刪除會員留言</label> 
-							<input 
+							<input  autocomplete="off"
 							 id="deleteCommentMemberMText" type="number"
 							name="commentMemberId"  placeholder="memberId"> 
 					</div>
@@ -437,7 +396,7 @@ input[type="button"] {
 					<div>
 						<label  for="deleteCommentMemberPText">
 							哪位播客</label> 
-						<input 
+						<input  autocomplete="off"
 							id="deleteCommentMemberPText" type="number"
 							name="commentPodcasterId"  placeholder="podcasterId">
 						<span>
@@ -446,9 +405,6 @@ input[type="button"] {
 						<span id="deleteCommentMemberErr"></span>
 						</span>
 					</div>
-
-				</form>
-
 			</div>
 
 		</div>
@@ -906,6 +862,62 @@ input[type="button"] {
 		}
 	}
 	}
+
+	function processTicketOrder(conn,input){
+		let ajaxtable=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", conn, true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		console.log("conn:"+conn);
+		console.log("input:"+input);
+		xhr.send("input="+input);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type = xhr.getResponseHeader("Content-Type");
+				let selectTicketOrder = JSON.parse(xhr.responseText);
+				if(selectTicketOrder[0]==null){
+					console.log("NO RESULT!");
+					ajaxtable.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>"
+				}
+
+				let content="";
+				
+				for(var i=0;i<selectTicketOrder.length;i++){
+				content+=
+				"<table  class='ta'>"
+				+"<tr>"	
+				+"<th>TicketOrderId</th>"	
+				+"<th colspan='2'>OrderDate</th>"
+				+"<th>MemberId</th>"
+				+"<th>ActivityId</th>"
+				+"<th>OrderPrice</th>"
+				+"</tr>"
+				+"<tr>"
+				+"<td rowspan='3'>"+selectTicketOrder[i].ticketOrderId+"</td>"
+				+"<td colspan='2'>"+selectTicketOrder[i].orderDate+"</td>"
+				+"<td>"+selectTicketOrder[i].memberId+"</td>"
+				+"<td>"+selectTicketOrder[i].activityId+"</td>"
+				+"<td>"+selectTicketOrder[i].orderPrice+"</td>"
+				+"</tr>"
+				+"<tr>"
+				+"<th colspan='2'>ShippingAddress</th>"
+				+"<th>BNO</th>"
+				+"<th>InVoiceTitle</th>"
+				+"<th>TotalAmount</th>"
+				+"</tr>"
+				+"<tr>"
+				+"<td colspan='2'>"+selectTicketOrder[i].shippingAddress+"</td>"
+				+"<td>"+selectTicketOrder[i].bno+"</td>"
+				+"<td>"+selectTicketOrder[i].invoiceTitle+"</td>"
+				+"<td>"+selectTicketOrder[i].totalAmount+"</td>"
+				+"</tr>"
+				+"</table>"				
+			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+				ajaxtable.innerHTML=content;
+		}
+	}
+}
 
 	
 	

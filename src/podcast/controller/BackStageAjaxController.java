@@ -173,11 +173,85 @@ public class BackStageAjaxController {
 		OrderTicketBean oBean = bDao.selectOrderById(orderId);
 		java.util.List<OrderTicketBean> oList = new ArrayList<OrderTicketBean>();
 		oList.add(oBean);
-		m.addAttribute("oList", oList);
 
 		return oList;
 	}
 
+	@PostMapping(path = { "/BackStageSelectOrderByMember" })
+	public  @ResponseBody java.util.List<OrderTicketBean> selectOrderByMember(@RequestParam(value = "input") Integer memberId,
+			Model m) {
+		
+		java.util.List<OrderTicketBean> oList = bDao.selectOrderByMember(memberId);
+
+		return oList;
+	}
+
+	@PostMapping(path = { "/BackStageSelectOrderByActivity" })
+	public @ResponseBody java.util.List<OrderTicketBean> selectOrderByActivity(@RequestParam(name = "input") Integer activityId,
+			Model m) {
+		
+		java.util.List<OrderTicketBean> oList = bDao.selectOrderByActivity(activityId);
+
+		return oList;
+	}
+
+	//ProgramComment AJAX Function======================================================
 	
-	
+	@PostMapping(path = { "/BackStageSelectCommentById" })
+	public @ResponseBody java.util.List<ProgramCommentBean> SelectCommentByID(@RequestParam(name = "inputm") Integer commentId,
+			Model m) {
+		
+		ProgramCommentBean pBean = bDao.selectCommentById(commentId);
+		ArrayList<ProgramCommentBean> pList = new ArrayList<ProgramCommentBean>();
+		pList.add(pBean);
+
+		return pList;
+	}
+
+	@PostMapping(path = { "/BackStageSelectCommentByMember" })
+	public @ResponseBody java.util.List<ProgramCommentBean> SelectCommentByMember(
+			@RequestParam(name = "inputm") Integer commentmemberId,
+			@RequestParam(name = "inputp") Integer commentpodcasterId, Model m) {
+		
+		java.util.List<ProgramCommentBean> pList = bDao.selectCommentByMember(commentmemberId, commentpodcasterId);
+
+		return pList;
+	}
+
+	@PostMapping(path = { "/BackStageSelectCommentByPodcaster" })
+	public @ResponseBody java.util.List<ProgramCommentBean> SelectCommentByPodcaster(
+			@RequestParam(name = "inputm") Integer commentpodcasterId, Model m) {
+		
+		java.util.List<ProgramCommentBean> pList = bDao.selectCommentByPodcaster(commentpodcasterId);
+		m.addAttribute("pList", pList);
+
+		return pList;
+	}
+
+	@PostMapping(path = { "/BackStageDeleteCommentById" })
+	public @ResponseBody java.util.List<ProgramCommentBean> DeleteCommentById( 
+			@RequestParam(name = "inputm") Integer commentId,
+			Model m) {
+		
+		ProgramCommentBean pBean = bDao.selectCommentById(commentId);
+		ArrayList<ProgramCommentBean> pList = new ArrayList<ProgramCommentBean>();
+		pList.add(pBean);
+		
+		bDao.deleteComment(commentId);
+
+		return pList;
+	}
+
+	@PostMapping(path = { "/BackStageDeleteCommentByMember" })
+	public @ResponseBody java.util.List<ProgramCommentBean> DeleteCommentByMember(
+			@RequestParam(name = "inputm") Integer commentMemberId,
+			@RequestParam(name = "inputP") Integer commentPodcasterId, Model m) {
+		
+		java.util.List<ProgramCommentBean> pList = bDao.selectCommentByMember(commentMemberId, commentPodcasterId);
+
+		bDao.deleteCommentByMember(commentMemberId, commentPodcasterId);
+
+
+		return pList;
+	}
 }

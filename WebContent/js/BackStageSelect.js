@@ -131,37 +131,61 @@
 		
 		var selectOrderIdBtn=document.getElementById("selectOrderIdBtn");
 		selectOrderIdBtn.onclick=function(){
-			var selectOrderIdText=document.getElementById("selectOrderIdText").value;
 			
-			if(!selectOrderIdText){
+				//按下按鈕就先清空結果&其他欄位的值
+				document.getElementById("ajaxTable").innerHTML="";
+				document.getElementById("selectOrderMemberText").value="";
+				document.getElementById("selectOrderActText").value="";
+				//清空其他ERR訊息
+				document.getElementById("selectOrderMemberErr").innerHTML="";
+				document.getElementById("selectOrderActErr").innerHTML="";
+			let input=document.getElementById("selectOrderIdText").value;
+			if(!input){
 				document.getElementById("selectOrderIdErr").innerHTML="請輸入TicketOrderId";
 				return false;
-			}	
-			document.getElementById("selectOrderIdForm").submit();
+			}
+				
+			processTicketOrder("BackStageSelectOrderById",input);
 			return true;
 		}
 		
 		var selectOrderMemberBtn=document.getElementById("selectOrderMemberBtn");
 		selectOrderMemberBtn.onclick=function(){
-			var selectOrderMemberText=document.getElementById("selectOrderMemberText").value;
-			
-			if(!selectOrderMemberText){
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectOrderIdText").value="";
+			document.getElementById("selectOrderActText").value="";
+			//清空其他ERR訊息
+			document.getElementById("selectOrderIdErr").innerHTML="";
+			document.getElementById("selectOrderActErr").innerHTML="";
+
+			let input=document.getElementById("selectOrderMemberText").value;
+			if(!input){
 				document.getElementById("selectOrderMemberErr").innerHTML="請輸入MemberId";
 				return false;
 			}	
-			document.getElementById("selectOrderMemberForm").submit();
+			processTicketOrder("BackStageSelectOrderByMember",input);
 			return true;
 		}
 		
 		var selectOrderActBtn=document.getElementById("selectOrderActBtn");
 		selectOrderActBtn.onclick=function(){
-			var selectOrderActText=document.getElementById("selectOrderActText").value;
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectOrderIdText").value="";
+			document.getElementById("selectOrderMemberText").value="";
+			//清空其他ERR訊息
+			document.getElementById("selectOrderIdErr").innerHTML="";
+			document.getElementById("selectOrderMemberErr").innerHTML="";
 			
-			if(!selectOrderActText){
+			let input=document.getElementById("selectOrderActText").value;
+			if(!input){
 				document.getElementById("selectOrderActErr").innerHTML="請輸入ActivityId";
 				return false;
 			}	
-			document.getElementById("selectOrderActForm").submit();
+			processTicketOrder("BackStageSelectOrderByActivity",input);
 			return true;
 		}
 		
@@ -169,49 +193,107 @@
 		
 		var selectCommentIdBtn=document.getElementById("selectCommentIdBtn");
 		selectCommentIdBtn.onclick=function(){
-			var selectCommentIdText=document.getElementById("selectCommentIdText").value;
-			
-			if(!selectCommentIdText){
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectCommentMemberMText").value="";
+			document.getElementById("selectCommentMemberPText").value="";
+			document.getElementById("selectCommentPodcasterText").value="";
+			document.getElementById("deleteCommentIdText").value="";
+			document.getElementById("deleteCommentMemberMText").value="";
+			document.getElementById("deleteCommentMemberPText").value="";
+			//清空其他ERR訊息
+			document.getElementById("selectCommentMemberErr").innerHTML="";
+			document.getElementById("selectCommentPodcasterErr").innerHTML="";
+			document.getElementById("deleteCommentIdErr").innerHTML="";
+			document.getElementById("deleteCommentMemberErr").innerHTML="";
+
+			let inputm=document.getElementById("selectCommentIdText").value;
+			let inputp=33;
+			if(!inputm){
 				document.getElementById("selectCommentIdErr").innerHTML="請輸入MemberId";
 				return false;
 			}	
-			document.getElementById("selectCommentIdForm").submit();
+			processComment("BackStageSelectCommentById",inputm,inputp);
 			return true;
 		}
 		
 		var selectCommentMemberBtn=document.getElementById("selectCommentMemberBtn");
 		selectCommentMemberBtn.onclick=function(){
-			var selectCommentMemberMText=document.getElementById("selectCommentMemberMText").value;
-			var selectCommentMemberPText=document.getElementById("selectCommentMemberPText").value;
 			
-			if(!selectCommentMemberMText){
-				document.getElementById("selectCommentMemerErr").innerHTML="請輸入MemberId & PodcasterId";
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectCommentIdText").value="";
+			document.getElementById("selectCommentPodcasterText").value="";
+			document.getElementById("deleteCommentIdText").value="";
+			document.getElementById("deleteCommentMemberMText").value="";
+			document.getElementById("deleteCommentMemberPText").value="";
+			//清空其他ERR訊息
+			document.getElementById("selectCommentIdErr").innerHTML="";
+			document.getElementById("selectCommentPodcasterErr").innerHTML="";
+			document.getElementById("deleteCommentIdErr").innerHTML="";
+			document.getElementById("deleteCommentMemberErr").innerHTML="";
+			
+			let inputm=document.getElementById("selectCommentMemberMText").value;
+			let inputp=document.getElementById("selectCommentMemberPText").value;
+			if(!inputm){
+				document.getElementById("selectCommentMemberErr").innerHTML="請輸入MemberId & PodcasterId";
 				return false;
-			}else if(!selectCommentMemberPText){
-				document.getElementById("selectCommentMemerErr").innerHTML="請輸入MemberId & PodcasterId";
+			}else if(!inputp){
+				document.getElementById("selectCommentMemberErr").innerHTML="請輸入MemberId & PodcasterId";
 				return false;
 			}
-			document.getElementById("selectCommentMemberForm").submit();
+			processComment("BackStageSelectCommentByMember",inputm,inputp);
 			return true;
 		}
 		
 		var selectCommentPodcasterBtn=document.getElementById("selectCommentPodcasterBtn");
 		selectCommentPodcasterBtn.onclick=function(){
-			var selectCommentPodcasterText=document.getElementById("selectCommentPodcasterText").value;
 			
-			if(!selectCommentPodcasterText){
+				//按下按鈕就先清空結果&其他欄位的值
+				document.getElementById("ajaxTable").innerHTML="";
+				document.getElementById("selectCommentMemberMText").value="";
+				document.getElementById("selectCommentMemberPText").value="";
+				document.getElementById("selectCommentIdText").value="";
+				document.getElementById("deleteCommentIdText").value="";
+				document.getElementById("deleteCommentMemberMText").value="";
+				document.getElementById("deleteCommentMemberPText").value="";
+				//清空其他ERR訊息
+				document.getElementById("selectCommentMemberErr").innerHTML="";
+				document.getElementById("selectCommentIdErr").innerHTML="";
+				document.getElementById("deleteCommentIdErr").innerHTML="";
+				document.getElementById("deleteCommentMemberErr").innerHTML="";
+			
+			let inputm=document.getElementById("selectCommentPodcasterText").value;
+			let inputp=33;
+			if(!inputm){
 				document.getElementById("selectCommentPodcasterErr").innerHTML="請輸入PodcasterId";
 				return false;
 			}	
-			document.getElementById("selectCommentPodcasterForm").submit();
+			processComment("BackStageSelectCommentByPodcaster",inputm,inputp);
 			return true;
 		}
 		
 		var deleteCommentIdBtn=document.getElementById("deleteCommentIdBtn");
 		deleteCommentIdBtn.onclick=function(){
-			var deleteCommentIdText=document.getElementById("deleteCommentIdText").value;
 			
-			if(!deleteCommentIdText){
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectCommentMemberMText").value="";
+			document.getElementById("selectCommentMemberPText").value="";
+			document.getElementById("selectCommentIdText").value="";
+			document.getElementById("selectCommentPodcasterText").value="";
+			document.getElementById("deleteCommentMemberMText").value="";
+			document.getElementById("deleteCommentMemberPText").value="";
+			//清空其他ERR訊息
+			document.getElementById("selectCommentMemberErr").innerHTML="";
+			document.getElementById("selectCommentIdErr").innerHTML="";
+			document.getElementById("selectCommentPodcasterErr").innerHTML="";
+			document.getElementById("deleteCommentMemberErr").innerHTML="";
+			
+			let inputm=document.getElementById("deleteCommentIdText").value;
+			let inputp=33;
+			if(!inputm){
 				document.getElementById("deleteCommentIdErr").innerHTML="請輸入CommentId";
 				return false;
 			}
@@ -219,7 +301,7 @@
 			var r=confirm("確定要刪除此Comment?")
 			if(r==true){
 		
-				document.getElementById("deleteCommentIdForm").submit();
+				processComment("BackStageDeleteCommentById",inputm,inputp);
 				return true;
 			}else{
 		
@@ -230,13 +312,26 @@
 		
 		var deleteCommentMemberBtn=document.getElementById("deleteCommentMemberBtn");
 		deleteCommentMemberBtn.onclick=function(){
-			var deleteCommentMemberMText=document.getElementById("deleteCommentMemberMText").value;
-			var deleteCommentMemberPText=document.getElementById("deleteCommentMemberPText").value;
 			
-			if(!deleteCommentMemberMText){
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectCommentIdText").value="";
+			document.getElementById("selectCommentPodcasterText").value="";
+			document.getElementById("deleteCommentIdText").value="";
+			document.getElementById("selectCommentMemberMText").value="";
+			document.getElementById("selectCommentMemberPText").value="";
+			//清空其他ERR訊息
+			document.getElementById("selectCommentIdErr").innerHTML="";
+			document.getElementById("selectCommentPodcasterErr").innerHTML="";
+			document.getElementById("deleteCommentIdErr").innerHTML="";
+			document.getElementById("selectCommentMemberErr").innerHTML="";
+			
+			let inputm=document.getElementById("deleteCommentMemberMText").value;
+			let inputp=document.getElementById("deleteCommentMemberPText").value;
+			if(!inputm){
 				document.getElementById("deleteCommentMemberErr").innerHTML="請輸入MemberId & PodcasterId";
 				return false;
-			}else if(!deleteCommentMemberPText){
+			}else if(!inputp){
 				document.getElementById("deleteCommentMemberErr").innerHTML="請輸入MemberId & PodcasterId";
 				return false;
 			}
@@ -244,13 +339,13 @@
 			var r=confirm("確定要刪除Comment?")
 			if(r==true){
 		
-				document.getElementById("deleteCommentIdForm").submit();
+				processComment("BackStageDeleteCommentByMemberd",inputm,inputp);
 				return true;
 			}else{
 		
 			}
 		}
-		
+		//0924 20:34做到這，剩下JSP下方的processComment()實作
 		//Category Function===========================================
 		
 		var setNewCategoryBtn=document.getElementById("setNewCategoryBtn");
