@@ -97,14 +97,12 @@ public class AfterSubProgram {
 	    	SubProgramListDAO sdao2 = (SubProgramListDAO)context.getBean("SubProgramListDAO");	    	
 	    	List<SubscriptionBean> subRecordList=sdao2.selectBySubMemeberId(loginMember.getMemberId());	    	
 	    	subRecordList.get(0).getPodcasterId();//訂閱的播客
-	    	MemberDAO memberDao = (MemberDAO)context.getBean("MemberDAO");
-	    	MemberBean memberBean = memberDao.selectPodcaster(subRecordList.get(0).getPodcasterId());
-	    	//訂閱的頻道、訂閱的起訖日、費用。
 	    
 	    	
+	    
 	    	
+	    	//訂閱的頻道、訂閱的起訖日、費用。
 	    	System.out.println("---------訂閱--------------");
-	    	
 	    	System.out.println(subRecordList.get(0).getMemberId());
 	    	System.out.println(subRecordList.get(0).getSubdateEnd());
 	    	System.out.println(subRecordList.get(0).getSubdateStart());
