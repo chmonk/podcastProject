@@ -254,4 +254,38 @@ public class BackStageAjaxController {
 
 		return pList;
 	}
+	
+	
+//Category AJAX Function==========================================================
+	
+	@PostMapping(path = { "/BackStageSetNewCategory" })
+	public @ResponseBody java.util.List<CategoryBean> SetNewCategory(@RequestParam(name = "inputo") String categoryName,
+			Model m) throws Exception {
+		
+		boolean testify = bDao.setNewCategory(categoryName);
+		if (testify == false) {
+			
+			java.util.List<CategoryBean> cList = new ArrayList<CategoryBean>();
+			return cList;
+		}
+		
+		java.util.List<CategoryBean> cList = cDao.selectAll();
+		return cList;
+	}
+
+	@PostMapping(path = { "/BackStageUpdateCategoryById" })
+	public @ResponseBody java.util.List<CategoryBean> UpdateCayegory(
+			@RequestParam(name = "inputn") String categoryNewName,
+			@RequestParam(name="inputo")Integer categoryId,
+			Model m) throws Exception {
+
+		CategoryBean cBean = new CategoryBean();
+		cBean.setCategoryId(categoryId);
+		cBean.setCategoryName(categoryNewName);
+		bDao.updateCategory(categoryId, cBean);
+		java.util.List<CategoryBean> cList=cDao.selectAll();
+		
+
+		return cList;
+	}
 }

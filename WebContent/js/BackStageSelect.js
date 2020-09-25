@@ -357,34 +357,52 @@
 		
 			}
 		}
-		//0924 20:34做到這，剩下JSP下方的processComment()實作
+
 		//Category Function===========================================
-		
+		let ajaxTable=document.getElementById("ajaxTable");
+
 		var setNewCategoryBtn=document.getElementById("setNewCategoryBtn");
 		setNewCategoryBtn.onclick=function(){
-			var setNewCategoryText=document.getElementById("setNewCategoryText").value;
-			
-			if(!setNewCategoryText){
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("upgradeCategoryIdText").value="";
+			document.getElementById("upgradeCategoryNameText").value="";
+			//清空所有ERR訊息
+			document.getElementById("setNewCategoryErr").innerHTML="";
+			document.getElementById("upgradeCategoryErr").innerHTML="";
+
+			let inputo=document.getElementById("setNewCategoryText").value;
+			let inputn=33;
+			if(!inputo){
 				document.getElementById("setNewCategoryErr").innerHTML="請輸入CategoryName";
 				return false;
 			}	
-			document.getElementById("setNewCategoryForm").submit();
+			processCategory("BackStageSetNewCategory",inputo,inputn);
 			return true;
 		}
 		
 		var upgradeCategoryBtn=document.getElementById("upgradeCategoryBtn");
 		upgradeCategoryBtn.onclick=function(){
-			var upgradeCategoryIdText=document.getElementById("upgradeCategoryIdText").value;
-			var upgradeCategoryNameText=document.getElementById("upgradeCategoryNameText").value;
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("setNewCategoryText").value="";
+			//清空所有ERR訊息
+			document.getElementById("setNewCategoryErr").innerHTML="";
+			document.getElementById("upgradeCategoryErr").innerHTML="";
+
+			let inputo=document.getElementById("upgradeCategoryIdText").value;
+			let inputn=document.getElementById("upgradeCategoryNameText").value;
 			
-			if(!upgradeCategoryIdText){
+			if(!inputo){
 				document.getElementById("upgradeCategoryErr").innerHTML="請輸入CategoryId & CategoryNewName";
 				return false;
-			}else if(!upgradeCategoryNameText){
+			}else if(!inputn){
 				document.getElementById("upgradeCategoryErr").innerHTML="請輸入CategoryId & CategoryNewName";
 				return false;
 			}
-			document.getElementById("upgradeCategoryForm").submit();
+			processCategory("BackStageUpdateCategoryById",inputo,inputn);
 			return true;
 		}
 		

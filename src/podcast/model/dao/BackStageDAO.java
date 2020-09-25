@@ -162,18 +162,19 @@ public class BackStageDAO implements IBackStageDAO {
 	// CategoryFunction============================================================
 
 	public boolean setNewCategory(String categoryName) throws Exception {
-//		CategoryDAO cDao=new CategoryDAO();
-//		Session session = sessionFactory.getCurrentSession();
-//		String hqlstr="from CategoryBean where categoryName=:categoryName";
-//		Query<CategoryBean> query = session.createQuery(hqlstr,CategoryBean.class);
-//		query.setParameter("categoryName", categoryName);
-//		if(query.list().size()==0) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		String hqlstr="from CategoryBean where categoryName=:categoryName";
+		Query<CategoryBean> query = session.createQuery(hqlstr,CategoryBean.class);
+		query.setParameter("categoryName", categoryName);
+		
+		if(query.list().size()==0) {
 		CategoryBean cBean = new CategoryBean();
 		cBean.setCategoryName(categoryName);
 		cDao.insert(cBean);
 		return true;
-//		}
-//		return false;
+		}
+		return false;
 
 	}
 

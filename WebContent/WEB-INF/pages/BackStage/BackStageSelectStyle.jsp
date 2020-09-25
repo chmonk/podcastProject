@@ -418,11 +418,8 @@ input[type="button"] {
 			</div>
 
 			<div>
-				<form id="setNewCategoryForm" autocomplete="off"
-					action="<c:url value="/BackStageSetNewCategory.controller"/>"
-					method="POST">
 					<label for="setNewCategoryText">新增類別</label> 
-					<input id="setNewCategoryText" 
+					<input id="setNewCategoryText"  autocomplete="off"
 					type="text" name="categoryName" placeholder="categoryName"> 
 					<span>
 					<input
@@ -430,22 +427,18 @@ input[type="button"] {
 						class="btn btn-warning">
 					<span id="setNewCategoryErr"></span>
 					</span>
-				</form>
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="upgradeCategoryForm" autocomplete="off"
-					action="<c:url value="/BackStageUpdateCategoryById.controller"/>"
-					method="POST">
 					<div>
 						<label for="upgradeCategoryIdText">修改類別</label> 
-						<input
+						<input  autocomplete="off"
 							id="upgradeCategoryIdText" type="number" name="categoryId" placeholder="categoryId">
 					</div>
 
 					<div>
 						<label for="upgradeCategoryNameText">新類別名</label> 
-						<input
+						<input  autocomplete="off"
 							id="upgradeCategoryNameText" type="text" name="categoryNewName" placeholder="categoryName">
 						<span>
 						<input id="upgradeCategoryBtn"
@@ -453,8 +446,6 @@ input[type="button"] {
 						<span id="upgradeCategoryErr"></span>
 						</span>
 					</div>
-
-				</form>
 			</div>
 
 		</div>
@@ -966,6 +957,45 @@ function processComment(conn,inputm,inputp){
 				+"</tr>"
 				+"</table>"		
 			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+				ajaxtable.innerHTML=content;
+		}
+	}
+}
+
+
+function processCategory(conn,inputo,inputn){
+		let ajaxtable=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", conn, true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		console.log("conn:"+conn);
+		console.log("inputo:"+inputo);
+		console.log("inputn:"+inputn);
+		xhr.send("inputo="+inputo+"&inputn="+inputn);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type = xhr.getResponseHeader("Content-Type");
+				let selectCategory = JSON.parse(xhr.responseText);
+				if(selectCategory[0]==null){
+					console.log("NO RESULT!");
+					ajaxtable.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>"
+				}
+
+				let content=
+				"<table class='ta'>"
+				+"<tr>"
+				+"<th>CategoryId</th>"
+				+"<th>CategoryName</th>"
+				+"</tr>";
+				for(var i=0;i<selectCategory.length;i++){
+				content+=
+				+"<tr>"
+				+"<td>"+selectCategory[i].categoryId+"</td>"
+				+"<td>"+selectCategory[i].categoryName+"</td>"
+				+"</tr>";		
+			}    
+				content+="</table>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 				ajaxtable.innerHTML=content;
 		}
 	}
