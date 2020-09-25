@@ -367,4 +367,72 @@ public class BackStageAjaxController {
 		return aList;
 	}
 	
+//Browsing History======================================================================
+	
+	@PostMapping(path = { "/SelectHistoryById" })
+	public @ResponseBody java.util.List<HistoryBean> SelectHistoryById(
+			@RequestParam(name = "input") Integer historyId,
+			Model m) throws Exception {
+		
+		HistoryBean hBean=bDao.selectHistoryById(historyId);
+		java.util.List<HistoryBean> hList = new ArrayList<HistoryBean>();
+		hList.add(hBean);
+		return hList;
+	}
+	
+	@PostMapping(path = { "/SelectHistoryByMember" })
+	public @ResponseBody java.util.List<HistoryBean> SelectHistoryByMember(
+			@RequestParam(name = "input") Integer memberId,
+			Model m) throws Exception {
+		
+		java.util.List<HistoryBean> hList = bDao.selectHistoryByMember(memberId);
+		
+		return hList;
+	}
+
+	@PostMapping(path = { "/SelectHistoryByPodcaster" })
+	public  @ResponseBody java.util.List<HistoryBean> SelectHistoryByPodcaster(
+			@RequestParam(name = "input") Integer podcasterId,
+			Model m) throws Exception {
+		
+		java.util.List<HistoryBean> hList = bDao.selectHistoryByPodcaster(podcasterId);
+
+		return hList;
+	}
+	
+
+	@PostMapping(path = { "/SelectHistoryByLastListen" })
+	public @ResponseBody java.util.List<HistoryBean> SelectHistoryByLastListen(
+			@RequestParam(name = "input") String lastListen,
+			Model m) throws Exception {
+		
+		Date date;
+		java.util.List<HistoryBean> hList=new ArrayList<HistoryBean>();
+		try {
+			date=Date.valueOf(lastListen);
+			hList = bDao.selectHistoryByLastListen(date);
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+		return hList;
+	}
+	
+	@PostMapping(path = { "/DeleteHistoryByDate" })
+	public @ResponseBody java.util.List<HistoryBean> DeleteHistoryByDate(
+			@RequestParam(name = "input") String deleteDate,
+			Model m) throws Exception {
+		
+		Date date;
+		java.util.List<HistoryBean> hList=new ArrayList<HistoryBean>();
+		try {
+			date=Date.valueOf(deleteDate);
+			hList=bDao.deleteHistoryByDate(date);
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+		//已經改寫DAO，但是要看看是否有效
+		return hList;
+	}
+	
+	
 }

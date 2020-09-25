@@ -269,7 +269,7 @@ public class BackStageDAO implements IBackStageDAO {
 		return query.list();
 	}
 
-	public boolean deleteHistoryByDate(Date setPoInteger) {
+	public List<HistoryBean> deleteHistoryByDate(Date setPoInteger) {
 		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = "from HistoryBean where lastListen <:setPoInteger";
 		Query<HistoryBean> query = session.createQuery(hqlstr, HistoryBean.class);
@@ -278,7 +278,7 @@ public class BackStageDAO implements IBackStageDAO {
 		for (HistoryBean hBean : list) {
 			session.delete(hBean);
 		}
-		return true;
+		return list;
 	}
 
 	// income
