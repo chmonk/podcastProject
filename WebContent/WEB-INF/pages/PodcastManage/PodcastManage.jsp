@@ -45,7 +45,7 @@
 <body>
 
 <div class="container">
-        <h1 style="text-align:center;">${LoginOK.name}的活動列表</h1><br>
+        <h1 style="text-align:center;">${LoginOK.name}的頻道列表</h1><br>
         <div class="row col-md-6 col-md-offset-3 custyle">
             <table class="table table-striped custab">
                 <thead>
