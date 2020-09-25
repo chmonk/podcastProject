@@ -18,29 +18,24 @@
             background-attachment: fixed;
         }
         .custab {
-
             border: 1px solid #ccc;
             padding: 5px;
             margin: 5% 0;
             box-shadow: 3px 3px 2px #ccc;
             transition: 0.5s;
         }
-
         .custab:hover {
             box-shadow: 3px 3px 0px transparent;
             transition: 0.5s;
         }
-
         .name {
             width: 300px;
         }
-
         th,
         tr {
             text-align: center;
             background-color: white;
         }
-
         h1 {
             color: white;
         }
@@ -50,7 +45,7 @@
 <body>
 
 <div class="container">
-        <h1 style="text-align:center;">${LoginOK.name}的活動列表</h1><br>
+        <h1 style="text-align:center;">${LoginOK.name}的頻道列表</h1><br>
         <div class="row col-md-6 col-md-offset-3 custyle">
             <table class="table table-striped custab">
                 <thead>
@@ -108,9 +103,7 @@
 <!-- </table> -->
 
 <script type="text/javascript">
-
 function delConfirm(clicked_name){
-
 	var r=confirm("確定要刪除此podcast?")
 	if(r==true){
 		
@@ -121,7 +114,6 @@ function delConfirm(clicked_name){
 		
 	}
 }
-
 </script>
 
 </body>

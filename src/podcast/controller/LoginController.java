@@ -51,9 +51,9 @@ public class LoginController {
 
 		
 		System.out.println("account & password= "+account+" "+password);
-		MemberBean memberbean = new MemberBean();
-		MemberBean mbean=null;
-		
+		MemberBean mbean = null;
+		MemberBean memberbean = new MemberBean();		
+
     	ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
     	

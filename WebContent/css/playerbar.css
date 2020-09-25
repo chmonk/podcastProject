@@ -25,6 +25,7 @@ a {
 
 /* 控制播放條位置 fa-fa chart 顏色 */ 
 .player {
+	z-index:9999;
 	color: #FFFFFF	;
 	height: 48px;
 	width: 100%;
