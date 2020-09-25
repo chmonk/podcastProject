@@ -11,4 +11,5 @@ public interface IHistoryDao {
 	public List<HistoryBean> selectByMember(Integer memberId);
 	public List<HistoryBean> selectByPodcast(Integer podcastId);
 	public List<HistoryBean> selectByPublisher(Integer publisherId);
+	public List<HistoryBean> selectAll();
 }

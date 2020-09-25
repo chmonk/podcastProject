@@ -12,6 +12,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Component
 @Entity
 @Table(name = "subscription")
@@ -52,21 +54,23 @@ public class SubscriptionBean {
 	}
 
 	@Column(name = "SUBDATESTART")
-	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public Date getSubdateStart() {
 		return subdateStart;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public void setSubdateStart(Date subdateStart) {
 		this.subdateStart = subdateStart;
 	}
 
 	@Column(name = "SUBDATEEND")
-	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public Date getSubdateEnd() {
 		return subdateEnd;
 	}
 
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public void setSubdateEnd(Date subdateEnd) {
 		this.subdateEnd = subdateEnd;
 	}

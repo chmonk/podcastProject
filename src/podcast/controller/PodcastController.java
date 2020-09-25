@@ -44,7 +44,9 @@ public class PodcastController {
     	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
     	//Integer memberId=(Integer) request.getAttribute("memberId");
 //    	Integer memberId=20;
-    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
+
+    	List<uploadPodcastBean> upList=upDao.selectAllFromMemberAll(memberId);
+
     	m.addAttribute("upList",upList);
     	request.setAttribute("upList", upList);
 		
@@ -85,6 +87,7 @@ public class PodcastController {
 		public String podcastModifyProcess(@RequestParam("title")String title,
 								 @RequestParam("podcastInfo")String podcastInfo,
 								 @RequestParam("radioP")Integer openPayment,
+								 @RequestParam("category")Integer category,
 								 @RequestParam("podcastId")Integer podcastId,
 								 HttpServletRequest request,
 								 Model m) throws Exception {
@@ -99,6 +102,7 @@ public class PodcastController {
 	    	ubean.setTitle(title);
 	    	ubean.setPodcastInfo(podcastInfo);
 	    	ubean.setOpenPayment(openPayment);
+	    	ubean.setCategoryId(category);
 	    	upDao.update(podcastId, ubean);
 	    	
 	    	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
@@ -106,7 +110,7 @@ public class PodcastController {
 	    	MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
 			Integer memberId = memberBean.getMemberId();
 			
-	    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
+	    	List<uploadPodcastBean> upList=upDao.selectAllFromMemberAll(memberId);
 	    	m.addAttribute("upList",upList);
 	    	request.setAttribute("upList", upList);
 			

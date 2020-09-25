@@ -109,7 +109,7 @@
 			<div class="col-lg-3"></div>
 			<div class="col-lg-6">
 				<h1 class="text-center animated slideInDown"
-					style="color: #fff; font-weight: bold;">修改會員</h1>
+					style="color: #fff; font-weight: bold;">修改會員資料</h1>
 				<div id="ui" class="text-center">
 					<form class="form-group" action="updateMemberProcess" method="POST"
 						enctype='multipart/form-data'>
@@ -209,18 +209,20 @@
 						</div>
 						<br>
 
-						<div  class="resources" style=" display: none;">
+<!-- 						<div  class="resources" style=" display: none;"> -->
+						<div>
 							<label>銀行帳號：</label> <input type="text" name="bankAccount"
 								class="form-control"  value="${MemberBean.bankAccount}">
 						</div>
 						<br>
 
-						<div  class="resources" style=" display: none;">
+<!-- 						<div  class="resources" style=" display: none;"> -->
+						<div>
 							<label>頻道月費：</label> <select class="form-control" name="monthlyPayment" >
 								<option value="-1">---請選擇---</option>
-								<c:forEach items="${MemberBean.account}" var="d" varStatus="i">
-								<option value="${MemberBean.monthlyPayment}" selected>${MemberBean.monthlyPayment}</option>
-								</c:forEach>
+								<option value=0 selected>免費</option>
+								<option value=100>100元</option>
+								<option value=300>300元</option>
 							</select>
 						</div>
 						<br>

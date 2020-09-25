@@ -37,14 +37,14 @@ public class SubOrderController {
     	SubProgramListDAO sdao2 = (SubProgramListDAO)context.getBean("SubProgramListDAO");
     	List<SubscriptionBean> subRecordList=sdao2.selectBySubMemeberId(loginMember.getMemberId());
     	
-    	//訂閱的頻道、訂閱的起訖日、費用。
+    	//訂閱的頻道、訂閱的起訖日、費用。正式使用時以下需遮起來，否則無資料的時候會報錯
     	System.out.println("---------訂閱--------------");
     	
-    	System.out.println(subRecordList.get(0).getMemberId());
-    	System.out.println(subRecordList.get(0).getSubdateEnd());
-    	System.out.println(subRecordList.get(0).getSubdateStart());
-    	System.out.println(subRecordList.get(0).getMonthlyPayment());	    	
-    	System.out.println(subRecordList.get(0).getReceipt());	    	
+//    	System.out.println(subRecordList.get(0).getMemberId());
+//    	System.out.println(subRecordList.get(0).getSubdateEnd());
+//    	System.out.println(subRecordList.get(0).getSubdateStart());
+//    	System.out.println(subRecordList.get(0).getMonthlyPayment());	    	
+//    	System.out.println(subRecordList.get(0).getReceipt());	    	
 
     	System.out.println("---------訂閱--------------");
     	m.addAttribute("subRecordList", subRecordList);

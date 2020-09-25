@@ -11,78 +11,70 @@
 <meta name="author" content="AnchiaoChang">
 <title>新增單集</title>
 </head>
-<style>
-* {
-	margin: 0 auto;
-}
+ <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
 
-fieldset {
-	width: 500px;
-	border: 2px solid;
-	border-radius: 15px;
-	/* 	background-color: beige; */
-}
+  <style type="text/css">
+    body {
+      background-image: url(<c:url value='/img/banner/b1.jpg' />);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
 
-.div1 {
-	margin: 15px;
-	border-bottom: 1px dashed grey;
-}
+    #ui {
+      border-radius: 10px;
+      background-color: #333;
+      padding: 50px;
+      opacity: 0.8;
+      box-shadow: 2px 2px 2px 2px #000;
+      animation-delay: 2s;
+      animation-duration: 2s;
 
-.div2 {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 15px;
-}
+    }
 
-.div2 input {
-	margin: 1px
-}
+    #ui label {
+      color: #fff;
+      font-weight: 800;
 
-.notice {
-	font-size: 10px;
-}
+    }
 
-.wrong_contnet {
-	color: red;
-	font-size: small;
-}
+    #contact_showcase {
+      margin-top: 70px;
+    }
 
-.right_contnet {
-	color: green;
-	font-size: small;
-}
-</style>
+    .button {
+      font-weight: 800;
+
+    }
+  </style>
 
 <body>
 
-	<%
-		String user = (String) request.getAttribute("user");
-	%>
-	${user}您好!
+ <div class="container">
+    <div class="row">
+		<div class="col-lg-3"></div>
+     	<div class="col-lg-6">
 
-	<fieldset>
-		<legend>新增單集</legend>
+        <h1 class="text-center animated slideInDown" style="color: #fff; font-weight: bold;">新增單集</h1>
+		<div id="ui" class="text-center">
 
-		<form:form id="totalform" action="addPodcastProcess" method="POST"
-			modelAttribute="uploadPodcastBean" enctype="multipart/form-data" >
-			<div class="div1">
-				<form:label path="title" for="" class="l1">單集名稱:</form:label>
-				<form:input path="title" id="name" name="podname" /><span id="empty"></span>
-				<div class="notice"></div>
-			</div>
+          <form id="totalform" class="form-group" action="addPodcastProcess" method="POST" enctype="multipart/form-data">
+		   <label>單集名稱: </label>
+            <input type="text" name="title" id="name" class="form-control" placeholder="請輸入單集名稱" required>
+            <br>
 
-
-			<div class="div1">
-				<form:label path="podcastInfo" for="" class="l1">單集簡介:</form:label>
-				<form:textarea path="podcastInfo"  id="info" name="podinfo"/>
-				<span id="idsp2"></span>
-				<div class="notice"></div>
-			</div>
-
-			<div class="div1">
-				<label for="" class="l1">頻道類別:</label> 
-				<select name="category" >
-					<option value=1>喜劇娛樂</option>
+			<div class="row">
+             <div class="col-lg-6 col-md-6">
+            <label>付費狀態: </label>
+            <select class="form-control" name="openPayment">
+              <option value=0 checked>免費</option>
+              <option value=1>訂閱</option>
+            </select>
+              </div>
+             <div class="col-lg-6 col-md-6">
+            <label>頻道類別: </label>
+            <select class="form-control" name="category">
+              <option value=1 checked>喜劇娛樂</option>
 					<option value=2>生活文化</option>
 					<option value=3>男女話題</option>
 					<option value=4>名人精選</option>
@@ -98,36 +90,34 @@ fieldset {
 					<option value=14>科技趨勢</option>
 					<option value=15>音樂藝術</option>
 					<option value=16>教育學習</option>
-				</select>
-				<span id="idsp1"></span>
-				<div class="notice"></div>
-			</div>
-			<div class="div1">
-				<label for="" class="l1">付費狀態:</label> <input type=radio
-					name="openPayment" value=0 checked/>免費 <input type=radio
-					name="openPayment" value=1 />訂閱 <span id="idsp1"></span>
-				<div class="notice"></div>
-			</div>
-			<div class="div1">
-				<label for="" class="l1">上傳單集:</label> <input type="file"
-					name="podcastfile" size="40" id="audio">
-				<div class="notice"></div>
-			</div>
+            </select>
+              </div>
+            <br>
+            
+            <label>單集簡介: </label>
+            <textarea name="podcastInfo" id="info" class="form-control" rows="3" placeholder="請輸入單集簡介..."
+              required> </textarea>
+            <br>
 
-			<div class="div1">
-				<label for="" class="l1">單集封面:</label> <input type="file"
-					name="podcastpic" size="40" id="pic">
-				<div class="notice"></div>
-			</div>
+            <label>單集封面: </label>
+            <input type="file" name="podcastpic" id="pic" class="form-control" required>
+            <br>
+            <label>上傳單集: </label>
+            <input type="file" name="podcastfile" id="audio" class="form-control" required>
+            <br>
 
-			<div class="div2">
-				<input type="button" value="送出" id="send" onclick=function(){checknull()}/> 
-				<input type="reset" value="清除"/>
-				<p id="err" ></p>
-			</div>
-		</form:form>
+            <div class="button">
+              <input type="button" id="send" value="送出" onclick= function(){checknull()} class="btn btn-danger btn-block btn-lg"
+                style="box-shadow: 2px 2px 2px gray; ">
+                <p id="err" style="background-color: white" ></p>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
 
-	</fieldset>
 <!-- onclick=function(){columnTestify} -->
 <script>
 var send=document.getElementById("send");

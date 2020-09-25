@@ -51,11 +51,9 @@ public class LoginController {
 
 		
 		System.out.println("account & password= "+account+" "+password);
+		MemberBean mbean = null;
+		MemberBean memberbean = new MemberBean();		
 
-		MemberBean mbean = new MemberBean();
-
-		
-		
     	ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
     	
@@ -66,35 +64,32 @@ public class LoginController {
 
 		try {
 
+
 				   mbean = mdao.checkIdPassword(account,password);
 
 			if (mbean != null) {
 
+
+				mbean = mdao.checkIdPassword(account,password);
+			if (mbean != null) {
+
 				// 登入成功, 將mb物件放入Session範圍內，重新組裝   識別字串為"LoginOK"
 				
-				request.getSession().setMaxInactiveInterval(1800);
-				
 				MemberBean packMemberBean = new MemberBean();
-				
-
 				packMemberBean.setAccount(mbean.getAccount());
 				packMemberBean.setMemberId(mbean.getMemberId());
 				packMemberBean.setRole(mbean.getRole());
 				packMemberBean.setAddress(mbean.getAddress());
 				packMemberBean.setName(mbean.getName());
-
 				packMemberBean.setNickname(mbean.getNickname());
-
-
-				
+				packMemberBean.setNickname(mbean.getNickname());
 
 				model.addAttribute("LoginOK", packMemberBean);
 			} else {
 				// 登入失敗, 放相關的錯誤訊息到 errorMsgMap 之內
 				result.rejectValue("invalidCredentials", "", "該帳號不存在或密碼錯誤");
 				return loginForm;
-			}
-		} catch (RuntimeException ex) {
+			}}}catch (RuntimeException ex) {
 			result.rejectValue("invalidCredentials", "", ex.getMessage());
 			ex.printStackTrace();
 			return loginForm;
