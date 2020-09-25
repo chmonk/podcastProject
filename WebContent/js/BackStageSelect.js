@@ -411,25 +411,39 @@
 		
 		var selectSubMemberBtn=document.getElementById("selectSubMemberBtn");
 		selectSubMemberBtn.onclick=function(){
-			var selectSubMemberText=document.getElementById("selectSubMemberText").value;
-			
-			if(!selectSubMemberText){
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectSubPodcasterText").value="";
+			//清空所有ERR訊息
+			document.getElementById("selectSubMemberErr").innerHTML="";
+			document.getElementById("selectSubPodcasterErr").innerHTML="";
+
+			let input=document.getElementById("selectSubMemberText").value;
+			if(!input){
 				document.getElementById("selectSubMemberErr").innerHTML="請輸入MemberId";
 				return false;
 			}	
-			document.getElementById("selectSubMemberForm").submit();
+			processSub("SelectSubscriptionByMember",input);
 			return true;
 		}
 		
 		var selectSubPodcasterBtn=document.getElementById("selectSubPodcasterBtn");
 		selectSubPodcasterBtn.onclick=function(){
-			var selectSubPodcasterText=document.getElementById("selectSubPodcasterText").value;
-			
-			if(!selectSubPodcasterText){
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectSubMemberText").value="";
+			//清空所有ERR訊息
+			document.getElementById("selectSubMemberErr").innerHTML="";
+			document.getElementById("selectSubPodcasterErr").innerHTML="";
+
+			let input=document.getElementById("selectSubPodcasterText").value;
+			if(!input){
 				document.getElementById("selectSubPodcasterErr").innerHTML="請輸入PodcasterId";
 				return false;
 			}	
-			document.getElementById("selectSubPodcasterForm").submit();
+			processSub("SelectSubscriptionByPodcaster",input);
 			return true;
 		}
 		
@@ -437,52 +451,97 @@
 		
 		var selectActIdBtn=document.getElementById("selectActIdBtn");
 		selectActIdBtn.onclick=function(){
-			var selectActIdText=document.getElementById("selectActIdText").value;
-			
-			if(!selectActIdText){
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectActPodcasterText").value="";
+			document.getElementById("selectActDateText").value="";
+			document.getElementById("deleteActIdText").value="";
+			//清空所有ERR訊息
+			document.getElementById("selectActIdErr").value="";
+			document.getElementById("selectActPodcasterErr").value="";
+			document.getElementById("selectActDateErr").value="";
+			document.getElementById("deleteActIdErr").value="";
+
+			let input=document.getElementById("selectActIdText").value;
+			if(!input){
 				document.getElementById("selectActIdErr").innerHTML="請輸入ActivityId";
 				return false;
 			}	
-			document.getElementById("selectActIdForm").submit();
+			processActivity("SelectActivityById",input);
 			return true;
 		}
 		
 		var selectActPodcasterBtn=document.getElementById("selectActPodcasterBtn");
 		selectActPodcasterBtn.onclick=function(){
-			var selectActPodcasterText=document.getElementById("selectActPodcasterText").value;
-			
-			if(!selectActPodcasterText){
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectActIdText").value="";
+			document.getElementById("selectActDateText").value="";
+			document.getElementById("deleteActIdText").value="";
+			//清空所有ERR訊息
+			document.getElementById("selectActIdErr").value="";
+			document.getElementById("selectActPodcasterErr").value="";
+			document.getElementById("selectActDateErr").value="";
+			document.getElementById("deleteActIdErr").value="";
+
+			let input=document.getElementById("selectActPodcasterText").value;
+			if(!input){
 				document.getElementById("selectActPodcasterErr").innerHTML="請輸入PodcasterId";
 				return false;
 			}	
-			document.getElementById("selectActPodcasterForm").submit();
+			processActivity("SelectActivityByPodcaster",input);
 			return true;
 		}
 		
 		var selectActDateBtn=document.getElementById("selectActDateBtn");
 		selectActDateBtn.onclick=function(){
-			var selectActDateText=document.getElementById("selectActDateText").value;
-			
-			if(!selectActDateText){
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectActPodcasterText").value="";
+			document.getElementById("selectActIdText").value="";
+			document.getElementById("deleteActIdText").value="";
+			//清空所有ERR訊息
+			document.getElementById("selectActIdErr").value="";
+			document.getElementById("selectActPodcasterErr").value="";
+			document.getElementById("selectActDateErr").value="";
+			document.getElementById("deleteActIdErr").value="";
+
+			let input=document.getElementById("selectActDateText").value;
+
+			if(!input){
 				document.getElementById("selectActDateErr").innerHTML="請輸入ActivityDate";
 				return false;
 			}	
-			document.getElementById("selectActDateForm").submit();
+			processActivity("SelectActivityByDate",input);
 			return true;
 		}
 		
 		var deleteActIdBtn=document.getElementById("deleteActIdBtn");
 		deleteActIdBtn.onclick=function(){
-			var deleteActIdText=document.getElementById("deleteActIdText").value;
-			
-			if(!deleteActIdText){
+
+			//按下按鈕就先清空結果&其他欄位的值
+			document.getElementById("ajaxTable").innerHTML="";
+			document.getElementById("selectActPodcasterText").value="";
+			document.getElementById("selectActDateText").value="";
+			document.getElementById("selectActIdText").value="";
+			//清空所有ERR訊息
+			document.getElementById("selectActIdErr").value="";
+			document.getElementById("selectActPodcasterErr").value="";
+			document.getElementById("selectActDateErr").value="";
+			document.getElementById("deleteActIdErr").value="";
+
+			let input=document.getElementById("deleteActIdText").value;
+			if(!input){
 				document.getElementById("deleteActIdErr").innerHTML="請輸入ActivityId";
 				return false;
 			}
 			
 			var r=confirm("確定要刪除此Activity?")
 			if(r==true){
-				document.getElementById("deleteActIdForm").submit();
+				processActivity("DeleteActivityByID",input);
 				return true;
 			}else{
 		

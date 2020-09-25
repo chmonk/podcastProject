@@ -460,32 +460,22 @@ input[type="button"] {
 			</div>
 
 			<div>
-				<form id="selectSubMemberForm" autocomplete="off"
-					action="<c:url value="/SelectSubscriptionByMember.controller"/>"
-					method="POST">
 					<label for="selectSubMemberText">會員訂閱一覽</label> <input
-						id="selectSubMemberText" type="number" name="memberId"
+					autocomplete="off"	id="selectSubMemberText" type="number" name="memberId"
 						placeholder="MemberId"> <span> <input
 						id="selectSubMemberBtn" type="button" value="send"
 						class="btn btn-warning"><span id="selectSubMemberErr"></span>
 					</span>
-
-				</form>
 			</div>
 			<hr class="hr0">
 
 			<div>
-				<form id="selectSubPodcasterForm" autocomplete="off"
-					action="<c:url value="/SelectSubscriptionByPodcaster.controller"/>"
-					method="POST">
 					<label for="selectSubPodcasterText">播客訂閱一覽</label>
 					<input id="selectSubPodcasterText" type="number" name="podcasterId"
-						placeholder="PodcasterId"> <span> <input
+					autocomplete="off"	placeholder="PodcasterId"> <span> <input
 						id="selectSubPodcasterBtn" type="button" value="send"
 						class="btn btn-warning"><span id="selectSubPodcasterErr"></span>
 					</span>
-
-				</form>
 			</div>
 
 		</div>
@@ -500,56 +490,39 @@ input[type="button"] {
 			</div>
 
 			<div>
-				<form id="selectActIdForm" autocomplete="off"
-					action="<c:url value="/SelectActivityById.controller"/>"
-					method="POST">
-					<label for="selectActIdText">活動查詢</label> <input
+					<label for="selectActIdText">活動查詢</label> <input autocomplete="off"
 						id="selectActIdText" type="number" name="activityId"
 						placeholder="ActivityId"> <span> <input
 						id="selectActIdBtn" type="button" value="send"
 						class="btn btn-warning"> <span id="selectActIdErr"></span>
 					</span>
-
-				</form>
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="selectActPodcasterForm" autocomplete="off"
-					action="<c:url value="/SelectActivityByPodcaster.controller"/>"
-					method="POST">
-					<label for="selectActPodcasterText">播客活動查詢</label> <input
+					<label for="selectActPodcasterText">播客活動查詢</label> <input autocomplete="off"
 						id="selectActPodcasterText" type="number" name="podcasterId"
 						placeholder="PodcasterId"> <span> <input
 						id="selectActPodcasterBtn" type="button" value="send"
 						class="btn btn-warning"> <span id="selectActPodcasterErr"></span>
 					</span>
-				</form>
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="selectActDateForm" autocomplete="off"
-					action="<c:url value="/SelectActivityByDate.controller"/>"
-					method="POST">
-					<label for="selectActDateText">依日期搜尋活動</label> <input
+					<label for="selectActDateText">依日期搜尋活動</label> <input autocomplete="off"
 						id="selectActDateText" type="text" name="activityDate"
 						placeholder="YYYY-mm-dd"> <span> <input
 						id="selectActDateBtn" type="button" value="send"
 						class="btn btn-warning"> <span id="selectActDateErr"></span>
 					</span>
-				</form>
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="deleteActIdForm" autocomplete="off"
-					action="<c:url value="/DeleteActivityByID.controller"/>"
-					method="POST">
-					<label for="deleteActIdText">刪除活動</label> <input
+					<label for="deleteActIdText">刪除活動</label> <input autocomplete="off"
 						id="deleteActIdText" type="number" name="activityId"
 						placeholder="ActivityId"> <span> <input
 						id="deleteActIdBtn" type="button" value="send"
 						class="btn btn-warning"> <span id="deleteActIdErr"></span>
 					</span>
-				</form>
 			</div>
 
 		</div>
@@ -776,7 +749,7 @@ input[type="button"] {
 	//動態生成表格JS 
 	//分區功能:Member===================
 	function processMember(conn,input){
-		let ajaxtable=document.getElementById("ajaxTable");
+		let ajaxtableM=document.getElementById("ajaxTable");
 		let xhr = new XMLHttpRequest();
 		xhr.open("POST", conn, true);
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -790,7 +763,8 @@ input[type="button"] {
 				let selectMember = JSON.parse(xhr.responseText);
 				if(selectMember[0]==null){
 					console.log("NO RESULT!");
-					ajaxtable.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>"
+					ajaxtableM.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>";
+					return;
 				}
 
 				let content="";
@@ -849,13 +823,13 @@ input[type="button"] {
 			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 				
 				
-				ajaxtable.innerHTML=content;
+				ajaxtableM.innerHTML=content;
 		}
 	}
 	}
 
 	function processTicketOrder(conn,input){
-		let ajaxtable=document.getElementById("ajaxTable");
+		let ajaxtableT=document.getElementById("ajaxTable");
 		let xhr = new XMLHttpRequest();
 		xhr.open("POST", conn, true);
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -869,7 +843,9 @@ input[type="button"] {
 				let selectTicketOrder = JSON.parse(xhr.responseText);
 				if(selectTicketOrder[0]==null){
 					console.log("NO RESULT!");
-					ajaxtable.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>"
+					ajaxtableT.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>";
+					return;
+
 				}
 
 				let content="";
@@ -905,14 +881,14 @@ input[type="button"] {
 				+"</tr>"
 				+"</table>"				
 			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-				ajaxtable.innerHTML=content;
+				ajaxtableT.innerHTML=content;
 		}
 	}
 }
 
 
 function processComment(conn,inputm,inputp){
-		let ajaxtable=document.getElementById("ajaxTable");
+		let ajaxtableCC=document.getElementById("ajaxTable");
 		let xhr = new XMLHttpRequest();
 		xhr.open("POST", conn, true);
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -927,7 +903,8 @@ function processComment(conn,inputm,inputp){
 				let selectComment = JSON.parse(xhr.responseText);
 				if(selectComment[0]==null){
 					console.log("NO RESULT!");
-					ajaxtable.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>"
+					ajaxtableCC.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>";
+					return;
 				}
 
 				let content="";
@@ -957,14 +934,14 @@ function processComment(conn,inputm,inputp){
 				+"</tr>"
 				+"</table>"		
 			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-				ajaxtable.innerHTML=content;
+				ajaxtableCC.innerHTML=content;
 		}
 	}
 }
 
 
 function processCategory(conn,inputo,inputn){
-		let ajaxtable=document.getElementById("ajaxTable");
+		let ajaxtableC=document.getElementById("ajaxTable");
 		let xhr = new XMLHttpRequest();
 		xhr.open("POST", conn, true);
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -979,27 +956,141 @@ function processCategory(conn,inputo,inputn){
 				let selectCategory = JSON.parse(xhr.responseText);
 				if(selectCategory[0]==null){
 					console.log("NO RESULT!");
-					ajaxtable.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>"
+					ajaxtableC.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>";
+					return;
 				}
-
-				let content=
-				"<table class='ta'>"
+				
+				let content="<table class='ta'>"
 				+"<tr>"
 				+"<th>CategoryId</th>"
 				+"<th>CategoryName</th>"
 				+"</tr>";
 				for(var i=0;i<selectCategory.length;i++){
 				content+=
-				+"<tr>"
+				"<tr>"
 				+"<td>"+selectCategory[i].categoryId+"</td>"
 				+"<td>"+selectCategory[i].categoryName+"</td>"
 				+"</tr>";		
 			}    
 				content+="</table>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-				ajaxtable.innerHTML=content;
+				ajaxtableC.innerHTML=content;
 		}
 	}
 }
+
+function processSub(conn,input){
+		let ajaxtableS=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", conn, true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		console.log("conn:"+conn);
+		console.log("input:"+input);
+		xhr.send("input="+input);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type = xhr.getResponseHeader("Content-Type");
+				let selectSub = JSON.parse(xhr.responseText);
+				if(selectSub[0]==null){
+					console.log("NO RESULT!");
+					ajaxtableS.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>";
+					return;
+				}
+				
+				let content="<table class='ta'>"
+				+"<tr>"
+				+"<th>SubOrderId</th>"
+				+"<th>SubDateStart</th>"
+				+"<th>SubDateEnd</th>"
+				+"<th>MonthlyPayment</th>"
+				+"<th>MemberId</th>"
+				+"<th>PodcasterId</th>"
+				+"<th>CreditCardNumber</th>"
+				+"<th>Receipt</th>"
+				+"</tr>";
+				for(var i=0;i<selectSub.length;i++){
+				content+=
+				"<tr>"
+				+"<td>"+selectSub[i].subOrderId+"</td>"
+				+"<td>"+selectSub[i].subdateStart+"</td>"
+				+"<td>"+selectSub[i].subdateEnd+"</td>"
+				+"<td>"+selectSub[i].monthlyPayment+"</td>"
+				+"<td>"+selectSub[i].memberId+"</td>"
+				+"<td>"+selectSub[i].podcasterId+"</td>"
+				+"<td>"+selectSub[i].creditCardNumber+"</td>"
+				+"<td>"+selectSub[i].receipt+"</td>"
+				+"</tr>";		
+			}    
+				content+="</table>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+				ajaxtableS.innerHTML=content;
+		}
+	}
+}
+
+
+function processActivity(conn,input){
+		let ajaxtableA=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", conn, true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		console.log("conn:"+conn);
+		console.log("input:"+input);
+		xhr.send("input="+input);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type = xhr.getResponseHeader("Content-Type");
+				let selectActivity = JSON.parse(xhr.responseText);
+				if(selectActivity[0]==null){
+					console.log("NO RESULT!");
+					ajaxtableA.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>";
+					return;
+				}
+				
+				let content="<table class='ta'>";
+				
+				for(var i=0;i<selectActivity.length;i++){
+					content+=
+					"<tr>"
+					+"<th>ActivityId</th>"
+					+"<th>ActivityName</th>"
+					+"<th>ActivityDate</th>"
+					+"<th colspan='4'>ActivityContent</th>"
+					+"<th>ActivityLocation</th>"	
+					+"</tr>"
+					+"<tr>"
+					+"<td rowspan='3'>"+selectActivity[i].activityId+"</td>"
+					+"<td>"+selectActivity[i].activityName+"</td>"
+					+"<td>"+selectActivity[i].activityDate+"</td>"
+					+"<td colspan='4'>"+selectActivity[i].activityContent+"</td>"
+					+"<td>"+selectActivity[i].activityLocation+"</td>"
+					+"</tr>"
+					+"<tr>"
+					+"<th>ActivityTime</th>"
+					+"<th>PodcasterId</th>"
+					+"<th>ActivityPrice</th>"
+					+"<th>ActivityMaxPeople</th>"
+					+"<th>Stock</th>"
+					+"<th>ActivityStatus</th>"
+					+"<th>ActivityImg</th>"
+					+"</tr>"
+					+"<tr>"
+					+"<td>"+selectActivity[i].activityTime+"</td>"
+					+"<td>"+selectActivity[i].podcasterId+"</td>"
+					+"<td>"+selectActivity[i].activityPrice+"</td>"
+					+"<td>"+selectActivity[i].activityMaxPeople+"</td>"
+					+"<td>"+selectActivity[i].stock+"</td>"
+					+"<td>"+selectActivity[i].activityStatus+"</td>"
+					+"<td>"+selectActivity[i].activityImg+"</td>"
+					+"</tr>";
+				}
+				content+="</table>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+				ajaxtableA.innerHTML=content;
+			}    
+				
+		}
+	}
+
 
 	
 	
@@ -1007,7 +1098,5 @@ function processCategory(conn,inputo,inputn){
 
 	<script type="text/javascript"
 		src="<c:url value='/js/BackStageSelect.js'/>"></script>
-
-
 </body>
 </html>

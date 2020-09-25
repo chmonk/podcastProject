@@ -288,4 +288,83 @@ public class BackStageAjaxController {
 
 		return cList;
 	}
+	
+	//Subscription Function===============================================================
+	
+	@PostMapping(path = { "/SelectSubscriptionByMember" })
+	public @ResponseBody java.util.List<SubscriptionBean> SelectSubscriptionByMember(
+			@RequestParam(name = "input") Integer memberId,
+			Model m) throws Exception {
+		
+		
+		java.util.List<SubscriptionBean> sList = bDao.selectSubscriptionByMember(memberId);
+		
+		return sList;
+	}
+	
+	@PostMapping(path = { "/SelectSubscriptionByPodcaster" })
+	public @ResponseBody java.util.List<SubscriptionBean> SelectSubscriptionByPodcaster(
+			@RequestParam(name = "input") Integer podcasterId,
+			Model m) throws Exception {
+	
+		java.util.List<SubscriptionBean> sList = bDao.selectSubscriptionByPodcaster(podcasterId);
+		return sList;
+	}
+	
+//Activity Function=======================================================
+	
+	@PostMapping(path = { "/SelectActivityById" })
+	public @ResponseBody java.util.List<ActivityBean> SelectActivityById(
+			@RequestParam(name = "input") Integer activityId,
+			Model m) throws Exception {
+			
+		ActivityBean aBean=bDao.selectActivity(activityId);
+		java.util.List<ActivityBean> aList = new ArrayList<ActivityBean>();
+		aList.add(aBean);
+
+		
+		return aList;
+		
+	}
+	
+	@PostMapping(path = { "/SelectActivityByPodcaster" })
+	public @ResponseBody java.util.List<ActivityBean> SelectActivityByPodcaster(
+			@RequestParam(name = "input") Integer podcasterId,
+			Model m) throws Exception {
+			
+		java.util.List<ActivityBean> aList=bDao.selectActivityByPodcaster(podcasterId);
+		return aList;
+		
+	}
+	
+	@PostMapping(path = { "/SelectActivityByDate" })
+	public @ResponseBody java.util.List<ActivityBean> SelectActivityByDate(
+			@RequestParam(name = "input") String activityDate,
+			Model m) throws Exception {
+			
+		Date date;
+		java.util.List<ActivityBean> aList=new ArrayList<ActivityBean>();
+		try {
+			date=Date.valueOf(activityDate);
+			aList=bDao.selectActivitybyDate(date);
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+			
+			return aList;
+	}
+	
+	@PostMapping(path = { "/DeleteActivityByID" })
+	public @ResponseBody java.util.List<ActivityBean> DeleteActivityById(
+			@RequestParam(name = "input") Integer activityId,
+			Model m) throws Exception {
+		
+		ActivityBean aBean=bDao.selectActivity(activityId);
+		java.util.List<ActivityBean> aList = new ArrayList<ActivityBean>();
+		aList.add(aBean);
+		bDao.deleteActivity(activityId);
+		
+		return aList;
+	}
+	
 }
