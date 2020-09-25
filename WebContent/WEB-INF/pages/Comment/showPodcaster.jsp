@@ -222,6 +222,44 @@ border-radius: 50%;
 	 text-align: right;
 }
 
+#tab-panel {
+    max-width: 690px;
+    margin: 0 auto;
+    padding-top: 50px;
+    font-family: arial;
+}
+#tab-panel .tabs {
+    margin-bottom: 20px;
+    background: #FFF;
+    overflow: hidden;
+    text-align: center;
+}
+#tab-panel .tabs a {
+    float: left;
+    display: block;
+    width: 33.33%;
+    padding: 15px 0;
+    border: 1px solid #CCC;
+    font-size: 16px;
+    color: #333;
+    box-sizing: border-box;
+    transition: all .3s;
+}
+#tab-panel .tabs a.active {
+    background: #09C;
+    color: #FFF;
+}
+#tab-panel .tab-content {
+    border: 1px solid #CCC;
+}
+#tab-panel .tab-content > li {
+    display: none;
+    padding: 20px;
+    font-size: 14px;
+    color: #666;
+    line-height: 25px;
+}
+
 </style>
 <script type="text/javascript">
 	window.onload=function(){
@@ -241,7 +279,7 @@ border-radius: 50%;
 </head>
 <body>
 	<div class="head">
-		<jsp:include page="../header_banner.jsp" flush="true " />
+		<jsp:include page="../header_banner_test.jsp" flush="true " />
 		
 	</div>
 	<div class="showPodcasterBody">
@@ -257,6 +295,9 @@ border-radius: 50%;
 				<div>
 					<span id='need_to_sub'></span>
 					<button id="hide_alreadysub_btn" type="button" class="btn btn-info" style="display:'';">已訂閱</button>
+					<form action="/SpringWebProject/AfterSubProgram.controller">
+						<input id='check_sub' type="submit" value="訂閱" class="btn btn-danger">
+					</form>
 				</div>
 			</div>
 		</div>
@@ -285,8 +326,15 @@ border-radius: 50%;
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="podcastList">
+			<div class="col-md-6">	
+			<div id="tab-panel">
+			  <div class="tabs">
+			    <a>節目表單</a>
+			    <a>訂閱表單</a>
+			  </div>
+			  <ul class="tab-content">
+				  <li>
+				  <div class="podcastList">
 					<div>
 						<h2 class="h2">節目列表</h2>
 						<div class="container2">
@@ -334,14 +382,13 @@ border-radius: 50%;
 						</div>
 					</div>
 				</div>	
-				
-				<div class="podcastList2">
-					<form action="/SpringWebProject/AfterSubProgram.controller">
-		<input id='check_sub' type="submit" value="訂閱" class="btn btn-danger">
-		<div id="d1" style="display: none">
+				  </li>
+				  <li>
+				  <div class="podcastList2">
+					
+			<div id="d1" style="display: none">
 			<div>
 				<c:forEach var="alreadySub" items="${subProgram}">
-					<div class="container">
 						<div class="card-media">
 							<!-- media container -->
 							<div class="card-media-object-container">
@@ -381,15 +428,12 @@ border-radius: 50%;
 								</div>
 							</div>
 						</div>
-					</div>
 				</c:forEach>
-
 			</div>
 		</div>
 		<div id="d2" style="display: ''">
 			<div>
 				<c:forEach var="unalreadySub" items="${needSub}">
-					<div class="container">
 						<div class="card-media">
 							<!-- media container -->
 							<div class="card-media-object-container">
@@ -431,24 +475,40 @@ border-radius: 50%;
 								</div>
 							</div>
 						</div>
-					</div>
 				</c:forEach>
 			</div>
-		</div>
-		<hr />
-	</form>
-				
+		</div>			
 				</div>
-
-
+				  </li>
+			  </ul>
+			</div>
+			</div>
 			</div>
 		</div>
-	</div>
+
 	<div class="playbar">
 		<jsp:include page="../playerbar.jsp" flush="true " />
 	</div>
 	
 	<script type="text/javascript">
+
+	$(function(){
+	    var $tabPanel = $('#tab-panel') ,
+	        $tabs = $tabPanel.find('.tabs') ,
+	        $tab = $tabs.find('a') ,
+	        $tabContent = $tabPanel.find('.tab-content') ,
+	        $content = $tabContent.find('> li');
+	     
+	    $tab.eq(0).addClass('active');
+	    $content.eq(0).show();
+	     
+	    $tab.on('click',function(){
+	        var $tabIndex = $(this).index();
+	        $(this).addClass('active').siblings().removeClass('active');
+	        $content.eq($tabIndex).show().siblings().hide();
+	    });
+	});
+		
 		function delConfirm(clicked_name) {
 	
 			var r = confirm("確定要刪除此留言?")

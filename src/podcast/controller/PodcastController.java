@@ -206,7 +206,7 @@ public class PodcastController {
 			String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
 			// 取得到含workspace前的絕對路徑
 			String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,
-					path.indexOf("\\.metadata"));
+					path.indexOf("/.metadata"));
 
 			// 制式資料夾
 			// 節目圖片 programimg
@@ -256,7 +256,7 @@ public class PodcastController {
 			String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
 			// 取得到含workspace前的絕對路徑
 			String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,
-					path.indexOf("\\.metadata"));
+					path.indexOf("/.metadata"));
 
 			// 制式資料夾
 			// 節目圖片 programimg

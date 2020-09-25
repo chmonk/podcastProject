@@ -108,7 +108,7 @@
 
             <label>活動內容: </label>
             <textarea name="activityContent" class="form-control" rows="3" value="${aBean.activityContent}" placeholder="請輸入活動內容..."
-              required> </textarea>
+              required>${aBean.activityContent} </textarea>
             <br>
 
             <label>活動照片: </label>
