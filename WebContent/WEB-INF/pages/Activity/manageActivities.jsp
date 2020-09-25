@@ -52,10 +52,8 @@ function confirmDelete(n) {
             box-shadow: 3px 3px 0px transparent;
             transition: 0.5s;
         }
-
-        .name {
-            width: 300px;
-        }
+table{
+table-layout: fixed;}
 
         th,
         tr {
@@ -100,27 +98,30 @@ function confirmDelete(n) {
 	</div>
 
     <div class="container">
-        <h1 style="text-align:center;">${LoginOK.name}的活動列表</h1><br>
-        <div class="row col-md-6 col-md-offset-3 custyle">
+        <div class="custyle">
             <table class="table table-striped custab">
                 <thead>
-
+<tr>
+                        <td colspan="5">${LoginOK.name}的活動列表</td>
+                    </tr>
                     <a href="<c:url value='/addActivityForm' />" class="btn btn-primary btn-md pull-right">+新增活動</a>
                     <br>
                     <tr>
-                        <th class="name">名稱</th>
+                    <th>照片</th>
+                        <th align="center">名稱</th>
                         <th>日期</th>
-                        <th>庫存</th>
+                        <th>參加人數</th>
                         <th class="text-center">操作</th>
                     </tr>
                 </thead>
                 <c:forEach var="alist" varStatus="loop" items="${ActivityList}">
-                <tr>
+                <tr><td><img width="50%" src="<c:url value='${alist.activityImg}' />"></td>
+     
                     <td><a  href='<c:url value='ActivityDetail?memberId=${LoginOK.memberId}&activityId=${alist.activityId}' />'>
-						${alist.activityName}
+						<u>${alist.activityName}</u>
 			    </a></td>
-                    <td>${alist.activityDate}</td>
-                    <td>${alist.stock}張</td>
+                    <td  width="110px">${alist.activityDate}</td>
+                    <td width="90px">${alist.activityMaxPeople - alist.stock}人</td>
                     <td class="text-center">
                         <a href="#" class="btn btn-danger btn-md" onclick="confirmDelete(${alist.activityId})">刪除</a>
                     </td>
@@ -128,8 +129,8 @@ function confirmDelete(n) {
 
 </c:forEach>
                 <tr height='36' id='borderA'>
-                    <td id='borderA' align="center" colspan="4">
-                        <button type="button" class="btn btn-dark"><a href="<c:url value='/' />">回首頁</button>
+                    <td id='borderA' align="center" colspan="5">
+                   <a class="btn btn-primary" href="<c:url value='/' />">回首頁</a>
                     </td>
                 </tr>
 

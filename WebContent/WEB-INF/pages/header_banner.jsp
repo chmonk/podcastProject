@@ -146,16 +146,18 @@ nav ul ul li {
 }
 
 .img_text {
- position: absolute;
- top:-10px;
- font-size: 12px;
- color: #fff;
- border-radius: 50%;
- background-color: #F00;
- width: 20px;
- height: 20px;
- text-align: center;
- line-height: 20px;
+    position: absolute;
+    top: -10px;
+    left: 23px;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: #860707;
+    width: 22px;
+    height: 23px;
+    text-align: center;
+    line-height: 20px;
+}
 }
 
 </style>

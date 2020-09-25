@@ -50,7 +50,7 @@
 }
 
 body {
-	background-image: url(< c : url value = '/img/banner/b4.jpg'/ >);
+	background-image: url(<c:url value='/img/banner/b4.jpg' />);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;

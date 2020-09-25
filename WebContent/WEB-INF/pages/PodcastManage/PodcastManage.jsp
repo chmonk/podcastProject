@@ -71,12 +71,12 @@
 		</div>
 	</div>
 <div class="container">
-        <h1 style="text-align:center;">${LoginOK.name}的頻道列表</h1><br>
         <div class="row col-md-6 col-md-offset-3 custyle">
             <table class="table table-striped custab">
                 <thead>
                     <a href="<c:url value='/addPodcast' />" class="btn btn-primary btn-md pull-right">+新增單集</a>
                     <br>
+                    <tr><td colspan="4">${LoginOK.name}的頻道列表</td></tr>
                     <tr>
                         <th class="name">單集名稱</th>
                         <th>上傳日期</th>
@@ -88,15 +88,15 @@
                 <tr>
                 	<td>${podcast.title}</td><td>${podcast.uploadTime}</td>
                 	<td><form action="<c:url value="/modifyPodcast"/>"><input type="hidden" name="thisPodcastId" value=${podcast.podcastId}>
-                		<input type="submit" name="modify" value="修改" ></form></td>
+                		<input class="btn btn-warning" type="submit" name="modify" value="修改" ></form></td>
                 	<td><form id="${podcast.podcastId}" action="<c:url value="/processDeletePodcast"/>"  method="POST">
 						<input type="hidden" name="delPodcastId" value=${podcast.podcastId}> 
-						<input type="button" value="刪除" onclick="delConfirm(this.name)" name="${podcast.podcastId}"></form></td>
+						<input class="btn btn-danger" type="button" value="刪除" onclick="delConfirm(this.name)" name="${podcast.podcastId}"></form></td>
                 </tr>
 </c:forEach>
                 <tr height='36' id='borderA'>
                     <td id='borderA' align="center" colspan="4">
-                        <button type="button" class="btn btn-dark"><a href="<c:url value='/' />">回首頁</button>
+                       <a class="btn btn-primary" href="<c:url value='/' />">回首頁</a>
                     </td>
                 </tr>
             </table>

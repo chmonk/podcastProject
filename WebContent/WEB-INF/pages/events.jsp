@@ -216,6 +216,10 @@
 									type='hidden' name='activityLocation'
 									value='${list.activityLocation}'> <Input type='hidden'
 									name='activityMaxPeople' value='${list.activityMaxPeople}'>
+									<Input type='hidden'
+									name='stock' value='${list.stock}'>
+									<Input type='hidden'
+									name='activityImg' value='${list.activityImg}'>
 							</div>
 							<div class="checkbox">
 								<label> <input type="checkbox" required>
