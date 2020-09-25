@@ -260,10 +260,11 @@ public class HistoryDao implements IHistoryDao {
 					//"--用節目id分組 依照觀看時間反序排(新的數字小)
 					"ROW_NUMBER() over (partition by podcastId order by lastlisten desc) as sn " + 
 					//取得節目id 名稱 上傳者暱稱 觀看時間 上傳時間  使用者id 節目典籍次數 節目案讚數  所以join 所需的三table 命名為new
-					"from (select h.podcastId,h.podcastName,h.publisherId,h.lastListen,h.memberId ,m.nickname,u.uploadTime, u.likesCount,u.clickAmount,u.audioImg, u.audioPath,u.podcastInfo "+ 
+					"from (select h.podcastId,h.podcastName,h.publisherId,h.lastListen,h.memberId ,m.nickname,u.uploadTime, u.likesCount,u.clickAmount,u.audioImg, u.audioPath,u.podcastInfo, c.categoryName "+ 
 					"from browsingHistory as h "+
 					"left join uploadPodcast as u on  h.podcastId = u.podcastId " + 
-					"left join  members as m on m.memberId= u.memberId) " + 
+					"left join  members as m on m.memberId= u.memberId " + 
+					" left join category as c on c.categoryId=u.categoryId)"+
 					"as new " + 
 					//選擇使用者id
 					"where memberId= ? ) " + 
