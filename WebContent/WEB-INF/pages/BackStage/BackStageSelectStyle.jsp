@@ -919,6 +919,58 @@ input[type="button"] {
 	}
 }
 
+
+function processComment(conn,inputm,inputp){
+		let ajaxtable=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", conn, true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		console.log("conn:"+conn);
+		console.log("inputm:"+inputm);
+		console.log("inputp:"+inputp);
+		xhr.send("inputm="+inputm+"&inputp="+inputp);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type = xhr.getResponseHeader("Content-Type");
+				let selectComment = JSON.parse(xhr.responseText);
+				if(selectComment[0]==null){
+					console.log("NO RESULT!");
+					ajaxtable.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>"
+				}
+
+				let content="";
+				
+				for(var i=0;i<selectComment.length;i++){
+				content+=
+				"<table class='ta'>"
+				+"<tr>"
+				+"<th>CommentId</th>"
+				+"<th colspan='2'>CommentMsg</th>"
+				+"<th>MsgStatus</th>"
+				+"</tr>"
+				+"<tr>"
+				+"<td rowspan='3'>"+selectComment[i].commentId+"</td>"
+				+"<td colspan='2'>"+selectComment[i].commentMsg+"</td>"
+				+"<td>"+selectComment[i].msgStatus+"</td>"
+				+"</tr>"
+				+"<tr>"
+				+"<th>PodcasterId</th>"
+				+"<th>MemberId</th>"
+				+"<th>MsgDate</th>"
+				+"</tr>"
+				+"<tr>"
+				+"<td>"+selectComment[i].podcasterId+"</td>"
+				+"<td>"+selectComment[i].memberId+"</td>"
+				+"<td>"+selectComment[i].msgDate+"</td>"
+				+"</tr>"
+				+"</table>"		
+			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+				ajaxtable.innerHTML=content;
+		}
+	}
+}
+
 	
 	
 </script>

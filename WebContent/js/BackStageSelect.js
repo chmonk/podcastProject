@@ -59,6 +59,7 @@
 			document.getElementById("selectMemberAccountText").value="";
 			document.getElementById("deleteMemberText").value="";
 			//清空其他ERR訊息
+			document.getElementById("selectMemberByIdErr").innerHTML="";
 			document.getElementById("selectMemberAccountErr").innerHTML="";
 			document.getElementById("deleteMemberErr").innerHTML="";
 
@@ -83,6 +84,7 @@
 			document.getElementById("deleteMemberText").value="";
 			//清空其他ERR訊息
 			document.getElementById("selectMemberByIdErr").innerHTML="";
+			document.getElementById("selectMemberAccountErr").innerHTML="";
 			document.getElementById("deleteMemberErr").innerHTML="";
 
 			if(!selectMemberAccountText){
@@ -106,6 +108,7 @@
 			//清空其他ERR訊息
 			document.getElementById("selectMemberByIdErr").innerHTML="";
 			document.getElementById("selectMemberAccountErr").innerHTML="";
+			document.getElementById("deleteMemberErr").innerHTML="";
 
 			if(!deleteMemberText){
 				document.getElementById("deleteMemberErr").innerHTML="請輸入MemberId";
@@ -137,6 +140,7 @@
 				document.getElementById("selectOrderMemberText").value="";
 				document.getElementById("selectOrderActText").value="";
 				//清空其他ERR訊息
+				document.getElementById("selectOrderIdErr").innerHTML="";
 				document.getElementById("selectOrderMemberErr").innerHTML="";
 				document.getElementById("selectOrderActErr").innerHTML="";
 			let input=document.getElementById("selectOrderIdText").value;
@@ -158,6 +162,7 @@
 			document.getElementById("selectOrderActText").value="";
 			//清空其他ERR訊息
 			document.getElementById("selectOrderIdErr").innerHTML="";
+			document.getElementById("selectOrderMemberErr").innerHTML="";
 			document.getElementById("selectOrderActErr").innerHTML="";
 
 			let input=document.getElementById("selectOrderMemberText").value;
@@ -179,6 +184,8 @@
 			//清空其他ERR訊息
 			document.getElementById("selectOrderIdErr").innerHTML="";
 			document.getElementById("selectOrderMemberErr").innerHTML="";
+			document.getElementById("selectOrderActErr").innerHTML="";
+
 			
 			let input=document.getElementById("selectOrderActText").value;
 			if(!input){
@@ -203,6 +210,7 @@
 			document.getElementById("deleteCommentMemberMText").value="";
 			document.getElementById("deleteCommentMemberPText").value="";
 			//清空其他ERR訊息
+			document.getElementById("selectCommentIdErr").innerHTML="";
 			document.getElementById("selectCommentMemberErr").innerHTML="";
 			document.getElementById("selectCommentPodcasterErr").innerHTML="";
 			document.getElementById("deleteCommentIdErr").innerHTML="";
@@ -230,6 +238,7 @@
 			document.getElementById("deleteCommentMemberPText").value="";
 			//清空其他ERR訊息
 			document.getElementById("selectCommentIdErr").innerHTML="";
+			document.getElementById("selectCommentMemberErr").innerHTML="";
 			document.getElementById("selectCommentPodcasterErr").innerHTML="";
 			document.getElementById("deleteCommentIdErr").innerHTML="";
 			document.getElementById("deleteCommentMemberErr").innerHTML="";
@@ -259,8 +268,9 @@
 				document.getElementById("deleteCommentMemberMText").value="";
 				document.getElementById("deleteCommentMemberPText").value="";
 				//清空其他ERR訊息
-				document.getElementById("selectCommentMemberErr").innerHTML="";
 				document.getElementById("selectCommentIdErr").innerHTML="";
+				document.getElementById("selectCommentMemberErr").innerHTML="";
+				document.getElementById("selectCommentPodcasterErr").innerHTML="";
 				document.getElementById("deleteCommentIdErr").innerHTML="";
 				document.getElementById("deleteCommentMemberErr").innerHTML="";
 			
@@ -286,9 +296,10 @@
 			document.getElementById("deleteCommentMemberMText").value="";
 			document.getElementById("deleteCommentMemberPText").value="";
 			//清空其他ERR訊息
-			document.getElementById("selectCommentMemberErr").innerHTML="";
 			document.getElementById("selectCommentIdErr").innerHTML="";
+			document.getElementById("selectCommentMemberErr").innerHTML="";
 			document.getElementById("selectCommentPodcasterErr").innerHTML="";
+			document.getElementById("deleteCommentIdErr").innerHTML="";
 			document.getElementById("deleteCommentMemberErr").innerHTML="";
 			
 			let inputm=document.getElementById("deleteCommentIdText").value;
@@ -322,9 +333,10 @@
 			document.getElementById("selectCommentMemberPText").value="";
 			//清空其他ERR訊息
 			document.getElementById("selectCommentIdErr").innerHTML="";
+			document.getElementById("selectCommentMemberErr").innerHTML="";
 			document.getElementById("selectCommentPodcasterErr").innerHTML="";
 			document.getElementById("deleteCommentIdErr").innerHTML="";
-			document.getElementById("selectCommentMemberErr").innerHTML="";
+			document.getElementById("deleteCommentMemberErr").innerHTML="";
 			
 			let inputm=document.getElementById("deleteCommentMemberMText").value;
 			let inputp=document.getElementById("deleteCommentMemberPText").value;
@@ -613,7 +625,7 @@
 		
 }
 		
-//logOut=============================================================================
+//All Member=============================================================================
 	
 	document.getElementById("showAllMemberBtn").onclick=function showAllMembers(){
 		let ajaxtable=document.getElementById("ajaxTable");
