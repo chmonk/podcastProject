@@ -143,6 +143,18 @@ nav ul ul li {
 	color: white;
 }
 
+.img_text {
+ position: absolute;
+ top:-10px;
+ font-size: 12px;
+ color: #fff;
+ border-radius: 50%;
+ background-color: #F00;
+ width: 20px;
+ height: 20px;
+ text-align: center;
+ line-height: 20px;
+}
 	
 
 </style>
@@ -151,7 +163,16 @@ nav ul ul li {
 
 </head>
 <body>		
-
+<c:choose>
+   <c:when test="${ShoppingCart.itemNumber > 0}">
+      <!-- 購物車內有一項以上的商品 -->
+      <c:set var="cartContent" value="${ShoppingCart.itemNumber}"/>
+   </c:when>
+   <c:otherwise>
+      <!-- 購物車內沒有商品 -->
+      <c:set var="cartContent" value="0"/>        
+   </c:otherwise>
+</c:choose>
 <!-- header area -->
 		<header>
 			<!-- secondary menu -->
@@ -229,8 +250,9 @@ nav ul ul li {
 							                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>							
 							            </ul>        
 							           </li>
-							        <li><a href="<c:url value='ShoppingCart' />"><i class="aaaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"></i></a>
+							        <li><a href="<c:url value='ShoppingCart' />"><i class="aaaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"><span class="img_text">${cartContent}</span></i></a>
 							        </li>
+							 
 								</ul>
 							</div>
 						</c:when>
@@ -259,8 +281,9 @@ nav ul ul li {
 								                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>
 								            </ul>        
 							           </li>
-							    	<li><a href="<c:url value='ShoppingCart' />"><i class="glyphicon glyphicon-shopping-cart" style="font-size:20px;"></i></a>
+							    	<li><a href="<c:url value='ShoppingCart' />"><i class="glyphicon glyphicon-shopping-cart" style="font-size:20px;"><span class="img_text">${cartContent}</span></i></a>
 							    	</li>
+							    
 								</ul>
 							</div>
 						</c:when>

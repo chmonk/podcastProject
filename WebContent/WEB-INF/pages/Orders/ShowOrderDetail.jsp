@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html lang="en">
 
 <head>
@@ -61,7 +62,7 @@
             <table class="table table-striped custab">
                 <tr>
                     <td colspan='2'><b>出貨地址：</b>${OrderBean.shippingAddress}</td>
-                    <td colspan='2'><b>訂購日期：</b>${OrderBean.orderDate}</td>
+                    <td colspan='2'><b>訂購日期：</b>${fn:substring(OrderBean.orderDate, 0, 10)}</td>
                     <td colspan='2'><b>訂單編號：</b>${OrderBean.ticketOrderId}</td>
                 </tr>
                 <tr>
@@ -92,7 +93,7 @@
                     <td colspan="2"><b>合 計</b></td>
                 </tr>
                 <tr>
-                    <TD align="center"><b>營業稅</b></TD>
+                    <TD align="center"><b>折扣</b></TD>
                     <c:set var="VAT" value="${subtotal*0.05 + 0.0001}" />
                     <TD align="right">
                         <fmt:formatNumber value="${VAT}" pattern="#,###,###" />元</TD>

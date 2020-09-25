@@ -93,7 +93,7 @@ function confirmDelete(n) {
 						${alist.activityName}
 			    </a></td>
                     <td>${alist.activityDate}</td>
-                    <td>${alist.activityMaxPeople}張</td>
+                    <td>${alist.stock}張</td>
                     <td class="text-center">
                         <a href="#" class="btn btn-danger btn-md" onclick="confirmDelete(${alist.activityId})">刪除</a>
                     </td>

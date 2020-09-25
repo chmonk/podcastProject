@@ -162,7 +162,7 @@
 							${list.activityName}
 							<%-- 						&nbsp; <small><span class="label label-success" style="color:#F23030">票券剩餘:${list.activityMaxPeople}張</span></small> --%>
 
-							&nbsp; <small><span class="label label-danger">票券剩餘:${list.activityMaxPeople}張</span></small>
+							&nbsp; <small><span class="label label-danger">票券剩餘:${list.stock}張</span></small>
 						</h4>
 					</div>
 
