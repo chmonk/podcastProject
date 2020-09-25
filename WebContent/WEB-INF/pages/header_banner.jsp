@@ -11,7 +11,7 @@
 <!-- jquery-ui CSS -->
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<%--
+
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
@@ -30,7 +30,7 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/logo/favicon.ico">  
-		--%>
+		
 <!-- Javascript files -->
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
@@ -286,7 +286,7 @@ nav ul ul li {
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<!-- <img src="img/banner/b1.jpg" alt="..."> -->
+						<img src="img/banner/b1.jpg" alt="...">
 						<div class="container">
 							<!-- banner caption -->
 							<div class="carousel-caption slide-one">
@@ -302,7 +302,7 @@ nav ul ul li {
 						</div>
 					</div>
 					<div class="item">
-						<!-- <img src="img/banner/b2.jpg" alt="..."> -->
+						<img src="img/banner/b2.jpg" alt="...">
 						<div class="container">
 							<!-- banner caption -->
 							<div class="carousel-caption slide-two">
