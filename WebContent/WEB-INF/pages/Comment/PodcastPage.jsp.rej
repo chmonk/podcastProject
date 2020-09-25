@@ -1,9 +1,0 @@
-diff a/WebContent/WEB-INF/pages/Comment/PodcastPage.jsp b/WebContent/WEB-INF/pages/Comment/PodcastPage.jsp	(rejected hunks)
-@@ -59,6 +59,7 @@
- 	-webkit-border-radius: 7px;
- }
- 
-+<<<<<<< HEAD
- .feedback-input {
- 	color: #3c3c3c;
- 	font-family: Helvetica, Arial, sans-serif;
