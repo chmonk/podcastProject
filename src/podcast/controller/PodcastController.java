@@ -44,7 +44,9 @@ public class PodcastController {
     	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
     	//Integer memberId=(Integer) request.getAttribute("memberId");
 //    	Integer memberId=20;
+
     	List<uploadPodcastBean> upList=upDao.selectAllFromMemberAll(memberId);
+
     	m.addAttribute("upList",upList);
     	request.setAttribute("upList", upList);
 		

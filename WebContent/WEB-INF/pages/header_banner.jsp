@@ -12,8 +12,10 @@
 
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
 <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
-<%--
+
+
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
@@ -32,7 +34,7 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="img/logo/favicon.ico">  
-		--%>
+		
 <!-- Javascript files -->
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>

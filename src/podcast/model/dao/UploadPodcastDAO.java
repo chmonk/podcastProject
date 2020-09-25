@@ -84,8 +84,10 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 		return upList;
 	}
 	
+
 	
 	public List<uploadPodcastBean> selectAllFromMemberAll(Integer memberId) throws Exception {
+
 		Session session = sessionFactory.getCurrentSession();
 		String hbl = "from uploadPodcastBean where memberId=:memberId";
 
