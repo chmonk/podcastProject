@@ -45,7 +45,12 @@ $(document).ready(function(){
 </head>
 <body>
 	<div class="head">
+<<<<<<< HEAD
 		<jsp:include page="header_banner_test.jsp" flush="true " />	
+=======
+		<jsp:include page="header_banner_test.jsp" flush="true " />
+		
+>>>>>>> c858990a4fd10dd8b24e037dc2b04c3f61507b74
 	</div>
 	<div class="carousel-container col-sm-10 padcard">
 		<div class="row">

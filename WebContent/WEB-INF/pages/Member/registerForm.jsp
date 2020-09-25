@@ -156,7 +156,7 @@
 						<div>
 							<label>自我介紹：</label>
 							<textarea name="info" class="form-control" rows="5"
-								placeholder="請輸入自我介紹..." required> </textarea>
+								placeholder="請輸入自我介紹..." required></textarea>
 						</div>
 						<br>
 

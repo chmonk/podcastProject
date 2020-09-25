@@ -58,7 +58,7 @@
       <div class="col-lg-3"></div>
       <div class="col-lg-6">
 
-        <h1 class="text-center animated slideInDown" style="color: #fff; font-weight: bold;">新增活動</h1>
+        <h1 class="text-center animated slideInDown" style="color: #fff; font-weight: bold;">修改活動</h1>
 
         <div id="ui" class="text-center">
 
@@ -107,8 +107,8 @@
             <br>
 
             <label>活動內容: </label>
-            <textarea name="activityContent" class="form-control" rows="3" value="${aBean.activityContent}" placeholder="請輸入活動內容..."
-              required>${aBean.activityContent} </textarea>
+            <textarea name="activityContent" class="form-control" rows="3" value="${aBean.activityContent}" placeholder="請輸入活動內容..." required>${aBean.activityContent} </textarea>
+
             <br>
 
             <label>活動照片: </label>

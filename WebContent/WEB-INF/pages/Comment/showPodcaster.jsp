@@ -326,6 +326,7 @@ border-radius: 50%;
 					</ul>
 				</div>
 			</div>
+
 			<div class="col-md-6">	
 			<div id="tab-panel">
 			  <div class="tabs">
@@ -335,6 +336,7 @@ border-radius: 50%;
 			  <ul class="tab-content">
 				  <li>
 				  <div class="podcastList">
+
 					<div>
 						<h2 class="h2">節目列表</h2>
 						<div class="container2">
@@ -382,10 +384,11 @@ border-radius: 50%;
 						</div>
 					</div>
 				</div>	
+
 				  </li>
 				  <li>
 				  <div class="podcastList2">
-					
+				
 			<div id="d1" style="display: none">
 			<div>
 				<c:forEach var="alreadySub" items="${subProgram}">
@@ -433,7 +436,8 @@ border-radius: 50%;
 		</div>
 		<div id="d2" style="display: ''">
 			<div>
-				<c:forEach var="unalreadySub" items="${needSub}">
+				<c:forEach var="unalreadySub" items="${subProgram}">
+
 						<div class="card-media">
 							<!-- media container -->
 							<div class="card-media-object-container">
@@ -479,9 +483,11 @@ border-radius: 50%;
 			</div>
 		</div>			
 				</div>
+
 				  </li>
 			  </ul>
 			</div>
+
 			</div>
 			</div>
 		</div>
@@ -508,7 +514,7 @@ border-radius: 50%;
 	        $content.eq($tabIndex).show().siblings().hide();
 	    });
 	});
-		
+
 		function delConfirm(clicked_name) {
 	
 			var r = confirm("確定要刪除此留言?")
