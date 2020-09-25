@@ -45,7 +45,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<div class="head">
-		<jsp:include page="header_banner.jsp" flush="true " />
+		<jsp:include page="header_banner_test.jsp" flush="true " />
 		
 	</div>
 	<div class="carousel-container col-sm-10 padcard">

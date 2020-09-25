@@ -241,7 +241,7 @@ border-radius: 50%;
 </head>
 <body>
 	<div class="head">
-		<jsp:include page="../header_banner.jsp" flush="true " />
+		<jsp:include page="../header_banner_test.jsp" flush="true " />
 		
 	</div>
 	<div class="showPodcasterBody">
@@ -257,6 +257,9 @@ border-radius: 50%;
 				<div>
 					<span id='need_to_sub'></span>
 					<button id="hide_alreadysub_btn" type="button" class="btn btn-info" style="display:'';">已訂閱</button>
+					<form action="/SpringWebProject/AfterSubProgram.controller">
+						<input id='check_sub' type="submit" value="訂閱" class="btn btn-danger">
+					</form>
 				</div>
 			</div>
 		</div>
@@ -285,8 +288,9 @@ border-radius: 50%;
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="podcastList">
+			<div class="col-md-6">		
+			
+			  <div class="podcastList">
 					<div>
 						<h2 class="h2">節目列表</h2>
 						<div class="container2">
@@ -334,14 +338,12 @@ border-radius: 50%;
 						</div>
 					</div>
 				</div>	
-				
-				<div class="podcastList2">
-					<form action="/SpringWebProject/AfterSubProgram.controller">
-		<input id='check_sub' type="submit" value="訂閱" class="btn btn-danger">
-		<div id="d1" style="display: none">
+			  
+			  <div class="podcastList2">
+					
+			<div id="d1" style="display: none">
 			<div>
 				<c:forEach var="alreadySub" items="${subProgram}">
-					<div class="container">
 						<div class="card-media">
 							<!-- media container -->
 							<div class="card-media-object-container">
@@ -381,15 +383,12 @@ border-radius: 50%;
 								</div>
 							</div>
 						</div>
-					</div>
 				</c:forEach>
-
 			</div>
 		</div>
 		<div id="d2" style="display: ''">
 			<div>
-				<c:forEach var="unalreadySub" items="${needSub}">
-					<div class="container">
+				<c:forEach var="unalreadySub" items="${subProgram}">
 						<div class="card-media">
 							<!-- media container -->
 							<div class="card-media-object-container">
@@ -431,24 +430,25 @@ border-radius: 50%;
 								</div>
 							</div>
 						</div>
-					</div>
 				</c:forEach>
 			</div>
-		</div>
-		<hr />
-	</form>
-				
+		</div>			
 				</div>
 
-
+			</div>
 			</div>
 		</div>
-	</div>
+
 	<div class="playbar">
 		<jsp:include page="../playerbar.jsp" flush="true " />
 	</div>
 	
 	<script type="text/javascript">
+
+		$(function () {
+			$('#myTab li:eq(1) a').tab('show');
+		});
+		
 		function delConfirm(clicked_name) {
 	
 			var r = confirm("確定要刪除此留言?")

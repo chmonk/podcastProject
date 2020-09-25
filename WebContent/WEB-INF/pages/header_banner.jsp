@@ -9,8 +9,10 @@
 <!-- Styles -->
 
 <!-- jquery-ui CSS -->
+
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
 <%--
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -137,15 +139,19 @@ nav ul ul li {
 	display:list-item;
 	position: relative;
 }
+.aaaa{
+	color: white;
+}
 
 	
 
 </style>
-	
+
 	
 
 </head>
 <body>		
+
 <!-- header area -->
 		<header>
 			<!-- secondary menu -->
@@ -173,6 +179,7 @@ nav ul ul li {
 							<a class="h-twitter" href="#"><i class="fa fa-twitter"></i></a> <a
 								class="h-google" href="#"><i class="fa fa-google-plus"></i></a>
 							<a class="h-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+							
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -222,6 +229,8 @@ nav ul ul li {
 							                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>							
 							            </ul>        
 							           </li>
+							        <li><a href="<c:url value='ShoppingCart' />"><i class="aaaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"></i></a>
+							        </li>
 								</ul>
 							</div>
 						</c:when>
@@ -238,19 +247,20 @@ nav ul ul li {
 									<li><a href="<c:url value='/#team' />">瀏覽搜尋</a></li>
 									<li><li><a href="#">${LoginOK.name}</a>
 				         				<!-- First Tier Drop Down -->
-							            <ul class="barlist">
-							                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
-							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
-							                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
-							                <li><a href="<c:url value='/ShoppingCart' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購物結帳</a></li>
-							                <li><a href="<c:url value='/SubOrderController.controller' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
-							                <li><a href="<c:url value='/addPodcast' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳音檔</a></li>
-							                <li><a href="<c:url value='/manageActivities' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳活動</a></li>
-							                <li><a href="<c:url value='/managePodcast' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;頻道管理</a></li>
-							                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>
-							     
-							            </ul>        
+								            <ul class="barlist">
+								                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
+								                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
+								                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
+								                <li><a href="<c:url value='/ShoppingCart' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購物結帳</a></li>
+								                <li><a href="<c:url value='/SubOrderController.controller' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
+								                <li><a href="<c:url value='/addPodcast' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳音檔</a></li>
+								                <li><a href="<c:url value='/manageActivities' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳活動</a></li>
+								                <li><a href="<c:url value='/managePodcast' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;頻道管理</a></li>
+								                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>
+								            </ul>        
 							           </li>
+							    	<li><a href="<c:url value='ShoppingCart' />"><i class="glyphicon glyphicon-shopping-cart" style="font-size:20px;"></i></a>
+							    	</li>
 								</ul>
 							</div>
 						</c:when>
@@ -331,11 +341,7 @@ nav ul ul li {
 		</div>
 		
 <!-- 		banner end -->
-		
-		
-		
-		
-	
 </body>
+
 
 </html>
