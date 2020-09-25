@@ -7,14 +7,15 @@
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 <meta charset="UTF-8">
 <title>訂閱頻道紀錄</title>
 <style type="text/css">
 
-div{
-margin:25px auto;
-width:200px
-}
+.webpage{ 
+ margin:25px auto; 
+ width:200px 
+ } 
 
 h1{
 color:#FFFFFF;
@@ -68,11 +69,39 @@ table {
       border-right: none;
     }
   }
-}</style>
+  }
+.showPodcasterBody {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.showPodcasterBodyHeader {
+	padding-top: 50px;
+	/* 	border-bottom: 1px solid black;  */
+}
+</style>
 
 </head>
 <body>
+<div class="head">
+		<jsp:include page="header_banner_test.jsp" flush="true " />
+	</div>
 
+<div class="showPodcasterBody">
+		<div class="row showPodcasterBodyHeader">
+			<div class="col-md-4">
+				<div class="memberImg">
+					<img alt="" src="${podcasterData.podcastImg}">
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="memberName">${podcasterData.podcastName}</div>
+				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	
 <h1 >${LoginOK.name}的頻道訂閱紀錄</h1>
 	<table border="1">
 <thead>
@@ -91,7 +120,7 @@ table {
 </c:forEach>
 
 </table>
-<div>
+<div  class="webpage">
 <button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/" />'">回首頁</button>
 <button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/orderList" />'">票券訂購紀錄</button>
 </div>
