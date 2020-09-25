@@ -75,10 +75,8 @@ public class RegisterController {
 			};
 			
 			//email
-		String EMAIL_REGEX = "^[\w-_\.+]*[\w-_\.]\@([\w]+\.)+[\w]+[\w]$";
-		if() {
-			
-		};
+		String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		
 		if(!errors.isEmpty()) {
 				return "Member/registerForm";
 				};
