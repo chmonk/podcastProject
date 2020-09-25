@@ -227,10 +227,14 @@ border-radius: 50%;
 	window.onload=function(){
 		if ("${subscriptionPermission}"==0){
 			document.getElementById('need_to_sub').innerHTML="未訂閱此頻道，請訂閱";
-			document.getElementById('hide_alreadysub_btn').style.display='none';
-			
-			
-		}else{
+			document.getElementById('hide_alreadysub_btn').style.display='none';			
+		}else if("${subscriptionPermission}"==2){
+			document.getElementById('hide_alreadysub_btn').innerHTML="本人頻道";
+			document.getElementById('hide_alreadysub_btn').className="btn btn-success";
+			document.getElementById('d1').style.display='';
+			document.getElementById('check_sub').style.display='none';
+			document.getElementById('d2').style.display='none';
+			}else{
 			document.getElementById('d1').style.display='';
 			document.getElementById('check_sub').style.display='none';
 			document.getElementById('d2').style.display='none';
