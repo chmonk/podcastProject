@@ -174,7 +174,7 @@
 						<br>
 
 						<div>
-							<label>住址：<font color="red">${err."address"}</font></label> <input type="text" name="address"
+							<label>住址：<font color="red">${err.address}</font></label> <input type="text" name="address"
 								class="form-control" placeholder="台北市中正區重慶南路一段122號" required>
 						</div>
 						<br>

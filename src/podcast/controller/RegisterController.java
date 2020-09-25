@@ -2,9 +2,11 @@ package podcast.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -70,13 +72,61 @@ public class RegisterController {
 		Map<String, String> errors = new HashMap<String, String>();
 		request.setAttribute("err", errors);
 			//帳號
-		if(account.equals("曹圈圈")) {
-			errors.put("account", "account is required");
+			if(account==null || account.length()==0) {
+				errors.put("account", "account is required");
 			};
-			
+			//密碼
+			if(password==null || password.length()==0) {
+				errors.put("password", "password is required");
+				};
+			//name
+			if(name==null || name.length()==0) {
+				errors.put("name", "name is required");
+				};
+			//nickname
+			if(nickname==null || nickname.length()==0) {
+				errors.put("nickname", "nickname is required");
+				};
+			//birthday
+			if(birthday==null || birthday.length()==0) {
+				errors.put("birthday", "birthday is required");
+				};		
+			//registerDate
+			if(registerDate==null || registerDate.length()==0) {
+				errors.put("registerDate", "registerDate is required");
+				};
+			//自我介紹
+			if(info==null || info.length()==0) {
+				errors.put("info", "info is required");
+				};
 			//email
-		String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-		
+			String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+			Pattern p =Pattern.compile(EMAIL_REGEX);
+			Matcher mr= p.matcher(email);
+					
+			if(email==null || email.length()==0) {
+				errors.put("email", "account is required");
+				};
+			if(!mr.matches()) {
+				errors.put("email", "格式錯誤");
+				};
+					
+			//cellphone
+			if(cellphone==null || cellphone.length()==0) {
+				errors.put("cellphone", "cellphone is required");
+				};
+			//file
+			if(file==null || file.length()==0) {
+				errors.put("file", "file is required");
+				};
+			//role
+			if(role==null || role.length()==0) {
+				errors.put("role", "role is required");
+				};
+			//creditCardNumber
+			if(creditCardNumber==null || creditCardNumber.length()==0) {
+				errors.put("creditCardNumber", "creditCardNumber is required");
+				};	
 		if(!errors.isEmpty()) {
 				return "Member/registerForm";
 				};
