@@ -247,3 +247,7 @@ html {
 	fill: red;
 }
 
+.likeNum {
+float: right; 
+align: center;
+}

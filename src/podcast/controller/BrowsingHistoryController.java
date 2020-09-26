@@ -43,7 +43,12 @@ public class BrowsingHistoryController {
 	public String leadToBrowsingHistory(Model m, HttpServletRequest request)
 
 			throws Exception {
-
+		if((MemberBean)m.getAttribute("LoginOK")==null) {
+			return "login";
+		}
+		
+		
+		
 		// get the list of browsing list
 		MemberBean mbean= (MemberBean)m.getAttribute("LoginOK");
 		Integer userId= mbean.getMemberId();
@@ -68,7 +73,7 @@ public class BrowsingHistoryController {
 		System.out.println(userId);
 
 		// 從舊到新 與前端順序相同
-		List<HistoryOrderProgramBean> result = hdao.selectHistoryByMemberId2(userId);
+		List<HistoryOrderProgramBean> result = hdao.selectHistoryByMemberId5(userId);
 
 		// sql取資料 從新到舊 but 因為js playlist 新到舊 =下到上 塞丟前端資料從最舊紀錄開始塞
 

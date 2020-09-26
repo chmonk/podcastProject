@@ -162,9 +162,11 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	public uploadPodcastBean decrLikeCount(Integer podcastID) {
 
 		uploadPodcastBean ubean = sessionFactory.getCurrentSession().get(uploadPodcastBean.class, podcastID);
-
-		ubean.setLikesCount(ubean.getLikesCount() - 1);
-
+		
+		if(ubean.getLikesCount()>0) {
+			ubean.setLikesCount(ubean.getLikesCount() - 1);
+		}
+		
 		return ubean;
 	}
 

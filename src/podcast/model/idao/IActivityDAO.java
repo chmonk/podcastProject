@@ -15,5 +15,6 @@ public interface IActivityDAO {
 	public boolean delete(Integer ActivityId) throws Exception;
 	public List<ActivityBean> selectByPodcasterId(Integer podcasterId) throws Exception;
 	public Map<Integer, ActivityBean> getActivityMap();
+	public List<ActivityBean> selectOpenActivities() throws Exception;
 
 }
