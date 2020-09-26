@@ -434,5 +434,91 @@ public class BackStageAjaxController {
 		return hList;
 	}
 	
+//Podcast Function========================================================
+	
+	@PostMapping(path= {"/SelectPodcastByMember"})
+	public @ResponseBody java.util.List<uploadPodcastBean> SelectPocastByMember(@RequestParam(name="input")Integer memberId,
+										Model m) {
+		java.util.List<uploadPodcastBean> uList = bDao.selectPodcastByMember(memberId);	
+		return uList;
+		
+	}
+	
+	@PostMapping(path= {"/DeletePodcastbyId"})
+	public @ResponseBody java.util.List<uploadPodcastBean> DeletePodcastById(@RequestParam(name="input")Integer podcastId,
+									Model m) throws Exception {
+		
+		uploadPodcastBean uBean = uDao.select(podcastId);
+		java.util.List<uploadPodcastBean> uList = new ArrayList<uploadPodcastBean>();
+		uList.add(uBean);
+		m.addAttribute("PodcastResult","Select Podcast Deleted!");
+		bDao.deletePodcast(podcastId);
+		return uList;
+	}
+	
+	@PostMapping(path= {"/TopPodcst"})
+	public @ResponseBody java.util.List<uploadPodcastBean> TopPodcast(@RequestParam(name="input")String uploadTime,
+							 Model m) {
+		
+		Date date;
+		java.util.List<uploadPodcastBean> uList=new ArrayList<uploadPodcastBean>();
+		try {
+			date=Date.valueOf(uploadTime);
+			uList=bDao.topPodcast(date);
+			
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+		return uList;
+	}
+	
+//Income Calculate=============================================================
+	
+	@PostMapping(path = { "/SubscriptionIncome" })
+	public  @ResponseBody ArrayList<String> SubscriptionIncome(
+			@RequestParam(name = "inputS") String startDate,
+			@RequestParam(name = "inputE") String endDate,
+			Model m) {
+		
+		Date startdate;
+		Date enddate;
+		Integer subIncome=null;
+		ArrayList<String> iList=new ArrayList<String>();
+		try {
+			startdate=Date.valueOf(startDate);
+			enddate=Date.valueOf(endDate);
+			subIncome=bDao.SubscriptionIncome(startdate, enddate);
+			iList.add(startDate);
+			iList.add(endDate);
+			iList.add(subIncome.toString());
+		}catch(IllegalArgumentException e) {
+			//do nothing
+		}		
+		return iList;
+	}
+	
+
+	@PostMapping(path = { "/TicketIncome" })
+	public   @ResponseBody ArrayList<String> TicketIncome(
+			@RequestParam(name = "inputS") String startDate,
+			@RequestParam(name = "inputE") String endDate,
+			Model m) {
+		Date startdate; 
+		Date enddate;
+		Double subIncome=0.0;
+		ArrayList<String> iList=new ArrayList<String>();
+		try {
+			startdate=Date.valueOf(startDate);
+			enddate=Date.valueOf(endDate);
+			subIncome=bDao.TicketIncome(startdate, enddate);
+			iList.add(startDate);
+			iList.add(endDate);
+			iList.add(subIncome.toString());
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+
+		return iList;
+	}
 	
 }

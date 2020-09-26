@@ -537,70 +537,51 @@ input[type="button"] {
 			</div>
 
 			<div>
-				<form id="selectHistoryIdForm" autocomplete="off"
-					action="<c:url value="/SelectHistoryById.controller"/>"
-					method="POST">
-					<label for="selectHistoryIdText">查詢紀錄</label> <input
+					<label for="selectHistoryIdText">查詢紀錄</label> <input autocomplete="off"
 						id="selectHistoryIdText" type="number" name="historyId"
 						placeholder="historyId">
 					<sapn> <input id="selectHistoryIdBtn" type="button"
 						value="send" class="btn btn-warning"> <span
 						id="selectHistoryIdErr"></span> </sapn>
-				</form>
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="selectHistoryMemberForm" autocomplete="off"
-					action="<c:url value="/SelectHistoryByMember.controller"/>"
-					method="POST">
-					<label for="selectHistoryMemberText">會員紀錄</label> <input
+
+					<label for="selectHistoryMemberText">會員紀錄</label> <input autocomplete="off"
 						id="selectHistoryMemberText" type="number" name="memberId"
 						placeholder="memberId"> <span> <input
 						id="selectHistoryMemberBtn" type="button" value="send"
 						class="btn btn-warning"> <span id="selectHistoryMemberErr"></span>
 					</span>
-				</form>
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="selectHistoryPodcasterForm" autocomplete="off"
-					action="<c:url value="/SelectHistoryByPodcaster.controller"/>"
-					method="POST">
+
 					<label for="selectHistoryPodcasterText">
 					播客紀錄</label> <input id="selectHistoryPodcasterText" type="number"
-						name="podcasterId" placeholder="podcasterId">
+					autocomplete="off"	name="podcasterId" placeholder="podcasterId">
 					<sapn> <input id="selectHistoryPodcasterBtn" type="button"
 						value="send" class="btn btn-warning"> <span
 						id="selectHistoryPodcasterErr"></span> </sapn>
-				</form>
-
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="selectHistoryLastForm" autocomplete="off"
-					action="<c:url value="/SelectHistoryByLastListen.controller"/>"
-					method="POST">
-					<label for="selectHistoryLastText">依收聽時間</label> <input
+					<label for="selectHistoryLastText">依收聽時間</label> <input autocomplete="off"
 						id="selectHistoryLastText" type="text" name="historyLastListen"
 						placeholder="YYYY-mm-dd"> <span> <input
 						id="selectHistoryLastBtn" type="button" value="send"
 						class="btn btn-warning"> <span id="selectHistoryLastErr"></span>
 					</span>
-				</form>
-
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="deleteHistoryDateForm" autocomplete="off"
-					action="<c:url value="/DeleteHistoryByDate.controller"/>"
-					method="POST">
-					<label for="deleteHistoryDateText">批量刪除紀錄</label> <input
+
+					<label for="deleteHistoryDateText">批量刪除紀錄</label> <input autocomplete="off"
 						id="deleteHistoryDateText" type="text" name="historyDeleteDate"
 						placeholder="YYYY-mm-dd"> <span> <input
 						id="deleteHistoryDateBtn" type="button" value="send"
 						class="btn btn-warning"> <span id="deleteHistoryDateErr"></span>
 					</span>
-				</form>
 
 			</div>
 
@@ -618,46 +599,32 @@ input[type="button"] {
 			</div>
 
 			<div>
-				<form id="selectPodcastMemberForm" autocomplete="off"
-					action="<c:url value="/SelectPodcastByMember.controller"/>"
-					method="POST">
-					<label for="selectPodcastMemberText">播客節目列表</label> <input
+					<label for="selectPodcastMemberText">播客節目列表</label> <input autocomplete="off"
 						id="selectPodcastMemberText" type="number" name="memberId"
 						placeholder="memberId"> <span> <input
 						id="selectPodcastMemberBtn" type="button" value="send"
 						class="btn btn-warning"> <span id="selectPodcastMemberErr"></span>
 					</span>
-				</form>
-
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="deletePodcastIdForm" autocomplete="off"
-					action="<c:url value="/DeletePodcastbyId.controller"/>"
-					method="POST">
-					<label for="deletePodcastIdText">刪除節目</label> <input
+					<label for="deletePodcastIdText">刪除節目</label> <input autocomplete="off"
 						id="deletePodcastIdText" type="number" name="podcastId"
 						placeholder="podcastId"> <span> <input
 						id="deletePodcastIdBtn" type="button" value="send"
 						class="btn btn-warning"> <span id="deletePodcastIdErr"></span>
 					</span>
-				</form>
-
 			</div>
 
 			<hr class="hr0">
 
 			<div>
-				<form id="topPodcastForm" autocomplete="off"
-					action="<c:url value="/TopPodcst.controller"/>" method="POST">
-					<label for="topPodcastText">區間熱門節目</label> <input
+					<label for="topPodcastText">區間熱門節目</label> <input autocomplete="off"
 						id="topPodcastText" type="text" name="uploadTime"
 						placeholder="YYYY-mm-dd"> <span> <input
 						id="topPodcastBtn" type="button" value="send"
 						class="btn btn-warning"> <span id="topPodcastErr"></span>
 					</span>
-				</form>
-
 			</div>
 
 		</div>
@@ -667,42 +634,35 @@ input[type="button"] {
 		<div class="areas" id="income" style="display: none;">
 
 			<div>
-				<form id="subIncomeForm" autocomplete="off"
-					action="<c:url value="/SubscriptionIncome.controller"/>"
-					method="POST">
 					<div>
 						<label for="subIncomeSDText">訂閱收入(起)</label> <input
-							id="subIncomeSDText" type="text" name="startDate"
+						autocomplete="off"	id="subIncomeSDText" type="text" name="startDate"
 							placeholder="YYYY-mm-dd">
 					</div>
 					<div>
-						<label for="subIncomeEDText">訂閱收入(迄)</label> <input
+						<label for="subIncomeEDText">訂閱收入(迄)</label> <input autocomplete="off"
 							id="subIncomeEDText" type="text" name="endDate"
 							placeholder="YYYY-mm-dd"> <span> <input
 							id="subIncomeBtn" type="button" value="send"
 							class="btn btn-warning"> <span id="subIncomeErr"></span>
 						</span>
 					</div>
-				</form>
 			</div>
 			<hr class="hr0">
 			<div>
-				<form id="ticketIncomeForm" autocomplete="off"
-					action="<c:url value="/TicketIncome.controller"/>" method="POST">
 					<div>
 						<label for="ticketIncomeSDText">票券收入(起)</label> <input
-							id="ticketIncomeSDText" type="text" name="startDate"
+						autocomplete="off"	id="ticketIncomeSDText" type="text" name="startDate"
 							placeholder="YYYY-mm-dd">
 					</div>
 					<div>
-						<label for="ticketIncomeEDText">票券收入(迄)</label> <input
+						<label for="ticketIncomeEDText">票券收入(迄)</label> <input autocomplete="off"
 							id="ticketIncomeEDText" type="text" name="endDate"
 							placeholder="YYYY-mm-dd"> <span> <input
 							id="ticketIncomeBtn" type="button" value="send"
 							class="btn btn-warning"> <span id="ticketIncomeErr"></span>
 						</span>
 					</div>
-				</form>
 				<br>
 			</div>
 
@@ -1091,8 +1051,148 @@ function processActivity(conn,input){
 		}
 	}
 
-
+function processHistory(conn,input){
+		let ajaxtableH=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", conn, true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		console.log("conn:"+conn);
+		console.log("input:"+input);
+		xhr.send("input="+input);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type = xhr.getResponseHeader("Content-Type");
+				let selectHistory = JSON.parse(xhr.responseText);
+				if(selectHistory[0]==null){
+					console.log("NO RESULT!");
+					ajaxtableH.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>";
+					return;
+				}
+				
+				let content="<table class='ta'>"
+				+"<tr>"
+				+"<th>HistoryId</th>"
+				+"<th>PodcastId</th>"
+				+"<th>PodcastName</th>"
+				+"<th>PublisherId</th>"
+				+"<th>MemberId</th>"
+				+"<th>LastListen</th>"
+				+"</tr>";
+				for(var i=0;i<selectHistory.length;i++){
+				content+=
+				"<tr>"
+				+"<td>"+selectHistory[i].historyId+"</td>"
+				+"<td>"+selectHistory[i].podcastId+"</td>"
+				+"<td>"+selectHistory[i].podcastName+"</td>"
+				+"<td>"+selectHistory[i].publisherId+"</td>"
+				+"<td>"+selectHistory[i].memberId+"</td>"
+				+"<td>"+selectHistory[i].lastListen+"</td>"
+				+"</tr>";		
+			}    
+				content+="</table>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+				ajaxtableH.innerHTML=content;
+		}
+	}
+}
 	
+
+function processPodcast(conn,input){
+		let ajaxtableP=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", conn, true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		console.log("conn:"+conn);
+		console.log("input:"+input);
+		xhr.send("input="+input);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type = xhr.getResponseHeader("Content-Type");
+				let selectPodcast = JSON.parse(xhr.responseText);
+				if(selectPodcast[0]==null){
+					console.log("NO RESULT!");
+					ajaxtableP.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>";
+					return;
+				}
+
+				let content="";
+				
+				for(var i=0;i<selectPodcast.length;i++){
+				content+=
+				"<table class='ta'>"
+				+"<tr>"
+				+"<th>PodcastId</th>"
+				+"<th>CategoryId</th>"
+				+"<th>Title</th>"
+				+"<th colspan='3'>PodcastInfo</th>"
+				+"</tr>"
+				+"<tr>"
+				+"<td rowspan='5'>"+selectPodcast[i].podcastId+"</td>"
+				+"<td>"+selectPodcast[i].categoryId+"</td>"
+				+"<td>"+selectPodcast[i].title+"</td>"
+				+"<td colspan='3'>"+selectPodcast[i].podcastInfo+"</td>"
+				+"</tr>"
+				+"<tr>"
+				+"<th>MemberId</th>"
+				+"<th>UploadTime</th>"
+				+"<th>OpenPayment</th>"
+				+"<th>ClickAmount</th>"
+				+"<th>LikesCount</th>"
+				+"</tr>"
+				+"<tr>"
+				+"<td>"+selectPodcast[i].memberId+"</td>"
+				+"<td >"+selectPodcast[i].uploadTime+"</td>"
+				+"<td>"+selectPodcast[i].openPayment+"</td>"
+				+"<td>"+selectPodcast[i].clickAmount+"</td>"
+				+"<td>"+selectPodcast[i].likesCount+"</td>"
+				+"</tr>"
+				+"</table>"		
+			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+				ajaxtableP.innerHTML=content;
+		}
+	}
+}
+
+
+function processIncome(conn,inputS,inputE){
+		let ajaxtableI=document.getElementById("ajaxTable");
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", conn, true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		console.log("conn:"+conn);
+		console.log("inputS:"+inputS);
+		console.log("inputE:"+inputE);
+		xhr.send("inputS="+inputS+"&inputE="+inputE);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log("readyState & status GOOD!");
+				let type = xhr.getResponseHeader("Content-Type");
+				let selectIncome = JSON.parse(xhr.responseText);
+				if(selectIncome[2]==0.0){
+					console.log("NO RESULT!");
+					ajaxtableI.innerHTML="<h1 style='color:red;text-align:center;'>查無結果!</h1>";
+					return;
+				}
+				
+				let content="<table class='ta'>"
+				+"<tr>"
+				+"<th>StartDate</th>"
+				+"<th>EndDate</th>"
+				+"<th>Income</th>"
+				+"</tr>"
+				+"<tr>"
+				+"<td>"+selectIncome[0]+"</td>"
+				+"<td>"+selectIncome[1]+"</td>"
+				+"<td>"+selectIncome[2]+"</td>"
+				+"</tr>"
+				+"</table>"	;	
+			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+				ajaxtableI.innerHTML=content;
+		}
+	}
+}
+
 	
 </script>
 
