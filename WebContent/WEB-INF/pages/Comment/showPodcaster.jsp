@@ -252,8 +252,13 @@
 <script type="text/javascript">
 	window.onload = function() {
 		if ("${subscriptionPermission}" == 0) {
+			if("${payAmount}"==0){
+				document.getElementById('check_sub').style.display = 'none'
+				document.getElementById('hide_alreadysub_btn').style.display = 'none';	
+				}else{
 			document.getElementById('need_to_sub').innerHTML = "未訂閱此頻道，請訂閱";
 			document.getElementById('hide_alreadysub_btn').style.display = 'none';
+				}
 		} else if ("${subscriptionPermission}" == 2) {
 			document.getElementById('hide_alreadysub_btn').innerHTML = "本人頻道";
 			document.getElementById('hide_alreadysub_btn').className = "btn btn-success";
@@ -305,11 +310,11 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">訂閱本頻道每月需支付${payAmount}元</div>
+					<div id="pay_free" class="modal-body">訂閱本頻道每月需支付${payAmount}元</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary"
+						<button id="btn_gotopay" type="button" class="btn btn-primary"
 							onclick="location.href='<c:url value="/AfterSubProgram.controller" />'">確定前往付費
 							</button>
 					</div>
