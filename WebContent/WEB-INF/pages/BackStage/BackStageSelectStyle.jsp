@@ -7,166 +7,17 @@
 <meta charset="UTF-8">
 <title>BackStage Select</title>
 
-
 <style>
-td {
-	width: 100px;
-	text-align: center;
-	border: 1px solid #3A3A3A;
-	word-wrap: break-word;
-	max-width: 1px;
-	color:black;
-}
-
-th {
-	width: 100px;
-	text-align: center;
-	border: 1px solid #3A3A3A;
-	background-color: #3A3A3A;
-}
-
-#ajaxTable{
-	margin-top:50px;
-	height: 500px;
-	width:650px;
-    overflow: auto;
-}
-.ta {
-	border: 3px solid #3A3A3A;
-	border-collapse: collapse;
-	background-color:white;
-	margin:0px auto;
-	
-}
-
-.center {
-	margin: 0px auto;
-	text-align: center;
-}
-
-
-
-.hr0{
-	height:3px;
-	border: none;
-    border-top:3px dashed;
-}
-
-::placeholder {
-	color: #EAE8E8;
-	opacity: 1;
-}
-
-span {
-	color: red;
-	font-size: 20px;
-	margin-top: 10px;
-}
-
-p {
-	color: red;
-	font-size: 20px
-}
-
-#body {
-	font-family: "Lato", sans-serif;
-	color: white;
-	background-color: #515151;
-}
-
-h1 {
-	font-size: 80px;
-	margin: 0px;
-	padding: 0px;
-}
-
-h3 {
-	margin: 0px;
-	padding: 0px;
-	color: #999;
-}
-
-div.wrap {
-	width: 350px;
-	height:600px;
-	overflow: auto;
-}
-
-div.wrap div {
-	position: relative;
-	margin: 25px 5px 25px 0px;
-}
-
-label {
-	position: absolute;
-	top: 0;
-	font-size: 35px;
-	margin: 10px;
-	padding: 0 10px;
-	background-color: #949494;
-	-webkit-transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
-	transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
-}
-
-.active {
-	top: -25px;
-	font-size: 20px;
-}
-
-.double {
-	position: absolute;
-	top: 0;
-	font-size: 26px;
-	margin: 13px;
-	padding: 0 10px;
-	background-color: #949494;
-	-webkit-transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
-	transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
-}
-
-.doubleact {
-	top: -25px;
-	font-size: 20px;
-}
-
-input[type="text"] {
-	width: 100%;
-	padding: 20px;
-	border: 1px solid white;
-	font-size: 20px;
-	background-color: #949494;
-	color: white;
-}
-
-input[type="text"]:focus {
-	outline: none;
-}
-
-input[type="number"] {
-	width: 100%;
-	padding: 20px;
-	border: 1px solid white;
-	font-size: 20px;
-	background-color: #949494;
-	color: white;
-}
-
-input[type="number"]:focus {
-	outline: none;
-}
-
-#select {
-	color: black;
-}
-
-input[type="button"] {
-	margin-top: 10px;
-}
 </style>
+<!-- 本體不包含選單CSS -->
+<link href="css/BackStage.css" rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-	crossorigin="anonymous"></script>
+
+<!-- OTHERS -->
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -196,44 +47,66 @@ input[type="button"] {
 
 </head>
 
-<body id="body" onload="showhide();columnTestify()">
-
-	
-	
+<body onload="columnTestify()">
+	<div class="bg">
 		<div style="margin-left: 30px;">
-			<h1>後臺管理功能選擇 </h1>
-			<form id="select">
-				<select id="options" name="options" onchange="showhide()">
-					<option value="members">Members</option>
-					<option value="ticketorder">TicketOrder</option>
-					<option value="programcomment">ProgramComment</option>
-					<option value="category">Category</option>
-					<option value="subscription">Subscription</option>
-					<option value="activity">Activity</option>
-					<option value="history">History</option>
-					<option value="podcast">Podcast</option>
-					<option value="income">Income</option>
-					<option value="logout">===LogOut===</option>
-				</select>
+			<div class="col-sm-11" style="margin-bottom:20px">
+				<h1 style="color: white;font-weight: bold;">SoundPod 後臺管理系統 </h1>
+			</div>
+			<div class="col-sm-1">
+			<form id="logoutForm" action="<c:url value="logout"/>" method="GET">
+			<input id="logoutBtn" type="button" value="登出" class="btn btn-danger" style="margin-top:20px">
 			</form>
+			</div>
 		</div>
 
-	<!-- Member============================================================================== -->
+<!--表單選取區塊-------------------------------->	
+	<!-- <div class="col-sm-2">
+		<form id="select">
+			<select id="options" name="options" onchange="showhide()">
+				<option value="members">Members</option>
+				<option value="ticketorder">TicketOrder</option>
+				<option value="programcomment">ProgramComment</option>
+				<option value="category">Category</option>
+				<option value="subscription">Subscription</option>
+				<option value="activity">Activity</option>
+				<option value="history">History</option>
+				<option value="podcast">Podcast</option>
+				<option value="income">Income</option>
+				<option value="logout">===LogOut===</option>
+			</select>
+		</form>
+	</div> -->
+
 	<div class="col-sm-2">
-		<!-- 選單放這裡 -->
+		<div style="margin:0px auto;">
+		<input class="btn btn-default btn-custom" type="button" value="members" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="ticketorder" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="programcomment" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="category" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="subscription" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="activity" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="history" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="podcast"onclick="showhide(value)" ><br>
+		<input class="btn btn-default btn-custom" type="button" value="income"onclick="showhide(value)" ><br>
+		</div>
 	</div>
-	<div class="col-sm-4" style="background-color: #949494;height:600px">
+
+<!--areas區塊-->
+<!-- Member============================================================================== -->
+
+	<div class="col-sm-3" style="background-color: hsla(9, 0%, 47%, 0.95);height:600px">
 	<div class="wrap">
-		<div class="areas" id="members" style="display: none;">
+		<div class="areas" id="members" style="display: block;">
 			
 			<div >
 				<input id="showAllMemberBtn" type="button" class="btn btn-danger btn-lg" 
-				value="Member總覽" onclick="showAllMembers()">
+				value="會員總覽" onclick="showAllMembers()">
 			</div>	
 			
 			<div>
 				
-					<label for="selectMemberIdText">Member 詳情</label> <input autocomplete="off"
+					<label for="selectMemberIdText">會員詳情</label> <input autocomplete="off"
 						id="selectMemberIdText" type="number" name="selectmemberId" placeholder="memberId">
 					<span>
 					<input id="memberIdBtn" type="button" value="send"
@@ -246,7 +119,7 @@ input[type="button"] {
 			<hr class="hr0">
 			<div>
 				
-					<label for="selectMemberAccountText">Nickname 搜尋</label> 
+					<label for="selectMemberAccountText">暱稱搜尋</label> 
 						<input id="selectMemberAccountText" type="text" autocomplete="off"
 						name="account" placeholder="nickname"> 
 					<span>
@@ -260,7 +133,7 @@ input[type="button"] {
 			<hr class="hr0">
 			<div>
 				
-					<label for="deleteMemberText">刪除 Member</label> <input autocomplete="off"
+					<label for="deleteMemberText">刪除會員</label> <input autocomplete="off"
 						id="deleteMemberText" type="number" name="deletememberId" placeholder="memberId">
 					<span>
 					<input id="deleteMemberBtn" type="button" value="send"
@@ -278,7 +151,7 @@ input[type="button"] {
 		
 			<div >
 				<input id="showAllOrderBtn" type="button" class="btn btn-danger btn-lg" 
-				value="Order總覽" onclick="showAllOrder()">
+				value="訂單總覽" onclick="showAllOrder()">
 			</div>
 
 			<div>
@@ -323,7 +196,7 @@ input[type="button"] {
 		
 			<div >
 				<input id="showAllCommentBtn" type="button" class="btn btn-danger btn-lg" 
-				value="Comment總覽" onclick="showAllComment()">
+				value="留言總覽" onclick="showAllComment()">
 			</div>	
 			<div>
 					<label for="selectCommentIdText">留言查詢</label> 
@@ -414,7 +287,7 @@ input[type="button"] {
 
 			<div >
 				<input id="showAllCategoryBtn" type="button" class="btn btn-danger btn-lg" 
-				value="Category總覽" onclick="showAllCategory()">
+				value="類別總覽" onclick="showAllCategory()">
 			</div>
 
 			<div>
@@ -456,7 +329,7 @@ input[type="button"] {
 		
 			<div >
 				<input id="showAllSubBtn" type="button" class="btn btn-danger btn-lg" 
-				value="Sub總覽" onclick="showAllSub()">
+				value="訂閱總覽" onclick="showAllSub()">
 			</div>
 
 			<div>
@@ -486,7 +359,7 @@ input[type="button"] {
 
 			<div >
 				<input id="showAllActivityBtn" type="button" class="btn btn-danger btn-lg" 
-				value="Activity總覽" onclick="showAllActivity()">
+				value="活動總覽" onclick="showAllActivity()">
 			</div>
 
 			<div>
@@ -533,7 +406,7 @@ input[type="button"] {
 		
 			<div >
 				<input id="showAllHistoryBtn" type="button" class="btn btn-danger btn-lg" 
-				value="History總覽" onclick="showAllHistory()">
+				value="紀錄總覽" onclick="showAllHistory()">
 			</div>
 
 			<div>
@@ -595,7 +468,7 @@ input[type="button"] {
 		
 			<div >
 				<input id="showAllPodcastBtn" type="button" class="btn btn-danger btn-lg" 
-				value="Podcast總覽" onclick="showAllPodcast()">
+				value="節目總覽" onclick="showAllPodcast()">
 			</div>
 
 			<div>
@@ -668,21 +541,13 @@ input[type="button"] {
 
 		</div>
 
-<!-- LogOut========================================================================-->
-
-		<div class="areas" id="logout" style="display: none;">
-			<form id="logoutForm" action="<c:url value="logout"/>" method="GET">
-			<input id="logoutBtn" type="button" value="登出" class="btn btn-warning">
-			</form>
-		</div>
-
 	</div>
 	<!--上面的是DIV.WRAP結束TAG/下面這是選取區域的DIV結束TAG -->
 	</div>
 
-	<div class="col-sm-6" style="background-color: #DCDCDC;height:600px">
+	<div class="col-sm-7" style="background-color:hsla(9, 5%, 90%, 0.7);height:600px;">
 	<!-- AJAX動態生成查詢結果 -->
-		<h2 id="resultTag" style="text-align:center;margin-top: 15px;color:black">查詢結果:</h2>
+		<h2 id="resultTag" style="text-align:center;margin-top: 15px;color:black;font-weight: bold;">查詢結果:</h2>
 		<div id="ajaxTable" style="margin:0px auto;margin-top: 10px;">
 			<img src="./img/magnifier3.png" alt="" style="margin-left:50px;margin-top:10px;">
 		</div>
@@ -1192,11 +1057,12 @@ function processIncome(conn,inputS,inputE){
 		}
 	}
 }
-
 	
 </script>
 
 	<script type="text/javascript"
 		src="<c:url value='/js/BackStageSelect.js'/>"></script>
+
+	</div>
 </body>
 </html>

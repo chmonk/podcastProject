@@ -31,10 +31,10 @@ function fff() {
 	document.getElementById("result").innerHTML = oValue.value;
 }
 
-function showhide() {
-	var x = document.getElementById('options');
-	var xv = x.value;
-	let displayobj = document.getElementById(xv);
+function showhide(value) {
+	
+	let displayobj = document.getElementById(value);
+	console.log(value);
 	let areas = document.getElementsByClassName('areas');
 	var i;
 	for (i = 0; i < areas.length; i++) {
