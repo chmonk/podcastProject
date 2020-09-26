@@ -25,6 +25,15 @@
 
 <link href="css/musicbar.css" rel="stylesheet">
 <style type="text/css">
+
+body {
+            background-image: url(<c:url value='/img/banner/b4.jpg' />);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+
 .showPodcasterBody {
 	padding-top: 40px;
 	padding-bottom: 40px;
@@ -35,21 +44,30 @@
 	/* 	border-bottom: 1px solid black;  */
 }
 
-h2 {
-	margin: 10%;
-	width: 150px;
+
+   .titelheader {
+        position: relative;
+    }
+
+    h2 {
+    	margin: 10%;
+        position: absolute;
+        float: left;
+        display: inline;
+    }
+
+    #pressHistoryAdd {
+        right: 15%;
+        top: 30px;
+        position: absolute;
+        float: right;
+        display: inline;
+    }
+
+.margindiv{
+margin-bottom:3%;
+
 }
-
-#pressHistoryAdd {
-float:left;
-
-}
-
-#bbb{
-    margin: 25px auto;
-    width: 200px;
-}
-
 
 
 </style>
@@ -96,12 +114,12 @@ float:left;
 		</div>
 	</div>
 		
-	<div id="bbb" style="width:80%; height:30px">
-		<h2>瀏覽紀錄</h2>
+	<div class="titelheader">
+		<h2 style="color: white">瀏覽紀錄</h2>
 		<button id="pressHistoryAdd">一鍵加入</button>
 	</div>
 	
-<br>	
+<br><br>	
 	<hr>
 	
 
@@ -129,7 +147,7 @@ float:left;
 		</div>
 	</div>
 
-	<div>
+	<div class="margindiv">
 		<c:forEach var="rownum" items="${history}">
 			<div class="container">
 				<div class="card-media">
