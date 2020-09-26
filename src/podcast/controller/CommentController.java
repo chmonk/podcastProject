@@ -37,7 +37,7 @@ import podcast.model.javabean.fuzzyPodcastReturnArchitecture;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
-@SessionAttributes({ "LoginOK" , "thisPodcasterId","subscriptionPermission"})
+@SessionAttributes({ "LoginOK" , "thisPodcasterId","subscriptionPermission","payAmount"})
 public class CommentController {
 
 	//按下頻道圖案=送出action,連到此方法
@@ -136,6 +136,8 @@ public class CommentController {
     	List<uploadPodcastBean> s = sdao.selectByMemeberId(podcasterId);
     	m.addAttribute("subscriptionPermission", subscriptionPermission);
     	m.addAttribute("subProgram", s);
+    	
+    	m.addAttribute("payAmount",mdao.selectPodcaster(podcasterId).getMonthlyPayment());//抓取訂閱播客頻道所需費用，送至前端
     	
     	//把PodcasterId送到頻道頁面
 		m.addAttribute("thisPodcasterId",podcasterId);
