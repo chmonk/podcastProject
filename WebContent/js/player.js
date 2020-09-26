@@ -300,60 +300,6 @@ $(document).ready(() => {
 
 
 
-	//載入頁面時 取得使用者看過的瀏覽列表置換成mediatext
-	const getNewMediaData = function(userId) {
-
-
-
-		//請求瀏覽紀錄塞入播放清單
-		let xhr5 = new XMLHttpRequest();
-
-		xhr5.open("post", "/SpringWebProject/getPlaylist", true);
-
-		xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-		xhr5.send("userId=" + userId);
-		xhr5.onreadystatechange = function() {
-
-			if (xhr5.readyState == 4) {
-
-				if (xhr5.status == 200) {
-
-					var type = xhr5.getResponseHeader("Content-Type");
-
-					if (type.indexOf("application/json") === 0) {
-
-						//clean old mediaData
-
-						//黑魔法清空array
-						mediaData.length = 0;
-
-
-						med = JSON.parse(xhr5.responseText);
-
-						//將object 轉為 js array 才能取用 array方法
-						Object.keys(med).map(function(_) { return med[_]; });
-						//console.log(med);
-
-						//依序塞入歌曲  舊到新push   反敘為unshift
-						med.forEach(function(song, index) {
-							mediaData.unshift(song);
-						})
-
-						renderPlaylist(mediaData);
-					}
-
-				} else {
-					console.log("status isn't 200");
-				}
-			} else {
-				console.log("readystate=" + xhr5.readyState);
-			}
-		};
-	};
-
-	//getNewMediaData(1);
-
 
 	// 歌曲資訊元件
 	const MusicInfo = (info, idx) => {
@@ -474,6 +420,9 @@ $(document).ready(() => {
 	});
 	
 	///點愛心取得歌曲
+	
+	
+	
 		$("svg").on("click", function (e) {
 		
 		$(e.currentTarget.parentNode).toggleClass("like");
@@ -686,32 +635,8 @@ $(document).ready(() => {
 	});
 
 
-	//取得使用者id  渲染成對應的播放清單
-	//getNewMediaData(1);
 
 
-	/////////////////////////////////
-	//	var lemon = $("#lemon");
-	//
-	//	lemon.click("on", function() {
-	//
-	//		let xhr = new XMLHttpRequest();
-	//
-	//		xhr.open("get", "/SpringWebProject/postjson", true);
-	//
-	//		xhr.send();
-	//
-	//		xhr.onreadystatechange = function() {
-	//			if (xhr.status == 200 && xhr.readyState == 4) {
-	//				alert(xhr.responseText);
-	//
-	//				mediaData.push(JSON.parse(xhr.responseText));
-	//
-	//				renderPlaylist(mediaData);
-	//
-	//			}
-	//		}
-	//	})
 
 	//生成對應memberid所含圖片列表(未來替換成播放條列表)
 	$("button.t")
@@ -764,8 +689,64 @@ $(document).ready(() => {
 			xhr1.send();
 		})
 
+	$("#pressHistoryAdd").on("click", function() {
+		
+		console.log("browsingHis add to playerList1");
+
+		//請求瀏覽紀錄塞入播放清單
+		let xhr5 = new XMLHttpRequest();
+
+		xhr5.open("post", "/SpringWebProject/getPlaylist", true);
+
+		xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+		xhr5.send("userId=" + 1);
+		xhr5.onreadystatechange = function() {
+
+			if (xhr5.readyState == 4) {
+
+				if (xhr5.status == 200) {
+
+					var type = xhr5.getResponseHeader("Content-Type");
+
+					if (type.indexOf("application/json") === 0) {
+
+						//clean old mediaData
+
+						//黑魔法清空array
+						mediaData.length = 0;
 
 
+						med = JSON.parse(xhr5.responseText);
+
+						//將object 轉為 js array 才能取用 array方法
+						Object.keys(med).map(function(_) { return med[_]; });
+						//console.log(med);
+
+						//依序塞入歌曲  舊到新push   反敘為unshift
+						med.forEach(function(song, index) {
+							mediaData.unshift(song);
+						})
+
+						renderPlaylist(mediaData);
+					}
+
+				} else {
+					console.log("status isn't 200");
+				}
+			} else {
+				console.log("readystate=" + xhr5.readyState);
+			}
+		};
+	
+	
+	
+	
+	
+	
+	})
+	
+	
 	//點選#show下的圖片觸發新增到播放列表 同時發送使用者id(利用html input tag) 節目id(綁在節目圖示)
 	$("#show").on("click", "img", function() {
 
