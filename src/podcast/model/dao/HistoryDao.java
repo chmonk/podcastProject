@@ -339,7 +339,7 @@ public class HistoryDao implements IHistoryDao {
 					//join members
 					+ "left join members as m on m.memberId=h.publisherId "
 					// for specific memberid 2.?
-					+ "where h.memberId=1  "
+					+ "where h.memberId= ?  "
 					//the lastest record
 					+ "and h.sn=1  order by lastListen" ;			
 			
@@ -347,6 +347,7 @@ public class HistoryDao implements IHistoryDao {
 			NativeQuery query = session.createNativeQuery(nativesqlstr);
 			
 			query.setParameter(1, memberId);
+			query.setParameter(2, memberId);
 			
 			List<Object[]> resultSet = query.list();
 			
@@ -412,7 +413,7 @@ public class HistoryDao implements IHistoryDao {
 							//join members
 							+ "left join members as m on m.memberId=h.publisherId "
 							// for specific memberid 2.?
-							+ "where h.memberId=1  "
+							+ "where h.memberId=?  "
 							//the lastest record
 							+ "and h.sn=1  order by lastListen" ;			
 					
@@ -420,6 +421,7 @@ public class HistoryDao implements IHistoryDao {
 					NativeQuery query = session.createNativeQuery(nativesqlstr);
 					
 					query.setParameter(1, memberId);
+					query.setParameter(2, memberId);
 					
 					List<Object[]> resultSet = query.list();
 					
