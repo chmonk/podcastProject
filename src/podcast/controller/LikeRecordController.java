@@ -31,9 +31,13 @@ public class LikeRecordController {
 	
 	@GetMapping(value = "/goToLikeRecord")
 	public String leadToBrowsingHistory(Model m, HttpServletRequest request)
-
 			throws Exception {
 
+		if((MemberBean)m.getAttribute("LoginOK")==null) {
+			return "login";
+		}
+		
+		
 		// get the list of browsing list
 		MemberBean mbean= (MemberBean)m.getAttribute("LoginOK");
 		Integer userId= mbean.getMemberId();
