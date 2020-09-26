@@ -38,9 +38,9 @@
 /* *{
 	border: 1px solid black;
 } */
-/* .messageBoard {
+.messageBoard {
 	background-color: #f2f2f2;
-} */
+}
 
 .showPodcasterBody {
 	padding-top: 40px;
@@ -49,8 +49,7 @@
 
 .showPodcasterBodyHeader {
 	padding-top: 110px;
-	background-color: #252c37;
-	/* border-bottom: 1px solid black; */
+	border-bottom: 1px solid black;
 }
 
 .memberImg {
@@ -92,24 +91,20 @@
 	font-size: 20px;
 	font: #222831;
 }
-.bodycolor{
-	background-color: #fff;
-}
 
-/* .card-media {
+.card-media {
 	width: 600px;
-} */
-
- .podcastList {
-
-	width: 80%;
-    margin: auto;
 }
-/*
+
+.podcastList {
+	overflow-y: scroll;
+	height: 900px;
+}
+
 .messageBoard {
 	overflow-y: scroll;
 	height: 1000px;
-} */
+}
 
 @import
 	url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
@@ -163,7 +158,7 @@
 
 .messageBoard div.bubbleContainer div.bubbleBody {
 	margin-left: 100px;
-	width: 80%;
+	width: 500px;
 	height: 200px;
 	background-color: #fff;
 	border-radius: 10px;
@@ -213,7 +208,7 @@
 	display: block;
 	margin: 0 auto;
 	margin-right: 20px;
-	background-color: #f23031;
+	background-color: #09C;
 	border: 3px solid white;
 	outline: none;
 	border-radius: 12px;
@@ -225,13 +220,13 @@
 .messageBoard ul.messageList {
 	/* 	 width: 80vw;
  */
-	margin: 50px;
+	margin: 50px auto;
 	font-family: "Open Sans";
 }
 
 .messageBoard ul.messageList li.message {
 	list-style: none;
-	width: 90%;
+	width: 600px;
 	background-color: rgba(255, 255, 255, 1);
 	border-radius: 10px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -255,7 +250,7 @@
 }
 
 #tab-panel {
-	/* max-width: 690px; */
+	max-width: 690px;
 	margin: 0 auto;
 	font-family: arial;
 }
@@ -265,7 +260,7 @@
 }
 
 #tab-panel .tabs {
-	background: #252c37;;
+	background: #FFF;
 	overflow: hidden;
 	text-align: center;
 }
@@ -273,18 +268,18 @@
 #tab-panel .tabs a {
 	float: left;
 	display: block;
-	width: 33.333%;
+	width: 50%;
 	padding: 15px 0;
 	/*     border: 1px solid #CCC;
  */
 	font-size: 16px;
-	color: #fff;
+	color: #333;
 	box-sizing: border-box;
 	transition: all .3s;
 }
 
 #tab-panel .tabs a.active {
-	background: #f23031;
+	background: #09C;
 	color: #FFF;
 }
 
@@ -300,9 +295,6 @@
 	color: #666;
 	line-height: 25px;
 }
-
-
-
 </style>
 
 <title>頻道首頁</title>
@@ -339,10 +331,38 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12 bodycolor">
+			<div class="col-md-6">
+				<div class="messageBoard">
+					<div class="bubbleContainer">
+						<div class="bubbleBody">
+							<form id="message" action="podcastPage.do" method="post"
+								name="comment">
+								<textarea name="formMessage" id="content"
+									placeholder="留言內容：&#13;&#10;請輸入不超過50個字"></textarea>
+							</form>
+							<span class="submit"> <input id="podcasterId"
+								type="hidden" value="${thisPodcasterId}" />
+								<button id="submitBtn" class="btnSendMessage" type="button"
+									form="message">提交</button>
+							</span>
+						</div>
+					</div>
+					<ul class="messageList" id="messageList">
+						<c:forEach items="${commList}" var="comment" varStatus="tagStatus">
+							<li class="message">
+								<p class="messageTitle">${comment.Name}</p>
+								<p class="messageContent">${comment.commentMsg}</p>
+								<p class="messageDate">${comment.msgDate}</p>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="col-md-6">
 				<div id="tab-panel">
 					<div class="tabs">
-						<a>節目表單</a> <a>訂閱表單</a><a>留言板</a>
+						<a>節目表單</a> <a>訂閱表單</a>
 					</div>
 					<ul class="tab-content">
 						<li>
@@ -436,7 +456,7 @@
 													<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getCategoryName()}</span>
 													<c:choose>
 														<c:when test="${subscriptionPermission ==1}">
-															<a id="${alreadySub.getPodcastId()}"
+															<a id="${podcast.getPodcastId()}"
 																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 														</c:when>
 														<c:otherwise>
@@ -453,40 +473,12 @@
 								</div>
 							</div>
 						</li>
-						<li>
-							<div class="messageBoard">
-								<div class="bubbleContainer">
-									<div class="bubbleBody">
-										<form id="message" action="podcastPage.do" method="post"
-											name="comment">
-											<textarea name="formMessage" id="content"
-												placeholder="留言內容：&#13;&#10;請輸入不超過50個字"></textarea>
-										</form>
-										<span class="submit"> <input id="podcasterId"
-											type="hidden" value="${thisPodcasterId}" />
-											<button id="submitBtn" class="btnSendMessage" type="button"
-												form="message">提交</button>
-										</span>
-									</div>
-								</div>
-								<ul class="messageList" id="messageList">
-									<c:forEach items="${commList}" var="comment"
-										varStatus="tagStatus">
-										<li class="message">
-											<p class="messageTitle">${comment.Name}</p>
-											<p class="messageContent">${comment.commentMsg}</p>
-											<p class="messageDate">${comment.msgDate}</p>
-										</li>
-									</c:forEach>
-								</ul>
-							</div>
-						</li>
 					</ul>
 				</div>
+
 			</div>
 		</div>
 	</div>
-
 
 	<div class="playbar">
 		<jsp:include page="../playerbar.jsp" flush="true " />

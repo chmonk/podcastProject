@@ -55,6 +55,10 @@ public class CommentController {
     	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
     	CategoryDAO cdao = (CategoryDAO)context.getBean("CategoryDAO");
     	//判斷podcasterId是否為播客
+    	boolean verificationPodcaster = mdao.verificationPodcaster(podcasterId);
+    	if(!verificationPodcaster) {
+    		return "index";
+    	}
     	
     	
     	
