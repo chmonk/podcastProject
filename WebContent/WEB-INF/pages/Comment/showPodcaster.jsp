@@ -461,11 +461,11 @@
 													<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getCategoryName()}</span>
 													<c:choose>
 													<c:when test="${subscriptionPermission ==2}">
-															<a id="${podcast.getPodcastId()}"
+															<a id="${alreadySub.getPodcastId()}"
 																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 														</c:when>
 														<c:when test="${subscriptionPermission ==1}">
-															<a id="${podcast.getPodcastId()}"
+															<a id="${alreadySub.getPodcastId()}"
 																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 														</c:when>
 														<c:otherwise>
