@@ -19,27 +19,33 @@
     function cancelOrder() {
     	if (confirm("確定取消此份訂單 ? ") ) {
     		// 接收此資料的Servlet會使用 finalDecision 參數的值
-    		document.forms[0].finalDecision.value = "CANCEL";
-    		document.forms[0].action="<c:url value='cancelOrder' />";
-    		document.forms[0].method="GET";
-    		document.forms[0].submit();
+    		console.log(document.forms);
+    		document.forms[1].finalDecision.value = "CANCEL";
+    		document.forms[1].action="<c:url value='cancelOrder' />";
+    		document.forms[1].method="GET";
+    		document.forms[1].submit();
     		return;
     	} else {
     		return;
     	}
     }
     function reconfirmOrder() {
+    	console.log(document.forms);
     	var sa = document.getElementById('ShippingAddress').value;
     	if  (sa === "") {
     		window.alert ('出貨地址不能是空白');
     		return ; 
     	}
     	if (confirm("確定送出此份訂單 ? ") ) {
+        	console.log(document.forms);
+        	
     		// 接收此資料的Servlet會使用 finalDecision 參數的值
-    		document.forms[0].finalDecision.value = "ORDER";
-    		document.forms[0].action="<c:url value='ProcessOrder' />";
-    		document.forms[0].method="POST";
-    		document.forms[0].submit();
+    		document.forms[1].finalDecision.value = "ORDER";
+    		document.forms[1].action="<c:url value='ProcessOrder' />";
+    		document.forms[1].method="POST";
+        	console.log(document.forms);
+    		
+    		document.forms[1].submit();
     		return;
     	} else {
     		return;
@@ -84,7 +90,7 @@
             background-color: white;
         }
 
-   
+   table{ table-layout: fixed;}
 
         #table2 {
             margin-top: 0px;
@@ -112,9 +118,9 @@
 <body>
 
 <body>
-<!-- 	<div class="head"> -->
-<%-- 		<jsp:include page="../header_banner_test.jsp" flush="true " /> --%>
-<!-- 	</div> -->
+	<div class="head">
+		<jsp:include page="../header_banner_test.jsp" flush="true " />
+	</div>
 
 
 	<div class="showPodcasterBody">
@@ -174,7 +180,8 @@
                     </TR>
  <c:forEach varStatus="vs" var="entry" items="${ShoppingCart.content}">
                     <TR>
-                        <td>${entry.value.activityName}</td>
+                        <td><img width="70%" src="<c:url value='${entry.value.description}' />">
+                        <br>${entry.value.activityName}</td>
                         <td>${entry.value.activityLocation}</td>
                         <td>${entry.value.activityDate}</td>
                         <td>

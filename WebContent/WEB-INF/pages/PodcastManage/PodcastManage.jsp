@@ -31,6 +31,8 @@
         .name {
             width: 300px;
         }
+        table{
+table-layout: fixed;}
         th,
         tr {
             text-align: center;
@@ -76,8 +78,9 @@
                 <thead>
                     <a href="<c:url value='/addPodcast' />" class="btn btn-primary btn-md pull-right">+新增單集</a>
                     <br>
-                    <tr><td colspan="4">${LoginOK.name}的頻道列表</td></tr>
+                    <tr><td colspan="5">${LoginOK.name}的頻道列表</td></tr>
                     <tr>
+                    	<td>單集圖像</td>
                         <th class="name">單集名稱</th>
                         <th>上傳日期</th>
                         <th>修改</th>
@@ -86,7 +89,9 @@
                 </thead>
                 <c:forEach var="podcast" varStatus="loop" items="${upList}">
                 <tr>
-                	<td>${podcast.title}</td><td>${podcast.uploadTime}</td>
+                	<td><img width="50%" src="<c:url value='${podcast.audioimg}' />"></td>
+                	<td>${podcast.title}</td>
+                	<td>${podcast.uploadTime}</td>
                 	<td><form action="<c:url value="/modifyPodcast"/>"><input type="hidden" name="thisPodcastId" value=${podcast.podcastId}>
                 		<input class="btn btn-warning" type="submit" name="modify" value="修改" ></form></td>
                 	<td><form id="${podcast.podcastId}" action="<c:url value="/processDeletePodcast"/>"  method="POST">
@@ -95,7 +100,7 @@
                 </tr>
 </c:forEach>
                 <tr height='36' id='borderA'>
-                    <td id='borderA' align="center" colspan="4">
+                    <td id='borderA' align="center" colspan="5">
                        <a class="btn btn-primary" href="<c:url value='/' />">回首頁</a>
                     </td>
                 </tr>

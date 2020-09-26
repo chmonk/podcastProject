@@ -73,6 +73,10 @@ table-layout: fixed;}
 	padding-top: 50px;
 	/* 	border-bottom: 1px solid black;  */
 }
+
+.closeTr{
+background-color:#f3e1e1!important;
+}
     </style>
 
 </head>
@@ -97,31 +101,50 @@ table-layout: fixed;}
 		</div>
 	</div>
 
+
+
     <div class="container">
         <div class="custyle">
             <table class="table table-striped custab">
                 <thead>
 <tr>
-                        <td colspan="5">${LoginOK.name}的活動列表</td>
+                        <td colspan="6">${LoginOK.name}的活動列表</td>
                     </tr>
                     <a href="<c:url value='/addActivityForm' />" class="btn btn-primary btn-md pull-right">+新增活動</a>
                     <br>
                     <tr>
                     <th>照片</th>
-                        <th align="center">名稱</th>
-                        <th>日期</th>
-                        <th>參加人數</th>
-                        <th class="text-center">操作</th>
+                        <td><b>名稱</b></td>
+                        <td><b>日期</b></td>
+                        <td><b>參加人數</b></td>
+                        <td><b>狀態</b></td>
+                        <td><b>操作</b></td>
                     </tr>
                 </thead>
                 <c:forEach var="alist" varStatus="loop" items="${ActivityList}">
-                <tr><td><img width="50%" src="<c:url value='${alist.activityImg}' />"></td>
+                <c:choose>
+   <c:when test="${alist.activityStatus == 1 }">
+      <!-- 購物車內有一項以上的商品 -->
+      <c:set var="activityStatus" value="關閉"/>
+   </c:when>
+   <c:otherwise>
+      <!-- 購物車內沒有商品 -->
+      <c:set var="activityStatus" value="開啟"/>        
+   </c:otherwise>   
+</c:choose>
+
+<c:set var="rowColor" value="none" />
+<c:if test="${alist.activityStatus == 1 }">
+<c:set var="rowColor" value="closeTr" />
+</c:if>
+                <tr class="${rowColor}"><td><img width="50%" src="<c:url value='${alist.activityImg}' />"></td>
      
                     <td><a  href='<c:url value='ActivityDetail?memberId=${LoginOK.memberId}&activityId=${alist.activityId}' />'>
 						<u>${alist.activityName}</u>
 			    </a></td>
                     <td  width="110px">${alist.activityDate}</td>
                     <td width="90px">${alist.activityMaxPeople - alist.stock}人</td>
+                    <td>${activityStatus}</td>
                     <td class="text-center">
                         <a href="#" class="btn btn-danger btn-md" onclick="confirmDelete(${alist.activityId})">刪除</a>
                     </td>
@@ -129,7 +152,7 @@ table-layout: fixed;}
 
 </c:forEach>
                 <tr height='36' id='borderA'>
-                    <td id='borderA' align="center" colspan="5">
+                    <td id='borderA' align="center" colspan="6">
                    <a class="btn btn-primary" href="<c:url value='/' />">回首頁</a>
                     </td>
                 </tr>
