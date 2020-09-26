@@ -50,19 +50,30 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
             box-shadow: 3px 3px 0px transparent;
             transition: 0.5s;
         }
-
-        .name {
-            width: 200px;
+        
+        .spanParent{
+        position:relative;
         }
 
-table{ border-radius: 10px;}
+        .stockLeft {
+            font-size:8px;
+            color:red;
+            position:absolute; 
+            top:40px;
+            left:50px;
+            white-space:nowrap;
+        }
+
+table{ table-layout: fixed;}
         th,
         tr {
-        border-radius-top-left:10px;
-        border-radius-top-right:10px;
+      
             text-align: center;
             background-color: white;
         }
+  
+        
+     
 
         h1 {
             color: white;
@@ -89,7 +100,7 @@ table{ border-radius: 10px;}
             }
         }
 
-        function modify(key, qty, index) {
+        function modify(key, qty, index, stock) {
             var x = "newQty" + index;
             var newQty = document.getElementById(x).value;
             if (newQty < 0) {
@@ -105,6 +116,9 @@ table{ border-radius: 10px;}
                 window.alert("新、舊數量相同，不必修改");
                 return;
             }
+            if(newQty > stock){
+            	 window.alert("購買數量超過庫存");
+            	 return;}
             if (confirm("確定將此商品的數量由" + qty + " 改為 " + newQty + " ? ")) {
                 document.forms[0].action = "<c:url value='UpdateItem.do?cmd=MOD&activityId=" + key + "&newQty=" +
                     newQty + "' />";
@@ -186,39 +200,43 @@ table{ border-radius: 10px;}
         <div class="custyle">
             <table class="table table-striped custab">
 
-                <h1 style="text-align:center;">${LoginOK.name}的購物清單</h1>
+             
 
-                <div class="row">
-                    <thead>
-                        <th class="col-md-2">
+                 <tr><td colspan='8'>${LoginOK.name}的購物清單</td></tr>
+                    <tr>
+                   
+                   
+                        <td><b>
                             活動名稱
-                        </th>
-                        <th class="col-md-2">
+                       </b> </td>
+                        <td><b>
                             活動地點
-                        </th>
-                        <th class="col-md-2">
+                       </b> </td>
+                        <td><b>
                             活動日期
-                        </th>
-                        <th class="col-md-2">
+                       </b> </td>
+                        <td><b>
                             單價
-                        </th>
-                        <th class="col-md-1">
+                       </b> </td>
+                        <td><b>
                             數量
-                        </th>
-                        <th class="col-md-1">
+                      </b>  </td>
+                        <td><b>
                             小計
-                        </th>
-                        <th class="col-md-1">
+                       </b> </td>
+                        <td><b>
                             修改
-                        </th>
-                        <th class="col-md-1">
+                       </b> </td>
+                        <td><b>
                             刪除
-                        </th>
+                      </b>  </td>
+                        </tr>
                     <tbody>
                         <c:forEach varStatus="vs" var="anEntry" items="${ShoppingCart.content}">
                             <tr>
                                 <td class="col-md-2">
-                                    ${anEntry.value.activityName}
+                               <img width="70%" src="<c:url value='${anEntry.value.description}' />">
+                                  <br>  ${anEntry.value.activityName}
                                 </td>
                                 <td class="col-md-2">
                                     ${anEntry.value.activityLocation}
@@ -229,8 +247,10 @@ table{ border-radius: 10px;}
                                 <td class="col-md-2">
                                     <fmt:formatNumber value="${anEntry.value.unitPrice}" pattern="#,###" />元</td>
                                 </td>
-                                <td class="col-md-1">
-                                   <Input id="newQty${vs.index}" style="width:28px;text-align:right" name="newQty" type="text" value="<fmt:formatNumber value="${anEntry.value.quantity}" />" name="qty" onkeypress="return isNumberKey(event)"  />
+                                <td class="spanParent">
+                                   <Input id="newQty${vs.index}" style="width:48px;text-align:right" name="newQty" type="text" value="<fmt:formatNumber value="${anEntry.value.quantity}" />" name="qty" onkeypress="return isNumberKey(event)"  />
+                                   
+                                   <span class="stockLeft">票券僅剩${anEntry.value.amount}張</span>
                                 </td>
                                 <td class="col-md-1">
                                     <fmt:formatNumber value="${anEntry.value.unitPrice * anEntry.value.quantity}"
@@ -238,7 +258,7 @@ table{ border-radius: 10px;}
                                 </td>
                                 <td class="col-md-2">
                                     <Input type="button" class="btn btn-success" name="update" value="修改"
-                                        onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index})">
+                                        onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index},${anEntry.value.amount})">
   </td>
                                 <td class="col-md-2">
                                     <Input type="button" class="btn btn-danger" name="delete" value="刪除"
@@ -248,7 +268,7 @@ table{ border-radius: 10px;}
                         </c:forEach>
                         <tr>
                             <td colspan='5' align='right'>合計金額：</td>
-                            <td align='right'>
+                            <td>
                                 <fmt:formatNumber value="${subtotal}" pattern="#,###,###" />元</td>
                             <td align='right'>&nbsp;</td>
                             <td></td>
@@ -256,10 +276,10 @@ table{ border-radius: 10px;}
                         </tr>
                         <tr>
                             <td></td>
-                            <td colspan='2'> <a href="<c:url value='/#events' />">繼續購物</a></td>
-                            <td colspan='2'><a href="<c:url value='checkout' />"
-                                    onClick="return Checkout(${subtotal});">再次確認</a></td>
-     <td colspan='2'> <a href="<c:url value='abort' />" onClick="return Abort();">放棄購物</a></td>
+                            <td colspan='2'> <a  href="<c:url value='/#events' />"><b>繼續購物</b></a></td>
+                            <td colspan='2'><a  href="<c:url value='checkout' />"
+                                    onClick="return Checkout(${subtotal});"><b>再次確認</b></a></td>
+     <td  colspan='2'> <a  href="<c:url value='abort' />" onClick="return Abort();"><b>放棄購物</b></a></td>
                             <td></td>
 
                         </tr>

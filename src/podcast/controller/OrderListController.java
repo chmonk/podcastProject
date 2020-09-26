@@ -1,6 +1,7 @@
 package podcast.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +16,10 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import podcast.model.javabean.MemberBean;
+import podcast.model.javabean.OrderItemBean;
 import podcast.model.javabean.OrderTicketBean;
 import podcast.model.dao.OrderTicketDAO;
+import podcast.model.dao.ShoppingCart;
 
 
 @Controller
@@ -35,6 +38,11 @@ public class OrderListController {
 			return "redirect:/login";
 
 		}	
+		
+		ShoppingCart sc = (ShoppingCart) model.getAttribute("ShoppingCart");
+		Map<Integer, OrderItemBean> cart =sc.getContent();
+		cart.clear();
+		
 		ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
 		OrderTicketDAO ot = (OrderTicketDAO)context.getBean("OrderTicketDAO");
