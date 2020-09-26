@@ -38,9 +38,8 @@ public class BrowsingHistoryController {
 	@Autowired
 	HistoryDao hdao;
 
-	// 導向瀏覽紀錄頁面 ?userid=
-	@GetMapping(value = "/goToBrowsingHistory")
 
+	@GetMapping(value = "/goToBrowsingHistory")
 	public String leadToBrowsingHistory(Model m, HttpServletRequest request)
 
 			throws Exception {
@@ -49,7 +48,7 @@ public class BrowsingHistoryController {
 		MemberBean mbean= (MemberBean)m.getAttribute("LoginOK");
 		Integer userId= mbean.getMemberId();
 		
-		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId3(userId);
+		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId4(userId);
 
 		m.addAttribute("history", rs);
 

@@ -455,9 +455,9 @@ $(document).ready(() => {
 				}
 
 				//設定準備播放歌曲
-				myAudio.setCurrentMusic(mediaData.length-1);
+				//myAudio.setCurrentMusic(mediaData.length-1);
 				//自動播放	
-				myAudio.setPlayStatus(true);
+				//myAudio.setPlayStatus(true);
 
 
 
@@ -475,7 +475,7 @@ $(document).ready(() => {
 	
 	///點愛心取得歌曲
 		$("svg").on("click", function (e) {
-
+		
 		$(e.currentTarget.parentNode).toggleClass("like");
 		
 		console.log(e.target);
@@ -501,7 +501,7 @@ $(document).ready(() => {
 			data: pid,
 			dataType: "json",
 			success: function(data) {
-				console.log(data);
+				/*console.log(data);
                 var new_song = data;
 
 				var duplicate = false;
@@ -527,7 +527,7 @@ $(document).ready(() => {
 				myAudio.setCurrentMusic(mediaData.length-1);
 				//自動播放	
 				myAudio.setPlayStatus(true);
-
+*/
 	
 
 			}

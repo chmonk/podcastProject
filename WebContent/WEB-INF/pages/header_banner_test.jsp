@@ -223,7 +223,7 @@ nav ul ul li {
 				         				<!-- First Tier Drop Down -->
 							            <ul class="barlist">
 							                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
-							                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
+							                <li><a href="<c:url value='/goToLikeRecord' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
 							                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
 							                <li><a href="<c:url value='/ShoppingCart' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購物結帳</a></li>
 							                <li><a href="<c:url value='/SubOrderController.controller' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
@@ -250,7 +250,7 @@ nav ul ul li {
 				         				<!-- First Tier Drop Down -->
 								            <ul class="barlist">
 								                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
-								                <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
+								                <li><a href="<c:url value='/goToLikeRecord' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
 								                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
 								                <li><a href="<c:url value='/ShoppingCart' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購物結帳</a></li>
 								                <li><a href="<c:url value='/SubOrderController.controller' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
@@ -270,12 +270,12 @@ nav ul ul li {
 								id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right ">
 		
-									<li><a href="#latestalbum">官方節目</a></li>
-									<li><a href="#featuredalbum">矚目新選</a></li>
-									<li><a href="#joinus">熱播排行</a></li>
-									<li><a href="#portfolio">人氣播客</a></li>
-									<li><a href="#events">派對活動</a></li>
-									<li><a href="#team">瀏覽搜尋</a></li>
+									<li><a href="<c:url value='/#latestalbum' />">官方節目</a></li>
+									<li><a href="<c:url value='/#featuredalbum' />">矚目新選</a></li>
+									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li>
+									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
+									<li><a href="<c:url value='/#events' />">派對活動</a></li>
+									<li><a href="<c:url value='/#team' />">瀏覽搜尋</a></li>
 									<li><a href="<c:url value='/login' />">註冊/登入</a></li>
 								</ul>
 							</div>					    
