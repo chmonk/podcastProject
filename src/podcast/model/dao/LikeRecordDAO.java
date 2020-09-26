@@ -163,6 +163,32 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 	}
 	
 	
+	// 確認節目 使用者是否有 like紀錄  回傳likestatus 
+		public Integer checkByMemberidAndPodcastIdReturnLikeStatus(Integer memberId, Integer podcastId) {
+
+			Session session = sessionFactory.getCurrentSession();
+
+			String sqlstr = " from LikeRecordBean where memberId=?1 and podcastId=?2";
+
+		Query<LikeRecordBean> query = session.createQuery(sqlstr, LikeRecordBean.class)
+					.setParameter(1, memberId).setParameter(2, podcastId);
+
+			// 如果為空 表示未按過節目
+			try {
+				List<LikeRecordBean> rs = query.getResultList();
+				if (rs.isEmpty()) {
+					return 0;
+				} else {
+					return rs.get(0).getLikeStatus();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+
+		}
+	
+	
 	//取的最愛節目清單
 			public List<HistoryOrderProgramBean> selectLikeList(Integer memberId) {
 				
