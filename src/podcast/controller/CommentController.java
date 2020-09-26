@@ -48,14 +48,18 @@ public class CommentController {
 			return "login";
 		}
 		
-		
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		ProgramCommentDAO commDao = (ProgramCommentDAO) context.getBean("ProgramCommentDAO");
 		UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
     	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
     	CategoryDAO cdao = (CategoryDAO)context.getBean("CategoryDAO");
-		
+    	//判斷podcasterId是否為播客
+    	
+    	
+    	
+    	
+		//取得留言資料
 		List<ProgramCommentBean> commList=commDao.selectAllPodcasterId(podcasterId);
 		List<Object> commListData = new LinkedList<>();
 
@@ -139,10 +143,26 @@ public class CommentController {
     
     	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");
     	List<uploadPodcastBean> s = sdao.selectByMemeberId(podcasterId);
-    	m.addAttribute("subscriptionPermission", subscriptionPermission);
-    	m.addAttribute("subProgram", s);
+    	ArrayList<fuzzyPodcastReturnArchitecture> subscriptionPodcastData = new ArrayList<fuzzyPodcastReturnArchitecture>();
+		for(uploadPodcastBean e:s) {
+			fuzzyPodcastReturnArchitecture data = new fuzzyPodcastReturnArchitecture();
+			data.setAudioImg(e.getAudioimg());
+			data.setAudioPath(e.getAudioPath());
+			data.setCategoryName(cdao.select(e.getCategoryId()).getCategoryName());
+			data.setClickAmount(e.getClickAmount());
+			data.setLikesCount(e.getLikesCount());
+			data.setOpenPayment(e.getOpenPayment());
+			data.setPodcastId(e.getPodcastId());
+			data.setPodcastInfo(e.getPodcastInfo());
+			data.setTitle(e.getTitle());
+			data.setUploadTime(e.getUploadTime());
+			subscriptionPodcastData.add(data);		
+		}
     	
-    	m.addAttribute("payAmount",mdao.selectPodcaster(podcasterId).getMonthlyPayment());//抓取訂閱播客頻道所需費用，送至前端
+		m.addAttribute("payAmount",mdao.selectPodcaster(podcasterId).getMonthlyPayment());//抓取訂閱播客頻道所需費用，送至前端
+    	
+    	m.addAttribute("subscriptionPermission", subscriptionPermission);
+    	m.addAttribute("subProgram", subscriptionPodcastData);
     	
     	//把PodcasterId送到頻道頁面
 		m.addAttribute("thisPodcasterId",podcasterId);
