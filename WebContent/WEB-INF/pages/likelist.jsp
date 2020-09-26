@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>我的最愛</title>
 <script
 	src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -63,8 +63,7 @@ h2 {
 </head>
 <body>
 	<div class="head">
-		<jsp:include page="header_banner_test.jsp" flush="true " />	
-
+		<jsp:include page="header_banner_test.jsp" flush="true " />
 	</div>
 
 	<div class="showPodcasterBody">
@@ -82,7 +81,7 @@ h2 {
 		</div>
 	</div>
 
-	<h2>瀏覽紀錄</h2>
+	<h2>最愛節目</h2>
 
 	<hr>
 

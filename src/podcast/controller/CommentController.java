@@ -44,6 +44,11 @@ public class CommentController {
 	@RequestMapping(path = "/podcastPage", method = RequestMethod.GET)
 	public String showPodcastPage(HttpServletRequest request,Model m, @RequestParam(name="fuzzyPodcasterId")Integer podcasterId) throws Exception {
 		
+		if(m.getAttribute("LoginOK")==null) {
+			return "login";
+		}
+		
+		
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		ProgramCommentDAO commDao = (ProgramCommentDAO) context.getBean("ProgramCommentDAO");
@@ -109,9 +114,11 @@ public class CommentController {
     	System.out.println("----------測試是否抓到登入的會員ID-------------------------");
     	System.out.println(loginMember.getMemberId());
     	System.out.println("----------測試是否抓到登入的會員ID---------------------------");
-    	
+    
     	List<SubscriptionBean> f = fdao.selectSubcriptionByMemberID(loginMember.getMemberId(),podcasterId);//確認訂單有無訂閱關係
-    	if(f.isEmpty()) {  //無訂閱關係
+    	if(loginMember.getMemberId()==podcasterId) {  //如果進入頻道為直播主本人
+    		subscriptionPermission = 2;
+    	}else if(f.isEmpty()){ //無訂閱關係
     		subscriptionPermission = 0;
     	}else {
         	for(SubscriptionBean g:f) {  	
@@ -127,7 +134,7 @@ public class CommentController {
         		System.out.println("日期比較: "+g.getSubdateEnd().compareTo(date));
         	}
     	}
-
+    	System.out.println(subscriptionPermission);
     	//並於上傳列表中找出該節目
     
     	SubProgramListDAO sdao = (SubProgramListDAO)context.getBean("SubProgramListDAO");

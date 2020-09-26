@@ -83,7 +83,7 @@ hr{
 	border: 0;
 	border-radius:0;
 	box-shadow: none;
-	background: rgba(0,0,0,0.25);
+	background: rgb(193 30 30 / 25%);
 	-webkit-transition: all 0.25s ease;
 	-moz-transition: all 0.25s ease;
 	-ms-transition: all 0.25s ease;

@@ -1,60 +1,62 @@
-var mediaData = [
-	{
-		author: "Freedom1111 Trail Studio",
-		authorUrl: "https://www.youtube.com/channel/UCx6kpgiQkDkN1UnK5GaATGw",
-		fileName: "Swing Theory",
-		fileUrl:
-			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/Swing_Theory.mp3",
-		thumb:
-			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/15367448967_0551dce9c1_q.jpg"
-	},
-	{
-		author: "Huma-Huma",
-		authorUrl: "",
-		fileName: "It's All Happening",
-		fileUrl:
-			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/It_s_All_Happening.mp3",
-		thumb:
-			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/34347642316_fe2f354cfd_q.jpg"
-	},
-	{
-		author: "Danny Kean/Doug Maxwell",
-		authorUrl: "https://www.youtube.com/channel/UCwhJTv7O8EmDwyvqMBLHcHg",
-		fileName: "So Smooth",
-		fileUrl:
-			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/So_Smooth.mp3",
-		thumb:
-			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/36981460496_80c2c2bce5_q.jpg"
-	},
-	{
-		author: "Silent Partner",
-		authorUrl: "",
-		fileName: "Sinking Ship",
-		fileUrl:
-			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/Sinking_Ship.mp3",
-		thumb:
-			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/38552225096_84b69eb7aa_q.jpg"
-	},
-	{
-		author: "Jimmy Fontanez/Doug Maxwell",
-		authorUrl: "https://www.youtube.com/channel/UCwhJTv7O8EmDwyvqMBLHcHg",
-		fileName: "Trap Unboxing",
-		fileUrl:
-			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/Trap_Unboxing.mp3",
-		thumb:
-			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/41451305061_f0bd9717be_q.jpg"
-	},
-	{
-		author: "米津玄師",
-		authorUrl: "",
-		fileName: "lemon",
-		fileUrl:
-			"./programTestFile1/lemon.mp3",
-		thumb:
-			"./programTestFile1/lemon.jpg"
+//var mediaData = [
+//	{
+//		author: "Freedom1111 Trail Studio",
+//		authorUrl: "https://www.youtube.com/channel/UCx6kpgiQkDkN1UnK5GaATGw",
+//		fileName: "Swing Theory",
+//		fileUrl:
+//			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/Swing_Theory.mp3",
+//		thumb:
+//			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/15367448967_0551dce9c1_q.jpg"
+//	},
+//	{
+//		author: "Huma-Huma",
+//		authorUrl: "",
+//		fileName: "It's All Happening",
+//		fileUrl:
+//			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/It_s_All_Happening.mp3",
+//		thumb:
+//			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/34347642316_fe2f354cfd_q.jpg"
+//	},
+//	{
+//		author: "Danny Kean/Doug Maxwell",
+//		authorUrl: "https://www.youtube.com/channel/UCwhJTv7O8EmDwyvqMBLHcHg",
+//		fileName: "So Smooth",
+//		fileUrl:
+//			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/So_Smooth.mp3",
+//		thumb:
+//			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/36981460496_80c2c2bce5_q.jpg"
+//	},
+//	{
+//		author: "Silent Partner",
+//		authorUrl: "",
+//		fileName: "Sinking Ship",
+//		fileUrl:
+//			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/Sinking_Ship.mp3",
+//		thumb:
+//			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/38552225096_84b69eb7aa_q.jpg"
+//	},
+//	{
+//		author: "Jimmy Fontanez/Doug Maxwell",
+//		authorUrl: "https://www.youtube.com/channel/UCwhJTv7O8EmDwyvqMBLHcHg",
+//		fileName: "Trap Unboxing",
+//		fileUrl:
+//			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/Trap_Unboxing.mp3",
+//		thumb:
+//			"https://s3-ap-northeast-1.amazonaws.com/dazedbear-assets/custom-audio-player/41451305061_f0bd9717be_q.jpg"
+//	},
+//	{
+//		author: "米津玄師",
+//		authorUrl: "",
+//		fileName: "lemon",
+//		fileUrl:
+//			"./programTestFile1/lemon.mp3",
+//		thumb:
+//			"./programTestFile1/lemon.jpg"
+//
+//	}
+//];
 
-	}
-];
+var mediaData = [];
 
 // 格式化秒數
 const formatTime = (sec) => {
@@ -453,9 +455,9 @@ $(document).ready(() => {
 				}
 
 				//設定準備播放歌曲
-				myAudio.setCurrentMusic(mediaData.length-1);
+				//myAudio.setCurrentMusic(mediaData.length-1);
 				//自動播放	
-				myAudio.setPlayStatus(true);
+				//myAudio.setPlayStatus(true);
 
 
 
@@ -473,7 +475,7 @@ $(document).ready(() => {
 	
 	///點愛心取得歌曲
 		$("svg").on("click", function (e) {
-
+		
 		$(e.currentTarget.parentNode).toggleClass("like");
 		
 		console.log(e.target);
@@ -499,7 +501,7 @@ $(document).ready(() => {
 			data: pid,
 			dataType: "json",
 			success: function(data) {
-				console.log(data);
+				/*console.log(data);
                 var new_song = data;
 
 				var duplicate = false;
@@ -525,7 +527,7 @@ $(document).ready(() => {
 				myAudio.setCurrentMusic(mediaData.length-1);
 				//自動播放	
 				myAudio.setPlayStatus(true);
-
+*/
 	
 
 			}
