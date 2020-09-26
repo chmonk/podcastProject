@@ -689,6 +689,7 @@ $(document).ready(() => {
 			xhr1.send();
 		})
 
+////歷史  一鍵加入
 	$("#pressHistoryAdd").on("click", function() {
 		
 		console.log("browsingHis add to playerList1");
@@ -700,7 +701,7 @@ $(document).ready(() => {
 
 		xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-		xhr5.send("userId=" + 1);
+		xhr5.send();
 		xhr5.onreadystatechange = function() {
 
 			if (xhr5.readyState == 4) {
@@ -739,14 +740,60 @@ $(document).ready(() => {
 			}
 		};
 	
-	
-	
-	
-	
-	
 	})
 	
 	
+	//最愛  一鍵加入
+	$("#presslikelistAdd").on("click", function() {
+		
+    console.log("browsingHis add to playerList1");
+
+    //請求最愛紀錄塞入播放清單
+    let xhr5 = new XMLHttpRequest();
+
+    xhr5.open("post", "/SpringWebProject/getlikePlaylist", true);
+
+    xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr5.send();
+    xhr5.onreadystatechange = function() {
+
+        if (xhr5.readyState == 4) {
+
+            if (xhr5.status == 200) {
+
+                var type = xhr5.getResponseHeader("Content-Type");
+
+                if (type.indexOf("application/json") === 0) {
+
+                    //clean old mediaData
+
+                    //黑魔法清空array
+                    mediaData.length = 0;
+
+
+                    med = JSON.parse(xhr5.responseText);
+
+                    //將object 轉為 js array 才能取用 array方法
+                    Object.keys(med).map(function(_) { return med[_]; });
+                    //console.log(med);
+
+                    //依序塞入歌曲  舊到新push   反敘為unshift
+                    med.forEach(function(song, index) {
+                        mediaData.unshift(song);
+                    })
+
+                    renderPlaylist(mediaData);
+                }
+
+            } else {
+                console.log("status isn't 200");
+            }
+        } else {
+            console.log("readystate=" + xhr5.readyState);
+        }
+    };
+})
 	//點選#show下的圖片觸發新增到播放列表 同時發送使用者id(利用html input tag) 節目id(綁在節目圖示)
 	$("#show").on("click", "img", function() {
 

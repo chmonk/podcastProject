@@ -37,7 +37,19 @@
 
 h2 {
 	margin: 10%;
+	width: 150px;
 }
+
+#pressHistoryAdd {
+float:left;
+
+}
+
+#bbb{
+    margin: 25px auto;
+    width: 200px;
+}
+
 
 
 </style>
@@ -82,10 +94,15 @@ h2 {
 			</div>
 		</div>
 	</div>
-
-	<h2>瀏覽紀錄</h2>  <button id="pressHistoryAdd">一鍵加入</button>
-
+		
+	<div id="bbb" style="width:80%; height:30px">
+		<h2>瀏覽紀錄</h2>
+		<button id="pressHistoryAdd">一鍵加入</button>
+	</div>
+	
+<br>	
 	<hr>
+	
 
 
 	<div class="carousel-container col-sm-10 padcard">
