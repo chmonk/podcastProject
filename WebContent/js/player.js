@@ -296,7 +296,7 @@ $(document).ready(() => {
 	const volumeBg = $("#volume_bg");
 	const volumeBar = $("#volume_bar");
 	const volumeHandle = $("#volume_handle");
-	const audiotext = $(".playlist-number");;
+	const audiotext = $(".playlist-number");
 
 
 
@@ -357,11 +357,29 @@ $(document).ready(() => {
 
 	//播放清單取得歌曲
 	//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
-	audiotext.click(function() {
+	audiotext.click(function(e) {
+		
+		//找到點擊率的span element
+		//console.log($(e.currentTarget.parentNode).prev("div").find("span").last());
+		
+		//找到點擊率的span element text ex. 點擊率35
+		//console.log($(e.currentTarget.parentNode).prev("div").find("span").last().text());
+		
+		let clickoutText=$(e.currentTarget.parentNode).prev("div").find("span").last().text();
+		
+		//取出數字  轉成數字
+		//console.log(clickoutText.substring(3));
+		let oldclickamount=parseInt(clickoutText.substring(3));
+		let newclickamount=oldclickamount+1;
+		
+		//塞回點擊率數字+1
+		$(e.currentTarget.parentNode).prev("div").find("span").last().text(`點擊率${newclickamount}`);
+		
 		console.log(this);
 		var pid = {};
 		pid.id = this.id;
 		// console.log(this.id);
+
 
 		xhr = $.ajax({
 			url: "/SpringWebProject/addListController",
@@ -372,14 +390,14 @@ $(document).ready(() => {
 			dataType: "json",
 			success: function(data) {
 				// console.log(xhr);
-//				console.log(data);
-//				mediaData.push(data);//不能用responseText會無法顯示
-//				var result = [...new Set(mediaData.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
-//				mediaData = result;
-//
-//				renderPlaylist();//重新取得清單資訊
+				//				console.log(data);
+				//				mediaData.push(data);//不能用responseText會無法顯示
+				//				var result = [...new Set(mediaData.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
+				//				mediaData = result;
+				//
+				//				renderPlaylist();//重新取得清單資訊
 				console.log(data);
-                var new_song = data;
+				var new_song = data;
 
 				var duplicate = false;
 				var duplicate_index;
@@ -405,10 +423,6 @@ $(document).ready(() => {
 				//自動播放	
 				//myAudio.setPlayStatus(true);
 
-
-
-
-
 			}
 
 		})
@@ -418,30 +432,60 @@ $(document).ready(() => {
 
 
 	});
-	
+
 	///點愛心取得歌曲
-	
-	
-	
-		$("svg").on("click", function (e) {
-		
+
+
+
+	$("svg").on("click", function(e) {
+
+
+		//console.log($(e.currentTarget.parentNode).find("span").text());
+		let clickamountString=$(e.currentTarget.parentNode.parentNode.parentNode).children().eq(2).find("span").last().text();
+		let clickamountNum=parseInt(clickamountString.substring(3));
+		//取消愛心
+		if ($(e.currentTarget.parentNode).hasClass("like")) {
+			//愛心數
+			$(e.currentTarget.parentNode).find("span").text(
+				`${parseInt($(e.currentTarget.parentNode).find("span").text()) - 1}`
+			);
+			//取消愛心不扣點擊率
+		} else {
+			//增加愛心
+			$(e.currentTarget.parentNode).find("span").text(
+				`${parseInt($(e.currentTarget.parentNode).find("span").text()) + 1}`
+			);
+			//增加點級率		
+			$(e.currentTarget.parentNode.parentNode.parentNode).children().eq(2).find("span").last().text(
+				`點擊率${clickamountNum+1}`
+			);
+		}
+
+
 		$(e.currentTarget.parentNode).toggleClass("like");
-		
-		console.log(e.target);
-		
-		console.log($(e.currentTarget.parentNode.parentNode.parentNode));
-		console.log($(e.currentTarget.parentNode.parentNode.parentNode).find("a"));
-		console.log($(e.currentTarget.parentNode.parentNode.parentNode).find("a").attr("id"));
-		
-		var id=$(e.currentTarget.parentNode.parentNode.parentNode).find("a").attr("id");
-		
+
+//				console.log(e.target);
+				//console.log($(e.currentTarget.parentNode));
+				//console.log($(e.currentTarget.parentNode.parentNode.parentNode));
+				//console.log($(e.currentTarget.parentNode.parentNode.parentNode).children());
+				//取得點級數
+				//console.log($(e.currentTarget.parentNode.parentNode.parentNode).children().eq(2).find("span").last());
+				
+				//				console.log($(e.currentTarget.parentNode.parentNode).next("div"));
+				//				console.log($(e.currentTarget.parentNode.parentNode).next("div").find("span").last());
+				//				console.log($(e.currentTarget.parentNode.parentNode.parentNode));
+				//				console.log($(e.currentTarget.parentNode.parentNode.parentNode).find("a"));
+				//				console.log($(e.currentTarget.parentNode.parentNode.parentNode).find("a").attr("id"));
+
+		var id = $(e.currentTarget.parentNode.parentNode.parentNode).find("a").attr("id");
+
 		console.log(id);
-		var pid={};
-		
-		pid.id=id;
-		
-	//播放清單取得歌曲
-	//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
+		var pid = {};
+
+		pid.id = id;
+
+		//播放清單取得歌曲
+		//以ajax取得控制器傳來的json物件，將其以push的方式加到Array下
 
 		xhr = $.ajax({
 			url: "/SpringWebProject/addListByLikeController",
@@ -477,7 +521,7 @@ $(document).ready(() => {
 				//自動播放	
 				myAudio.setPlayStatus(true);
 */
-	
+
 
 			}
 
@@ -486,9 +530,9 @@ $(document).ready(() => {
 
 
 
-});
-	
-	
+	});
+
+
 
 	// 監聽事件顯示 UI
 	myAudio.on("playstatuschange", () =>
@@ -689,9 +733,9 @@ $(document).ready(() => {
 			xhr1.send();
 		})
 
-////歷史  一鍵加入
+	////歷史  一鍵加入
 	$("#pressHistoryAdd").on("click", function() {
-		
+
 		console.log("browsingHis add to playerList1");
 
 		//請求瀏覽紀錄塞入播放清單
@@ -739,61 +783,61 @@ $(document).ready(() => {
 				console.log("readystate=" + xhr5.readyState);
 			}
 		};
-	
+
 	})
-	
-	
+
+
 	//最愛  一鍵加入
 	$("#presslikelistAdd").on("click", function() {
-		
-    console.log("browsingHis add to playerList1");
 
-    //請求最愛紀錄塞入播放清單
-    let xhr5 = new XMLHttpRequest();
+		console.log("browsingHis add to playerList1");
 
-    xhr5.open("post", "/SpringWebProject/getlikePlaylist", true);
+		//請求最愛紀錄塞入播放清單
+		let xhr5 = new XMLHttpRequest();
 
-    xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr5.open("post", "/SpringWebProject/getlikePlaylist", true);
 
-    xhr5.send();
-    xhr5.onreadystatechange = function() {
+		xhr5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-        if (xhr5.readyState == 4) {
+		xhr5.send();
+		xhr5.onreadystatechange = function() {
 
-            if (xhr5.status == 200) {
+			if (xhr5.readyState == 4) {
 
-                var type = xhr5.getResponseHeader("Content-Type");
+				if (xhr5.status == 200) {
 
-                if (type.indexOf("application/json") === 0) {
+					var type = xhr5.getResponseHeader("Content-Type");
 
-                    //clean old mediaData
+					if (type.indexOf("application/json") === 0) {
 
-                    //黑魔法清空array
-                    mediaData.length = 0;
+						//clean old mediaData
+
+						//黑魔法清空array
+						mediaData.length = 0;
 
 
-                    med = JSON.parse(xhr5.responseText);
+						med = JSON.parse(xhr5.responseText);
 
-                    //將object 轉為 js array 才能取用 array方法
-                    Object.keys(med).map(function(_) { return med[_]; });
-                    //console.log(med);
+						//將object 轉為 js array 才能取用 array方法
+						Object.keys(med).map(function(_) { return med[_]; });
+						//console.log(med);
 
-                    //依序塞入歌曲  舊到新push   反敘為unshift
-                    med.forEach(function(song, index) {
-                        mediaData.unshift(song);
-                    })
+						//依序塞入歌曲  舊到新push   反敘為unshift
+						med.forEach(function(song, index) {
+							mediaData.unshift(song);
+						})
 
-                    renderPlaylist(mediaData);
-                }
+						renderPlaylist(mediaData);
+					}
 
-            } else {
-                console.log("status isn't 200");
-            }
-        } else {
-            console.log("readystate=" + xhr5.readyState);
-        }
-    };
-})
+				} else {
+					console.log("status isn't 200");
+				}
+			} else {
+				console.log("readystate=" + xhr5.readyState);
+			}
+		};
+	})
 	//點選#show下的圖片觸發新增到播放列表 同時發送使用者id(利用html input tag) 節目id(綁在節目圖示)
 	$("#show").on("click", "img", function() {
 
