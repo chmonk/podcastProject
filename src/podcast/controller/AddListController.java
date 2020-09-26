@@ -48,12 +48,17 @@ public class AddListController {
 	//id from ajax provide podcastId
 	public @ResponseBody Map<String, String> AddList(Integer id,Model model) throws Exception {
 
+		
+		
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
 		System.out.println(id);
 		Integer publisherId=udao.select(id).getMemberId();
 
 //		Integer userId=(Integer)model.getAttribute("userid");
 		MemberBean mbean = (MemberBean)model.getAttribute("LoginOK");
+		
+		//check loginOK
+				System.out.println("loginOK ID:"+mbean.getMemberId() );
 
 		Integer userid=mbean.getMemberId();
 
@@ -105,7 +110,8 @@ public class AddListController {
 	}
 	
 	
-	//點擊節目愛心時  1.節目加入播放列表  2.增加瀏覽紀錄 3.節目點擊增加 4.增加like record like 1 addlist 1
+
+	//點擊節目愛心時  3.節目點擊增加 4.增加like record like 1 addlist 1
 	@GetMapping(value="/addListByLikeController", produces= {"application/json"})
 	//id from ajax provide podcastId
 	public @ResponseBody Map<String, String> AddListByLike(Integer id,Model model) throws Exception {
@@ -129,19 +135,17 @@ public class AddListController {
 		m.put("thumb", songlist.getAudioimg());
 
 		//2. 新增瀏覽紀錄
-		HistoryBean hbean = new HistoryBean();
+				HistoryBean hbean = new HistoryBean();
+		
+				hbean.setLastListen(new Date());
+				hbean.setMemberId(userid);
+				hbean.setPodcastId(id);
+				hbean.setPodcastName(songlist.getTitle());
+				hbean.setPublisherId(songlist.getMemberId());
+		
+				hdao.insert(hbean);
 
-		hbean.setLastListen(new Date());
-		hbean.setMemberId(userid);
-		hbean.setPodcastId(id);
-		hbean.setPodcastName(songlist.getTitle());
-		hbean.setPublisherId(songlist.getMemberId());
-
-		hdao.insert(hbean);
-
-		//3. 新增點擊數
-		udao.addClickCount(id);
-		System.out.println("stage3");
+				
 
 		//4. 如果likelist未有紀錄就新增 單純新增like record
 		LikeRecordBean likeresult = ldao.checkByMemberidAndPodcastID(userid, podcastId);
@@ -155,11 +159,17 @@ public class AddListController {
 
 			ldao.insert(lbean);
 			
+			//3. 新增點擊數
+			udao.addClickCount(id);
+			
 		}else if(likeresult.getLikeStatus()==0){
 			//增加愛心
 			udao.addLikeCount(id);
 			likeresult.setLikeStatus(1);
 			likeresult.setShowInListOrNot(1); //重點變為可加入list
+			
+			//3. 新增點擊數
+			udao.addClickCount(id);
 			
 		}else {
 			//取消愛心

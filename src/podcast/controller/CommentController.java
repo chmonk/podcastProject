@@ -44,6 +44,11 @@ public class CommentController {
 	@RequestMapping(path = "/podcastPage", method = RequestMethod.GET)
 	public String showPodcastPage(HttpServletRequest request,Model m, @RequestParam(name="fuzzyPodcasterId")Integer podcasterId) throws Exception {
 		
+		if(m.getAttribute("LoginOK")==null) {
+			return "login";
+		}
+		
+		
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		ProgramCommentDAO commDao = (ProgramCommentDAO) context.getBean("ProgramCommentDAO");

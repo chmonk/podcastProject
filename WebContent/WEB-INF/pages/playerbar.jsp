@@ -83,7 +83,7 @@
 						<div class="timeline__progress-bar" id="timeline-bar"></div>
 						<div class="timeline__progress-handle" id="timeline-handle"></div>
 					</div>
-					<span class="timeline__duration" id="duration">00:10:59</span>
+					<span class="timeline__duration" id="duration">00:00:00</span>
 				</div>
 			</div>
 			<div class="player__volume player__item">
@@ -102,9 +102,8 @@
 						src="https://i1.sndcdn.com/artworks-000406637742-g6nq0a-t120x120.jpg" />
 					<div class="info__wrapper">
 						<p class="info__author" id="current-author"
-							title="Front End Happy Hour">Front End Happy Hour</p>
-						<span class="info__name" id="current-name">Episode 066 -
-							Type systems - a static drink list</span>
+							title="Front End Happy Hour"></p>
+						<span class="info__name" id="current-name"></span>
 					</div>
 				</div>
 			</div>
@@ -125,24 +124,23 @@
 										src="https://i1.sndcdn.com/artworks-000406637742-g6nq0a-t120x120.jpg" />
 									<div class="info__wrapper">
 										<a class="info__author" href="/front-end-happy-hour"
-											title="Front End Happy Hour">Front End Happy Hour</a><span
-											class="info__name">Episode 066 - Type systems - a
-											static drink list</span>
+											title="Front End Happy Hour"></a><span
+											class="info__name"></span>
 									</div>
 								</div>
 							</div>
-							<div class="queue__item">
-								<div class="info">
-									<img class="info__thumb"
-										src="https://i1.sndcdn.com/artworks-000406637742-g6nq0a-t120x120.jpg" />
-									<div class="info__wrapper">
-										<a class="info__author" href="/front-end-happy-hour"
-											title="Front End Happy Hour">Front End Happy Hour</a><span
-											class="info__name">Episode 066 - Type systems - a
-											static drink list</span>
-									</div>
-								</div>
-							</div>
+<!-- 							<div class="queue__item"> -->
+<!-- 								<div class="info"> -->
+<!-- 									<img class="info__thumb" -->
+<!-- 										src="https://i1.sndcdn.com/artworks-000406637742-g6nq0a-t120x120.jpg" /> -->
+<!-- 									<div class="info__wrapper"> -->
+<!-- 										<a class="info__author" href="/front-end-happy-hour" -->
+<!-- 											title="Front End Happy Hour">Front End Happy Hour</a><span -->
+<!-- 											class="info__name">Episode 066 - Type systems - a -->
+<!-- 											static drink list</span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 						</div>
 					</div>
 				</div>
