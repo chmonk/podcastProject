@@ -24,7 +24,7 @@ public class OrderItemBean {
 
 	Integer amount; // 庫存量
 
-	String description;
+	String description; //照片路徑
 
 	Integer unitPrice; // 單價
 
@@ -43,7 +43,7 @@ public class OrderItemBean {
 	OrderTicketBean orderTicketBean;
 
 	public OrderItemBean(Integer activityId, String activityName, Integer unitPrice, Integer quantity,
-			Date activityDate, String activityLocation, Integer amount) {
+			Date activityDate, String activityLocation, Integer amount,String description) {
 		this.activityId = activityId;
 		this.unitPrice = unitPrice;
 		this.amount = amount;
@@ -51,6 +51,7 @@ public class OrderItemBean {
 		this.activityName = activityName;
 		this.activityDate = activityDate;
 		this.activityLocation = activityLocation;
+		this.description = description;
 	}
 
 	public OrderItemBean() {

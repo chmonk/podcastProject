@@ -18,7 +18,7 @@ _<%@ page language="java" contentType="text/html; charset=UTF-8"
 }
 
 body {
-	background-image: url(< c : url value = '/img/banner/b4.jpg'/ >);
+	background-image: url(<c:url value='/img/banner/b4.jpg' />);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
@@ -37,18 +37,12 @@ body {
 	transition: 0.5s;
 }
 
-.name {
-	width: 200px;
-}
 
 th, tr {
 	text-align: center;
 	background-color: white;
 }
 
-h1 {
-	color: white;
-}
 
 .showPodcasterBody {
 	padding-top: 40px;
@@ -59,17 +53,24 @@ h1 {
 	padding-top: 50px;
 	/* 	border-bottom: 1px solid black;  */
 }
+}
+.secondary-menu {
+    position: fixed;
+    z-index: 99999;
+    width: 100%;
+    background: rgba(0,0,0,0.9);
+    top: 0;}
+.head{ position: fixed;
+top: 0;}
 </style>
 
 </head>
 
 
 <body>
-
-	<div class="head">
+<div class="head">
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
-
 	<div class="showPodcasterBody">
 		<div class="row showPodcasterBodyHeader">
 			<div class="col-md-4">
@@ -86,24 +87,24 @@ h1 {
 	</div>
 
 	<c:set var="funcName" value="ORD" scope="session" />
-	<div class="container">
+	
+	<div class="container-fluid">
 		<div class="custyle">
-			<h1 style="text-align: center;">${LoginOK.name}的訂購紀錄：</h1>
 			<table class="table table-striped custab">
-				<div class="row">
+		 <tr><td colspan='4'><b>${LoginOK.name}的訂購紀錄：</b></tr>
 					<tr>
-						<th>訂單編號</th>
-						<th>訂購日期</th>
-						<th>總金額</th>
-						<th>送貨地址</th>
+						<td>訂單編號</td>
+						<td>訂購日期</td>
+						<td>總金額</td>
+						<td>送貨地址</td>
 					</tr>
 					<c:forEach var="anOrderBean" varStatus="stat"
 						items="${memberOrders}">
 						<tr>
-							<td><a
+							<td><a style="color:red;"
 								href='<c:url value='
                                     orderDetail?memberId=${LoginOK.memberId}&ticketOrderId=${anOrderBean.ticketOrderId}' />'>
-									${anOrderBean.ticketOrderId} </a></td>
+									<u>${anOrderBean.ticketOrderId}</u> </a></td>
 							<td>${fn:substring(anOrderBean.orderDate, 0, 10)}</td>
 							<td>${anOrderBean.totalAmount}</td>
 							<td>${anOrderBean.shippingAddress}</td>
@@ -120,8 +121,7 @@ h1 {
 							class="btn btn-primary"
 							href="<c:url value='removeShoppingCart' />">回首頁</a></td>
 					</tr>
-				</div>
-				</div>
+		
 			</table>
 		</div>
 	</div>

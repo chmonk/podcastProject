@@ -38,10 +38,10 @@
 /* *{
 	border: 1px solid black;
 } */
+
 /* .messageBoard {
 	background-color: #f2f2f2;
 } */
-
 .showPodcasterBody {
 	padding-top: 40px;
 	padding-bottom: 40px;
@@ -92,25 +92,23 @@
 	font-size: 20px;
 	font: #222831;
 }
-.bodycolor{
+
+.bodycolor {
 	background-color: #fff;
 }
 
 /* .card-media {
 	width: 600px;
 } */
-
- .podcastList {
-
+.podcastList {
 	width: 80%;
-    margin: auto;
+	margin: auto;
 }
 /*
 .messageBoard {
 	overflow-y: scroll;
 	height: 1000px;
 } */
-
 @import
 	url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 
@@ -255,7 +253,6 @@
 }
 
 #tab-panel {
-	/* max-width: 690px; */
 	margin: 0 auto;
 	font-family: arial;
 }
@@ -300,9 +297,6 @@
 	color: #666;
 	line-height: 25px;
 }
-
-
-
 </style>
 
 <title>頻道首頁</title>
@@ -324,21 +318,29 @@
 				<div class="memberInfo">${podcasterData.podcastInfo}</div>
 				<div>
 					<c:choose>
+
+						<c:when test="${subscriptionPermission ==2}">
+							<button id="hide_alreadysub_btn" type="button"
+								class="btn btn-success">本人頻道</button>
+						</c:when>
+
 						<c:when test="${subscriptionPermission ==1}">
 							<button id="hide_alreadysub_btn" type="button"
 								class="btn btn-info">已訂閱</button>
 						</c:when>
+
+						<c:when test="${payAmount ==0}">
+						</c:when>
 						<c:otherwise>
-							<form action="/SpringWebProject/AfterSubProgram.controller">
-								<input id='check_sub' type="submit" value="訂閱"
-									class="btn btn-danger">
-							</form>
+							<button id='check_sub' type="button" class="btn btn-danger"
+								data-toggle="modal" data-target="#exampleModal">訂閱</button>
 						</c:otherwise>
 					</c:choose>
 				</div>
 			</div>
 		</div>
 		<div class="row">
+
 			<div class="col-md-12 bodycolor">
 				<div id="tab-panel">
 					<div class="tabs">
@@ -397,6 +399,7 @@
 							</div>
 						</li>
 						<li>
+
 							<div class="podcastList">
 								<div>
 									<c:forEach var="alreadySub" items="${subProgram}">
@@ -435,8 +438,13 @@
 													class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 													<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getCategoryName()}</span>
 													<c:choose>
+
+														<c:when test="${subscriptionPermission ==2}">
+															<a id="${podcast.getPodcastId()}"
+																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
+														</c:when>
 														<c:when test="${subscriptionPermission ==1}">
-															<a id="${alreadySub.getPodcastId()}"
+															<a id="${podcast.getPodcastId()}"
 																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 														</c:when>
 														<c:otherwise>
@@ -488,11 +496,41 @@
 	</div>
 
 
-	<div class="playbar">
-		<jsp:include page="../playerbar.jsp" flush="true " />
-	</div>
 
-	<script type="text/javascript">
+
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">即將離開頁面進入付費....</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div id="pay_free" class="modal-body">訂閱本頻道每月需支付${payAmount}元</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">取消</button>
+						<button id="btn_gotopay" type="button" class="btn btn-primary"
+							onclick="location.href='<c:url value="/AfterSubProgram.controller" />'">確定前往付費
+						</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<div class="playbar">
+			<jsp:include page="../playerbar.jsp" flush="true " />
+		</div>
+
+		<script type="text/javascript">
 		$(function() {
 			var $tabPanel = $('#tab-panel'), $tabs = $tabPanel.find('.tabs'), $tab = $tabs
 					.find('a'), $tabContent = $tabPanel.find('.tab-content'), $content = $tabContent
@@ -562,25 +600,25 @@
 			}
 		}
 	</script>
-	<!-- Javascript files -->
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-	<!-- Bootstrap JS -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- WayPoints JS -->
-	<script src="js/waypoints.min.js"></script>
-	<!-- Include js plugin -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- One Page Nav -->
-	<script src="js/jquery.nav.js"></script>
-	<!-- Respond JS for IE8 -->
-	<script src="js/respond.min.js"></script>
-	<!-- HTML5 Support for IE -->
-	<script src="js/html5shiv.js"></script>
-	<!-- Custom JS -->
-	<script src="js/custom.js"></script>
-	<!-- 	plaer bar function js -->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/player.js"></script>
+		<!-- Javascript files -->
+		<!-- jQuery -->
+		<script src="js/jquery.js"></script>
+		<!-- Bootstrap JS -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- WayPoints JS -->
+		<script src="js/waypoints.min.js"></script>
+		<!-- Include js plugin -->
+		<script src="js/owl.carousel.min.js"></script>
+		<!-- One Page Nav -->
+		<script src="js/jquery.nav.js"></script>
+		<!-- Respond JS for IE8 -->
+		<script src="js/respond.min.js"></script>
+		<!-- HTML5 Support for IE -->
+		<script src="js/html5shiv.js"></script>
+		<!-- Custom JS -->
+		<script src="js/custom.js"></script>
+		<!-- 	plaer bar function js -->
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/player.js"></script>
 </body>
 </html>

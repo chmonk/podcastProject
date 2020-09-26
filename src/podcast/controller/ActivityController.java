@@ -165,7 +165,7 @@ public class ActivityController {
 	
 	}
 
-	// 資料庫的所有活動傳送至首頁
+	// 資料庫的公開活動傳送至首頁
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String showActivities(HttpServletRequest request, Model m) throws Exception {
 
@@ -175,7 +175,7 @@ public class ActivityController {
 		ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
 
 		List<ActivityBean> list = new LinkedList<ActivityBean>();
-		list = aDao.selectAll();
+		list = aDao.selectOpenActivities();
 		m.addAttribute("list", list);
 
 		//購物車商品
@@ -232,7 +232,10 @@ public class ActivityController {
 	@PostMapping("/updateAc")
 	public String processAction2(
 			@ModelAttribute("ActivityBean") ActivityBean activity,
-			@RequestParam("file") MultipartFile multipartFile,Model m,HttpServletRequest request) throws Exception {
+			@RequestParam("soldQuantity") Integer soldQuantity,
+			@RequestParam("oldMaxppl") Integer oldMaxppl,
+//			@RequestParam("file") MultipartFile multipartFile,
+			Model m,HttpServletRequest request) throws Exception {
 		
 		System.out.println("Entering processAction2");
 		
@@ -258,24 +261,25 @@ public class ActivityController {
 		+activityPrice
 		+activityMaxPeople
 		+activityStatus
-		+multipartFile);
+//		+multipartFile
+		);
 
-		
+		//newStock=newMaxppl-(oldMaxppl-oStock)
 		Integer aId = activity.getActivityId();	
-		Integer stock = activity.getActivityMaxPeople();
-		activity.setStock(stock);
+		Integer newstock = activity.getActivityMaxPeople()-(oldMaxppl-soldQuantity);
+		activity.setStock(newstock);
 		
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
 		Integer Id = memberBean.getMemberId();		
 		activity.setPodcasterId(Id);
 		
-		String ActivityImg = "";
-		if(multipartFile != null) {
-			ActivityImg = processFile(Id,multipartFile,request);
-		}else {
-			ActivityImg = activity.getActivityImg();
-		}		
-		activity.setActivityImg(ActivityImg);
+//		String ActivityImg = "";
+//		if(multipartFile != null) {
+//			ActivityImg = processFile(Id,multipartFile,request);
+//		}else {
+//			ActivityImg = activity.getActivityImg();
+//		}		
+//		activity.setActivityImg(ActivityImg);
 
 		
 		ServletContext app = request.getServletContext();

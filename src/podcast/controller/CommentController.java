@@ -59,10 +59,7 @@ public class CommentController {
     	if(!verificationPodcaster) {
     		return "index";
     	}
-    	
-    	
-    	
-    	
+
 		//取得留言資料
 		List<ProgramCommentBean> commList=commDao.selectAllPodcasterId(podcasterId);
 		List<Object> commListData = new LinkedList<>();
@@ -163,7 +160,8 @@ public class CommentController {
 			subscriptionPodcastData.add(data);		
 		}
     	
-    	
+		m.addAttribute("payAmount",mdao.selectPodcaster(podcasterId).getMonthlyPayment());//抓取訂閱播客頻道所需費用，送至前端
+
     	
     	m.addAttribute("subscriptionPermission", subscriptionPermission);
     	m.addAttribute("subProgram", subscriptionPodcastData);

@@ -133,17 +133,20 @@
             <br>
 
             <label>活動內容: </label>
-            <textarea name="activityContent" class="form-control" rows="3" value="${aBean.activityContent}" placeholder="請輸入活動內容..." required>${aBean.activityContent} </textarea>
+
+            <textarea name="activityContent" class="form-control" rows="3" value="${aBean.activityContent}"  required>${aBean.activityContent} </textarea>
+
 
             <br>
 
-            <label>活動照片: </label>
-            <input type="file" name="file" class="form-control">
-            <br>
+<!--             <label>活動照片: </label> -->
+<!--             <input type="file" name="file" class="form-control"> -->
+<!--             <br> -->
             
             <input type=hidden name="activityId" value="${aBean.activityId}">
             <input type=hidden name="activityImg" value="${aBean.activityImg}">
-
+            <input type=hidden name="oldMaxppl" value="${aBean.activityMaxPeople}">
+			<input type=hidden name="soldQuantity" value="${aBean.stock}">
             <div class="button">
               <input type="submit" name="submit" value="送出" class="btn btn-danger btn-block btn-lg"
                 style="box-shadow: 2px 2px 2px gray;">

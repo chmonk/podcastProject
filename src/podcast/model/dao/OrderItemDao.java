@@ -37,8 +37,8 @@ public class OrderItemDao implements IOrderItemDao {
 		int n = 0;
 		Integer stock = 0;
 		Session session = factory.getCurrentSession();
-		String hql0 = "SELECT activityMaxPeople FROM ActivityBean WHERE activityId = :activityId";
-		String hql1 = "UPDATE ActivityBean SET activityMaxPeople = activityMaxPeople - :orderAmount WHERE activityId = :activityId";
+		String hql0 = "SELECT stock FROM ActivityBean WHERE activityId = :activityId";
+		String hql1 = "UPDATE ActivityBean SET stock = stock - :orderAmount WHERE activityId = :activityId";
 		//String hql1 = "UPDATE OrderItemBean SET amount = amount - :orderAmount WHERE activityId = :activityId";
 		stock = (Integer) session.createQuery(hql0)
 								 .setParameter("activityId", oib.getActivityId())
