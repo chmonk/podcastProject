@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.Date, java.text.SimpleDateFormat"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
@@ -296,7 +297,20 @@
 	line-height: 25px;
 }
 </style>
+<script type="text/javascript">
+	window.onload = function() {
+		if ("${subscriptionPermission}" == 0) {
+			document.getElementById('need_to_sub').innerHTML = "未訂閱此頻道，請訂閱";
+			document.getElementById('hide_alreadysub_btn').style.display = 'none';
 
+		} else {
+			/* playlist-number">加到播放列表 */
+			document.getElementById('d1').style.display = '';
+			document.getElementById('check_sub').style.display = 'none';
+			document.getElementById('d2').style.display = 'none';
+		}
+	}
+</script>
 <title>頻道首頁</title>
 </head>
 <body>
@@ -314,19 +328,19 @@
 			<div class="col-md-8">
 				<div class="memberName">${podcasterData.podcastName}</div>
 				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div id="app">
+				
+					<div v-if="message==0">{{ me}}</div>
+				  
+				</div>
 				<div>
-					<c:choose>
-						<c:when test="${subscriptionPermission ==1}">
-							<button id="hide_alreadysub_btn" type="button"
-								class="btn btn-info">已訂閱</button>
-						</c:when>
-						<c:otherwise>
-							<form action="/SpringWebProject/AfterSubProgram.controller">
-								<input id='check_sub' type="submit" value="訂閱"
-									class="btn btn-danger">
-							</form>
-						</c:otherwise>
-					</c:choose>
+					<span id='need_to_sub'></span>
+					<button id="hide_alreadysub_btn" type="button" class="btn btn-info"
+						style="display: '';">已訂閱</button>
+					<form action="/SpringWebProject/AfterSubProgram.controller">
+						<input id='check_sub' type="submit" value="訂閱"
+							class="btn btn-danger">
+					</form>
 				</div>
 			</div>
 		</div>
@@ -454,18 +468,9 @@
 												<div
 													class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 													<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getCategoryName()}</span>
-													<c:choose>
-														<c:when test="${subscriptionPermission ==1}">
-															<a id="${podcast.getPodcastId()}"
-																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
-														</c:when>
-														<c:otherwise>
-															<a id="${alreadySub.getPodcastId()}"
-																class="card-media-body-supporting-bottom-text card-media-link u-float-right">
-																需訂閱才能收聽</a>
-														</c:otherwise>
-													</c:choose>
-
+													<a id="${alreadySub.getPodcastId()}"
+														class="card-media-body-supporting-bottom-text card-media-link u-float-right">
+														需訂閱才能收聽</a>
 												</div>
 											</div>
 										</div>
@@ -574,5 +579,19 @@
 	<!-- 	plaer bar function js -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 </body>
+	<script type="text/javascript">
+	var app = new Vue({
+	  el: '#app',
+	  data: {
+	    message: '${subscriptionPermission}',
+	    me:'${subProgram}'
+	  },
+	  methods: {
+
+		  
+		}
+	})
+	</script>
 </html>
