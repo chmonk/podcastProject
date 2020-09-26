@@ -62,7 +62,7 @@
 		<!--/ hero end -->
 
 		<!-- 矚目新選 -->
-<%-- 		<jsp:include page="promo_feature.jsp" flush="true " /> --%>
+ 		<jsp:include page="promo_feature.jsp" flush="true " />
 		<!-- 矚目新選 -->
 
 		<!-- call to action -->

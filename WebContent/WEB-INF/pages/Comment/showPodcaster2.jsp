@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.Date, java.text.SimpleDateFormat"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
@@ -38,10 +39,10 @@
 /* *{
 	border: 1px solid black;
 } */
-
-/* .messageBoard {
+.messageBoard {
 	background-color: #f2f2f2;
-} */
+}
+
 .showPodcasterBody {
 	padding-top: 40px;
 	padding-bottom: 40px;
@@ -49,8 +50,7 @@
 
 .showPodcasterBodyHeader {
 	padding-top: 110px;
-	background-color: #252c37;
-	/* border-bottom: 1px solid black; */
+	border-bottom: 1px solid black;
 }
 
 .memberImg {
@@ -93,22 +93,20 @@
 	font: #222831;
 }
 
-.bodycolor {
-	background-color: #fff;
+.card-media {
+	width: 600px;
 }
 
-/* .card-media {
-	width: 600px;
-} */
 .podcastList {
-	width: 80%;
-	margin: auto;
+	overflow-y: scroll;
+	height: 1000px;
 }
-/*
+
 .messageBoard {
 	overflow-y: scroll;
 	height: 1000px;
-} */
+}
+
 @import
 	url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 
@@ -161,7 +159,7 @@
 
 .messageBoard div.bubbleContainer div.bubbleBody {
 	margin-left: 100px;
-	width: 80%;
+	width: 500px;
 	height: 200px;
 	background-color: #fff;
 	border-radius: 10px;
@@ -211,7 +209,7 @@
 	display: block;
 	margin: 0 auto;
 	margin-right: 20px;
-	background-color: #f23031;
+	background-color: #09C;
 	border: 3px solid white;
 	outline: none;
 	border-radius: 12px;
@@ -223,13 +221,13 @@
 .messageBoard ul.messageList {
 	/* 	 width: 80vw;
  */
-	margin: 50px;
+	margin: 50px auto;
 	font-family: "Open Sans";
 }
 
 .messageBoard ul.messageList li.message {
 	list-style: none;
-	width: 90%;
+	width: 600px;
 	background-color: rgba(255, 255, 255, 1);
 	border-radius: 10px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -253,6 +251,7 @@
 }
 
 #tab-panel {
+	max-width: 690px;
 	margin: 0 auto;
 	font-family: arial;
 }
@@ -262,7 +261,7 @@
 }
 
 #tab-panel .tabs {
-	background: #252c37;;
+	background: #FFF;
 	overflow: hidden;
 	text-align: center;
 }
@@ -270,18 +269,18 @@
 #tab-panel .tabs a {
 	float: left;
 	display: block;
-	width: 33.333%;
+	width: 50%;
 	padding: 15px 0;
 	/*     border: 1px solid #CCC;
  */
 	font-size: 16px;
-	color: #fff;
+	color: #333;
 	box-sizing: border-box;
 	transition: all .3s;
 }
 
 #tab-panel .tabs a.active {
-	background: #f23031;
+	background: #09C;
 	color: #FFF;
 }
 
@@ -298,7 +297,20 @@
 	line-height: 25px;
 }
 </style>
+<script type="text/javascript">
+	window.onload = function() {
+		if ("${subscriptionPermission}" == 0) {
+			document.getElementById('need_to_sub').innerHTML = "未訂閱此頻道，請訂閱";
+			document.getElementById('hide_alreadysub_btn').style.display = 'none';
 
+		} else {
+			/* playlist-number">加到播放列表 */
+			document.getElementById('d1').style.display = '';
+			document.getElementById('check_sub').style.display = 'none';
+			document.getElementById('d2').style.display = 'none';
+		}
+	}
+</script>
 <title>頻道首頁</title>
 </head>
 <body>
@@ -316,35 +328,55 @@
 			<div class="col-md-8">
 				<div class="memberName">${podcasterData.podcastName}</div>
 				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div id="app">
+				
+					<div v-if="message==0">{{ me}}</div>
+				  
+				</div>
 				<div>
-					<c:choose>
-
-						<c:when test="${subscriptionPermission ==2}">
-							<button id="hide_alreadysub_btn" type="button"
-								class="btn btn-success">本人頻道</button>
-						</c:when>
-
-						<c:when test="${subscriptionPermission ==1}">
-							<button id="hide_alreadysub_btn" type="button"
-								class="btn btn-info">已訂閱</button>
-						</c:when>
-
-						<c:when test="${payAmount ==0}">
-						</c:when>
-						<c:otherwise>
-							<button id='check_sub' type="button" class="btn btn-danger"
-								data-toggle="modal" data-target="#exampleModal">訂閱</button>
-						</c:otherwise>
-					</c:choose>
+					<span id='need_to_sub'></span>
+					<button id="hide_alreadysub_btn" type="button" class="btn btn-info"
+						style="display: '';">已訂閱</button>
+					<form action="/SpringWebProject/AfterSubProgram.controller">
+						<input id='check_sub' type="submit" value="訂閱"
+							class="btn btn-danger">
+					</form>
 				</div>
 			</div>
 		</div>
 		<div class="row">
+			<div class="col-md-6">
+				<div class="messageBoard">
+					<div class="bubbleContainer">
+						<div class="bubbleBody">
+							<form id="message" action="podcastPage.do" method="post"
+								name="comment">
+								<textarea name="formMessage" id="content"
+									placeholder="留言內容：&#13;&#10;請輸入不超過50個字"></textarea>
+							</form>
+							<span class="submit"> <input id="podcasterId"
+								type="hidden" value="${thisPodcasterId}" />
+								<button id="submitBtn" class="btnSendMessage" type="button"
+									form="message">提交</button>
+							</span>
+						</div>
+					</div>
+					<ul class="messageList" id="messageList">
+						<c:forEach items="${commList}" var="comment" varStatus="tagStatus">
+							<li class="message">
+								<p class="messageTitle">${comment.Name}</p>
+								<p class="messageContent">${comment.commentMsg}</p>
+								<p class="messageDate">${comment.msgDate}</p>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
 
-			<div class="col-md-12 bodycolor">
+			<div class="col-md-6">
 				<div id="tab-panel">
 					<div class="tabs">
-						<a>節目表單</a> <a>訂閱表單</a><a>留言板</a>
+						<a>節目表單</a> <a>訂閱表單</a>
 					</div>
 					<ul class="tab-content">
 						<li>
@@ -399,8 +431,7 @@
 							</div>
 						</li>
 						<li>
-
-							<div class="podcastList">
+							<div class="podcastList2">
 								<div>
 									<c:forEach var="alreadySub" items="${subProgram}">
 										<div class="card-media">
@@ -437,24 +468,9 @@
 												<div
 													class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 													<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getCategoryName()}</span>
-													<c:choose>
-
-													<c:when test="${subscriptionPermission ==2}">
-															<a id="${alreadySub.getPodcastId()}"
-
-																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
-														</c:when>
-														<c:when test="${subscriptionPermission ==1}">
-															<a id="${alreadySub.getPodcastId()}"
-																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
-														</c:when>
-														<c:otherwise>
-															<a id="${alreadySub.getPodcastId()}"
-																class="card-media-body-supporting-bottom-text card-media-link u-float-right">
-																需訂閱才能收聽</a>
-														</c:otherwise>
-													</c:choose>
-
+													<a id="${alreadySub.getPodcastId()}"
+														class="card-media-body-supporting-bottom-text card-media-link u-float-right">
+														需訂閱才能收聽</a>
 												</div>
 											</div>
 										</div>
@@ -462,76 +478,18 @@
 								</div>
 							</div>
 						</li>
-						<li>
-							<div class="messageBoard">
-								<div class="bubbleContainer">
-									<div class="bubbleBody">
-										<form id="message" action="podcastPage.do" method="post"
-											name="comment">
-											<textarea name="formMessage" id="content"
-												placeholder="留言內容：&#13;&#10;請輸入不超過50個字"></textarea>
-										</form>
-										<span class="submit"> <input id="podcasterId"
-											type="hidden" value="${thisPodcasterId}" />
-											<button id="submitBtn" class="btnSendMessage" type="button"
-												form="message">提交</button>
-										</span>
-									</div>
-								</div>
-								<ul class="messageList" id="messageList">
-									<c:forEach items="${commList}" var="comment"
-										varStatus="tagStatus">
-										<li class="message">
-											<p class="messageTitle">${comment.Name}</p>
-											<p class="messageContent">${comment.commentMsg}</p>
-											<p class="messageDate">${comment.msgDate}</p>
-										</li>
-									</c:forEach>
-								</ul>
-							</div>
-						</li>
 					</ul>
 				</div>
+
 			</div>
 		</div>
 	</div>
 
+	<div class="playbar">
+		<jsp:include page="../playerbar.jsp" flush="true " />
+	</div>
 
-
-
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">即將離開頁面進入付費....</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div id="pay_free" class="modal-body">訂閱本頻道每月需支付${payAmount}元</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">取消</button>
-						<button id="btn_gotopay" type="button" class="btn btn-primary"
-							onclick="location.href='<c:url value="/AfterSubProgram.controller" />'">確定前往付費
-						</button>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-
-
-
-
-		<div class="playbar">
-			<jsp:include page="../playerbar.jsp" flush="true " />
-		</div>
-
-		<script type="text/javascript">
+	<script type="text/javascript">
 		$(function() {
 			var $tabPanel = $('#tab-panel'), $tabs = $tabPanel.find('.tabs'), $tab = $tabs
 					.find('a'), $tabContent = $tabPanel.find('.tab-content'), $content = $tabContent
@@ -601,25 +559,39 @@
 			}
 		}
 	</script>
-		<!-- Javascript files -->
-		<!-- jQuery -->
-		<script src="js/jquery.js"></script>
-		<!-- Bootstrap JS -->
-		<script src="js/bootstrap.min.js"></script>
-		<!-- WayPoints JS -->
-		<script src="js/waypoints.min.js"></script>
-		<!-- Include js plugin -->
-		<script src="js/owl.carousel.min.js"></script>
-		<!-- One Page Nav -->
-		<script src="js/jquery.nav.js"></script>
-		<!-- Respond JS for IE8 -->
-		<script src="js/respond.min.js"></script>
-		<!-- HTML5 Support for IE -->
-		<script src="js/html5shiv.js"></script>
-		<!-- Custom JS -->
-		<script src="js/custom.js"></script>
-		<!-- 	plaer bar function js -->
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<script type="text/javascript" src="js/player.js"></script>
+	<!-- Javascript files -->
+	<!-- jQuery -->
+	<script src="js/jquery.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- WayPoints JS -->
+	<script src="js/waypoints.min.js"></script>
+	<!-- Include js plugin -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- One Page Nav -->
+	<script src="js/jquery.nav.js"></script>
+	<!-- Respond JS for IE8 -->
+	<script src="js/respond.min.js"></script>
+	<!-- HTML5 Support for IE -->
+	<script src="js/html5shiv.js"></script>
+	<!-- Custom JS -->
+	<script src="js/custom.js"></script>
+	<!-- 	plaer bar function js -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 </body>
+	<script type="text/javascript">
+	var app = new Vue({
+	  el: '#app',
+	  data: {
+	    message: '${subscriptionPermission}',
+	    me:'${subProgram}'
+	  },
+	  methods: {
+
+		  
+		}
+	})
+	</script>
 </html>
