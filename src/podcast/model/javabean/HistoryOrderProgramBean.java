@@ -19,15 +19,16 @@ public class HistoryOrderProgramBean {
 	String audioPath;
 	String podcastInfo;
 	String categoryName;
+	Integer likestatus;
+	Integer showInListOrNot;
 
 	public HistoryOrderProgramBean() {
 	}
 
-
-
 	public HistoryOrderProgramBean(Integer podcastId, String podcastName, Integer publisherId, String lastListen,
 			Integer memberId, String nickname, String uploadTime, Integer likesCount, Integer clickAmount,
-			String audioImg, String audioPath, String podcastInfo, String categoryName) {
+			String audioImg, String audioPath, String podcastInfo, String categoryName, Integer likestatus,
+			Integer showInListOrNot) {
 		super();
 		this.podcastId = podcastId;
 		this.podcastName = podcastName;
@@ -42,8 +43,9 @@ public class HistoryOrderProgramBean {
 		this.audioPath = audioPath;
 		this.podcastInfo = podcastInfo;
 		this.categoryName = categoryName;
+		this.likestatus = likestatus;
+		this.showInListOrNot = showInListOrNot;
 	}
-
 
 
 	public Integer getPodcastId() {
@@ -160,6 +162,22 @@ public class HistoryOrderProgramBean {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	public Integer getLikestatus() {
+		return likestatus;
+	}
+
+	public void setLikestatus(Integer likestatus) {
+		this.likestatus = likestatus;
+	}
+
+	public Integer getShowInListOrNot() {
+		return showInListOrNot;
+	}
+
+	public void setShowInListOrNot(Integer showInListOrNot) {
+		this.showInListOrNot = showInListOrNot;
 	}
 	
 	
