@@ -3,14 +3,14 @@
 <%
 // String amount = request.getParameter("300");
 
-String amount = ("300");
+// String amount = ("300");
 
-int amount_final = 0;
-if(amount.indexOf(".")> -1){
-	amount = amount.substring(0, amount.indexOf("."));
-	amount_final = Integer.parseInt(amount);
-}
-amount_final = Integer.parseInt(amount);
+// int amount_final = 0;
+// if(amount.indexOf(".")> -1){
+// 	amount = amount.substring(0, amount.indexOf("."));
+// 	amount_final = Integer.parseInt(amount);
+// }
+// amount_final = Integer.parseInt(amount);
 
 
 %>
@@ -66,7 +66,7 @@ function setConf(){
 <input type="hidden" name="TEMPLATE"   id="TEMPLATE" value="BOTH">
 <input type="hidden" name="TravelStartDate"   id="TravelStartDate" value="">
 <input type="hidden" name="TravelEndDate"     id="TravelEndDate" value="">
-<input type="hidden" name="TransAmt"   id="TransAmt" value="<%=amount_final %>">
+<input type="hidden" name="TransAmt"   id="TransAmt" value="${payAmount}">
 <input type="hidden" name="NotifyURL"  id="NotifyURL" value="http://localhost:8080/SpringWebProject/NcccResponsePage.jsp">
 <input type="hidden" name="Signature"  id="Signature" value="">
 <iframe name="HPPFrame" id="mainFrame" height="600" width="800" Frameborder="0"/>
