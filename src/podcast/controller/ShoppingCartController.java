@@ -67,7 +67,8 @@ public class ShoppingCartController {
     		@RequestParam("activityId") Integer activityId,
     		@RequestParam("activityLocation") String activityLocation,
     		@RequestParam("activityDate") Date activityDate,
-    		@RequestParam("activityMaxPeople") Integer activityMaxPeople,
+    		@RequestParam("stock") Integer stock,
+    		@RequestParam("activityImg") String activityImg,
     		Model m,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		m.addAttribute("quantity", quantity);
@@ -106,8 +107,8 @@ public class ShoppingCartController {
 		System.out.println("bean : "+bean.getActivityName());
 		
 		OrderItemBean oib = new  OrderItemBean(activityId,activityName,
-				activityPrice,quantity,activityDate,activityLocation,activityMaxPeople);
-		System.out.println("你點選到的票券資訊:"+activityId+activityName+activityPrice+quantity+activityDate+activityLocation);	
+				activityPrice,quantity,activityDate,activityLocation,stock,activityImg);
+		System.out.println("票券照片路徑:"+activityImg);	
 		
 		// 將OrderItem物件加入ShoppingCart
 		cart.addToCart(activityId, oib);
@@ -210,7 +211,7 @@ public class ShoppingCartController {
 			System.out.println("庫存= "+stock);
 			if(stock>0) {
 			oib.setDiscount(1.0);  //
-			oib.setDescription("無用資料欄");
+	//		oib.setDescription("無用資料欄");
 			
 			oib.setAmount(stock);
 			oib.setOrderTicketBean(ob2);
