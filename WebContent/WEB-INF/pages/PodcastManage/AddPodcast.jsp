@@ -58,6 +58,7 @@
   </style>
 
 <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div class="head">
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
@@ -128,6 +129,8 @@
             <label>單集封面: </label>
             <input type="file" name="podcastpic" id="pic" class="form-control" required>
             <br>
+            <img width="60%" id="blah" src="#" alt="預覽你上傳的照片" />
+            <br>
             <label>上傳單集: </label>
             <input type="file" name="podcastfile" id="audio" class="form-control" required>
             <br>
@@ -164,7 +167,28 @@ send.onclick=function checknull() {
 }
 }
 
+
+
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    
+	    reader.onload = function(e) {
+	      $('#blah').attr('src', e.target.result);
+	    }
+	    
+	    reader.readAsDataURL(input.files[0]); // convert to base64 string
+	  }
+	}
+
+	$("#pic").change(function() {
+	  readURL(this);
+	});
+
+
  </script> 
+ 
+ 
 
 </body>
 
