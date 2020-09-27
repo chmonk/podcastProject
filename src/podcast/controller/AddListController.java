@@ -48,17 +48,15 @@ public class AddListController {
 	
 	
 	//點擊節目時  1.節目加入播放列表  2.增加瀏覽紀錄 3.節目點擊增加 4.增加like record like 0 addlist 1
-	@PostMapping(value="/addListController", produces= {"application/json"})
+	@GetMapping(value="/addListController", produces= {"application/json"})
 	//id from ajax provide podcastId
 	public @ResponseBody Map<String, String> AddList(
 			@RequestParam("id") Integer id,
-			@RequestParam("media") String mediaData,
 			Model model) throws Exception {
 
 		
 		System.out.println("id==="+id);
-		System.out.println("media=="+mediaData);
-		model.addAttribute("mediaData", mediaData);
+
 		
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
 		System.out.println(id);

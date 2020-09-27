@@ -409,7 +409,7 @@ $(document).ready(() => {
 		pid.media= JSON.stringify(mediaData) ;
 		// console.log(this.id);
 
-		/*
+		
 		xhr = $.ajax({
 			url: "/SpringWebProject/addListController",
 			//上線應修正成async
@@ -447,6 +447,15 @@ $(document).ready(() => {
 					renderPlaylist(mediaData);
 				}
 
+				//送更新後播放清單給後端
+				var xhr9= new XMLHttpRequest();
+
+				xhr9.open("post","/SpringWebProject/updateProgramList",true);
+			
+				xhr9.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+				xhr9.send("media="+JSON.stringify(mediaData));
+				
 				//設定準備播放歌曲
 				//myAudio.setCurrentMusic(mediaData.length-1);
 				//自動播放	
@@ -454,9 +463,9 @@ $(document).ready(() => {
 
 			}
 
-		}) */
+		}) 
 		
-		var xhr = new XMLHttpRequest();
+		/* var xhr = new XMLHttpRequest();
 
 			if(xhr !==null){
 			
@@ -518,7 +527,7 @@ $(document).ready(() => {
 			}
 
 		}
-	}
+	}   */
 		
 		
 	
