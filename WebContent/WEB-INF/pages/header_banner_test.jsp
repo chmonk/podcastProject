@@ -273,14 +273,13 @@ nav ul ul li {
 									<li><li><a href="#">${LoginOK.name}</a>
 				         				<!-- First Tier Drop Down -->
 								            <ul class="barlist">
-								                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
+								            <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
 								                <li><a href="<c:url value='/goToLikeRecord' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
 								                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
-								                <li><a href="<c:url value='/ShoppingCart' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購物結帳</a></li>
 								                <li><a href="<c:url value='/SubOrderController.controller' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
-								                <li><a href="<c:url value='/addPodcast' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳音檔</a></li>
-								                <li><a href="<c:url value='/manageActivities' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳活動</a></li>
+								                <li><a href="<c:url value='/mypodcastPage' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的頻道</a></li>
 								                <li><a href="<c:url value='/managePodcast' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;頻道管理</a></li>
+								                <li><a href="<c:url value='/manageActivities' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;活動管理</a></li>
 								                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>
 								            </ul>        
 							           </li>

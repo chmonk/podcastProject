@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
 <style type="text/css">
     body {
-            background-image: url(<c:url value='/img/banner/b4.jpg' />);
+            background-image: url(<c:url value='/img/banner/b3.jpg' />);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -89,7 +89,7 @@ table-layout: fixed;}
                 </thead>
                 <c:forEach var="podcast" varStatus="loop" items="${upList}">
                 <tr>
-                	<td><img width="50%" src="<c:url value='${podcast.audioimg}' />"></td>
+                	<td><img width="110%" src="<c:url value='${podcast.audioimg}' />"></td>
                 	<td>${podcast.title}</td>
                 	<td>${podcast.uploadTime}</td>
                 	<td><form action="<c:url value="/modifyPodcast"/>"><input type="hidden" name="thisPodcastId" value=${podcast.podcastId}>

@@ -144,7 +144,19 @@ nav ul ul li {
 	color: white;
 }
 
-
+.img_text {
+    position: absolute;
+    top: -10px;
+    left: 23px;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: #860707;
+    width: 22px;
+    height: 23px;
+    text-align: center;
+    line-height: 20px;
+}
 	
 
 </style>
@@ -152,7 +164,17 @@ nav ul ul li {
 	
 
 </head>
-<body>		
+<body>	
+<c:choose>
+   <c:when test="${ShoppingCart.itemNumber > 0}">
+      <!-- 購物車內有一項以上的商品 -->
+      <c:set var="cartContent" value="${ShoppingCart.itemNumber}"/>
+   </c:when>
+   <c:otherwise>
+      <!-- 購物車內沒有商品 -->
+      <c:set var="cartContent" value="0"/>        
+   </c:otherwise>
+</c:choose>		
 
 <!-- header area -->
 		<header>
@@ -226,12 +248,11 @@ nav ul ul li {
 							                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
 							                <li><a href="<c:url value='/goToLikeRecord' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
 							                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
-							                <li><a href="<c:url value='/ShoppingCart' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購物結帳</a></li>
 							                <li><a href="<c:url value='/SubOrderController.controller' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
 							                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>							
 							            </ul>        
 							           </li>
-							        <li><a href="<c:url value='ShoppingCart' />"><i class="aaaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"></i></a>
+							           <li><a href="<c:url value='ShoppingCart' />"><i class="aaaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"><span class="img_text">${cartContent}</span></i></a>
 							        </li>
 								</ul>
 							</div>
@@ -253,16 +274,15 @@ nav ul ul li {
 								                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
 								                <li><a href="<c:url value='/goToLikeRecord' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
 								                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
-								                <li><a href="<c:url value='/ShoppingCart' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購物結帳</a></li>
 								                <li><a href="<c:url value='/SubOrderController.controller' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
-								                <li><a href="<c:url value='/addPodcast' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳音檔</a></li>
-								                <li><a href="<c:url value='/manageActivities' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上傳活動</a></li>
+								                <li><a href="<c:url value='/mypodcastPage' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的頻道</a></li>
 								                <li><a href="<c:url value='/managePodcast' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;頻道管理</a></li>
+								                <li><a href="<c:url value='/manageActivities' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;活動管理</a></li>
 								                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>
 								            </ul>        
 							           </li>
-							    	<li><a href="<c:url value='ShoppingCart' />"><i class="glyphicon glyphicon-shopping-cart" style="font-size:20px;"></i></a>
-							    	</li>
+							    	       <li><a href="<c:url value='ShoppingCart' />"><i class="aaaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"><span class="img_text">${cartContent}</span></i></a>
+							        </li>
 								</ul>
 							</div>
 						</c:when>

@@ -127,8 +127,8 @@
             <label>活動狀態: </label>
             <select class="form-control" name="activityStatus" value="${aBean.activityStatus}">
             	<option>請選擇</option>
-              <option value=0>公開</option>
-              <option value=1>關閉</option>
+              <option value=0 id="status0">公開</option>
+              <option value=1 id="status1">關閉</option>
             </select>
             <br>
 
@@ -165,7 +165,12 @@
 <!-- end of container -->
 
 
-
+<script>
+window.onload=function(){
+var activityStatus=${aBean.activityStatus};
+document.getElementById("status"+activityStatus).selected=true;
+}
+</script>
 </body>
 
 </html>
