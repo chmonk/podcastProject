@@ -300,6 +300,34 @@ $(document).ready(() => {
 
 
 
+	
+	//每頁重load 播放列表
+	function loadmediaList(){
+		var xhr10= new XMLHttpRequest();
+
+		xhr10.open("get","/SpringWebProject/loadProgramList/");
+
+		xhr10.send();
+
+		xhr10.onreadystatechange=function(){
+			if(xhr10.readyState==4 && xhr10.status==200){
+				
+				var newList= JSON.parse(xhr10.responseText);
+				console.log(newList);
+				
+				for(let i=0; i<newList.length;i++){
+					mediaData.push(newList[i]);
+				}
+				
+				renderPlaylist(mediaData);
+				
+			}
+		}
+	}
+
+	loadmediaList();
+	
+	
 
 	// 歌曲資訊元件
 	const MusicInfo = (info, idx) => {
@@ -336,7 +364,7 @@ $(document).ready(() => {
 		});
 	};
 
-
+	
 
 
 
@@ -378,9 +406,10 @@ $(document).ready(() => {
 		console.log(this);
 		var pid = {};
 		pid.id = this.id;
+		pid.media= JSON.stringify(mediaData) ;
 		// console.log(this.id);
 
-
+		
 		xhr = $.ajax({
 			url: "/SpringWebProject/addListController",
 			//上線應修正成async
@@ -418,6 +447,15 @@ $(document).ready(() => {
 					renderPlaylist(mediaData);
 				}
 
+				//送更新後播放清單給後端
+				var xhr9= new XMLHttpRequest();
+
+				xhr9.open("post","/SpringWebProject/updateProgramList",true);
+			
+				xhr9.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+				xhr9.send("media="+JSON.stringify(mediaData));
+				
 				//設定準備播放歌曲
 				//myAudio.setCurrentMusic(mediaData.length-1);
 				//自動播放	
@@ -425,8 +463,74 @@ $(document).ready(() => {
 
 			}
 
-		})
+		}) 
+		
+		/* var xhr = new XMLHttpRequest();
 
+			if(xhr !==null){
+			
+				xhr.open("post","/SpringWebProject/addListController",true);
+			
+				xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+				xhr.send("id="+pid.id+"&media="+pid.media);
+			
+			
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4 && xhr.status==200){
+			
+						var type=xhr.getResponseHeader("Content-type");
+			
+						if(type.indexOf("application/json")===0){
+							
+							var data=JSON.parse(xhr.responseText);
+			
+							var new_song = data;
+			
+							var duplicate = false;
+							var duplicate_index;
+			
+							for (let i = 0; i < mediaData.length; i++) {
+								if (mediaData[i].podcastId == new_song.podcastId) {
+									duplicate = true;
+									duplicate_index = i;
+									break;
+								}
+							}
+							if (duplicate) {
+								mediaData.splice(duplicate_index, 1);
+								mediaData.push(new_song);
+								renderPlaylist(mediaData);
+							} else {
+								mediaData.push(new_song);
+								renderPlaylist(mediaData);
+							}
+
+				
+				
+				//送更新後播放清單給後端
+				var xhr9= new XMLHttpRequest();
+
+				xhr9.open("post","/SpringWebProject/updateProgramList",true);
+			
+				xhr9.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+				xhr9.send("media="+JSON.stringify(mediaData));
+		
+				
+				//設定準備播放歌曲
+				//myAudio.setCurrentMusic(mediaData.length-1);
+				//自動播放	
+				//myAudio.setPlayStatus(true);
+
+			}
+			}
+
+		}
+	}   */
+		
+		
+	
 
 
 
@@ -434,9 +538,6 @@ $(document).ready(() => {
 	});
 
 	///點愛心取得歌曲
-
-
-
 	$("svg").on("click", function(e) {
 
 
