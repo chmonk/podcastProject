@@ -38,10 +38,10 @@
 /* *{
 	border: 1px solid black;
 } */
-.messageBoard {
-	background-color: #f2f2f2;
-}
 
+/* .messageBoard {
+	background-color: #f2f2f2;
+} */
 .showPodcasterBody {
 	padding-top: 40px;
 	padding-bottom: 40px;
@@ -49,7 +49,8 @@
 
 .showPodcasterBodyHeader {
 	padding-top: 110px;
-	border-bottom: 1px solid black;
+	background-color: #252c37;
+	/* border-bottom: 1px solid black; */
 }
 
 .memberImg {
@@ -92,20 +93,22 @@
 	font: #222831;
 }
 
-.card-media {
+.bodycolor {
+	background-color: #fff;
+}
+
+/* .card-media {
 	width: 600px;
-}
-
+} */
 .podcastList {
-	overflow-y: scroll;
-	height: 1000px;
+	width: 80%;
+	margin: auto;
 }
-
+/*
 .messageBoard {
 	overflow-y: scroll;
 	height: 1000px;
-}
-
+} */
 @import
 	url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 
@@ -158,7 +161,7 @@
 
 .messageBoard div.bubbleContainer div.bubbleBody {
 	margin-left: 100px;
-	width: 500px;
+	width: 80%;
 	height: 200px;
 	background-color: #fff;
 	border-radius: 10px;
@@ -208,7 +211,7 @@
 	display: block;
 	margin: 0 auto;
 	margin-right: 20px;
-	background-color: #09C;
+	background-color: #f23031;
 	border: 3px solid white;
 	outline: none;
 	border-radius: 12px;
@@ -220,13 +223,13 @@
 .messageBoard ul.messageList {
 	/* 	 width: 80vw;
  */
-	margin: 50px auto;
+	margin: 50px;
 	font-family: "Open Sans";
 }
 
 .messageBoard ul.messageList li.message {
 	list-style: none;
-	width: 600px;
+	width: 90%;
 	background-color: rgba(255, 255, 255, 1);
 	border-radius: 10px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -250,7 +253,6 @@
 }
 
 #tab-panel {
-	max-width: 690px;
 	margin: 0 auto;
 	font-family: arial;
 }
@@ -260,7 +262,7 @@
 }
 
 #tab-panel .tabs {
-	background: #FFF;
+	background: #252c37;;
 	overflow: hidden;
 	text-align: center;
 }
@@ -268,18 +270,18 @@
 #tab-panel .tabs a {
 	float: left;
 	display: block;
-	width: 50%;
+	width: 33.333%;
 	padding: 15px 0;
 	/*     border: 1px solid #CCC;
  */
 	font-size: 16px;
-	color: #333;
+	color: #fff;
 	box-sizing: border-box;
 	transition: all .3s;
 }
 
 #tab-panel .tabs a.active {
-	background: #09C;
+	background: #f23031;
 	color: #FFF;
 }
 
@@ -316,58 +318,33 @@
 				<div class="memberInfo">${podcasterData.podcastInfo}</div>
 				<div>
 					<c:choose>
+
 						<c:when test="${subscriptionPermission ==2}">
-						<button id="hide_alreadysub_btn" type="button"
+							<button id="hide_alreadysub_btn" type="button"
 								class="btn btn-success">本人頻道</button>
 						</c:when>
+
 						<c:when test="${subscriptionPermission ==1}">
 							<button id="hide_alreadysub_btn" type="button"
 								class="btn btn-info">已訂閱</button>
 						</c:when>
-						<c:when test="${payAmount ==0}">						
-						</c:when>						
+
+						<c:when test="${payAmount ==0}">
+						</c:when>
 						<c:otherwise>
-						<button id='check_sub' type="button" class="btn btn-danger"
-							data-toggle="modal" data-target="#exampleModal" >訂閱</button>	
-							
+							<button id='check_sub' type="button" class="btn btn-danger"
+								data-toggle="modal" data-target="#exampleModal">訂閱</button>
 						</c:otherwise>
 					</c:choose>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6">
-				<div class="messageBoard">
-					<div class="bubbleContainer">
-						<div class="bubbleBody">
-							<form id="message" action="podcastPage.do" method="post"
-								name="comment">
-								<textarea name="formMessage" id="content"
-									placeholder="留言內容：&#13;&#10;請輸入不超過50個字"></textarea>
-							</form>
-							<span class="submit"> <input id="podcasterId"
-								type="hidden" value="${thisPodcasterId}" />
-								<button id="submitBtn" class="btnSendMessage" type="button"
-									form="message">提交</button>
-							</span>
-						</div>
-					</div>
-					<ul class="messageList" id="messageList">
-						<c:forEach items="${commList}" var="comment" varStatus="tagStatus">
-							<li class="message">
-								<p class="messageTitle">${comment.Name}</p>
-								<p class="messageContent">${comment.commentMsg}</p>
-								<p class="messageDate">${comment.msgDate}</p>
-							</li>
-						</c:forEach>
-					</ul>
-				</div>
-			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-12 bodycolor">
 				<div id="tab-panel">
 					<div class="tabs">
-						<a>節目表單</a> <a>訂閱表單</a>
+						<a>節目表單</a> <a>訂閱表單</a><a>留言板</a>
 					</div>
 					<ul class="tab-content">
 						<li>
@@ -386,18 +363,27 @@
 												<div class="card-media-body">
 													<div class="card-media-body-top">
 														<span class="subtle">${podcast.getTitle()}</span>
-														<div class="card-media-body-top-icons u-float-right">
-															<svg fill="#888888" height="16" viewBox="0 0 24 24"
-																width="16" xmlns="http://www.w3.org/2000/svg">
-					            <path d="M0 0h24v24H0z" fill="none" />
-					            <path
-																	d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
-					          </svg>
-															<svg fill="#888888" height="16" viewBox="0 -28 512 512"
+														<!-- 依據資料庫染愛心顏色 -->
+							<c:choose>
+								<c:when test="${podcast.getLikesStatus()==1}">
+									<div class="card-media-body-top-icons u-float-right like">
+								</c:when>
+								<c:otherwise>
+									<div class="card-media-body-top-icons u-float-right">
+								</c:otherwise>
+							</c:choose>
+														
+<!-- 															<svg  height="16" viewBox="0 0 24 24" -->
+<!-- 																width="16" xmlns="http://www.w3.org/2000/svg"> -->
+<!-- 					            <path d="M0 0h24v24H0z" fill="none" /> -->
+<!-- 					            <path -->
+<!-- 																	d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" /> -->
+<!-- 					          </svg> -->
+															<svg  height="25" viewBox="0 -28 512 512"
 																width="16" xmlns="http://www.w3.org/2000/svg">
 					          	<path
 																	d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0" />
-					          </svg>
+					          </svg><span class="likeNum" >${podcast.getLikesCount()}</span>
 														</div>
 													</div>
 													<span class="card-media-body-heading">${podcast.getPodcastInfo()}</span>
@@ -422,7 +408,8 @@
 							</div>
 						</li>
 						<li>
-							<div class="podcastList2">
+
+							<div class="podcastList">
 								<div>
 									<c:forEach var="alreadySub" items="${subProgram}">
 										<div class="card-media">
@@ -436,18 +423,26 @@
 											<div class="card-media-body">
 												<div class="card-media-body-top">
 													<span class="subtle">${alreadySub.getTitle()}</span>
-													<div class="card-media-body-top-icons u-float-right">
-														<svg fill="#888888" height="16" viewBox="0 0 24 24"
-															width="16" xmlns="http://www.w3.org/2000/svg">
-				            <path d="M0 0h24v24H0z" fill="none" />
-				            <path
-																d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
-				          </svg>
-														<svg fill="#888888" height="16" viewBox="0 -28 512 512"
+													<!-- 依據資料庫染愛心顏色 -->
+							<c:choose>
+								<c:when test="${alreadySub.getLikesStatus()==1}">
+									<div class="card-media-body-top-icons u-float-right like">
+								</c:when>
+								<c:otherwise>
+									<div class="card-media-body-top-icons u-float-right">
+								</c:otherwise>
+							</c:choose>
+<!-- 														<svg height="16" viewBox="0 0 24 24" -->
+<!-- 															width="16" xmlns="http://www.w3.org/2000/svg"> -->
+<!-- 				            <path d="M0 0h24v24H0z" fill="none" /> -->
+<!-- 				            <path -->
+<!-- 																d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" /> -->
+<!-- 				          </svg> -->
+														<svg  height="25" viewBox="0 -28 512 512"
 															width="16" xmlns="http://www.w3.org/2000/svg">
 				          	<path
 																d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0" />
-				          </svg>
+				          </svg><span class="likeNum" >${alreadySub.getLikesCount()}</span>
 													</div>
 												</div>
 												<span class="card-media-body-heading">${alreadySub.getPodcastInfo()}</span>
@@ -460,12 +455,14 @@
 													class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 													<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getCategoryName()}</span>
 													<c:choose>
+
 													<c:when test="${subscriptionPermission ==2}">
-															<a id="${podcast.getPodcastId()}"
+															<a id="${alreadySub.getPodcastId()}"
+
 																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 														</c:when>
 														<c:when test="${subscriptionPermission ==1}">
-															<a id="${podcast.getPodcastId()}"
+															<a id="${alreadySub.getPodcastId()}"
 																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 														</c:when>
 														<c:otherwise>
@@ -482,14 +479,44 @@
 								</div>
 							</div>
 						</li>
+						<li>
+							<div class="messageBoard">
+								<div class="bubbleContainer">
+									<div class="bubbleBody">
+										<form id="message" action="podcastPage.do" method="post"
+											name="comment">
+											<textarea name="formMessage" id="content"
+												placeholder="留言內容：&#13;&#10;請輸入不超過50個字"></textarea>
+										</form>
+										<span class="submit"> <input id="podcasterId"
+											type="hidden" value="${thisPodcasterId}" />
+											<button id="submitBtn" class="btnSendMessage" type="button"
+												form="message">提交</button>
+										</span>
+									</div>
+								</div>
+								<ul class="messageList" id="messageList">
+									<c:forEach items="${commList}" var="comment"
+										varStatus="tagStatus">
+										<li class="message">
+											<p class="messageTitle">${comment.Name}</p>
+											<p class="messageContent">${comment.commentMsg}</p>
+											<p class="messageDate">${comment.msgDate}</p>
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</li>
 					</ul>
 				</div>
-
 			</div>
 		</div>
 	</div>
 
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+
+
+
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -506,8 +533,9 @@
 							data-dismiss="modal">取消</button>
 						<button id="btn_gotopay" type="button" class="btn btn-primary"
 							onclick="location.href='<c:url value="/AfterSubProgram.controller" />'">確定前往付費
-							</button>
+						</button>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -515,11 +543,12 @@
 
 
 
-	<div class="playbar">
-		<jsp:include page="../playerbar.jsp" flush="true " />
-	</div>
 
-	<script type="text/javascript">
+		<div class="playbar">
+			<jsp:include page="../playerbar.jsp" flush="true " />
+		</div>
+
+		<script type="text/javascript">
 		$(function() {
 			var $tabPanel = $('#tab-panel'), $tabs = $tabPanel.find('.tabs'), $tab = $tabs
 					.find('a'), $tabContent = $tabPanel.find('.tab-content'), $content = $tabContent
@@ -589,25 +618,25 @@
 			}
 		}
 	</script>
-	<!-- Javascript files -->
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-	<!-- Bootstrap JS -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- WayPoints JS -->
-	<script src="js/waypoints.min.js"></script>
-	<!-- Include js plugin -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- One Page Nav -->
-	<script src="js/jquery.nav.js"></script>
-	<!-- Respond JS for IE8 -->
-	<script src="js/respond.min.js"></script>
-	<!-- HTML5 Support for IE -->
-	<script src="js/html5shiv.js"></script>
-	<!-- Custom JS -->
-	<script src="js/custom.js"></script>
-	<!-- 	plaer bar function js -->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/player.js"></script>
+		<!-- Javascript files -->
+		<!-- jQuery -->
+		<script src="js/jquery.js"></script>
+		<!-- Bootstrap JS -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- WayPoints JS -->
+		<script src="js/waypoints.min.js"></script>
+		<!-- Include js plugin -->
+		<script src="js/owl.carousel.min.js"></script>
+		<!-- One Page Nav -->
+		<script src="js/jquery.nav.js"></script>
+		<!-- Respond JS for IE8 -->
+		<script src="js/respond.min.js"></script>
+		<!-- HTML5 Support for IE -->
+		<script src="js/html5shiv.js"></script>
+		<!-- Custom JS -->
+		<script src="js/custom.js"></script>
+		<!-- 	plaer bar function js -->
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/player.js"></script>
 </body>
 </html>

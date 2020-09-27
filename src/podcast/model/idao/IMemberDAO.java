@@ -22,5 +22,7 @@ public interface IMemberDAO {
 
 	public List<String> fuzzySelectPodcasterAllName();
 
+	public boolean verificationPodcaster(int id);
+
 
 }
