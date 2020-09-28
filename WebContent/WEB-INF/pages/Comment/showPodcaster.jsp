@@ -49,7 +49,8 @@
 
 .showPodcasterBodyHeader {
 	padding-top: 110px;
-	background-color: #252c37;
+	background-color: #191919;
+	
 	/* border-bottom: 1px solid black; */
 }
 
@@ -58,12 +59,12 @@
 	margin-bottom: 20px;
 	height: 200px;
 	width: 200px;
-	border: 1px solid #f2f2f2;
+	border: 1px solid black;
 	border-radius: 50%;
 	z-index: 10;
-	-webkit-box-shadow: 3px 3px 5px #f2f2f2;
-	-moz-box-shadow: 3px 3px 5px #f2f2f2;
-	box-shadow: 3px 3px 5px #f2f2f2;
+	 -webkit-box-shadow: 3px 3px 5px black;
+	-moz-box-shadow: 3px 3px 5px black;
+	box-shadow: 3px 3px 5px black; 
 }
 
 .memberImg img {
@@ -77,7 +78,8 @@
 	margin-top: 30px;
 	display: inline-block;
 	background-color: #222831;
-	padding: 5px 15px 5px 15px;
+	/* padding: 5px 20px 0px 15px; */
+	margin-bottom:5px;
 	margin-left: -50px;
 	font-family: 微軟正黑體;
 	font-size: 30px;
@@ -86,11 +88,13 @@
 }
 
 .memberInfo {
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	margin-left: -50px;
 	font-family: 微軟正黑體;
 	font-size: 20px;
 	font: #222831;
+	color:white;
+	margin-bottom:10px;
 }
 
 .bodycolor {
@@ -257,12 +261,17 @@
 	font-family: arial;
 }
 
+.tab-content{
+background-color: #f9f9f9;
+
+}
+
 #tab-panel .tab-content {
 	list-style: none;
 }
 
 #tab-panel .tabs {
-	background: #252c37;;
+	background: #191919;
 	overflow: hidden;
 	text-align: center;
 }
@@ -281,8 +290,8 @@
 }
 
 #tab-panel .tabs a.active {
-	background: #f23031;
-	color: #FFF;
+	background: #f9f9f9;
+	color: #f23031;
 }
 
 #tab-panel .tab-content {
@@ -315,24 +324,26 @@
 			</div>
 			<div class="col-md-8">
 				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div class="memberInfo">
+				${podcasterData.podcastInfo}
+				</div>
 				<div>
 					<c:choose>
 
 						<c:when test="${subscriptionPermission ==2}">
 							<button id="hide_alreadysub_btn" type="button"
-								class="btn btn-success">本人頻道</button>
+								class="memberInfo btn btn-success">本人頻道</button>
 						</c:when>
 
 						<c:when test="${subscriptionPermission ==1}">
 							<button id="hide_alreadysub_btn" type="button"
-								class="btn btn-info">已訂閱</button>
+								class="memberInfo btn btn-info">已訂閱</button>
 						</c:when>
 
 						<c:when test="${payAmount ==0}">
 						</c:when>
 						<c:otherwise>
-							<button id='check_sub' type="button" class="btn btn-danger"
+							<button id='check_sub' type="button" class="memberInfo btn btn-danger"
 								data-toggle="modal" data-target="#exampleModal">訂閱</button>
 						</c:otherwise>
 					</c:choose>
@@ -344,7 +355,7 @@
 			<div class="col-md-12 bodycolor">
 				<div id="tab-panel">
 					<div class="tabs">
-						<a>節目表單</a> <a>訂閱表單</a><a>留言板</a>
+						<a>節目列表</a> <a>訂閱列表</a><a>留言板</a>
 					</div>
 					<ul class="tab-content">
 						<li>
@@ -532,7 +543,7 @@
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">取消</button>
 						<button id="btn_gotopay" type="button" class="btn btn-primary"
-							onclick="location.href='<c:url value="/AfterSubProgram.controller" />'">確定前往付費
+							onclick="location.href='<c:url value="http://localhost:8080/SpringWebProject/NcccPaymentPage.jsp" />'">確定前往付費
 						</button>
 					</div>
 

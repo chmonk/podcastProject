@@ -162,18 +162,19 @@ public class BackStageDAO implements IBackStageDAO {
 	// CategoryFunction============================================================
 
 	public boolean setNewCategory(String categoryName) throws Exception {
-//		CategoryDAO cDao=new CategoryDAO();
-//		Session session = sessionFactory.getCurrentSession();
-//		String hqlstr="from CategoryBean where categoryName=:categoryName";
-//		Query<CategoryBean> query = session.createQuery(hqlstr,CategoryBean.class);
-//		query.setParameter("categoryName", categoryName);
-//		if(query.list().size()==0) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		String hqlstr="from CategoryBean where categoryName=:categoryName";
+		Query<CategoryBean> query = session.createQuery(hqlstr,CategoryBean.class);
+		query.setParameter("categoryName", categoryName);
+		
+		if(query.list().size()==0) {
 		CategoryBean cBean = new CategoryBean();
 		cBean.setCategoryName(categoryName);
 		cDao.insert(cBean);
 		return true;
-//		}
-//		return false;
+		}
+		return false;
 
 	}
 
@@ -268,7 +269,7 @@ public class BackStageDAO implements IBackStageDAO {
 		return query.list();
 	}
 
-	public boolean deleteHistoryByDate(Date setPoInteger) {
+	public List<HistoryBean> deleteHistoryByDate(Date setPoInteger) {
 		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = "from HistoryBean where lastListen <:setPoInteger";
 		Query<HistoryBean> query = session.createQuery(hqlstr, HistoryBean.class);
@@ -277,7 +278,7 @@ public class BackStageDAO implements IBackStageDAO {
 		for (HistoryBean hBean : list) {
 			session.delete(hBean);
 		}
-		return true;
+		return list;
 	}
 
 	// income

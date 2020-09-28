@@ -196,7 +196,7 @@ nav ul ul li {
 						<div  style="display:inline-block;line-height: 20px;color: #333; z-index:-100;">
 							<form action="<c:url value="FuzzySelect.controller"/>" method="get">
 								<input id="tags" class="form-control-sm" type="text" name="selectCondition"/>
-								<input class="form-control-sm" type="submit" value="Send">
+								<input class="form-control-sm" type="submit" value="搜尋">
 							</form>
 						</div>
 							<a class="h-facebook" href="#"><i class="fa fa-facebook"></i></a>
@@ -241,7 +241,7 @@ nav ul ul li {
 									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li>
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
-									<li><a href="<c:url value='/#team' />">瀏覽搜尋</a></li>
+									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
 									<li><li><a href="#">${LoginOK.name}</a>
 				         				<!-- First Tier Drop Down -->
 							            <ul class="barlist">
@@ -267,7 +267,7 @@ nav ul ul li {
 									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li>
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
-									<li><a href="<c:url value='/#team' />">瀏覽搜尋</a></li>
+									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
 									<li><li><a href="#">${LoginOK.name}</a>
 				         				<!-- First Tier Drop Down -->
 								            <ul class="barlist">
@@ -296,7 +296,7 @@ nav ul ul li {
 									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li>
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
-									<li><a href="<c:url value='/#team' />">瀏覽搜尋</a></li>
+									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
 									<li><a href="<c:url value='/login' />">註冊/登入</a></li>
 									
 								</ul>
@@ -310,7 +310,6 @@ nav ul ul li {
 			</nav>
 		</header>
 		<!--/ header end -->
-
 
 	<!-- 		banner start -->
 	<div class="banner">
@@ -328,9 +327,18 @@ nav ul ul li {
 									<i class="fa fa-music"></i> Podcast For You!
 								</h2>
 								<!-- paragraph -->
-								<h3 class="animated fadeInRightBig">聽見全世界</h3>
+								<h3 class="animated fadeInRightBig ">聽見全世界</h3>
 								<!-- button -->
-								<a href="#" class="animated fadeIn btn btn-theme">註冊/登入</a>
+								
+								<c:choose>
+									<c:when test="${LoginOK.role!=null}">
+										<h3 class="animated fadeInLeftBig">歡迎${LoginOK.name}一起聽見全世界的聲音</h3>
+									</c:when>
+									<c:otherwise>
+										<a href="#" class="animated fadeIn btn btn-theme">註冊/登入</a>
+									</c:otherwise>
+								</c:choose>
+								
 							</div>
 						</div>
 					</div>
@@ -346,7 +354,14 @@ nav ul ul li {
 								<!-- paragraph -->
 								<h3 class="animated fadeInRightBig">最完整的播音平台</h3>
 								<!-- button -->
-								<a href="#" class="animated fadeIn btn btn-theme">註冊/登入</a>
+								<c:choose>
+									<c:when test="${LoginOK.role!=null}">
+										<h3 class="animated fadeInLeftBig ">享受最多元的節目</h3>
+									</c:when>
+									<c:otherwise>
+										<a href="#" class="animated fadeIn btn btn-theme">註冊/登入</a>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>

@@ -1,0 +1,171 @@
+@charset "UTF-8";
+
+.btn.btn-custom{
+	width:200px;
+	border-radius: 0;
+	font-size: 18pt;
+	font-family: "Lato", sans-serif;
+	font-weight:bold;
+	text-align: center;
+	margin-bottom:10px;
+	margin-left:10px;
+	background-color: transparent;
+	color:white;
+}
+
+body, html {
+	height: 100%;
+	margin: 0;
+  }
+  
+  .bg {
+	/* The image used */
+	background-image: url("../img/banner/b4.jpg");
+  
+	/* Full height */
+	height: 100%; 
+  
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+	font-family: "Lato", sans-serif;
+	color: white;
+  }
+
+td {
+	width: 100px;
+	text-align: center;
+	border: 1px solid #3A3A3A;
+	word-wrap: break-word;
+	max-width: 1px;
+	color:black;
+}
+
+th {
+	width: 100px;
+	text-align: center;
+	border: 1px solid #3A3A3A;
+	background-color: #3A3A3A;
+}
+
+#ajaxTable{
+	margin-top:50px;
+	height: 500px;
+	widows: 750px;
+    overflow: auto;
+}
+.ta {
+	border: 3px solid #3A3A3A;
+	border-collapse: collapse;
+	background-color:white;
+	margin:0px auto;
+	
+}
+
+.center {
+	margin: 0px auto;
+	text-align: center;
+}
+
+
+
+.hr0{
+	height:3px;
+	border: none;
+    border-top:3px dashed;
+}
+
+::placeholder {
+	color: #EAE8E8;
+	opacity: 1;
+}
+
+span {
+	color: red;
+	font-size: 20px;
+	margin-top: 10px;
+}
+
+p {
+	color: red;
+	font-size: 20px
+}
+
+div.wrap {
+	width: 350px;
+	height:600px;
+	overflow: auto;
+}
+
+div.wrap div {
+	position: relative;
+	margin: 25px 5px 25px 0px;
+}
+
+label {
+	position: absolute;
+	top: 0;
+	font-size: 35px;
+	margin: 10px;
+	padding: 0 10px;
+	background-color:  hsla(9, 0%, 47%, 0.95);
+	-webkit-transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
+	transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
+}
+
+.active {
+	top: -25px;
+	font-size: 20px;
+}
+
+.double {
+	position: absolute;
+	top: 0;
+	font-size: 26px;
+	margin: 13px;
+	padding: 0 10px;
+	background-color:  hsla(9, 0%, 47%, 0.95);
+	-webkit-transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
+	transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
+}
+
+.doubleact {
+	top: -25px;
+	font-size: 20px;
+}
+
+input[type="text"] {
+	width: 100%;
+	padding: 20px;
+	border: 1px solid white;
+	font-size: 20px;
+	background-color:  hsla(9, 0%, 47%, 0.95);
+	color: white;
+}
+
+input[type="text"]:focus {
+	outline: none;
+}
+
+input[type="number"] {
+	width: 100%;
+	padding: 20px;
+	border: 1px solid white;
+	font-size: 20px;
+	background-color:  hsla(9, 0%, 47%, 0.95);
+	color: white;
+}
+
+input[type="number"]:focus {
+	outline: none;
+}
+
+#select {
+	color: black;
+}
+
+input[type="button"] {
+	margin-top: 10px;
+}
