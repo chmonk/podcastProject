@@ -173,11 +173,352 @@ public class BackStageAjaxController {
 		OrderTicketBean oBean = bDao.selectOrderById(orderId);
 		java.util.List<OrderTicketBean> oList = new ArrayList<OrderTicketBean>();
 		oList.add(oBean);
-		m.addAttribute("oList", oList);
 
 		return oList;
 	}
 
+	@PostMapping(path = { "/BackStageSelectOrderByMember" })
+	public  @ResponseBody java.util.List<OrderTicketBean> selectOrderByMember(@RequestParam(value = "input") Integer memberId,
+			Model m) {
+		
+		java.util.List<OrderTicketBean> oList = bDao.selectOrderByMember(memberId);
+
+		return oList;
+	}
+
+	@PostMapping(path = { "/BackStageSelectOrderByActivity" })
+	public @ResponseBody java.util.List<OrderTicketBean> selectOrderByActivity(@RequestParam(name = "input") Integer activityId,
+			Model m) {
+		
+		java.util.List<OrderTicketBean> oList = bDao.selectOrderByActivity(activityId);
+
+		return oList;
+	}
+
+	//ProgramComment AJAX Function======================================================
 	
+	@PostMapping(path = { "/BackStageSelectCommentById" })
+	public @ResponseBody java.util.List<ProgramCommentBean> SelectCommentByID(@RequestParam(name = "inputm") Integer commentId,
+			Model m) {
+		
+		ProgramCommentBean pBean = bDao.selectCommentById(commentId);
+		ArrayList<ProgramCommentBean> pList = new ArrayList<ProgramCommentBean>();
+		pList.add(pBean);
+
+		return pList;
+	}
+
+	@PostMapping(path = { "/BackStageSelectCommentByMember" })
+	public @ResponseBody java.util.List<ProgramCommentBean> SelectCommentByMember(
+			@RequestParam(name = "inputm") Integer commentmemberId,
+			@RequestParam(name = "inputp") Integer commentpodcasterId, Model m) {
+		
+		java.util.List<ProgramCommentBean> pList = bDao.selectCommentByMember(commentmemberId, commentpodcasterId);
+
+		return pList;
+	}
+
+	@PostMapping(path = { "/BackStageSelectCommentByPodcaster" })
+	public @ResponseBody java.util.List<ProgramCommentBean> SelectCommentByPodcaster(
+			@RequestParam(name = "inputm") Integer commentpodcasterId, Model m) {
+		
+		java.util.List<ProgramCommentBean> pList = bDao.selectCommentByPodcaster(commentpodcasterId);
+		m.addAttribute("pList", pList);
+
+		return pList;
+	}
+
+	@PostMapping(path = { "/BackStageDeleteCommentById" })
+	public @ResponseBody java.util.List<ProgramCommentBean> DeleteCommentById( 
+			@RequestParam(name = "inputm") Integer commentId,
+			Model m) {
+		
+		ProgramCommentBean pBean = bDao.selectCommentById(commentId);
+		ArrayList<ProgramCommentBean> pList = new ArrayList<ProgramCommentBean>();
+		pList.add(pBean);
+		
+		bDao.deleteComment(commentId);
+
+		return pList;
+	}
+
+	@PostMapping(path = { "/BackStageDeleteCommentByMember" })
+	public @ResponseBody java.util.List<ProgramCommentBean> DeleteCommentByMember(
+			@RequestParam(name = "inputm") Integer commentMemberId,
+			@RequestParam(name = "inputP") Integer commentPodcasterId, Model m) {
+		
+		java.util.List<ProgramCommentBean> pList = bDao.selectCommentByMember(commentMemberId, commentPodcasterId);
+
+		bDao.deleteCommentByMember(commentMemberId, commentPodcasterId);
+
+
+		return pList;
+	}
+	
+	
+//Category AJAX Function==========================================================
+	
+	@PostMapping(path = { "/BackStageSetNewCategory" })
+	public @ResponseBody java.util.List<CategoryBean> SetNewCategory(@RequestParam(name = "inputo") String categoryName,
+			Model m) throws Exception {
+		
+		boolean testify = bDao.setNewCategory(categoryName);
+		if (testify == false) {
+			
+			java.util.List<CategoryBean> cList = new ArrayList<CategoryBean>();
+			return cList;
+		}
+		
+		java.util.List<CategoryBean> cList = cDao.selectAll();
+		return cList;
+	}
+
+	@PostMapping(path = { "/BackStageUpdateCategoryById" })
+	public @ResponseBody java.util.List<CategoryBean> UpdateCayegory(
+			@RequestParam(name = "inputn") String categoryNewName,
+			@RequestParam(name="inputo")Integer categoryId,
+			Model m) throws Exception {
+
+		CategoryBean cBean = new CategoryBean();
+		cBean.setCategoryId(categoryId);
+		cBean.setCategoryName(categoryNewName);
+		bDao.updateCategory(categoryId, cBean);
+		java.util.List<CategoryBean> cList=cDao.selectAll();
+		
+
+		return cList;
+	}
+	
+	//Subscription Function===============================================================
+	
+	@PostMapping(path = { "/SelectSubscriptionByMember" })
+	public @ResponseBody java.util.List<SubscriptionBean> SelectSubscriptionByMember(
+			@RequestParam(name = "input") Integer memberId,
+			Model m) throws Exception {
+		
+		
+		java.util.List<SubscriptionBean> sList = bDao.selectSubscriptionByMember(memberId);
+		
+		return sList;
+	}
+	
+	@PostMapping(path = { "/SelectSubscriptionByPodcaster" })
+	public @ResponseBody java.util.List<SubscriptionBean> SelectSubscriptionByPodcaster(
+			@RequestParam(name = "input") Integer podcasterId,
+			Model m) throws Exception {
+	
+		java.util.List<SubscriptionBean> sList = bDao.selectSubscriptionByPodcaster(podcasterId);
+		return sList;
+	}
+	
+//Activity Function=======================================================
+	
+	@PostMapping(path = { "/SelectActivityById" })
+	public @ResponseBody java.util.List<ActivityBean> SelectActivityById(
+			@RequestParam(name = "input") Integer activityId,
+			Model m) throws Exception {
+			
+		ActivityBean aBean=bDao.selectActivity(activityId);
+		java.util.List<ActivityBean> aList = new ArrayList<ActivityBean>();
+		aList.add(aBean);
+
+		
+		return aList;
+		
+	}
+	
+	@PostMapping(path = { "/SelectActivityByPodcaster" })
+	public @ResponseBody java.util.List<ActivityBean> SelectActivityByPodcaster(
+			@RequestParam(name = "input") Integer podcasterId,
+			Model m) throws Exception {
+			
+		java.util.List<ActivityBean> aList=bDao.selectActivityByPodcaster(podcasterId);
+		return aList;
+		
+	}
+	
+	@PostMapping(path = { "/SelectActivityByDate" })
+	public @ResponseBody java.util.List<ActivityBean> SelectActivityByDate(
+			@RequestParam(name = "input") String activityDate,
+			Model m) throws Exception {
+			
+		Date date;
+		java.util.List<ActivityBean> aList=new ArrayList<ActivityBean>();
+		try {
+			date=Date.valueOf(activityDate);
+			aList=bDao.selectActivitybyDate(date);
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+			
+			return aList;
+	}
+	
+	@PostMapping(path = { "/DeleteActivityByID" })
+	public @ResponseBody java.util.List<ActivityBean> DeleteActivityById(
+			@RequestParam(name = "input") Integer activityId,
+			Model m) throws Exception {
+		
+		ActivityBean aBean=bDao.selectActivity(activityId);
+		java.util.List<ActivityBean> aList = new ArrayList<ActivityBean>();
+		aList.add(aBean);
+		bDao.deleteActivity(activityId);
+		
+		return aList;
+	}
+	
+//Browsing History======================================================================
+	
+	@PostMapping(path = { "/SelectHistoryById" })
+	public @ResponseBody java.util.List<HistoryBean> SelectHistoryById(
+			@RequestParam(name = "input") Integer historyId,
+			Model m) throws Exception {
+		
+		HistoryBean hBean=bDao.selectHistoryById(historyId);
+		java.util.List<HistoryBean> hList = new ArrayList<HistoryBean>();
+		hList.add(hBean);
+		return hList;
+	}
+	
+	@PostMapping(path = { "/SelectHistoryByMember" })
+	public @ResponseBody java.util.List<HistoryBean> SelectHistoryByMember(
+			@RequestParam(name = "input") Integer memberId,
+			Model m) throws Exception {
+		
+		java.util.List<HistoryBean> hList = bDao.selectHistoryByMember(memberId);
+		
+		return hList;
+	}
+
+	@PostMapping(path = { "/SelectHistoryByPodcaster" })
+	public  @ResponseBody java.util.List<HistoryBean> SelectHistoryByPodcaster(
+			@RequestParam(name = "input") Integer podcasterId,
+			Model m) throws Exception {
+		
+		java.util.List<HistoryBean> hList = bDao.selectHistoryByPodcaster(podcasterId);
+
+		return hList;
+	}
+	
+
+	@PostMapping(path = { "/SelectHistoryByLastListen" })
+	public @ResponseBody java.util.List<HistoryBean> SelectHistoryByLastListen(
+			@RequestParam(name = "input") String lastListen,
+			Model m) throws Exception {
+		
+		Date date;
+		java.util.List<HistoryBean> hList=new ArrayList<HistoryBean>();
+		try {
+			date=Date.valueOf(lastListen);
+			hList = bDao.selectHistoryByLastListen(date);
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+		return hList;
+	}
+	
+	@PostMapping(path = { "/DeleteHistoryByDate" })
+	public @ResponseBody java.util.List<HistoryBean> DeleteHistoryByDate(
+			@RequestParam(name = "input") String deleteDate,
+			Model m) throws Exception {
+		
+		Date date;
+		java.util.List<HistoryBean> hList=new ArrayList<HistoryBean>();
+		try {
+			date=Date.valueOf(deleteDate);
+			hList=bDao.deleteHistoryByDate(date);
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+		//已經改寫DAO，但是要看看是否有效
+		return hList;
+	}
+	
+//Podcast Function========================================================
+	
+	@PostMapping(path= {"/SelectPodcastByMember"})
+	public @ResponseBody java.util.List<uploadPodcastBean> SelectPocastByMember(@RequestParam(name="input")Integer memberId,
+										Model m) {
+		java.util.List<uploadPodcastBean> uList = bDao.selectPodcastByMember(memberId);	
+		return uList;
+		
+	}
+	
+	@PostMapping(path= {"/DeletePodcastbyId"})
+	public @ResponseBody java.util.List<uploadPodcastBean> DeletePodcastById(@RequestParam(name="input")Integer podcastId,
+									Model m) throws Exception {
+		
+		uploadPodcastBean uBean = uDao.select(podcastId);
+		java.util.List<uploadPodcastBean> uList = new ArrayList<uploadPodcastBean>();
+		uList.add(uBean);
+		m.addAttribute("PodcastResult","Select Podcast Deleted!");
+		bDao.deletePodcast(podcastId);
+		return uList;
+	}
+	
+	@PostMapping(path= {"/TopPodcst"})
+	public @ResponseBody java.util.List<uploadPodcastBean> TopPodcast(@RequestParam(name="input")String uploadTime,
+							 Model m) {
+		
+		Date date;
+		java.util.List<uploadPodcastBean> uList=new ArrayList<uploadPodcastBean>();
+		try {
+			date=Date.valueOf(uploadTime);
+			uList=bDao.topPodcast(date);
+			
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+		return uList;
+	}
+	
+//Income Calculate=============================================================
+	
+	@PostMapping(path = { "/SubscriptionIncome" })
+	public  @ResponseBody ArrayList<String> SubscriptionIncome(
+			@RequestParam(name = "inputS") String startDate,
+			@RequestParam(name = "inputE") String endDate,
+			Model m) {
+		
+		Date startdate;
+		Date enddate;
+		Integer subIncome=null;
+		ArrayList<String> iList=new ArrayList<String>();
+		try {
+			startdate=Date.valueOf(startDate);
+			enddate=Date.valueOf(endDate);
+			subIncome=bDao.SubscriptionIncome(startdate, enddate);
+			iList.add(startDate);
+			iList.add(endDate);
+			iList.add(subIncome.toString());
+		}catch(IllegalArgumentException e) {
+			//do nothing
+		}		
+		return iList;
+	}
+	
+
+	@PostMapping(path = { "/TicketIncome" })
+	public   @ResponseBody ArrayList<String> TicketIncome(
+			@RequestParam(name = "inputS") String startDate,
+			@RequestParam(name = "inputE") String endDate,
+			Model m) {
+		Date startdate; 
+		Date enddate;
+		Double subIncome=0.0;
+		ArrayList<String> iList=new ArrayList<String>();
+		try {
+			startdate=Date.valueOf(startDate);
+			enddate=Date.valueOf(endDate);
+			subIncome=bDao.TicketIncome(startdate, enddate);
+			iList.add(startDate);
+			iList.add(endDate);
+			iList.add(subIncome.toString());
+		}catch(IllegalArgumentException e){
+			//do nothing
+		}
+
+		return iList;
+	}
 	
 }

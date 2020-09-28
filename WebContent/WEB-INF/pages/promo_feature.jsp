@@ -73,7 +73,7 @@
 				<!-- default heading -->
 				<div class="default-heading">
 					<!-- heading -->
-					<h2>矚目新選</h2>
+					<h2>熱播排行</h2>
 				</div>
 				<!-- featured album elements -->
 				<div class="featured-element">
