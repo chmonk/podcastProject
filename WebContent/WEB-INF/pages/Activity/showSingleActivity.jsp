@@ -52,6 +52,10 @@
 	padding-top: 50px;
 	/* 	border-bottom: 1px solid black;  */
 }
+.headtop{
+	margin-top:150px;
+	margin-bottom:20px;
+}
   </style>
 
 </head>
@@ -61,22 +65,8 @@
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
 
-<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
-	</div>
 
-  <div class="container">
+  <div class="container headtop">
     <div class="row">
 
 
@@ -127,8 +117,8 @@
             <label>活動狀態: </label>
             <select class="form-control" name="activityStatus" value="${aBean.activityStatus}">
             	<option>請選擇</option>
-              <option value=0>公開</option>
-              <option value=1>關閉</option>
+              <option value=0 id="status0">公開</option>
+              <option value=1 id="status1">關閉</option>
             </select>
             <br>
 
@@ -139,12 +129,16 @@
 
             <br>
 
-<!--             <label>活動照片: </label> -->
-<!--             <input type="file" name="file" class="form-control"> -->
-<!--             <br> -->
+          <div class="col-lg-12">
+             <br>
+				<label>活動照片：</label> <input type="file" name="file" 
+								class="form-control" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png" required/><br/>
+   									<img id="preview_progressbarTW_img" src="${aBean.activityImg}" style="max-width: 300px; max-height: 300px;"/>   								
+						<br><br></div>
+						<br>
             
             <input type=hidden name="activityId" value="${aBean.activityId}">
-            <input type=hidden name="activityImg" value="${aBean.activityImg}">
+<%--             <input type=hidden name="activityImg" value="${aBean.activityImg}"> --%>
             <input type=hidden name="oldMaxppl" value="${aBean.activityMaxPeople}">
 			<input type=hidden name="soldQuantity" value="${aBean.stock}">
             <div class="button">
@@ -165,7 +159,24 @@
 <!-- end of container -->
 
 
+<script>
+window.onload=function(){
+var activityStatus=${aBean.activityStatus};
+document.getElementById("status"+activityStatus).selected=true;
+}
 
+function readURL(input){
+	  if(input.files && input.files[0]){
+	    var imageTagID = input.getAttribute("targetID");
+	    var reader = new FileReader();
+	    reader.onload = function (e) {
+	       var img = document.getElementById(imageTagID);
+	       img.setAttribute("src", e.target.result)
+	    }
+	    reader.readAsDataURL(input.files[0]);
+	  }
+	}
+</script>
 </body>
 
 </html>

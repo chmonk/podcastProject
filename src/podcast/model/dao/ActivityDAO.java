@@ -91,12 +91,12 @@ public class ActivityDAO implements IActivityDAO {
 			oldbean.setActivityDate(abean.getActivityDate());
 			oldbean.setActivityContent(abean.getActivityContent());
 			oldbean.setActivityLocation(abean.getActivityLocation ());
-//			oldbean.setPodcasterId(abean.getPodcasterId());
+			oldbean.setPodcasterId(abean.getPodcasterId());
 			oldbean.setActivityPrice(abean.getActivityPrice());
 			oldbean.setActivityMaxPeople(abean.getActivityMaxPeople());
 			oldbean.setStock(abean.getStock());
 			oldbean.setActivityStatus(abean.getActivityStatus());
-//			oldbean.setActivityImg(abean.getActivityImg());
+			oldbean.setActivityImg(abean.getActivityImg());
 			oldbean.setActivityTime(abean.getActivityTime());
 			System.out.println("update done");
 		}

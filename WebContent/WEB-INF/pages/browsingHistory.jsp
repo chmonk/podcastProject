@@ -24,6 +24,11 @@
 	rel="stylesheet">
 
 <link href="css/musicbar.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="css/style.css" rel="stylesheet">
+<link href="css/style-color.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
 <style type="text/css">
 body {
 	background-image: url(< c : url value = '/img/banner/b4.jpg'/ >);
@@ -35,22 +40,37 @@ body {
 .showPodcasterBody {
 	padding-top: 40px;
 	padding-bottom: 40px;
+	background-color:#f9f9f9;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+
 }
 
-.showPodcasterBodyHeader {
-	padding-top: 50px;
-	/* 	border-bottom: 1px solid black;  */
+.titelheader {
+    position: relative;
+    padding-top: 150px;
+	padding-bottom: 30px;
 }
+
 
 .titelheader {
 	position: relative;
 }
 
+
+
 h2 {
-	margin: 10%;
-	position: absolute;
-	float: left;
-	display: inline;
+ 	margin: 10%;
+ 	text-align:center;
+	margin-bottom:10px;
+    display: inline;
+}
+
+
+.margindiv{
+	margin-bottom:3%;
+
 }
 
 #pressHistoryAdd {
@@ -65,6 +85,7 @@ h2 {
 	margin-bottom: 3%;
 }
 </style>
+
 </head>
 <body>
 	<div class="head">
@@ -72,10 +93,28 @@ h2 {
 
 	</div>
 
+
 	<div class="titelheader">
-		<h2 style="color: white">瀏覽紀錄</h2>
-		<button id="pressHistoryAdd">一鍵加入</button>
+		<div class="default-heading">
+			<h2 >瀏覽紀錄</h2>
+			<button id="pressHistoryAdd" class="btn btn-primary">一鍵加入</button>
+		</div>
 	</div>
+
+		
+		
+<!-- 	<div class="titelheader"> -->
+<!-- 		<h2 style="color: white">瀏覽紀錄</h2> -->
+<!-- 		<button id="pressHistoryAdd">一鍵加入</button> -->
+<!-- 	</div> -->
+	
+<!-- <br><br>	 -->
+<!-- 	<hr> -->
+	
+
+
+	
+
 
 	<div class="margindiv">
 		<c:forEach var="rownum" items="${history}">
