@@ -4,9 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<style>
+	.img-size{
+	display: block;
+	max-width: 100%;
+	width: 100%;
+	 max-width: 450px;
+	 height: 300px;
+	 object-fit: cover;
+	}
+	
+	</style>
+
 <%-- 
 <!-- Styles -->
-
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Animate CSS -->
@@ -48,27 +60,28 @@
 	--%>
 </head>
 <body>		
-
-				<!-- promo -->
+<!--
+			
 		<div class="promo parallax-one pad">
 			<div class="container">
-				<!-- promo element -->
+			
 				<div class="promo-element ">
-					<!-- heading -->
+					
 					<h3>Music An Art...</h3>
-					<!-- paragraph -->
+					
 					<p>
 						Music is an art form and cultural activity whose medium is sound
 						organized in time. The common elements of music are <strong>pitch</strong>,
 						<strong>rhythm</strong>, <strong>dynamics</strong> and the sonic
 						qualities of <strong>timbre</strong> and <strong>texture</strong>.
 					</p>
-					<!-- link -->
+					
 					<a class="promo-link" href="#"><i class="fa fa-play-circle"></i></a>
 				</div>
 			</div>
 		</div>
-		<!--/ promo end -->
+		
+-->
 
 		<!-- featured abbum -->
 		<div class="featured pad" id="featuredalbum">
@@ -81,15 +94,15 @@
 				<!-- featured album elements -->
 				<div class="featured-element">
 					<div class="row">
-						<div class="col-md-4 col-sm-6">
+						<div class="col-md-4 col-sm-6" >
 							<!-- featured item -->
-							<div class="featured-item ">
+							<div class="featured-item " >
 								<!-- image container -->
 								<div class="figure">
 									<!-- image -->
-									<img class="img-responsive" src="img/featured/_1.png" alt="" />
+									<img id="podimg1" class=" img-size" src="img/featured/_1.png" alt="" />
 									<!-- paragraph -->
-									<p>There are many variations of passages available, but the
+									<p id="podinfo1">There are many variations of passages available, but the
 										majority have suffered Lorem alteration in some form, by
 										injected look even slightly believable.</p>
 
@@ -97,13 +110,13 @@
 								<!-- featured information -->
 								<div class="featured-item-info">
 									<!-- featured title -->
-									<h4>Power Pop</h4>
+									<h4 id="podtitle1">Power Pop</h4>
 									<!-- horizontal line -->
 									<hr />
 									<!-- some responce from social medial or web likes -->
 									<p>
-										1024+ <span class="label label-theme">Like</span> &nbsp;&nbsp;
-										825+ <span class="label label-theme">Love</span>
+										<span id="podlike1">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
+										<span id="podclick1">825+</span> <span class="label label-theme">Click</span>
 									</p>
 								</div>
 							</div>
@@ -114,22 +127,22 @@
 								<!-- image container -->
 								<div class="figure">
 									<!-- image -->
-									<img class="img-responsive" src="img/featured/_2.png" alt="" />
+									<img id="podimg2" class="img-size" src="img/featured/_2.png" alt="" />
 									<!-- paragraph -->
-									<p>There are many variations of passages available, but the
+									<p id="podinfo2">There are many variations of passages available, but the
 										majority have suffered Lorem alteration in some form, by
 										injected look even slightly believable.</p>
 								</div>
 								<!-- featured information -->
 								<div class="featured-item-info">
 									<!-- featured title -->
-									<h4>Bad Brains</h4>
+									<h4 id="podtitle2">Bad Brains</h4>
 									<!-- horizontal line -->
 									<hr />
 									<!-- some responce from social medial or web likes -->
 									<p>
-										1024+ <span class="label label-theme">Like</span> &nbsp;&nbsp;
-										825+ <span class="label label-theme">Love</span>
+										<span id="podlike2">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
+										<span id="podclick2">825+</span> <span class="label label-theme">Click</span>
 									</p>
 								</div>
 							</div>
@@ -140,22 +153,22 @@
 								<!-- image container -->
 								<div class="figure">
 									<!-- image -->
-									<img class="img-responsive" src="img/featured/_4.png" alt="" />
+									<img id="podimg3" class="img-size" src="img/featured/_4.png" alt="" />
 									<!-- paragraph -->
-									<p>There are many variations of passages available, but the
+									<p id="podinfo3">There are many variations of passages available, but the
 										majority have suffered Lorem alteration in some form, by
 										injected look even slightly believable.</p>
 								</div>
 								<!-- featured information -->
 								<div class="featured-item-info">
 									<!-- featured title -->
-									<h4>The Mars Volta</h4>
+									<h4 id="podtitle3">The Mars Volta</h4>
 									<!-- horizontal line -->
 									<hr />
 									<!-- some responce from social medial or web likes -->
 									<p>
-										1024+ <span class="label label-theme">Like</span> &nbsp;&nbsp;
-										825+ <span class="label label-theme">Love</span>
+										<span id="podlike3">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
+										<span id="podclick3">825+</span> <span class="label label-theme">Click</span>
 									</p>
 								</div>
 							</div>
@@ -166,22 +179,22 @@
 								<!-- image container -->
 								<div class="figure">
 									<!-- image -->
-									<img class="img-responsive" src="img/featured/4.jpg" alt="" />
+									<img id="podimg4" class="img-size" src="img/featured/4.jpg" alt="" />
 									<!-- paragraph -->
-									<p>There are many variations of passages available, but the
+									<p id="podinfo4">There are many variations of passages available, but the
 										majority have suffered Lorem alteration in some form, by
 										injected look even slightly believable.</p>
 								</div>
 								<!-- featured information -->
 								<div class="featured-item-info">
 									<!-- featured title -->
-									<h4>Dirty Dancing</h4>
+									<h4 id="podtitle4">Dirty Dancing</h4>
 									<!-- horizontal line -->
 									<hr />
 									<!-- some responce from social medial or web likes -->
 									<p>
-										1024+ <span class="label label-theme">Like</span> &nbsp;&nbsp;
-										825+ <span class="label label-theme">Love</span>
+										<span id="podlike4">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
+										<span id="podclick4">825+</span> <span class="label label-theme">Click</span>
 									</p>
 								</div>
 							</div>
@@ -192,22 +205,22 @@
 								<!-- image container -->
 								<div class="figure">
 									<!-- image -->
-									<img class="img-responsive" src="img/featured/5.jpg" alt="" />
+									<img id="podimg5" class="img-size" src="img/featured/5.jpg" alt="" />
 									<!-- paragraph -->
-									<p>There are many variations of passages available, but the
+									<p id="podinfo5">There are many variations of passages available, but the
 										majority have suffered Lorem alteration in some form, by
 										injected look even slightly believable.</p>
 								</div>
 								<!-- featured information -->
 								<div class="featured-item-info">
 									<!-- featured title -->
-									<h4>Hotel California</h4>
+									<h4 id="podtitle5">Hotel California</h4>
 									<!-- horizontal line -->
 									<hr />
 									<!-- some responce from social medial or web likes -->
 									<p>
-										1024+ <span class="label label-theme">Like</span> &nbsp;&nbsp;
-										825+ <span class="label label-theme">Love</span>
+										<span id="podlike5">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
+										<span id="podclick5">825+</span> <span class="label label-theme">Click</span>
 									</p>
 								</div>
 							</div>
@@ -218,22 +231,22 @@
 								<!-- image container -->
 								<div class="figure">
 									<!-- image -->
-									<img class="img-responsive" src="img/featured/6.jpg" alt="" />
+									<img id="podimg6" class="img-size" src="img/featured/6.jpg" alt="" />
 									<!-- paragraph -->
-									<p>There are many variations of passages available, but the
+									<p id="podinfo6">There are many variations of passages available, but the
 										majority have suffered Lorem alteration in some form, by
 										injected look even slightly believable.</p>
 								</div>
 								<!-- featured information -->
 								<div class="featured-item-info">
 									<!-- featured title -->
-									<h4>Punk Compilation</h4>
+									<h4 id="podtitle6">Punk Compilation</h4>
 									<!-- horizontal line -->
 									<hr />
 									<!-- some responce from social medial or web likes -->
 									<p>
-										1024+ <span class="label label-theme">Like</span> &nbsp;&nbsp;
-										825+ <span class="label label-theme">Love</span>
+										<span id="podlike6">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
+										<span id="podclick6">825+</span> <span class="label label-theme">Click</span>
 									</p>
 								</div>
 							</div>
@@ -243,9 +256,6 @@
 			</div>
 		</div>
 		<!-- features end -->
-
-
-	
 </body>
 
 </html>
