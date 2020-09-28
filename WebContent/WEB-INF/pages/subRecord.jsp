@@ -4,97 +4,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
+	
 <meta charset="UTF-8">
 <title>訂閱頻道紀錄</title>
 <style type="text/css">
+* {
+            margin: 0 auto;
+            font-size: medium;
+        }
 
-div{
-margin:25px auto;
-width:200px
-}
-
-h1{
-color:#FFFFFF;
-width:1000px;
-margin:25px auto;
-text-align: center;
-}
-body{
- background-image:url(<c:url value='/img/banner/b4.jpg' />)}
-table {
-	
-  text-align:center;
-  width:1000px;
-  height:200px;
-  font-family: 'Arial';
-  margin: 25px auto;
-  border-collapse: collapse;
-  border: 1px solid 	#ADADAD;
-  border-bottom: 2px solid #9D9D9D;
-  box-shadow: 0px 0px 20px rgba(0,0,0,0.20),
-     0px 10px 20px rgba(0,0,0,0.05),
-     0px 20px 20px rgba(0,0,0,0.05),
-     0px 30px 20px rgba(0,0,0,0.05);
-     }
-  tr:hover {
-  	
-      color:#000000;
-      background: #FF9797;
-      }
-   th{
-   text-align: center;
-   }
+        body {
+            background-image: url(<c:url value='/img/banner/b4.jpg' />);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
   
-  th, td {
-  font-size:20px;
-/*   text-align:center; */
-  height:100px;
-    color: #FFFFFF;
-    border: 1px solid 	#ADADAD;
-    padding: auto;
-    border-collapse: collapse;
-  }
-  th {
-  	
- 	 font-family:微軟正黑體;
-    background:	#7B7B7B;
-    color: 		#FFFFFF;
-    text-transform: uppercase;
-    font-size: 24px;
-    &.last {
-      border-right: none;
-    }
-  }
-}</style>
+  		.custyle{
+  		padding:100px;}
+
+        .custab {
+
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5% 0;
+            box-shadow: 3px 3px 2px #ccc;
+            transition: 0.5s;
+        }
+
+        .custab:hover {
+            box-shadow: 3px 3px 0px transparent;
+            transition: 0.5s;
+        }
+
+        .name {
+            width: 200px;
+        }
+
+        th,
+        tr {
+            text-align: center;
+            background-color: white;
+        }
+
+        h1 {
+            color: white;
+        }
+</style>
 
 </head>
 <body>
+<div class="head">
+		<jsp:include page="header_banner_test.jsp" flush="true " />
+	</div>
 
-<h1 >${LoginOK.name}的頻道訂閱紀錄</h1>
-	<table border="1">
-<thead>
-<tr>
-<th>頻道名稱</th>
-<th>訂閱開始時間</th>
-<th>訂閱結束時間</th>
-<th>費用</th>
-</tr>
-</thead>
-<c:forEach items="${subRecordList}" var="subRecord">
-<tr><td>${subRecord.getReceipt()}</td>
-<td>${subRecord.getSubdateStart()}</td>
-<td>${subRecord.getSubdateEnd()}</td>
-<td>${subRecord.getMonthlyPayment()}</td></tr>
-</c:forEach>
+<div class="showPodcasterBody">
+		<div class="row showPodcasterBodyHeader">
+			<div class="col-md-4">
+				<div class="memberImg">
+					<img alt="" src="${podcasterData.podcastImg}">
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="memberName">${podcasterData.podcastName}</div>
+				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	
+    <div class="container">
+        <div class="custyle">
+            <table class="table table-striped custab">
+                <thead>
+                    <tr>
+                        <td colspan="4">${LoginOK.name}的訂閱頻道紀錄</td>
+                    </tr>
+                    <tr>
+                        <th>頻道名稱</th>
+                        <th>訂閱開始時間</th>
+                        <th>訂閱結束時間</th>
+                        <th>費用</th>
+                    </tr>
+                </thead>
+                <c:forEach items="${subRecordList}" var="subRecord">
+                    <tr>
+                        <td>${subRecord.getReceipt()}</td>
+                        <td>${subRecord.getSubdateStart()}</td>
+                        <td>${subRecord.getSubdateEnd()}</td>
+                        <td>${subRecord.getMonthlyPayment()}</td>
+                    </tr>
+                </c:forEach>
+                <tr>
+                    <td align="center" colspan="4">
+                        <a class="btn btn-primary"
+                            onclick="location.href='<c:url value="/" />'">回首頁</a>
+                        <a class="btn btn-warning"
+                            onclick="location.href='<c:url value="/orderList" />'">票券訂購紀錄</a>
+                    </td>
+                </tr>
 
-</table>
-<div>
-<button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/" />'">回首頁</button>
-<button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/orderList" />'">票券訂購紀錄</button>
-</div>
+            </table>
 
 </body>
 </html>

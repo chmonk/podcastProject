@@ -45,7 +45,7 @@ public class ActivityDAO implements IActivityDAO {
 		return session.get(ActivityBean.class, activityId);
 	}
 	
-
+	@Override
 	public List<ActivityBean>  selectByPodcasterId(Integer podcasterId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from ActivityBean where podcasterId=:id";
@@ -66,6 +66,20 @@ public class ActivityDAO implements IActivityDAO {
 
 		return lists;
 	}
+	
+	@Override
+	public List<ActivityBean> selectOpenActivities() throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		String hbl = "from ActivityBean where activityStatus=:activityStatus";
+
+		Query<ActivityBean> query = session.createQuery(hbl, ActivityBean.class);
+		query.setParameter("activityStatus", 0);   //只選擇公開的活動
+		List<ActivityBean> lists = query.list();
+
+		return lists;
+	}	
+	
+
 
 	@Override
 	public ActivityBean update(Integer activityId, ActivityBean abean) throws Exception {
@@ -77,12 +91,12 @@ public class ActivityDAO implements IActivityDAO {
 			oldbean.setActivityDate(abean.getActivityDate());
 			oldbean.setActivityContent(abean.getActivityContent());
 			oldbean.setActivityLocation(abean.getActivityLocation ());
-			oldbean.setPodcasterId(abean.getPodcasterId());
+//			oldbean.setPodcasterId(abean.getPodcasterId());
 			oldbean.setActivityPrice(abean.getActivityPrice());
 			oldbean.setActivityMaxPeople(abean.getActivityMaxPeople());
 			oldbean.setStock(abean.getStock());
 			oldbean.setActivityStatus(abean.getActivityStatus());
-			oldbean.setActivityImg(abean.getActivityImg());
+//			oldbean.setActivityImg(abean.getActivityImg());
 			oldbean.setActivityTime(abean.getActivityTime());
 			System.out.println("update done");
 		}

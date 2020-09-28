@@ -43,12 +43,38 @@
       font-weight: 800;
 
     }
+        .showPodcasterBody {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.showPodcasterBodyHeader {
+	padding-top: 50px;
+	/* 	border-bottom: 1px solid black;  */
+}
   </style>
 
 </head>
 
 <body>
+<div class="head">
+		<jsp:include page="../header_banner_test.jsp" flush="true " />
+	</div>
 
+<div class="showPodcasterBody">
+		<div class="row showPodcasterBodyHeader">
+			<div class="col-md-4">
+				<div class="memberImg">
+					<img alt="" src="${podcasterData.podcastImg}">
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="memberName">${podcasterData.podcastName}</div>
+				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div></div>
+			</div>
+		</div>
+	</div>
 
   <div class="container">
     <div class="row">
@@ -107,17 +133,20 @@
             <br>
 
             <label>活動內容: </label>
-            <textarea name="activityContent" class="form-control" rows="3" value="${aBean.activityContent}" placeholder="請輸入活動內容..."
-              required> ${aBean.activityContent}</textarea>
+
+            <textarea name="activityContent" class="form-control" rows="3" value="${aBean.activityContent}"  required>${aBean.activityContent} </textarea>
+
+
             <br>
 
-            <label>活動照片: </label>
-            <input type="file" name="file" class="form-control">
-            <br>
+<!--             <label>活動照片: </label> -->
+<!--             <input type="file" name="file" class="form-control"> -->
+<!--             <br> -->
             
             <input type=hidden name="activityId" value="${aBean.activityId}">
             <input type=hidden name="activityImg" value="${aBean.activityImg}">
-
+            <input type=hidden name="oldMaxppl" value="${aBean.activityMaxPeople}">
+			<input type=hidden name="soldQuantity" value="${aBean.stock}">
             <div class="button">
               <input type="submit" name="submit" value="送出" class="btn btn-danger btn-block btn-lg"
                 style="box-shadow: 2px 2px 2px gray;">

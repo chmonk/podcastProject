@@ -41,8 +41,41 @@ function reconfirmOrder() {
 <!-- 取得今天的日期，今天的日期應當在最後確認時才取得 -->
 <jsp:useBean   id="today"  class="java.util.Date" scope="session"/> 
 <title>訂單明細資訊確認</title>
+<style type="text/css">
+
+  .showPodcasterBody {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.showPodcasterBodyHeader {
+	padding-top: 50px;
+	/* 	border-bottom: 1px solid black;  */
+}
+
+</style>
 </head>
 <body style="background:;">
+<div class="head">
+		<jsp:include page="../header_banner_test.jsp" flush="true " />
+	</div>
+
+<div class="showPodcasterBody">
+		<div class="row showPodcasterBodyHeader">
+			<div class="col-md-4">
+				<div class="memberImg">
+					<img alt="" src="${podcasterData.podcastImg}">
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="memberName">${podcasterData.podcastName}</div>
+				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+
+
 <c:set var="funcName" value="CHE" scope="session"/>
 <%-- <jsp:include page="/fragment/topMVC.jsp" /> --%>
 <div style="text-align:center">

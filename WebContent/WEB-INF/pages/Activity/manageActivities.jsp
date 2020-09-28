@@ -52,10 +52,8 @@ function confirmDelete(n) {
             box-shadow: 3px 3px 0px transparent;
             transition: 0.5s;
         }
-
-        .name {
-            width: 300px;
-        }
+table{
+table-layout: fixed;}
 
         th,
         tr {
@@ -66,34 +64,87 @@ function confirmDelete(n) {
         h1 {
             color: white;
         }
+            .showPodcasterBody {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.showPodcasterBodyHeader {
+	padding-top: 50px;
+	/* 	border-bottom: 1px solid black;  */
+}
+
+.closeTr{
+background-color:#f3e1e1!important;
+}
     </style>
 
 </head>
 
 <body>
+<div class="head">
+		<jsp:include page="../header_banner_test.jsp" flush="true " />
+	</div>
+
+<div class="showPodcasterBody">
+		<div class="row showPodcasterBodyHeader">
+			<div class="col-md-4">
+				<div class="memberImg">
+					<img alt="" src="${podcasterData.podcastImg}">
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="memberName">${podcasterData.podcastName}</div>
+				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+
+
 
     <div class="container">
-        <h1 style="text-align:center;">${LoginOK.name}的活動列表</h1><br>
-        <div class="row col-md-6 col-md-offset-3 custyle">
+        <div class="custyle">
             <table class="table table-striped custab">
                 <thead>
-
+<tr>
+                        <td colspan="6">${LoginOK.name}的活動列表</td>
+                    </tr>
                     <a href="<c:url value='/addActivityForm' />" class="btn btn-primary btn-md pull-right">+新增活動</a>
                     <br>
                     <tr>
-                        <th class="name">名稱</th>
-                        <th>日期</th>
-                        <th>庫存</th>
-                        <th class="text-center">操作</th>
+                    <th>照片</th>
+                        <td><b>名稱</b></td>
+                        <td><b>日期</b></td>
+                        <td><b>參加人數</b></td>
+                        <td><b>狀態</b></td>
+                        <td><b>操作</b></td>
                     </tr>
                 </thead>
                 <c:forEach var="alist" varStatus="loop" items="${ActivityList}">
-                <tr>
+                <c:choose>
+   <c:when test="${alist.activityStatus == 1 }">
+      <!-- 購物車內有一項以上的商品 -->
+      <c:set var="activityStatus" value="關閉"/>
+   </c:when>
+   <c:otherwise>
+      <!-- 購物車內沒有商品 -->
+      <c:set var="activityStatus" value="開啟"/>        
+   </c:otherwise>   
+</c:choose>
+
+<c:set var="rowColor" value="none" />
+<c:if test="${alist.activityStatus == 1 }">
+<c:set var="rowColor" value="closeTr" />
+</c:if>
+                <tr class="${rowColor}"><td><img width="50%" src="<c:url value='${alist.activityImg}' />"></td>
+     
                     <td><a  href='<c:url value='ActivityDetail?memberId=${LoginOK.memberId}&activityId=${alist.activityId}' />'>
-						${alist.activityName}
+						<u>${alist.activityName}</u>
 			    </a></td>
-                    <td>${alist.activityDate}</td>
-                    <td>${alist.activityMaxPeople}張</td>
+                    <td  width="110px">${alist.activityDate}</td>
+                    <td width="90px">${alist.activityMaxPeople - alist.stock}人</td>
+                    <td>${activityStatus}</td>
                     <td class="text-center">
                         <a href="#" class="btn btn-danger btn-md" onclick="confirmDelete(${alist.activityId})">刪除</a>
                     </td>
@@ -101,8 +152,8 @@ function confirmDelete(n) {
 
 </c:forEach>
                 <tr height='36' id='borderA'>
-                    <td id='borderA' align="center" colspan="4">
-                        <button type="button" class="btn btn-dark"><a href="<c:url value='/' />">回首頁</button>
+                    <td id='borderA' align="center" colspan="6">
+                   <a class="btn btn-primary" href="<c:url value='/' />">回首頁</a>
                     </td>
                 </tr>
 

@@ -43,11 +43,39 @@
       font-weight: 800;
 
     }
+        .showPodcasterBody {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.showPodcasterBodyHeader {
+	padding-top: 50px;
+	/* 	border-bottom: 1px solid black;  */
+}
   </style>
 
 </head>
 
 <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div class="head">
+		<jsp:include page="../header_banner_test.jsp" flush="true " />
+	</div>
+
+<div class="showPodcasterBody">
+		<div class="row showPodcasterBodyHeader">
+			<div class="col-md-4">
+				<div class="memberImg">
+					<img alt="" src="${podcasterData.podcastImg}">
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="memberName">${podcasterData.podcastName}</div>
+				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div></div>
+			</div>
+		</div>
+	</div>
 
 
   <div class="container">
@@ -112,10 +140,13 @@
             <br>
 
             <label>活動照片: </label>
-            <input type="file" name="file" class="form-control" required>
+            <input type="file" name="file" class="form-control" id="imgInp" required>
             <br>
+            
+            <img width="60%" id="blah" src="#" alt="預覽你上傳的照片" />
 
             <div class="button">
+            <br>
               <input type="submit" name="submit" value="送出" class="btn btn-danger btn-block btn-lg"
                 style="box-shadow: 2px 2px 2px gray;">
             </div>
@@ -127,7 +158,23 @@
 
   </div>
 <!-- end of container -->
+<script>
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    
+	    reader.onload = function(e) {
+	      $('#blah').attr('src', e.target.result);
+	    }
+	    
+	    reader.readAsDataURL(input.files[0]); // convert to base64 string
+	  }
+	}
 
+	$("#imgInp").change(function() {
+	  readURL(this);
+	});
+</script>
 
 
 </body>
