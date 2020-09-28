@@ -24,10 +24,17 @@
 	rel="stylesheet">
 
 <link href="css/musicbar.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="css/style.css" rel="stylesheet">
+<link href="css/style-color.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
+<style type="text/css">
+
 <style type="text/css">
 
 body {
-            background-image: url(<c:url value='/img/banner/b4.jpg' />);
+        background-color:#f9f9f9;
+/*             background-image: url(<c:url value='/img/banner/b3.jpg' />); */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -50,8 +57,8 @@ body {
 
     h2 {
     	margin: 10%;
-        position: absolute;
-        float: left;
+    	text-align:center;
+	margin-bottom:10px;
         display: inline;
     }
 
@@ -65,58 +72,32 @@ body {
 
 .margindiv{
 margin-bottom:3%;
-
+}
+.headtop{
+	margin-top:150px;
+	margin-bottom:20px;
 }
 </style>
-<script type="text/javascript">
-	$(document).ready(function() {
 
-		$('.owl-carousel').owlCarousel({
-			loop : false,
-			//autoWidth:true, 
-			margin : 10,
-			responsive : {
-				350 : {
-					items : 1
-				},
-				600 : {
-					items : 3
-				},
-				1000 : {
-					items : 5
-				}
-			}
-		})
-	});
-</script>
 </head>
 <body>
 	<div class="head">
 		<jsp:include page="header_banner_test.jsp" flush="true " />
 	</div>
 
-	<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
+		<div class="titelheader headtop">
+	<div class="default-heading">
+		<h2 >我的最愛</h2></div>
+		<button id="pressHistoryAdd" class="btn btn-primary">一鍵加入</button>
 	</div>
 
-	<div class="titelheader">
-		<h2 style="color: white">我的最愛</h2>
-		<button id="pressHistoryAdd">一鍵加入</button>
-	</div>
+<!-- 	<div class="titelheader"> -->
+<!-- 		<h2 style="color: white">我的最愛</h2> -->
+<!-- 		<button id="pressHistoryAdd">一鍵加入</button> -->
+<!-- 	</div> -->
 	
-<br><br>	
-	<hr>
+<!-- <br><br>	 -->
+<!-- 	<hr> -->
 	
 
 	<div class="carousel-container col-sm-10 padcard">

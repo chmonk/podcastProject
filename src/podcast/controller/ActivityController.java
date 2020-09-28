@@ -132,7 +132,7 @@ public class ActivityController {
 		// 專案資料夾名稱
 		String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
 		// 取得到含workspace前的絕對路徑
-		String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,path.indexOf("/.metadata"));
+		String workspace=request.getSession().getServletContext().getRealPath("/").substring(0,path.indexOf("\\.metadata"));
 
 		// 制式資料夾
 		// 節目圖片 programimg
@@ -144,7 +144,7 @@ public class ActivityController {
 		String savefolder = "activitypic";
 
 		// 制式檔案名稱
-		String savefilename = id + maintitile + subtitle;
+		String savefilename = maintitile + subtitle;
 
 		// 檔案制式存檔名稱 待設定
 
@@ -234,7 +234,7 @@ public class ActivityController {
 			@ModelAttribute("ActivityBean") ActivityBean activity,
 			@RequestParam("soldQuantity") Integer soldQuantity,
 			@RequestParam("oldMaxppl") Integer oldMaxppl,
-//			@RequestParam("file") MultipartFile multipartFile,
+			@RequestParam("file") MultipartFile multipartFile,
 			Model m,HttpServletRequest request) throws Exception {
 		
 		System.out.println("Entering processAction2");
@@ -273,6 +273,8 @@ public class ActivityController {
 		Integer Id = memberBean.getMemberId();		
 		activity.setPodcasterId(Id);
 		
+		String ActivityImg = processFile(Id,multipartFile,request);
+		activity.setActivityImg(ActivityImg);
 //		String ActivityImg = "";
 //		if(multipartFile != null) {
 //			ActivityImg = processFile(Id,multipartFile,request);

@@ -101,57 +101,83 @@
       font-weight: 800;
 
     }
+    .aaa{
+     display: inline-block; 
+    }
   </style>
 </head>
 
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3"></div>
-			<div class="col-lg-6">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
 				<h1 class="text-center animated slideInDown"
 					style="color: #fff; font-weight: bold;">新增會員資料</h1>
 				<div id="ui" class="text-center">
 					<form class="form-group" action="addMemberProcess" method="POST"
 						enctype='multipart/form-data'>
-						<div>
-							<label>帳號：</label> <input type="text" name="account"
-								class="form-control" placeholder="設定系統帳號" required>
+
+<!-- 						<div> -->
+<!-- 							<label>註冊日期：</label> <input type="hidden" name="registerDate" -->
+<!-- 								class="form-control" required value="2020-09-28"> -->
+<!-- 						</div> -->
+<!-- 						<br> -->
+
+
+
+						<div class="row">
+							<div class="col-sm-6">
+								<label style=" display: inline-block; ">帳號：<font color="red">${err.account}</font></label> <input type="text" name="account"
+									class="form-control" placeholder="請輸入帳號" required>
+							</div>
+							<div class="col-sm-6">
+							<label>密碼：<font color="red">${err.password}</font></label> <input type="password" name="password"
+								class="form-control" placeholder="請輸入密碼" required>
+							</div>
 						</div>
 						<br>
-
-
-						<div>
-							<label>密碼：</label> <input type="password" name="password"
-								class="form-control" placeholder="設定登入密碼" required>
+						<div class="row">
+							<div class="col-sm-6">
+								<label>姓名：<font color="red">${err.name}</font></label>
+								<input type="text" name="name"
+									class="form-control" placeholder="請輸入姓名" required>
+							</div>
+							<div class="col-sm-6">
+								<label>暱稱：<font color="red">${err.nickname}</font></label> 
+								<input type="text" name="nickname"
+									class="form-control" placeholder="請輸入暱稱" required>
+							</div>
 						</div>
+					
+						<br>
+						<div class="row">
+							<div class="col-sm-6">
+								<label>性別：<font color="red">${err.sex}</font></label> <select class="form-control" name="sex"
+									required>
+									<!--<option value="">---請選擇---</option>-->
+									<option value="男">男</option>
+									<option value="女">女</option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<label>角色：<font color="red">${err.role}</font></label> 
+								<select class="form-control" name="role"
+									id="role" required>
+									<!--  <option value="">---請選擇---</option>-->
+									<option value="1">一般會員</option>
+									<option value="2">播客</option>
+								</select>
+							</div>
+						</div>
+					
 						<br>
 
 						<div>
-							<label>姓名：</label> <input type="text" name="name"
-								class="form-control" placeholder="請輸入姓名" required>
-						</div>
-						<br>
-
-						<div>
-							<label>暱稱：</label> <input type="text" name="nickname"
-								class="form-control" placeholder="請輸入暱稱" required>
-						</div>
-						<br>
-
-
-						<div>
-							<label>生日：</label> <input type="date" name="birthday"
+							<label>生日：<font color="red">${err.birthday}</font></label> <input type="date" name="birthday"
 								class="form-control" required>
 						</div>
 						<br>
-
-						<div>
-							<label>註冊日期：</label> <input type="date" name="registerDate"
-								class="form-control" required>
-						</div>
-						<br>
-
 
 						<div>
 							<label>自我介紹：</label>
@@ -161,35 +187,34 @@
 						<br>
 
 						<div>
-							<label>電子信箱：</label> <input type="text" name="email"
-								class="form-control" placeholder="abc@aaa.com" required>
+
+							<label>電子信箱：<font color="red">${err.email}</font></label> <input type="text" name="email"
+								class="form-control" placeholder="請輸入信箱" required>
+
 						</div>
 						<br>
 
 						<div>
-							<label>手機號碼：</label> <input type="text" name="cellphone"
-								class="form-control" placeholder="0987654321" required>
+
+							<label>手機號碼：<font color="red">${err.cellphone}</font></label> <input type="text" name="cellphone"
+								class="form-control" placeholder="請輸入手機" required>
+
+						</div>
+						<br>
+
+
+						<div>
+						
+
+							<label>住址：<font color="red">${err.address}</font></label> <input type="text" name="address"
+								class="form-control" placeholder="請輸入地址" required>
+	
+
 						</div>
 						<br>
 
 						<div>
-							<label>住址：</label> <input type="text" name="address"
-								class="form-control" placeholder="台北市中正區重慶南路一段122號" required>
-						</div>
-						<br>
-
-						<div>
-							<label>性別：</label> <select class="form-control" name="sex"
-								required>
-								<option value="">---請選擇---</option>
-								<option value="男">男</option>
-								<option value="女">女</option>
-							</select>
-						</div>
-						<br>
-
-						<div>
-							<label>照片：</label> <input type="file" name="file"
+							<label>照片：<font color="red">${err.file}</font></label> <input type="file" name="file"
 								class="form-control" onchange="readURL(this)"
 								targetID="preview_progressbarTW_img"
 								accept="image/gif, image/jpeg, image/png" required /><br /> <img
@@ -198,24 +223,17 @@
 						</div>
 						<br>
 
-						<div>
-							<label>角色：</label> <select class="form-control" name="role"
-								id="role" required>
-								<option value="">---請選擇---</option>
-								<option value="1">一般會員</option>
-								<option value="2">播客</option>
-							</select>
-						</div>
+
 						<br>
 
 						<div>
-							<label>信用卡號：</label> <input type="text" name="creditCardNumber"
+							<label>信用卡號：<font color="red">${err.creditCardNumber}</font></label> <input type="text" name="creditCardNumber"
 								class="form-control" placeholder="xxxx-xxxx-xxxx-xxxx">
 						</div>
 						<br>
 
 						<div class="resources" style="display: none;">
-							<label>銀行帳號：</label> <input type="text" name="bankAccount"
+							<label>銀行帳號：<font color="red">${err.bankAccount}</font></label> <input type="text" name="bankAccount"
 								class="form-control" id="reason" placeholder="xxx-xxxxxxxxxxxx">
 						</div>
 						<br>
@@ -240,9 +258,13 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-lg-3"></div>
+			<div class="col-sm-3"></div>
 		</div>
 	</div>
+	<br>
+	<div style="text-align: center">
+			<a href="<c:url value='/' />" class="btn btn-primary btn-md">回首頁</a>
+		</div>
 
 </body>
 </html>

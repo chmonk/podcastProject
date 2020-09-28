@@ -109,6 +109,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 			oldbean.setOpenPayment(ubean.getOpenPayment());
 			oldbean.setTitle(ubean.getTitle());
 			oldbean.setPodcastInfo(ubean.getPodcastInfo());
+			oldbean.setAudioimg(ubean.getAudioimg());
 		}
 
 		return oldbean;

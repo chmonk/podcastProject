@@ -65,4 +65,15 @@ public class IndexContentController {
 		
 		return popList;
 	}
+	
+@GetMapping(path= {"/PopularPodcast"})
+public @ResponseBody List<uploadPodcastBean> popularPodcast(Model m, HttpServletRequest request){
+	
+	LocalDate date=LocalDate.now().minusDays(30);
+	Date popdate=Date.valueOf(date);
+	List<uploadPodcastBean> podList=bDao.topPodcast(popdate);
+	
+	return podList;
+}
+
 }
