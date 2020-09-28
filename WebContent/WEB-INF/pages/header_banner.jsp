@@ -12,7 +12,6 @@
 
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-
 <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
 
 
@@ -145,37 +144,15 @@ nav ul ul li {
 	color: white;
 }
 
-.img_text {
-    position: absolute;
-    top: -10px;
-    left: 23px;
-    font-size: 14px;
-    color: #fff;
-    border-radius: 50%;
-    background-color: #860707;
-    width: 22px;
-    height: 23px;
-    text-align: center;
-    line-height: 20px;
-}
-}
+
+	
 
 </style>
 
 	
 
 </head>
-<body>	
-<c:choose>
-   <c:when test="${ShoppingCart.itemNumber > 0}">
-      <!-- 購物車內有一項以上的商品 -->
-      <c:set var="cartContent" value="${ShoppingCart.itemNumber}"/>
-   </c:when>
-   <c:otherwise>
-      <!-- 購物車內沒有商品 -->
-      <c:set var="cartContent" value="0"/>        
-   </c:otherwise>
-</c:choose>	
+<body>		
 
 <!-- header area -->
 		<header>
@@ -254,9 +231,8 @@ nav ul ul li {
 							                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>							
 							            </ul>        
 							           </li>
-							        <li><a href="<c:url value='ShoppingCart' />"><i class="aaaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"><span class="img_text">${cartContent}</span></i></a>
+							        <li><a href="<c:url value='ShoppingCart' />"><i class="aaaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"></i></a>
 							        </li>
-							        
 								</ul>
 							</div>
 						</c:when>
@@ -285,9 +261,8 @@ nav ul ul li {
 								                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>
 								            </ul>        
 							           </li>
-							    	<li><a href="<c:url value='ShoppingCart' />"><i class="aaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"><span class="img_text">${cartContent}</span></i></a>
+							    	<li><a href="<c:url value='ShoppingCart' />"><i class="glyphicon glyphicon-shopping-cart" style="font-size:20px;"></i></a>
 							    	</li>
-							    	
 								</ul>
 							</div>
 						</c:when>
@@ -303,6 +278,7 @@ nav ul ul li {
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
 									<li><a href="<c:url value='/#team' />">瀏覽搜尋</a></li>
 									<li><a href="<c:url value='/login' />">註冊/登入</a></li>
+									
 								</ul>
 							</div>					    
 					    </c:otherwise>
@@ -369,6 +345,5 @@ nav ul ul li {
 		
 <!-- 		banner end -->
 </body>
-
 
 </html>

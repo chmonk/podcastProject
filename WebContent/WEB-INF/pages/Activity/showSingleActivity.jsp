@@ -133,6 +133,7 @@
             <br>
 
             <label>活動內容: </label>
+
             <textarea name="activityContent" class="form-control" rows="3" value="${aBean.activityContent}"  required>${aBean.activityContent} </textarea>
 
 
