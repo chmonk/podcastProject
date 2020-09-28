@@ -146,11 +146,11 @@
 						</div>
 						<br>
 
-						<div>
-							<label>註冊日期：</label> <input type="date" name="registerDate"
-								class="form-control" required>
-						</div>
-						<br>
+<!-- 						<div> -->
+<!-- 							<label>註冊日期：</label> <input type="hidden" name="registerDate" -->
+<!-- 								class="form-control" required value="2020-09-28"> -->
+<!-- 						</div> -->
+<!-- 						<br> -->
 
 
 						<div>

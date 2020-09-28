@@ -2,7 +2,8 @@ package podcast.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,12 +37,25 @@ public class RegisterController {
 	// 接收新增會員表單
 	@RequestMapping(path = "/addMemberProcess", method = RequestMethod.POST)
 	public String processAction(
-			@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request,
+			@RequestParam("file") MultipartFile multipartFile, 
+			HttpServletRequest request,
 			@ModelAttribute("MemberBean") MemberBean members, BindingResult result, Model m) throws Exception {
+		
 		// 檢查所有欄位,有空白則導回表單
 		if (result.hasErrors()) {
 			return "Member/registerForm";
 		}		
+		
+		
+		System.out.println("members"+members.getRegisterDate());
+		
+		java.util.Date rdate = new java.util.Date();
+		java.sql.Date registerDate= new java.sql.Date(rdate.getTime());
+		
+		members.setRegisterDate(registerDate);
+		
+		System.out.println("members"+members.getRegisterDate());
+
 		
 		String image = processFile2(multipartFile,request);		
 		members.setImage(image);		
