@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -26,7 +30,7 @@ import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
-@SessionAttributes("LoginOK")
+@SessionAttributes({"LoginOK","mediaData"})
 public class AddListController {
 	
 	
@@ -46,9 +50,13 @@ public class AddListController {
 	//點擊節目時  1.節目加入播放列表  2.增加瀏覽紀錄 3.節目點擊增加 4.增加like record like 0 addlist 1
 	@GetMapping(value="/addListController", produces= {"application/json"})
 	//id from ajax provide podcastId
-	public @ResponseBody Map<String, String> AddList(Integer id,Model model) throws Exception {
+	public @ResponseBody Map<String, String> AddList(
+			@RequestParam("id") Integer id,
+			Model model) throws Exception {
 
 		
+		System.out.println("id==="+id);
+
 		
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
 		System.out.println(id);
@@ -114,10 +122,12 @@ public class AddListController {
 	//點擊節目愛心時  3.節目點擊增加 4.增加like record like 1 addlist 1
 	@GetMapping(value="/addListByLikeController", produces= {"application/json"})
 	//id from ajax provide podcastId
-	public @ResponseBody Map<String, String> AddListByLike(Integer id,Model model) throws Exception {
+	public @ResponseBody Map<String, String> AddListByLike(@RequestParam("id") Integer id,
+			Model model) throws Exception {
 
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
-		System.out.println(id);
+		System.out.println("id==="+id);
+	
 		Integer publisherId=udao.select(id).getMemberId();
 //		Integer userId=(Integer)model.getAttribute("userid");
 		MemberBean mbean = (MemberBean)model.getAttribute("LoginOK");
@@ -180,4 +190,28 @@ public class AddListController {
 		
 		return m;
 	}
+	
+	//每當重新整理就要求session中programList
+	@GetMapping(path="loadProgramList",produces = "application/json;charset=UTF-8;")
+	public @ResponseBody  String loadProgramList(Model m){
+
+		
+		if(m.getAttribute("mediaData")==null) {
+			return "[]";
+		}else {
+			System.out.println(m.getAttribute("mediaData").toString());
+			return m.getAttribute("mediaData").toString();
+		}
+	}
+	
+	//每當加入歌曲後送資料更新programList
+	@PostMapping(path="updateProgramList")
+	public @ResponseBody String updateProgramList(Model m,
+			@RequestParam("media") String mediaData){
+		m.addAttribute("mediaData", mediaData);
+		System.out.println("update mediaData"+mediaData);
+		
+		return m.addAttribute("mediaData", mediaData).toString();
+	}
+	
 }

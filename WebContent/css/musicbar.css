@@ -248,3 +248,10 @@ html {
 .like {
 	fill: red;
 }
+
+
+.likeNum {
+float: right; 
+align: center;
+}
+

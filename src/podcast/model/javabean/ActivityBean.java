@@ -1,5 +1,6 @@
 package podcast.model.javabean;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -17,7 +18,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name="activity")
 @Component
-public class ActivityBean {
+public class ActivityBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer activityId;
 	private String activityName;
 	private Date activityDate;

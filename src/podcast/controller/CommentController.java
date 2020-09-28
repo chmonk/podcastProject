@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import podcast.model.dao.CategoryDAO;
+import podcast.model.dao.LikeRecordDAO;
 import podcast.model.dao.MemberDAO;
 import podcast.model.dao.ProgramCommentDAO;
 import podcast.model.dao.SubProgramListDAO;
@@ -39,6 +41,9 @@ import podcast.model.javabean.uploadPodcastBean;
 @Controller
 @SessionAttributes({ "LoginOK" , "thisPodcasterId","subscriptionPermission"})
 public class CommentController {
+	
+	@Autowired 
+	LikeRecordDAO ldao;
 
 	//按下頻道圖案=送出action,連到此方法
 	@RequestMapping(path = "/podcastPage", method = RequestMethod.GET)
@@ -55,10 +60,20 @@ public class CommentController {
     	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
     	CategoryDAO cdao = (CategoryDAO)context.getBean("CategoryDAO");
     	//判斷podcasterId是否為播客
+
+    	
+    	
+    	//取得使用者id
+    	MemberBean mbean=(MemberBean)m.getAttribute("LoginOK");
+    	Integer  memberId =mbean.getMemberId();
+    	
+    	
+
     	boolean verificationPodcaster = mdao.verificationPodcaster(podcasterId);
     	if(!verificationPodcaster) {
     		return "index";
     	}
+
 
 		//取得留言資料
 		List<ProgramCommentBean> commList=commDao.selectAllPodcasterId(podcasterId);
@@ -89,7 +104,7 @@ public class CommentController {
 		request.setAttribute("podcasterData", showPodcasterData);
 		
 		
-		//顯示所有單集
+		//顯示所有不須訂閱單集
 		List<uploadPodcastBean> upList=upDao.selectAllFromMember(podcasterId);
 		ArrayList<fuzzyPodcastReturnArchitecture> PodcastData = new ArrayList<fuzzyPodcastReturnArchitecture>();
 		for(uploadPodcastBean e:upList) {
@@ -104,6 +119,7 @@ public class CommentController {
 			data.setPodcastInfo(e.getPodcastInfo());
 			data.setTitle(e.getTitle());
 			data.setUploadTime(e.getUploadTime());
+			data.setLikesStatus(ldao.checkByMemberidAndPodcastIdReturnLikeStatus(memberId, e.getPodcastId()));
 			PodcastData.add(data);		
 		}
     	m.addAttribute("PodcastData",PodcastData);
@@ -157,6 +173,8 @@ public class CommentController {
 			data.setPodcastInfo(e.getPodcastInfo());
 			data.setTitle(e.getTitle());
 			data.setUploadTime(e.getUploadTime());
+			data.setLikesStatus(ldao.checkByMemberidAndPodcastIdReturnLikeStatus(memberId, e.getPodcastId()));
+			
 			subscriptionPodcastData.add(data);		
 		}
     	
