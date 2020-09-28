@@ -80,15 +80,15 @@
 
 	<div class="col-sm-2">
 		<div style="margin:0px auto;">
-		<input class="btn btn-default btn-custom" type="button" value="members" onclick="showhide(value)"><br>
-		<input class="btn btn-default btn-custom" type="button" value="ticketorder" onclick="showhide(value)"><br>
-		<input class="btn btn-default btn-custom" type="button" value="programcomment" onclick="showhide(value)"><br>
-		<input class="btn btn-default btn-custom" type="button" value="category" onclick="showhide(value)"><br>
-		<input class="btn btn-default btn-custom" type="button" value="subscription" onclick="showhide(value)"><br>
-		<input class="btn btn-default btn-custom" type="button" value="activity" onclick="showhide(value)"><br>
-		<input class="btn btn-default btn-custom" type="button" value="history" onclick="showhide(value)"><br>
-		<input class="btn btn-default btn-custom" type="button" value="podcast"onclick="showhide(value)" ><br>
-		<input class="btn btn-default btn-custom" type="button" value="income"onclick="showhide(value)" ><br>
+		<input class="btn btn-default btn-custom" type="button" value="會員" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="票券" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="留言板" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="節目類別" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="訂閱" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="活動" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="收聽紀錄" onclick="showhide(value)"><br>
+		<input class="btn btn-default btn-custom" type="button" value="節目"onclick="showhide(value)" ><br>
+		<input class="btn btn-default btn-custom" type="button" value="收入計算"onclick="showhide(value)" ><br>
 		</div>
 	</div>
 
@@ -97,7 +97,7 @@
 
 	<div class="col-sm-3" style="background-color: hsla(9, 0%, 47%, 0.95);height:600px">
 	<div class="wrap">
-		<div class="areas" id="members" style="display: block;">
+		<div class="areas" id="會員" style="display: block;">
 			
 			<div >
 				<input id="showAllMemberBtn" type="button" class="btn btn-danger btn-lg" 
@@ -147,7 +147,7 @@
 
 		<!-- TicketOrder============================================================================== -->
 
-		<div class="areas" id="ticketorder" style="display: none">
+		<div class="areas" id="票券" style="display: none">
 		
 			<div >
 				<input id="showAllOrderBtn" type="button" class="btn btn-danger btn-lg" 
@@ -192,7 +192,7 @@
 
 		<!-- ProgramComment========================================================================-->
 
-		<div class="areas" id="programcomment" style="display: none;">
+		<div class="areas" id="留言板" style="display: none;">
 		
 			<div >
 				<input id="showAllCommentBtn" type="button" class="btn btn-danger btn-lg" 
@@ -283,7 +283,7 @@
 		</div>
 
 		<!-- Category========================================================================-->
-		<div class="areas" id="category" style="display: none;">
+		<div class="areas" id="節目類別" style="display: none;">
 
 			<div >
 				<input id="showAllCategoryBtn" type="button" class="btn btn-danger btn-lg" 
@@ -325,7 +325,7 @@
 
 		<!-- Subscription========================================================================-->
 
-		<div class="areas" id="subscription" style="display: none;">
+		<div class="areas" id="訂閱" style="display: none;">
 		
 			<div >
 				<input id="showAllSubBtn" type="button" class="btn btn-danger btn-lg" 
@@ -355,7 +355,7 @@
 
 
 		<!-- Activity========================================================================-->
-		<div class="areas" id="activity" style="display: none;">
+		<div class="areas" id="活動" style="display: none;">
 
 			<div >
 				<input id="showAllActivityBtn" type="button" class="btn btn-danger btn-lg" 
@@ -402,7 +402,7 @@
 
 		<!-- History========================================================================-->
 
-		<div class="areas" id="history" style="display: none;">
+		<div class="areas" id="收聽紀錄" style="display: none;">
 		
 			<div >
 				<input id="showAllHistoryBtn" type="button" class="btn btn-danger btn-lg" 
@@ -464,7 +464,7 @@
 		<!-- Podcast========================================================================-->
 
 
-		<div class="areas" id="podcast" style="display: none;">
+		<div class="areas" id="節目" style="display: none;">
 		
 			<div >
 				<input id="showAllPodcastBtn" type="button" class="btn btn-danger btn-lg" 
@@ -504,7 +504,7 @@
 
 		<!-- Income Calculate========================================================================-->
 
-		<div class="areas" id="income" style="display: none;">
+		<div class="areas" id="收入計算" style="display: none;">
 
 			<div>
 					<div>
@@ -549,7 +549,7 @@
 	<!-- AJAX動態生成查詢結果 -->
 		<h2 id="resultTag" style="text-align:center;margin-top: 15px;color:black;font-weight: bold;">查詢結果:</h2>
 		<div id="ajaxTable" style="margin:0px auto;margin-top: 10px;">
-			<img src="./img/magnifier3.png" alt="" style="margin-left:50px;margin-top:10px;">
+			<img src="./img/magnifier3.png" alt="" style="margin-left:200px;margin-top:30px;">
 		</div>
 	
 	
