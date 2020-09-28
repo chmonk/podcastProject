@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/bootstrap.min.css' />">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 
 	function readURL(input){
@@ -17,7 +18,7 @@
 	    var reader = new FileReader();
 	    reader.onload = function (e) {
 	       var img = document.getElementById(imageTagID);
-	       img.setAttribute("src", e.target.result)
+	       img.setAttribute("src", e.target.result);
 	    }
 	    reader.readAsDataURL(input.files[0]);
 	  }
@@ -66,6 +67,18 @@
      	function isEmail(email) {
      		return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
      	}
+
+     	$(document).ready(function(){
+
+     		$("#password").on("focus",function(){
+     			var pass = $('<input type="password" name="password" class="form-control"  required>');
+     			console.log(this);
+     	        $(this).replaceWith(pass);
+     	        pass.focus();
+     		});
+
+
+     	})	
           
 </script>
 <style type="text/css">
@@ -132,7 +145,7 @@
 									class="form-control" placeholder="請輸入帳號" required>
 							</div>
 							<div class="col-sm-6">
-							<label>密碼：<font color="red">${err.password}</font></label> <input type="password" name="password"
+							<label>密碼：<font color="red">${err.password}</font></label> <input type="text" id="password" name="password"
 								class="form-control" placeholder="請輸入密碼" required>
 							</div>
 						</div>
@@ -174,7 +187,7 @@
 						<br>
 
 						<div>
-							<label>生日：<font color="red">${err.birthday}</font></label> <input type="date" name="birthday"
+							<label>生日：<font color="red">${err.birthday}</font></label> <input id="password"  type="date" name="birthday"
 								class="form-control" required>
 						</div>
 						<br>
