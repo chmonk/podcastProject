@@ -270,7 +270,8 @@
 	</div>
 	<!-- portfolio end -->
 	<script>
-		window.onload = function() {
+	aaa();
+	function aaa() {
 			console.log("PopFunction Start!");
 
 			let pop1 = document.getElementById("pop1");

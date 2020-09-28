@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,19 +74,18 @@
 								<!-- image -->
 								<img class="img-responsive" src="img/album/2.jpg" alt="" />
 								<!-- disk image -->
-								<img class="img-responsive disk" src="img/album/disk.png" alt="" />
+								<img class="img-responsive disk" src="${PodcastData[0].getAudioImg()}" alt="" />
 							</div>
 							<!-- album details -->
 							<div class="album-details">
 								<!-- title -->
-								<h4>Perfect Melodi</h4>
+								<h4>${PodcastData[0].getTitle()}</h4>
 								<!-- composed by -->
-								<h5>By Himanshu</h5>
+								<h5>${PodcastData[0].getPodcasterName()}</h5>
 								<!-- paragraph -->
-								<p>Lorem Ipsum has been the industry's standard dummy text
-									ever since 1500.</p>
+								<p>${PodcastData[0].getPodcastInfo()}</p>
 								<!-- button -->
-								<a href="#" class="btn btn-lg btn-theme" id="playNowBtn" ><i
+								<a id="${PodcastData[0].getPodcastId()}" class="btn btn-lg btn-theme playlist-number" ><i
 									class="fa fa-play"></i>&nbsp; Play Now</a>
 							</div>
 						</div>
@@ -93,134 +93,25 @@
 							<!-- play list -->
 							<div class="playlist-content">
 								<ul class="list-unstyled">
-									<li id="1" class="playlist-number">
+								<c:forEach var="list" items="${PodcastData}" begin="1" end="8" >
+									<li id="${list.getPodcastId()}" class="playlist-number">
 										<!-- song information -->
 										<div class="song-info">
 											<!-- song title -->
-											<h4>Melodi Song Track One</h4>
+											<h4>${list.getTitle()}</h4>
 											<p>
-												<strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>:
-												Rock &nbsp;|&nbsp; <strong>Singer</strong>: Dawn
+												<strong>點擊數</strong>: ${list.getClickAmount()} &nbsp;|&nbsp; <strong>類型</strong>:
+												${list.getCategoryName()} &nbsp;|&nbsp; <strong>播客</strong>: ${list.getPodcasterName()}
 											</p>
 										</div> <!-- music icon -->
 										<div class="music-icon">
-											<a href="#"><i class="fa fa-play"></i></a> <a href="#"><i
-												class="fa fa-pause"></i></a>
+											<a><i class="fa fa-play"></i></a>
+											<!-- <a href="#"><i class="fa fa-pause"></i></a> -->
 										</div>
 										<div class="clearfix"></div>
 									</li>
-									<li id="2" class="playlist-number">
-										<!-- song information -->
-										<div class="song-info">
-											<!-- song title -->
-											<h4>Melodi Song Track Two</h4>
-											<p>
-												<strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>:
-												Rock &nbsp;|&nbsp; <strong>Singer</strong>: Dawn
-											</p>
-										</div> <!-- music icon -->
-										<div class="music-icon">
-											<a href="#"><i class="fa fa-play"></i></a> <a href="#"><i
-												class="fa fa-pause"></i></a>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li id="3" class="playlist-number">
-										<!-- song information -->
-										<div class="song-info">
-											<!-- song title -->
-											<h4>Melodi Song Track Three</h4>
-											<p>
-												<strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>:
-												Rock &nbsp;|&nbsp; <strong>Singer</strong>: Dawn
-											</p>
-										</div> <!-- music icon -->
-										<div class="music-icon">
-											<a href="#"><i class="fa fa-play"></i></a> <a href="#"><i
-												class="fa fa-pause"></i></a>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li id="4" class="playlist-number">
-										<!-- song information -->
-										<div class="song-info">
-											<!-- song title -->
-											<h4>Melodi Song Track Four</h4>
-											<p>
-												<strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>:
-												Rock &nbsp;|&nbsp; <strong>Singer</strong>: Dawn
-											</p>
-										</div> <!-- music icon -->
-										<div class="music-icon">
-											<a href="#"><i class="fa fa-play"></i></a> <a href="#"><i
-												class="fa fa-pause"></i></a>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li id="5" class="playlist-number">
-										<!-- song information -->
-										<div class="song-info">
-											<!-- song title -->
-											<h4>Melodi Song Track Five</h4>
-											<p>
-												<strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>:
-												Rock &nbsp;|&nbsp; <strong>Singer</strong>: Dawn
-											</p>
-										</div> <!-- music icon -->
-										<div class="music-icon">
-											<a href="#"><i class="fa fa-play"></i></a> <a href="#"><i
-												class="fa fa-pause"></i></a>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li class="playlist-number">
-										<!-- song information -->
-										<div class="song-info">
-											<!-- song title -->
-											<h4>Melodi Song Track Six</h4>
-											<p>
-												<strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>:
-												Rock &nbsp;|&nbsp; <strong>Singer</strong>: Dawn
-											</p>
-										</div> <!-- music icon -->
-										<div class="music-icon">
-											<a href="#"><i class="fa fa-play"></i></a> <a href="#"><i
-												class="fa fa-pause"></i></a>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li class="playlist-number">
-										<!-- song information -->
-										<div class="song-info">
-											<!-- song title -->
-											<h4>Melodi Song Track Seven</h4>
-											<p>
-												<strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>:
-												Rock &nbsp;|&nbsp; <strong>Singer</strong>: Dawn
-											</p>
-										</div> <!-- music icon -->
-										<div class="music-icon">
-											<a href="#"><i class="fa fa-play"></i></a> <a href="#"><i
-												class="fa fa-pause"></i></a>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li class="playlist-number">
-										<!-- song information -->
-										<div class="song-info">
-											<!-- song title -->
-											<h4>Melodi Song Track Eight</h4>
-											<p>
-												<strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>:
-												Rock &nbsp;|&nbsp; <strong>Singer</strong>: Dawn
-											</p>
-										</div> <!-- music icon -->
-										<div class="music-icon">
-											<a href="#"><i class="fa fa-play"></i></a> <a href="#"><i
-												class="fa fa-pause"></i></a>
-										</div>
-										<div class="clearfix"></div>
-									</li>
+								</c:forEach>
+	
 								</ul>
 							</div>
 						</div>
