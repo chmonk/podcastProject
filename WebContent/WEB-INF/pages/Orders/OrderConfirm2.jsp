@@ -60,7 +60,8 @@
         }
 
         body {
-            background-image: url(<c:url value='/img/banner/b3.jpg' />);
+        background-color:#f9f9f9;
+/*             background-image: url(<c:url value='/img/banner/b3.jpg' />); */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -106,6 +107,10 @@
 	padding-top: 50px;
 	/* 	border-bottom: 1px solid black;  */
 }
+.headtop{
+	margin-top:120px;
+	margin-bottom:20px;
+}
     </style>
     
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
@@ -122,23 +127,7 @@
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
 
-
-	<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
-	</div>
-
-    <div class="container">
+    <div class="container headtop">
         <div class="custyle">
             <FORM action="<c:url value='preProcessOrder' />" method="POST">
             <table class="table table-striped custab">

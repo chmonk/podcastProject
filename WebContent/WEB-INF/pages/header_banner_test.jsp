@@ -94,7 +94,12 @@
     margin: .8em 0 .2em;
     line-height: 1.5;
   }
+  
+  .navbar{
+  background-color:#000000!important;
  
+  }
+  
 
 nav ul {
 	padding: 0;
@@ -134,7 +139,8 @@ nav ul li:hover > ul {
 	
 /* Fisrt Tier Dropdown */
 nav ul ul li {
-	background: rgb(193 30 30 / 25%);
+background:#000000;
+/* 	background: rgb(193 30 30 / 25%); */
 	width:170px;
 	float:none;
 	display:list-item;

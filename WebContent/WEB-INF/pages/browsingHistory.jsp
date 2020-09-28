@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>瀏覽紀錄</title>
 <script
 	src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -24,128 +24,67 @@
 	rel="stylesheet">
 
 <link href="css/musicbar.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="css/style.css" rel="stylesheet">
+<link href="css/style-color.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
 <style type="text/css">
 
 body {
-            background-image: url(<c:url value='/img/banner/b3.jpg' />);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-
-
-.showPodcasterBody {
-	padding-top: 40px;
-	padding-bottom: 40px;
+	background-color:#f9f9f9;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
 }
 
-.showPodcasterBodyHeader {
-	padding-top: 50px;
-	/* 	border-bottom: 1px solid black;  */
+.titelheader {
+    position: relative;
+    padding-top: 150px;
+	padding-bottom: 30px;
 }
 
+h2 {
+ 	margin: 10%;
+ 	text-align:center;
+	margin-bottom:10px;
+    display: inline;
+}
 
-   .titelheader {
-        position: relative;
-    }
-
-    h2 {
-    	margin: 10%;
-        position: absolute;
-        float: left;
-        display: inline;
-    }
-
-    #pressHistoryAdd {
-        right: 15%;
-        top: 30px;
-        position: absolute;
-        float: right;
-        display: inline;
-    }
 
 .margindiv{
-margin-bottom:3%;
+	margin-bottom:3%;
 
 }
 
 
 </style>
-<script type="text/javascript">
-	$(document).ready(function() {
 
-		$('.owl-carousel').owlCarousel({
-			loop : false,
-			//autoWidth:true, 
-			margin : 10,
-			responsive : {
-				350 : {
-					items : 1
-				},
-				600 : {
-					items : 3
-				},
-				1000 : {
-					items : 5
-				}
-			}
-		})
-	});
-</script>
 </head>
 <body>
 	<div class="head">
 		<jsp:include page="header_banner_test.jsp" flush="true " />	
-
-	</div>
-
-	<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
 	</div>
 		
 	<div class="titelheader">
-		<h2 style="color: white">瀏覽紀錄</h2>
-		<button id="pressHistoryAdd">一鍵加入</button>
-	</div>
-	
-<br><br>	
-	<hr>
-	
-
-
-	<div class="carousel-container col-sm-10 padcard">
-		<div class="row">
-			<div class="col-sm-12">
-				<ul class="owl-carousel owl-theme">
-					<c:forEach var="data" items="${fuzzyUserData}">
-						<li class="item">
-							<div class="card">
-								<img class="card-img-top img-fluid"
-									src="https://source.unsplash.com/318x180/?starwars"
-									alt="Card image cap">
-								<div class="card-block">
-									<h4 class="card-title">${data.getNickname()}</h4>
-									<p class="card-text">${data.getInfo()}</p>
-									<a href="#" class="btn btn-primary">Button</a>
-								</div>
-							</div>
-						</li>
-					</c:forEach>
-				</ul>
-			</div>
+		<div class="default-heading">
+			<h2 >瀏覽紀錄</h2>
+			<button id="pressHistoryAdd" class="btn btn-primary">一鍵加入</button>
 		</div>
 	</div>
+		
+		
+<!-- 	<div class="titelheader"> -->
+<!-- 		<h2 style="color: white">瀏覽紀錄</h2> -->
+<!-- 		<button id="pressHistoryAdd">一鍵加入</button> -->
+<!-- 	</div> -->
+	
+<!-- <br><br>	 -->
+<!-- 	<hr> -->
+	
+
+
+	
 
 	<div class="margindiv">
 		<c:forEach var="rownum" items="${history}">

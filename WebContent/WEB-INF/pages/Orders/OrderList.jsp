@@ -18,7 +18,8 @@ _<%@ page language="java" contentType="text/html; charset=UTF-8"
 }
 
 body {
-	background-image: url(<c:url value='/img/banner/b3.jpg' />);
+        background-color:#f9f9f9;
+/*             background-image: url(<c:url value='/img/banner/b3.jpg' />); */
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
@@ -62,6 +63,10 @@ th, tr {
     top: 0;}
 .head{ position: fixed;
 top: 0;}
+.headtop{
+	margin-top:120px;
+	margin-bottom:20px;
+}
 </style>
 
 </head>
@@ -71,24 +76,9 @@ top: 0;}
 <div class="head">
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
-	<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName"></div>
-				<div class="memberInfo"></div>
-				<div></div>
-			</div>
-		</div>
-	</div>
-
 	<c:set var="funcName" value="ORD" scope="session" />
 	
-	<div class="container-fluid">
+	<div class="container-fluid headtop">
 		<div class="custyle">
 			<table class="table table-striped custab">
 		 <tr><td colspan='4'><b>${LoginOK.name}的訂購紀錄：</b></tr>

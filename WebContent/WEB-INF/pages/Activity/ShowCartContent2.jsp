@@ -30,7 +30,8 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
         }
 
         body {
-            background-image: url(<c:url value='/img/banner/b3.jpg' />);
+        background-color:#f9f9f9;
+/*             background-image: url(<c:url value='/img/banner/b3.jpg' />); */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -86,6 +87,9 @@ table{ table-layout: fixed;}
 .showPodcasterBodyHeader {
 	padding-top: 50px;
 	/* 	border-bottom: 1px solid black;  */
+}
+.headtop{
+	margin-top:150px;
 }
     </style>
 
@@ -166,20 +170,6 @@ table{ table-layout: fixed;}
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
 
-<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
-	</div>
     <c:set var="funcName" value="CHE" scope="session" />
 
 
@@ -196,100 +186,80 @@ table{ table-layout: fixed;}
 
 
 
-    <div class="container">
+    <div class="container headtop">
         <div class="custyle">
             <table class="table table-striped custab">
+            	<tr>
+            		<td colspan='8'>${LoginOK.name}的購物清單</td>
+            	</tr>
+                <tr>
+                	<td><b>活動名稱</b></td>
+                    <td><b>活動地點 </b></td>
+                    <td><b>活動日期</b></td>
+                    <td><b> 單價</b></td>
+                    <td><b> 數量</b></td>
+                    <td><b>小計</b></td>
+                    <td><b>修改</b></td>
+                    <td><b>刪除</b></td>
+                </tr>
+            <tbody>
+            <c:forEach varStatus="vs" var="anEntry" items="${ShoppingCart.content}">
+	            <tr>
+	            	<td class="col-md-2">
+	               		<img width="70%" src="<c:url value='${anEntry.value.description}' />">
+	                  	<br>${anEntry.value.activityName}
+	                </td>
+	                <td class="col-md-2">
+	                    ${anEntry.value.activityLocation}
+	                </td>
+	                <td class="col-md-2">
+	                    ${anEntry.value.activityDate}
+	                </td>
+	                <td class="col-md-2">
+	                    <fmt:formatNumber value="${anEntry.value.unitPrice}" pattern="#,###" />元
+	                </td>
+	                <td class="spanParent">
+	                   <Input id="newQty${vs.index}" style="width:48px;text-align:right" name="newQty" type="text" value="<fmt:formatNumber value="${anEntry.value.quantity}" />" name="qty" onkeypress="return isNumberKey(event)"  />
+	                   <span class="stockLeft">票券僅剩${anEntry.value.amount}張</span>
+	                </td>
+	                <td class="col-md-1">
+	                    <fmt:formatNumber value="${anEntry.value.unitPrice * anEntry.value.quantity}"
+	                        pattern="#,###,###" />元
+	                </td>
+	                <td class="col-md-2">
+	                    <Input type="button" class="btn btn-success" name="update" value="修改"
+	                        onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index},${anEntry.value.amount})">
+					</td>
+                    <td class="col-md-2">
+                        <Input type="button" class="btn btn-danger" name="delete" value="刪除"
+                            onclick="confirmDelete(${anEntry.key})">
+					</td>
+	           </tr>
+           </c:forEach>
+           <tr>
+               <td colspan='5' align='right'>合計金額：</td>
+               <td>
+                   <fmt:formatNumber value="${subtotal}" pattern="#,###,###" />元</td>
+               <td align='right'>&nbsp;</td>
+               <td></td>
 
-             
+           </tr>
+           <tr>
+               <td></td>
+               <td colspan='2'> <a  href="<c:url value='/#events' />"><b>繼續購物</b></a></td>
+               <td colspan='2'><a  href="<c:url value='checkout' />"
+                       onClick="return Checkout(${subtotal});"><b>再次確認</b></a></td>
+		   	   <td  colspan='2'> <a  href="<c:url value='abort' />" onClick="return Abort();"><b>放棄購物</b></a></td>
+               <td></td>
 
-                 <tr><td colspan='8'>${LoginOK.name}的購物清單</td></tr>
-                    <tr>
-                   
-                   
-                        <td><b>
-                            活動名稱
-                       </b> </td>
-                        <td><b>
-                            活動地點
-                       </b> </td>
-                        <td><b>
-                            活動日期
-                       </b> </td>
-                        <td><b>
-                            單價
-                       </b> </td>
-                        <td><b>
-                            數量
-                      </b>  </td>
-                        <td><b>
-                            小計
-                       </b> </td>
-                        <td><b>
-                            修改
-                       </b> </td>
-                        <td><b>
-                            刪除
-                      </b>  </td>
-                        </tr>
-                    <tbody>
-                        <c:forEach varStatus="vs" var="anEntry" items="${ShoppingCart.content}">
-                            <tr>
-                                <td class="col-md-2">
-                               <img width="70%" src="<c:url value='${anEntry.value.description}' />">
-                                  <br>  ${anEntry.value.activityName}
-                                </td>
-                                <td class="col-md-2">
-                                    ${anEntry.value.activityLocation}
-                                </td>
-                                <td class="col-md-2">
-                                    ${anEntry.value.activityDate}
-                                </td>
-                                <td class="col-md-2">
-                                    <fmt:formatNumber value="${anEntry.value.unitPrice}" pattern="#,###" />元</td>
-                                </td>
-                                <td class="spanParent">
-                                   <Input id="newQty${vs.index}" style="width:48px;text-align:right" name="newQty" type="text" value="<fmt:formatNumber value="${anEntry.value.quantity}" />" name="qty" onkeypress="return isNumberKey(event)"  />
-                                   
-                                   <span class="stockLeft">票券僅剩${anEntry.value.amount}張</span>
-                                </td>
-                                <td class="col-md-1">
-                                    <fmt:formatNumber value="${anEntry.value.unitPrice * anEntry.value.quantity}"
-                                        pattern="#,###,###" />元</td>
-                                </td>
-                                <td class="col-md-2">
-                                    <Input type="button" class="btn btn-success" name="update" value="修改"
-                                        onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index},${anEntry.value.amount})">
-  </td>
-                                <td class="col-md-2">
-                                    <Input type="button" class="btn btn-danger" name="delete" value="刪除"
-                                        onclick="confirmDelete(${anEntry.key})">
-       </td>
-                            </tr>
-                        </c:forEach>
-                        <tr>
-                            <td colspan='5' align='right'>合計金額：</td>
-                            <td>
-                                <fmt:formatNumber value="${subtotal}" pattern="#,###,###" />元</td>
-                            <td align='right'>&nbsp;</td>
-                            <td></td>
-
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td colspan='2'> <a  href="<c:url value='/#events' />"><b>繼續購物</b></a></td>
-                            <td colspan='2'><a  href="<c:url value='checkout' />"
-                                    onClick="return Checkout(${subtotal});"><b>再次確認</b></a></td>
-     <td  colspan='2'> <a  href="<c:url value='abort' />" onClick="return Abort();"><b>放棄購物</b></a></td>
-                            <td></td>
-
-                        </tr>
-                    </tbody>
-                </div>
-
-            </table>
-            <form>
-                <input type="hidden" name="a" />
-            </form>
+           </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <form>
+      <input type="hidden" name="a" />
+  </form>
 </body>
 
 </html>
