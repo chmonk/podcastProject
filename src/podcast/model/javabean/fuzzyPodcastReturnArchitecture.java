@@ -14,14 +14,16 @@ public class fuzzyPodcastReturnArchitecture {
 	private String audioPath;
 	private String audioImg;
 	private Integer likesCount;
-	
-	
+	private Integer likesStatus;
+
 	public fuzzyPodcastReturnArchitecture() {
-		
+
 	}
-	
-	public fuzzyPodcastReturnArchitecture(Integer podcastId, String title, String categoryName, String podcasterName, String podcastInfo,
-			Integer openPayment, Date uploadTime, Integer clickAmount, String audioPath,String audioImg,Integer likesCount) {
+
+	public fuzzyPodcastReturnArchitecture(Integer podcastId, String title, String categoryName, String podcasterName,
+			String podcastInfo, Integer openPayment, Date uploadTime, Integer clickAmount, String audioPath,
+			String audioImg, Integer likesCount, Integer likesStatus) {
+		super();
 		this.podcastId = podcastId;
 		this.title = title;
 		this.categoryName = categoryName;
@@ -32,37 +34,46 @@ public class fuzzyPodcastReturnArchitecture {
 		this.clickAmount = clickAmount;
 		this.audioPath = audioPath;
 		this.audioImg = audioImg;
-		this.setLikesCount(likesCount);
+		this.likesCount = likesCount;
+		this.likesStatus = likesStatus;
 	}
-	
-	
+
 	public Integer getPodcastId() {
 		return podcastId;
 	}
+
 	public void setPodcastId(Integer podcastId) {
 		this.podcastId = podcastId;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getCategoryName() {
 		return categoryName;
 	}
+
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+
 	public String getPodcasterName() {
 		return podcasterName;
 	}
+
 	public void setPodcasterName(String podcasterName) {
 		this.podcasterName = podcasterName;
 	}
+
 	public String getPodcastInfo() {
 		return podcastInfo;
 	}
+
 	public void setPodcastInfo(String podcastInfo) {
 		this.podcastInfo = podcastInfo;
 	}
@@ -115,5 +126,12 @@ public class fuzzyPodcastReturnArchitecture {
 		this.likesCount = likesCount;
 	}
 
+	public Integer getLikesStatus() {
+		return likesStatus;
+	}
+
+	public void setLikesStatus(Integer likesStatus) {
+		this.likesStatus = likesStatus;
+	}
 
 }

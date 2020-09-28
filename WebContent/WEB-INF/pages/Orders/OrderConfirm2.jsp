@@ -7,6 +7,9 @@
 <html lang="en">
 
 <head>
+
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
@@ -16,27 +19,33 @@
     function cancelOrder() {
     	if (confirm("確定取消此份訂單 ? ") ) {
     		// 接收此資料的Servlet會使用 finalDecision 參數的值
-    		document.forms[0].finalDecision.value = "CANCEL";
-    		document.forms[0].action="<c:url value='cancelOrder' />";
-    		document.forms[0].method="GET";
-    		document.forms[0].submit();
+    		console.log(document.forms);
+    		document.forms[1].finalDecision.value = "CANCEL";
+    		document.forms[1].action="<c:url value='cancelOrder' />";
+    		document.forms[1].method="GET";
+    		document.forms[1].submit();
     		return;
     	} else {
     		return;
     	}
     }
     function reconfirmOrder() {
+    	console.log(document.forms);
     	var sa = document.getElementById('ShippingAddress').value;
     	if  (sa === "") {
     		window.alert ('出貨地址不能是空白');
     		return ; 
     	}
     	if (confirm("確定送出此份訂單 ? ") ) {
+        	console.log(document.forms);
+        	
     		// 接收此資料的Servlet會使用 finalDecision 參數的值
-    		document.forms[0].finalDecision.value = "ORDER";
-    		document.forms[0].action="<c:url value='ProcessOrder' />";
-    		document.forms[0].method="POST";
-    		document.forms[0].submit();
+    		document.forms[1].finalDecision.value = "ORDER";
+    		document.forms[1].action="<c:url value='ProcessOrder' />";
+    		document.forms[1].method="POST";
+        	console.log(document.forms);
+    		
+    		document.forms[1].submit();
     		return;
     	} else {
     		return;
@@ -81,14 +90,22 @@
             background-color: white;
         }
 
-        h1 {
-            color: white;
-        }
+   table{ table-layout: fixed;}
 
         #table2 {
             margin-top: 0px;
             padding-top: 0px;
         }
+        
+.showPodcasterBody {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.showPodcasterBodyHeader {
+	padding-top: 50px;
+	/* 	border-bottom: 1px solid black;  */
+}
     </style>
     
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
@@ -99,13 +116,34 @@
 </head>
 
 <body>
-<c:set var="funcName" value="CHE" scope="session"/>
+
+<body>
+	<div class="head">
+		<jsp:include page="../header_banner_test.jsp" flush="true " />
+	</div>
+
+
+	<div class="showPodcasterBody">
+		<div class="row showPodcasterBodyHeader">
+			<div class="col-md-4">
+				<div class="memberImg">
+					<img alt="" src="${podcasterData.podcastImg}">
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="memberName">${podcasterData.podcastName}</div>
+				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+
     <div class="container">
         <div class="custyle">
-            <h1 style="text-align:center;">請確認訂購資訊：</h1>
             <FORM action="<c:url value='preProcessOrder' />" method="POST">
             <table class="table table-striped custab">
-                <div class="row">
+            
+                <tr><td colspan='6'>請確認訂購資訊：</tr>
                     <tr>
                         <td colspan='2'>會員編號：${LoginOK.memberId}</td>
                         <td colspan='2'>客戶姓名：${LoginOK.name}</td>
@@ -142,7 +180,8 @@
                     </TR>
  <c:forEach varStatus="vs" var="entry" items="${ShoppingCart.content}">
                     <TR>
-                        <td>${entry.value.activityName}</td>
+                        <td><img width="70%" src="<c:url value='${entry.value.description}' />">
+                        <br>${entry.value.activityName}</td>
                         <td>${entry.value.activityLocation}</td>
                         <td>${entry.value.activityDate}</td>
                         <td>
@@ -171,7 +210,6 @@
             </FORM>
         </div>
     </div>
-
 
 </body>
 

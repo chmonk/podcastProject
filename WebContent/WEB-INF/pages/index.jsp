@@ -62,11 +62,11 @@
 		<!--/ hero end -->
 
 		<!-- 矚目新選 -->
-		<jsp:include page="promo_feature.jsp" flush="true " />
+ 		<jsp:include page="promo_feature.jsp" flush="true " />
 		<!-- 矚目新選 -->
 
 		<!-- call to action -->
-		<jsp:include page="callToAction.jsp" flush="true " />
+<%-- 		<jsp:include page="callToAction.jsp" flush="true " /> --%>
 		<!--/ cta end -->
 
 		<!-- 熱播排行 -->
@@ -91,15 +91,15 @@
 		<!-- events end -->
 
 		<!-- about -->
-		<jsp:include page="about.jsp" flush="true " />
+<%-- 		<jsp:include page="about.jsp" flush="true " /> --%>
 		<!-- about end -->
 
 		<!-- meet -->
-		<jsp:include page="meets.jsp" flush="true " />
+<%-- 		<jsp:include page="meets.jsp" flush="true " /> --%>
 		<!-- meet end -->
 
 		<!-- contact -->
-		<jsp:include page="contact.jsp" flush="true " />
+<%-- 		<jsp:include page="contact.jsp" flush="true " /> --%>
 		<!-- contact end -->
 
 		<!-- footer -->

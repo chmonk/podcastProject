@@ -98,7 +98,19 @@ public class MemberDAO implements IMemberDAO {
 			return m;
 		}
 		return null;
+	}
+	@Override
+	public boolean verificationPodcaster(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from MemberBean where memberId=:id and role=2";
+		Query<MemberBean> query = session.createQuery(hql, MemberBean.class);
+		query.setParameter("id", id);
 		
+		MemberBean m = query.uniqueResult();
+		if (m != null) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

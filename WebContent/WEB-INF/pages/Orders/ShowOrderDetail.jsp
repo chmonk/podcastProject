@@ -1,67 +1,97 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
-    <title>個人訂單資訊</title>
-    
-    <style>
-        * {
-            margin: 0 auto;
-            font-size: medium;
-        }
+<meta charset="UTF-8">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/bootstrap.min.css' />">
+<title>個人訂單資訊</title>
 
-        body {
-            background-image:url(<c:url value='/img/banner/b4.jpg' />);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
+<style>
+* {
+	margin: 0 auto;
+	font-size: medium;
+}
 
-        .custab {
+body {
+	background-image: url(<c:url value='/img/banner/b4.jpg' />);
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+}
 
-            border: 1px solid #ccc;
-            padding: 5px;
-            margin: 5% 0;
-            box-shadow: 3px 3px 2px #ccc;
-            transition: 0.5s;
-        }
+.custab {
+	border: 1px solid #ccc;
+	padding: 5px;
+	margin: 5% 0;
+	box-shadow: 3px 3px 2px #ccc;
+	transition: 0.5s;
+}
 
-        .custab:hover {
-            box-shadow: 3px 3px 0px transparent;
-            transition: 0.5s;
-        }
+.custab:hover {
+	box-shadow: 3px 3px 0px transparent;
+	transition: 0.5s;
+}
 
-        .name {
-            width: 200px;
-        }
+.name {
+	width: 200px;
+}
 
-        th,
-        tr {
-            text-align: center;
-            background-color: white;
-        }
+th, tr {
+	text-align: center;
+	background-color: white;
+}
 
-        h1 {
-            color: white;
-        }
-    </style>
-    
+h1 {
+	color: white;
+}
+
+.showPodcasterBody {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.showPodcasterBodyHeader {
+	padding-top: 50px;
+	/* 	border-bottom: 1px solid black;  */
+}
+</style>
+
 </head>
 
 <body>
+<div class="head">
+		<jsp:include page="../header_banner_test.jsp" flush="true " />
+	</div>
+
+	<div class="showPodcasterBody">
+		<div class="row showPodcasterBodyHeader">
+			<div class="col-md-4">
+				<div class="memberImg">
+					<img alt="" src="${podcasterData.podcastImg}">
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="memberName">${podcasterData.podcastName}</div>
+				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div></div>
+			</div>
+		</div>
+	</div>
     <div class="container">
         <div class="custyle">
-            <h1 style="text-align:center;">${LoginOK.name}的訂單明細</h1>
+        
             <table class="table table-striped custab">
+            <tr><td colspan='6'>${LoginOK.name}的訂單明細</td></tr>
                 <tr>
                     <td colspan='2'><b>出貨地址：</b>${OrderBean.shippingAddress}</td>
-                    <td colspan='2'><b>訂購日期：</b>${OrderBean.orderDate}</td>
+                    <td colspan='2'><b>訂購日期：</b>${fn:substring(OrderBean.orderDate, 0, 10)}</td>
                     <td colspan='2'><b>訂單編號：</b>${OrderBean.ticketOrderId}</td>
                 </tr>
                 <tr>
@@ -92,7 +122,7 @@
                     <td colspan="2"><b>合 計</b></td>
                 </tr>
                 <tr>
-                    <TD align="center"><b>營業稅</b></TD>
+                    <TD align="center"><b>折扣</b></TD>
                     <c:set var="VAT" value="${subtotal*0.05 + 0.0001}" />
                     <TD align="right">
                         <fmt:formatNumber value="${VAT}" pattern="#,###,###" />元</TD>
@@ -110,6 +140,9 @@
                 </tr>
             </table>
 
+
+
+	
 </body>
 
 </html>

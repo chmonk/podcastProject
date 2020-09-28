@@ -62,7 +62,7 @@ public class AfterSubProgram {
 	    	if((int) m.getAttribute("subscriptionPermission")==0) {
 		    	SubscriptionBean q = new SubscriptionBean();
 		    	q.setMemberId(loginMember.getMemberId()); //訂閱者ID
-		    	q.setMonthlyPayment(300);
+		    	q.setMonthlyPayment(mdao.selectPodcaster((Integer)m.getAttribute("thisPodcasterId")).getMonthlyPayment());
 		    	q.setSubdateStart(date);
 		    	q.setSubdateEnd(date3);
 		    	q.setPodcasterId((Integer)m.getAttribute("thisPodcasterId")); //播客ID

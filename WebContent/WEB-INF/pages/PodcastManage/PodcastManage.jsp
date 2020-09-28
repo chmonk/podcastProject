@@ -31,6 +31,8 @@
         .name {
             width: 300px;
         }
+        table{
+table-layout: fixed;}
         th,
         tr {
             text-align: center;
@@ -39,19 +41,46 @@
         h1 {
             color: white;
         }
+             .showPodcasterBody {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.showPodcasterBodyHeader {
+	padding-top: 50px;
+	/* 	border-bottom: 1px solid black;  */
+}
 </style>
 </head>
 
 <body>
+<div class="head">
+		<jsp:include page="../header_banner_test.jsp" flush="true " />
+	</div>
 
+<div class="showPodcasterBody">
+		<div class="row showPodcasterBodyHeader">
+			<div class="col-md-4">
+				<div class="memberImg">
+					<img alt="" src="${podcasterData.podcastImg}">
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="memberName">${podcasterData.podcastName}</div>
+				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div></div>
+			</div>
+		</div>
+	</div>
 <div class="container">
-        <h1 style="text-align:center;">${LoginOK.name}的頻道列表</h1><br>
         <div class="row col-md-6 col-md-offset-3 custyle">
             <table class="table table-striped custab">
                 <thead>
                     <a href="<c:url value='/addPodcast' />" class="btn btn-primary btn-md pull-right">+新增單集</a>
                     <br>
+                    <tr><td colspan="5">${LoginOK.name}的頻道列表</td></tr>
                     <tr>
+                    	<td>單集圖像</td>
                         <th class="name">單集名稱</th>
                         <th>上傳日期</th>
                         <th>修改</th>
@@ -60,17 +89,19 @@
                 </thead>
                 <c:forEach var="podcast" varStatus="loop" items="${upList}">
                 <tr>
-                	<td>${podcast.title}</td><td>${podcast.uploadTime}</td>
+                	<td><img width="50%" src="<c:url value='${podcast.audioimg}' />"></td>
+                	<td>${podcast.title}</td>
+                	<td>${podcast.uploadTime}</td>
                 	<td><form action="<c:url value="/modifyPodcast"/>"><input type="hidden" name="thisPodcastId" value=${podcast.podcastId}>
-                		<input type="submit" name="modify" value="修改" ></form></td>
+                		<input class="btn btn-warning" type="submit" name="modify" value="修改" ></form></td>
                 	<td><form id="${podcast.podcastId}" action="<c:url value="/processDeletePodcast"/>"  method="POST">
 						<input type="hidden" name="delPodcastId" value=${podcast.podcastId}> 
-						<input type="button" value="刪除" onclick="delConfirm(this.name)" name="${podcast.podcastId}"></form></td>
+						<input class="btn btn-danger" type="button" value="刪除" onclick="delConfirm(this.name)" name="${podcast.podcastId}"></form></td>
                 </tr>
 </c:forEach>
                 <tr height='36' id='borderA'>
-                    <td id='borderA' align="center" colspan="4">
-                        <button type="button" class="btn btn-dark"><a href="<c:url value='/' />">回首頁</button>
+                    <td id='borderA' align="center" colspan="5">
+                       <a class="btn btn-primary" href="<c:url value='/' />">回首頁</a>
                     </td>
                 </tr>
             </table>
