@@ -196,7 +196,7 @@ nav ul ul li {
 						<div  style="display:inline-block;line-height: 20px;color: #333; z-index:-100;">
 							<form action="<c:url value="FuzzySelect.controller"/>" method="get">
 								<input id="tags" class="form-control-sm" type="text" name="selectCondition"/>
-								<input class="form-control-sm" type="submit" value="Send">
+								<input class="form-control-sm" type="submit" value="搜尋">
 							</form>
 						</div>
 							<a class="h-facebook" href="#"><i class="fa fa-facebook"></i></a>

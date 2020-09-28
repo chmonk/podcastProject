@@ -70,14 +70,14 @@
 		<!--/ cta end -->
 
 		<!-- 熱播排行 -->
-		<jsp:include page="workWithUs.jsp" flush="true " />
+		<%-- <jsp:include page="workWithUs.jsp" flush="true " /> --%>
 		<%-- <jsp:param value="" name=""/> --%>
 		<%-- 		</jsp:include>
  --%>
 		<!-- 熱播排行 -->
 
-		<!-- sign up for news letter -->
-		<jsp:include page="newsLetter.jsp" flush="true " />
+		<!-- 搜尋 -->
+		<jsp:include page="selectBar.jsp" flush="true " />
 		<!-- news letter end -->
 
 		<!-- 人氣播客 portfolio -->
