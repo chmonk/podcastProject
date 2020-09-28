@@ -1,84 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- 
+
 <!-- Styles -->
 
-<!-- Bootstrap CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- Animate CSS -->
-<link href="css/animate.min.css" rel="stylesheet">
-<!-- Basic stylesheet -->
-<link rel="stylesheet" href="css/owl.carousel.css">
-<!-- Font awesome CSS -->
-<link href="css/font-awesome.min.css" rel="stylesheet">
-<!-- Custom CSS -->
-<link href="css/style.css" rel="stylesheet">
-<link href="css/style-color.css" rel="stylesheet">
-<!-- player bar css -->
-<link href="css/playerbar.css" rel="stylesheet">
-<!-- player bar icon -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- jquery-ui CSS -->
 
-<!-- Favicon -->
-<link rel="shortcut icon" href="img/logo/favicon.ico">     
+<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+
+<!-- Bootstrap CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet"> 
+
 <!-- Javascript files -->
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
 	<!-- Bootstrap JS -->
 	<script src="js/bootstrap.min.js"></script>
-	<!-- WayPoints JS -->
-	<script src="js/waypoints.min.js"></script>
-	<!-- Include js plugin -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- One Page Nav -->
-	<script src="js/jquery.nav.js"></script>
-	<!-- Respond JS for IE8 -->
-	<script src="js/respond.min.js"></script>
-	<!-- HTML5 Support for IE -->
-	<script src="js/html5shiv.js"></script>
-	<!-- Custom JS -->
-	<script src="js/custom.js"></script>
-	<!-- 	plaer bar function js -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/player.js"></script> 
-	--%>
-</head>
-<body>		
 
-					<!-- news letter -->
-		<div class="news-letter">
-			<div class="container">
-				<!-- news letter inner content -->
-				<div class="news-content ">
-					<!-- heading -->
-					<h3>Sign Up For Newsletter</h3>
-					<!-- paragraph -->
-					<p>
-						<strong>Contact Us</strong> and let us know if you have any
-						questions, Don't forget to subscribe for more awesome stuff by
-						typing mail bellow.
-					</p>
-					<!-- subscribe form -->
-					<form>
-						<div class="input-group">
-							<input type="text" class="form-control input-lg"
-								placeholder="Email"> <span class="input-group-btn">
-								<button class="btn btn-default btn-lg" type="button">Subscribe</button>
-							</span>
-						</div>
-						<!-- /input-group -->
-					</form>
-				</div>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 	<!-- <script type="text/javascript" src="js/player.js"></script> -->
+ 	<script type="text/javascript">
+		$.widget("custom.catcomplete", $.ui.autocomplete, {
+			_renderMenu : function(ul, items) {
+				var that = this, currentCategory = "";
+				$.each(items, function(index, item) {
+					if (item.category != currentCategory) {
+						ul.append("<li class='ui-autocomplete-category'>"
+								+ item.category + "</li>");
+						currentCategory = item.category;
+					}
+					that._renderItemData(ul, item);
+				});
+			}
+		});
+		$(document).ready(function($) {
+			xhr = $.ajax({
+				url : "/SpringWebProject/getFuzzySelectAllDataName.controller",
+				async : false
+			})
+			var availableTags = xhr.responseJSON
+			console.log(availableTags);
+			$("#tags2").catcomplete({
+				source : availableTags
+			});
+
+		});
+	</script>
+
+
+</head>
+<body>
+
+
+
+	<!-- news letter -->
+	<div class="news-letter" id="selectBar">
+		<div class="container">
+			<!-- news letter inner content -->
+			<div class="news-content ">
+				<!-- heading -->
+				<h3>尋找屬於你的聲音</h3>
+				<!-- paragraph -->
+				<p>
+					<strong>尋找</strong>你心之所向，只屬於你專屬的聲音吧！
+				</p>
+				<!-- subscribe form -->
+				<form action="<c:url value="FuzzySelect.controller"/>" method="get">
+					<div class="input-group">
+						<input id="tags2" type="text" class="form-control input-lg"
+							name="selectCondition" placeholder="輸入播客或節目名稱"> 
+						<span class="input-group-btn">
+							<button class="btn btn-default btn-lg" type="submit">搜尋</button>
+						</span>
+					</div>
+					<!-- /input-group -->
+				</form>
 			</div>
 		</div>
-		<!-- news letter end -->
-
-
-	
+	</div>
+	<!-- news letter end -->
 </body>
 
 </html>
