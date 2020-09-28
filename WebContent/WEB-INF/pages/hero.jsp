@@ -56,7 +56,7 @@
 				<!-- hero content -->
 				<div class="hero-content ">
 					<!-- heading -->
-					<h2>官方節目</h2>
+					<h2>矚目新選</h2>
 					<hr>
 					<!-- paragraph -->
 					<p>
