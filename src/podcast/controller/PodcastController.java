@@ -207,8 +207,11 @@ public class PodcastController {
 			// 專案資料夾名稱
 			String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
 			// 取得到含workspace前的絕對路徑
+			
+			System.out.println("陸竟"+request.getSession().getServletContext().getRealPath("/"));
+			System.out.println(path.indexOf("metadata"));
 			String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,
-					path.indexOf("/.metadata"));
+					path.indexOf("metadata")-1);
 
 			// 制式資料夾
 			// 節目圖片 programimg
@@ -236,6 +239,7 @@ public class PodcastController {
 			// 檔案寫入路徑(存檔)
 			multipartFile.transferTo(f);
 
+			System.out.println("./"+savefolder+"/"+savefilename);
 			// 存入資料庫預設路徑 
 			return "./"+savefolder+"/"+savefilename;
 		
@@ -258,7 +262,7 @@ public class PodcastController {
 			String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
 			// 取得到含workspace前的絕對路徑
 			String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,
-					path.indexOf("/.metadata"));
+					path.indexOf("metadata")-1);
 
 			// 制式資料夾
 			// 節目圖片 programimg
