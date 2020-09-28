@@ -39,7 +39,7 @@ import podcast.model.javabean.fuzzyPodcastReturnArchitecture;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
-@SessionAttributes({ "LoginOK" , "thisPodcasterId","subscriptionPermission"})
+@SessionAttributes({ "LoginOK" , "thisPodcasterId","subscriptionPermission","payAmount","podcasterData","subProgram","commList","PodcastData"})
 public class CommentController {
 	
 	@Autowired 
