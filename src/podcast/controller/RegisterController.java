@@ -40,96 +40,179 @@ public class RegisterController {
 
 	// 接收新增會員表單
 	@RequestMapping(path = "/addMemberProcess", method = RequestMethod.POST)
-	public String processAction(
-			@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request,
+	public String processAction(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request,
 			@ModelAttribute("MemberBean") MemberBean members, BindingResult result, Model m) throws Exception {
 		// 檢查所有欄位,有空白則導回表單
 		if (result.hasErrors()) {
 			return "Member/registerForm";
-		}		
-		//取得前端欄位資料
-		String account=request.getParameter("account");
-		String password=request.getParameter("password");
-		String name=request.getParameter("name");
-		String nickname=request.getParameter("nickname");
-		String birthday=request.getParameter("birthday");
-		String registerDate=request.getParameter("registerDate");
-		String info=request.getParameter("info");
-		String email=request.getParameter("email");
-		String cellphone=request.getParameter("cellphone");
-		String address=request.getParameter("address");
-		String sex=request.getParameter("sex");
-		String file=request.getParameter("file");
-		String role=request.getParameter("role");
-		String creditCardNumber=request.getParameter("creditCardNumber");
-		String bankAccount=request.getParameter("bankAccount");
-		String image = processFile2(multipartFile,request);		
+		}
+		// 取得前端欄位資料
+		String account = request.getParameter("account");
+		String password = request.getParameter("password");
+		String name = request.getParameter("name");
+		String nickname = request.getParameter("nickname");
+		String birthday = request.getParameter("birthday");
+		String registerDate = request.getParameter("registerDate");
+		String info = request.getParameter("info");
+		String email = request.getParameter("email");
+		String cellphone = request.getParameter("cellphone");
+		String address = request.getParameter("address");
+		String sex = request.getParameter("sex");
+		String file = request.getParameter("file");
+		String role = request.getParameter("role");
+		String creditCardNumber = request.getParameter("creditCardNumber");
+		String bankAccount = request.getParameter("bankAccount");
+		String image = processFile2(multipartFile, request);
 		members.setImage(image);
-		
-		System.out.println("accunt:"+account);
-		
-		//資料格式判斷
+
+		System.out.println("accunt:" + account);
+
+		// 資料格式判斷
 		Map<String, String> errors = new HashMap<String, String>();
 		request.setAttribute("err", errors);
-			//帳號
-			if(account==null || account.length()==0) {
-				errors.put("account", "account is required");
-			};
-			//密碼
-			if(password==null || password.length()==0) {
-				errors.put("password", "password is required");
-				};
-			//name
-			if(name==null || name.length()==0) {
-				errors.put("name", "name is required");
-				};
-			//nickname
-			if(nickname==null || nickname.length()==0) {
-				errors.put("nickname", "nickname is required");
-				};
-			//birthday
-			if(birthday==null || birthday.length()==0) {
-				errors.put("birthday", "birthday is required");
-				};		
-			//registerDate
-			if(registerDate==null || registerDate.length()==0) {
-				errors.put("registerDate", "registerDate is required");
-				};
-			//自我介紹
-			if(info==null || info.length()==0) {
-				errors.put("info", "info is required");
-				};
-			//email
-			String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-			Pattern p =Pattern.compile(EMAIL_REGEX);
-			Matcher mr= p.matcher(email);
-					
-			if(email==null || email.length()==0) {
-				errors.put("email", "account is required");
-				};
-			if(!mr.matches()) {
-				errors.put("email", "格式錯誤");
-				};
-					
-			//cellphone
-			if(cellphone==null || cellphone.length()==0) {
-				errors.put("cellphone", "cellphone is required");
-				};
-			//file
-			if(file==null || file.length()==0) {
-				errors.put("file", "file is required");
-				};
-			//role
-			if(role==null || role.length()==0) {
-				errors.put("role", "role is required");
-				};
-			//creditCardNumber
-			if(creditCardNumber==null || creditCardNumber.length()==0) {
-				errors.put("creditCardNumber", "creditCardNumber is required");
-				};	
-		if(!errors.isEmpty()) {
-				return "Member/registerForm";
-				};
+		// 帳號
+		if (account == null || account.length() == 0) {
+			errors.put("account", "account is required");
+		}
+		;
+		// 密碼
+		if (password == null || password.length() == 0) {
+			errors.put("password", "password is required");
+		}
+		;
+		if (!password.matches(".*\\d+.*")) {
+			errors.put("password", "password 需含有數字");
+		}
+		;
+		if (!password.matches(".*[a-zA-Z]+.*")) {
+			errors.put("password", "password 需含有大小寫字母");
+		}
+		;
+		if (password.matches(".*[~!@#$%^&*_+|<>,.?/:;'\\[\\]{}\"]+.*")) {
+			errors.put("password", "不得含有特殊字元");
+		}
+		;
+		// name
+		if (name == null || name.length() == 0) {
+			errors.put("name", "name is required");
+		}
+		;
+		// nickname
+		if (nickname == null || nickname.length() == 0) {
+			errors.put("nickname", "nickname is required");
+		}
+		;
+		if (nickname.matches(".*[~!@#$%^&*_+|<>,.?/:;'\\[\\]{}\"]+.*")) {
+			errors.put("nickname", "不得含有特殊字元");
+		}
+		;
+		// birthday
+		if (birthday == null || birthday.length() == 0) {
+			errors.put("birthday", "birthday is required");
+		}
+		;
+	
+		String regex1 = "^((19|20)[0-9]{2})//((0?2-((0?[1-9])|([1-2][0-9])))|(0?(1|3|5|7|8|10|12)//((0?[1-9])|([1-2][0-9])|(3[0-1])))|(0?(4|6|9|11)//((0?[1-9])|([1-2][0-9])|30)))$";
+			// 開始判斷,且符合正則表達式
+			if (birthday.matches(regex1)) {
+				// 分割截取0年份1月份2日
+				String[] dateSplit = birthday.split("/");
+				// 判斷輸入的月份是否是二月，輸入的是二月的話，還需要判斷該年是否是閏年
+				if ("02".equals(dateSplit[1]) || "2".equals(dateSplit[1])) {
+					int year = Integer.parseInt(dateSplit[0]);
+					// 不是閏年,需要判斷日是否大於28
+					if (!(year % 4 == 0 && year % 100 != 0 || year % 400 == 0)) {
+						int day = Integer.parseInt(dateSplit[2]);
+						if (day > 28) {
+							errors.put("birthday", "格式錯誤");
+
+						}
+					}
+				}
+			}
+
+		
+		
+
+		// registerDate
+		if (registerDate == null || registerDate.length() == 0) {
+			errors.put("registerDate", "registerDate is required");
+		}
+		;
+		if (registerDate.matches(regex1)) {
+			// 分割截取0年份1月份2日
+			String[] dateSplit = registerDate.split("/");
+			// 判斷輸入的月份是否是二月，輸入的是二月的話，還需要判斷該年是否是閏年
+			if ("02".equals(dateSplit[1]) || "2".equals(dateSplit[1])) {
+				int year = Integer.parseInt(dateSplit[0]);
+				// 不是閏年,需要判斷日是否大於28
+				if (!(year % 4 == 0 && year % 100 != 0 || year % 400 == 0)) {
+					int day = Integer.parseInt(dateSplit[2]);
+					if (day > 28) {
+						errors.put("registerDate", "格式錯誤");
+
+					}
+				}
+			}
+		}
+		;
+		// 自我介紹
+		if (info == null || info.length() == 0) {
+			errors.put("info", "info is required");
+		}
+		;
+		if (info.matches(".*[~!@#$%^&*_+|<>,.?/:;'\\[\\]{}\"]+.*")) {
+			errors.put("info", "不得含有特殊字元");
+		}
+		;
+		// email
+		String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		Pattern p = Pattern.compile(EMAIL_REGEX);
+		Matcher mr = p.matcher(email);
+
+		if (email == null || email.length() == 0) {
+			errors.put("email", "account is required");
+		}
+		;
+		if (!mr.matches()) {
+			errors.put("email", "格式錯誤");
+		}
+		;
+
+		// cellphone
+		if (cellphone == null || cellphone.length() == 0) {
+			errors.put("cellphone", "cellphone is required");
+		}
+		;
+		if (!cellphone.matches("^[0-9]*$") || cellphone.length() < 10) {
+			errors.put("cellphone", "格式錯誤(只能輸入數字)");
+		}
+		;
+		// file
+//			if(file==null || file.length()==0) {
+//				errors.put("file", "file is required");
+//				};
+		// role
+		if (role == "") {
+			errors.put("role", "role is required");
+		}
+		;
+		// creditCardNumber
+		if (creditCardNumber == null || creditCardNumber.length() == 0) {
+			errors.put("creditCardNumber", "creditCardNumber is required");
+		}
+		;
+		if (!creditCardNumber.matches("^[0-9]*$") || creditCardNumber.length() < 16) {
+			errors.put("creditCardNumber", "格式錯誤(只能輸入數字)");
+		}
+		;
+		
+		////////////////////////////////////////////////////////////////////
+		if (!errors.isEmpty()) {
+			return "Member/registerForm";
+		}
+		;
 
 		// model傳送資料
 //		m.addAttribute("account", members.getAccount());
@@ -160,8 +243,8 @@ public class RegisterController {
 		mDao.insert(members);
 		return "Member/registerFormResult";
 	}
-	
-	public String processFile2(MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
+
+	public String processFile2(MultipartFile multipartFile, HttpServletRequest request) throws Exception, IOException {
 		// 取得原檔案名字
 		String filename = multipartFile.getOriginalFilename();
 		System.out.println(filename);
@@ -206,9 +289,9 @@ public class RegisterController {
 		// 檔案寫入路徑(存檔)
 		multipartFile.transferTo(f);
 
-		// 存入資料庫預設路徑 
-		return "./"+savefolder+"/"+savefilename;
-	
+		// 存入資料庫預設路徑
+		return "./" + savefolder + "/" + savefilename;
+
 	}
 
 }
