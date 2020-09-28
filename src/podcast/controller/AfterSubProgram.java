@@ -1,5 +1,6 @@
 package podcast.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,8 +59,9 @@ public class AfterSubProgram {
 	    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
 	    	
 
-	    	
+	    	String ResponseCode = (String) request.getSession().getAttribute("ResponseCode");
 	    	if((int) m.getAttribute("subscriptionPermission")==0) {
+	    		if(ResponseCode.equals("00")) {
 		    	SubscriptionBean q = new SubscriptionBean();
 		    	q.setMemberId(loginMember.getMemberId()); //訂閱者ID
 		    	q.setMonthlyPayment(mdao.selectPodcaster((Integer)m.getAttribute("thisPodcasterId")).getMonthlyPayment());
@@ -68,14 +70,14 @@ public class AfterSubProgram {
 		    	q.setPodcasterId((Integer)m.getAttribute("thisPodcasterId")); //播客ID
 		    	q.setReceipt(mdao.selectPodcaster((Integer)m.getAttribute("thisPodcasterId")).getNickname());
 		    	q.setCreditCardNumber("4938-1701-3000-0003");    	
-		    	sdao.insert(q);		    		
+		    	sdao.insert(q);	
+		    	int subscriptionPermission = 1;     //將訂閱權限更改為已訂閱
+		    	m.addAttribute("subscriptionPermission", subscriptionPermission);
+	    		}		
 	    	}
-
-	    	
-
 	    	List<SubscriptionBean> subRecord=sdao.selectBySubMemeberId(loginMember.getMemberId());
 	    	m.addAttribute("subRecord", subRecord);
 	    	
-	return "/NcccPaymentPage";
+	return "Comment/showPodcaster";
 }
 }

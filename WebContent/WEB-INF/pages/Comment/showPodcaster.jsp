@@ -532,7 +532,7 @@
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">取消</button>
 						<button id="btn_gotopay" type="button" class="btn btn-primary"
-							onclick="location.href='<c:url value="/AfterSubProgram.controller" />'">確定前往付費
+							onclick="location.href='<c:url value="http://localhost:8080/SpringWebProject/NcccPaymentPage.jsp" />'">確定前往付費
 						</button>
 					</div>
 
