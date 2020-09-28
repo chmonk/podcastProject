@@ -9,7 +9,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
+<!-- Custom CSS -->
+<link href="css/style.css" rel="stylesheet">
+<link href="css/style-color.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
+<style type="text/css">
   
   <script type="text/javascript">
 function confirmDelete(n) {
@@ -33,7 +37,8 @@ function confirmDelete(n) {
         }
 
         body {
-            background-image: url(<c:url value='/img/banner/b4.jpg' />);
+         background-color:#f9f9f9;
+/*             background-image: url(<c:url value='/img/banner/b5.jpg' />); */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -77,41 +82,41 @@ table-layout: fixed;}
 .closeTr{
 background-color:#f3e1e1!important;
 }
+
+    h2 {
+    	margin: 10%;
+    	text-align:center;
+	margin-bottom:10px;
+        display: inline;
+    }
+.headtop{
+	margin-top:150px;
+	margin-bottom:0px!important;
+}
+.mb10{
+	margin-bottom:10px;
+}
     </style>
 
 </head>
 
 <body>
-<div class="head">
+	<div class="head">
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
 
-<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
+	<div class="default-heading headtop">
+		<h2 >活動管理</h2>
 	</div>
-
-
-
+<!-- 		<button id="pressHistoryAdd" class="btn btn-primary">一鍵加入</button> -->
     <div class="container">
         <div class="custyle">
             <table class="table table-striped custab">
                 <thead>
-<tr>
+					<tr>
                         <td colspan="6">${LoginOK.name}的活動列表</td>
                     </tr>
-                    <a href="<c:url value='/addActivityForm' />" class="btn btn-primary btn-md pull-right">+新增活動</a>
-                    <br>
+                    <a href="<c:url value='/addActivityForm' />" class="btn btn-primary btn-md pull-right mb10" >+新增活動</a>
                     <tr>
                     <th>照片</th>
                         <td><b>名稱</b></td>
