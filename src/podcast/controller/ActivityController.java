@@ -144,7 +144,7 @@ public class ActivityController {
 		String savefolder = "activitypic";
 
 		// 制式檔案名稱
-		String savefilename = id + maintitile + subtitle;
+		String savefilename = maintitile + subtitle;
 
 		// 檔案制式存檔名稱 待設定
 
