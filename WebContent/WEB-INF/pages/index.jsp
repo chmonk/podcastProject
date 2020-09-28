@@ -62,11 +62,11 @@
 		<!--/ hero end -->
 
 		<!-- 矚目新選 -->
- 		<jsp:include page="promo_feature.jsp" flush="true " />
+		<jsp:include page="promo_feature.jsp" flush="true " />
 		<!-- 矚目新選 -->
 
 		<!-- call to action -->
-<%-- 		<jsp:include page="callToAction.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="callToAction.jsp" flush="true " /> --%>
 		<!--/ cta end -->
 
 		<!-- 熱播排行 -->
@@ -91,15 +91,15 @@
 		<!-- events end -->
 
 		<!-- about -->
-<%-- 		<jsp:include page="about.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="about.jsp" flush="true " /> --%>
 		<!-- about end -->
 
 		<!-- meet -->
-<%-- 		<jsp:include page="meets.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="meets.jsp" flush="true " /> --%>
 		<!-- meet end -->
 
 		<!-- contact -->
-<%-- 		<jsp:include page="contact.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="contact.jsp" flush="true " /> --%>
 		<!-- contact end -->
 
 		<!-- footer -->
@@ -117,7 +117,7 @@
 
 
 	<!-- Javascript files -->
-	
+
 	<!-- 熱門播客JS -->
 
 	<script>
@@ -177,43 +177,41 @@
 					pop2.value = podcasters[1].memberId;
 					pop3.value = podcasters[2].memberId;
 					pop4.value = podcasters[3].memberId;
-	<%--
+
 					pop5.value = podcasters[4].memberId;
 					pop6.value = podcasters[5].memberId;
 					pop7.value = podcasters[6].memberId;
 					pop8.value = podcasters[7].memberId;
-					--%>
-		
-	<%--
-			img1.src=podcasters[0].image;
-			img2.src=podcasters[1].image;
-			img3.src=podcasters[2].image;
-			img4.src=podcasters[3].image;
-			img5.src=podcasters[4].image;
-			img6.src=podcasters[5].image;
-			img7.src=podcasters[6].image;
-			img8.src=podcasters[7].image;
-			--%>
-		title1.innerHTML = podcasters[0].nickname;
+	<%--	--%>
+					img1.src = podcasters[0].image;
+					img2.src = podcasters[1].image;
+					img3.src = podcasters[2].image;
+					img4.src = podcasters[3].image;
+					img5.src = podcasters[4].image;
+					img6.src = podcasters[5].image;
+					img7.src = podcasters[6].image;
+					img8.src = podcasters[7].image;
+	<%--	--%>
+					title1.innerHTML = podcasters[0].nickname;
 					title2.innerHTML = podcasters[1].nickname;
 					title3.innerHTML = podcasters[2].nickname;
 					title4.innerHTML = podcasters[3].nickname;
-	<%--
+
 					title5.innerHTML = podcasters[4].nickname;
 					title6.innerHTML = podcasters[5].nickname;
 					title7.innerHTML = podcasters[6].nickname;
 					title8.innerHTML = podcasters[7].nickname;
-					--%>
-		info1.innerHTML = podcasters[0].info;
+	<%--	--%>
+					info1.innerHTML = podcasters[0].info;
 					info2.innerHTML = podcasters[1].info;
 					info3.innerHTML = podcasters[2].info;
 					info4.innerHTML = podcasters[3].info;
-	<%--
+
 					info5.innerHTML = podcasters[4].info;
 					info6.innerHTML = podcasters[5].info;
 					info7.innerHTML = podcasters[6].info;
 					info8.innerHTML = podcasters[7].info;
-					--%>
+	<%--	--%>
 		}
 			}
 		}
