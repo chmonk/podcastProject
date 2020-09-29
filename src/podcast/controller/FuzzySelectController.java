@@ -125,7 +125,7 @@ public class FuzzySelectController {
     			selectData.setLikesCount(podcastAllData.get(e.getIndex()).getLikesCount());
     			selectData.setConfirmubScription(confirmSubscriptionStatus(memberId,podcastAllData.get(e.getIndex()).getMemberId()));
     			selectData.setPodcasterId(podcastAllData.get(e.getIndex()).getMemberId());
-    			selectData.setLikesStatus(ldao.checkByMemberidAndPodcastIdReturnLikeStatus(memberId, selectData.getPodcasterId()));
+    			selectData.setLikesStatus(ldao.checkByMemberidAndPodcastIdReturnLikeStatus(memberId, selectData.getPodcastId()));
     			
     			fuzzyPodcastData.add(selectData);
     		}
