@@ -539,17 +539,18 @@ padding-left: 30px;
 									${comment.replyDate}
 									</p>
 <!-- 								</div> -->
-								<div class="reply" style="display: none">
+								<div class="reply" style="display: none;">
 									<button type="button" onclick="display('${comment.msgDate}')"
-										class="btnSendMessage">回復</button>
+										class="btnSendMessage">回覆</button>
 								</div>
 								<div id="${comment.msgDate}" style="display: none">
 									<form action="podcastPage.do" id="podcasterReply" method="post">
 										<textarea name="replyMessage" id="${comment.commentMsg}"
 											placeholder="留言內容：&#13;&#10;請輸入不超過50個字" required></textarea>
 									</form>
-									<input id="podcasterId" type="hidden"
-										value="${thisPodcasterId}" /> <input type="button"
+									<!--<input id="podcasterId" type="hidden"
+										value="${thisPodcasterId}" /> -->
+										<input type="button"
 										class="btnSendMessage" id="submitReply" value="送出"
 										onclick="submitReply('${comment.commentId}','${comment.commentMsg}')">
 								</div>
@@ -612,7 +613,8 @@ padding-left: 30px;
 					replyStatus[x].style.display = "block";
 				}
 			} else {
-				replyStatus.style.display = "";
+				console.log("not podcastPage owner!");
+				return;
 			}
 
 		}
@@ -695,6 +697,9 @@ padding-left: 30px;
 		};
 		function submitReply(thiscommentId, thiscommentMsg) {
 			let replybox = document.getElementById(thiscommentMsg).value;
+			console.log("thiscommentMsg:"+thiscommentMsg);		
+			console.log("thiscommentId:"+thiscommentId);
+			console.log("replybox:"+replybox);
 			if (!replybox) {
 				document.getElementById(thiscommentMsg).placeholder = "請勿留空";
 				return;
@@ -705,9 +710,7 @@ padding-left: 30px;
 			xhr2.setRequestHeader("Content-type",
 					"application/x-www-form-urlencoded");
 
-			console.log(replybox);
 			xhr2.send("replybox=" + replybox + "&commentId=" + thiscommentId);
-			console.log(replybox);
 
 			xhr2.onreadystatechange = function() {
 				if (xhr2.readyState === 4 && xhr2.status === 200) {
