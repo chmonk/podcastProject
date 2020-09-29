@@ -64,7 +64,7 @@
     }
     
     .default-heading{
-    margin-top: 110px!important;
+    margin-top: 150px!important;
     margin-bottom:0px!important;
     }
 </style>
@@ -75,20 +75,7 @@
 		<jsp:include page="header_banner_test.jsp" flush="true " />
 	</div>
 
-<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
-	</div>
+
 	
 		<div class="default-heading">
 		<h2 >購買紀錄</h2></div>
@@ -125,6 +112,7 @@
                 </tr>
 
             </table>
-
+</div>
+</div>
 </body>
 </html>
