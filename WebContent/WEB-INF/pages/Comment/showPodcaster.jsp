@@ -58,12 +58,12 @@
 	margin-bottom: 20px;
 	height: 200px;
 	width: 200px;
-	border: 1px solid #f2f2f2;
+	border: 1px solid black;
 	border-radius: 50%;
 	z-index: 10;
-	-webkit-box-shadow: 3px 3px 5px #f2f2f2;
-	-moz-box-shadow: 3px 3px 5px #f2f2f2;
-	box-shadow: 3px 3px 5px #f2f2f2;
+	 -webkit-box-shadow: 3px 3px 5px black;
+	-moz-box-shadow: 3px 3px 5px black;
+	box-shadow: 3px 3px 5px black; 
 }
 
 .memberImg img {
@@ -77,7 +77,8 @@
 	margin-top: 30px;
 	display: inline-block;
 	background-color: #222831;
-	padding: 5px 15px 5px 15px;
+	/* padding: 5px 20px 0px 15px; */
+	margin-bottom:5px;
 	margin-left: -50px;
 	font-family: 微軟正黑體;
 	font-size: 30px;
@@ -86,11 +87,13 @@
 }
 
 .memberInfo {
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	margin-left: -50px;
 	font-family: 微軟正黑體;
 	font-size: 20px;
 	font: #222831;
+	color:white;
+	margin-bottom:10px;
 }
 
 .bodycolor {
@@ -257,12 +260,17 @@
 	font-family: arial;
 }
 
+.tab-content{
+background-color: #f9f9f9;
+
+}
+
 #tab-panel .tab-content {
 	list-style: none;
 }
 
 #tab-panel .tabs {
-	background: #252c37;;
+	background: #191919;
 	overflow: hidden;
 	text-align: center;
 }
@@ -281,8 +289,8 @@
 }
 
 #tab-panel .tabs a.active {
-	background: #f23031;
-	color: #FFF;
+	background: #f9f9f9;
+	color: #f23031;
 }
 
 #tab-panel .tab-content {
@@ -297,10 +305,6 @@
 	color: #666;
 	line-height: 25px;
 }
-
-/* .dis2.reply{ */
-/* display: block; */
-/* } */
 </style>
 
 <title>頻道首頁</title>
@@ -319,24 +323,26 @@
 			</div>
 			<div class="col-md-8">
 				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
+				<div class="memberInfo">
+				${podcasterData.podcastInfo}
+				</div>
 				<div>
 					<c:choose>
 
 						<c:when test="${subscriptionPermission ==2}">
 							<button id="hide_alreadysub_btn" type="button"
-								class="btn btn-success">本人頻道</button>
+								class="memberInfo btn btn-success">本人頻道</button>
 						</c:when>
 
 						<c:when test="${subscriptionPermission ==1}">
 							<button id="hide_alreadysub_btn" type="button"
-								class="btn btn-info">已訂閱</button>
+								class="memberInfo btn btn-info">已訂閱</button>
 						</c:when>
 
 						<c:when test="${payAmount ==0}">
 						</c:when>
 						<c:otherwise>
-							<button id='check_sub' type="button" class="btn btn-danger"
+							<button id='check_sub' type="button" class="memberInfo btn btn-danger"
 								data-toggle="modal" data-target="#exampleModal">訂閱</button>
 						</c:otherwise>
 					</c:choose>
@@ -348,7 +354,7 @@
 			<div class="col-md-12 bodycolor">
 				<div id="tab-panel">
 					<div class="tabs">
-						<a>節目表單</a> <a>訂閱表單</a><a>留言板</a>
+						<a>節目列表</a> <a>訂閱列表</a><a>留言板</a>
 					</div>
 					<ul class="tab-content">
 						<li>
@@ -368,186 +374,151 @@
 													<div class="card-media-body-top">
 														<span class="subtle">${podcast.getTitle()}</span>
 														<!-- 依據資料庫染愛心顏色 -->
-														<c:choose>
-															<c:when test="${podcast.getLikesStatus()==1}">
-																<div
-																	class="card-media-body-top-icons u-float-right like">
-															</c:when>
-															<c:otherwise>
-																<div class="card-media-body-top-icons u-float-right">
-															</c:otherwise>
-														</c:choose>
-
-														<!-- 															<svg  height="16" viewBox="0 0 24 24" -->
-														<!-- 																width="16" xmlns="http://www.w3.org/2000/svg"> -->
-														<!-- 					            <path d="M0 0h24v24H0z" fill="none" /> -->
-														<!-- 					            <path -->
-														<!-- 																	d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" /> -->
-														<!-- 					          </svg> -->
-														<svg height="25" viewBox="0 -28 512 512" width="16"
-															xmlns="http://www.w3.org/2000/svg">
+							<c:choose>
+								<c:when test="${podcast.getLikesStatus()==1}">
+									<div class="card-media-body-top-icons u-float-right like">
+								</c:when>
+								<c:otherwise>
+									<div class="card-media-body-top-icons u-float-right">
+								</c:otherwise>
+							</c:choose>
+														
+<!-- 															<svg  height="16" viewBox="0 0 24 24" -->
+<!-- 																width="16" xmlns="http://www.w3.org/2000/svg"> -->
+<!-- 					            <path d="M0 0h24v24H0z" fill="none" /> -->
+<!-- 					            <path -->
+<!-- 																	d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" /> -->
+<!-- 					          </svg> -->
+															<svg  height="25" viewBox="0 -28 512 512"
+																width="16" xmlns="http://www.w3.org/2000/svg">
 					          	<path
-																d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0" />
-					          </svg>
-														<span class="likeNum">${podcast.getLikesCount()}</span>
+																	d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0" />
+					          </svg><span class="likeNum" >${podcast.getLikesCount()}</span>
+														</div>
+													</div>
+													<span class="card-media-body-heading">${podcast.getPodcastInfo()}</span>
+													<div class="card-media-body-supporting-bottom">
+														<span
+															class="card-media-body-supporting-bottom-text subtle">${podcast.getUploadTime()}</span>
+														<span
+															class="card-media-body-supporting-bottom-text subtle u-float-right">點擊率${podcast.getClickAmount()}</span>
+													</div>
+													<div
+														class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
+														<span
+															class="card-media-body-supporting-bottom-text subtle">${podcast.getCategoryName()}</span>
+														<a id="${podcast.getPodcastId()}"
+															class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 													</div>
 												</div>
-												<span class="card-media-body-heading">${podcast.getPodcastInfo()}</span>
+											</div>
+										</c:forEach>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+
+							<div class="podcastList">
+								<div>
+									<c:forEach var="alreadySub" items="${subProgram}">
+										<div class="card-media">
+											<!-- media container -->
+											<div class="card-media-object-container">
+												<div class="card-media-object">
+													<img class="podcastImg" src="${alreadySub.getAudioImg()}">
+												</div>
+											</div>
+											<!-- body container -->
+											<div class="card-media-body">
+												<div class="card-media-body-top">
+													<span class="subtle">${alreadySub.getTitle()}</span>
+													<!-- 依據資料庫染愛心顏色 -->
+							<c:choose>
+								<c:when test="${alreadySub.getLikesStatus()==1}">
+									<div class="card-media-body-top-icons u-float-right like">
+								</c:when>
+								<c:otherwise>
+									<div class="card-media-body-top-icons u-float-right">
+								</c:otherwise>
+							</c:choose>
+<!-- 														<svg height="16" viewBox="0 0 24 24" -->
+<!-- 															width="16" xmlns="http://www.w3.org/2000/svg"> -->
+<!-- 				            <path d="M0 0h24v24H0z" fill="none" /> -->
+<!-- 				            <path -->
+<!-- 																d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" /> -->
+<!-- 				          </svg> -->
+														<svg  height="25" viewBox="0 -28 512 512"
+															width="16" xmlns="http://www.w3.org/2000/svg">
+				          	<path
+																d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0" />
+				          </svg><span class="likeNum" >${alreadySub.getLikesCount()}</span>
+													</div>
+												</div>
+												<span class="card-media-body-heading">${alreadySub.getPodcastInfo()}</span>
 												<div class="card-media-body-supporting-bottom">
-													<span class="card-media-body-supporting-bottom-text subtle">${podcast.getUploadTime()}</span>
+													<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getUploadTime()}</span>
 													<span
-														class="card-media-body-supporting-bottom-text subtle u-float-right">點擊率${podcast.getClickAmount()}</span>
+														class="card-media-body-supporting-bottom-text subtle u-float-right">點擊率${alreadySub.getClickAmount()}</span>
 												</div>
 												<div
 													class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
-													<span class="card-media-body-supporting-bottom-text subtle">${podcast.getCategoryName()}</span>
-													<a id="${podcast.getPodcastId()}"
-														class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
+													<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getCategoryName()}</span>
+													<c:choose>
+
+													<c:when test="${subscriptionPermission ==2}">
+															<a id="${alreadySub.getPodcastId()}"
+
+																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
+														</c:when>
+														<c:when test="${subscriptionPermission ==1}">
+															<a id="${alreadySub.getPodcastId()}"
+																class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
+														</c:when>
+														<c:otherwise>
+															<a id="${alreadySub.getPodcastId()}"
+																class="card-media-body-supporting-bottom-text card-media-link u-float-right">
+																需訂閱才能收聽</a>
+														</c:otherwise>
+													</c:choose>
+
 												</div>
 											</div>
-									</div>
+										</div>
 									</c:forEach>
 								</div>
 							</div>
-				</div>
-				</li>
-				<li>
-
-					<div class="podcastList">
-						<div>
-							<c:forEach var="alreadySub" items="${subProgram}">
-								<div class="card-media">
-									<!-- media container -->
-									<div class="card-media-object-container">
-										<div class="card-media-object">
-											<img class="podcastImg" src="${alreadySub.getAudioImg()}">
-										</div>
-									</div>
-									<!-- body container -->
-									<div class="card-media-body">
-										<div class="card-media-body-top">
-											<span class="subtle">${alreadySub.getTitle()}</span>
-											<!-- 依據資料庫染愛心顏色 -->
-											<c:choose>
-												<c:when test="${alreadySub.getLikesStatus()==1}">
-													<div class="card-media-body-top-icons u-float-right like">
-												</c:when>
-												<c:otherwise>
-													<div class="card-media-body-top-icons u-float-right">
-												</c:otherwise>
-											</c:choose>
-											<!-- 														<svg height="16" viewBox="0 0 24 24" -->
-											<!-- 															width="16" xmlns="http://www.w3.org/2000/svg"> -->
-											<!-- 				            <path d="M0 0h24v24H0z" fill="none" /> -->
-											<!-- 				            <path -->
-											<!-- 																d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" /> -->
-											<!-- 				          </svg> -->
-											<svg height="25" viewBox="0 -28 512 512" width="16"
-												xmlns="http://www.w3.org/2000/svg">
-				          	<path
-													d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0" />
-				          </svg>
-											<span class="likeNum">${alreadySub.getLikesCount()}</span>
-										</div>
-									</div>
-									<span class="card-media-body-heading">${alreadySub.getPodcastInfo()}</span>
-									<div class="card-media-body-supporting-bottom">
-										<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getUploadTime()}</span>
-										<span
-											class="card-media-body-supporting-bottom-text subtle u-float-right">點擊率${alreadySub.getClickAmount()}</span>
-									</div>
-									<div
-										class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
-										<span class="card-media-body-supporting-bottom-text subtle">${alreadySub.getCategoryName()}</span>
-										<c:choose>
-
-											<c:when test="${subscriptionPermission ==2}">
-												<a id="${alreadySub.getPodcastId()}"
-													class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
-											</c:when>
-											<c:when test="${subscriptionPermission ==1}">
-												<a id="${alreadySub.getPodcastId()}"
-													class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
-											</c:when>
-											<c:otherwise>
-												<a id="${alreadySub.getPodcastId()}"
-													class="card-media-body-supporting-bottom-text card-media-link u-float-right">
-													需訂閱才能收聽</a>
-											</c:otherwise>
-										</c:choose>
-
+						</li>
+						<li>
+							<div class="messageBoard">
+								<div class="bubbleContainer">
+									<div class="bubbleBody">
+										<form id="message" action="podcastPage.do" method="post"
+											name="comment">
+											<textarea name="formMessage" id="content"
+												placeholder="留言內容：&#13;&#10;請輸入不超過50個字"></textarea>
+										</form>
+										<span class="submit"> <input id="podcasterId"
+											type="hidden" value="${thisPodcasterId}" />
+											<button id="submitBtn" class="btnSendMessage" type="button"
+												form="message">提交</button>
+										</span>
 									</div>
 								</div>
-						</div>
-						</c:forEach>
-					</div>
-			</div>
-			</li>
-			<li>
-				<div class="messageBoard">
-					<div class="bubbleContainer">
-						<div class="bubbleBody">
-							<form id="message" action="podcastPage.do" method="post" name="comment">
-								<textarea name="formMessage" id="content" placeholder="留言內容：&#13;&#10;請輸入不超過50個字"></textarea>
-							</form>
-							<span class="submit"> <input id="podcasterId" type="hidden" value="${thisPodcasterId}" /> <input
-								id="memberId" type="hidden" value="${thisMemberId}" />
-								<button id="submitBtn" class="btnSendMessage" type="button" form="message">提交</button>
-							</span>
-						</div>
-					</div>
-					<ul class="messageList" id="messageList">
-						<c:forEach items="${commList}" var="comment" varStatus="tagStatus">
-							<li class="message">
-								<p class="messageTitle" >${comment.Name}</p>
-								<p class="messageContent">${comment.commentMsg}</p>
-								<p class="messageDate">${comment.msgDate}</p>
-								<p class="replyMsg">${comment.replyMsg}</p>
-								<p class="replyDate">${comment.replyDate}</p>
-								
-								<div class="reply" style="display: none">
-									<button type="button" onclick="display('${comment.msgDate}')" class="btnSendMessage">回復</button>
-								</div>
-								<div id="${comment.msgDate}" style="display: none">
-									<form action="podcastPage.do" id="podcasterReply" method="post">
-										<textarea name="replyMessage" id="replybox"
-											placeholder="留言內容：&#13;&#10;請輸入不超過50個字"></textarea>
-									</form>
-									<input id="podcasterId" type="hidden" value="${thisPodcasterId}" />
-									<button type="button" form="podcasterReply" class="btnSendMessage" id="submitReply">送出</button>
-								</div>
-						
-							</li>
-						</c:forEach>
+								<ul class="messageList" id="messageList">
+									<c:forEach items="${commList}" var="comment"
+										varStatus="tagStatus">
+										<li class="message">
+											<p class="messageTitle">${comment.Name}</p>
+											<p class="messageContent">${comment.commentMsg}</p>
+											<p class="messageDate">${comment.msgDate}</p>
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</li>
 					</ul>
 				</div>
-			</li>
-		</div>
-	</div>
-
-
-
-
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">即將離開頁面進入付費....</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div id="pay_free" class="modal-body">訂閱本頻道每月需支付${payAmount}元</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">取消</button>
-					<button id="btn_gotopay" type="button" class="btn btn-primary"
-						onclick="location.href='<c:url value="/AfterSubProgram.controller" />'">確定前往付費
-					</button>
-				</div>
-
 			</div>
 		</div>
 	</div>
@@ -555,38 +526,39 @@
 
 
 
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">即將離開頁面進入付費....</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div id="pay_free" class="modal-body">訂閱本頻道每月需支付${payAmount}元</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">取消</button>
+						<button id="btn_gotopay" type="button" class="btn btn-primary"
+							onclick="location.href='<c:url value="http://localhost:8080/SpringWebProject/NcccPaymentPage.jsp" />'">確定前往付費
+						</button>
+					</div>
 
-	<div class="playbar">
-		<jsp:include page="../playerbar.jsp" flush="true " />
-	</div>
+				</div>
+			</div>
+		</div>
 
-	<script type="text/javascript">
-		window.onload = function() {
-			var replyStatus = document.getElementsByClassName("reply");
-			var memberId = document.getElementById("memberId").value;
-			var podcasterId = document.getElementById("podcasterId").value;
-			console.log(memberId);
-			console.log(podcasterId);
-			if (memberId == podcasterId) {
-				console.log("block!");
-				for (var x = 0; x < replyStatus.length; x++) {
-					replyStatus[x].style.display = "block";
-				}
-			} else {
-				replyStatus.style.display = "";
-			}
 
-		}
 
-		function display(id) {
-			var traget = document.getElementById(id);
-			if (traget.style.display == "none") {
-				traget.style.display = "";
-			} else {
-				traget.style.display = "none";
-			}
-		}
 
+
+		<div class="playbar">
+			<jsp:include page="../playerbar.jsp" flush="true " />
+		</div>
+
+		<script type="text/javascript">
 		$(function() {
 			var $tabPanel = $('#tab-panel'), $tabs = $tabPanel.find('.tabs'), $tab = $tabs
 					.find('a'), $tabContent = $tabPanel.find('.tab-content'), $content = $tabContent
@@ -602,18 +574,18 @@
 			});
 		});
 
-		// 		function delConfirm(clicked_name) {
+		function delConfirm(clicked_name) {
 
-		// 			var r = confirm("確定要刪除此留言?")
-		// 			if (r == true) {
+			var r = confirm("確定要刪除此留言?")
+			if (r == true) {
 
-		// 				console.log(clicked_name);
-		// 				document.getElementById(clicked_name).submit();
+				console.log(clicked_name);
+				document.getElementById(clicked_name).submit();
 
-		// 			} else {
+			} else {
 
-		// 			}
-		// 		}
+			}
+		}
 
 		document.getElementById("submitBtn").onclick = function() {
 			var xhr = new XMLHttpRequest();
@@ -633,8 +605,8 @@
 					console.log("get data");
 					console.log(xhr.responseText);
 					var cbean = JSON.parse(xhr.responseText);
-					console.log(cbean.replyMsg);
-					
+					console.log(cbean.commentMsg);
+					/* var ctable = document.getElementById("ctable");*/
 					var messageList = document.getElementById("messageList");
 					var m = new Date(cbean.msgDate);
 					console.log(cbean.msgDate);
@@ -655,62 +627,26 @@
 				}
 			}
 		}
-		
-		document.getElementById("submitReply").onclick = function() {
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "<c:url value='/podcastPage.do'/>", true);
-			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			var replybox = document.getElementById("replybox").value;
-			console.log(replybox);
-			xhr.send("replybox=" + replybox);
-			console.log(replybox);
-
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState === 4 && xhr.status === 200) {
-					console.log("get data");
-					console.log(xhr.responseText);
-					var cbean = JSON.parse(xhr.responseText);
-					console.log(cbean.commentMsg);
-					/* var ctable = document.getElementById("ctable");*/
-					var mesList = document.getElementById("messageList");
-					var m = new Date(cbean.replyDate);
-					console.log(cbean.replyDate);
-					console.log(m);
-					//下面兩行有問題尚未解決
-					/* var newMsg = "<tr class='d3'><td width='240'>"
-							+ cbean.commentMsg
-							+ "</td><td width='80' align='center' style='color:gray'>"
-							+ cbean.memberId
-							+ "</td><td width='80' align='center' style='color:gray'>"
-							+ cbean.msgDate + "</td></tr>"; */
-					var newMsg = "<li class='message'>
-						+ cbean.replyMsg + "</p><p class='replyMsg'>"
-							+ cbean.replyDate + "</p></li>";
-
-							mesList.innerHTML = newMsg + mesList.innerHTML;
-				}
-			}
-		}
 	</script>
-	<!-- Javascript files -->
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-	<!-- Bootstrap JS -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- WayPoints JS -->
-	<script src="js/waypoints.min.js"></script>
-	<!-- Include js plugin -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- One Page Nav -->
-	<script src="js/jquery.nav.js"></script>
-	<!-- Respond JS for IE8 -->
-	<script src="js/respond.min.js"></script>
-	<!-- HTML5 Support for IE -->
-	<script src="js/html5shiv.js"></script>
-	<!-- Custom JS -->
-	<script src="js/custom.js"></script>
-	<!-- 	plaer bar function js -->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/player.js"></script>
+		<!-- Javascript files -->
+		<!-- jQuery -->
+		<script src="js/jquery.js"></script>
+		<!-- Bootstrap JS -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- WayPoints JS -->
+		<script src="js/waypoints.min.js"></script>
+		<!-- Include js plugin -->
+		<script src="js/owl.carousel.min.js"></script>
+		<!-- One Page Nav -->
+		<script src="js/jquery.nav.js"></script>
+		<!-- Respond JS for IE8 -->
+		<script src="js/respond.min.js"></script>
+		<!-- HTML5 Support for IE -->
+		<script src="js/html5shiv.js"></script>
+		<!-- Custom JS -->
+		<script src="js/custom.js"></script>
+		<!-- 	plaer bar function js -->
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/player.js"></script>
 </body>
 </html>

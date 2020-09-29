@@ -64,7 +64,7 @@ String OrderID = request.getParameter("OrderID");
 String TransAmt = request.getParameter("TransAmt");
 String ResponseCode = request.getParameter("ResponseCode");
 String ResponseMsg = request.getParameter("ResponseMsg");
-
+request.getSession().setAttribute("ResponseCode", ResponseCode);
 // jdbc/BookDataSQLver
 
 // java.sql.Connection conn = null;
@@ -141,7 +141,7 @@ thead {
 </table>
 
 <!-- 自動跳轉回訂單成立頁面 -->
-<meta http-equiv="refresh" content ="3;url=/SpringWebProject/podcastPage?fuzzyPodcasterId=${thisPodcasterId}">
+<meta http-equiv="refresh" content ="3;url=/SpringWebProject/AfterSubProgram.controller">
 
 </body>
 </html>

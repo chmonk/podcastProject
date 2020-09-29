@@ -54,6 +54,10 @@
 	padding-top: 50px;
 	/* 	border-bottom: 1px solid black;  */
 }
+.headtop{
+	margin-top:120px;
+	margin-bottom:20px;
+}
   </style>
 
 
@@ -65,22 +69,7 @@
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
 
-<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
-	</div>
-
- <div class="container">
+ <div class="container headtop">
     <div class="row">
 		<div class="col-lg-3"></div>
      	<div class="col-lg-6">
@@ -125,15 +114,34 @@
               </div>
             <br>
             
+             <div class="col-lg-12">
+             <br>
             <label path="podcastInfo">單集簡介: </label>
             <textarea path="podcastInfo" title="podcastInfo" name="podcastInfo" id="podcastInfo" class="form-control" rows="3"
               required> </textarea>
+            </div>
             <br>
-            <div class="button">
+            
+            
+            <div class="col-lg-12">
+             <br>
+				<label>單集照片：</label> <input type="file" name="file" 
+								class="form-control" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png" required/><br/>
+   									<img id="preview_progressbarTW_img" src="${uploadPodcastBean.audioimg}" style="max-width: 300px; max-height: 300px;"/>   								
+						</div>
+						<br>
+            
+            <div class="button col-lg-12">
+            <br><br>
               <input id="submitBtn" type="button" value="確認修改" class="btn btn-danger btn-block btn-lg" style="box-shadow: 2px 2px 2px gray; ">
               
             </div>
           </form>
+          <div  class="col-lg-12" style="text-align: center">
+          <br>
+		<a href="<c:url value='/managePodcast' />" class="btn btn-primary btn-md">回上一頁</a>&nbsp;&nbsp;
+		<a href="<c:url value='/' />" class="btn btn-primary btn-md">回首頁</a>
+	</div>
         </div>
       </div>
       <div class="col-lg-3"></div>
@@ -218,6 +226,19 @@ function check(){
 	}else{
 		document.getElementById("podcastModifyForm").submit();
 	}	
+}
+
+
+function readURL(input){
+  if(input.files && input.files[0]){
+    var imageTagID = input.getAttribute("targetID");
+    var reader = new FileReader();
+    reader.onload = function (e) {
+       var img = document.getElementById(imageTagID);
+       img.setAttribute("src", e.target.result)
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
 }
 
 </script>

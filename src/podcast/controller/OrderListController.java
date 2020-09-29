@@ -40,8 +40,9 @@ public class OrderListController {
 		}	
 		
 		ShoppingCart sc = (ShoppingCart) model.getAttribute("ShoppingCart");
+		if(sc!=null) {
 		Map<Integer, OrderItemBean> cart =sc.getContent();
-		cart.clear();
+		cart.clear();}
 		
 		ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
