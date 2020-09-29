@@ -24,6 +24,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
 import podcast.model.dao.CategoryDAO;
+import podcast.model.dao.LikeRecordDAO;
 import podcast.model.dao.MemberDAO;
 import podcast.model.dao.SubProgramListDAO;
 import podcast.model.dao.UploadPodcastDAO;
@@ -38,6 +39,9 @@ import podcast.model.javabean.uploadPodcastBean;
 public class FuzzySelectController {
 	@Autowired
 	SubProgramListDAO sdao;
+	
+	@Autowired
+	LikeRecordDAO ldao;
 	
 	@GetMapping(path = { "/getFuzzySelectAllDataName.controller" })
 	public @ResponseBody List<Map<String,String>> getFuzzySelectAllDataName(HttpServletRequest request,HttpServletResponse response) {
@@ -121,6 +125,7 @@ public class FuzzySelectController {
     			selectData.setLikesCount(podcastAllData.get(e.getIndex()).getLikesCount());
     			selectData.setConfirmubScription(confirmSubscriptionStatus(memberId,podcastAllData.get(e.getIndex()).getMemberId()));
     			selectData.setPodcasterId(podcastAllData.get(e.getIndex()).getMemberId());
+    			selectData.setLikesStatus(ldao.checkByMemberidAndPodcastIdReturnLikeStatus(memberId, selectData.getPodcasterId()));
     			
     			fuzzyPodcastData.add(selectData);
     		}
