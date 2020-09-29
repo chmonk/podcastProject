@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>showFuzzySelect</title>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
@@ -200,9 +200,25 @@ $(document).ready(function(){
 							<div
 								class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 								<span class="card-media-body-supporting-bottom-text subtle">${data.getCategoryName()}</span>
-								<a id="${data.getPodcastId()}"
-									class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
-
+								<c:choose>
+									<c:when test="${data.getOpenPayment()==1}">
+										<c:choose>
+											<c:when test="${data.getConfirmubScription() ==2 or data.getConfirmubScription() ==1}">
+												<a id="${data.getPodcastId()}"
+													class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
+											</c:when>
+											<c:otherwise>
+												<a id="${data.getPodcastId()}"
+													class="card-media-body-supporting-bottom-text card-media-link u-float-right">
+													需訂閱才能收聽</a>
+											</c:otherwise>
+										</c:choose>
+									</c:when>
+									<c:otherwise>
+										<a id="${data.getPodcastId()}"
+											class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
