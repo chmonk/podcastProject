@@ -70,12 +70,13 @@
 
      	$(document).ready(function(){
 
-     		$("#password").on("focus",function(){
-     			var pass = $('<input type="password" name="password" class="form-control"  required>');
+     		$("#pass").on("focus",function(){
+     			var pass = $('<input type="password" id="pass" name="password" class="form-control"  required>');
      			console.log(this);
      	        $(this).replaceWith(pass);
      	        pass.focus();
      		});
+
 
 
      	})	
@@ -145,7 +146,7 @@
 									class="form-control" placeholder="請輸入帳號" required>
 							</div>
 							<div class="col-sm-6">
-							<label>密碼：<font color="red">${err.password}</font></label> <input type="text" id="password" name="password"
+							<label>密碼：<font color="red">${err.password}</font></label> <input type="text" id="pass" name="password"
 								class="form-control" placeholder="請輸入密碼" required>
 							</div>
 						</div>
