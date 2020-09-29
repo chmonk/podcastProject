@@ -140,7 +140,13 @@
 .messageBoard ul.messageList li.message p.messageDate {
 	 text-align: right;
 }
+.replyComment{
+background-color:  #0d3544;
+}
 
+.dis2.reply{
+display: block;
+}
 </style>
 <title>頻道首頁</title>
 </head>
@@ -164,7 +170,11 @@
 						    <li class="message">
 					        	<p class="messageTitle">${comment.Name}</p>
 					        	<p class="messageContent">${comment.commentMsg}</p>
-					        	<p class="messageDate">${comment.msgDate} <span><button type="button" class="btn btn-sm" id="replay'+va.com_id+'" onclick="replay('+va.com_id+');">回复</button></span></p>
+					        	<p class="messageDate">${comment.msgDate}</p>
+					        	<div class="dis2">
+					        	<button type="button" class="btn btn-sm" id="reply" onclick="reply('+va.com_id+');">回复</button></span></p>
+					        	<textarea name="replyMessage" id="reply" placeholder="留言內容：&#13;&#10;請輸入不超過50個字"></textarea></div>
+					        	<p class="replyComment"></p>
 						    </li>
 					    </c:forEach>
 					</ul>
@@ -175,22 +185,12 @@
 	
 	<script type="text/javascript">
 
-		$(function () {
-			$('#myTab li:eq(1) a').tab('show');
-		});
-		
-		function delConfirm(clicked_name) {
-	
-			var r = confirm("確定要刪除此留言?")
-			if (r == true) {
-	
-				console.log(clicked_name);
-				document.getElementById(clicked_name).submit();
-	
-			} else {
-	
+		document.getElementById("reply").onclick=function(){
+			var xhR= new XMLHttpRequest();
+			xhR.open("POST", "<c:url value='/podcastPage.do'/>", true);
+			xhR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			var content = document.getElementById("content").value;
 			}
-		}	
 		
 		document.getElementById("submitBtn").onclick = function() {
 			var xhr = new XMLHttpRequest();
