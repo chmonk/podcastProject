@@ -82,6 +82,7 @@ public class CommentController {
 		for (ProgramCommentBean i : commList) {
 			Map<String, Object> commListitem = new HashMap<>();
 
+			commListitem.put("commentId", i.getCommentId());
 			commListitem.put("replyDate",i.getReplyDate());
 			commListitem.put("replyMsg",i.getReplyMsg());
 			commListitem.put("commentMsg",i.getCommentMsg());
@@ -200,7 +201,7 @@ public class CommentController {
 	@Column	
 	@Temporal(TemporalType.TIMESTAMP)
 	@PostMapping("/podcastPage.do")
-	public @ResponseBody Map<String, Object> processComment(@RequestParam("content") String commentMsg,@RequestParam("replybox") String replyMsg,
+	public @ResponseBody Map<String, Object> processComment(@RequestParam("content") String commentMsg,
 			@RequestParam(name="PId")Integer podcasterId,
 		 HttpServletRequest request, Model m) throws Exception {
 		
@@ -237,8 +238,8 @@ public class CommentController {
 		Map<String, Object> commListitem = new HashMap<>();
 		SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 
-		commListitem.put("replyMsg",replyMsg);
-		commListitem.put("replyDate",df.format(pBean.getReplyDate()));
+
+
 		commListitem.put("commentMsg",commentMsg);
 		commListitem.put("msgDate",df.format(pBean.getMsgDate()));
 		commListitem.put("Name", mdao.selectPodcaster(memberId).getNickname());
@@ -248,42 +249,44 @@ public class CommentController {
 //		request.setAttribute("commList", commList);
 //		
 		return commListitem;
-	}}
+	}
 	
-//	
-//	@Column	
-//	@Temporal(TemporalType.TIMESTAMP)
-//	@PostMapping("/podcastReplyPage.do")
-//	public @ResponseBody Map<String, Object> processReplyComment(@RequestParam("replybox") String replyMsg,
-//		 HttpServletRequest request, Model m) throws Exception {
-//		
-//		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
-//		
-//		Integer memberId = memberBean.getMemberId();
-//		ProgramCommentBean pBean =new ProgramCommentBean();
-//		
-//		Date time = new Date();
-//		SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
-//		String dateString = df.format(time);
-//		Map<String, Object> commListitem = new HashMap<>();
-//		
-//		
+	
+	@Column	
+	@Temporal(TemporalType.TIMESTAMP)
+	@PostMapping("/podcastReplyPage.do")
+	public @ResponseBody Map<String, Object> processReplyComment(@RequestParam("replybox") String replyMsg,@RequestParam("commentId")Integer commentId,
+		 HttpServletRequest request, Model m) throws Exception {
+		
+		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+		
+		Integer memberId = memberBean.getMemberId();
+	//	ProgramCommentBean pBean =new ProgramCommentBean();
+	
+		Date time = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+		String dateString = df.format(time);
+		Map<String, Object> commListitem = new HashMap<>();
+		
+		
 //		pBean.setReplyDate(time);
 //		pBean.setReplyMsg(replyMsg);
-//		pBean.setMsgDateIsreplyName(dateString);
-//	
-//		ServletContext app = request.getServletContext();
-//		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-//		ProgramCommentDAO commDao = (ProgramCommentDAO) context.getBean("ProgramCommentDAO");
-//    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
-//		
-//    	commDao.insert(pBean);
-//		
-//		
-//		
-//		return commListitem;
-//	}
-//	}
+	
+		ServletContext app = request.getServletContext();
+		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+		ProgramCommentDAO commDao = (ProgramCommentDAO) context.getBean("ProgramCommentDAO");
+    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
+		
+    	commDao.reply(commentId, replyMsg, time);
+    	
+    	commListitem.put("replyMsg",replyMsg);
+    	commListitem.put("replyDate", dateString);
+		
+		
+		
+		return commListitem;
+	}
+	}
 	
 //	//刪除
 //	@PostMapping(path= "processDeleteComment")
