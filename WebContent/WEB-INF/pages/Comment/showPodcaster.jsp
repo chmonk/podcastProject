@@ -533,12 +533,12 @@ padding-left: 30px;
 								<p class="messageTitle">${comment.Name}</p>
 								<p class="messageContent">${comment.commentMsg}</p>
 								<p class="messageDate">${comment.msgDate}</p>
-								<div class="replymessage">
-									<p class="human">作者:</p>
+<!-- 								<div class="replymessage"> -->
+<!-- 									<p class="human">作者:</p> -->
 									<p id="${comment.commentId}" class="replyMsg">${comment.replyMsg}<br>
-									<div class="replydate">${comment.replyDate}</div>
+									${comment.replyDate}
 									</p>
-								</div>
+<!-- 								</div> -->
 								<div class="reply" style="display: none">
 									<button type="button" onclick="display('${comment.msgDate}')"
 										class="btnSendMessage">回復</button>
