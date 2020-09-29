@@ -95,7 +95,7 @@
                 </thead>
                 <c:forEach items="${subRecordList}" var="subRecord">
                     <tr>
-                        <td>${subRecord.getReceipt()}</td>
+                        <td><a href="http://localhost:8080/SpringWebProject/podcastPage?fuzzyPodcasterId=${subRecord.getPodcasterId()}">${subRecord.getReceipt()}</a></td>
                         <td>${subRecord.getSubdateStart()}</td>
                         <td>${subRecord.getSubdateEnd()}</td>
                         <td>${subRecord.getMonthlyPayment()}</td>
@@ -111,8 +111,10 @@
                 </tr>
 
             </table>
+
            </div>
       </div>
+
 
 </body>
 </html>
