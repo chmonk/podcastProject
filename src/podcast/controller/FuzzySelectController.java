@@ -120,6 +120,8 @@ public class FuzzySelectController {
     			selectData.setAudioImg(podcastAllData.get(e.getIndex()).getAudioimg());
     			selectData.setLikesCount(podcastAllData.get(e.getIndex()).getLikesCount());
     			selectData.setConfirmubScription(confirmSubscriptionStatus(memberId,podcastAllData.get(e.getIndex()).getMemberId()));
+    			selectData.setPodcasterId(podcastAllData.get(e.getIndex()).getMemberId());
+    			
     			fuzzyPodcastData.add(selectData);
     		}
     	}

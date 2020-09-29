@@ -45,7 +45,7 @@
 }
 
 .padcastlist {
-	margin: 60px;
+	margin: 20px 60px 60px 60px;
 }
 .padcard{
 	margin: auto;
@@ -59,7 +59,7 @@
 .padcard li {
 	margin: 0;
 	float: left;
-	padding: 50px 0;
+	padding: 30px 0;
 }
 
 .title-select {
@@ -102,6 +102,15 @@
 	color: #fff;
     outline: 0;
 }
+
+.podcastListTitle{
+	margin-left: 65px;
+    margin-bottom: 30px;
+}
+.podcasterListTitle{
+	margin-bottom: 0px;
+	margin-top: 20px;
+}
  
  
 
@@ -140,6 +149,12 @@ $(document).ready(function(){
 		<div class="container padcard">
 			<div class="row">
 				<div class="col-sm-12">
+				<c:if test="${empty fuzzyUserData and empty fuzzyPodcastData}">
+					<h2 class="podcasterListTitle">找不到資料!請重新搜尋!</h2>
+				</c:if>
+				<c:if test="${not empty fuzzyUserData}">
+					<h4 class="podcasterListTitle">播客列表</h4>
+				</c:if>
 					<ul class="owl-carousel owl-theme">
 						<c:forEach var="data" items="${fuzzyUserData}">
 							<li class="item">
@@ -150,7 +165,7 @@ $(document).ready(function(){
 										<h4 class="card-title">${data.getNickname()}</h4>
 										<p class="card-text">${data.getInfo()}</p>
 										<form action="<c:url value="/podcastPage"/>">
-						                   <input type="hidden" name="fuzzyPodcasterId" value=${data.getMemberId()} />
+						                   <input type="hidden" name="fuzzyPodcasterId" value="${data.getMemberId()}" />
 						                   <input type="submit" class="btn1 first" value="前往"/>
 						                 </form>
 									</div>
@@ -161,7 +176,11 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+		
 		<div class="padcastlist">
+			<c:if test="${not empty fuzzyPodcastData}">
+				<h4 class="podcastListTitle">節目列表</h4>
+			</c:if>
 			<c:forEach var="data" items="${fuzzyPodcastData}">
 				<div class="container PodcastData">
 					<div class="card-media">
@@ -208,7 +227,7 @@ $(document).ready(function(){
 													class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 											</c:when>
 											<c:otherwise>
-												<a id="${data.getPodcastId()}"
+												<a id="${data.getPodcastId()}" href="<c:url value="/podcastPage?fuzzyPodcasterId=${data.getPodcasterId()}"/>"
 													class="card-media-body-supporting-bottom-text card-media-link u-float-right">
 													需訂閱才能收聽</a>
 											</c:otherwise>

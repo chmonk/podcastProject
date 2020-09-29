@@ -86,16 +86,16 @@
 
 	</script>
 	<style type="text/css">
-	.ui-menu{
-	z-index: 999999;
-	}
+
 	.ui-autocomplete-category {
     font-weight: bold;
     padding: .2em .4em;
     margin: .8em 0 .2em;
     line-height: 1.5;
   }
- 
+.navbar-fixed-top{
+z-index: 90 !important;
+}
 
 nav ul {
 	padding: 0;
@@ -139,6 +139,7 @@ nav ul ul li {
 	float:none;
 	display:list-item;
 	position: relative;
+	background-color: rgba(0,0,0,0.2);
 }
 .aaaa{
 	color: white;
@@ -317,7 +318,7 @@ nav ul ul li {
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<img src="img/banner/b1.jpg" alt="...">
+						<img src="img/banner/banner1001.jpg" alt="...">
 						<div class="container">
 							<!-- banner caption -->
 							<div class="carousel-caption slide-one">
@@ -342,7 +343,7 @@ nav ul ul li {
 						</div>
 					</div>
 					<div class="item">
-						<img src="img/banner/b2.jpg" alt="...">
+						<img src="img/banner/banner1000.jpg" alt="...">
 						<div class="container">
 							<!-- banner caption -->
 							<div class="carousel-caption slide-two">
