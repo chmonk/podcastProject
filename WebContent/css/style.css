@@ -177,6 +177,19 @@ hr{
   animation-duration:2s;
   animation-delay:1s;
 }
+/* .banner .carousel .carousel-caption .h3delay h3{
+  -webkit-animation-duration: 2s;
+  -webkit-animation-delay: 2.5s;
+  -moz-animation-duration: 2s;
+  -moz-animation-delay: 2.5s;
+  -ms-animation-duration: 2s;
+  -ms-animation-delay: 2.5s;
+  -o-animation-duration: 2s;    
+  -o-animation-delay: 2.5s;    
+  animation-duration:2s;
+  animation-delay:2.5s;
+	
+} */
 
 .banner .carousel .carousel-caption h2 i {
 	font-size: 64px;
@@ -613,6 +626,8 @@ hr{
 .portfolio-content .item img {
 	width: 100%;
 	max-width: 450px;
+	height: 300px;
+	object-fit: cover;
 }
 
 .portfolio-content .item .p-transparent{

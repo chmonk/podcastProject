@@ -61,23 +61,35 @@
 		<jsp:include page="hero.jsp" flush="true " />
 		<!--/ hero end -->
 
+
+		<!-- 矚目新選 -->
+		<jsp:include page="promo_feature.jsp" flush="true " />
+		<!-- 矚目新選 -->
+
 		<!-- 熱播排行 -->
  		<jsp:include page="promo_feature_active.jsp" flush="true " />
 		<!-- 熱播排行 -->
 
+
 		<!-- call to action -->
-<%-- 		<jsp:include page="callToAction.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="callToAction.jsp" flush="true " /> --%>
 		<!--/ cta end -->
 <%-- 
 		<!-- 熱播排行 -->
+<<<<<<< HEAD
+		<%-- <jsp:include page="workWithUs.jsp" flush="true " /> --%>
+		<%-- <jsp:param value="" name=""/> --%>
+		<%-- 		</jsp:include>
+=======
 		<jsp:include page="workWithUs.jsp" flush="true " />
 		<jsp:param value="" name=""/> 
 				</jsp:include>
+>>>>>>> origin/RickyLee
  --%>
 		<!-- 熱播排行 -->
 
-		<!-- sign up for news letter -->
-		<jsp:include page="newsLetter.jsp" flush="true " />
+		<!-- 搜尋 -->
+		<jsp:include page="selectBar.jsp" flush="true " />
 		<!-- news letter end -->
 
 		<!-- 人氣播客 portfolio -->
@@ -91,15 +103,15 @@
 		<!-- events end -->
 
 		<!-- about -->
-<%-- 		<jsp:include page="about.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="about.jsp" flush="true " /> --%>
 		<!-- about end -->
 
 		<!-- meet -->
-<%-- 		<jsp:include page="meets.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="meets.jsp" flush="true " /> --%>
 		<!-- meet end -->
 
 		<!-- contact -->
-<%-- 		<jsp:include page="contact.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="contact.jsp" flush="true " /> --%>
 		<!-- contact end -->
 
 		<!-- footer -->
@@ -117,6 +129,7 @@
 
 
 	<!-- Javascript files -->
+
 	
 	<!-- 首頁排行JS -->
 	<script type="text/javascript"
@@ -126,6 +139,7 @@
 		window.onload=function(){popularPodcast();popularPodcaster()};
 
 	
+
 	</script>
 
 

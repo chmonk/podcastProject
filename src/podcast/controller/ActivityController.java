@@ -3,6 +3,7 @@ package podcast.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,15 +28,23 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import podcast.model.dao.ActivityDAO;
+import podcast.model.dao.CategoryDAO;
+import podcast.model.dao.LikeRecordDAO;
+import podcast.model.dao.MemberDAO;
 import podcast.model.dao.OrderTicketDAO;
+import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.LoginBean;
 import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.OrderTicketBean;
+import podcast.model.javabean.fuzzyPodcastReturnArchitecture;
+import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
 @SessionAttributes({ "LoginOK", "products_DPP", "ShoppingCart","ActivityList" })
 public class ActivityController {
+	@Autowired 
+	LikeRecordDAO ldao;
 
 	// 管理活動頁面
 	@GetMapping("/manageActivities")
@@ -132,7 +142,7 @@ public class ActivityController {
 		// 專案資料夾名稱
 		String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
 		// 取得到含workspace前的絕對路徑
-		String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,path.indexOf("/.metadata"));
+		String workspace=request.getSession().getServletContext().getRealPath("/").substring(0,path.indexOf("\\.metadata"));
 
 		// 制式資料夾
 		// 節目圖片 programimg
@@ -144,7 +154,7 @@ public class ActivityController {
 		String savefolder = "activitypic";
 
 		// 制式檔案名稱
-		String savefilename = id + maintitile + subtitle;
+		String savefilename = maintitile + subtitle;
 
 		// 檔案制式存檔名稱 待設定
 
@@ -173,6 +183,8 @@ public class ActivityController {
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 
 		ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
+    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
+
 
 		List<ActivityBean> list = new LinkedList<ActivityBean>();
 		list = aDao.selectOpenActivities();
@@ -181,7 +193,29 @@ public class ActivityController {
 		//購物車商品
 		Map<Integer, ActivityBean> aMap = aDao.getActivityMap();
 		m.addAttribute("products_DPP", aMap);
-
+		
+		//撈前九筆最新上傳的節目
+		UploadPodcastDAO up = (UploadPodcastDAO) context.getBean("UploadPodcastDAO");
+    	CategoryDAO cdao = (CategoryDAO)context.getBean("CategoryDAO");
+		List<uploadPodcastBean> upList = up.selectLatestPodcasts();
+		ArrayList<fuzzyPodcastReturnArchitecture> PodcastData = new ArrayList<fuzzyPodcastReturnArchitecture>();
+		for(uploadPodcastBean e:upList) {
+			fuzzyPodcastReturnArchitecture data = new fuzzyPodcastReturnArchitecture();
+			data.setAudioImg(e.getAudioimg());
+			data.setAudioPath(e.getAudioPath());
+			data.setClickAmount(e.getClickAmount());
+			data.setLikesCount(e.getLikesCount());
+			data.setOpenPayment(e.getOpenPayment());
+			data.setPodcastId(e.getPodcastId());
+			data.setPodcastInfo(e.getPodcastInfo());
+			data.setPodcasterName(mdao.selectPodcaster(e.getMemberId()).getNickname());
+			data.setCategoryName(cdao.select(e.getCategoryId()).getCategoryName());
+			data.setTitle(e.getTitle());
+			data.setUploadTime(e.getUploadTime());
+			PodcastData.add(data);		
+		}
+    	m.addAttribute("PodcastData",PodcastData);
+		
 		return "index";
 
 	}
@@ -234,7 +268,7 @@ public class ActivityController {
 			@ModelAttribute("ActivityBean") ActivityBean activity,
 			@RequestParam("soldQuantity") Integer soldQuantity,
 			@RequestParam("oldMaxppl") Integer oldMaxppl,
-//			@RequestParam("file") MultipartFile multipartFile,
+			@RequestParam("file") MultipartFile multipartFile,
 			Model m,HttpServletRequest request) throws Exception {
 		
 		System.out.println("Entering processAction2");
@@ -273,6 +307,8 @@ public class ActivityController {
 		Integer Id = memberBean.getMemberId();		
 		activity.setPodcasterId(Id);
 		
+		String ActivityImg = processFile(Id,multipartFile,request);
+		activity.setActivityImg(ActivityImg);
 //		String ActivityImg = "";
 //		if(multipartFile != null) {
 //			ActivityImg = processFile(Id,multipartFile,request);
