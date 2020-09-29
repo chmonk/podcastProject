@@ -446,7 +446,7 @@ public class HistoryDao implements IHistoryDao {
 		
 		
 		//取得對應使用者觀看節目紀錄加上愛心紀錄  使用native sql 取得節目id 名字 上船者id 上傳者nickname 節目上傳時間 愛心與否(加入播放列表用) 
-				public List<HistoryOrderProgramBean> selectHistoryByMemberId5(Integer memberId) {
+				public List<HistoryOrderProgramBean> selectHistoryByMemberId5(Integer memberId) throws ParseException {
 					
 					Session session = sessionFactory.getCurrentSession();
 					
@@ -490,13 +490,12 @@ public class HistoryDao implements IHistoryDao {
 						
 						System.out.println(resultSet.get(i)[3].toString());
 						
-						
-						
-						
+
 						SimpleDateFormat sdf1 = new SimpleDateFormat(resultSet.get(i)[3].toString());
 						
 						String lastListen = resultSet.get(i)[3].toString();
 						String uploadTime = resultSet.get(i)[6].toString();
+						String registerenddate;
 						
 						hpbean.setPodcastId(Integer.parseInt(resultSet.get(i)[0].toString()));
 						hpbean.setPodcastName(resultSet.get(i)[1].toString());
@@ -514,7 +513,48 @@ public class HistoryDao implements IHistoryDao {
 						hpbean.setLikestatus(Integer.parseInt(resultSet.get(i)[13].toString()));
 						hpbean.setShowInListOrNot(Integer.parseInt(resultSet.get(i)[14].toString()));
 						hpbean.setOpenPayment(Integer.parseInt(resultSet.get(i)[15].toString()));
-						hpbean.setSubdateEnd(resultSet.get(i)[16].toString());
+						//處理訂閱到期時間
+						if(resultSet.get(i)[16]==null) {
+							//System.out.println("date null");
+							hpbean.setSubdateEnd("null");
+						}else {
+							//System.out.println("date not null");
+							//System.out.println(resultSet.get(i)[16].toString());
+						    registerenddate=resultSet.get(i)[16].toString();
+							hpbean.setSubdateEnd(registerenddate);
+						}
+						
+						//判斷節目是否付費      依據訂閱時間與目前時間判斷是否到期
+						
+						if(hpbean.getOpenPayment()==0) {
+							//不須付費可觀看
+							hpbean.setWatchProgramValidation(1);
+						}else {
+							//付費權限檢測
+							String dateformat= "yyyy-MM-dd";
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+							
+							
+							if(hpbean.getSubdateEnd().equals("null")) {
+								//沒訂閱不可加入閱覽
+								hpbean.setWatchProgramValidation(0);
+							}else {
+								Date subendDate = sdf.parse(hpbean.getSubdateEnd());
+								
+								Date now= new Date();
+								
+								int comparison = subendDate.compareTo(now);
+								
+								if(comparison!=-1) {
+									hpbean.setWatchProgramValidation(1);
+								}else {
+									hpbean.setWatchProgramValidation(0);
+								}
+								
+							}
+							
+				
+						}
 						orderList.add(hpbean);
 					}
 					
