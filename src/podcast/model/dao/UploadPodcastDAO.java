@@ -98,6 +98,22 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 
 		return upList;
 	}
+	
+	
+	public List<uploadPodcastBean> selectLatestPodcasts() throws Exception {
+
+		Session session = sessionFactory.getCurrentSession();
+		String hbl = "from uploadPodcastBean order by uploadTime DESC";
+
+		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
+
+		query.setFirstResult(0);
+		query.setMaxResults(8);
+
+		List<uploadPodcastBean> upList = query.list();
+		System.out.println("抓到了："+upList);
+		return upList;
+	}
 
 	@Override
 	public uploadPodcastBean update(Integer podcastId, uploadPodcastBean ubean) throws Exception {
