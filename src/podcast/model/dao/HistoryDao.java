@@ -1,5 +1,6 @@
 package podcast.model.dao;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;    
 import java.util.Date;  
 
@@ -318,7 +319,7 @@ public class HistoryDao implements IHistoryDao {
 
    
 		//取得對應使用者觀看節目紀錄加上愛心紀錄  使用native sql 取得節目id 名字 上船者id 上傳者nickname 節目上傳時間 愛心與否(網頁瀏覽紀錄用) 
-		public List<HistoryOrderProgramBean> selectHistoryByMemberId4(Integer memberId) {
+		public List<HistoryOrderProgramBean> selectHistoryByMemberId4(Integer memberId) throws ParseException {
 			
 			Session session = sessionFactory.getCurrentSession();
 			
@@ -326,7 +327,7 @@ public class HistoryDao implements IHistoryDao {
 			String nativesqlstr =
 					"select "
 					//表格組成
-					+ "h.podcastId,h.podcastName,h.publisherId,h.lastListen,h.memberId ,m.nickname,u.uploadTime, u.likesCount,u.clickAmount,u.audioImg, u.audioPath,u.podcastInfo, c.categoryName,l.likeStatus,l.showInListOrNot "
+					+ "h.podcastId,h.podcastName,h.publisherId,h.lastListen,h.memberId ,m.nickname,u.uploadTime, u.likesCount,u.clickAmount,u.audioImg, u.audioPath,u.podcastInfo, c.categoryName,l.likeStatus,l.showInListOrNot ,u.openPayment ,s.subdateEnd "
 					//get the lastest record for each program from same memberid  1.?
 					+ "from (select *, ROW_NUMBER() over(partition by podcastid order by lastlisten desc  ) as sn "
 					+ "from browsingHistory where memberid= ? ) as h "
@@ -338,6 +339,8 @@ public class HistoryDao implements IHistoryDao {
 					+ "left join category as c on u.categoryId=c.categoryId "
 					//join members
 					+ "left join members as m on m.memberId=h.publisherId "
+					//check the subsription
+					+" left join subscription as s on s.memberId=h.memberId and  h.publisherId=s.podcasterId "
 					// for specific memberid 2.?
 					+ "where h.memberId= ?  "
 					//the lastest record
@@ -358,7 +361,7 @@ public class HistoryDao implements IHistoryDao {
 				
 				HistoryOrderProgramBean hpbean= new HistoryOrderProgramBean();
 				
-				System.out.println(resultSet.get(i)[3].toString());
+				//System.out.println(resultSet.get(i)[3].toString());
 				
 				
 				
@@ -367,6 +370,7 @@ public class HistoryDao implements IHistoryDao {
 				
 				String lastListen = resultSet.get(i)[3].toString();
 				String uploadTime = resultSet.get(i)[6].toString();
+				String registerenddate;
 				
 				hpbean.setPodcastId(Integer.parseInt(resultSet.get(i)[0].toString()));
 				hpbean.setPodcastName(resultSet.get(i)[1].toString());
@@ -383,7 +387,57 @@ public class HistoryDao implements IHistoryDao {
 				hpbean.setCategoryName(resultSet.get(i)[12].toString());
 				hpbean.setLikestatus(Integer.parseInt(resultSet.get(i)[13].toString()));
 				hpbean.setShowInListOrNot(Integer.parseInt(resultSet.get(i)[14].toString()));
+				hpbean.setOpenPayment(Integer.parseInt(resultSet.get(i)[15].toString()));
 				
+				//處理訂閱到期時間
+				if(resultSet.get(i)[16]==null) {
+					//System.out.println("date null");
+					hpbean.setSubdateEnd("null");
+				}else {
+					//System.out.println("date not null");
+					//System.out.println(resultSet.get(i)[16].toString());
+				    registerenddate=resultSet.get(i)[16].toString();
+					hpbean.setSubdateEnd(registerenddate);
+				}
+				
+				//判斷節目是否付費      依據訂閱時間與目前時間判斷是否到期
+				
+				if(hpbean.getOpenPayment()==0) {
+					//不須付費可觀看
+					hpbean.setWatchProgramValidation(1);
+				}else {
+					//付費權限檢測
+					String dateformat= "yyyy-MM-dd";
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					
+					
+					if(hpbean.getSubdateEnd().equals("null")) {
+						//沒訂閱不可加入閱覽
+						hpbean.setWatchProgramValidation(0);
+					}else {
+						Date subendDate = sdf.parse(hpbean.getSubdateEnd());
+						
+						Date now= new Date();
+						
+						int comparison = subendDate.compareTo(now);
+						
+						if(comparison!=-1) {
+							hpbean.setWatchProgramValidation(1);
+						}else {
+							hpbean.setWatchProgramValidation(0);
+						}
+						
+					}
+					
+		
+				}
+				
+				
+				
+				
+				
+				
+
 				orderList.add(hpbean);
 			}
 			
@@ -400,7 +454,7 @@ public class HistoryDao implements IHistoryDao {
 					String nativesqlstr =
 							"select "
 							//表格組成
-							+ "h.podcastId,h.podcastName,h.publisherId,h.lastListen,h.memberId ,m.nickname,u.uploadTime, u.likesCount,u.clickAmount,u.audioImg, u.audioPath,u.podcastInfo, c.categoryName,l.likeStatus,l.showInListOrNot "
+							+ "h.podcastId,h.podcastName,h.publisherId,h.lastListen,h.memberId ,m.nickname,u.uploadTime, u.likesCount,u.clickAmount,u.audioImg, u.audioPath,u.podcastInfo, c.categoryName,l.likeStatus,l.showInListOrNot ,u.openPayment ,s.subdateEnd "
 							//get the lastest record for each program from same memberid  1.?
 							+ "from (select *, ROW_NUMBER() over(partition by podcastid order by lastlisten desc  ) as sn "
 							+ "from browsingHistory where memberid= ? ) as h "
@@ -412,6 +466,8 @@ public class HistoryDao implements IHistoryDao {
 							+ "left join category as c on u.categoryId=c.categoryId "
 							//join members
 							+ "left join members as m on m.memberId=h.publisherId "
+							//check the subsription
+							+" left join subscription as s on s.memberId=h.memberId and  h.publisherId=s.podcasterId "
 							// for specific memberid 2.?
 							+ "where h.memberId=?  "
 							//the lastest record
@@ -457,7 +513,8 @@ public class HistoryDao implements IHistoryDao {
 						hpbean.setCategoryName(resultSet.get(i)[12].toString());
 						hpbean.setLikestatus(Integer.parseInt(resultSet.get(i)[13].toString()));
 						hpbean.setShowInListOrNot(Integer.parseInt(resultSet.get(i)[14].toString()));
-						
+						hpbean.setOpenPayment(Integer.parseInt(resultSet.get(i)[15].toString()));
+						hpbean.setSubdateEnd(resultSet.get(i)[16].toString());
 						orderList.add(hpbean);
 					}
 					

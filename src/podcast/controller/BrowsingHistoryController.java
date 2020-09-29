@@ -55,6 +55,12 @@ public class BrowsingHistoryController {
 		
 		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId4(userId);
 
+		/*觀看權限訂閱
+		for(HistoryOrderProgramBean r:rs) {
+			System.out.println("podcastid:"+r.getPodcastId()+" openpayment:"+r.getOpenPayment()+" enddate:"+r.getSubdateEnd());
+			System.out.println("podcastid:"+r.getPodcastId()+" valid:"+r.getWatchProgramValidation());
+		}  */
+		
 		m.addAttribute("history", rs);
 
 
