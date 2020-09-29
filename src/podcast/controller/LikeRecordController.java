@@ -57,7 +57,7 @@ public class LikeRecordController {
 	
 	//ajax要瀏覽紀錄整理  塞到播放列表
 		@PostMapping(value = "/getlikePlaylist")
-		public @ResponseBody List<Map<String, String>> getUserPlaylist(HttpServletRequest request, Model m) {
+		public @ResponseBody List<Map<String, String>> getUserPlaylist(HttpServletRequest request, Model m) throws Exception {
 			// test get userid
 			
 			MemberBean mbean = (MemberBean)m.getAttribute("LoginOK");
