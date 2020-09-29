@@ -60,7 +60,7 @@ h2 {
 	display: inline;
 }
 
-#pressHistoryAdd {
+#presslikelistAdd {
 	right: 15%;
 	top: 30px;
 	position: absolute;
@@ -88,7 +88,7 @@ h2 {
 		<div class="default-heading">
 			<h2>我的最愛</h2>
 		</div>
-		<button id="pressHistoryAdd" class="btn btn-primary">一鍵加入</button>
+		<button id="presslikelistAdd" class="btn btn-primary">一鍵加入</button>
 	</div>
 
 	<!-- 	<div class="titelheader"> -->

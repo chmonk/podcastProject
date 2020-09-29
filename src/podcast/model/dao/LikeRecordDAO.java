@@ -305,9 +305,8 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 							
 						}
 					
+					}
 					orderList.add(hpbean);
-					
-				}
 				
 			}
 				return orderList;

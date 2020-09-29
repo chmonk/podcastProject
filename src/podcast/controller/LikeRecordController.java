@@ -48,6 +48,12 @@ public class LikeRecordController {
 		Integer userId= mbean.getMemberId();
 		
 		List<HistoryOrderProgramBean> rs = ldao.selectLikeList(userId);
+		
+		//輸出檢測
+//		for(HistoryOrderProgramBean h:rs) {
+//			
+//			System.out.println("podcast id :"+ h.getPodcastId() + " name: "+h.getPodcastName());
+//		}
 
 		m.addAttribute("history", rs);
 
@@ -75,17 +81,19 @@ public class LikeRecordController {
 
 			for (HistoryOrderProgramBean hpbean : result) {
 				//預計要加上作者連結
-				
-				Map<String, String> map = new HashMap<String, String>();
-				
-				map.put("podcastId",hpbean.getPodcastId().toString());
-				map.put("author",hpbean.getNickname());
-				map.put("authorUrl","");
-				map.put("fileName", hpbean.getPodcastName());
-				map.put("fileUrl", hpbean.getAudioPath());
-				map.put("thumb",hpbean.getAudioImg());
-				
-				list.add(map);
+				if(hpbean.getWatchProgramValidation()==1) {
+					
+					Map<String, String> map = new HashMap<String, String>();
+					
+					map.put("podcastId",hpbean.getPodcastId().toString());
+					map.put("author",hpbean.getNickname());
+					map.put("authorUrl","");
+					map.put("fileName", hpbean.getPodcastName());
+					map.put("fileUrl", hpbean.getAudioPath());
+					map.put("thumb",hpbean.getAudioImg());
+					
+					list.add(map);
+				}
 			}
 
 			return list;
