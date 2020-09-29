@@ -4,7 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <!-- Custom CSS -->
+<link href="css/style.css" rel="stylesheet">
+<link href="css/style-color.css" rel="stylesheet">
  <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
+<style type="text/css">
 	
 <meta charset="UTF-8">
 <title>訂閱頻道紀錄</title>
@@ -15,15 +19,16 @@
         }
 
         body {
-            background-image: url(<c:url value='/img/banner/b4.jpg' />);
+        background-color:#f9f9f9;
+/*             background-image: url(<c:url value='/img/banner/b3.jpg' />); */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
   
   		.custyle{
-  		padding:100px;}
-
+/*   		padding:100px;} */
+}
         .custab {
 
             border: 1px solid #ccc;
@@ -51,6 +56,17 @@
         h1 {
             color: white;
         }
+            h2 {
+/*     	margin: 10%; */
+    	text-align:center;
+	margin-bottom:10px;
+        display: inline;
+    }
+    
+    .default-heading{
+    margin-top: 150px!important;
+    margin-bottom:0px!important;
+    }
 </style>
 
 </head>
@@ -59,27 +75,17 @@
 		<jsp:include page="header_banner_test.jsp" flush="true " />
 	</div>
 
-<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
-	</div>
+
+	
+		<div class="default-heading">
+		<h2 >購買紀錄</h2></div>
 	
     <div class="container">
         <div class="custyle">
             <table class="table table-striped custab">
                 <thead>
                     <tr>
-                        <td colspan="4">${LoginOK.name}的訂閱頻道紀錄</td>
+                        <td colspan="4">${LoginOK.name}的訂閱頻道</td>
                     </tr>
                     <tr>
                         <th>頻道名稱</th>
@@ -90,7 +96,7 @@
                 </thead>
                 <c:forEach items="${subRecordList}" var="subRecord">
                     <tr>
-                        <td>${subRecord.getReceipt()}</td>
+                        <td><a href="http://localhost:8080/SpringWebProject/podcastPage?fuzzyPodcasterId=${subRecord.getPodcasterId()}">${subRecord.getReceipt()}</a></td>
                         <td>${subRecord.getSubdateStart()}</td>
                         <td>${subRecord.getSubdateEnd()}</td>
                         <td>${subRecord.getMonthlyPayment()}</td>
@@ -106,6 +112,7 @@
                 </tr>
 
             </table>
-
+</div>
+</div>
 </body>
 </html>

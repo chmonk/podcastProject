@@ -9,14 +9,20 @@
 <meta charset="UTF-8">
 <title>管理頻道頁面</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
+<!-- Custom CSS -->
+<link href="css/style.css" rel="stylesheet">
+<link href="css/style-color.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
 <style type="text/css">
     body {
-            background-image: url(<c:url value='/img/banner/b4.jpg' />);
+        background-color:#f9f9f9;
+/*             background-image: url(<c:url value='/img/banner/b3.jpg' />); */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
+        
+
         .custab {
             border: 1px solid #ccc;
             padding: 5px;
@@ -50,6 +56,17 @@ table-layout: fixed;}
 	padding-top: 50px;
 	/* 	border-bottom: 1px solid black;  */
 }
+
+    h2 {
+    	margin: 10%;
+    	text-align:center;
+	margin-bottom:10px;
+        display: inline;
+    }
+    .headtop{
+	margin-top:120px;
+	margin-bottom:20px;
+}
 </style>
 </head>
 
@@ -57,30 +74,18 @@ table-layout: fixed;}
 <div class="head">
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
-
-<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
-	</div>
+		<div class="default-heading headtop">
+		<h2 >頻道管理</h2></div>
+	
 <div class="container">
-        <div class="row col-md-6 col-md-offset-3 custyle">
+        <div class="row col-md-10 col-md-offset-1 custyle">
             <table class="table table-striped custab">
                 <thead>
                     <a href="<c:url value='/addPodcast' />" class="btn btn-primary btn-md pull-right">+新增單集</a>
                     <br>
                     <tr><td colspan="5">${LoginOK.name}的頻道列表</td></tr>
                     <tr>
-                    	<td>單集圖像</td>
+                    	<th>單集圖像</th>
                         <th class="name">單集名稱</th>
                         <th>上傳日期</th>
                         <th>修改</th>
@@ -89,10 +94,10 @@ table-layout: fixed;}
                 </thead>
                 <c:forEach var="podcast" varStatus="loop" items="${upList}">
                 <tr>
-                	<td><img width="50%" src="<c:url value='${podcast.audioimg}' />"></td>
-                	<td>${podcast.title}</td>
-                	<td>${podcast.uploadTime}</td>
-                	<td><form action="<c:url value="/modifyPodcast"/>"><input type="hidden" name="thisPodcastId" value=${podcast.podcastId}>
+                	<td><img width="110%" src="<c:url value='${podcast.audioimg}' />"></td>
+                	<td   width="110px">${podcast.title}</td>
+                	<td   width="110px">${podcast.uploadTime}</td>
+                	<td   width="110px"><form action="<c:url value="/modifyPodcast"/>"><input type="hidden" name="thisPodcastId" value=${podcast.podcastId}>
                 		<input class="btn btn-warning" type="submit" name="modify" value="修改" ></form></td>
                 	<td><form id="${podcast.podcastId}" action="<c:url value="/processDeletePodcast"/>"  method="POST">
 						<input type="hidden" name="delPodcastId" value=${podcast.podcastId}> 

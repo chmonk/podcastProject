@@ -53,6 +53,11 @@ function reconfirmOrder() {
 	/* 	border-bottom: 1px solid black;  */
 }
 
+.headtop{
+	margin-top:120px;
+	margin-bottom:20px;
+}
+
 </style>
 </head>
 <body style="background:;">
@@ -60,25 +65,9 @@ function reconfirmOrder() {
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
 
-<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
-	</div>
-
-
 <c:set var="funcName" value="CHE" scope="session"/>
 <%-- <jsp:include page="/fragment/topMVC.jsp" /> --%>
-<div style="text-align:center">
+<div style="text-align:center" class="headtop">
 <h3>請確認訂購資訊：</h3>
 <FORM style="margin: 0 auto; width:750px;" action="<c:url value='preProcessOrder' />" method="POST" >
    <TABLE border='1' style="background:; border-color:rgb( 100, 100, 255); border-style: outset; width:810;">

@@ -3,6 +3,7 @@ package podcast.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -42,17 +43,35 @@ public class RegisterController {
 	@RequestMapping(path = "/addMemberProcess", method = RequestMethod.POST)
 	public String processAction(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request,
 			@ModelAttribute("MemberBean") MemberBean members, BindingResult result, Model m) throws Exception {
+		
 		// 檢查所有欄位,有空白則導回表單
 		if (result.hasErrors()) {
 			return "Member/registerForm";
 		}
+		
+		
+		System.out.println("members"+members.getRegisterDate());
+		
+		java.util.Date rdate = new java.util.Date();
+		java.sql.Date registerDate= new java.sql.Date(rdate.getTime());
+		
+		members.setRegisterDate(registerDate);
+		
+		System.out.println("members"+members.getRegisterDate());
+
+		
+		String image = processFile2(multipartFile,request);		
+		members.setImage(image);	
+		
+		
+		
+		
 		// 取得前端欄位資料
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
 		String nickname = request.getParameter("nickname");
 		String birthday = request.getParameter("birthday");
-		String registerDate = request.getParameter("registerDate");
 		String info = request.getParameter("info");
 		String email = request.getParameter("email");
 		String cellphone = request.getParameter("cellphone");
@@ -62,7 +81,7 @@ public class RegisterController {
 		String role = request.getParameter("role");
 		String creditCardNumber = request.getParameter("creditCardNumber");
 		String bankAccount = request.getParameter("bankAccount");
-		String image = processFile2(multipartFile, request);
+		//String image = processFile2(multipartFile, request);
 		members.setImage(image);
 
 		System.out.println("accunt:" + account);
@@ -134,7 +153,10 @@ public class RegisterController {
 		
 		
 
-		// registerDate
+				
+
+			/*
+		// registerDate  new Date()給值  no need test
 		if (registerDate == null || registerDate.length() == 0) {
 			errors.put("registerDate", "registerDate is required");
 		}
@@ -155,7 +177,7 @@ public class RegisterController {
 				}
 			}
 		}
-		;
+		;   */
 		// 自我介紹
 		if (info == null || info.length() == 0) {
 			errors.put("info", "info is required");
@@ -213,6 +235,7 @@ public class RegisterController {
 			return "Member/registerForm";
 		}
 		;
+
 
 		// model傳送資料
 //		m.addAttribute("account", members.getAccount());
