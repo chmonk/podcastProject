@@ -106,6 +106,9 @@ public class ShoppingCartController {
 		ActivityBean bean = map.get(activityId);
 		System.out.println("bean : "+bean.getActivityName());
 		
+		if(bean.getStock()<=0) {
+			return "redirect:/#events";		}
+		
 		OrderItemBean oib = new  OrderItemBean(activityId,activityName,
 				activityPrice,quantity,activityDate,activityLocation,stock,activityImg);
 		System.out.println("票券照片路徑:"+activityImg);	
@@ -184,10 +187,10 @@ public class ShoppingCartController {
 			return "redirect:/login";
 
 		}
-		// 如果使用者取消訂單
+
 		System.out.println("測試零");
 		Integer memberId = memberBean.getMemberId();  
-		double totalAmount = sc.getSubtotal(); // 取出會員代號
+		double totalAmount = sc.getSubtotal(); 
 		Timestamp time= new Timestamp(System.currentTimeMillis());
 		Integer activityId = 10000;  //訂單不該有這一個欄位,應該是OIB才有
 		Integer orderPrice = 10000;  //此欄位已有totalAmount

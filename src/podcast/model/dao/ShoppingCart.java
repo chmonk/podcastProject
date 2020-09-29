@@ -25,8 +25,8 @@ public class ShoppingCart {
 		} else {
 	        // 如果客戶在伺服器端已有此項商品的資料，則客戶『加購』此項商品
 			OrderItemBean oiBean = cart.get(activityId);
-			// 加購的數量：bean.getQuantity()
-			// 原有的數量：oBean.getQuantity()			
+			// 加購的數量：oib.getQuantity()
+			// 原有的數量：oiBean.getQuantity()			
 			oiBean.setQuantity(oib.getQuantity() + oiBean.getQuantity());
 		}
 	}

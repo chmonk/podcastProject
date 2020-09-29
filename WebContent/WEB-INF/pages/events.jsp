@@ -60,9 +60,9 @@
 </style>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeVgKGb9DYep9MX7uwKiRZd2NYaerrhSw"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKsAoRrnd4jZL_pQJhvBgphbttPkTl8LM"
 	defer></script>
-	<script src="js/map.js"></script>
+<script src="js/map.js"></script>
 	
 	<style>
 	#map {
@@ -76,6 +76,8 @@
 	}
 	</style>
 	<script>
+	initialize();
+
 		var geocoder;
 		var map;
 		function initialize() {
@@ -297,7 +299,7 @@
 									<!-- buy ticket button link -->
 									<button href="#bookTicket${loop.index}"
 										class="btn btn-lg btn-theme" data-toggle="modal"
-										id="${loop.index}" name="abc" class="submit" onclick="codeAddress()">購票</button>
+										id="${loop.index}" name="abc" class="submit" value="geocode" onclick="codeAddress()">購票</button>
 								</div>
 							</div>
 						</div>
@@ -316,6 +318,7 @@
 
 	<!-- events end -->
 <script>
+initialize();
 var geocoder;
 var map;
 
