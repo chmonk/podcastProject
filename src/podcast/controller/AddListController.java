@@ -66,7 +66,7 @@ public class AddListController {
 		MemberBean mbean = (MemberBean)model.getAttribute("LoginOK");
 		
 		//check loginOK
-				System.out.println("loginOK ID:"+mbean.getMemberId() );
+		System.out.println("loginOK ID:"+mbean.getMemberId() );
 
 		Integer userid=mbean.getMemberId();
 
