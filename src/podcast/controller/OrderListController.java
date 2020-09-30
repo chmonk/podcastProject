@@ -39,10 +39,7 @@ public class OrderListController {
 
 		}	
 		
-		ShoppingCart sc = (ShoppingCart) model.getAttribute("ShoppingCart");
-		if(sc!=null) {
-		Map<Integer, OrderItemBean> cart =sc.getContent();
-		cart.clear();}
+
 		
 		ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
@@ -50,7 +47,15 @@ public class OrderListController {
 
 		List<OrderTicketBean> memberOrders = ot.getMemberOrders(memberBean.getMemberId());
 		model.addAttribute("memberOrders", memberOrders);
+		
+		ShoppingCart sc = (ShoppingCart) model.getAttribute("ShoppingCart");
+		if(sc!=null) {
+		Map<Integer, OrderItemBean> cart =sc.getContent();
+		cart.clear();}
+		
 		return "Orders/OrderList";
+		
+		
 
 	}
 	

@@ -37,7 +37,7 @@ function confirmDelete(n) {
         }
 
         body {
-         background-color:#f9f9f9;
+         background-color:#f7f7f7!important;
 /*             background-image: url(<c:url value='/img/banner/b5.jpg' />); */
             background-size: cover;
             background-position: center;
