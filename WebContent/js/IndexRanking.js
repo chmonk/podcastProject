@@ -172,7 +172,7 @@
 							podclick3.innerHTML=podcasts[2].clickAmount;
 							play3.id=podcasts[2].podcastId;
 
-							podimg4.src=podcasts[3].audiomg;
+							podimg4.src=podcasts[3].audioimg;
 							podinfo4.innerHTML=podcasts[3].podcastInfo;
 							podtitle4.innerHTML=podcasts[3].title;
 							podlike4.innerHTML=podcasts[3].likesCount;
