@@ -126,11 +126,11 @@
             <div class="col-lg-12">
              <br>
 				<label>單集照片：</label> <input type="file" name="file" 
-								class="form-control" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png" required/><br/>
+								class="form-control" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png"/><br/>
    									<img id="preview_progressbarTW_img" src="${uploadPodcastBean.audioimg}" style="max-width: 300px; max-height: 300px;"/>   								
 						</div>
 						<br>
-            
+            <input type=hidden name="oldImage" value="${uploadPodcastBean.audioimg}">
             <div class="button col-lg-12">
             <br><br>
               <input id="submitBtn" type="button" value="確認修改" class="btn btn-danger btn-block btn-lg" style="box-shadow: 2px 2px 2px gray; ">

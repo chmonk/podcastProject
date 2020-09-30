@@ -30,7 +30,7 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
         }
 
         body {
-        background-color:#f9f9f9;
+        background-color:#f7f7f7!important;
 /*             background-image: url(<c:url value='/img/banner/b3.jpg' />); */
             background-size: cover;
             background-position: center;
@@ -42,7 +42,7 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
             border: 1px solid #ccc;
             padding: 5px;
             margin: 5% 0;
-            box-shadow: 3px 3px 2px #ccc;
+            box-shadow: 3px 3px 2px 2px #ccc;
             transition: 0.5s;
         }
 
