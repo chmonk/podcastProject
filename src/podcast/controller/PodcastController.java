@@ -90,6 +90,7 @@ public class PodcastController {
 								 @RequestParam("category")Integer category,
 								 @RequestParam("podcastId")Integer podcastId,
 								@RequestParam("file") MultipartFile multipartFile,
+								@RequestParam(value="oldImage",required= false)String oldImage,
 								 HttpServletRequest request,
 								 Model m) throws Exception {
 			
@@ -99,14 +100,20 @@ public class PodcastController {
 	    	
 	    	System.out.println("modifyPodcastId:"+podcastId);
 	    	
-	    	String savePicPath = processIMGFile(podcastId,multipartFile,request);
-	    	
 	    	uploadPodcastBean ubean=new uploadPodcastBean();
+	    	
+	    	Boolean b =multipartFile.isEmpty();
+	    	if(!b) {
+	    		String image = processIMGFile(multipartFile, request);
+	    		ubean.setAudioimg(image);
+	    		}else {
+	    			ubean.setAudioimg(oldImage);
+	    		}
+	    
 	    	ubean.setTitle(title);
 	    	ubean.setPodcastInfo(podcastInfo);
 	    	ubean.setOpenPayment(openPayment);
 	    	ubean.setCategoryId(category);
-	    	ubean.setAudioimg(savePicPath);
 	    	upDao.update(podcastId, ubean);
 	    	
 	    	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
@@ -160,7 +167,7 @@ public class PodcastController {
 	    	
 	    	Timestamp time= new Timestamp(System.currentTimeMillis());
 	    	
-	    	String savePicPath = processIMGFile(memberId,multipartFile,request);
+	    	String savePicPath = processIMGFile(multipartFile,request);
 	    	String saveaudioPath = processAUDFile(memberId,multipartFile2,request);
 	    	
 	    	upload.setAudioimg(savePicPath);
@@ -195,7 +202,7 @@ public class PodcastController {
 		
 		
 		
-		public String processIMGFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
+		public String processIMGFile(MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
 			// 取得原檔案名字
 			String filename = multipartFile.getOriginalFilename();
 			System.out.println(filename);

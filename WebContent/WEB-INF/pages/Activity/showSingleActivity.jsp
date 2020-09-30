@@ -132,7 +132,7 @@
           <div class="col-lg-12">
              <br>
 				<label>活動照片：</label> <input type="file" name="file" 
-								class="form-control" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png" required/><br/>
+								class="form-control" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png"/><br/>
    									<img id="preview_progressbarTW_img" src="${aBean.activityImg}" style="max-width: 300px; max-height: 300px;"/>   								
 						<br><br></div>
 						<br>
@@ -141,6 +141,7 @@
 <%--             <input type=hidden name="activityImg" value="${aBean.activityImg}"> --%>
             <input type=hidden name="oldMaxppl" value="${aBean.activityMaxPeople}">
 			<input type=hidden name="soldQuantity" value="${aBean.stock}">
+			<input type=hidden name="oldImage" value="${aBean.activityImg}">
             <div class="button">
               <input type="submit" name="submit" value="送出" class="btn btn-danger btn-block btn-lg"
                 style="box-shadow: 2px 2px 2px gray;">
@@ -176,6 +177,8 @@ function readURL(input){
 	    reader.readAsDataURL(input.files[0]);
 	  }
 	}
+
+
 </script>
 </body>
 
