@@ -30,14 +30,17 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/bootstrap.min.css' />">
 <style type="text/css">
-<
-style type ="text /css ">body {
-	background-color: #f9f9f9;
-	/*             background-image: url(<c:url value='/img/banner/b3.jpg' />); */
-	background-size: cover;
-	background-position: center;
-	background-attachment: fixed;
-}
+
+
+<style type="text/css">
+
+body {
+        background-color:#f7f7f7!important;
+/*             background-image: url(<c:url value='/img/banner/b3.jpg' />); */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
 .showPodcasterBody {
 	padding-top: 40px;

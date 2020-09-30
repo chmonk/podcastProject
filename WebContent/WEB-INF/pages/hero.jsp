@@ -60,10 +60,10 @@
 					<h2>矚目新選</h2>
 					<hr>
 					<!-- paragraph -->
-					<p>
-						We sing the best <strong class="theme-color">Songs</strong> and
-						now we control the world best <strong class="theme-color">Music</strong>.
-					</p>
+<!-- 					<p> -->
+<!-- 						We sing the best <strong class="theme-color">Songs</strong> and -->
+<!-- 						now we control the world best <strong class="theme-color">Music</strong>. -->
+<!-- 					</p> -->
 				</div>
 				<!-- hero play list -->
 				<div class="hero-playlist">

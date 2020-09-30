@@ -164,6 +164,7 @@
 								<label>角色：<font color="red">${err.role}</font></label> 
 								<select class="form-control" name="role"
 									id="role" required>
+									<option value="-1">請選擇</option>
 									<option value="2" id="role2">播客</option>
 									<option value="1" id="role1">一般會員</option>
 									
@@ -217,7 +218,7 @@
 							<label>照片：<font color="red">${err.file}</font></label> <input type="file" name="file"
 								class="form-control" onchange="readURL(this)"
 								targetID="preview_progressbarTW_img"
-								accept="image/gif, image/jpeg, image/png" id="file" required/><br /> <img
+								accept="image/gif, image/jpeg, image/png" id="file"/><br /> <img
 								id="preview_progressbarTW_img" src="${MemberBean.image}"
 								style="max-width: 300px; max-height: 300px;" />
 						</div>
@@ -247,7 +248,7 @@
 							</select>
 						</div>
 						<br>
-						<p id="a"></p>
+						<input type=hidden name="oldImage" value="${MemberBean.image}">
 
 						<div class="button">
 							<input type="submit" name="submit" value="送出"
@@ -279,17 +280,6 @@ window.onload=function(){
 
 
 	}
-
-function checkFile(){
-	var File = document.getElementById("file").value;
-	var a = document.getElementById("a");
-	var oldImage = "<input type=hidden name="oldImage" value="${MemberBean.image}">"
-	if(File == null){
-	a.appendChild(oldImage);
-		}
-}
-
-
 
 
 </script>
