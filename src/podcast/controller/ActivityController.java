@@ -104,7 +104,7 @@ public class ActivityController {
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
 		Integer Id = memberBean.getMemberId();
 		
-		String ActivityImg = processFile(Id,multipartFile,request);		
+		String ActivityImg = processFile(multipartFile,request);		
 		Integer stock = activity.getActivityMaxPeople();
 		activity.setStock(stock);
 		activity.setPodcasterId(Id);
@@ -126,7 +126,7 @@ public class ActivityController {
 	
 
 
-	public String processFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
+	public String processFile(MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
 		// 取得原檔案名字
 		String filename = multipartFile.getOriginalFilename();
 		System.out.println(filename);
@@ -269,6 +269,7 @@ public class ActivityController {
 			@RequestParam("soldQuantity") Integer soldQuantity,
 			@RequestParam("oldMaxppl") Integer oldMaxppl,
 			@RequestParam("file") MultipartFile multipartFile,
+			@RequestParam(value="oldImage",required= false)String oldImage,
 			Model m,HttpServletRequest request) throws Exception {
 		
 		System.out.println("Entering processAction2");
@@ -295,7 +296,7 @@ public class ActivityController {
 		+activityPrice
 		+activityMaxPeople
 		+activityStatus
-//		+multipartFile
+		+multipartFile
 		);
 
 		//newStock=newMaxppl-(oldMaxppl-oStock)
@@ -307,8 +308,25 @@ public class ActivityController {
 		Integer Id = memberBean.getMemberId();		
 		activity.setPodcasterId(Id);
 		
-		String ActivityImg = processFile(Id,multipartFile,request);
-		activity.setActivityImg(ActivityImg);
+		String fName=multipartFile.getName();
+		String fOName=multipartFile.getOriginalFilename();
+		Boolean b =multipartFile.isEmpty();
+		System.out.println("有沒有上傳照片?"+b);
+		System.out.println("照片getName?"+fName);
+		System.out.println("照片fOName?"+fOName);
+		System.out.println("照片檔案 "+multipartFile);
+		System.out.println("舊照片檔案路徑 "+oldImage);
+		if(!b) {
+		String image = processFile(multipartFile, request);
+		activity.setActivityImg(image);
+		}else {
+			activity.setActivityImg(oldImage);
+		}
+		
+//		String ActivityImg = processFile(multipartFile,request);
+//		activity.setActivityImg(ActivityImg);
+		
+		
 //		String ActivityImg = "";
 //		if(multipartFile != null) {
 //			ActivityImg = processFile(Id,multipartFile,request);
