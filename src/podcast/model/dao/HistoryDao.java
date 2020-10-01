@@ -69,7 +69,7 @@ public class HistoryDao implements IHistoryDao {
 	
 	
 	
-	public boolean deteleByPodcastId(Integer podcastId) {
+	public boolean deleteByPodcastId(Integer podcastId) {
 
 		Session session = sessionFactory.getCurrentSession();
 		
