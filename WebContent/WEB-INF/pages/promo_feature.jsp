@@ -55,16 +55,13 @@
 				<!-- promo element -->
 				<div class="promo-element ">
 					<!-- heading -->
-					<h3>Music An Art...</h3>
+					<h3>最方便齊全的 Podcast 探索與聆聽</h3>
 					<!-- paragraph -->
 					<p>
-						Music is an art form and cultural activity whose medium is sound
-						organized in time. The common elements of music are <strong>pitch</strong>,
-						<strong>rhythm</strong>, <strong>dynamics</strong> and the sonic
-						qualities of <strong>timbre</strong> and <strong>texture</strong>.
+						從創作發想、節目託管、行銷資源、音檔上架到 Podcast 盈利變現。SoundPod 陪伴著你把 Podcast 從興趣變成專業，再進一步轉成事業。
 					</p>
 					<!-- link -->
-					<a class="promo-link" href="#"><i class="fa fa-play-circle"></i></a>
+				<!-- 	<a class="promo-link" href="#"><i class="fa fa-play-circle"></i></a> -->
 				</div>
 			</div>
 		</div>

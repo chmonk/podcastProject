@@ -15,6 +15,13 @@
 	 object-fit: cover;
 	}
 	
+	.btn-custom{
+		border-radius: 20px;
+		color: white;
+		background-color: #F91818;
+		box-shadow: none;
+	}
+	
 	</style>
 
 <%-- 
@@ -60,28 +67,27 @@
 	--%>
 </head>
 <body>		
-<!--
+
 			
+			<!-- promo -->
 		<div class="promo parallax-one pad">
 			<div class="container">
-			
+				<!-- promo element -->
 				<div class="promo-element ">
-					
-					<h3>Music An Art...</h3>
-					
+					<!-- heading -->
+					<h3>最方便齊全的 Podcast 探索與聆聽</h3>
+					<!-- paragraph -->
 					<p>
-						Music is an art form and cultural activity whose medium is sound
-						organized in time. The common elements of music are <strong>pitch</strong>,
-						<strong>rhythm</strong>, <strong>dynamics</strong> and the sonic
-						qualities of <strong>timbre</strong> and <strong>texture</strong>.
+						從創作發想、節目託管、行銷資源、音檔上架到 Podcast 盈利變現。SoundPod 陪伴著你把 Podcast 從興趣變成專業，再進一步轉成事業。
 					</p>
-					
-					<a class="promo-link" href="#"><i class="fa fa-play-circle"></i></a>
+					<!-- link -->
+				<!-- 	<a class="promo-link" href="#"><i class="fa fa-play-circle"></i></a> -->
 				</div>
 			</div>
 		</div>
+		<!--/ promo end -->
 		
--->
+
 
 		<!-- featured abbum -->
 		<div class="featured pad" id="featuredalbum">
@@ -116,7 +122,9 @@
 									<!-- some responce from social medial or web likes -->
 									<p>
 										<span id="podlike1">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
-										<span id="podclick1">825+</span> <span class="label label-theme">Click</span>
+										<span id="podclick1">825+</span> <span class="label label-theme">Click</span>&nbsp;&nbsp;
+										<span > &nbsp;&nbsp;&nbsp;</span> <input type="button" id="play1" 
+										class="btn-xs btn-custom playlist-number" value="&nbsp;AddList+&nbsp;">
 									</p>
 								</div>
 							</div>
@@ -143,6 +151,8 @@
 									<p>
 										<span id="podlike2">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
 										<span id="podclick2">825+</span> <span class="label label-theme">Click</span>
+										<span > &nbsp;&nbsp;&nbsp;</span> <input type="button" id="play2" 
+										class="btn-xs btn-custom playlist-number" value="&nbsp;AddList+&nbsp;">
 									</p>
 								</div>
 							</div>
@@ -169,6 +179,8 @@
 									<p>
 										<span id="podlike3">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
 										<span id="podclick3">825+</span> <span class="label label-theme">Click</span>
+										<span > &nbsp;&nbsp;&nbsp;</span> <input type="button" id="play3" 
+										class="btn-xs btn-custom playlist-number" value="&nbsp;AddList+&nbsp;">
 									</p>
 								</div>
 							</div>
@@ -195,6 +207,8 @@
 									<p>
 										<span id="podlike4">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
 										<span id="podclick4">825+</span> <span class="label label-theme">Click</span>
+										<span > &nbsp;&nbsp;&nbsp;</span> <input type="button" id="play4" 
+										class="btn-xs btn-custom playlist-number" value="&nbsp;AddList+&nbsp;">
 									</p>
 								</div>
 							</div>
@@ -221,6 +235,8 @@
 									<p>
 										<span id="podlike5">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
 										<span id="podclick5">825+</span> <span class="label label-theme">Click</span>
+										<span > &nbsp;&nbsp;&nbsp;</span> <input type="button" id="play5" 
+										class="btn-xs btn-custom playlist-number" value="&nbsp;AddList+&nbsp;">
 									</p>
 								</div>
 							</div>
@@ -247,6 +263,8 @@
 									<p>
 										<span id="podlike6">1024+</span> <span class="label label-theme">Like</span> &nbsp;&nbsp;
 										<span id="podclick6">825+</span> <span class="label label-theme">Click</span>
+										<span > &nbsp;&nbsp;&nbsp;</span> <input type="button" id="play6" 
+										class="btn-xs btn-custom playlist-number" value="&nbsp;AddList+&nbsp;">
 									</p>
 								</div>
 							</div>

@@ -89,6 +89,8 @@ public class PodcastController {
 								 @RequestParam("radioP")Integer openPayment,
 								 @RequestParam("category")Integer category,
 								 @RequestParam("podcastId")Integer podcastId,
+								@RequestParam("file") MultipartFile multipartFile,
+								@RequestParam(value="oldImage",required= false)String oldImage,
 								 HttpServletRequest request,
 								 Model m) throws Exception {
 			
@@ -99,6 +101,15 @@ public class PodcastController {
 	    	System.out.println("modifyPodcastId:"+podcastId);
 	    	
 	    	uploadPodcastBean ubean=new uploadPodcastBean();
+	    	
+	    	Boolean b =multipartFile.isEmpty();
+	    	if(!b) {
+	    		String image = processIMGFile(multipartFile, request);
+	    		ubean.setAudioimg(image);
+	    		}else {
+	    			ubean.setAudioimg(oldImage);
+	    		}
+	    
 	    	ubean.setTitle(title);
 	    	ubean.setPodcastInfo(podcastInfo);
 	    	ubean.setOpenPayment(openPayment);
@@ -156,7 +167,7 @@ public class PodcastController {
 	    	
 	    	Timestamp time= new Timestamp(System.currentTimeMillis());
 	    	
-	    	String savePicPath = processIMGFile(memberId,multipartFile,request);
+	    	String savePicPath = processIMGFile(multipartFile,request);
 	    	String saveaudioPath = processAUDFile(memberId,multipartFile2,request);
 	    	
 	    	upload.setAudioimg(savePicPath);
@@ -191,7 +202,7 @@ public class PodcastController {
 		
 		
 		
-		public String processIMGFile(Integer id,MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
+		public String processIMGFile(MultipartFile multipartFile,HttpServletRequest request) throws Exception, IOException {
 			// 取得原檔案名字
 			String filename = multipartFile.getOriginalFilename();
 			System.out.println(filename);
@@ -207,8 +218,13 @@ public class PodcastController {
 			// 專案資料夾名稱
 			String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
 			// 取得到含workspace前的絕對路徑
+
+			
+			System.out.println("陸竟"+request.getSession().getServletContext().getRealPath("/"));
+			System.out.println(path.indexOf("metadata"));
 			String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,
-					path.indexOf("/.metadata"));
+					path.indexOf("metadata")-1);
+
 
 			// 制式資料夾
 			// 節目圖片 programimg
@@ -220,7 +236,7 @@ public class PodcastController {
 			String savefolder = "programimg";
 
 			// 制式檔案名稱
-			String savefilename = id + maintitile + subtitle;
+			String savefilename = maintitile + subtitle;
 
 			// 檔案制式存檔名稱 待設定
 
@@ -236,6 +252,7 @@ public class PodcastController {
 			// 檔案寫入路徑(存檔)
 			multipartFile.transferTo(f);
 
+			System.out.println("./"+savefolder+"/"+savefilename);
 			// 存入資料庫預設路徑 
 			return "./"+savefolder+"/"+savefilename;
 		
@@ -258,7 +275,7 @@ public class PodcastController {
 			String caseFolder = path.split("\\\\")[path.split("\\\\").length - 1];
 			// 取得到含workspace前的絕對路徑
 			String workspace = request.getSession().getServletContext().getRealPath("/").substring(0,
-					path.indexOf("/.metadata"));
+					path.indexOf("metadata")-1);
 
 			// 制式資料夾
 			// 節目圖片 programimg
@@ -270,7 +287,7 @@ public class PodcastController {
 			String savefolder = "programmedia";
 
 			// 制式檔案名稱
-			String savefilename = id + maintitile + subtitle;
+			String savefilename = maintitile + subtitle;
 
 			// 檔案制式存檔名稱 待設定
 

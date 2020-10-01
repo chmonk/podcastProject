@@ -25,6 +25,7 @@
 
 <style type="text/css">
 .showPodcasterBody {
+	margin-top: 150px;
 	margin-bottom: 60px;
 }
 .card {
@@ -33,10 +34,11 @@
 }
 
 .card img {
+	box-shadow: 4px 4px 3px rgba(20%,20%,40%,0.5);
 	display: block;
 	max-width: 100%;
 	height: 200px;
-	padding: 10px;
+/* 	padding: 10px; */
 }
 .card-block{
 	text-align: center;
@@ -68,15 +70,15 @@
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 .first:hover {
-   box-shadow: 0 0 40px 40px #2f97ed inset;
+   box-shadow: 0 0 40px 40px #f23031 inset;
  }
  .btn1 {
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid #2f97ed;
+  border: 2px solid #f23031;
   border-radius: 0.6em;
-  color: #2f97ed;
+  color: #f23031;
   cursor: pointer;
   /* display: flex; */
   align-self: center;
@@ -149,7 +151,7 @@ $(document).ready(function(){
 										<p class="card-text">${data.getInfo()}</p>
 										<form action="<c:url value="/podcastPage"/>">
 						                   <input type="hidden" name="fuzzyPodcasterId" value=${data.getMemberId()} />
-						                   <input type="submit" class="btn1 first" value="Button"/>
+						                   <input type="submit" class="btn1 first" value="前往"/>
 						                 </form>
 									</div>
 								</div>

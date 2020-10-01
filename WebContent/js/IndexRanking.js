@@ -131,6 +131,13 @@
 			let podclick5=document.getElementById("podclick5");
 			let podclick6=document.getElementById("podclick6");
 
+			let play1=document.getElementById("play1");
+			let play2=document.getElementById("play2");
+			let play3=document.getElementById("play3");
+			let play4=document.getElementById("play4");
+			let play5=document.getElementById("play5");
+			let play6=document.getElementById("play6");
+
 
 			let xhr2 = new XMLHttpRequest();
 					xhr2.open("GET", "PopularPodcast", true);
@@ -149,36 +156,42 @@
 							podtitle1.innerHTML=podcasts[0].title;
 							podlike1.innerHTML=podcasts[0].likesCount;
 							podclick1.innerHTML=podcasts[0].clickAmount;
+							play1.id=podcasts[0].podcastId;
 
 							podimg2.src=podcasts[1].audioimg;
 							podinfo2.innerHTML=podcasts[1].podcastInfo;
 							podtitle2.innerHTML=podcasts[1].title;
 							podlike2.innerHTML=podcasts[1].likesCount;
 							podclick2.innerHTML=podcasts[1].clickAmount;
+							play2.id=podcasts[1].podcastId;
 
 							podimg3.src=podcasts[2].audioimg;
 							podinfo3.innerHTML=podcasts[2].podcastInfo;
 							podtitle3.innerHTML=podcasts[2].title;
 							podlike3.innerHTML=podcasts[2].likesCount;
 							podclick3.innerHTML=podcasts[2].clickAmount;
+							play3.id=podcasts[2].podcastId;
 
-							podimg4.src=podcasts[3].audiomg;
+							podimg4.src=podcasts[3].audioimg;
 							podinfo4.innerHTML=podcasts[3].podcastInfo;
 							podtitle4.innerHTML=podcasts[3].title;
 							podlike4.innerHTML=podcasts[3].likesCount;
 							podclick4.innerHTML=podcasts[3].clickAmount;
+							play4.id=podcasts[3].podcastId;
 
 							podimg5.src=podcasts[4].audioimg;
 							podinfo5.innerHTML=podcasts[4].podcastInfo;
 							podtitle5.innerHTML=podcasts[4].title;
 							podlike5.innerHTML=podcasts[4].likesCount;
 							podclick5.innerHTML=podcasts[4].clickAmount;
+							play5.id=podcasts[4].podcastId;
 
 							podimg6.src=podcasts[5].audioimg;
 							podinfo6.innerHTML=podcasts[5].podcastInfo;
 							podtitle6.innerHTML=podcasts[5].title;
 							podlike6.innerHTML=podcasts[5].likesCount;
 							podclick6.innerHTML=podcasts[5].clickAmount;
+							play6.id=podcasts[5].podcastId;
 						}
 					}
 		}

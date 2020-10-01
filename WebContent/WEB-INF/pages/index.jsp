@@ -65,19 +65,13 @@
  		<jsp:include page="promo_feature_active.jsp" flush="true " />
 		<!-- 熱播排行 -->
 
-		<!-- call to action -->
-<%-- 		<jsp:include page="callToAction.jsp" flush="true " /> --%>
-		<!--/ cta end -->
-<%-- 
-		<!-- 熱播排行 -->
-		<jsp:include page="workWithUs.jsp" flush="true " />
-		<jsp:param value="" name=""/> 
-				</jsp:include>
- --%>
-		<!-- 熱播排行 -->
 
-		<!-- sign up for news letter -->
-		<jsp:include page="newsLetter.jsp" flush="true " />
+		<!-- call to action -->
+		<%-- 		<jsp:include page="callToAction.jsp" flush="true " /> --%>
+		<!--/ cta end -->
+
+		<!-- 搜尋 -->
+		<jsp:include page="selectBar.jsp" flush="true " />
 		<!-- news letter end -->
 
 		<!-- 人氣播客 portfolio -->
@@ -91,15 +85,15 @@
 		<!-- events end -->
 
 		<!-- about -->
-<%-- 		<jsp:include page="about.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="about.jsp" flush="true " /> --%>
 		<!-- about end -->
 
 		<!-- meet -->
-<%-- 		<jsp:include page="meets.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="meets.jsp" flush="true " /> --%>
 		<!-- meet end -->
 
 		<!-- contact -->
-<%-- 		<jsp:include page="contact.jsp" flush="true " /> --%>
+		<%-- 		<jsp:include page="contact.jsp" flush="true " /> --%>
 		<!-- contact end -->
 
 		<!-- footer -->
@@ -117,6 +111,7 @@
 
 
 	<!-- Javascript files -->
+
 	
 	<!-- 首頁排行JS -->
 	<script type="text/javascript"
@@ -126,6 +121,7 @@
 		window.onload=function(){popularPodcast();popularPodcaster()};
 
 	
+
 	</script>
 
 
@@ -148,6 +144,12 @@
 	<!-- 	plaer bar function js -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
+	
+	
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKsAoRrnd4jZL_pQJhvBgphbttPkTl8LM"
+	defer></script>
+	<script src="js/map.js"></script>
 </body>
 
 </html>

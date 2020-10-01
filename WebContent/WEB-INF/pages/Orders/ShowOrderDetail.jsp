@@ -20,7 +20,8 @@
 }
 
 body {
-	background-image: url(<c:url value='/img/banner/b4.jpg' />);
+        background-color:#f7f7f7!important;
+/*             background-image: url(<c:url value='/img/banner/b3.jpg' />); */
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
@@ -61,6 +62,10 @@ h1 {
 	padding-top: 50px;
 	/* 	border-bottom: 1px solid black;  */
 }
+.headtop{
+	margin-top:120px;
+	margin-bottom:20px;
+}
 </style>
 
 </head>
@@ -70,21 +75,7 @@ h1 {
 		<jsp:include page="../header_banner_test.jsp" flush="true " />
 	</div>
 
-	<div class="showPodcasterBody">
-		<div class="row showPodcasterBodyHeader">
-			<div class="col-md-4">
-				<div class="memberImg">
-					<img alt="" src="${podcasterData.podcastImg}">
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="memberName">${podcasterData.podcastName}</div>
-				<div class="memberInfo">${podcasterData.podcastInfo}</div>
-				<div></div>
-			</div>
-		</div>
-	</div>
-    <div class="container">
+    <div class="container headtop">
         <div class="custyle">
         
             <table class="table table-striped custab">
@@ -111,7 +102,7 @@ h1 {
                         <td>${aBean.quantity}</td>
                         <td>0</td>
                         <td>
-                            <fmt:formatNumber value="${aBean.unitPrice*aBean.quantity}" pattern="#,###,###" />元</td>
+                            <fmt:formatNumber value="${aBean.unitPrice*aBean.quantity}" pattern="#,###,###" />元
                         </td>
                         <c:set var="subtotal"
                             value="${ subtotal + aBean.unitPrice * aBean.discount * aBean.quantity }" />
@@ -125,7 +116,8 @@ h1 {
                     <TD align="center"><b>折扣</b></TD>
                     <c:set var="VAT" value="${subtotal*0.05 + 0.0001}" />
                     <TD align="right">
-                        <fmt:formatNumber value="${VAT}" pattern="#,###,###" />元</TD>
+<%--                         <fmt:formatNumber value="${VAT}" pattern="#,###,###" /> --%>
+                        0元</TD>
                 </tr>
                 <tr height='30'>
                     <TD align="center"><b>總金額</b></TD>
@@ -139,6 +131,8 @@ h1 {
 
                 </tr>
             </table>
+       </div>
+       </div>
 
 
 

@@ -66,6 +66,19 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 
 		return pBean;
 	}
+	
+	@Override
+	public ProgramCommentBean reply(Integer commentId,String replyMsg,Date replyDate) {
+		Session session = sessionFactory.getCurrentSession();
+		ProgramCommentBean pBean = session.get(ProgramCommentBean.class, commentId);
+
+		if (pBean != null) {
+			pBean.setReplyMsg(replyMsg);
+			pBean.setReplyDate(replyDate);
+		}
+
+		return pBean;
+	}
 
 	@Override
 	public boolean delete(Integer commentId) {
