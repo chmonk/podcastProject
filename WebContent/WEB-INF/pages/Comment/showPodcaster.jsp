@@ -597,7 +597,7 @@ padding-left: 30px;
 									<div id="${comment.commentId}" class="replymessage">
 										<c:if test="${not empty comment.replyMsg}">
 											<div class="commentMemberImg">
-												<img class="commentMemberImg" alt="" src="${podcasterData.memberImg}">
+												<img class="commentMemberImg" alt="" src="${podcasterData.podcastImg}">
 											</div>
 											<p class="messageTitle">${podcasterData.podcastName}</p>
 										</c:if>

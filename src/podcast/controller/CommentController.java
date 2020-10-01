@@ -44,6 +44,8 @@ public class CommentController {
 	
 	@Autowired 
 	LikeRecordDAO ldao;
+	@Autowired
+	MemberDAO mdao;
 
 	//按下頻道圖案=送出action,連到此方法
 	@RequestMapping(path = "/podcastPage", method = RequestMethod.GET)
@@ -278,7 +280,8 @@ public class CommentController {
     	commListitem.put("replyMsg",replyMsg);
     	commListitem.put("replyDate", dateString);
     	commListitem.put("podcastName", memberName);
-    	commListitem.put("podcastImg", memberBean.getImage());
+    	commListitem.put("podcastImg", mdao.selectPodcaster(memberBean.getMemberId()).getImage());
+    	
 		
 		
 		
