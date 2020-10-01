@@ -61,11 +61,6 @@
 		<jsp:include page="hero.jsp" flush="true " />
 		<!--/ hero end -->
 
-
-		<!-- 矚目新選 -->
-		<jsp:include page="promo_feature.jsp" flush="true " />
-		<!-- 矚目新選 -->
-
 		<!-- 熱播排行 -->
  		<jsp:include page="promo_feature_active.jsp" flush="true " />
 		<!-- 熱播排行 -->
@@ -74,19 +69,6 @@
 		<!-- call to action -->
 		<%-- 		<jsp:include page="callToAction.jsp" flush="true " /> --%>
 		<!--/ cta end -->
-<%-- 
-		<!-- 熱播排行 -->
-<<<<<<< HEAD
-		<%-- <jsp:include page="workWithUs.jsp" flush="true " /> --%>
-		<%-- <jsp:param value="" name=""/> --%>
-		<%-- 		</jsp:include>
-=======
-		<jsp:include page="workWithUs.jsp" flush="true " />
-		<jsp:param value="" name=""/> 
-				</jsp:include>
->>>>>>> origin/RickyLee
- --%>
-		<!-- 熱播排行 -->
 
 		<!-- 搜尋 -->
 		<jsp:include page="selectBar.jsp" flush="true " />
@@ -162,6 +144,12 @@
 	<!-- 	plaer bar function js -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
+	
+	
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKsAoRrnd4jZL_pQJhvBgphbttPkTl8LM"
+	defer></script>
+	<script src="js/map.js"></script>
 </body>
 
 </html>
