@@ -18,6 +18,7 @@ html {
 }
 
 .u-float-right {
+	cursor: pointer;
 	float: right;
 }
 

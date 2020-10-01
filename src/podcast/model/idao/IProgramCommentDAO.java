@@ -19,5 +19,7 @@ public interface IProgramCommentDAO {
 	
 	public List<ProgramCommentBean> selectAllPodcasterId(Integer podcasterId) throws Exception;
 
+	public ProgramCommentBean reply(Integer commentId, String replyMsg, Date replyDate);
+
 
 }

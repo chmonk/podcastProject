@@ -24,18 +24,41 @@ public class ProgramCommentBean {
 	private Integer podcasterId;
 	private Integer msgStatus;
 	private Date msgDate;
+	private Date replyDate;
+	private String replyMsg;
 
 	public ProgramCommentBean() {
 	}
 
 	public ProgramCommentBean(Integer commentId, String commentMsg, Integer memberId, Integer podcasterId, Integer msgStatus,
-			Date msgDate) {
+			Date msgDate,  Date replyDate, String replyMsg) {
 		this.commentId = commentId;
 		this.commentMsg = commentMsg;
 		this.memberId = memberId;
 		this.podcasterId = podcasterId;
 		this.msgStatus = msgStatus;
 		this.msgDate = msgDate;
+		this.replyDate = replyDate;
+		this.replyMsg = replyMsg;
+	}
+	
+	@Column(name = "REPLYMSG")
+	public String getReplyMsg() {
+		return replyMsg;
+	}
+
+	public void setReplyMsg(String replyMsg) {
+		this.replyMsg = replyMsg;
+	}
+
+	@Column(name = "REPLYDATE")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	public Date getReplyDate() {
+		return replyDate;
+	}
+
+	public void setReplyDate(Date replyDate) {
+		this.replyDate = replyDate;
 	}
 
 	@Id

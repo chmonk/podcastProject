@@ -1,6 +1,7 @@
 package podcast.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,16 +25,19 @@ import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
 import podcast.model.dao.CategoryDAO;
 import podcast.model.dao.MemberDAO;
+import podcast.model.dao.SubProgramListDAO;
 import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.CategoryBean;
 import podcast.model.javabean.MemberBean;
+import podcast.model.javabean.SubscriptionBean;
 import podcast.model.javabean.fuzzyPodcastReturnArchitecture;
 import podcast.model.javabean.uploadPodcastBean;
 
 @Controller
-@SessionAttributes(names= {"msg"})
-
+@SessionAttributes({"LoginOK"})
 public class FuzzySelectController {
+	@Autowired
+	SubProgramListDAO sdao;
 	
 	@GetMapping(path = { "/getFuzzySelectAllDataName.controller" })
 	public @ResponseBody List<Map<String,String>> getFuzzySelectAllDataName(HttpServletRequest request,HttpServletResponse response) {
@@ -58,7 +63,6 @@ public class FuzzySelectController {
         	DataNameList.put("category", "節目");  	
         	FuzzySelectAllDataNameList.add(DataNameList);
     	}
-    	System.out.println(FuzzySelectAllDataNameList);
 		return FuzzySelectAllDataNameList;
 		
 	}
@@ -68,6 +72,10 @@ public class FuzzySelectController {
     	//取得註冊物件的context
 		ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+    	
+    	MemberBean mbean=(MemberBean)m.getAttribute("LoginOK");
+    	Integer  memberId =mbean.getMemberId();
+    	
     	//搜尋播客頻道
     	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
     	List<MemberBean> userAllData = mdao.fuzzySelectPodcasterAll();
@@ -111,6 +119,9 @@ public class FuzzySelectController {
     			selectData.setAudioPath(podcastAllData.get(e.getIndex()).getAudioPath());
     			selectData.setAudioImg(podcastAllData.get(e.getIndex()).getAudioimg());
     			selectData.setLikesCount(podcastAllData.get(e.getIndex()).getLikesCount());
+    			selectData.setConfirmubScription(confirmSubscriptionStatus(memberId,podcastAllData.get(e.getIndex()).getMemberId()));
+    			selectData.setPodcasterId(podcastAllData.get(e.getIndex()).getMemberId());
+    			
     			fuzzyPodcastData.add(selectData);
     		}
     	}
@@ -118,6 +129,32 @@ public class FuzzySelectController {
 		m.addAttribute("fuzzyUserData", fuzzyUserData);
 		m.addAttribute("fuzzyPodcastData", fuzzyPodcastData);
 		return "/FuzzySelect/showFuzzySelect";
+	}
+	
+	public Integer confirmSubscriptionStatus(Integer memberId,Integer podcasterId) throws Exception {
+		Date date =new Date();
+		List<SubscriptionBean> f = sdao.selectSubcriptionByMemberID(memberId,podcasterId);//確認訂單有無訂閱關係
+		
+    	if(memberId==podcasterId) {  //如果進入頻道為直播主本人
+    		System.out.println("本人");
+    		return 2;
+    	}else if(f.isEmpty()){ //無訂閱關係
+    		System.out.println("無訂閱關係");
+    		return 0;
+    	}else {
+        	for(SubscriptionBean g:f) {  	
+        		if(g.getSubdateEnd().compareTo(date)==1) {
+        			System.out.println("會員"+g.getMemberId()+"在"+g.getPodcasterId()+"的訂閱期間內");
+        			return 1;
+        		}else if(g.getSubdateEnd().compareTo(date)==-1) {
+        			System.out.println("已過期");
+        			return 0;
+        		}
+        	}
+    	}
+		return 0;
+		
+		
 	}
 
 }

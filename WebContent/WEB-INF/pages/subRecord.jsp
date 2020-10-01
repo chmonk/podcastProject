@@ -67,6 +67,7 @@
     margin-top: 150px!important;
     margin-bottom:0px!important;
     }
+
 </style>
 
 </head>
@@ -74,8 +75,6 @@
 <div class="head">
 		<jsp:include page="header_banner_test.jsp" flush="true " />
 	</div>
-
-
 	
 		<div class="default-heading">
 		<h2 >購買紀錄</h2></div>
@@ -112,7 +111,10 @@
                 </tr>
 
             </table>
-</div>
-</div>
+
+           </div>
+      </div>
+
+
 </body>
 </html>

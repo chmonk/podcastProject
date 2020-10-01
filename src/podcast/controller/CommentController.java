@@ -44,6 +44,8 @@ public class CommentController {
 	
 	@Autowired 
 	LikeRecordDAO ldao;
+	@Autowired
+	MemberDAO mdao;
 
 	//按下頻道圖案=送出action,連到此方法
 	@RequestMapping(path = "/podcastPage", method = RequestMethod.GET)
@@ -82,10 +84,15 @@ public class CommentController {
 		for (ProgramCommentBean i : commList) {
 			Map<String, Object> commListitem = new HashMap<>();
 
+			commListitem.put("commentId", i.getCommentId());
+			commListitem.put("replyDate",i.getReplyDate());
+			commListitem.put("replyMsg",i.getReplyMsg());
 			commListitem.put("commentMsg",i.getCommentMsg());
 			commListitem.put("msgDate",i.getMsgDate());
 			commListitem.put("Name", mdao.selectPodcaster(i.getMemberId()).getNickname());
+			commListitem.put("memberImg", mdao.selectPodcaster(i.getMemberId()).getImage());
 			commListData.add(commListitem);
+			
 		}
 		
 		
@@ -186,6 +193,10 @@ public class CommentController {
     	
     	//把PodcasterId送到頻道頁面
 		m.addAttribute("thisPodcasterId",podcasterId);
+		
+		//把MemberId送到頻道頁面
+		m.addAttribute("thisMemberId",memberId);
+		
 		//return "Comment/PodcastPage";
 		return "Comment/showPodcaster";
 		}
@@ -206,6 +217,7 @@ public class CommentController {
 
 		Integer memberId = memberBean.getMemberId();
 		ProgramCommentBean pBean =new ProgramCommentBean();
+		m.addAttribute("thisMemberId",memberId);
 
 		Date time = new Date();
 			
@@ -230,9 +242,12 @@ public class CommentController {
 		Map<String, Object> commListitem = new HashMap<>();
 		SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 
+
+
 		commListitem.put("commentMsg",commentMsg);
 		commListitem.put("msgDate",df.format(pBean.getMsgDate()));
 		commListitem.put("Name", mdao.selectPodcaster(memberId).getNickname());
+		commListitem.put("memberImg", mdao.selectPodcaster(memberId).getImage());
 
 //		List<ProgramCommentBean> commList=commDao.selectAllPodcasterId(memberId);
 //		m.addAttribute("commList",commList);
@@ -241,6 +256,38 @@ public class CommentController {
 		return commListitem;
 	}
 	
+	
+	@Column	
+	@Temporal(TemporalType.TIMESTAMP)
+	@PostMapping("/podcastReplyPage.do")
+	public @ResponseBody Map<String, Object> processReplyComment(@RequestParam("replybox") String replyMsg,@RequestParam("commentId")Integer commentId,
+		 HttpServletRequest request, Model m) throws Exception {
+		
+		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+		
+		String memberName = memberBean.getNickname();	
+		Date time = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+		String dateString = df.format(time);
+		Map<String, Object> commListitem = new HashMap<>();
+	
+		ServletContext app = request.getServletContext();
+		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+		ProgramCommentDAO commDao = (ProgramCommentDAO) context.getBean("ProgramCommentDAO");
+		
+    	commDao.reply(commentId, replyMsg, time);
+    	
+    	commListitem.put("replyMsg",replyMsg);
+    	commListitem.put("replyDate", dateString);
+    	commListitem.put("podcastName", memberName);
+    	commListitem.put("podcastImg", mdao.selectPodcaster(memberBean.getMemberId()).getImage());
+    	
+		
+		
+		
+		return commListitem;
+	}
+	}
 	
 //	//刪除
 //	@PostMapping(path= "processDeleteComment")
@@ -267,4 +314,4 @@ public class CommentController {
 //		
 //		return "Comment/PodcastPage";
 //	}
-}
+
