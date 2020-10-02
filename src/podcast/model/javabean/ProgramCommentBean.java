@@ -24,7 +24,6 @@ public class ProgramCommentBean {
 	private Integer podcasterId;
 	private Integer msgStatus;
 	private Date msgDate;
-
 	private Date replyDate;
 	private String replyMsg;
 

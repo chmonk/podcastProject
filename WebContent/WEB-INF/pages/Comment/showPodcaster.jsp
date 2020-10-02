@@ -77,9 +77,9 @@
 	margin-top: 30px;
 	display: inline-block;
 
-/* 	background-color: #222831;
- */	/* padding: 5px 20px 0px 15px; */
-	margin-bottom:5px;
+	background-color: #222831;
+	/* padding: 5px 20px 0px 15px; */
+	margin-bottom: 5px;
 
 	margin-left: -50px;
 	font-family: 微軟正黑體;
@@ -133,14 +133,9 @@
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.replymessage {
-	background-color: rgba(255, 255, 255, 1);
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-	margin: 20px;
-	border-radius: 10px;
-}
 
-.replydate {
+
+/* .replydate {
 	text-align: right;
 padding-bottom: 15px;
 padding-right: 15px;
@@ -148,7 +143,7 @@ padding-right: 15px;
 .replyMsg{
 padding-top:15px;
 padding-left: 30px;
-}
+} */
 .human {
 	padding-left: 30px;
 	padding-top:15px;
@@ -190,7 +185,7 @@ padding-left: 30px;
 .messageBoard div.bubbleContainer div.bubbleBody {
 	margin-left: 100px;
 	width: 80%;
-	height: 200px;
+	height: 210px;
 	background-color: #fff;
 	border-radius: 10px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -238,7 +233,7 @@ padding-left: 30px;
 	height: 40px;
 	display: block;
 	margin: 0 auto;
-	margin-right: 20px;
+	margin-right: 60px;
 	background-color: #f23031;
 	border: 3px solid white;
 	outline: none;
@@ -267,6 +262,8 @@ padding-left: 30px;
 }
 
 .messageBoard ul.messageList li.message p.messageTitle {
+	display: inline-block;
+	margin: 10px 0px 5px 10px;
 	font-size: 20px;
 	font-weight: 600;
 	margin-bottom: 5px;
@@ -274,10 +271,69 @@ padding-left: 30px;
 
 .messageBoard ul.messageList li.message p.messageContent {
 	line-height: 24px;
+	margin-left: 60px;
 }
 
 .messageBoard ul.messageList li.message p.messageDate {
 	text-align: right;
+}
+.replymessage{
+	list-style: none;
+    width: 95%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+    padding: 10px 0px 10px 10px;
+    box-sizing: border-box;
+    /* margin: 5px; */
+    margin-left: 5%;
+}
+.fromreplyMessage{
+    width: 90%;
+    border: none;
+    /* margin: 0px 0px 0px 51.6406px; */
+    /* height: 56px; */
+    margin-left: 5%;
+    resize: none;
+    font-size: 15px;
+    display: block;
+}
+.frombtnSendMessage{
+	width: 60px;
+    height: 40px;
+    /* display: block; */
+   /*  margin: 0 auto; */
+    margin-right: 20px;
+    /* margin-left:90%; */
+    background-color: #f23031;
+    border: 3px solid white;
+    outline: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: "Shadows Into Light";
+    color: white;
+}
+.frombtn{
+	display: inline-flex;
+    margin-left: 85%;
+}
+.reply{
+	display: inline-flex;
+    margin-left: 90%;
+}
+.commentMemberImg{
+	width:40px;
+	height:40px;
+	display: inline-flex;
+	border: 1px solid black;
+	border-radius: 50%;
+	z-index: 10;
+}
+.commentMemberImg img{
+	border-radius: 50%;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
 }
 
 #tab-panel {
@@ -532,28 +588,43 @@ padding-left: 30px;
 					<ul class="messageList" id="messageList">
 						<c:forEach items="${commList}" var="comment" varStatus="tagStatus">
 							<li class="message">
+								<div class="commentMemberImg">
+									<img class="commentMemberImg" alt="" src="${comment.memberImg}">
+								</div>
 								<p class="messageTitle">${comment.Name}</p>
 								<p class="messageContent">${comment.commentMsg}</p>
 								<p class="messageDate">${comment.msgDate}</p>
 <!-- 								<div class="replymessage"> -->
-<!-- 									<p class="human">作者:</p> -->
-									<p id="${comment.commentId}" class="replyMsg">${comment.replyMsg}<br>
-									${comment.replyDate}
-									</p>
+									<div id="${comment.commentId}" class="replymessage">
+										<c:if test="${not empty comment.replyMsg}">
+											<div class="commentMemberImg">
+												<img class="commentMemberImg" alt="" src="${podcasterData.podcastImg}">
+											</div>
+											<p class="messageTitle">${podcasterData.podcastName}</p>
+										</c:if>
+										<p class="messageContent">${comment.replyMsg}</p>
+										<p class="messageDate">${comment.replyDate}</p>
+									</div>
+
 <!-- 								</div> -->
-								<div class="reply" style="display: none">
+								<div class="reply" id="btnSend_${comment.msgDate}" style="display: none">
 									<button type="button" onclick="display('${comment.msgDate}')"
-										class="btnSendMessage">回復</button>
+										class="frombtnSendMessage">回復</button>
 								</div>
 								<div id="${comment.msgDate}" style="display: none">
 									<form action="podcastPage.do" id="podcasterReply" method="post">
-										<textarea name="replyMessage" id="${comment.commentMsg}"
+										<textarea class="fromreplyMessage" id="${comment.commentMsg}"
 											placeholder="留言內容：&#13;&#10;請輸入不超過50個字" required></textarea>
 									</form>
-									<input id="podcasterId" type="hidden"
-										value="${thisPodcasterId}" /> <input type="button"
-										class="btnSendMessage" id="submitReply" value="送出"
-										onclick="submitReply('${comment.commentId}','${comment.commentMsg}')">
+									<div class="frombtn">
+										<input id="podcasterId" type="hidden"
+											value="${thisPodcasterId}" />
+										 <input type="button"
+											class="frombtnSendMessage" id="submitReply" value="送出"
+											onclick="submitReply('${comment.commentId}','${comment.commentMsg}','${comment.msgDate}')">
+										<button type="button" onclick="display('${comment.msgDate}')"
+											class="frombtnSendMessage">取消</button>
+									</div>
 								</div>
 							</li>
 						</c:forEach>
@@ -614,17 +685,21 @@ padding-left: 30px;
 					replyStatus[x].style.display = "block";
 				}
 			} else {
-				replyStatus.style.display = "";
+				return;
 			}
 
 		}
 
 		function display(id) {
 			var traget = document.getElementById(id);
+			var traget2 = document.getElementById("btnSend_"+id);
 			if (traget.style.display == "none") {
 				traget.style.display = "";
+				traget2.style.display = "none";
+				
 			} else {
 				traget.style.display = "none";
+				traget2.style.display = "";
 			}
 		}
 
@@ -682,26 +757,25 @@ padding-left: 30px;
 					/* var ctable = document.getElementById("ctable");*/
 					var messageList = document.getElementById("messageList");
 					var m = new Date(cbean.msgDate);
-					console.log(cbean.msgDate);
-					console.log(m);
 
-					var newMsg = "<li class='message'><p class='messageTitle'>"
+					var newMsg ="<li class='message'><div class='commentMemberImg'><img class='commentMemberImg'src='"
+							+ cbean.memberImg + "'></div><p class='messageTitle'>"
 							+ cbean.Name + "</p><p class='messageContent'>"
 							+ cbean.commentMsg + "</p><p class='messageDate'>"
 							+ cbean.msgDate + "</p></li>";
 
 					messageList.innerHTML = newMsg + messageList.innerHTML;
-					document.getElementById("content").value = "";
+					document.getElementById(content).value = "";
 				}
 			}
 		};
-		function submitReply(thiscommentId, thiscommentMsg) {
+		function submitReply(thiscommentId, thiscommentMsg, id) {
 			let replybox = document.getElementById(thiscommentMsg).value;
 			if (!replybox) {
 				document.getElementById(thiscommentMsg).placeholder = "請勿留空";
 				return;
 			}
-
+			var aaa=id;
 			let xhr2 = new XMLHttpRequest();
 			xhr2.open("POST", "<c:url value='/podcastReplyPage.do'/>", true);
 			xhr2.setRequestHeader("Content-type",
@@ -721,17 +795,20 @@ padding-left: 30px;
 					let mesList = document.getElementById("messageList");
 					//let t = new Date(cbean.replyDate);
 					console.log(rbean.replyDate);
-					//console.log(t);
-					let reMsg = rbean.replyMsg + "<br>" + rbean.replyDate;
+					let reMsg ="<div class='commentMemberImg'><img class='commentMemberImg'src='"
+						+ rbean.podcastImg + "'></div><p class='messageTitle'>"
+						+ rbean.podcastName + "</p><p class='messageContent'>"
+						+ rbean.replyMsg + "</p><p class='messageDate'>"
+						+ rbean.replyDate + "</p>";
 
 					document.getElementById(thiscommentId).innerHTML = reMsg;
 					document.getElementById(thiscommentMsg).value = "";
+					display(id);
 				}
 			}
 		};
 	</script>
 	<!-- Javascript files -->
-	+
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
 	<!-- Bootstrap JS -->
