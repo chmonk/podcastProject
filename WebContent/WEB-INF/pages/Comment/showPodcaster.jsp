@@ -79,6 +79,7 @@
 	background-color: #222831;
 	/* padding: 5px 20px 0px 15px; */
 	margin-bottom: 5px;
+
 	margin-left: -50px;
 	font-family: 微軟正黑體;
 	font-size: 30px;
