@@ -44,6 +44,8 @@ public class CommentController {
 	
 	@Autowired 
 	LikeRecordDAO ldao;
+	@Autowired
+	MemberDAO mdao;
 
 	//按下頻道圖案=送出action,連到此方法
 	@RequestMapping(path = "/podcastPage", method = RequestMethod.GET)
@@ -89,6 +91,7 @@ public class CommentController {
 			commListitem.put("commentMsg",i.getCommentMsg());
 			commListitem.put("msgDate",i.getMsgDate());
 			commListitem.put("Name", mdao.selectPodcaster(i.getMemberId()).getNickname());
+			commListitem.put("memberImg", mdao.selectPodcaster(i.getMemberId()).getImage());
 			commListData.add(commListitem);
 			
 		}
@@ -215,6 +218,7 @@ public class CommentController {
 
 		Integer memberId = memberBean.getMemberId();
 		ProgramCommentBean pBean =new ProgramCommentBean();
+		m.addAttribute("thisMemberId",memberId);
 
 		Date time = new Date();
 			
@@ -244,6 +248,7 @@ public class CommentController {
 		commListitem.put("commentMsg",commentMsg);
 		commListitem.put("msgDate",df.format(pBean.getMsgDate()));
 		commListitem.put("Name", mdao.selectPodcaster(memberId).getNickname());
+		commListitem.put("memberImg", mdao.selectPodcaster(memberId).getImage());
 
 //		List<ProgramCommentBean> commList=commDao.selectAllPodcasterId(memberId);
 //		m.addAttribute("commList",commList);
@@ -261,27 +266,23 @@ public class CommentController {
 		
 		MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
 		
-		Integer memberId = memberBean.getMemberId();
-	//	ProgramCommentBean pBean =new ProgramCommentBean();
-	
+		String memberName = memberBean.getNickname();	
 		Date time = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 		String dateString = df.format(time);
 		Map<String, Object> commListitem = new HashMap<>();
-		
-		
-//		pBean.setReplyDate(time);
-//		pBean.setReplyMsg(replyMsg);
 	
 		ServletContext app = request.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
 		ProgramCommentDAO commDao = (ProgramCommentDAO) context.getBean("ProgramCommentDAO");
-    	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
 		
     	commDao.reply(commentId, replyMsg, time);
     	
     	commListitem.put("replyMsg",replyMsg);
     	commListitem.put("replyDate", dateString);
+    	commListitem.put("podcastName", memberName);
+    	commListitem.put("podcastImg", mdao.selectPodcaster(memberBean.getMemberId()).getImage());
+    	
 		
 		
 		
