@@ -606,28 +606,17 @@ padding-left: 30px;
 									</div>
 
 <!-- 								</div> -->
-<<<<<<< HEAD
-								<div class="reply" style="display: none;">
-									<button type="button" onclick="display('${comment.msgDate}')"
-										class="btnSendMessage">回覆</button>
-=======
+
 								<div class="reply" id="btnSend_${comment.msgDate}" style="display: none">
 									<button type="button" onclick="display('${comment.msgDate}')"
 										class="frombtnSendMessage">回復</button>
->>>>>>> 3d967bfcd06d636d938b1a1e806c5db4f30867d1
 								</div>
 								<div id="${comment.msgDate}" style="display: none">
 									<form action="podcastPage.do" id="podcasterReply" method="post">
 										<textarea class="fromreplyMessage" id="${comment.commentMsg}"
 											placeholder="留言內容：&#13;&#10;請輸入不超過50個字" required></textarea>
 									</form>
-<<<<<<< HEAD
-									<!--<input id="podcasterId" type="hidden"
-										value="${thisPodcasterId}" /> -->
-										<input type="button"
-										class="btnSendMessage" id="submitReply" value="送出"
-										onclick="submitReply('${comment.commentId}','${comment.commentMsg}')">
-=======
+
 									<div class="frombtn">
 										<input id="podcasterId" type="hidden"
 											value="${thisPodcasterId}" />
@@ -637,7 +626,6 @@ padding-left: 30px;
 										<button type="button" onclick="display('${comment.msgDate}')"
 											class="frombtnSendMessage">取消</button>
 									</div>
->>>>>>> 3d967bfcd06d636d938b1a1e806c5db4f30867d1
 								</div>
 							</li>
 						</c:forEach>

@@ -242,12 +242,11 @@ background:#000000;
 								id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right">
 		
-									<li><a href="<c:url value='/#latestalbum' />">官方節目</a></li>
-									<li><a href="<c:url value='/#featuredalbum' />">矚目新選</a></li>
-									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li>
+									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
+									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
-									<li><a href="<c:url value='/#team' />">瀏覽搜尋</a></li>
+									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
 									<li><li><a href="#">${LoginOK.name}</a>
 				         				<!-- First Tier Drop Down -->
 							            <ul class="barlist">
@@ -270,12 +269,11 @@ background:#000000;
 								id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right">
 <!-- 	http://localhost:8080/SpringWebProject/#latestalbum -->
-									<li><a href="<c:url value='/#latestalbum' />">官方節目</a></li>
-									<li><a href="<c:url value='/#featuredalbum' />">矚目新選</a></li>
-									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li>
+									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
+									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
-									<li><a href="<c:url value='/#team' />">瀏覽搜尋</a></li>
+									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
 									<li><li><a href="#">${LoginOK.name}</a>
 				         				<!-- First Tier Drop Down -->
 								            <ul class="barlist">
@@ -300,12 +298,11 @@ background:#000000;
 								id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right ">
 		
-									<li><a href="<c:url value='/#latestalbum' />">官方節目</a></li>
-									<li><a href="<c:url value='/#featuredalbum' />">矚目新選</a></li>
-									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li>
+									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
+									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
-									<li><a href="<c:url value='/#team' />">瀏覽搜尋</a></li>
+									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
 									<li><a href="<c:url value='/login' />">註冊/登入</a></li>
 								</ul>
 							</div>					    

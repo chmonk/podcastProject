@@ -236,10 +236,8 @@ nav ul ul li {
 							<div class="collapse navbar-collapse"
 								id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right">
-		
-									<li><a href="<c:url value='/#latestalbum' />">官方節目</a></li>
-									<li><a href="<c:url value='/#featuredalbum' />">矚目新選</a></li>
-									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li>
+									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
+									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
 									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
@@ -263,9 +261,8 @@ nav ul ul li {
 								id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right">
 <!-- 	http://localhost:8080/SpringWebProject/#latestalbum -->
-									<li><a href="<c:url value='/#latestalbum' />">官方節目</a></li>
-									<li><a href="<c:url value='/#featuredalbum' />">矚目新選</a></li>
-									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li>
+									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
+									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
 									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
@@ -335,7 +332,7 @@ nav ul ul li {
 										<h3 class="animated fadeInLeftBig">歡迎${LoginOK.name}一起聽見全世界的聲音</h3>
 									</c:when>
 									<c:otherwise>
-										<a href="#" class="animated fadeIn btn btn-theme">註冊/登入</a>
+										<a href="<c:url value='/login' />" class="animated fadeIn btn btn-theme">註冊/登入</a>
 									</c:otherwise>
 								</c:choose>
 								
@@ -359,7 +356,7 @@ nav ul ul li {
 										<h3 class="animated fadeInLeftBig ">享受最多元的節目</h3>
 									</c:when>
 									<c:otherwise>
-										<a href="#" class="animated fadeIn btn btn-theme">註冊/登入</a>
+										<a href="<c:url value='/login' />" class="animated fadeIn btn btn-theme">註冊/登入</a>
 									</c:otherwise>
 								</c:choose>
 							</div>
