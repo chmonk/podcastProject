@@ -60,94 +60,26 @@
 </style>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKsAoRrnd4jZL_pQJhvBgphbttPkTl8LM"
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKsAoRrnd4jZL_pQJhvBgphbttPkTl8LM"
 	defer></script>
 <script src="js/map.js"></script>
-	
-	<style>
-	#map {
-		height: 98%;
-	}
 
-	html, body {
-		height: 98%;
-		margin: 0;
-		padding: 0;
-	}
-	</style>
-	<script>
-	initialize();
+<style>
+#map {
+	height: 98%;
+}
 
-		var geocoder;
-		var map;
-		function initialize() {
-			geocoder = new google.maps.Geocoder();
-			
-			var latlng = new google.maps.LatLng(-34.397, 150.644);
-			var mapOptions = {
-				zoom : 11,
-				center : latlng
-			}
-			map = new google.maps.Map(document.getElementById('map'), mapOptions);
-		}
-
-		function codeAddress() {
-			var address = document.getElementById('address').value;
-			geocoder.geocode({
-				'address' : address
-			}, function(results, status) {
-				if (status == 'OK') {
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({
-						map : map,
-						position : results[0].geometry.location
-					});
-				} else {
-					alert('Geocode was not successful for the following reason: ' + status);
-				}
-			});
-		}
-// 	var map;
-// 	function initMap() {
-// 	  map = new google.maps.Map(document.getElementById('map'), {
-// 	    center: {lat: -34.397, lng: 150.644},
-// 	    zoom: 8
-// 	  });
-// 	}
-
-// 	  var geocoder;
-//  	  var map;
-// 	  function initialize() {
-// 	    geocoder = new google.maps.Geocoder();
-// 	    var latlng = new google.maps.LatLng(-34.397, 150.644);
-// 	    var mapOptions = {
-// 	      zoom: 8,
-// 	      center: latlng
-// 	    }
-// 	    map = new google.maps.Map(document.getElementById('map'), mapOptions);
-// 	  }
-
-// 	  function codeAddress() {
-// 	    var address = document.getElementById('address').value;;
-// 	    geocoder.geocode( { 'address': address}, function(results, status) {
-// 	      if (status == 'OK') {
-// 	        map.setCenter(results[0].geometry.location);
-// 	        var marker = new google.maps.Marker({
-// 	            map: map,
-// 	            position: results[0].geometry.location
-// 	        });
-// 	      } else {
-// 	        alert('Geocode was not successful for the following reason: ' + status);
-// 	      }
-// 	    });
-// 	  }
-	</script>
-
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
 
 </head>
-<body  onload="initialize()">
+<body onload="initialize()">
 
-	<!-- modal for booking ticket form -->
 	<!-- modal for booking ticket form -->
 	<c:forEach var="list" items="${list}" varStatus="loop">
 
@@ -164,17 +96,33 @@
 							${list.activityName}
 							<%-- 						&nbsp; <small><span class="label label-success" style="color:#F23030">票券剩餘:${list.activityMaxPeople}張</span></small> --%>
 
-							&nbsp; <small><span class="label label-danger">票券剩餘:${list.stock}張</span></small>
+					<c:choose>
+						<c:when test="${list.stock == 0}">
+							<c:set var="style" scope="page" value="danger" />
+						</c:when>
+						<c:otherwise>
+							<c:set var="style" scope="page" value="success" />
+						</c:otherwise>
+					</c:choose>
+							&nbsp; <medium><span class="label label-${style}">票券剩餘:${list.stock}張</span></medium>
 						</h4>
 					</div>
 
-
+ 					<c:choose>
+						<c:when test="${list.stock == 0}">
+							<c:set var="isStock" scope="page" value="0" />
+						</c:when>
+						<c:otherwise>
+							<c:set var="isStock" scope="page" value="1" />
+						</c:otherwise>
+					</c:choose> 
 					<!-- form for events ticket booking -->
 					<form action="addTickets" method="POST">
 						<div class="modal-body">
 							<div class="form-group">
 								<div align="center" width="300px" height="200px">
-									<img width="100%" height="100%" src="<c:url value='${list.activityImg}' />">
+									<img width="100%" height="100%"
+										src="<c:url value='${list.activityImg}' />">
 								</div>
 
 								<h4>
@@ -184,9 +132,8 @@
 								<h4>
 									地點：<br />
 								</h4>
-								<input type=hidden id="address" value="${list.activityLocation}"/>
-								${list.activityLocation}
-								<br />
+								<input type=hidden id="address" value="${list.activityLocation}" />
+								${list.activityLocation} <br />
 								<h4>
 									票價：<br />
 								</h4>${list.activityPrice}<br />
@@ -218,10 +165,9 @@
 									type='hidden' name='activityLocation'
 									value='${list.activityLocation}'> <Input type='hidden'
 									name='activityMaxPeople' value='${list.activityMaxPeople}'>
-									<Input type='hidden'
-									name='stock' value='${list.stock}'>
-									<Input type='hidden'
-									name='activityImg' value='${list.activityImg}'>
+								<Input type='hidden' name='stock' value='${list.stock}'>
+								<Input type='hidden' name='activityImg'
+									value='${list.activityImg}'>
 							</div>
 							<div class="checkbox">
 								<label> <input type="checkbox" required>
@@ -233,7 +179,8 @@
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<!-- link to payment gatway here -->
-							<button type="submit" class="btn btn-primary" id="booknow">加入購物車</button>
+							<button type="submit" class="btn btn-primary" id="booknow"
+								onclick="checkStock(${isStock})">加入購物車</button>
 						</div>
 					</form>
 				</div>
@@ -277,7 +224,8 @@
 									<!-- event location -->
 									<span class="event-location"><i class="fa fa-map-marker"></i>${fn:substring(list.activityLocation, 0, 12)}</span>
 									<!-- image -->
-									<img class="img-responsive" src="<c:url value='${list.activityImg}' />" alt="" />
+									<img class="img-responsive"
+										src="<c:url value='${list.activityImg}' />" alt="" />
 									<!-- 										<img class="img-responsive" src="img/event/1.jpg" alt="" /> -->
 									<!-- image hover -->
 									<!-- 										<div class="img-hover"> -->
@@ -299,7 +247,8 @@
 									<!-- buy ticket button link -->
 									<button href="#bookTicket${loop.index}"
 										class="btn btn-lg btn-theme" data-toggle="modal"
-										id="${loop.index}" name="abc" class="submit" value="geocode" onclick="codeAddress()">購票</button>
+										id="${loop.index}" name="abc" class="submit" value="geocode"
+										onclick="codeAddress()">購票</button>
 								</div>
 							</div>
 						</div>
@@ -314,43 +263,18 @@
 			</div>
 		</div>
 	</div>
-	<!-- events end -->
 
 	<!-- events end -->
-<script>
-initialize();
-var geocoder;
-var map;
-
-function initialize() {
-    geocoder = new google.maps.Geocoder();
-
-    var latlng = new google.maps.LatLng(-34.397, 150.644);
-    var mapOptions = {
-        zoom: 11,
-        center: latlng
-    }
-    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	<script>
+function checkStock(s){
+	const value = parseInt(s);
+/*  	alert(value);
+ 	console.log(typeof(value));  */
+	if(value==0){
+		alert("很抱歉！票券已搶購一空");
+		return;
+		}
 }
-
-function codeAddress() {
-    var address = document.getElementById('address').value;
-    geocoder.geocode({
-        'address': address
-    }, function (results, status) {
-        if (status == 'OK') {
-            map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
-            });
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
-    });
-}
-
 </script>
-
 </body>
 </html>
