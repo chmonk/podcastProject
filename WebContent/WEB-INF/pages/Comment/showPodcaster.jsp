@@ -76,7 +76,6 @@
 .memberName {
 	margin-top: 30px;
 	display: inline-block;
-
 	background-color: #222831;
 	/* padding: 5px 20px 0px 15px; */
 	margin-bottom: 5px;
@@ -144,6 +143,7 @@ padding-right: 15px;
 padding-top:15px;
 padding-left: 30px;
 } */
+
 .human {
 	padding-left: 30px;
 	padding-top:15px;
@@ -607,6 +607,7 @@ padding-left: 30px;
 									</div>
 
 <!-- 								</div> -->
+
 								<div class="reply" id="btnSend_${comment.msgDate}" style="display: none">
 									<button type="button" onclick="display('${comment.msgDate}')"
 										class="frombtnSendMessage">回復</button>
@@ -616,6 +617,7 @@ padding-left: 30px;
 										<textarea class="fromreplyMessage" id="${comment.commentMsg}"
 											placeholder="留言內容：&#13;&#10;請輸入不超過50個字" required></textarea>
 									</form>
+
 									<div class="frombtn">
 										<input id="podcasterId" type="hidden"
 											value="${thisPodcasterId}" />
@@ -685,6 +687,7 @@ padding-left: 30px;
 					replyStatus[x].style.display = "block";
 				}
 			} else {
+				console.log("not podcastPage owner!");
 				return;
 			}
 
@@ -771,6 +774,9 @@ padding-left: 30px;
 		};
 		function submitReply(thiscommentId, thiscommentMsg, id) {
 			let replybox = document.getElementById(thiscommentMsg).value;
+			console.log("thiscommentMsg:"+thiscommentMsg);		
+			console.log("thiscommentId:"+thiscommentId);
+			console.log("replybox:"+replybox);
 			if (!replybox) {
 				document.getElementById(thiscommentMsg).placeholder = "請勿留空";
 				return;
@@ -781,9 +787,7 @@ padding-left: 30px;
 			xhr2.setRequestHeader("Content-type",
 					"application/x-www-form-urlencoded");
 
-			console.log(replybox);
 			xhr2.send("replybox=" + replybox + "&commentId=" + thiscommentId);
-			console.log(replybox);
 
 			xhr2.onreadystatechange = function() {
 				if (xhr2.readyState === 4 && xhr2.status === 200) {

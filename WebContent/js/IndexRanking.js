@@ -61,7 +61,7 @@
 					pop5.value = podcasters[4].memberId;
 					pop6.value = podcasters[5].memberId;
 					pop7.value = podcasters[6].memberId;
-
+					pop8.value = podcasters[7].memberId;
 		
 
 					img1.src=podcasters[0].image;
@@ -71,7 +71,7 @@
 					img5.src=podcasters[4].image;
 					img6.src=podcasters[5].image;
 					img7.src=podcasters[6].image;
-
+					img8.src=podcasters[7].image;
 			
 					title1.innerHTML = podcasters[0].nickname;
 					title2.innerHTML = podcasters[1].nickname;
@@ -80,6 +80,7 @@
 					title5.innerHTML = podcasters[4].nickname;
 					title6.innerHTML = podcasters[5].nickname;
 					title7.innerHTML = podcasters[6].nickname;
+					title8.innerHTML = podcasters[7].nickname;
 
 					info1.innerHTML = podcasters[0].info;
 					info2.innerHTML = podcasters[1].info;
@@ -88,6 +89,7 @@
 					info5.innerHTML = podcasters[4].info;
 					info6.innerHTML = podcasters[5].info;
 					info7.innerHTML = podcasters[6].info;
+					info8.innerHTML = podcasters[7].info;
 
 			}
 		}
@@ -137,6 +139,13 @@
 			let play4=document.getElementById("play4");
 			let play5=document.getElementById("play5");
 			let play6=document.getElementById("play6");
+			
+			let topod1=document.getElementById("topod1");
+			let topod2=document.getElementById("topod2");
+			let topod3=document.getElementById("topod3");
+			let topod4=document.getElementById("topod4");
+			let topod5=document.getElementById("topod5");
+			let topod6=document.getElementById("topod6");
 
 
 			let xhr2 = new XMLHttpRequest();
@@ -157,6 +166,7 @@
 							podlike1.innerHTML=podcasts[0].likesCount;
 							podclick1.innerHTML=podcasts[0].clickAmount;
 							play1.id=podcasts[0].podcastId;
+							topod1.value=podcasts[0].memberId;
 
 							podimg2.src=podcasts[1].audioimg;
 							podinfo2.innerHTML=podcasts[1].podcastInfo;
@@ -164,6 +174,7 @@
 							podlike2.innerHTML=podcasts[1].likesCount;
 							podclick2.innerHTML=podcasts[1].clickAmount;
 							play2.id=podcasts[1].podcastId;
+							topod2.value=podcasts[1].memberId;
 
 							podimg3.src=podcasts[2].audioimg;
 							podinfo3.innerHTML=podcasts[2].podcastInfo;
@@ -171,6 +182,7 @@
 							podlike3.innerHTML=podcasts[2].likesCount;
 							podclick3.innerHTML=podcasts[2].clickAmount;
 							play3.id=podcasts[2].podcastId;
+							topod3.value=podcasts[2].memberId;
 
 							podimg4.src=podcasts[3].audioimg;
 							podinfo4.innerHTML=podcasts[3].podcastInfo;
@@ -178,6 +190,7 @@
 							podlike4.innerHTML=podcasts[3].likesCount;
 							podclick4.innerHTML=podcasts[3].clickAmount;
 							play4.id=podcasts[3].podcastId;
+							topod4.value=podcasts[3].memberId;
 
 							podimg5.src=podcasts[4].audioimg;
 							podinfo5.innerHTML=podcasts[4].podcastInfo;
@@ -185,6 +198,7 @@
 							podlike5.innerHTML=podcasts[4].likesCount;
 							podclick5.innerHTML=podcasts[4].clickAmount;
 							play5.id=podcasts[4].podcastId;
+							topod5.value=podcasts[4].memberId;
 
 							podimg6.src=podcasts[5].audioimg;
 							podinfo6.innerHTML=podcasts[5].podcastInfo;
@@ -192,6 +206,7 @@
 							podlike6.innerHTML=podcasts[5].likesCount;
 							podclick6.innerHTML=podcasts[5].clickAmount;
 							play6.id=podcasts[5].podcastId;
+							topod6.value=podcasts[5].memberId;
 						}
 					}
 		}

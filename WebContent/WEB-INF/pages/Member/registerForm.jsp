@@ -84,7 +84,7 @@
 </script>
 <style type="text/css">
     body {
-      background-image: url(<c:url value='/img/banner/b1.jpg' />);
+      background-image: url(<c:url value='/img/banner/b6.jpg' />);
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -276,7 +276,7 @@
 		</div>
 	</div>
 	<br>
-	<div style="text-align: center">
+	<div style="text-align: center;margin-bottom:20px;">
 			<a href="<c:url value='/' />" class="btn btn-primary btn-md">回首頁</a>
 		</div>
 
