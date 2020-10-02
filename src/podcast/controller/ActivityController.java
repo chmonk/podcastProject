@@ -45,6 +45,9 @@ import podcast.model.javabean.uploadPodcastBean;
 public class ActivityController {
 	@Autowired 
 	LikeRecordDAO ldao;
+	
+	@Autowired
+	ActivityDAO aDAO;
 
 	// 管理活動頁面
 	@GetMapping("/manageActivities")
@@ -224,13 +227,21 @@ public class ActivityController {
 	@PostMapping("DeleteActivity")
 	public String deleteActivity(HttpServletRequest request,
 			@RequestParam("cmd")   String cmd,
-			@RequestParam(value = "activityId", required = false) Integer  activityId) throws Exception {
+			@RequestParam(value = "activityId", required = false) Integer  activityId, Model m) throws Exception {
 		ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);			
     	ActivityDAO aDao = (ActivityDAO) context.getBean("ActivityDAO");
     	
+    	MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
+    	
+    	
+    	
     	if (cmd.equalsIgnoreCase("DEL")) {
     	boolean b = aDao.delete(activityId);
+    	
+    	List<ActivityBean> list = aDao.selectByPodcasterId(memberBean.getMemberId());				
+    	m.addAttribute("ActivityList",list);
+    	
     	return "Activity/manageActivities";}
     	else {
     		return "Activity/manageActivities";	

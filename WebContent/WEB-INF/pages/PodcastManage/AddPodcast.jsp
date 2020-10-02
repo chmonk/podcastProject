@@ -82,14 +82,14 @@
 			<div class="row">
              <div class="col-lg-6 col-md-6">
             <label>付費狀態: </label>
-            <select class="form-control" name="openPayment">
+            <select id="openPayment" class="form-control" name="openPayment">
               <option value=0 checked>免費</option>
               <option value=1>訂閱</option>
             </select>
               </div>
              <div class="col-lg-6 col-md-6">
             <label>頻道類別: </label>
-            <select class="form-control" name="category">
+            <select id="category" class="form-control" name="category">
               <option value=1 checked>喜劇娛樂</option>
 					<option value=2>生活文化</option>
 					<option value=3>男女話題</option>
@@ -129,6 +129,11 @@
                 style="box-shadow: 2px 2px 2px gray; ">
                 <p id="err" style="background-color: white" ></p>
             </div>
+            <br>
+            <div style="text-align: center; margin-bottom: 20px;">
+		
+		<button  class="btn btn-primary btn-md" onclick="fillBlank()">一鍵輸入</button>
+	</div>
           </form>
         </div>
       </div>
@@ -175,6 +180,15 @@ function readURL(input) {
 	});
 
 
+	function fillBlank(){
+
+		$("#name").val("調酒入門");
+		$("#openPayment")[0].selectedIndex=1;
+		$("#category")[0].selectedIndex=3;
+		$("#info").val("浪漫duke的調酒入門");
+		
+
+}
  </script> 
  
  

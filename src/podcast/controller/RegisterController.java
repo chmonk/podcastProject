@@ -12,13 +12,16 @@ import java.util.regex.Pattern;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -30,7 +33,11 @@ import podcast.model.javabean.MemberBean;
 @Controller
 @SessionAttributes({ "LoginOK" })
 public class RegisterController {
-
+	
+	
+	@Autowired
+	MemberDAO mdao;
+	
 	// 導向新增會員頁面
 	@RequestMapping(path = "/register", method = RequestMethod.GET)
 	public String showForm(Model m) {
@@ -319,6 +326,31 @@ public class RegisterController {
 		// 存入資料庫預設路徑
 		return "./" + savefolder + "/" + savefilename;
 
+	}
+	
+	@GetMapping(value="/checkAccount",produces="application/json;charset=utf-8")
+	public @ResponseBody String checkAccout(@RequestParam("account") String account){
+		
+		if(mdao.checkRegisterAccount(account)) {
+			System.out.println( "可以使用");
+			return "可以使用";
+		}else {
+			System.out.println( "此帳號已使用");
+			return "此帳號已使用";
+		}
+	}
+	
+	
+	@GetMapping(value="/checkNickname",produces="application/json;charset=utf-8")
+	public @ResponseBody String checkNickname(@RequestParam("nickname") String nickname){
+		
+		if(mdao.checkRegisterNickname(nickname)) {
+			System.out.println( "可以使用");
+			return "可以使用";
+		}else {
+			System.out.println( "此暱稱已使用");
+			return "此暱稱已使用";
+		}
 	}
 
 }
