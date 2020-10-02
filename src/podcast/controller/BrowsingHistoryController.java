@@ -1,5 +1,6 @@
 package podcast.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +56,12 @@ public class BrowsingHistoryController {
 		
 		List<HistoryOrderProgramBean> rs = hdao.selectHistoryByMemberId4(userId);
 
+		/*觀看權限訂閱
+		for(HistoryOrderProgramBean r:rs) {
+			System.out.println("podcastid:"+r.getPodcastId()+" openpayment:"+r.getOpenPayment()+" enddate:"+r.getSubdateEnd());
+			System.out.println("podcastid:"+r.getPodcastId()+" valid:"+r.getWatchProgramValidation());
+		}  */
+		
 		m.addAttribute("history", rs);
 
 
@@ -65,7 +72,7 @@ public class BrowsingHistoryController {
 
 	//ajax要瀏覽紀錄整理  塞到播放列表
 	@PostMapping(value = "/getPlaylist")
-	public @ResponseBody List<Map<String, String>> getUserPlaylist(HttpServletRequest request, Model m) {
+	public @ResponseBody List<Map<String, String>> getUserPlaylist(HttpServletRequest request, Model m) throws ParseException {
 		// test get userid
 		
 		MemberBean mbean = (MemberBean)m.getAttribute("LoginOK");

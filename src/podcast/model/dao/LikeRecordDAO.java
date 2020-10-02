@@ -1,7 +1,9 @@
 package podcast.model.dao;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -190,7 +192,7 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 	
 	
 	//取的最愛節目清單
-			public List<HistoryOrderProgramBean> selectLikeList(Integer memberId) {
+			public List<HistoryOrderProgramBean> selectLikeList(Integer memberId) throws Exception {
 				
 				Session session = sessionFactory.getCurrentSession();
 				
@@ -198,7 +200,7 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 				String nativesqlstr =
 						"select "
 						//表格組成
-						+ "h.podcastId,h.podcastName,h.publisherId,h.lastListen,h.memberId ,m.nickname,u.uploadTime, u.likesCount,u.clickAmount,u.audioImg, u.audioPath,u.podcastInfo, c.categoryName,l.likeStatus,l.showInListOrNot "
+						+ "h.podcastId,h.podcastName,h.publisherId,h.lastListen,h.memberId ,m.nickname,u.uploadTime, u.likesCount,u.clickAmount,u.audioImg, u.audioPath,u.podcastInfo, c.categoryName,l.likeStatus,l.showInListOrNot ,u.openPayment ,s.subdateEnd  "
 						//get the lastest record for each program from same memberid  1.?
 						+ "from (select *, ROW_NUMBER() over(partition by podcastid order by lastlisten desc  ) as sn "
 						+ "from browsingHistory where memberid= ? ) as h "
@@ -210,13 +212,15 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 						+ "left join category as c on u.categoryId=c.categoryId "
 						//join members
 						+ "left join members as m on m.memberId=h.publisherId "
+						//check the subsription
+						+" left join subscription as s on s.memberId=h.memberId and  h.publisherId=s.podcasterId "
 						// for specific memberid 2.?
 						+ "where h.memberId=? "
 						//the lastest record
 						+ "and h.sn=1 and l.likeStatus=1 order by lastListen" ;			
 				
 				
-				NativeQuery query = session.createNativeQuery(nativesqlstr);
+				NativeQuery<Object[]> query = session.createNativeQuery(nativesqlstr);
 				
 				query.setParameter(1, memberId);
 				query.setParameter(2, memberId);
@@ -224,6 +228,8 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 				List<Object[]> resultSet = query.list();
 				
 				List<HistoryOrderProgramBean> orderList= new ArrayList<HistoryOrderProgramBean>();
+				
+				
 				
 				//sql取資料 從新到舊   but 因為js playlist 新到舊 =下到上   塞丟前端資料從最舊紀錄開始塞
 				for (int i=resultSet.size()-1;i>=0;i--) {
@@ -239,6 +245,7 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 					
 					String lastListen = resultSet.get(i)[3].toString();
 					String uploadTime = resultSet.get(i)[6].toString();
+					String registerenddate;
 					
 					hpbean.setPodcastId(Integer.parseInt(resultSet.get(i)[0].toString()));
 					hpbean.setPodcastName(resultSet.get(i)[1].toString());
@@ -256,10 +263,52 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 					hpbean.setLikestatus(Integer.parseInt(resultSet.get(i)[13].toString()));
 					hpbean.setShowInListOrNot(Integer.parseInt(resultSet.get(i)[14].toString()));
 					
+					hpbean.setOpenPayment(Integer.parseInt(resultSet.get(i)[15].toString()));
+					
+					//處理訂閱到期時間
+					if(resultSet.get(i)[16]==null) {
+						//System.out.println("date null");
+						hpbean.setSubdateEnd("null");
+					}else {
+						//System.out.println("date not null");
+						//System.out.println(resultSet.get(i)[16].toString());
+					    registerenddate=resultSet.get(i)[16].toString();
+						hpbean.setSubdateEnd(registerenddate);
+					}
+					
+					//判斷節目是否付費      依據訂閱時間與目前時間判斷是否到期
+					
+					if(hpbean.getOpenPayment()==0) {
+						//不須付費可觀看
+						hpbean.setWatchProgramValidation(1);
+					}else {
+						//付費權限檢測
+						String dateformat= "yyyy-MM-dd";
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						
+						
+						if(hpbean.getSubdateEnd().equals("null")) {
+							//沒訂閱不可加入閱覽
+							hpbean.setWatchProgramValidation(0);
+						}else {
+							Date subendDate = sdf.parse(hpbean.getSubdateEnd());
+							
+							Date now= new Date();
+							
+							int comparison = subendDate.compareTo(now);
+							
+							if(comparison!=-1) {
+								hpbean.setWatchProgramValidation(1);
+							}else {
+								hpbean.setWatchProgramValidation(0);
+							}
+							
+						}
+					
+					}
 					orderList.add(hpbean);
-				}
 				
-				return orderList;
 			}
+				return orderList;
 
-}
+}}

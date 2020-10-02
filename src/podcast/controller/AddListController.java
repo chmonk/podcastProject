@@ -52,10 +52,12 @@ public class AddListController {
 	//id from ajax provide podcastId
 	public @ResponseBody Map<String, String> AddList(
 			@RequestParam("id") Integer id,
-			Model model) throws Exception {
+			Model model,HttpServletResponse response) throws Exception {
 
 		
 		System.out.println("id==="+id);
+		
+		
 
 		
 		//@ResponseBody表示被此標註的類別方法的回傳值會直接以JSON格式顯示在HTML上
@@ -64,6 +66,13 @@ public class AddListController {
 
 //		Integer userId=(Integer)model.getAttribute("userid");
 		MemberBean mbean = (MemberBean)model.getAttribute("LoginOK");
+		
+		
+		if(mbean==null) {
+			System.out.println("loginok null");
+			return null;
+		}
+		
 		
 		//check loginOK
 		System.out.println("loginOK ID:"+mbean.getMemberId() );

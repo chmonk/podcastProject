@@ -68,6 +68,7 @@ public class CommentController {
     	//取得使用者id
     	MemberBean mbean=(MemberBean)m.getAttribute("LoginOK");
     	Integer  memberId =mbean.getMemberId();
+    	m.addAttribute("thisMemberId",memberId);
     	
     	
 
