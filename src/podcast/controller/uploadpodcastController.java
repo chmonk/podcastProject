@@ -258,7 +258,7 @@ public class uploadpodcastController {
 	    	 	
 	    	 	HistoryDao hdao= (HistoryDao)context.getBean("HistoryDao");
 	    	 	
-	    	 	hdao.deteleByPodcastId(podcastId);
+	    	 	hdao.deleteByPodcastId(podcastId);
 	    	 	
 	    	 	LikeRecordDAO ldao=(LikeRecordDAO)context.getBean("LikeRecordDAO");
 	    	 	

@@ -1,8 +1,6 @@
 package podcast.model.javabean;
 
-
-
-
+import java.util.Date;
 
 public class HistoryOrderProgramBean {
 	
@@ -21,14 +19,19 @@ public class HistoryOrderProgramBean {
 	String categoryName;
 	Integer likestatus;
 	Integer showInListOrNot;
+	Integer openPayment;
+	String subdateEnd;
+	Integer watchProgramValidation;
+	
 
 	public HistoryOrderProgramBean() {
 	}
 
+
 	public HistoryOrderProgramBean(Integer podcastId, String podcastName, Integer publisherId, String lastListen,
 			Integer memberId, String nickname, String uploadTime, Integer likesCount, Integer clickAmount,
 			String audioImg, String audioPath, String podcastInfo, String categoryName, Integer likestatus,
-			Integer showInListOrNot) {
+			Integer showInListOrNot, Integer openPayment, String subdateEnd, Integer watchProgramValidation) {
 		super();
 		this.podcastId = podcastId;
 		this.podcastName = podcastName;
@@ -45,7 +48,11 @@ public class HistoryOrderProgramBean {
 		this.categoryName = categoryName;
 		this.likestatus = likestatus;
 		this.showInListOrNot = showInListOrNot;
+		this.openPayment = openPayment;
+		this.subdateEnd = subdateEnd;
+		this.watchProgramValidation = watchProgramValidation;
 	}
+
 
 
 	public Integer getPodcastId() {
@@ -179,6 +186,46 @@ public class HistoryOrderProgramBean {
 	public void setShowInListOrNot(Integer showInListOrNot) {
 		this.showInListOrNot = showInListOrNot;
 	}
+
+
+	public Integer getOpenPayment() {
+		return openPayment;
+	}
+
+
+	public void setOpenPayment(Integer openPayment) {
+		this.openPayment = openPayment;
+	}
+
+
+	public String getSubdateEnd() {
+		return subdateEnd;
+	}
+
+
+	public void setSubdateEnd(String subdateEnd) {
+		this.subdateEnd = subdateEnd;
+	}
+
+
+	public Integer getWatchProgramValidation() {
+		return watchProgramValidation;
+	}
+
+
+	public void setWatchProgramValidation(Integer watchProgramValidation) {
+		this.watchProgramValidation = watchProgramValidation;
+	}
+
+
+
+
+
+	
+
+
+	
+	
 	
 	
 	
