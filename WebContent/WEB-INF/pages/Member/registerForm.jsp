@@ -93,7 +93,7 @@
      			if(accountValue.trim()==""){
 						console.log("null");
 						console.log($("#acountRS").text());
-						$("#acountRS").text("不可為空").addClass("wrong");
+						$("#acountRS").text("不可為空").removeClass("right").addClass("wrong");
 						return;
          			}
          	 	console.log('account is '+ accountValue);
@@ -108,9 +108,9 @@
 
 
 						if(result==="可以使用"){
-							$("#acountRS").text(result).addClass("right");
+							$("#acountRS").text(result).removeClass("wrong").addClass("right");
 							}else{
-							$("#acountRS").text(result).addClass("wrong");
+							$("#acountRS").text(result).removeClass("right").addClass("wrong");
 							}
 						
 						
@@ -150,13 +150,13 @@
          	
      			let passValue= $("#pass").val();
      			if (passValue == null || passValue.length == 0) {
-     				$("#passRS").text("不可為空").addClass("wrong");
+     				$("#passRS").text("不可為空").removeClass("right").addClass("wrong");
      			}else if(!passValue.match(".*\\d+.*")){
-     				$("#passRS").text("需含有數字").addClass("wrong");
+     				$("#passRS").text("需含有數字").removeClass("right").addClass("wrong");
 				}else if(!passValue.match(".*[a-zA-Z]+.*")){
-     				$("#passRS").text("需含有大小寫字母").addClass("wrong");
+     				$("#passRS").text("需含有大小寫字母").removeClass("right").addClass("wrong");
 				}else{
-					$("#passRS").text("可以使用").addClass("right");
+					$("#passRS").text("可以使用").removeClass("wrong").addClass("right");
 				}
 				console.log( $("#pass").val());
      	}  
@@ -168,7 +168,7 @@
      			let nickname= $("#nickname").val();
      			if(nickname.trim()==""){
 						console.log("null");
-						$("#nicknameRS").text("不可為空").addClass("wrong");
+						$("#nicknameRS").text("不可為空").removeClass("right").addClass("wrong");
 						return;
          			}
          	 	console.log('nickname is '+ nickname);
@@ -181,9 +181,9 @@
 						let result= xhr.responseText;
 						console.log("async"+result);
 						if(result==="可以使用"){
-							$("#nicknameRS").text(result).addClass("right");
+							$("#nicknameRS").text(result).removeClass("wrong").addClass("right");
 							}else{
-							$("#nicknameRS").text(result).addClass("wrong");
+							$("#nicknameRS").text(result).removeClass("right").addClass("wrong");
 							}
 	                	}else{
 							console.log("no get");
