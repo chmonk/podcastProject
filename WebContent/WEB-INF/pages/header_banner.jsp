@@ -226,86 +226,9 @@ nav ul ul li {
 
 					<a class="navbar-brand" href="<c:url value='/' />"> <!-- logo image -->
 						<img class="img-responsive" src="img/logo/SoundPod2.png" alt="" />
-<<<<<<< HEAD
-						</a>
-					</div>
-	
-					<!-- Collect the nav links, forms, and other content for toggling -->
 
-					<c:choose>
-						<c:when test="${LoginOK.role==1}">
-							<div class="collapse navbar-collapse"
-								id="bs-example-navbar-collapse-1">
-								<ul class="nav navbar-nav navbar-right">
-									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
-									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
-									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
-									<li><a href="<c:url value='/#events' />">派對活動</a></li>
-									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
-									<li><li><a href="#">${LoginOK.name}</a>
-				         				<!-- First Tier Drop Down -->
-							            <ul class="barlist">
-							                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
-							                <li><a href="<c:url value='/goToLikeRecord' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
-							                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
-							                <li><a href="<c:url value='/SubOrderController.controller' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
-							                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>							
-							            </ul>        
-							           </li>
-							           <li><a href="<c:url value='ShoppingCart' />"><i class="aaaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"><span class="img_text">${cartContent}</span></i></a>
-							        </li>
-								</ul>
-							</div>
-						</c:when>
-						<c:when test="${LoginOK.role==2}">					
-							<div class="collapse navbar-collapse"
-								id="bs-example-navbar-collapse-1">
-								<ul class="nav navbar-nav navbar-right">
-<!-- 	http://localhost:8080/SpringWebProject/#latestalbum -->
-									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
-									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
-									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
-									<li><a href="<c:url value='/#events' />">派對活動</a></li>
-									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
-									<li><li><a href="#">${LoginOK.name}</a>
-				         				<!-- First Tier Drop Down -->
-								            <ul class="barlist">
-								                <li><a href="<c:url value='/update' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;會員資料</a></li>
-								                <li><a href="<c:url value='/goToLikeRecord' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的最愛</a></li>
-								                <li><a href="<c:url value='/goToBrowsingHistory' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;瀏覽紀錄</a></li>
-								                <li><a href="<c:url value='/SubOrderController.controller' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;購買紀錄</a></li>
-								                <li><a href="<c:url value='/mypodcastPage' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的頻道</a></li>
-								                <li><a href="<c:url value='/managePodcast' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;頻道管理</a></li>
-								                <li><a href="<c:url value='/manageActivities' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;活動管理</a></li>
-								                <li><a href="<c:url value='/logout' />">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登出</a></li>
-								            </ul>        
-							           </li>
-							    	       <li><a href="<c:url value='ShoppingCart' />"><i class="aaaa glyphicon glyphicon-shopping-cart" style="font-size:20px;"><span class="img_text">${cartContent}</span></i></a>
-							        </li>
-								</ul>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="collapse navbar-collapse"
-								id="bs-example-navbar-collapse-1">
-								<ul class="nav navbar-nav navbar-right ">
-		
-									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
-									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
-									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
-									<li><a href="<c:url value='/#events' />">派對活動</a></li>
-									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
-									<li><a href="<c:url value='/login' />">註冊/登入</a></li>
-									
-								</ul>
-							</div>					    
-					    </c:otherwise>
-					</c:choose>
-
-					<!-- /.navbar-collapse -->
-=======
 					</a>
->>>>>>> d1d86a48b752cee2b4414e0891aa99b0274611aa
+
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -378,6 +301,7 @@ nav ul ul li {
 								<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
 								<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
 								<%-- 									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li> --%>
+								<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 								<li><a href="<c:url value='/#events' />">派對活動</a></li>
 								<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
 								<li><a href="<c:url value='/login' />">註冊/登入</a></li>
@@ -396,58 +320,7 @@ nav ul ul li {
 
 	<!-- 		banner start -->
 	<div class="banner">
-<<<<<<< HEAD
-			<div id="carousel-example-generic" class="carousel slide"
-				data-ride="carousel">
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner" role="listbox">
-					<div class="item active">
-						<img src="img/banner/banner1001.jpg" alt="...">
-						<div class="container">
-							<!-- banner caption -->
-							<div class="carousel-caption slide-one">
-								<!-- heading -->
-								<h2 class="animated fadeInLeftBig">
-									<i class="fa fa-music"></i> Podcast For You!
-								</h2>
-								<!-- paragraph -->
-								<h3 class="animated fadeInRightBig ">聽見全世界</h3>
-								<!-- button -->
-								
-								<c:choose>
-									<c:when test="${LoginOK.role!=null}">
-										<h3 class="animated fadeInLeftBig">歡迎${LoginOK.name}一起聽見全世界的聲音</h3>
-									</c:when>
-									<c:otherwise>
-										<a href="<c:url value='/login' />" class="animated fadeIn btn btn-theme">註冊/登入</a>
-									</c:otherwise>
-								</c:choose>
-								
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<img src="img/banner/banner1000.jpg" alt="...">
-						<div class="container">
-							<!-- banner caption -->
-							<div class="carousel-caption slide-two">
-								<!-- heading -->
-								<h2 class="animated fadeInLeftBig">
-									<i class="fa fa-headphones"></i> Listen to Podcast...
-								</h2>
-								<!-- paragraph -->
-								<h3 class="animated fadeInRightBig">最完整的播音平台</h3>
-								<!-- button -->
-								<c:choose>
-									<c:when test="${LoginOK.role!=null}">
-										<h3 class="animated fadeInLeftBig ">享受最多元的節目</h3>
-									</c:when>
-									<c:otherwise>
-										<a href="<c:url value='/login' />" class="animated fadeIn btn btn-theme">註冊/登入</a>
-									</c:otherwise>
-								</c:choose>
-							</div>
-=======
+
 		<div id="carousel-example-generic" class="carousel slide"
 			data-ride="carousel">
 			<!-- Wrapper for slides -->
@@ -470,7 +343,7 @@ nav ul ul li {
 									<h3 class="animated fadeInLeftBig">歡迎${LoginOK.name}一起聽見全世界的聲音</h3>
 								</c:when>
 								<c:otherwise>
-									<a href="#" class="animated fadeIn btn btn-theme">註冊/登入</a>
+									<a href="<c:url value='/login' />" class="animated fadeIn btn btn-theme">註冊/登入</a>
 								</c:otherwise>
 							</c:choose>
 
@@ -494,10 +367,10 @@ nav ul ul li {
 									<h3 class="animated fadeInLeftBig ">享受最多元的節目</h3>
 								</c:when>
 								<c:otherwise>
-									<a href="#" class="animated fadeIn btn btn-theme">註冊/登入</a>
+									<a href="<c:url value='/login' />" class="animated fadeIn btn btn-theme">註冊/登入</a>
 								</c:otherwise>
 							</c:choose>
->>>>>>> d1d86a48b752cee2b4414e0891aa99b0274611aa
+
 						</div>
 					</div>
 				</div>

@@ -244,10 +244,6 @@ background:#000000;
 		
 									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
 									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
-<<<<<<< HEAD
-=======
-<%-- 									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li> --%>
->>>>>>> d1d86a48b752cee2b4414e0891aa99b0274611aa
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
 									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
@@ -273,14 +269,9 @@ background:#000000;
 								id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right">
 <!-- 	http://localhost:8080/SpringWebProject/#latestalbum -->
-<<<<<<< HEAD
+
 									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
 									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
-=======
-										<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
-									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
-<%-- 									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li> --%>
->>>>>>> d1d86a48b752cee2b4414e0891aa99b0274611aa
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
 									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
@@ -308,14 +299,8 @@ background:#000000;
 								id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right ">
 		
-<<<<<<< HEAD
 									<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
 									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
-=======
-											<li><a href="<c:url value='/#latestalbum' />">矚目新選</a></li>
-									<li><a href="<c:url value='/#featuredalbum' />">熱播排行</a></li>
-<%-- 									<li><a href="<c:url value='/#joinus' />">熱播排行</a></li> --%>
->>>>>>> d1d86a48b752cee2b4414e0891aa99b0274611aa
 									<li><a href="<c:url value='/#portfolio' />">人氣播客</a></li>
 									<li><a href="<c:url value='/#events' />">派對活動</a></li>
 									<li><a href="<c:url value='/#selectBar' />">瀏覽搜尋</a></li>
@@ -351,7 +336,7 @@ background:#000000;
 								<!-- paragraph -->
 								<h3 class="animated fadeInRightBig">聽見全世界</h3>
 								<!-- button -->
-								<a href="#" class="animated fadeIn btn btn-theme">註冊/登入</a>
+								<a href="<c:url value='/login' />" class="animated fadeIn btn btn-theme">註冊/登入</a>
 							</div>
 						</div>
 					</div>
@@ -367,7 +352,7 @@ background:#000000;
 								<!-- paragraph -->
 								<h3 class="animated fadeInRightBig">最完整的播音平台</h3>
 								<!-- button -->
-								<a href="#" class="animated fadeIn btn btn-theme">註冊/登入</a>
+								<a href="<c:url value='/login' />" class="animated fadeIn btn btn-theme">註冊/登入</a>
 							</div>
 						</div>
 					</div>
