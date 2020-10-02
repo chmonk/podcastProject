@@ -6,6 +6,24 @@
 <head>
 <meta charset="UTF-8">
 
+<style>
+.titlespan{
+	color: white;
+	font-size: 30px
+}
+
+.overflow{
+
+  height:45px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+
+}
+
+</style>
+
 <!-- Styles -->
 <%-- 
 <!-- Bootstrap CSS -->
@@ -71,15 +89,15 @@
 				<!-- on mouse hover details -->
 				<div class="p-hover">
 					<!-- heading /title -->
-					<h3 id="title1">熱門播客1</h3>
+					<span class="titlespan" id="title1">熱門播客1</span>
 					<hr>
 					<!-- project details -->
-					<p id="info1">Some details about album.</p>
+					<p class="overflow" id="info1">Some details about album.</p>
 
 					<!-- icon -->
 
 					<form id="form1" action="<c:url value="/podcastPage"/>">
-						<a href="javascript:;"
+						<a href="javascript:;" style="margin-bottom: 5px;"
 							onclick="document.getElementById('form1').submit();"> <i
 							class="fa fa-share"> <input type="hidden"
 								name="fuzzyPodcasterId" id="pop1" value="" />
@@ -98,10 +116,10 @@
 				<!-- on mouse hover details -->
 				<div class="p-hover">
 					<!-- heading /title -->
-					<h3 id="title2">Album Title</h3>
+					<span class="titlespan" id="title2">Album Title</span>
 					<hr>
 					<!-- project details -->
-					<p id="info2">Some details about album.</p>
+					<p id="info2" class="overflow">Some details about album.</p>
 
 					<!-- icon -->
 					<form id="form2" action="<c:url value="/podcastPage"/>">
@@ -124,10 +142,10 @@
 				<!-- on mouse hover details -->
 				<div class="p-hover">
 					<!-- heading /title -->
-					<h3 id="title3">Album Title</h3>
+					<span class="titlespan" id="title3">Album Title</span>
 					<hr>
 					<!-- project details -->
-					<p id="info3">Some details about album.</p>
+					<p class="overflow" id="info3">Some details about album.</p>
 
 					<!-- icon -->
 					<form id="form3" action="<c:url value="/podcastPage"/>">
@@ -150,10 +168,10 @@
 				<!-- on mouse hover details -->
 				<div class="p-hover">
 					<!-- heading /title -->
-					<h3 id="title4">Album Title</h3>
+					<span class="titlespan" id="title4">Album Title</span>
 					<hr>
 					<!-- project details -->
-					<p id="info4">Some details about album.</p>
+					<p class="overflow" id="info4">Some details about album.</p>
 
 					<!-- icon -->
 					<form id="form4" action="<c:url value="/podcastPage"/>">
@@ -175,10 +193,10 @@
 				<!-- on mouse hover details -->
 				<div class="p-hover">
 					<!-- heading /title -->
-					<h3 id="title5">Album Title</h3>
+					<span class="titlespan" id="title5">Album Title</span>
 					<hr>
 					<!-- project details -->
-					<p id="info5">Some details about album.</p>
+					<p class="overflow" id="info5">Some details about album.</p>
 					<!-- icon -->
 					<form id="form5" action="<c:url value="/podcastPage"/>">
 						<a href="javascript:;"
@@ -199,10 +217,10 @@
 				<!-- on mouse hover details -->
 				<div class="p-hover">
 					<!-- heading /title -->
-					<h3 id="title6">Album Title</h3>
+					<span class="titlespan" id="title6">Album Title</span>
 					<hr>
 					<!-- project details -->
-					<p id="info6">Some details about album.</p>
+					<p class="overflow" id="info6">Some details about album.</p>
 					<!-- icon -->
 					<form id="form6" action="<c:url value="/podcastPage"/>">
 						<a href="javascript:;"
@@ -223,10 +241,10 @@
 				<!-- on mouse hover details -->
 				<div class="p-hover">
 					<!-- heading /title -->
-					<h3 id="title7">Album Title</h3>
+					<span class="titlespan" id="title7">Album Title</span>
 					<hr>
 					<!-- project details -->
-					<p id="info7">Some details about album.</p>
+					<p class="overflow" id="info7">Some details about album.</p>
 					<!-- icon -->
 					<form id="form7" action="<c:url value="/podcastPage"/>">
 						<a href="javascript:;"
@@ -247,10 +265,10 @@
 				<!-- on mouse hover details -->
 				<div class="p-hover">
 					<!-- heading /title -->
-					<h3 id="title8">Album Title</h3>
+					<span class="titlespan" id="title8">Album Title</span>
 					<hr>
 					<!-- project details -->
-					<p id="info8">Some details about album.</p>
+					<p class="overflow" id="info8">Some details about album.</p>
 					<!-- icon -->
 					<form id="form8" action="<c:url value="/podcastPage"/>">
 						<a href="javascript:;"
