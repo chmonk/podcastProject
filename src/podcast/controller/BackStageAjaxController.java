@@ -29,6 +29,7 @@ import podcast.model.dao.ActivityDAO;
 import podcast.model.dao.BackStageDAO;
 import podcast.model.dao.CategoryDAO;
 import podcast.model.dao.HistoryDao;
+import podcast.model.dao.LikeRecordDAO;
 import podcast.model.dao.MemberDAO;
 import podcast.model.dao.OrderTicketDAO;
 import podcast.model.dao.ProgramCommentDAO;
@@ -64,7 +65,8 @@ public class BackStageAjaxController {
 	private UploadPodcastDAO uDao;
 	@Autowired
 	private BackStageDAO bDao;
-	
+	@Autowired
+	private LikeRecordDAO ldao;
 //所有的showALLFunction=======================================
 	
 	@GetMapping(path= {"showAllMember"})
@@ -152,7 +154,7 @@ public class BackStageAjaxController {
 
 	@PostMapping(path = { "/BackStageDeleteMember" })
 	public @ResponseBody java.util.List<MemberBean> DeleteMember(HttpServletRequest request, @RequestParam(value = "input") Integer memberId,
-			Model m) {
+			Model m) throws Exception {
 		
 		MemberBean mBean = bDao.selectMember(memberId);
 		java.util.List<MemberBean> mList = new ArrayList<MemberBean>();
@@ -160,6 +162,11 @@ public class BackStageAjaxController {
 		m.addAttribute("mList", mList);
 		
 		bDao.deleteMember(memberId);
+		ldao.deleteByPodcasterId(memberId);
+		hDao.deleteByPodcasterId(memberId);
+		aDao.deleteByPodcasterId(memberId);
+		uDao.deleteByPodcasterId(memberId);
+		
 		m.addAttribute("memberDeleteMsg", "Select Member Deleted!");
 		return mList;
 
@@ -285,7 +292,6 @@ public class BackStageAjaxController {
 		bDao.updateCategory(categoryId, cBean);
 		java.util.List<CategoryBean> cList=cDao.selectAll();
 		
-
 		return cList;
 	}
 	
@@ -453,6 +459,9 @@ public class BackStageAjaxController {
 		uList.add(uBean);
 		m.addAttribute("PodcastResult","Select Podcast Deleted!");
 		bDao.deletePodcast(podcastId);
+		hDao.deleteByPodcastId(podcastId);
+		ldao.detelePodcastId(podcastId);
+		
 		return uList;
 	}
 	
