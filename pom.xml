@@ -6,7 +6,9 @@
 	<artifactId>SpringWebProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		</properties>
 	<dependencies>
 		<!-- https://github.com/xdrop/fuzzywuzzy 模糊搜尋套件 -->
 		<dependency>

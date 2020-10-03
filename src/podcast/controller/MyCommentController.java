@@ -66,6 +66,7 @@ public class MyCommentController {
     	//取得使用者id
     	MemberBean mbean=(MemberBean)m.getAttribute("LoginOK");
     	Integer  memberId =mbean.getMemberId();
+    	m.addAttribute("thisMemberId",memberId);
     	
     	
 
@@ -82,9 +83,14 @@ public class MyCommentController {
 		for (ProgramCommentBean i : commList) {
 			Map<String, Object> commListitem = new HashMap<>();
 
+			commListitem.put("commentId", i.getCommentId());
+			commListitem.put("replyDate",i.getReplyDate());
+			commListitem.put("replyMsg",i.getReplyMsg());
 			commListitem.put("commentMsg",i.getCommentMsg());
 			commListitem.put("msgDate",i.getMsgDate());
 			commListitem.put("Name", mdao.selectPodcaster(i.getMemberId()).getNickname());
+			commListitem.put("memberImg", mdao.selectPodcaster(i.getMemberId()).getImage());
+
 			commListData.add(commListitem);
 		}
 		

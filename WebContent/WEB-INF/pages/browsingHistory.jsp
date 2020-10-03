@@ -167,8 +167,23 @@ h2 {
 					<div
 						class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
 						<span class="card-media-body-supporting-bottom-text subtle">${rownum.getCategoryName()}</span>
-						<a id="${rownum.getPodcastId()}"
-							class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
+						
+						
+<%-- 						<a id="${rownum.getPodcastId()}" --%>
+<!-- 							class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a> -->
+							
+							<c:choose>
+								<c:when test="${rownum.getWatchProgramValidation() ==1}">
+								<a id="${rownum.getPodcastId()}"
+									class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
+										</c:when>
+								<c:otherwise>
+								<a id="${rownum.getPodcastId()}"
+									class="card-media-body-supporting-bottom-text card-media-link u-float-right">
+										需訂閱才能收聽</a>
+														</c:otherwise>
+													</c:choose>
+							
 					</div>
 				</div>
 			</div>

@@ -221,6 +221,10 @@ public class RegisterController {
 		}
 		;
 		// creditCardNumber
+		
+		//輸入-取代掉
+		creditCardNumber= creditCardNumber.replaceAll("-","");
+		
 		if (creditCardNumber == null || creditCardNumber.length() == 0) {
 			errors.put("creditCardNumber", "creditCardNumber is required");
 		}

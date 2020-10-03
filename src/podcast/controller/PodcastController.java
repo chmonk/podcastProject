@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import podcast.model.dao.HistoryDao;
+import podcast.model.dao.LikeRecordDAO;
 import podcast.model.dao.UploadPodcastDAO;
 import podcast.model.javabean.MemberBean;
 import podcast.model.javabean.uploadPodcastBean;
@@ -32,6 +35,17 @@ import podcast.model.javabean.uploadPodcastBean;
 @Controller
 @SessionAttributes({ "LoginOK"})
 public class PodcastController {
+	
+	
+	@Autowired
+	LikeRecordDAO ldao;
+	
+	@Autowired 
+	HistoryDao hdao;
+	
+	
+	
+	
 	//管理頻道
 	@RequestMapping(path = "/managePodcast", method = RequestMethod.GET)
 	public String showManagePodcast(HttpServletRequest request,Model m) throws Exception {
@@ -323,7 +337,14 @@ public class PodcastController {
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
     	UploadPodcastDAO upDao = (UploadPodcastDAO)context.getBean("UploadPodcastDAO");
     	
+    	//刪除節目
     	upDao.delete(delPodcastId);
+    	//刪除該節目我的最愛紀錄
+    	ldao.detelePodcastId(delPodcastId);
+    	//刪除該節目所有歷史紀錄
+    	hdao.deleteByPodcastId(delPodcastId);
+    	
+    	
     	
     	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
     	MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
