@@ -81,40 +81,40 @@ margin-top:150px;
 
 
             <label>活動名稱: </label>
-            <input type="text" name="activityName" class="form-control" placeholder="請輸入活動名稱" required>
+            <input type="text" id="activityName"  name="activityName" class="form-control" placeholder="請輸入活動名稱" required>
             <br>
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <label>活動日期: </label>
-                <input type="date" name="activityDate" class="form-control" required>
+                <input type="date" id="activityDate" name="activityDate" class="form-control" required>
               </div>
 
               <div class="col-lg-6 col-md-6">
                 <label>舉辦時間: </label>
-                <input type="text" name="activityTime" class="form-control" placeholder="06:30 pm" required>
+                <input type="text" id="activityTime"  name="activityTime" class="form-control" placeholder="06:30 pm" required>
               </div>
             </div>
             <br>
             <label>地點: </label>
-            <input type="text" name="activityLocation" class="form-control" placeholder="新竹市" required>
+            <input type="text" id="activityLocation" name="activityLocation" class="form-control" placeholder="新竹市" required>
             <br>
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <label>票券價格: </label>
-                <input type="text" name="activityPrice" class="form-control" placeholder="350" required>
+                <input type="text" id="activityPrice" name="activityPrice" class="form-control" placeholder="350" required>
               </div>
 
               <div class="col-lg-6 col-md-6">
                 <label>人數上限: </label>
-                <input type="text" name="activityMaxPeople" class="form-control" placeholder="100" required>
+                <input type="text" id="activityMaxPeople" name="activityMaxPeople" class="form-control" placeholder="100" required>
               </div>
             </div>
             <br>
 
             <label>活動狀態: </label>
-            <select class="form-control" name="activityStatus">
+            <select id="activityStatus" class="form-control" name="activityStatus">
             	<option>請選擇</option>
               <option value=0>公開</option>
               <option value=1>關閉</option>
@@ -122,7 +122,7 @@ margin-top:150px;
             <br>
 
             <label>活動內容: </label>
-            <textarea name="activityContent" class="form-control" rows="3" placeholder="請輸入活動內容..."
+            <textarea id="activityContent" name="activityContent" class="form-control" rows="3" placeholder="請輸入活動內容..."
               required> </textarea>
             <br>
 
@@ -137,6 +137,11 @@ margin-top:150px;
               <input type="submit" name="submit" value="送出" class="btn btn-danger btn-block btn-lg"
                 style="box-shadow: 2px 2px 2px gray;">
             </div>
+            <br>
+            <div style="text-align: center; margin-bottom: 20px;">
+		
+				<button  class="btn btn-primary btn-md" onclick="fillBlank()">一鍵輸入</button>
+			</div>
           </form>
         </div>
       </div>
@@ -161,6 +166,21 @@ function readURL(input) {
 	$("#imgInp").change(function() {
 	  readURL(this);
 	});
+
+
+	function fillBlank(){
+
+		$("#activityName").val("第一次當podcaster就上手");
+		$("#activityDate").val("2020-11-15");
+		$("#activityTime").val("07:30 pm");
+		$("#activityLocation").val("台北資策會");
+		$("#activityPrice").val("200");
+		$("#activityMaxPeople").val("30");
+		$("#activityStatus")[0].selectedIndex=1;
+		$("#activityContent").val("現在podcast正當紅，迅速上手如何製作好節目");
+
+	
+}
 </script>
 
 

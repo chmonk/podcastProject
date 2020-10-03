@@ -178,5 +178,51 @@ public class MemberDAO implements IMemberDAO {
 		} 	
 		return mb;
 	}
+	
+	public boolean checkRegisterAccount(String account) {
+		
+		Session session=sessionFactory.getCurrentSession();
+		
+		String hql ="from MemberBean where account=:acc";
+		
+		try {
+			List<MemberBean> rs = session.createQuery(hql,MemberBean.class).setParameter("acc", account).list();
+			if(rs.isEmpty()) {
+				System.out.println("normal, 尚未使用");
+				return true;
+			}else {
+				System.out.println("normal, 已使用");
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println("except, 不可使用");
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+		public boolean checkRegisterNickname(String nickname) {
+			
+			Session session=sessionFactory.getCurrentSession();
+			
+			String hql ="from MemberBean where nickname=:acc";
+			
+			try {
+				List<MemberBean> rs = session.createQuery(hql,MemberBean.class).setParameter("acc", nickname).list();
+				if(rs.isEmpty()) {
+					System.out.println("normal, 尚未使用");
+					return true;
+				}else {
+					System.out.println("normal, 已使用");
+					return false;
+				}
+			} catch (Exception e) {
+				System.out.println("except, 不可使用");
+				e.printStackTrace();
+				return false;
+			}
+		
+		
+	}
 
 }

@@ -13,9 +13,9 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-color.css" rel="stylesheet">
  <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.min.css' />">
-<style type="text/css">
+
   
-  <script type="text/javascript">
+ <script type="text/javascript">
 function confirmDelete(n) {
 	if (confirm("確定刪除此項活動 ? ") ) {
 		document.forms[0].action="<c:url value='DeleteActivity?cmd=DEL&activityId=" + n +"' />" ;
