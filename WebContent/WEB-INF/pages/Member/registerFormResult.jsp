@@ -11,7 +11,7 @@
 	href="<c:url value='/css/bootstrap.min.css' />">
 <style type="text/css">
     body {
-      background-image: url(<c:url value='/img/banner/b1.jpg' />);
+      background-image: url(<c:url value='/img/banner/b6.jpg' />);
       background-size: cover;
       background-position: center;
       background-attachment: fixed;

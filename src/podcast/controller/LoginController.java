@@ -37,7 +37,7 @@ public class LoginController {
 		return "login";
 	}
 	
-	@PostMapping("/login")   // = login.jsp的login.do路徑
+	@PostMapping("/login") 
 	public String checkAccount(
 			@ModelAttribute("loginBean") LoginBean bean,
 			BindingResult result, Model model,
@@ -52,25 +52,12 @@ public class LoginController {
 		
 		System.out.println("account & password= "+account+" "+password);
 		MemberBean mbean = null;
-		MemberBean memberbean = new MemberBean();		
-
     	ServletContext app = request.getServletContext();
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-    	
-
     	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
-    
-		
 
 		try {
-
-
-				   mbean = mdao.checkIdPassword(account,password);
-
-			if (mbean != null) {
-
-
-				mbean = mdao.checkIdPassword(account,password);
+			mbean = mdao.checkIdPassword(account,password);
 			if (mbean != null) {
 
 				// 登入成功, 將mb物件放入Session範圍內，重新組裝   識別字串為"LoginOK"
@@ -86,10 +73,12 @@ public class LoginController {
 
 				model.addAttribute("LoginOK", packMemberBean);
 			} else {
-				// 登入失敗, 放相關的錯誤訊息到 errorMsgMap 之內
+				// 登入失敗, 放相關的錯誤訊息
+				model.addAttribute("invalid", "該帳號不存在或密碼錯誤");
 				result.rejectValue("invalidCredentials", "", "該帳號不存在或密碼錯誤");
 				return loginForm;
-			}}}catch (RuntimeException ex) {
+			}}catch (RuntimeException ex) {
+			model.addAttribute("invalid", "該帳號不存在或密碼錯誤");	
 			result.rejectValue("invalidCredentials", "", ex.getMessage());
 			ex.printStackTrace();
 			return loginForm;
