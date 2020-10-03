@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
 <link rel="stylesheet" href="css/loginStyle.css">
-<title>登入</title>
+<title>SoundPod 登入</title>
 
 <script type="text/javascript">
 //由<body>的onLoad事件處理函數觸發此函數
@@ -28,7 +28,7 @@ function setFocusToUserId(){
 
 
   <form action="<c:url value='login' />" method="POST" name="loginForm" class="login-form">
-    <h1>登入</h1>
+    <h1>SoundPod 登入</h1>
     <div align="CENTER"><Font color="red"  face="標楷體">${invalid}</Font></div><br>
     <div class="textb">
       <input type="text" name="userId" required value="${requestScope.user}${param.userId}">
