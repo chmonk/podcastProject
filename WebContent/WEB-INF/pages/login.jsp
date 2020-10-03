@@ -25,19 +25,19 @@ function setFocusToUserId(){
 <c:if test="${ ! empty sessionScope.timeOut }" > <!-- 表示使用逾時，重新登入 -->
    <c:set var="msg" value="<font color='red'>${sessionScope.timeOut}</font>" />
 </c:if>
-<!-- 引入共同的頁首 -->
-<%-- <jsp:include page="/fragment/topMVC.jsp" /> --%>
+
 
   <form action="<c:url value='login' />" method="POST" name="loginForm" class="login-form">
     <h1>登入</h1>
+    <div align="CENTER"><Font color="red"  face="標楷體">${invalid}</Font></div><br>
     <div class="textb">
       <input type="text" name="userId" required value="${requestScope.user}${param.userId}">
-      <div class="placeholder">Username</div>
+      <div class="placeholder">帳號</div>
     </div>
 
     <div class="textb">
       <input type="password" required name="password" value="${requestScope.password}${param.password}">
-      <div class="placeholder">Password</div>
+      <div class="placeholder">密碼</div>
       <div class="show-password fas fa-eye-slash"></div>
     </div>
 
