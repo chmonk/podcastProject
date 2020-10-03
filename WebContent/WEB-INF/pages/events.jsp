@@ -241,8 +241,8 @@ html, body {
 									<hr />
 									<!-- paragraph -->
 									<p>
-										${fn:substring(list.activityContent, 0, 30)}... <a
-											style="color: #F23030" href="#">more</a>
+										${fn:substring(list.activityContent, 0, 30)}... 
+										<!-- <a style="color: #F23030" href="#">more</a> -->
 									</p>
 									<!-- buy ticket button link -->
 									<button href="#bookTicket${loop.index}"
