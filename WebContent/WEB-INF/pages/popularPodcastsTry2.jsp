@@ -9,7 +9,11 @@
 <style>
 .titlespan{
 	color: white;
-	font-size: 30px
+	font-size: 30px;
+	display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
 
 .overflow{
@@ -281,9 +285,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="text-center">
+		<!-- <div class="text-center">
 			<a href="#" class="btn btn-lg btn-theme">View more</a>
-		</div>
+		</div> -->
 		<!-- portfolio end -->
 	</div>
 	<!-- portfolio end -->
