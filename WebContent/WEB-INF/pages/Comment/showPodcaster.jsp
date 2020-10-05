@@ -618,7 +618,7 @@ padding-left: 30px;
 
 								<div class="reply" id="btnSend_${comment.msgDate}" style="display: none">
 									<button type="button" onclick="display('${comment.msgDate}')"
-										class="frombtnSendMessage">回復</button>
+										class="frombtnSendMessage">回覆</button>
 								</div>
 								<div id="${comment.msgDate}" style="display: none">
 									<form action="podcastPage.do" id="podcasterReply" method="post">
