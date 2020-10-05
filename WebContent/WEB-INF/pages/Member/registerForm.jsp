@@ -141,6 +141,10 @@
 			$("#cellphone").val("0977777777");
 			$("#address").val("台北市大安區復興南路一段390號");
 			$("#creditCardNumber").val("1111-1111-1111-1111");
+
+			checkAcount();
+			checkpassword();
+			checkNickname();
 	
 }
      	//確認密碼可否使用

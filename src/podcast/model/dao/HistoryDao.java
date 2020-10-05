@@ -67,6 +67,30 @@ public class HistoryDao implements IHistoryDao {
 		}
 	}
 	
+	public boolean deleteByPodcasterId(Integer podcasterId) {
+
+		Session session = sessionFactory.getCurrentSession();
+		
+		String nativesqlstr="delete from browsingHistory where publisherId=?";
+		
+		session.createNativeQuery(nativesqlstr).setParameter(1, podcasterId).executeUpdate();
+		
+		//檢查是否刪除
+		String nativesqlstr1="select * from browsingHistory where publisherId=?";
+		
+		NativeQuery<HistoryBean> query = session.createNativeQuery(nativesqlstr1,HistoryBean.class).setParameter(1, podcasterId);
+		
+		List<HistoryBean> result = query.getResultList();
+		
+		
+		if(result.isEmpty()) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	
 	
 	
 	public boolean deleteByPodcastId(Integer podcastId) {
@@ -432,13 +456,7 @@ public class HistoryDao implements IHistoryDao {
 		
 				}
 				
-				
-				
-				
-				
-				
-
-				orderList.add(hpbean);
+			orderList.add(hpbean);
 			}
 			
 			return orderList;
