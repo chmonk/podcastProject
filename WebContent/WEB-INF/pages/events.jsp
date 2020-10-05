@@ -51,34 +51,8 @@
 <!-- 	plaer bar function js -->
 
 
-<!-- map -->
-<!-- 	plaer bar function js -->
-<style type="text/css">
-#map {
-	height: 100%;
-}
-</style>
-
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKsAoRrnd4jZL_pQJhvBgphbttPkTl8LM"
-	defer></script>
-<script src="js/map.js"></script>
-
-<style>
-#map {
-	height: 98%;
-}
-
-html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-}
-</style>
-
 </head>
-<body onload="initialize()">
+<body>
 
 	<!-- modal for booking ticket form -->
 	<c:forEach var="list" items="${list}" varStatus="loop">
@@ -224,8 +198,11 @@ html, body {
 									<!-- event location -->
 									<span class="event-location"><i class="fa fa-map-marker"></i>${fn:substring(list.activityLocation, 0, 12)}</span>
 									<!-- image -->
-									<img class="img-responsive"
+									<div style="height: 345px;display: flex;">
+										<img class="img-responsive" 
 										src="<c:url value='${list.activityImg}' />" alt="" />
+									</div>
+									
 									<!-- 										<img class="img-responsive" src="img/event/1.jpg" alt="" /> -->
 									<!-- image hover -->
 									<!-- 										<div class="img-hover"> -->
@@ -247,8 +224,7 @@ html, body {
 									<!-- buy ticket button link -->
 									<button href="#bookTicket${loop.index}"
 										class="btn btn-lg btn-theme" data-toggle="modal"
-										id="${loop.index}" name="abc" class="submit" value="geocode"
-										onclick="codeAddress()">購票</button>
+										id="${loop.index}" name="abc" class="submit">購票</button>
 								</div>
 							</div>
 						</div>
