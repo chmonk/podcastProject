@@ -179,10 +179,7 @@ public class BackStageAjaxController {
 	@PostMapping(path = { "/BackStageSelectOrderById" })
 	public @ResponseBody java.util.List<OrderTicketBean> selectOrderById(HttpServletRequest request, @RequestParam(value = "input") Integer orderId, Model m) {
 		
-		OrderTicketBean oBean = bDao.selectOrderById(orderId);
-		java.util.List<OrderTicketBean> oList = new ArrayList<OrderTicketBean>();
-		oList.add(oBean);
-
+		java.util.List<OrderTicketBean> oList = bDao.selectOrderById(orderId);
 		return oList;
 	}
 
