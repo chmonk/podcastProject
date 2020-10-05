@@ -100,10 +100,30 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	}
 	
 	
+	public void deleteByPodcasterId(Integer podcasterId) throws Exception {
+
+		Session session = sessionFactory.getCurrentSession();
+		String hbl = "from uploadPodcastBean where memberId=:memberId";
+
+		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
+		query.setParameter("memberId", podcasterId);
+
+		List<uploadPodcastBean> upList = query.list();
+
+		for(uploadPodcastBean ubean:upList) {
+			
+			session.delete(ubean);
+		}
+		
+		System.out.println("deletedone");
+		
+	}
+	
+	
 	public List<uploadPodcastBean> selectLatestPodcasts() throws Exception {
 
 		Session session = sessionFactory.getCurrentSession();
-		String hbl = "from uploadPodcastBean order by uploadTime DESC";
+		String hbl = "from uploadPodcastBean where openPayment=0 order by uploadTime DESC ";
 
 		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
 

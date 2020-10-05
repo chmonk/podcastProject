@@ -203,10 +203,8 @@ public class PodcastController {
 	    	upDao.insert(upload);
 	    	
 	    	//return 到managaPodcast頁面，需要重新抓一次List<upLoadPodcastBean>
-	    	
-	    	
-			
-	    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
+
+	    	List<uploadPodcastBean> upList=upDao.selectAllFromMemberAll(memberId);
 	    	m.addAttribute("upList",upList);
 	    	request.setAttribute("upList", upList);
 			
@@ -350,7 +348,7 @@ public class PodcastController {
     	MemberBean memberBean = (MemberBean) m.getAttribute("LoginOK");
 		Integer memberId = memberBean.getMemberId();
 //    	Integer memberId=20;
-    	List<uploadPodcastBean> upList=upDao.selectAllFromMember(memberId);
+    	List<uploadPodcastBean> upList=upDao.selectAllFromMemberAll(memberId);
     	m.addAttribute("upList",upList);
     	request.setAttribute("upList", upList);
 		

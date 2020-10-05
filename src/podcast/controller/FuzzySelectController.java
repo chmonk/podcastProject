@@ -78,7 +78,11 @@ public class FuzzySelectController {
     	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
     	
     	MemberBean mbean=(MemberBean)m.getAttribute("LoginOK");
+    	if (mbean == null) {
+    		return "redirect:/login";
+		};
     	Integer  memberId =mbean.getMemberId();
+
     	
     	//搜尋播客頻道
     	MemberDAO mdao = (MemberDAO)context.getBean("MemberDAO");
