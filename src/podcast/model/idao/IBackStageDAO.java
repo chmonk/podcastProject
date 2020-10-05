@@ -17,7 +17,7 @@ public interface IBackStageDAO {
 	public MemberBean selectMember(Integer memberId);
 	public MemberBean selectMemberByAccount(String account);
 	public boolean deleteMember(Integer memberId);
-	public OrderTicketBean selectOrderById(Integer orderId);
+	public List<OrderTicketBean> selectOrderById(Integer orderId);
 	public List<OrderTicketBean> selectOrderByMember(Integer memberId);
 	public List<OrderTicketBean> selectOrderByActivity(Integer activityId);
 	public ProgramCommentBean selectCommentById(Integer commentId);
