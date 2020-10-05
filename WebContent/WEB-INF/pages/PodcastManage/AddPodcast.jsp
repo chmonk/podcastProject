@@ -183,7 +183,7 @@ function readURL(input) {
 	function fillBlank(){
 
 		$("#name").val("調酒入門");
-		$("#openPayment")[0].selectedIndex=1;
+		$("#openPayment")[0].selectedIndex=0;
 		$("#category")[0].selectedIndex=3;
 		$("#info").val("浪漫duke的調酒入門");
 		
