@@ -42,9 +42,16 @@
 /* .messageBoard {
 	background-color: #f2f2f2;
 } */
+html{
+background-color: #f9f9f9;
+}
+.body{
+background-color: #f9f9f9;
+}
 .showPodcasterBody {
 	padding-top: 40px;
 	padding-bottom: 40px;
+	background-color: #f9f9f9;
 }
 
 .showPodcasterBodyHeader {
@@ -98,7 +105,7 @@
 }
 
 .bodycolor {
-	background-color: #fff;
+	background-color:#f9f9f9;
 }
 
 /* .card-media {
@@ -251,6 +258,7 @@ padding-left: 30px;
 }
 
 .messageBoard ul.messageList li.message {
+
 	list-style: none;
 	width: 90%;
 	background-color: rgba(255, 255, 255, 1);
@@ -258,7 +266,7 @@ padding-left: 30px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 	padding: 15px;
 	box-sizing: border-box;
-	margin: 5px;
+	margin: 5px 5px 15px 5px;
 }
 
 .messageBoard ul.messageList li.message p.messageTitle {
@@ -325,7 +333,7 @@ padding-left: 30px;
 	width:40px;
 	height:40px;
 	display: inline-flex;
-	border: 1px solid black;
+	border: 0.5px solid #dedcdc;
 	border-radius: 50%;
 	z-index: 10;
 }
