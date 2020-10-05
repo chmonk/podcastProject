@@ -123,7 +123,7 @@ public class UploadPodcastDAO implements IUploadPodcastDAO {
 	public List<uploadPodcastBean> selectLatestPodcasts() throws Exception {
 
 		Session session = sessionFactory.getCurrentSession();
-		String hbl = "from uploadPodcastBean order by uploadTime DESC";
+		String hbl = "from uploadPodcastBean where openPayment=0 order by uploadTime DESC ";
 
 		Query<uploadPodcastBean> query = session.createQuery(hbl, uploadPodcastBean.class);
 
