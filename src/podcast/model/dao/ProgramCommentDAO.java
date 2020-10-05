@@ -20,7 +20,7 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
-	
+
 	public ProgramCommentDAO() {
 	}
 
@@ -32,15 +32,29 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 	public ProgramCommentBean insert(ProgramCommentBean pBean) {
 		Session session = sessionFactory.getCurrentSession();
 
-	
-			session.save(pBean);
-			return pBean;
+		session.save(pBean);
+		return pBean;
 	}
 
 	@Override
 	public ProgramCommentBean select(Integer commentId) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(ProgramCommentBean.class, commentId);
+	}
+
+	public List<ProgramCommentBean> selectByMemberId(Integer MemberId) {
+
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ProgramCommentBean where memberId=:memberId or podcasterId=:podcasterId";
+
+		List<ProgramCommentBean> result = session.createQuery(hql, ProgramCommentBean.class)
+				.setParameter("memberId", MemberId).setParameter("podcasterId", MemberId).getResultList();
+
+		for (ProgramCommentBean r : result) {
+			r.getCommentMsg();
+		}
+
+		return result;
 	}
 
 	@Override
@@ -51,8 +65,8 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 	}
 
 	@Override
-	public ProgramCommentBean update(Integer commentId, String commentMsg, Integer memberId, Integer podcasterId, Integer msgStatus,
-			Date msgDate) {
+	public ProgramCommentBean update(Integer commentId, String commentMsg, Integer memberId, Integer podcasterId,
+			Integer msgStatus, Date msgDate) {
 		Session session = sessionFactory.getCurrentSession();
 		ProgramCommentBean pBean = session.get(ProgramCommentBean.class, commentId);
 
@@ -66,9 +80,9 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 
 		return pBean;
 	}
-	
+
 	@Override
-	public ProgramCommentBean reply(Integer commentId,String replyMsg,Date replyDate) {
+	public ProgramCommentBean reply(Integer commentId, String replyMsg, Date replyDate) {
 		Session session = sessionFactory.getCurrentSession();
 		ProgramCommentBean pBean = session.get(ProgramCommentBean.class, commentId);
 
@@ -89,27 +103,39 @@ public class ProgramCommentDAO implements IProgramCommentDAO {
 			session.delete(pBean);
 			return true;
 		}
-
 		return false;
+	}
+
+	
+	public void deleteByMemberIdAndPublisherId(Integer MemberId) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		List<ProgramCommentBean> list = selectByMemberId(MemberId);
+		
+		for(ProgramCommentBean l:list) {
+			System.out.println(l.getCommentMsg());
+			session.delete(l);
+		}
 	}
 	
 	@Override
-	 public List<ProgramCommentBean> selectAllPodcasterId(Integer podcasterId) throws Exception {
-	  Session session = sessionFactory.getCurrentSession();
-	  String hbl = "from ProgramCommentBean where podcasterId=:podcasterId";
+	public List<ProgramCommentBean> selectAllPodcasterId(Integer podcasterId) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		String hbl = "from ProgramCommentBean where podcasterId=:podcasterId";
 
-	  Query<ProgramCommentBean> query = session.createQuery(hbl, ProgramCommentBean.class);
-	  query.setParameter("podcasterId", podcasterId);
+		Query<ProgramCommentBean> query = session.createQuery(hbl, ProgramCommentBean.class);
+		query.setParameter("podcasterId", podcasterId);
 
-	  List<ProgramCommentBean> commList = query.list();
-	  List<ProgramCommentBean> reverseOrderCommList = new LinkedList<ProgramCommentBean>();
+		List<ProgramCommentBean> commList = query.list();
+		List<ProgramCommentBean> reverseOrderCommList = new LinkedList<ProgramCommentBean>();
 
-	  for(int i=commList.size()-1;i>=0;i--) {
-		  reverseOrderCommList.add(commList.get(i));	  
-		  
-	  }
+		for (int i = commList.size() - 1; i >= 0; i--) {
+			reverseOrderCommList.add(commList.get(i));
 
-	  return reverseOrderCommList;
-	 }
+		}
+
+		return reverseOrderCommList;
+	}
 
 }
