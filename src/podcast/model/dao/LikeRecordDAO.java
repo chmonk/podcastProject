@@ -18,10 +18,14 @@ import podcast.model.idao.ILikeRecordDAO;
 import podcast.model.javabean.ActivityBean;
 import podcast.model.javabean.HistoryOrderProgramBean;
 import podcast.model.javabean.LikeRecordBean;
+import podcast.model.javabean.uploadPodcastBean;
 
 @Repository("LikeRecordDAO")
 public class LikeRecordDAO implements ILikeRecordDAO {
-
+	
+	@Autowired
+	UploadPodcastDAO udao;
+	
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
@@ -311,4 +315,47 @@ public class LikeRecordDAO implements ILikeRecordDAO {
 			}
 				return orderList;
 
-}}
+				
+}
+			
+			// 刪除by podcasterID
+			public void deleteByPodcasterId(Integer podcasterId) throws Exception {
+
+				Session session = sessionFactory.getCurrentSession();
+				
+				
+				List<uploadPodcastBean> list = udao.selectAllFromMemberAll(podcasterId);
+				
+				Integer podcastId;
+				
+				for(uploadPodcastBean ubean:list) {
+					
+					podcastId=ubean.getPodcastId();
+					
+					String nativesqlstr = "delete from likeRecord where podcastId= ? ";
+					
+					session.createNativeQuery(nativesqlstr).setParameter(1, podcastId).executeUpdate();
+					
+					// 檢查是否刪除
+					String nativesqlstr1 = "select * from likeRecord  where podcastId= ? ";
+					
+					NativeQuery<LikeRecordBean> query = session.createNativeQuery(nativesqlstr1, LikeRecordBean.class)
+							.setParameter(1, podcasterId);
+					
+					List<LikeRecordBean> result = query.getResultList();
+					
+					if (result.isEmpty()) {
+						// 刪除乾淨
+						System.out.println("刪除podcastid"+podcastId+"成功");
+					} else {
+						System.out.println("刪除podcastid"+podcastId+"失敗上有殘餘");
+					}
+				}
+
+
+			}
+
+
+}
+
+

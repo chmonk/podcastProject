@@ -91,6 +91,18 @@ public class RegisterController {
 		//String image = processFile2(multipartFile, request);
 		members.setImage(image);
 
+		System.out.println("role=>"+role);
+		
+		//先設定所有播客註冊設定要費用 300元
+		System.out.println("memberrole=>"+members.getRole());
+		System.out.println("memberpay=>"+members.getMonthlyPayment());
+		
+		if(members.getRole()==2) {
+			System.out.println("註冊需要錢錢");
+			members.setMonthlyPayment(300);
+		}
+		
+		
 		System.out.println("accunt:" + account);
 
 		// 資料格式判斷
