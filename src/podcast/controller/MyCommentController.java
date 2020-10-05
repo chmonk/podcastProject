@@ -89,6 +89,8 @@ public class MyCommentController {
 			commListitem.put("commentMsg",i.getCommentMsg());
 			commListitem.put("msgDate",i.getMsgDate());
 			commListitem.put("Name", mdao.selectPodcaster(i.getMemberId()).getNickname());
+			commListitem.put("memberImg", mdao.selectPodcaster(i.getMemberId()).getImage());
+
 			commListData.add(commListitem);
 		}
 		

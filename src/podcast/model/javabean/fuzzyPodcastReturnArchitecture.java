@@ -15,6 +15,8 @@ public class fuzzyPodcastReturnArchitecture {
 	private String audioImg;
 	private Integer likesCount;
 	private Integer likesStatus;
+	private Integer confirmubScription;
+	private Integer podcasterId;
 
 	public fuzzyPodcastReturnArchitecture() {
 
@@ -22,7 +24,7 @@ public class fuzzyPodcastReturnArchitecture {
 
 	public fuzzyPodcastReturnArchitecture(Integer podcastId, String title, String categoryName, String podcasterName,
 			String podcastInfo, Integer openPayment, Date uploadTime, Integer clickAmount, String audioPath,
-			String audioImg, Integer likesCount, Integer likesStatus) {
+			String audioImg, Integer likesCount, Integer likesStatus,Integer confirmubScription,Integer podcasterId) {
 		super();
 		this.podcastId = podcastId;
 		this.title = title;
@@ -36,6 +38,8 @@ public class fuzzyPodcastReturnArchitecture {
 		this.audioImg = audioImg;
 		this.likesCount = likesCount;
 		this.likesStatus = likesStatus;
+		this.confirmubScription = confirmubScription;
+		this.podcasterId = podcasterId;
 	}
 
 	public Integer getPodcastId() {
@@ -132,6 +136,22 @@ public class fuzzyPodcastReturnArchitecture {
 
 	public void setLikesStatus(Integer likesStatus) {
 		this.likesStatus = likesStatus;
+	}
+
+	public Integer getConfirmubScription() {
+		return confirmubScription;
+	}
+
+	public void setConfirmubScription(Integer confirmubScription) {
+		this.confirmubScription = confirmubScription;
+	}
+
+	public Integer getPodcasterId() {
+		return podcasterId;
+	}
+
+	public void setPodcasterId(Integer podcasterId) {
+		this.podcasterId = podcasterId;
 	}
 
 }
