@@ -599,8 +599,8 @@
 				"<table  class='ta'>"
 				+"<tr>"	
 				+"<th>MemberId</th>"	
-				+"<th>Account</th>"
-				+"<th>Password</th>"
+				+"<th colspan='2'>Account</th>"
+
 				+"<th>Name</th>"
 				+"<th>NickName</th>"
 				+"<th>Birthday</th>"
@@ -609,8 +609,8 @@
 				+"</tr>"
 				+"<tr>"
 				+"<td rowspan='5'>"+selectMember[i].memberId+"</td>"
-				+"<td>"+selectMember[i].account+"</td>"
-				+"<td>"+selectMember[i].password+"</td>"
+				+"<td colspan='2'>"+selectMember[i].account+"</td>"
+
 				+"<td>"+selectMember[i].name+"</td>"
 				+"<td>"+selectMember[i].nickname+"</td>"
 				+"<td>"+selectMember[i].birthday+"</td>"

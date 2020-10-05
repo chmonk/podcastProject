@@ -65,8 +65,8 @@ th {
 				<table class="center" class="center">
 					<tr>
 						<th>MemberId</th>
-						<th>Account</th>
-						<th>Password</th>
+						<th colspan="2">Account</th>
+						<!-- <th>Password</th> -->
 						<th>Name</th>
 						<th>NickName</th>
 						<th>Birthday</th>
@@ -74,8 +74,8 @@ th {
 					</tr>
 					<tr>
 						<td rowspan="5">${member.memberId}</td>
-						<td>${member.account}</td>
-						<td>${member.password}</td>
+						<td colspan="2">${member.account}</td>
+						<%-- <td>${member.password}</td> --%>
 						<td>${member.name}</td>
 						<td>${member.nickname}</td>
 						<td>${member.birthday}</td>
