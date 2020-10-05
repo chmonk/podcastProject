@@ -31,6 +31,7 @@
 	href="<c:url value='/css/bootstrap.min.css' />">
 
 
+
 <style type="text/css">
 
 body {
@@ -40,7 +41,6 @@ body {
             background-position: center;
             background-attachment: fixed;
         }
-
 
 
 .showPodcasterBody {
