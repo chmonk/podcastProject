@@ -1,5 +1,7 @@
 package podcast.model.dao;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,8 +9,7 @@ import javax.transaction.Transaction;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -52,8 +53,30 @@ public class OrderTicketDAO implements IOrderTicketDAO {
 	@Override
 	public List<OrderTicketBean> selectAll() {
 		Session session = sessionFactory.getCurrentSession();
-		Query<OrderTicketBean> query = session.createQuery("from OrderTicketBean where ticketOrderId<40", OrderTicketBean.class);
-		return query.list();
+		String nativesqlstr="select * from orderticket";
+		NativeQuery query = session.createNativeQuery(nativesqlstr);
+		List<Object[]> List=query.list();
+		List<OrderTicketBean> oList=new ArrayList<OrderTicketBean>();
+		for(int k=0;k<List.size();k++) {
+			OrderTicketBean oBean=new OrderTicketBean();
+			oBean.setTicketOrderId((Integer) List.get(k)[0]);
+			oBean.setOrderDate((Date) List.get(k)[1]);
+			oBean.setMemberId((Integer)List.get(k)[2]);
+			oBean.setActivityId((Integer)List.get(k)[3]);
+			oBean.setOrderPrice((Integer)List.get(k)[4]);
+			oBean.setShippingAddress((String) List.get(k)[5]);
+			oBean.setBno((String) List.get(k)[6]);
+			oBean.setInvoiceTitle((String) List.get(k)[7]);
+			
+			BigDecimal bd=(BigDecimal) List.get(k)[8];
+			Double dd=bd.doubleValue();
+			oBean.setTotalAmount(dd);
+			
+			oList.add(oBean);
+		}
+		
+		
+		return oList;
 	}
 
 	@Override
