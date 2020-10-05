@@ -106,7 +106,8 @@ public class ActivityDAO implements IActivityDAO {
 		return oldbean;
 	}
 
-	@Override
+	//deleteByActivityId
+	@Override  
 	public boolean delete(Integer activityId) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
 		ActivityBean abean = select(activityId);
@@ -118,6 +119,27 @@ public class ActivityDAO implements IActivityDAO {
 		}
 
 		return false;
+	}
+	
+	//刪除會員時刪除活動
+	public void deleteByPodcasterId(Integer PodcasterId) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		List<ActivityBean> list = selectByPodcasterId(PodcasterId);
+		
+		for(ActivityBean abean:list) {
+			
+			if (abean != null) {
+				session.delete(abean);
+				System.out.println("deleted one");
+				
+			}else {
+				System.out.println("null dont delete");
+				
+			}
+			
+			
+		}
+		
 	}
 	
 	@Override

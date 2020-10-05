@@ -29,7 +29,7 @@
 <link href="css/style-color.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/bootstrap.min.css' />">
-<style type="text/css">
+
 
 
 <style type="text/css">
@@ -41,6 +41,7 @@ body {
             background-position: center;
             background-attachment: fixed;
         }
+
 
 .showPodcasterBody {
 	padding-top: 40px;
