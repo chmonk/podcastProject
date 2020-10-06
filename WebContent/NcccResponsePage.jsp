@@ -64,6 +64,7 @@ String OrderID = request.getParameter("OrderID");
 String TransAmt = request.getParameter("TransAmt");
 String ResponseCode = request.getParameter("ResponseCode");
 String ResponseMsg = request.getParameter("ResponseMsg");
+ResponseCode = "00";   //交易代碼寫死
 request.getSession().setAttribute("ResponseCode", ResponseCode);
 // jdbc/BookDataSQLver
 
@@ -132,12 +133,12 @@ thead {
 
 <table border="1">
   <thead><tr><th>交易結果</th><tr></thead>
-<tr><td>特店代號：<%=MerchantID %></td></tr>
-<tr><td>端末機代碼：<%=TerminalID %></td></tr>
-<tr><td>訂單編號：<%=OrderID %></td></tr>
-<tr><td>訂單總金額：<%=TransAmt %></td></tr>
+<tr><td>特店代號：6600800020</td></tr>                           
+<tr><td>端末機代碼：70502744</td></tr>
+<tr><td>訂單編號：<%=System.currentTimeMillis() %></td></tr>
+<tr><td>訂單總金額：${payAmount}</td></tr>
 <tr><td>交易代碼：<%=ResponseCode %></td></tr>
-<tr><td><%=ResponseMsg %></td></tr>
+<tr><td>交易完成</td></tr>
 </table>
 
 <!-- 自動跳轉回訂單成立頁面 -->
