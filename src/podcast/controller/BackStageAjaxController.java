@@ -166,6 +166,8 @@ public class BackStageAjaxController {
 		hDao.deleteByPodcasterId(memberId);
 		aDao.deleteByPodcasterId(memberId);
 		uDao.deleteByPodcasterId(memberId);
+		pDao.deleteByMemberIdAndPublisherId(memberId);
+		
 		
 		m.addAttribute("memberDeleteMsg", "Select Member Deleted!");
 		return mList;

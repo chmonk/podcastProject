@@ -31,6 +31,7 @@
 	href="<c:url value='/css/bootstrap.min.css' />">
 
 
+
 <style type="text/css">
 
 body {
@@ -40,7 +41,6 @@ body {
             background-position: center;
             background-attachment: fixed;
         }
-
 
 
 .showPodcasterBody {
@@ -184,9 +184,10 @@ h2 {
 									class="card-media-body-supporting-bottom-text card-media-link u-float-right playlist-number">加到播放列表</a>
 							</c:when>
 							<c:otherwise>
-								<a id="${rownum.getPodcastId()}"
-									class="card-media-body-supporting-bottom-text card-media-link u-float-right">
-									需訂閱才能收聽</a>
+							<a id="${rownum.getPodcastId()}"
+												href="<c:url value="/podcastPage?fuzzyPodcasterId=${rownum.getPublisherId()}"/>"
+												class="card-media-body-supporting-bottom-text card-media-link u-float-right">
+												需訂閱才能收聽</a>
 							</c:otherwise>
 						</c:choose>
 
