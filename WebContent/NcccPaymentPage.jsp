@@ -69,6 +69,7 @@ function setConf(){
 <input type="hidden" name="TransAmt"   id="TransAmt" value="${payAmount}">
 <input type="hidden" name="NotifyURL"  id="NotifyURL" value="http://localhost:8080/SpringWebProject/NcccResponsePage.jsp">
 <input type="hidden" name="Signature"  id="Signature" value="">
+<input type ="button" onclick="javascript:location.href='http://localhost:8080/SpringWebProject/NcccResponsePage.jsp'" value="跳過"></input>
 <iframe name="HPPFrame" id="mainFrame" height="600" width="800" Frameborder="0"/>
 
 </body>
