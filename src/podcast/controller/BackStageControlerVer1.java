@@ -112,19 +112,19 @@ public class BackStageControlerVer1 {
 
 	// OrderTicketFunction=================================================================================
 
-	@PostMapping(path = { "/BackStageSelectOrderById.controller" })
-	public String selectOrderById(HttpServletRequest request, @RequestParam(name = "orderId") int orderId, Model m) {
-		ServletContext app = request.getServletContext();
-		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
-
-		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
-		OrderTicketBean oBean = bDao.selectOrderById(orderId);
-		java.util.List<OrderTicketBean> oList = new ArrayList<OrderTicketBean>();
-		oList.add(oBean);
-		m.addAttribute("oList", oList);
-
-		return "/BackStage/BackStageOrderTicketResult";
-	}
+//	@PostMapping(path = { "/BackStageSelectOrderById.controller" })
+//	public String selectOrderById(HttpServletRequest request, @RequestParam(name = "orderId") int orderId, Model m) {
+//		ServletContext app = request.getServletContext();
+//		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(app);
+//
+//		BackStageDAO bDao = (BackStageDAO) context.getBean("BackStageDAO");
+//		OrderTicketBean oBean = bDao.selectOrderById(orderId);
+//		java.util.List<OrderTicketBean> oList = new ArrayList<OrderTicketBean>();
+//		oList.add(oBean);
+//		m.addAttribute("oList", oList);
+//
+//		return "/BackStage/BackStageOrderTicketResult";
+//	}
 
 	@PostMapping(path = { "/BackStageSelectOrderByMember.controller" })
 	public String selectOrderByMember(HttpServletRequest request, @RequestParam(name = "memberId") int memberId,
