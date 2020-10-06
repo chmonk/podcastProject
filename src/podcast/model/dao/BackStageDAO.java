@@ -1,5 +1,6 @@
 package podcast.model.dao;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -91,26 +92,88 @@ public class BackStageDAO implements IBackStageDAO {
 
 	// TicketOrderFunction==========================================================================
 
-	public OrderTicketBean selectOrderById(Integer orderId) {
+	public List<OrderTicketBean> selectOrderById(Integer orderId) {
 		Session session = sessionFactory.getCurrentSession();
-		OrderTicketBean oBean = session.get(OrderTicketBean.class, orderId);
-		return oBean;
+		String nativesqlstr="select * from orderticket where ticketOrderId="+orderId;
+		NativeQuery query = session.createNativeQuery(nativesqlstr);
+		List<Object[]> List=query.list();
+		List<OrderTicketBean> oList=new ArrayList<OrderTicketBean>();
+		for(int k=0;k<List.size();k++) {
+			OrderTicketBean oBean=new OrderTicketBean();
+			oBean.setTicketOrderId((Integer) List.get(k)[0]);
+			oBean.setOrderDate((Date) List.get(k)[1]);
+			oBean.setMemberId((Integer)List.get(k)[2]);
+			oBean.setActivityId((Integer)List.get(k)[3]);
+			oBean.setOrderPrice((Integer)List.get(k)[4]);
+			oBean.setShippingAddress((String) List.get(k)[5]);
+			oBean.setBno((String) List.get(k)[6]);
+			oBean.setInvoiceTitle((String) List.get(k)[7]);
+			
+			BigDecimal bd=(BigDecimal) List.get(k)[8];
+			Double dd=bd.doubleValue();
+			oBean.setTotalAmount(dd);
+			
+			oList.add(oBean);
+		}
+		
+		
+		return oList;
 	}
 
 	public List<OrderTicketBean> selectOrderByMember(Integer memberId) {
 		Session session = sessionFactory.getCurrentSession();
-		String hqlstr = "from OrderTicketBean where memberId=:memberId";
-		Query<OrderTicketBean> query = session.createQuery(hqlstr, OrderTicketBean.class);
-		query.setParameter("memberId", memberId);
-		return query.list();
+		String nativesqlstr="select * from orderticket where memberId="+memberId;
+		NativeQuery query = session.createNativeQuery(nativesqlstr);
+		List<Object[]> List=query.list();
+		List<OrderTicketBean> oList=new ArrayList<OrderTicketBean>();
+		for(int k=0;k<List.size();k++) {
+			OrderTicketBean oBean=new OrderTicketBean();
+			oBean.setTicketOrderId((Integer) List.get(k)[0]);
+			oBean.setOrderDate((Date) List.get(k)[1]);
+			oBean.setMemberId((Integer)List.get(k)[2]);
+			oBean.setActivityId((Integer)List.get(k)[3]);
+			oBean.setOrderPrice((Integer)List.get(k)[4]);
+			oBean.setShippingAddress((String) List.get(k)[5]);
+			oBean.setBno((String) List.get(k)[6]);
+			oBean.setInvoiceTitle((String) List.get(k)[7]);
+			
+			BigDecimal bd=(BigDecimal) List.get(k)[8];
+			Double dd=bd.doubleValue();
+			oBean.setTotalAmount(dd);
+			
+			oList.add(oBean);
+		}
+		
+		
+		return oList;
 	}
 
 	public List<OrderTicketBean> selectOrderByActivity(Integer activityId) {
 		Session session = sessionFactory.getCurrentSession();
-		String hqlstr = "from OrderTicketBean where activityId=:activityId";
-		Query<OrderTicketBean> query = session.createQuery(hqlstr, OrderTicketBean.class);
-		query.setParameter("activityId", activityId);
-		return query.list();
+		String nativesqlstr="select * from orderticket where activityId="+activityId;
+		NativeQuery query = session.createNativeQuery(nativesqlstr);
+		List<Object[]> List=query.list();
+		List<OrderTicketBean> oList=new ArrayList<OrderTicketBean>();
+		for(int k=0;k<List.size();k++) {
+			OrderTicketBean oBean=new OrderTicketBean();
+			oBean.setTicketOrderId((Integer) List.get(k)[0]);
+			oBean.setOrderDate((Date) List.get(k)[1]);
+			oBean.setMemberId((Integer)List.get(k)[2]);
+			oBean.setActivityId((Integer)List.get(k)[3]);
+			oBean.setOrderPrice((Integer)List.get(k)[4]);
+			oBean.setShippingAddress((String) List.get(k)[5]);
+			oBean.setBno((String) List.get(k)[6]);
+			oBean.setInvoiceTitle((String) List.get(k)[7]);
+			
+			BigDecimal bd=(BigDecimal) List.get(k)[8];
+			Double dd=bd.doubleValue();
+			oBean.setTotalAmount(dd);
+			
+			oList.add(oBean);
+		}
+		
+		
+		return oList;
 	}
 
 	// ProgramCommentFunction======================================================================
