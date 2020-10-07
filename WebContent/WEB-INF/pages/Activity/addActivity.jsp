@@ -130,7 +130,7 @@ margin-top:150px;
             <input type="file" name="file" class="form-control" id="imgInp" required>
             <br>
             
-            <img width="60%" id="blah" src="#" alt="預覽你上傳的照片" />
+            <img width="60%" id="blah" src="<c:url value='/img/preview_photo.png' />" alt="預覽你上傳的照片" />
 
             <div class="button">
             <br>

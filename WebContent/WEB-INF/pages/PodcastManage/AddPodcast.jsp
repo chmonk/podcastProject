@@ -118,7 +118,7 @@
             <label>單集封面: </label>
             <input type="file" name="podcastpic" id="pic" class="form-control" required>
             <br>
-            <img width="60%" id="blah" src="#" alt="預覽你上傳的照片" />
+            <img width="60%" id="blah" src="<c:url value='/img/preview_photo.png' />"  alt="預覽你上傳的照片" />
             <br>
             <label>上傳單集: </label>
             <input type="file" name="podcastfile" id="audio" class="form-control" required>
@@ -183,7 +183,7 @@ function readURL(input) {
 	function fillBlank(){
 
 		$("#name").val("調酒入門");
-		$("#openPayment")[0].selectedIndex=1;
+		$("#openPayment")[0].selectedIndex=0;
 		$("#category")[0].selectedIndex=3;
 		$("#info").val("浪漫duke的調酒入門");
 		
